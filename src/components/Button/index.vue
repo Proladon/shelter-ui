@@ -1,0 +1,69 @@
+<template>
+  <button
+    class="s-button"
+    :class="[`s-button--${type}`, `s-button--${size}`, { 'is-disabled': disabled }]"
+    :disabled="disabled"
+    @click="handleClick"
+  >
+    <slot></slot>
+  </button>
+</template>
+
+<script setup lang="ts">
+import type { ButtonProps, ButtonEmits } from './types'
+
+const props = withDefaults(defineProps<ButtonProps>(), {
+  type: 'default',
+  size: 'default',
+  disabled: false,
+})
+
+const emit = defineEmits<ButtonEmits>()
+
+const handleClick = (event: MouseEvent) => {
+  if (props.disabled) return
+  emit('click', event)
+}
+</script>
+
+<style>
+.s-button {
+  @apply px-4 py-2 rounded-lg font-medium transition-colors duration-300 cursor-pointer;
+}
+
+.s-button--primary {
+  @apply bg-primary text-white hover:bg-primary-dark;
+}
+
+.s-button--success {
+  @apply bg-secondary text-white hover:bg-secondary-dark;
+}
+
+.s-button--warning {
+  @apply bg-yellow-500 text-white hover:bg-yellow-600;
+}
+
+.s-button--danger {
+  @apply bg-red-500 text-white hover:bg-red-600;
+}
+
+.s-button--info {
+  @apply bg-gray-500 text-white hover:bg-gray-600;
+}
+
+.s-button--default {
+  @apply bg-white text-gray-700 border border-gray-300 hover:bg-gray-100;
+}
+
+.s-button--large {
+  @apply text-lg px-6 py-3;
+}
+
+.s-button--small {
+  @apply text-sm px-3 py-1;
+}
+
+.s-button.is-disabled {
+  @apply opacity-60 cursor-not-allowed;
+}
+</style>
