@@ -26,7 +26,7 @@ const handleClick = (event: MouseEvent) => {
 }
 </script>
 
-<style>
+<style lang="postcss">
 .s-button {
   @apply px-4 py-2 rounded-lg font-medium transition-colors duration-300 cursor-pointer;
 }

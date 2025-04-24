@@ -1,9 +1,13 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+import HelloWorld from '@/components/HelloWorld.vue'
+import sButton from '@/components/Button/index.vue'
 </script>
 
 <template>
   <div>
+    <sButton>csacsa</sButton>
+    <sButton size="small">csacsa</sButton>
+    <p class="text-[24px]">csacsa</p>
     <a href="https://vite.dev" target="_blank">
       <img src="/vite.svg" class="logo" alt="Vite logo" />
     </a>

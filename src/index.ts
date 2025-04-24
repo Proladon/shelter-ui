@@ -1,5 +1,5 @@
 import type { App } from 'vue'
-import 'uno.css'
+import 'virtual:uno.css'
 
 // 導入組件
 import SButton from './components/Button/index.vue'

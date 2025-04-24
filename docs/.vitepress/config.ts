@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import UnoCSS from 'unocss/vite'
 
 export default defineConfig({
   title: 'Shelter UI',
@@ -38,6 +39,7 @@ export default defineConfig({
     },
   },
   vite: {
+    plugins: [UnoCSS()],
     ssr: {
       noExternal: ['unocss'],
     },

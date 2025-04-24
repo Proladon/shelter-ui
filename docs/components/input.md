@@ -6,6 +6,14 @@
 
 使用 `v-model` 進行雙向綁定。
 
+<Demo>
+  <div>
+    <s-input v-model="inputDemo" placeholder="請輸入內容" />
+    <div class="mt-2">輸入的內容：{{ inputDemo }}</div>
+  </div>
+  
+  <template #code>
+
 ```vue
 <template>
   <s-input v-model="input" placeholder="請輸入內容" />
@@ -19,9 +27,24 @@ const input = ref('')
 </script>
 ```
 
+  </template>
+</Demo>
+
+<script setup>
+import { ref } from 'vue'
+
+const inputDemo = ref('')
+const disabledInput = ref('')
+</script>
+
 ## 禁用狀態
 
 使用 `disabled` 屬性禁用輸入框。
+
+<Demo>
+  <s-input v-model="disabledInput" disabled placeholder="禁用狀態" />
+  
+  <template #code>
 
 ```vue
 <template>
@@ -35,9 +58,21 @@ const input = ref('')
 </script>
 ```
 
+  </template>
+</Demo>
+
 ## 不同尺寸
 
 使用 `size` 屬性設置不同的輸入框尺寸。
+
+<Demo>
+  <div class="flex flex-col gap-4">
+    <s-input v-model="smallInput" size="small" placeholder="小尺寸" />
+    <s-input v-model="defaultInput" placeholder="默認尺寸" />
+    <s-input v-model="largeInput" size="large" placeholder="大尺寸" />
+  </div>
+  
+  <template #code>
 
 ```vue
 <template>
@@ -47,13 +82,17 @@ const input = ref('')
     <s-input v-model="input3" size="large" placeholder="大尺寸" />
   </div>
 </template>
+```
 
-<script setup lang="ts">
+  </template>
+</Demo>
+
+<script setup>
 import { ref } from 'vue'
 
-const input1 = ref('')
-const input2 = ref('')
-const input3 = ref('')
+const smallInput = ref('')
+const defaultInput = ref('')
+const largeInput = ref('')
 </script>
 ```
 

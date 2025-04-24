@@ -1,16 +1,9 @@
-import { defineConfig, presetAttributify, presetIcons, presetTypography, presetUno } from 'unocss'
+import { defineConfig } from 'unocss'
+import transformerDirectives from '@unocss/transformer-directives'
 
 export default defineConfig({
-  presets: [
-    presetUno(),
-    presetAttributify(),
-    presetTypography(),
-    presetIcons({
-      scale: 1.2,
-      collections: {
-        carbon: () => import('@iconify-json/carbon/icons.json').then(i => i.default),
-      },
-    }),
+  transformers: [
+    transformerDirectives(),
   ],
   shortcuts: {
     'btn': 'px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-300',
