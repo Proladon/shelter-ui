@@ -2,14 +2,13 @@
   "name": "shelter-ui",
   "version": "0.1.0",
   "type": "module",
-  "description": "基於Vue 3的UnoCSS組件庫",
-  "author": "Your Name",
+  "description": "shelter vue ui components",
+  "author": "Proladon",
   "license": "MIT",
   "keywords": [
     "vue",
     "components",
-    "ui",
-    "unocss"
+    "ui"
   ],
   "main": "dist/shelter-ui.umd.js",
   "module": "dist/shelter-ui.js",
@@ -31,11 +30,7 @@
     "vue": "^3.5.13"
   },
   "devDependencies": {
-    "@iconify-json/carbon": "^1.2.8",
     "@types/node": "^22.14.1",
-    "@unocss/preset-attributify": "^66.1.0-beta.12",
-    "@unocss/preset-typography": "^66.1.0-beta.12",
-    "@unocss/preset-uno": "^66.1.0-beta.12",
     "@unocss/transformer-directives": "^66.1.0-beta.12",
     "@vitejs/plugin-vue": "^5.2.2",
     "@vue/tsconfig": "^0.7.0",

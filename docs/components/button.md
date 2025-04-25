@@ -84,6 +84,43 @@
   </template>
 </Demo>
 
+## 加載狀態
+
+使用 `loading` 屬性設置按鈕的加載狀態。
+
+<Demo>
+  <div class="flex gap-2">
+    <s-button :loading="true">加載中</s-button>
+    <s-button type="primary" :loading="true">加載中</s-button>
+    <s-button type="success" :loading="loading">{{ loading ? '加載中...' : '點擊加載' }}</s-button>
+    <s-button @click="toggleLoading">{{ loading ? '停止加載' : '開始加載' }}</s-button>
+  </div>
+  
+  <template #code>
+
+```vue
+<template>
+  <div class="flex gap-2">
+    <s-button :loading="true">加載中</s-button>
+    <s-button type="primary" :loading="true">加載中</s-button>
+    <s-button type="success" :loading="loading">{{ loading ? '加載中...' : '點擊加載' }}</s-button>
+    <s-button @click="toggleLoading">{{ loading ? '停止加載' : '開始加載' }}</s-button>
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+
+const loading = ref(false)
+const toggleLoading = () => {
+  loading.value = !loading.value
+}
+</script>
+```
+
+  </template>
+</Demo>
+
 ## 點擊事件
 
 使用 `@click` 監聽按鈕的點擊事件。
@@ -120,9 +157,10 @@ const handleClick = () => {
 
 | 屬性名 | 說明 | 類型 | 默認值 |
 | --- | --- | --- | --- |
-| type | 按鈕類型 | `'primary' \| 'success' \| 'warning' \| 'danger' \| 'info' \| 'default'` | `'default'` |
+| type | 按鈕類型 | `'primary' \| 'success' \| 'warning' \| 'danger' \| 'info' \| 'default' \| 'plain' \| 'text' \| 'dashed'` | `'default'` |
 | size | 按鈕尺寸 | `'large' \| 'default' \| 'small'` | `'default'` |
 | disabled | 是否禁用 | `boolean` | `false` |
+| loading | 是否顯示加載狀態 | `boolean` | `false` |
 
 ### 事件
 

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import HelloWorld from '@/components/HelloWorld.vue'
 import sButton from '@/components/Button/index.vue'
 import sSpin from '@/components/Spin/index.vue'
 import { ref } from 'vue'
@@ -62,7 +61,6 @@ const toggleLoading = () => {
       </a>
     </div>
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
 <style scoped>
