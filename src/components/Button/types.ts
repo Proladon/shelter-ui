@@ -1,5 +1,5 @@
 export interface ButtonProps {
-  type?: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'default'
+  type?: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'default' | 'plain' | 'text' | 'dashed'
   size?: 'large' | 'default' | 'small'
   disabled?: boolean
 }

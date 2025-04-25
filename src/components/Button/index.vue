@@ -55,6 +55,18 @@ const handleClick = (event: MouseEvent) => {
   @apply bg-white text-gray-700 border border-gray-300 hover:bg-gray-100;
 }
 
+.s-button--plain {
+  @apply bg-transparent text-gray-700 border border-gray-300 hover:bg-gray-50;
+}
+
+.s-button--dashed {
+  @apply bg-transparent text-gray-700 border border-gray-300 border-dashed hover:bg-gray-50;
+}
+
+.s-button--text {
+  @apply bg-transparent text-gray-700 border-0 hover:text-primary hover:bg-gray-50;
+}
+
 .s-button--large {
   @apply text-lg px-6 py-3;
 }
