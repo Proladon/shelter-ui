@@ -4,10 +4,12 @@ import 'virtual:uno.css'
 // 導入組件
 import SButton from './components/Button/index.vue'
 import SInput from './components/Input/index.vue'
+import SSpin from './components/Spin/index.vue'
 
 // 組件列表
 const components = {
   SButton,
+  SSpin,
   SInput,
 }
 
@@ -23,6 +25,7 @@ export function sayHello(name: string = 'world'): string {
 // 類型聲明
 export type { ButtonProps } from './components/Button/types'
 export type { InputProps } from './components/Input/types'
+export type { SpinProps } from './components/Spin/types'
 
 // 安裝函數
 const install = (app: App) => {
@@ -39,4 +42,5 @@ export default { install, version: '0.1.0', ...components }
 export {
   SButton,
   SInput,
+  SSpin
 }

@@ -127,12 +127,19 @@ const toggleSpin = () => {
   </template>
 </Demo>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 
+// For "包裹內容" demo
 const spinning = ref(true)
 const toggleSpin = () => {
   spinning.value = !spinning.value
+}
+
+// For "延遲顯示" demo
+const delayedSpinning = ref(true)
+const toggleDelayedSpin = () => {
+  delayedSpinning.value = !delayedSpinning.value
 }
 </script>
 
@@ -182,15 +189,6 @@ const toggleSpin = () => {
 
   </template>
 </Demo>
-
-<script setup>
-import { ref } from 'vue'
-
-const delayedSpinning = ref(true)
-const toggleDelayedSpin = () => {
-  delayedSpinning.value = !delayedSpinning.value
-}
-</script>
 
 ## API
 

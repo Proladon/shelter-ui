@@ -135,7 +135,7 @@ const toggleCode = () => {
 }
 
 .shelter-demo-code {
-  @apply border-t border-gray-200 p-4 bg-gray-50;
+  @apply border-t border-gray-200 p-4 ;
 }
 
 .shelter-demo-footer {
