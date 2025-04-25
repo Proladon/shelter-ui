@@ -1,14 +1,13 @@
 import { defineConfig } from 'unocss'
 import transformerDirectives from '@unocss/transformer-directives'
+import transformerVariantGroup from '@unocss/transformer-variant-group'
 
 export default defineConfig({
   transformers: [
     transformerDirectives(),
+    transformerVariantGroup(),
   ],
-  shortcuts: {
-    'btn': 'px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-300',
-    'input': 'px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500',
-  },
+  shortcuts: {},
   theme: {
     colors: {
       primary: {

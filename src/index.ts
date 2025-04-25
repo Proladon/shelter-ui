@@ -11,6 +11,15 @@ const components = {
   SInput,
 }
 
+/**
+ * Say hello function - returns a greeting message
+ * @param name - Optional name to greet, defaults to "world"
+ * @returns A greeting message
+ */
+export function sayHello(name: string = 'world'): string {
+  return `Hello, ${name}!`
+}
+
 // 類型聲明
 export type { ButtonProps } from './components/Button/types'
 export type { InputProps } from './components/Input/types'
