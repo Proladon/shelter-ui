@@ -1,10 +1,35 @@
 <template>
   <button
     class="s-button"
-    :class="[`s-button--${type}`, `s-button--${size}`, { 'is-disabled': disabled }]"
-    :disabled="disabled"
+    :class="[
+      `s-button--${type}`, 
+      `s-button--${size}`, 
+      { 
+        'is-disabled': disabled || loading,
+        's-button--loading': loading 
+      }
+    ]"
+    :disabled="disabled || loading"
     @click="handleClick"
   >
+    <span v-if="loading" class="s-button__loading">
+      <svg
+        class="s-button__loading-icon"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle
+          cx="12"
+          cy="12"
+          r="10"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-dasharray="60 30"
+        />
+      </svg>
+    </span>
     <slot></slot>
   </button>
 </template>
@@ -16,19 +41,20 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   type: 'default',
   size: 'default',
   disabled: false,
+  loading: false,
 })
 
 const emit = defineEmits<ButtonEmits>()
 
 const handleClick = (event: MouseEvent) => {
-  if (props.disabled) return
+  if (props.disabled || props.loading) return
   emit('click', event)
 }
 </script>
 
 <style lang="postcss">
 .s-button {
-  @apply px-4 py-2 rounded-lg font-medium transition-colors duration-300 cursor-pointer;
+  @apply px-4 py-2 rounded-lg font-medium transition-colors duration-300 cursor-pointer relative;
 }
 
 .s-button--primary {
@@ -77,5 +103,26 @@ const handleClick = (event: MouseEvent) => {
 
 .s-button.is-disabled {
   @apply opacity-60 cursor-not-allowed;
+}
+
+.s-button__loading {
+  @apply inline-flex items-center justify-center mr-2;
+}
+
+.s-button__loading-icon {
+  @apply w-4 h-4 animate-spin;
+}
+
+@keyframes s-button-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.s-button--loading {
+  @apply relative;
 }
 </style>

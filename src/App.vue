@@ -8,6 +8,11 @@ const spinning = ref(true)
 const toggleSpin = () => {
   spinning.value = !spinning.value
 }
+
+const loadingState = ref(false)
+const toggleLoading = () => {
+  loadingState.value = !loadingState.value
+}
 </script>
 
 <template>
@@ -32,10 +37,22 @@ const toggleSpin = () => {
     </div>
     
     <div class="button-demo">
-      <sButton>csacsa</sButton>
-      <sButton type="plain">Test</sButton>
-      <sButton type="text">Test</sButton>
-      <sButton type="dashed">Test</sButton>
+      <h2>Button 組件示例</h2>
+      <div class="button-types">
+        <sButton>默認按鈕</sButton>
+        <sButton type="plain">Plain 按鈕</sButton>
+        <sButton type="text">Text 按鈕</sButton>
+        <sButton type="dashed">Dashed 按鈕</sButton>
+      </div>
+      
+      <h3>Loading 狀態</h3>
+      <div class="button-loading-demo">
+        <sButton :loading="true">Loading 按鈕</sButton>
+        <sButton type="primary" :loading="true">Loading 按鈕</sButton>
+        <sButton type="success" :loading="loadingState">{{ loadingState ? '加載中...' : '點擊加載' }}</sButton>
+        <sButton @click="toggleLoading">{{ loadingState ? '停止加載' : '開始加載' }}</sButton>
+      </div>
+      
       <p class="text-[24px] text-red">csacsa</p>
       <a href="https://vite.dev" target="_blank">
         <img src="/vite.svg" class="logo" alt="Vite logo" />
@@ -89,9 +106,25 @@ const toggleSpin = () => {
 }
 
 .button-demo {
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+}
+
+.button-demo h2 {
+  margin-bottom: 16px;
+}
+
+.button-demo h3 {
+  margin: 20px 0 12px;
+}
+
+.button-types,
+.button-loading-demo {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 12px;
+  margin-bottom: 16px;
 }
 </style>
