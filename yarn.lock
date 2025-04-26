@@ -1107,7 +1107,7 @@
     "@unocss/core" "66.1.0-beta.12"
     "@unocss/preset-wind3" "66.1.0-beta.12"
 
-"@unocss/reset@66.1.0-beta.12":
+"@unocss/reset@66.1.0-beta.12", "@unocss/reset@^66.1.0-beta.12":
   version "66.1.0-beta.12"
   resolved "https://registry.yarnpkg.com/@unocss/reset/-/reset-66.1.0-beta.12.tgz#72a8d2c146fbd1359bea684354fd25de6f3c7abb"
   integrity sha512-a8sqnzf1EFFqYmnc31B1owiQV3CKD0J7FAFFxsYYwshxSI2v0hDDVsDpfxvpWXX+ZI6khZccnsMR7uXzk/bImw==

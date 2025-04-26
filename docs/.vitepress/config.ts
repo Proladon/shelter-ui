@@ -1,5 +1,7 @@
+import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vitepress'
 import UnoCSS from 'unocss/vite'
+import { resolve } from 'node:path'
 
 export default defineConfig({
   title: 'Shelter UI',
@@ -42,6 +44,11 @@ export default defineConfig({
     plugins: [UnoCSS()],
     ssr: {
       noExternal: ['unocss'],
+    },
+    resolve: {
+      alias: {
+        '@': resolve(__dirname, '../../src'),
+      },
     },
   },
 })

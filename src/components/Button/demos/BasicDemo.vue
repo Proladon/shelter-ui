@@ -10,5 +10,6 @@
 </template>
 
 <script setup lang="ts">
+import SButton from '../index.vue'
 // 基本按鈕用法示例
 </script>

@@ -53,6 +53,7 @@ const colors = convertToUnoColorsConfig(
     },
 
     status: {
+      info: '#d5d5d5',
       danger: '#ed6d7d',
       warning: '#f2c97d',
       success: '#9cc3b4',
@@ -63,6 +64,8 @@ const colors = convertToUnoColorsConfig(
     cssVarPrefix: 'sh',
   },
 )
+
+console.log(colors)
 
 export default defineConfig({
   transformers: [transformerDirectives(), transformerVariantGroup()],

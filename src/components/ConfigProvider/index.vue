@@ -30,6 +30,7 @@ const props = withDefaults(
       },
 
       status: {
+        info: '#d5d5d5',
         danger: '#ed6d7d',
         warning: '#f2c97d',
         success: '#9cc3b4',

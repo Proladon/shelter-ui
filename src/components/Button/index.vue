@@ -2,12 +2,17 @@
   <button
     class="s-button"
     :class="[
-      `s-button--${type}`,
-      `s-button--${size}`,
+      `s-button--type-${type}`,
+      `s-button--size-${size}`,
       {
         'is-disabled': disabled || loading,
         's-button--loading': loading,
+        's-button--text': text,
+        's-button--ghost': ghost,
+        's-button--dashed': dashed,
+        's-button--outline': outline,
       },
+      outline && type !== 'default' ? `s-button--outline-${type}` : ''
     ]"
     :disabled="disabled || loading"
     @click="handleClick"
@@ -30,77 +35,106 @@
         />
       </svg>
     </span>
-    <slot></slot>
+      <slot></slot>
   </button>
 </template>
 
 <script setup lang="ts">
-import type { ButtonProps, ButtonEmits } from "./types"
+import { computed } from 'vue';
+import type { ButtonProps, ButtonEmits } from './types'
 
 const props = withDefaults(defineProps<ButtonProps>(), {
-  type: "default",
-  size: "default",
+  type: 'default',
+  size: 'default',
   disabled: false,
   loading: false,
+  text: false,
+  ghost: false,
+  dashed: false,
+  outline: false,
 })
 
 const emit = defineEmits<ButtonEmits>()
 
 const handleClick = (event: MouseEvent) => {
   if (props.disabled || props.loading) return
-  emit("click", event)
+  emit('click', event)
 }
+
+const computedClass = computed(() => {
+  const classList: string[] = []
+  if (props.outline) {
+    classList.push('s-button--outline')
+  }
+  return []
+})
+
+
 </script>
 
-<style lang="postcss">
+<style lang="postcss" scoped>
 .s-button {
-  @apply px-4 py-2 rounded-lg font-medium  cursor-pointer relative;
+  @apply px-4 py-2 rounded-lg font-medium cursor-pointer relative;
   @apply flex items-center justify-center;
   @apply transition-all duration-300 ease-in-out;
+  @apply outline-none border-solid border;
 }
 
-.s-button--primary {
-  @apply bg-primary text-white hover:bg-primary-dark;
+/* Type */
+.s-button--type-primary {
+  @apply text-white;
+  @apply bg-primary border-primary;
 }
 
-.s-button--success {
-  @apply bg-secondary text-white hover:bg-secondary-dark;
+.s-button--type-success {
+  @apply text-white;
+  @apply bg-status.success border-status.success;
 }
 
-.s-button--warning {
-  @apply bg-yellow-500 text-white hover:bg-yellow-600;
+.s-button--type-warning {
+  @apply text-white;
+  @apply bg-status.warning border-status.warning;
 }
 
-.s-button--danger {
-  @apply bg-red-500 text-white hover:bg-red-600;
+.s-button--type-danger {
+  @apply text-white;
+  @apply bg-status.danger border-status.danger;
 }
 
-.s-button--info {
-  @apply bg-gray-500 text-white hover:bg-gray-600;
+.s-button--type-info {
+  @apply text-white;
+  @apply bg-status.info border-status.info;
 }
 
-.s-button--default {
-  @apply bg-white text-gray-700 border border-gray-300 hover:(bg-gray-100);
+.s-button--type-default {
+  @apply text-white border hover:(bg-status.info);
 }
 
-.s-button--plain {
-  @apply bg-transparent text-gray-700 border border-gray-300 hover:(bg-gray-50);
-}
-
-.s-button--dashed {
-  @apply bg-transparent text-gray-700 border border-gray-300 border-dashed hover:(bg-gray-50);
-}
-
-.s-button--text {
-  @apply bg-transparent text-gray-700 border-0 hover:text-primary hover:(bg-gray-50);
-}
-
-.s-button--large {
+/* Size */
+.s-button--size-large {
   @apply text-lg px-6 py-3;
 }
 
-.s-button--small {
+.s-button--size-small {
   @apply text-sm px-3 py-1;
+}
+
+/* Style */
+.s-button--outline {
+  @apply border bg-transparent;
+}
+
+.s-button--dashed {
+  @apply border border-dashed;
+}
+
+.s-button--text {
+  @apply bg-transparent text-white border-none hover:(bg-transparent text-primary);
+}
+
+.s-button--ghost {
+  @apply bg-transparent text-white;
+  @apply border-transparent;
 }
 
 .s-button.is-disabled {
@@ -117,5 +151,26 @@ const handleClick = (event: MouseEvent) => {
 
 .s-button--loading {
   @apply relative;
+}
+
+/* Outline + Type Text Color */
+.s-button--outline-primary {
+  @apply text-primary hover:(bg-primary/30);
+}
+
+.s-button--outline-success {
+  @apply text-status.success hover:(bg-status.success/30);
+}
+
+.s-button--outline-warning {
+  @apply text-status.warning hover:(bg-status.warning/30);
+}
+
+.s-button--outline-danger {
+  @apply text-status.danger hover:(bg-status.danger/30);
+}
+
+.s-button--outline-info {
+  @apply text-status.info hover:(bg-status.info/30);
 }
 </style>

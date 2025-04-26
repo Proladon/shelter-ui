@@ -1,19 +1,21 @@
 <template>
-  <div class="shelter-demo">
-    <div class="shelter-demo-preview">
-      <div class="shelter-demo-content s-component-container">
-        <slot></slot>
+  <SConfigProvider>
+    <div class="shelter-demo">
+      <div class="shelter-demo-preview">
+        <div class="shelter-demo-content s-component-container">
+          <slot></slot>
+        </div>
+      </div>
+      <div class="shelter-demo-code" v-if="showCode">
+        <slot name="code"></slot>
+      </div>
+      <div class="shelter-demo-footer" @click="toggleCode">
+        <span class="shelter-demo-toggle">
+          {{ showCode ? '隱藏代碼' : '顯示代碼' }}
+        </span>
       </div>
     </div>
-    <div class="shelter-demo-code" v-if="showCode">
-      <slot name="code"></slot>
-    </div>
-    <div class="shelter-demo-footer" @click="toggleCode">
-      <span class="shelter-demo-toggle">
-        {{ showCode ? '隱藏代碼' : '顯示代碼' }}
-      </span>
-    </div>
-  </div>
+  </SConfigProvider>
 </template>
 
 <script setup lang="ts">
@@ -135,7 +137,7 @@ const toggleCode = () => {
 }
 
 .shelter-demo-code {
-  @apply border-t border-gray-200 p-4 ;
+  @apply border-t border-gray-200 p-4;
 }
 
 .shelter-demo-footer {
