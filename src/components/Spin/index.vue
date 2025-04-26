@@ -87,8 +87,9 @@
 </template>
 
 <script setup lang="ts">
+import type { CSSProperties } from 'vue'
 import { computed, ref, watch, onBeforeUnmount } from 'vue'
-import type { SpinProps, SpinEmits } from './types'
+import type { SpinProps } from './types'
 
 const props = withDefaults(defineProps<SpinProps>(), {
   size: 'medium',
@@ -97,8 +98,6 @@ const props = withDefaults(defineProps<SpinProps>(), {
   strokeWidth: 2,
   delay: 0
 })
-
-const emit = defineEmits<SpinEmits>()
 
 // 計算實際尺寸
 const mergedSize = computed(() => {
@@ -134,7 +133,7 @@ const shouldShowSpin = computed(() => {
 const contentStyle = computed(() => {
   return {
     opacity: shouldShowSpin.value ? 0.5 : 1,
-    pointerEvents: shouldShowSpin.value ? 'none' : 'auto'
+    pointerEvents: shouldShowSpin.value ? 'none' : ('auto' as CSSProperties['pointerEvents'])
   }
 })
 
