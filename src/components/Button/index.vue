@@ -2,17 +2,18 @@
   <button
     class="s-button"
     :class="[
-      `s-button--type-${type}`,
-      `s-button--size-${size}`,
+      `type-${type}`,
+      `size-${size}`,
+      outline && type !== 'default' ? `style-outline-${type}` : '',
+      text && type !== 'default'? `style-text-${type}` : '',
+      ghost && type!== 'default'? `style-ghost-${type}` : '',
+      plain && type!== 'default'? `style-plain-${type}` : '',
+      borderd && type!== 'default'? `style-borderd-${type}` : '',
       {
         'is-disabled': disabled || loading,
         's-button--loading': loading,
-        's-button--text': text,
-        's-button--ghost': ghost,
-        's-button--dashed': dashed,
-        's-button--outline': outline,
+        'style-dashed': dashed,
       },
-      outline && type !== 'default' ? `s-button--outline-${type}` : ''
     ]"
     :disabled="disabled || loading"
     @click="handleClick"
@@ -52,6 +53,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   ghost: false,
   dashed: false,
   outline: false,
+  plain: false,
 })
 
 const emit = defineEmits<ButtonEmits>()
@@ -61,116 +63,215 @@ const handleClick = (event: MouseEvent) => {
   emit('click', event)
 }
 
-const computedClass = computed(() => {
-  const classList: string[] = []
-  if (props.outline) {
-    classList.push('s-button--outline')
-  }
-  return []
-})
-
-
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 .s-button {
-  @apply px-4 py-2 rounded-lg font-medium cursor-pointer relative;
+  @apply px-4 py-1 rounded-md font-medium cursor-pointer relative text-shadow-md;
   @apply flex items-center justify-center;
   @apply transition-all duration-300 ease-in-out;
-  @apply outline-none border-solid border;
-}
+  @apply border-solid border;
+  @apply hover:(brightness-90);
+  @apply active:(brightness-80);
 
-/* Type */
-.s-button--type-primary {
-  @apply text-white;
-  @apply bg-primary border-primary;
-}
+  /* Type */
+  &.type-primary {
+    @apply text-white;
+    @apply bg-primary border-primary;
+  }
 
-.s-button--type-success {
-  @apply text-white;
-  @apply bg-status.success border-status.success;
-}
+  &.type-success {
+    @apply text-white;
+    @apply bg-status.success border-status.success;
+  }
 
-.s-button--type-warning {
-  @apply text-white;
-  @apply bg-status.warning border-status.warning;
-}
+  &.type-warning {
+    @apply text-white;
+    @apply bg-status.warning border-status.warning;
+  }
 
-.s-button--type-danger {
-  @apply text-white;
-  @apply bg-status.danger border-status.danger;
-}
+  &.type-danger {
+    @apply text-white;
+    @apply bg-status.danger border-status.danger;
+  }
 
-.s-button--type-info {
-  @apply text-white;
-  @apply bg-status.info border-status.info;
-}
+  &.type-info {
+    @apply text-white;
+    @apply bg-status.info border-status.info;
+  }
 
-.s-button--type-default {
-  @apply text-white border hover:(bg-status.info);
-}
+  /* Size */
+  &.size-large {
+    @apply text-lg px-6 py-3;
+  }
 
-/* Size */
-.s-button--size-large {
-  @apply text-lg px-6 py-3;
-}
+  &.size-small {
+    @apply text-sm px-3 py-0.5;
+  }
 
-.s-button--size-small {
-  @apply text-sm px-3 py-1;
-}
+  /* Style */
+  &.style-dashed {
+    @apply border-dashed;
+  }
 
-/* Style */
-.s-button--outline {
-  @apply border bg-transparent;
-}
+  &.is-disabled {
+    @apply opacity-60 cursor-not-allowed;
+  }
 
-.s-button--dashed {
-  @apply border border-dashed;
-}
+  &__loading {
+    @apply inline-flex items-center justify-center mr-2;
+  }
 
-.s-button--text {
-  @apply bg-transparent text-white border-none hover:(bg-transparent text-primary);
-}
+  &__loading-icon {
+    @apply w-4 h-4 animate-spin;
+  }
 
-.s-button--ghost {
-  @apply bg-transparent text-white;
-  @apply border-transparent;
-}
+  &--loading {
+    @apply relative;
+  }
 
-.s-button.is-disabled {
-  @apply opacity-60 cursor-not-allowed;
-}
+  /* Plain */
+  &.style-plain {
+    @mixin plain-variant($color) {
+      @apply bg-opacity-10 bg-#{$color}.veil text-#{$color} border-transparent;
+      @apply hover:(brightness-90);
+      @apply active:(brightness-80);
+    }
 
-.s-button__loading {
-  @apply inline-flex items-center justify-center mr-2;
-}
+    &-primary {
+      @include plain-variant('primary');
+    }
 
-.s-button__loading-icon {
-  @apply w-4 h-4 animate-spin;
-}
+    &-success {
+      @include plain-variant('status.success');
+    }
 
-.s-button--loading {
-  @apply relative;
-}
+    &-warning {
+      @include plain-variant('status.warning');
+    }
 
-/* Outline + Type Text Color */
-.s-button--outline-primary {
-  @apply text-primary hover:(bg-primary/30);
-}
+    &-danger {
+      @include plain-variant('status.danger');
+    }
 
-.s-button--outline-success {
-  @apply text-status.success hover:(bg-status.success/30);
-}
+    &-info {
+      @include plain-variant('status.info');
+    }
+  }
 
-.s-button--outline-warning {
-  @apply text-status.warning hover:(bg-status.warning/30);
-}
+  /* Ghost */
+  &.style-ghost {
+    @mixin ghost-variant($color) {
+      @apply bg-transparent text-#{$color} border-transparent;
+      @apply hover:(bg-#{$color}.veil);
+      @apply active:(brightness-80);
+    }
 
-.s-button--outline-danger {
-  @apply text-status.danger hover:(bg-status.danger/30);
-}
+    &-primary {
+      @include ghost-variant('primary');
+    }
 
-.s-button--outline-info {
-  @apply text-status.info hover:(bg-status.info/30);
+    &-success {
+      @include ghost-variant('status.success');
+    }
+
+    &-warning {
+      @include ghost-variant('status.warning');
+    }
+
+    &-danger {
+      @include ghost-variant('status.danger');
+    }
+
+    &-info {
+      @include ghost-variant('status.info');
+    }
+  }
+
+  /* Text */
+  &.style-text {
+    @mixin text-variant($color) {
+      @apply bg-transparent border-transparent text-#{$color};
+      @apply hover:(brightness-90);
+      @apply active:(brightness-80);
+    }
+
+    &-primary {
+      @include text-variant('primary');
+    }
+
+    &-success {
+      @include text-variant('status.success');
+    }
+
+    &-warning {
+      @include text-variant('status.warning');
+    }
+
+    &-danger {
+      @include text-variant('status.danger');
+    }
+
+    &-info {
+      @include text-variant('status.info');
+    }
+  }
+
+  /* Outline*/
+  &.style-outline {
+    @mixin outline-variant($color) {
+      @apply bg-transparent text-#{$color};
+      @apply hover:(bg-#{$color}.veil);
+      @apply active:(brightness-80);
+    }
+
+    &-primary {
+      @include outline-variant('primary');
+    }
+
+    &-success {
+      @include outline-variant('status.success');
+    }
+
+    &-warning {
+      @include outline-variant('status.warning');
+    }
+
+    &-danger {
+      @include outline-variant('status.danger');
+    }
+
+    &-info {
+      @include outline-variant('status.info');
+    }
+  }
+
+  /* Borderd */
+  &.style-borderd {
+    @mixin borderd-variant($color) {
+      @apply bg-#{$color}.veil text-#{$color} border-#{$color};
+      @apply hover:(brightness-90);
+      @apply active:(brightness-80);
+    }
+
+    &-primary {
+      @include borderd-variant('primary');
+    }
+    &-success {
+      @include borderd-variant('status.success');
+    }
+
+    &-warning {
+      @include borderd-variant('status.warning');
+    }
+
+    &-danger {
+      @include borderd-variant('status.danger');
+    }
+
+    &-info {
+      @include borderd-variant('status.info');
+    }
+  }
 }
 </style>

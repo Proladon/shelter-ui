@@ -5,6 +5,7 @@
 import { onBeforeMount } from 'vue'
 import color from 'color'
 import type { ThemeVarsConfig } from './types'
+import { setCssVar } from '@/_utils/style';
 
 const props = withDefaults(
   defineProps<{
@@ -56,20 +57,27 @@ const flattenThemeVars = (
   }, {})
 }
 
-// 設置 CSS 變數
-const setCssVar = (varName: string, value: string) => {
-  document.documentElement.style.setProperty(`--${varName}`, value)
-}
-
 // 更新 CSS 變數
 const updateThemeVars = (themeVars: Record<string, string>) => {
   for (const key in themeVars) {
-    const rgbArray = color(themeVars[key]).rgb().array()
-    setCssVar(key, `${rgbArray[0]}, ${rgbArray[1]}, ${rgbArray[2]}`)
+    // const rgbArray = color(themeVars[key]).rgb().array()
+    // setCssVar(key, `${rgbArray[0]}, ${rgbArray[1]}, ${rgbArray[2]}`)
+    // const darkenRgbArray = color(themeVars[key]).darken(0.3).rgb().array()
+    // setCssVar(`${key}-darken`, `${darkenRgbArray[0]}, ${darkenRgbArray[1]}, ${darkenRgbArray[2]}`)
+    // const lightenRgbArray = color(themeVars[key]).lighten(0.3).rgb().array()
+    // setCssVar(`${key}-lighten`, `${lightenRgbArray[0]}, ${lightenRgbArray[1]}, ${lightenRgbArray[2]}`)
+
+    setCssVar(key, themeVars[key])
+    setCssVar(`${key}-darken`, color(themeVars[key]).blacken(0.3).hex())
+    setCssVar(`${key}-lighten`, color(themeVars[key]).whiten(0.3).hex())
+    setCssVar(`${key}-veil`, color(themeVars[key]).fade(0.7).hexa())
   }
 }
 
 onBeforeMount(() => {
+  if (props.themePrefix) {
+    setCssVar('sh-prefix', props.themePrefix)
+  }
   const colorVars = flattenThemeVars(props.themeConfig, props.themePrefix)
   updateThemeVars(colorVars)
 })

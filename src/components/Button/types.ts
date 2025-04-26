@@ -7,6 +7,8 @@ export interface ButtonProps {
   ghost?: boolean
   dashed?: boolean
   outline?: boolean
+  plain?: boolean
+  borderd?: boolean
 }
 
 export interface ButtonEmits {

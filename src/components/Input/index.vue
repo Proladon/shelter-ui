@@ -61,7 +61,7 @@ const handleClear = () => {
 }
 </script>
 
-<style>
+<style lang="postcss">
 .s-input-wrapper {
   @apply inline-block w-full;
 }
