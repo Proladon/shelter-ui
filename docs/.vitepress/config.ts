@@ -28,6 +28,7 @@ export default defineConfig({
           items: [
             { text: 'Button 按鈕', link: '/components/button' },
             { text: 'Input 輸入框', link: '/components/input' },
+            { text: 'BorderContainer 邊框容器', link: '/components/border-container' },
           ],
         },
       ],
