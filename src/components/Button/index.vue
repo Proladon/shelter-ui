@@ -4,15 +4,14 @@
     :class="[
       `type-${type}`,
       `size-${size}`,
-      outline && type !== 'default' ? `style-outline-${type}` : '',
-      text && type !== 'default'? `style-text-${type}` : '',
-      ghost && type!== 'default'? `style-ghost-${type}` : '',
-      plain && type!== 'default'? `style-plain-${type}` : '',
-      borderd && type!== 'default'? `style-borderd-${type}` : '',
+      outline ? `style-outline-${type}` : '',
+      text ? `style-text-${type}` : '',
+      ghost ? `style-ghost-${type}` : '',
+      borderd ? `style-borderd-${type}` : '',
+      dashed ? `style-dashed-${type}` : '',
       {
         'is-disabled': disabled || loading,
         's-button--loading': loading,
-        'style-dashed': dashed,
       },
     ]"
     :disabled="disabled || loading"
@@ -36,7 +35,7 @@
         />
       </svg>
     </span>
-      <slot></slot>
+    <slot></slot>
   </button>
 </template>
 
@@ -52,7 +51,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   ghost: false,
   dashed: false,
   outline: false,
-  plain: false,
+  borderd: false,
 })
 
 const emit = defineEmits<ButtonEmits>()
@@ -61,7 +60,6 @@ const handleClick = (event: MouseEvent) => {
   if (props.disabled || props.loading) return
   emit('click', event)
 }
-
 </script>
 
 <style lang="scss" scoped>
@@ -72,31 +70,29 @@ const handleClick = (event: MouseEvent) => {
   @apply border-solid border;
   @apply hover:(brightness-90);
   @apply active:(brightness-80);
+  @apply text-text.base;
 
-  /* Type */
+  /* Default styles (previously plain style) */
+  @apply bg-opacity-10 bg-text.base.fade text-text.base border-transparent;
+
   &.type-primary {
-    @apply text-white;
-    @apply bg-primary border-primary;
+    @apply bg-opacity-10 bg-primary.fade text-primary border-transparent;
   }
 
   &.type-success {
-    @apply text-white;
-    @apply bg-status.success border-status.success;
+    @apply bg-opacity-10 bg-status.success.fade text-status.success border-transparent;
   }
 
   &.type-warning {
-    @apply text-white;
-    @apply bg-status.warning border-status.warning;
+    @apply bg-opacity-10 bg-status.warning.fade text-status.warning border-transparent;
   }
 
   &.type-danger {
-    @apply text-white;
-    @apply bg-status.danger border-status.danger;
+    @apply bg-opacity-10 bg-status.danger.fade text-status.danger border-transparent;
   }
 
   &.type-info {
-    @apply text-white;
-    @apply bg-status.info border-status.info;
+    @apply bg-opacity-10 bg-status.info.fade text-status.info border-transparent;
   }
 
   /* Size */
@@ -109,10 +105,6 @@ const handleClick = (event: MouseEvent) => {
   }
 
   /* Style */
-  &.style-dashed {
-    @apply border-dashed;
-  }
-
   &.is-disabled {
     @apply opacity-60 cursor-not-allowed;
   }
@@ -129,32 +121,28 @@ const handleClick = (event: MouseEvent) => {
     @apply relative;
   }
 
-  /* Plain */
-  &.style-plain {
-    @mixin plain-variant($color) {
-      @apply bg-opacity-10 bg-#{$color}.veil text-#{$color} border-transparent;
-      @apply hover:(brightness-90);
-      @apply active:(brightness-80);
+  &.style-dashed {
+    @mixin dashed-variant($color) {
+      @apply border-dashed border-#{$color} text-#{$color};
     }
 
+    &-default {
+      @include dashed-variant('text.base');
+    }
     &-primary {
-      @include plain-variant('primary');
+      @include dashed-variant('primary');
     }
-
     &-success {
-      @include plain-variant('status.success');
+      @include dashed-variant('status.success');
     }
-
     &-warning {
-      @include plain-variant('status.warning');
+      @include dashed-variant('status.warning');
     }
-
     &-danger {
-      @include plain-variant('status.danger');
+      @include dashed-variant('status.danger');
     }
-
     &-info {
-      @include plain-variant('status.info');
+      @include dashed-variant('status.info');
     }
   }
 
@@ -162,8 +150,12 @@ const handleClick = (event: MouseEvent) => {
   &.style-ghost {
     @mixin ghost-variant($color) {
       @apply bg-transparent text-#{$color} border-transparent;
-      @apply hover:(bg-#{$color}.veil);
+      @apply hover:(bg-#{$color}.fade);
       @apply active:(brightness-80);
+    }
+
+    &-default {
+      @include ghost-variant('text.base');
     }
 
     &-primary {
@@ -195,6 +187,10 @@ const handleClick = (event: MouseEvent) => {
       @apply active:(brightness-80);
     }
 
+    &-default {
+      @include text-variant('text.base');
+    }
+
     &-primary {
       @include text-variant('primary');
     }
@@ -219,11 +215,14 @@ const handleClick = (event: MouseEvent) => {
   /* Outline*/
   &.style-outline {
     @mixin outline-variant($color) {
-      @apply bg-transparent text-#{$color};
-      @apply hover:(bg-#{$color}.veil);
+      @apply bg-transparent border-#{$color} text-#{$color};
+      @apply hover:(bg-#{$color}.fade);
       @apply active:(brightness-80);
     }
 
+    &-default {
+      @include outline-variant('text.base');
+    }
     &-primary {
       @include outline-variant('primary');
     }
@@ -248,11 +247,14 @@ const handleClick = (event: MouseEvent) => {
   /* Borderd */
   &.style-borderd {
     @mixin borderd-variant($color) {
-      @apply bg-#{$color}.veil text-#{$color} border-#{$color};
+      @apply bg-#{$color}.fade text-#{$color} border-#{$color};
       @apply hover:(brightness-90);
       @apply active:(brightness-80);
     }
 
+    &-default {
+      @include borderd-variant('text.base');
+    }
     &-primary {
       @include borderd-variant('primary');
     }

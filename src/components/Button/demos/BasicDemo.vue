@@ -1,11 +1,11 @@
 <template>
   <div class="flex gap-2">
-    <s-button>默認按鈕</s-button>
-    <s-button type="primary">主要按鈕</s-button>
-    <s-button type="success">成功按鈕</s-button>
-    <s-button type="warning">警告按鈕</s-button>
-    <s-button type="danger">危險按鈕</s-button>
-    <s-button type="info">信息按鈕</s-button>
+    <s-button>Default</s-button>
+    <s-button type="primary">Primary</s-button>
+    <s-button type="success">Success</s-button>
+    <s-button type="warning">Warning</s-button>
+    <s-button type="danger">Danger</s-button>
+    <s-button type="info">Info</s-button>
   </div>
 </template>
 

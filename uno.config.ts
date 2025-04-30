@@ -56,16 +56,18 @@ const flattenThemeVars = (
   }, {})
 }
 
-const addDarkenAndLighten = (themeVars: Record<string, string>,): Record<string, string> => {
+const addDarkenAndLighten = (
+  themeVars: Record<string, string>,
+): Record<string, string> => {
   const needAdd = {}
 
   for (const key in themeVars) {
-   // darken
-   needAdd[`${key}-darken`] = color(themeVars[key]).darken(0.3).hex()
-   // lighten
-   needAdd[`${key}-lighten`] = color(themeVars[key]).lighten(0.3).hex()
-  //  veil
-   needAdd[`${key}-veil`] = color(themeVars[key]).fade(0.3).hex()
+    // darken
+    needAdd[`${key}-darken`] = color(themeVars[key]).darken(0.3).hex()
+    // lighten
+    needAdd[`${key}-lighten`] = color(themeVars[key]).lighten(0.3).hex()
+    //  fade
+    needAdd[`${key}-fade`] = color(themeVars[key]).fade(0.3).hex()
   }
   return {
     ...themeVars,
@@ -73,14 +75,15 @@ const addDarkenAndLighten = (themeVars: Record<string, string>,): Record<string,
   }
 }
 
-const themes = {    primary: '#7EAFBA',
+const themes = {
+  primary: '#7EAFBA',
   'primary-light': '#2c353c',
   bg: {
     primary: '#22272e',
     secondary: '#1b1f27',
   },
   text: {
-    base: '#9CA3AF',
+    base: '#E3C9AA',
   },
   border: {
     base: '#3e4451',
@@ -90,9 +93,12 @@ const themes = {    primary: '#7EAFBA',
     danger: '#ed6d7d',
     warning: '#f2c97d',
     success: '#9cc3b4',
-  },}
+  },
+}
 
-const colors = convertToUnoColorsConfig(addDarkenAndLighten(flattenThemeVars(themes)),{
+const colors = convertToUnoColorsConfig(
+  addDarkenAndLighten(flattenThemeVars(themes)),
+  {
     colorPrefix: '',
     cssVarPrefix: 'sh',
   },

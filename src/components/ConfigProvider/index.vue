@@ -5,7 +5,7 @@
 import { onBeforeMount } from 'vue'
 import color from 'color'
 import type { ThemeVarsConfig } from './types'
-import { setCssVar } from '@/_utils/style';
+import { setCssVar } from '@/_utils/style'
 
 const props = withDefaults(
   defineProps<{
@@ -18,12 +18,13 @@ const props = withDefaults(
       primary: '#7EAFBA',
       'primary-light': '#2c353c',
       bg: {
-        primary: '#22272e',
+        primary: '#282D38',
         secondary: '#1b1f27',
       },
 
       text: {
-        base: '#9CA3AF',
+        // base: '#E3C9AA',
+        base: '#C5B39D',
       },
 
       border: {
@@ -70,7 +71,7 @@ const updateThemeVars = (themeVars: Record<string, string>) => {
     setCssVar(key, themeVars[key])
     setCssVar(`${key}-darken`, color(themeVars[key]).blacken(0.3).hex())
     setCssVar(`${key}-lighten`, color(themeVars[key]).whiten(0.3).hex())
-    setCssVar(`${key}-veil`, color(themeVars[key]).fade(0.7).hexa())
+    setCssVar(`${key}-fade`, color(themeVars[key]).fade(0.7).hexa())
   }
 }
 
