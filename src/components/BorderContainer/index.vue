@@ -3,7 +3,11 @@
     class="s-border-container"
     :class="[
       `type-${type}`,
-      { 'with-shadow': shadow, 'is-transparent': transparent },
+      {
+        'with-shadow': shadow,
+        'is-transparent': transparent,
+        'is-disabled': disabled,
+      },
     ]"
     :style="{
       width: typeof width === 'number' ? `${width}px` : width,
@@ -34,11 +38,13 @@ const props = withDefaults(defineProps<BorderContainerProps>(), {
   padding: 16,
   shadow: false,
   transparent: false,
+  disabled: false,
 })
 
 const emit = defineEmits<BorderContainerEmits>()
 
 const handleClick = (event: MouseEvent) => {
+  if (props.disabled) return
   emit('click', event)
 }
 </script>
@@ -96,6 +102,11 @@ const handleClick = (event: MouseEvent) => {
 
   &.is-transparent {
     @apply bg-transparent;
+  }
+
+  &.is-disabled {
+    @apply opacity-50 cursor-not-allowed;
+    @apply pointer-events-none select-none;
   }
 
   &__content {

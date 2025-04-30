@@ -7,6 +7,7 @@ export interface BorderContainerProps {
   padding?: string | number
   shadow?: boolean
   transparent?: boolean
+  disabled?: boolean
 }
 
 export interface BorderContainerEmits {

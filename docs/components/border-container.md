@@ -73,6 +73,56 @@ BorderContainer 允許您設置不同的邊框寬度。
   </template>
 </Demo>
 
+## 禁用狀態
+
+使用 `disabled` 屬性來禁用邊框容器。
+
+<Demo>
+  <DisabledDemo />
+  
+  <template #code>
+
+```vue
+<template>
+  <div class="flex flex-col gap-4">
+    <h4>Disabled State</h4>
+    <div class="grid grid-cols-2 gap-4">
+      <s-border-container 
+        disabled
+      >
+        <p>Disabled border container with default styling</p>
+      </s-border-container>
+      
+      <s-border-container 
+        type="primary"
+        disabled
+      >
+        <p>Disabled border container with primary color</p>
+      </s-border-container>
+      
+      <s-border-container 
+        type="success"
+        shadow
+        disabled
+      >
+        <p>Disabled border container with shadow</p>
+      </s-border-container>
+      
+      <s-border-container 
+        type="warning"
+        transparent
+        disabled
+      >
+        <p>Disabled border container with transparent background</p>
+      </s-border-container>
+    </div>
+  </div>
+</template>
+```
+
+  </template>
+</Demo>
+
 ## 高級定制
 
 BorderContainer 支持多種自定義選項，包括陰影、透明背景、自定義邊框半徑和邊框寬度等。
@@ -137,6 +187,7 @@ BorderContainer 支持多種自定義選項，包括陰影、透明背景、自�
 | padding | 內邊距 | `string \| number` | `16` |
 | shadow | 是否顯示陰影 | `boolean` | `false` |
 | transparent | 是否透明背景 | `boolean` | `false` |
+| disabled | 是否禁用 | `boolean` | `false` |
 
 ### 事件
 
@@ -154,5 +205,6 @@ BorderContainer 支持多種自定義選項，包括陰影、透明背景、自�
 import { SConfigProvider } from '@/index'
 import BasicDemo from '@/components/BorderContainer/demos/BasicDemo.vue'
 import StyleDemo from '@/components/BorderContainer/demos/StyleDemo.vue'
+import DisabledDemo from '@/components/BorderContainer/demos/DisabledDemo.vue'
 import CustomizationDemo from '@/components/BorderContainer/demos/CustomizationDemo.vue'
 </script>
