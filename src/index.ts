@@ -30,7 +30,10 @@ export type { ThemeVarsConfig } from './components/ConfigProvider/types'
 export type { ButtonProps, ButtonEmits } from './components/Button/types'
 export type { InputProps, InputEmits } from './components/Input/types'
 export type { SpinProps, SpinEmits } from './components/Spin/types'
-export type { BorderContainerProps, BorderContainerEmits } from './components/BorderContainer/types'
+export type {
+  BorderContainerProps,
+  BorderContainerEmits,
+} from './components/BorderContainer/types'
 
 // 安裝函數
 const install = (app: App) => {

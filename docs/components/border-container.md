@@ -53,15 +53,15 @@ BorderContainer 允許您設置不同的邊框寬度。
       <s-border-container :borderWidth="1">
         <p>1px border width</p>
       </s-border-container>
-      
+
       <s-border-container :borderWidth="2">
         <p>2px border width</p>
       </s-border-container>
-      
+
       <s-border-container :borderWidth="3">
         <p>3px border width</p>
       </s-border-container>
-      
+
       <s-border-container :borderWidth="4">
         <p>4px border width</p>
       </s-border-container>
@@ -87,32 +87,19 @@ BorderContainer 允許您設置不同的邊框寬度。
   <div class="flex flex-col gap-4">
     <h4>Disabled State</h4>
     <div class="grid grid-cols-2 gap-4">
-      <s-border-container 
-        disabled
-      >
+      <s-border-container disabled>
         <p>Disabled border container with default styling</p>
       </s-border-container>
-      
-      <s-border-container 
-        type="primary"
-        disabled
-      >
+
+      <s-border-container type="primary" disabled>
         <p>Disabled border container with primary color</p>
       </s-border-container>
-      
-      <s-border-container 
-        type="success"
-        shadow
-        disabled
-      >
+
+      <s-border-container type="success" shadow disabled>
         <p>Disabled border container with shadow</p>
       </s-border-container>
-      
-      <s-border-container 
-        type="warning"
-        transparent
-        disabled
-      >
+
+      <s-border-container type="warning" transparent disabled>
         <p>Disabled border container with transparent background</p>
       </s-border-container>
     </div>
@@ -137,32 +124,19 @@ BorderContainer 支持多種自定義選項，包括陰影、透明背景、自�
   <div class="flex flex-col gap-4">
     <h4>Advanced Customization</h4>
     <div class="grid grid-cols-2 gap-4">
-      <s-border-container 
-        type="primary"
-        shadow
-      >
+      <s-border-container type="primary" shadow>
         <p>Border container with shadow effect</p>
       </s-border-container>
-      
-      <s-border-container 
-        type="success"
-        transparent
-      >
+
+      <s-border-container type="success" transparent>
         <p>Border container with transparent background</p>
       </s-border-container>
-      
-      <s-border-container 
-        type="warning"
-        :borderRadius="12"
-      >
+
+      <s-border-container type="warning" :borderRadius="12">
         <p>Border container with custom border radius</p>
       </s-border-container>
-      
-      <s-border-container 
-        type="info"
-        :borderWidth="3"
-        :padding="8"
-      >
+
+      <s-border-container type="info" :borderWidth="3" :padding="8">
         <p>Border container with custom border width and padding</p>
       </s-border-container>
     </div>
@@ -177,28 +151,28 @@ BorderContainer 支持多種自定義選項，包括陰影、透明背景、自�
 
 ### 屬性
 
-| 屬性名 | 說明 | 類型 | 默認值 |
-| --- | --- | --- | --- |
-| type | 邊框容器類型 | `'primary' \| 'success' \| 'warning' \| 'danger' \| 'info' \| 'default'` | `'default'` |
-| width | 容器寬度 | `string \| number` | `'auto'` |
-| height | 容器高度 | `string \| number` | `'auto'` |
-| borderWidth | 邊框寬度 | `string \| number` | `1` |
-| borderRadius | 邊框圓角 | `string \| number` | `4` |
-| padding | 內邊距 | `string \| number` | `16` |
-| shadow | 是否顯示陰影 | `boolean` | `false` |
-| transparent | 是否透明背景 | `boolean` | `false` |
-| disabled | 是否禁用 | `boolean` | `false` |
+| 屬性名       | 說明         | 類型                                                                     | 默認值      |
+| ------------ | ------------ | ------------------------------------------------------------------------ | ----------- |
+| type         | 邊框容器類型 | `'primary' \| 'success' \| 'warning' \| 'danger' \| 'info' \| 'default'` | `'default'` |
+| width        | 容器寬度     | `string \| number`                                                       | `'auto'`    |
+| height       | 容器高度     | `string \| number`                                                       | `'auto'`    |
+| borderWidth  | 邊框寬度     | `string \| number`                                                       | `1`         |
+| borderRadius | 邊框圓角     | `string \| number`                                                       | `4`         |
+| padding      | 內邊距       | `string \| number`                                                       | `16`        |
+| shadow       | 是否顯示陰影 | `boolean`                                                                | `false`     |
+| transparent  | 是否透明背景 | `boolean`                                                                | `false`     |
+| disabled     | 是否禁用     | `boolean`                                                                | `false`     |
 
 ### 事件
 
-| 事件名 | 說明 | 回調參數 |
-| --- | --- | --- |
-| click | 點擊容器時觸發 | `(event: MouseEvent) => void` |
+| 事件名 | 說明           | 回調參數                      |
+| ------ | -------------- | ----------------------------- |
+| click  | 點擊容器時觸發 | `(event: MouseEvent) => void` |
 
 ### 插槽
 
-| 插槽名 | 說明 |
-| --- | --- |
+| 插槽名  | 說明     |
+| ------- | -------- |
 | default | 容器內容 |
 
 <script setup>
