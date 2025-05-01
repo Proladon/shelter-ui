@@ -7,6 +7,7 @@ import SInput from './components/Input/index.vue'
 import SSpin from './components/Spin/index.vue'
 import SBorderContainer from './components/BorderContainer/index.vue'
 import SPopover from './components/Popover/index.vue'
+import SEditableArea from './components/EditableArea/index.vue'
 
 // 組件列表
 const components = {
@@ -16,6 +17,7 @@ const components = {
   SInput,
   SBorderContainer,
   SPopover,
+  SEditableArea,
 }
 
 /**
@@ -37,6 +39,10 @@ export type {
   BorderContainerEmits,
 } from './components/BorderContainer/types'
 export type { PopoverProps, PopoverEmits } from './components/Popover/types'
+export type {
+  EditableAreaProps,
+  EditableAreaEmits,
+} from './components/EditableArea/types'
 
 // 安裝函數
 const install = (app: App) => {
@@ -50,4 +56,12 @@ const install = (app: App) => {
 export default { install, version: '0.1.0', ...components }
 
 // 單獨導出組件
-export { SButton, SInput, SSpin, SConfigProvider, SBorderContainer, SPopover }
+export {
+  SButton,
+  SInput,
+  SSpin,
+  SConfigProvider,
+  SBorderContainer,
+  SPopover,
+  SEditableArea,
+}
