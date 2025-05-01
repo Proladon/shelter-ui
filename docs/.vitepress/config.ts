@@ -28,10 +28,13 @@ export default defineConfig({
           items: [
             { text: 'Button 按鈕', link: '/components/button' },
             { text: 'Input 輸入框', link: '/components/input' },
+            { text: 'Spin 加載中', link: '/components/spin' },
             {
               text: 'BorderContainer 邊框容器',
               link: '/components/border-container',
             },
+            { text: 'Dialog 對話框', link: '/components/dialog' },
+            { text: 'Popover 彈出框', link: '/components/popover' },
           ],
         },
       ],

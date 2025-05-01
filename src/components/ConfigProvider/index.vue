@@ -18,7 +18,7 @@ const props = withDefaults(
       primary: '#7EAFBA',
       'primary-light': '#2c353c',
       bg: {
-        primary: '#282D38',
+        primary: '#283038',
         secondary: '#1b1f27',
       },
 
