@@ -43,18 +43,21 @@ const props = withDefaults(
 
 // 將 themeVars 物件展平成 key-value 的形式
 const flattenThemeVars = (
-  themeVars: ThemeVarsConfig,
+  themeVars: ThemeVarsConfig | Record<string, any>,
   prefix = '',
 ): Record<string, string> => {
   return Object.keys(themeVars).reduce((acc, key) => {
-    const value = themeVars[key]
+    const value = themeVars[key as keyof typeof themeVars]
     const newKey = prefix ? `${prefix}-${key}` : key
 
     if (typeof value === 'object' && !Array.isArray(value)) {
-      return { ...acc, ...flattenThemeVars(value, newKey) }
+      return {
+        ...acc,
+        ...flattenThemeVars(value as Record<string, any>, newKey),
+      }
     }
 
-    return { ...acc, [newKey]: value }
+    return { ...acc, [newKey]: value as string }
   }, {})
 }
 

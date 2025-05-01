@@ -13,7 +13,8 @@ defineOptions({
   name: 'SPopover',
 })
 
-const props = withDefaults(defineProps<PopoverProps>(), {
+// Props are used in the template
+withDefaults(defineProps<PopoverProps>(), {
   defaultOpen: undefined,
   open: undefined,
   modal: false,
