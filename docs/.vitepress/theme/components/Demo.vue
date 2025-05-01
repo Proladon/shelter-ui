@@ -10,9 +10,9 @@
         <slot name="code"></slot>
       </div>
       <div class="shelter-demo-footer" @click="toggleCode">
-        <span class="shelter-demo-toggle">
+        <SButton class="w-full" ghost type="success">
           {{ showCode ? '隱藏代碼' : '顯示代碼' }}
-        </span>
+        </SButton>
       </div>
     </div>
   </SConfigProvider>
@@ -20,6 +20,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import SButton from '@/components/Button/index.vue'
 
 const showCode = ref(false)
 
@@ -138,13 +139,5 @@ const toggleCode = () => {
 
 .shelter-demo-code {
   @apply border-t border-gray-200 p-4;
-}
-
-.shelter-demo-footer {
-  @apply border-t border-gray-200 p-2 text-center text-sm text-gray-500 cursor-pointer hover:bg-gray-50;
-}
-
-.shelter-demo-toggle {
-  @apply inline-flex items-center;
 }
 </style>

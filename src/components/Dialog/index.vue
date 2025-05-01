@@ -81,8 +81,9 @@ const handleOpenChange = (value: boolean) => {
 
 <style lang="scss" scoped>
 .s-dialog-overlay {
-  @apply fixed inset-0 z-50 bg-black bg-opacity-50 backdrop-blur-sm;
-  //   animation: overlayShow 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  @apply fixed inset-0 z-50;
+  @apply backdrop-blur-sm;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .s-dialog {
@@ -230,13 +231,6 @@ const handleOpenChange = (value: boolean) => {
 }
 
 /* Animations */
-.animation-fade-in {
-  animation: fadeIn 150ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.animation-scale-in {
-  animation: scaleIn 150ms cubic-bezier(0.16, 1, 0.3, 1);
-}
 
 @keyframes fadeIn {
   from {
