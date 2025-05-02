@@ -9,6 +9,7 @@ import SBorderContainer from './components/BorderContainer/index.vue'
 import SPopover from './components/Popover/index.vue'
 import SEditableArea from './components/EditableArea/index.vue'
 import STooltip from './components/Tooltip/index.vue'
+import SBadge from './components/Badge/index.vue'
 
 // 組件列表
 const components = {
@@ -20,6 +21,7 @@ const components = {
   SPopover,
   SEditableArea,
   STooltip,
+  SBadge,
 }
 
 /**
@@ -46,6 +48,7 @@ export type {
   EditableAreaEmits,
 } from './components/EditableArea/types'
 export type { TooltipProps, TooltipEmits } from './components/Tooltip/types'
+export type { BadgeProps, BadgeEmits } from './components/Badge/types'
 
 // 安裝函數
 const install = (app: App) => {
@@ -68,4 +71,5 @@ export {
   SPopover,
   SEditableArea,
   STooltip,
+  SBadge,
 }

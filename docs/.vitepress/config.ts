@@ -26,6 +26,7 @@ export default defineConfig({
         {
           text: '基礎組件',
           items: [
+            { text: 'Badge 徽章', link: '/components/badge' },
             { text: 'Button 按鈕', link: '/components/button' },
             { text: 'Input 輸入框', link: '/components/input' },
             { text: 'Spin 加載中', link: '/components/spin' },
