@@ -10,7 +10,7 @@
         <slot name="code"></slot>
       </div>
       <div class="shelter-demo-footer" @click="toggleCode">
-        <SButton class="w-full" ghost type="success">
+        <SButton class="w-full" text type="success">
           {{ showCode ? '隱藏代碼' : '顯示代碼' }}
         </SButton>
       </div>

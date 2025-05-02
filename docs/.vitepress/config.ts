@@ -35,6 +35,7 @@ export default defineConfig({
             },
             { text: 'Dialog 對話框', link: '/components/dialog' },
             { text: 'Popover 彈出框', link: '/components/popover' },
+            { text: 'Tooltip 工具提示', link: '/components/tooltip' },
             {
               text: 'EditableArea 可編輯區域',
               link: '/components/editable-area',
