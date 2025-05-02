@@ -18,7 +18,6 @@ import { ref } from 'vue'
 import { SActiveButtonGroup, SActiveButtonItem } from '../'
 
 const disabled = ref('tab1')
-const options = ref('option1')
 </script>
 
 <style scoped>
