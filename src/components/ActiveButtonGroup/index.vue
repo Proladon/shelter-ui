@@ -54,7 +54,7 @@ const updateIndicator = () => {
   indicatorStyle.value = {
     width: `${rect.width}px`,
     height: `${rect.height}px`,
-    transform: `translateX(${activeButton.ref.offsetLeft}px)`,
+    transform: `translateX(${activeButton.ref.offsetLeft - 3.5}px)`,
   }
 }
 
