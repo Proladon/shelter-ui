@@ -1,118 +1,237 @@
 <template>
-  <div class="s-input-wrapper" :class="{ 'is-disabled': disabled }">
-    <div class="s-input-container">
-      <div v-if="$slots.prefix" class="s-input-prefix">
+  <div class="sh-input-wrapper" :class="{ 'is-disabled': disabled }">
+    <div
+      class="sh-input"
+      :class="{
+        'is-focused': focused,
+        'is-clearable': clearable && !disabled && !isEmpty,
+      }"
+    >
+      <div v-if="$slots.prefix" class="sh-input-prefix">
         <slot name="prefix"></slot>
       </div>
+
       <input
-        class="s-input"
-        :class="[`s-input--${size}`, { 's-input--with-prefix': $slots.prefix, 's-input--with-suffix': $slots.suffix || clearable }]"
-        :type="type"
+        ref="inputRef"
         :value="modelValue"
-        :placeholder="placeholder"
+        :type="type"
         :disabled="disabled"
+        :readonly="readonly"
+        :placeholder="placeholder"
+        :autocomplete="autocomplete"
+        :maxlength="maxlength"
+        class="sh-input-inner"
         @input="handleInput"
+        @change="handleChange"
         @focus="handleFocus"
         @blur="handleBlur"
       />
-      <div v-if="clearable && modelValue" class="s-input-clear" @click="handleClear">
-        <span class="s-input-clear-icon">×</span>
-      </div>
-      <div v-if="$slots.suffix" class="s-input-suffix">
+
+      <div v-if="showSuffix" class="sh-input-suffix">
         <slot name="suffix"></slot>
+
+        <span v-if="isWordLimitVisible" class="sh-input-count">
+          <span class="sh-input-count-inner"
+            >{{ valueLength }}/{{ maxlength }}</span
+          >
+        </span>
+
+        <span
+          v-if="clearable && !disabled && !isEmpty"
+          class="sh-input-clear"
+          @click="handleClear"
+        >
+          <svg viewBox="0 0 1024 1024" width="12" height="12">
+            <path
+              d="M512 421.490332 331.092324 240.582656c-25.037934-25.037934-65.590616-25.037934-90.62855 0-25.037934 25.037934-25.037934 65.590616 0 90.62855L421.37145 512 240.463774 692.907676c-25.037934 25.037934-25.037934 65.590616 0 90.62855 25.037934 25.037934 65.590616 25.037934 90.62855 0L512 602.62855l180.907676 180.907676c25.037934 25.037934 65.590616 25.037934 90.62855 0 25.037934-25.037934 25.037934-65.590616 0-90.62855L602.62855 512l180.907676-180.907676c25.037934-25.037934 25.037934-65.590616 0-90.62855-25.037934-25.037934-65.590616-25.037934-90.62855 0L512 421.490332z"
+              fill="currentColor"
+            ></path>
+          </svg>
+        </span>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref, computed, watch, nextTick } from 'vue'
 import type { InputProps, InputEmits } from './types'
+
+defineOptions({
+  name: 'SInput',
+})
 
 const props = withDefaults(defineProps<InputProps>(), {
   modelValue: '',
-  type: 'text',
-  placeholder: '',
-  size: 'default',
   disabled: false,
   clearable: false,
+  placeholder: '',
+  type: 'text',
+  readonly: false,
+  autocomplete: 'off',
+  maxlength: undefined,
+  showWordLimit: false,
 })
 
 const emit = defineEmits<InputEmits>()
 
+const inputRef = ref<HTMLInputElement | null>(null)
+const focused = ref(false)
+
+const isEmpty = computed(() => {
+  return (
+    props.modelValue === '' ||
+    props.modelValue === undefined ||
+    props.modelValue === null
+  )
+})
+
+const showSuffix = computed(() => {
+  return (
+    props.clearable ||
+    props.showWordLimit ||
+    !!props.maxlength ||
+    !!slots.suffix
+  )
+})
+
+const isWordLimitVisible = computed(() => {
+  return (
+    props.showWordLimit &&
+    props.maxlength !== undefined &&
+    !props.disabled &&
+    !props.readonly &&
+    !props.type.includes('hidden')
+  )
+})
+
+const valueLength = computed(() => {
+  if (typeof props.modelValue === 'string') {
+    return props.modelValue.length
+  } else if (typeof props.modelValue === 'number') {
+    return props.modelValue.toString().length
+  }
+  return 0
+})
+
+const focus = () => {
+  inputRef.value?.focus()
+}
+
+const blur = () => {
+  inputRef.value?.blur()
+}
+
+const select = () => {
+  inputRef.value?.select()
+}
+
 const handleInput = (event: Event) => {
-  if (props.disabled) return
-  const target = event.target as HTMLInputElement
-  emit('update:modelValue', target.value)
+  const value = (event.target as HTMLInputElement).value
+  emit('update:modelValue', value)
+  emit('input', value)
+}
+
+const handleChange = (event: Event) => {
+  const value = (event.target as HTMLInputElement).value
+  emit('change', value)
 }
 
 const handleFocus = (event: FocusEvent) => {
-  if (props.disabled) return
+  focused.value = true
   emit('focus', event)
 }
 
 const handleBlur = (event: FocusEvent) => {
-  if (props.disabled) return
+  focused.value = false
   emit('blur', event)
 }
 
 const handleClear = () => {
-  if (props.disabled) return
   emit('update:modelValue', '')
+  emit('clear')
+
+  // Focus back to input after clearing
+  nextTick(() => {
+    focus()
+  })
 }
+
+// Expose methods to parent
+defineExpose({
+  focus,
+  blur,
+  select,
+  input: inputRef,
+})
+
+const slots = defineSlots<{
+  prefix?: () => any
+  suffix?: () => any
+}>()
 </script>
 
-<style lang="postcss">
-.s-input-wrapper {
-  @apply inline-block w-full;
+<style lang="scss" scoped>
+.sh-input-wrapper {
+  @apply w-full inline-flex flex-col relative;
+
+  &:not(.is-disabled) {
+    .sh-input:hover {
+      @apply border-primary;
+    }
+  }
 }
 
-.s-input-container {
-  @apply relative flex items-center w-full;
+.sh-input {
+  @apply inline-flex items-center w-full  bg-bg.primary;
+  @apply rounded-md overflow-hidden;
+  @apply transition duration-300 ease-in-out;
+  @apply border-[1px] border-solid border-border.base;
+
+  @apply h-[36px];
+  padding: 0 12px;
+
+  &.is-focused {
+    @apply border-primary outline-none;
+    box-shadow: 0 0 0 2px rgba(var(--sh-primary-fade), 0.2);
+  }
 }
 
-.s-input {
-  @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300;
+.sh-input-inner {
+  @apply flex-1 w-full h-full outline-none bg-transparent text-text.base;
+  @apply placeholder:text-gray-500;
 }
 
-.s-input--with-prefix {
-  @apply pl-10;
+.sh-input-prefix {
+  @apply flex items-center mr-2;
 }
 
-.s-input--with-suffix {
-  @apply pr-10;
+.sh-input-suffix {
+  @apply flex items-center ml-2;
 }
 
-.s-input--large {
-  @apply text-lg px-5 py-3;
+.sh-input-clear {
+  @apply inline-flex items-center justify-center cursor-pointer;
+  @apply text-gray-400 hover:text-text.base transition-colors;
+  @apply ml-1;
+  width: 16px;
+  height: 16px;
 }
 
-.s-input--small {
-  @apply text-sm px-3 py-1;
+.sh-input-count {
+  @apply ml-1 text-xs text-gray-400;
 }
 
-.s-input-prefix {
-  @apply absolute left-3 flex items-center justify-center text-gray-500;
-}
+/* Updated disabled style to use opacity instead of color changes */
+.is-disabled {
+  @apply opacity-60;
 
-.s-input-suffix {
-  @apply absolute right-3 flex items-center justify-center text-gray-500;
-}
+  .sh-input {
+    @apply cursor-not-allowed;
+  }
 
-.s-input-clear {
-  @apply absolute right-3 flex items-center justify-center text-gray-400 hover:text-gray-600 cursor-pointer;
-}
-
-.s-input-clear-icon {
-  @apply text-lg font-light;
-}
-
-.s-input-wrapper.is-disabled .s-input {
-  @apply bg-gray-100 text-gray-400 cursor-not-allowed;
-}
-
-.s-input-wrapper.is-disabled .s-input-prefix,
-.s-input-wrapper.is-disabled .s-input-suffix,
-.s-input-wrapper.is-disabled .s-input-clear {
-  @apply text-gray-300 cursor-not-allowed;
+  .sh-input-inner {
+    @apply cursor-not-allowed;
+  }
 }
 </style>

@@ -1,15 +1,7 @@
 <template>
-  <div class="flex flex-col gap-2 w-64">
-    <s-input v-model="inputValue" placeholder="請輸入內容"></s-input>
-    <s-input type="password" placeholder="請輸入密碼"></s-input>
-    <s-input disabled placeholder="禁用狀態"></s-input>
-    <s-input clearable v-model="clearableValue" placeholder="可清除內容"></s-input>
-    <s-input v-model="prefixValue" placeholder="帶前綴的輸入框">
-      <template #prefix>@</template>
-    </s-input>
-    <s-input v-model="suffixValue" placeholder="帶後綴的輸入框">
-      <template #suffix>.com</template>
-    </s-input>
+  <div class="demo-container">
+    <s-input v-model="inputValue" placeholder="Please input..." />
+    <div class="value-display">Current Value: {{ inputValue }}</div>
   </div>
 </template>
 
@@ -17,7 +9,18 @@
 import { ref } from 'vue'
 
 const inputValue = ref('')
-const clearableValue = ref('可清除的內容')
-const prefixValue = ref('')
-const suffixValue = ref('')
 </script>
+
+<style scoped>
+.demo-container {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.value-display {
+  margin-top: 16px;
+  font-size: 14px;
+  color: #666;
+}
+</style>

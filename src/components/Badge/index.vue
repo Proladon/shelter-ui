@@ -58,31 +58,18 @@ const handleClick = (event: MouseEvent) => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="postcss" scoped>
 .sh-badge-wrapper {
-  @apply relative inline-flex;
-  vertical-align: middle;
+  @apply relative inline-flex align-middle;
 }
 
 .sh-badge {
-  @apply rounded-full bg-status.danger text-white text-xs font-bold;
-  padding: 0.25rem 0.5rem;
-  position: absolute;
-  top: 0;
-  right: 0;
-  transform: translate(50%, -50%);
-  min-width: 1.5rem;
-  height: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  white-space: nowrap;
-  z-index: 10;
+  @apply rounded-full bg-status-danger text-white text-xs font-bold;
+  @apply px-2 py-1 absolute top-0 right-0 translate-x-1/2 -translate-y-1/2;
+  @apply min-w-[1.5rem] h-[1.5rem] flex items-center justify-center whitespace-nowrap z-10;
 
   &.is-dot {
-    @apply w-2 h-2 p-0;
-    min-width: unset;
-    border-radius: 50%;
+    @apply w-2 h-2 p-0 min-w-0 rounded-full;
   }
 }
 </style>

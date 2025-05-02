@@ -1,0 +1,19 @@
+<template>
+  <div class="demo-container">
+    <s-input v-model="inputValue" placeholder="Disabled input" disabled />
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const inputValue = ref('This input is disabled')
+</script>
+
+<style scoped>
+.demo-container {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+}
+</style>
