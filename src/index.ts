@@ -10,6 +10,11 @@ import SPopover from './components/Popover/index.vue'
 import SEditableArea from './components/EditableArea/index.vue'
 import STooltip from './components/Tooltip/index.vue'
 import SBadge from './components/Badge/index.vue'
+import SDialog from './components/Dialog/index.vue'
+import {
+  SActiveButtonGroup,
+  SActiveButtonItem,
+} from './components/ActiveButtonGroup'
 
 // 組件列表
 const components = {
@@ -22,6 +27,9 @@ const components = {
   SEditableArea,
   STooltip,
   SBadge,
+  SDialog,
+  SActiveButtonGroup,
+  SActiveButtonItem,
 }
 
 /**
@@ -49,6 +57,12 @@ export type {
 } from './components/EditableArea/types'
 export type { TooltipProps, TooltipEmits } from './components/Tooltip/types'
 export type { BadgeProps, BadgeEmits } from './components/Badge/types'
+export type { DialogProps, DialogEmits } from './components/Dialog/types'
+export type {
+  ActiveButtonGroupProps,
+  ActiveButtonGroupEmits,
+  ActiveButtonItemProps,
+} from './components/ActiveButtonGroup/types'
 
 // 安裝函數
 const install = (app: App) => {
@@ -72,4 +86,7 @@ export {
   SEditableArea,
   STooltip,
   SBadge,
+  SDialog,
+  SActiveButtonGroup,
+  SActiveButtonItem,
 }
