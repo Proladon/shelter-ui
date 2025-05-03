@@ -23,6 +23,10 @@
       "types": "./dist/core/index.d.ts",
       "import": "./dist/core.js.js",
       "require": "./dist/core.cjs.js"
+    },
+    "./dist/index.css": {
+      "import": "./dist/index.css",
+      "require": "./dist/index.css"
     }
   },
   "files": [
