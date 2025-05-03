@@ -10,7 +10,7 @@ import SPopover from './components/Popover/index.vue'
 import SEditableArea from './components/EditableArea/index.vue'
 import STooltip from './components/Tooltip/index.vue'
 import SBadge from './components/Badge/index.vue'
-import { generateUnoThemeColors } from '@/utils/style'
+import { generateUnoThemeColors } from '@/core'
 
 // 組件列表
 const components = {
