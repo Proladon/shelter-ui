@@ -21,9 +21,19 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/index.ts'),
+      // 使用对象形式定义多个入口点
+      entry: {
+        'shelter-ui': resolve(__dirname, 'src/index.ts'),
+        core: resolve(__dirname, 'src/core/index.ts'),
+      },
       name: 'ShelterUI',
-      fileName: (format) => `shelter-ui.${format === 'es' ? 'js' : format}.js`,
+      // 调整文件名格式以支持多个入口
+      fileName: (format, entryName) => {
+        if (entryName === 'shelter-ui') {
+          return `shelter-ui.${format === 'es' ? 'js' : format}.js`
+        }
+        return `${entryName}.${format === 'es' ? 'js' : format}.js`
+      },
     },
     cssCodeSplit: true,
     rollupOptions: {
@@ -34,8 +44,8 @@ export default defineConfig({
         },
         exports: 'named',
         assetFileNames: (assetInfo) => {
-          if (assetInfo.name === 'style.css') return 'shelter-ui.css';
-          return assetInfo.name || '';
+          if (assetInfo.name === 'style.css') return 'shelter-ui.css'
+          return assetInfo.name || ''
         },
       },
     },

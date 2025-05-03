@@ -13,6 +13,18 @@
   "main": "dist/shelter-ui.umd.js",
   "module": "dist/shelter-ui.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/shelter-ui.js",
+      "require": "./dist/shelter-ui.umd.js"
+    },
+    "./core": {
+      "types": "./dist/core/index.d.ts",
+      "import": "./dist/core.js",
+      "require": "./dist/core.umd.js"
+    }
+  },
   "files": [
     "dist"
   ],
