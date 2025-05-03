@@ -21,18 +21,21 @@ export default defineConfig({
   },
   build: {
     lib: {
-      // 使用对象形式定义多个入口点
+      // 使用物件形式定義多個入口點
       entry: {
         'shelter-ui': resolve(__dirname, 'src/index.ts'),
         core: resolve(__dirname, 'src/core/index.ts'),
       },
       name: 'ShelterUI',
-      // 调整文件名格式以支持多个入口
+      // 調整檔案名稱格式以支援多個入口
       fileName: (format, entryName) => {
-        if (entryName === 'shelter-ui') {
-          return `shelter-ui.${format === 'es' ? 'js' : format}.js`
+        // 確保生成 ES 和 CommonJS 兩種格式
+        if (format === 'es') {
+          return `${entryName}.js.js`
+        } else if (format === 'cjs') {
+          return `${entryName}.cjs.js`
         }
-        return `${entryName}.${format === 'es' ? 'js' : format}.js`
+        return `${entryName}.${format}.js`
       },
     },
     cssCodeSplit: true,

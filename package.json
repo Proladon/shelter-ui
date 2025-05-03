@@ -10,19 +10,19 @@
     "components",
     "ui"
   ],
-  "main": "dist/shelter-ui.umd.js",
-  "module": "dist/shelter-ui.js",
+  "main": "dist/shelter-ui.cjs.js",
+  "module": "dist/shelter-ui.js.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/shelter-ui.js",
-      "require": "./dist/shelter-ui.umd.js"
+      "import": "./dist/shelter-ui.js.js",
+      "require": "./dist/shelter-ui.cjs.js"
     },
     "./core": {
       "types": "./dist/core/index.d.ts",
-      "import": "./dist/core.js",
-      "require": "./dist/core.umd.js"
+      "import": "./dist/core.js.js",
+      "require": "./dist/core.cjs.js"
     }
   },
   "files": [
