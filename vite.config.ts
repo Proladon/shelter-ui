@@ -46,9 +46,10 @@ export default defineConfig({
           vue: 'Vue',
         },
         exports: 'named',
-        assetFileNames: (assetInfo) => {
-          if (assetInfo.name === 'style.css') return 'shelter-ui.css'
-          return assetInfo.name || ''
+        assetFileNames: () => {
+          // if (assetInfo.name === 'style.css') return 'index.css'
+          // return assetInfo.name || ''
+          return 'index.css'
         },
       },
     },
