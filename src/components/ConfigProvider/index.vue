@@ -5,7 +5,8 @@
 import { onBeforeMount } from 'vue'
 import color from 'color'
 import type { ThemeVarsConfig } from './types'
-import { setCssVar } from '@/_utils/style'
+import { setCssVar } from '@/utils/style'
+import defaultTheme from '@/themes/default'
 
 const props = withDefaults(
   defineProps<{
@@ -14,30 +15,7 @@ const props = withDefaults(
   }>(),
   {
     themePrefix: 'sh',
-    themeConfig: () => ({
-      primary: '#7EAFBA',
-      'primary-light': '#2c353c',
-      bg: {
-        primary: '#283038',
-        secondary: '#1b1f27',
-      },
-
-      text: {
-        // base: '#E3C9AA',
-        base: '#C5B39D',
-      },
-
-      border: {
-        base: '#3e4451',
-      },
-
-      status: {
-        info: '#d5d5d5',
-        danger: '#ed6d7d',
-        warning: '#f2c97d',
-        success: '#9cc3b4',
-      },
-    }),
+    themeConfig: () => defaultTheme,
   },
 )
 
