@@ -6,7 +6,7 @@ import {
   TooltipProvider,
   TooltipRoot,
   TooltipTrigger,
-} from 'radix-vue'
+} from 'reka-ui'
 import type { TooltipProps, TooltipEmits } from './types'
 
 defineOptions({

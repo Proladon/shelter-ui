@@ -1,4 +1,7 @@
 import {
+  _class_private_field_init
+} from "./chunk-DKXJ6YOE.js";
+import {
   Comment,
   Fragment,
   Teleport,
@@ -63,15 +66,15 @@ import {
   withDirectives,
   withKeys,
   withModifiers
-} from "./chunk-LW4I4DCF.js";
-import "./chunk-PZ5AY32C.js";
+} from "./chunk-64JB73B4.js";
+import "./chunk-OYQD7GAK.js";
 
-// node_modules/@internationalized/date/dist/utils.mjs
+// node_modules/radix-vue/node_modules/@internationalized/date/dist/utils.mjs
 function $2b4dce13dd5a17fa$export$842a2cf37af977e1(amount, numerator) {
   return amount - numerator * Math.floor(amount / numerator);
 }
 
-// node_modules/@internationalized/date/dist/GregorianCalendar.mjs
+// node_modules/radix-vue/node_modules/@internationalized/date/dist/GregorianCalendar.mjs
 var $3b62074eb05584b2$var$EPOCH = 1721426;
 function $3b62074eb05584b2$export$f297eb839006d339(era, year, month, day) {
   year = $3b62074eb05584b2$export$c36e0ecb2d4fa69d(era, year);
@@ -186,7 +189,7 @@ var $3b62074eb05584b2$export$80ee6245ec4f29ec = class {
   }
 };
 
-// node_modules/@internationalized/date/dist/weekStartData.mjs
+// node_modules/radix-vue/node_modules/@internationalized/date/dist/weekStartData.mjs
 var $2fe286d2fb449abb$export$7a5acbd77d414bd9 = {
   "001": 1,
   AD: 1,
@@ -285,7 +288,7 @@ var $2fe286d2fb449abb$export$7a5acbd77d414bd9 = {
   XK: 1
 };
 
-// node_modules/@internationalized/date/dist/queries.mjs
+// node_modules/radix-vue/node_modules/@internationalized/date/dist/queries.mjs
 function $14e0f24ef4ac5c92$export$ea39ec197993aef0(a2, b2) {
   b2 = (0, $11d87f3f76e88657$export$b4a036af3fc0b032)(b2, a2.calendar);
   return a2.era === b2.era && a2.year === b2.year && a2.month === b2.month && a2.day === b2.day;
@@ -374,7 +377,7 @@ function $14e0f24ef4ac5c92$var$getWeekStart(locale) {
   return region ? (0, $2fe286d2fb449abb$export$7a5acbd77d414bd9)[region] || 0 : 0;
 }
 
-// node_modules/@internationalized/date/dist/conversion.mjs
+// node_modules/radix-vue/node_modules/@internationalized/date/dist/conversion.mjs
 function $11d87f3f76e88657$export$bd4fb2bc8bb06fb(date) {
   date = $11d87f3f76e88657$export$b4a036af3fc0b032(date, new (0, $3b62074eb05584b2$export$80ee6245ec4f29ec)());
   let year = (0, $3b62074eb05584b2$export$c36e0ecb2d4fa69d)(date.era, date.year);
@@ -526,7 +529,7 @@ function $11d87f3f76e88657$export$538b00033cc11c75(date, timeZone) {
   return $11d87f3f76e88657$export$b4a036af3fc0b032($11d87f3f76e88657$export$1b96692a1ba042ac(ms2, timeZone), date.calendar);
 }
 
-// node_modules/@internationalized/date/dist/manipulation.mjs
+// node_modules/radix-vue/node_modules/@internationalized/date/dist/manipulation.mjs
 var $735220c2d4774dd3$var$ONE_HOUR = 36e5;
 function $735220c2d4774dd3$export$e16d8520af44a096(date, duration) {
   let mutableDate = date.copy();
@@ -695,14 +698,14 @@ function $735220c2d4774dd3$export$dd02b3e0007dfe28(value, field, amount, options
   switch (field) {
     case "hour": {
       let hours = value.hour;
-      let min2 = 0;
-      let max2 = 23;
+      let min3 = 0;
+      let max3 = 23;
       if ((options === null || options === void 0 ? void 0 : options.hourCycle) === 12) {
         let isPM = hours >= 12;
-        min2 = isPM ? 12 : 0;
-        max2 = isPM ? 23 : 11;
+        min3 = isPM ? 12 : 0;
+        max3 = isPM ? 23 : 11;
       }
-      mutable.hour = $735220c2d4774dd3$var$cycleValue(hours, amount, min2, max2, options === null || options === void 0 ? void 0 : options.round);
+      mutable.hour = $735220c2d4774dd3$var$cycleValue(hours, amount, min3, max3, options === null || options === void 0 ? void 0 : options.round);
       break;
     }
     case "minute":
@@ -719,18 +722,18 @@ function $735220c2d4774dd3$export$dd02b3e0007dfe28(value, field, amount, options
   }
   return mutable;
 }
-function $735220c2d4774dd3$var$cycleValue(value, amount, min2, max2, round2 = false) {
+function $735220c2d4774dd3$var$cycleValue(value, amount, min3, max3, round2 = false) {
   if (round2) {
     value += Math.sign(amount);
-    if (value < min2) value = max2;
+    if (value < min3) value = max3;
     let div = Math.abs(amount);
     if (amount > 0) value = Math.ceil(value / div) * div;
     else value = Math.floor(value / div) * div;
-    if (value > max2) value = min2;
+    if (value > max3) value = min3;
   } else {
     value += amount;
-    if (value < min2) value = max2 - (min2 - value - 1);
-    else if (value > max2) value = min2 + (value - max2 - 1);
+    if (value < min3) value = max3 - (min3 - value - 1);
+    else if (value > max3) value = min3 + (value - max3 - 1);
   }
   return value;
 }
@@ -759,23 +762,23 @@ function $735220c2d4774dd3$export$6814caac34ca03c7(dateTime, duration) {
 function $735220c2d4774dd3$export$9a297d111fc86b79(dateTime, field, amount, options) {
   switch (field) {
     case "hour": {
-      let min2 = 0;
-      let max2 = 23;
+      let min3 = 0;
+      let max3 = 23;
       if ((options === null || options === void 0 ? void 0 : options.hourCycle) === 12) {
         let isPM = dateTime.hour >= 12;
-        min2 = isPM ? 12 : 0;
-        max2 = isPM ? 23 : 11;
+        min3 = isPM ? 12 : 0;
+        max3 = isPM ? 23 : 11;
       }
       let plainDateTime = (0, $11d87f3f76e88657$export$b21e0b124e224484)(dateTime);
       let minDate = (0, $11d87f3f76e88657$export$b4a036af3fc0b032)($735220c2d4774dd3$export$e5d5e1c1822b6e56(plainDateTime, {
-        hour: min2
+        hour: min3
       }), new (0, $3b62074eb05584b2$export$80ee6245ec4f29ec)());
       let minAbsolute = [
         (0, $11d87f3f76e88657$export$5107c82f94518f5c)(minDate, dateTime.timeZone, "earlier"),
         (0, $11d87f3f76e88657$export$5107c82f94518f5c)(minDate, dateTime.timeZone, "later")
       ].filter((ms3) => (0, $11d87f3f76e88657$export$1b96692a1ba042ac)(ms3, dateTime.timeZone).day === minDate.day)[0];
       let maxDate = (0, $11d87f3f76e88657$export$b4a036af3fc0b032)($735220c2d4774dd3$export$e5d5e1c1822b6e56(plainDateTime, {
-        hour: max2
+        hour: max3
       }), new (0, $3b62074eb05584b2$export$80ee6245ec4f29ec)());
       let maxAbsolute = [
         (0, $11d87f3f76e88657$export$5107c82f94518f5c)(maxDate, dateTime.timeZone, "earlier"),
@@ -811,7 +814,7 @@ function $735220c2d4774dd3$export$31b5430eb18be4f8(dateTime, fields, disambiguat
   return (0, $11d87f3f76e88657$export$b4a036af3fc0b032)((0, $11d87f3f76e88657$export$1b96692a1ba042ac)(ms2, dateTime.timeZone), dateTime.calendar);
 }
 
-// node_modules/@internationalized/date/dist/string.mjs
+// node_modules/radix-vue/node_modules/@internationalized/date/dist/string.mjs
 var $fae977aafc393c5c$var$requiredDurationTimeGroups = [
   "hours",
   "minutes",
@@ -848,20 +851,7 @@ function $fae977aafc393c5c$export$bf79f1ebf4b18792(date) {
   return `${$fae977aafc393c5c$export$4223de14708adc63(date)}${$fae977aafc393c5c$var$offsetToString(date.offset)}[${date.timeZone}]`;
 }
 
-// node_modules/@swc/helpers/esm/_check_private_redeclaration.js
-function _check_private_redeclaration(obj, privateCollection) {
-  if (privateCollection.has(obj)) {
-    throw new TypeError("Cannot initialize the same private elements twice on an object");
-  }
-}
-
-// node_modules/@swc/helpers/esm/_class_private_field_init.js
-function _class_private_field_init(obj, privateMap, value) {
-  _check_private_redeclaration(obj, privateMap);
-  privateMap.set(obj, value);
-}
-
-// node_modules/@internationalized/date/dist/CalendarDate.mjs
+// node_modules/radix-vue/node_modules/@internationalized/date/dist/CalendarDate.mjs
 function $35ea8db9cb2ccb90$var$shiftArgs(args) {
   let calendar = typeof args[0] === "object" ? args.shift() : new (0, $3b62074eb05584b2$export$80ee6245ec4f29ec)();
   let era;
@@ -1064,7 +1054,7 @@ var $35ea8db9cb2ccb90$export$d3b7288e7994edea = class _$35ea8db9cb2ccb90$export$
   }
 };
 
-// node_modules/@internationalized/date/dist/JapaneseCalendar.mjs
+// node_modules/radix-vue/node_modules/@internationalized/date/dist/JapaneseCalendar.mjs
 var $62225008020f0a13$var$ERA_START_DATES = [
   [
     1868,
@@ -1215,7 +1205,7 @@ function $62225008020f0a13$var$getMinimums(date) {
   }
 }
 
-// node_modules/@internationalized/date/dist/BuddhistCalendar.mjs
+// node_modules/radix-vue/node_modules/@internationalized/date/dist/BuddhistCalendar.mjs
 var $8d73d47422ca7302$var$BUDDHIST_ERA_START = -543;
 var $8d73d47422ca7302$export$42d20a78301dee44 = class extends (0, $3b62074eb05584b2$export$80ee6245ec4f29ec) {
   fromJulianDay(jd2) {
@@ -1245,7 +1235,7 @@ function $8d73d47422ca7302$var$toGregorian(date) {
   return new (0, $35ea8db9cb2ccb90$export$99faa760c7908e4f)(era, year, date.month, date.day);
 }
 
-// node_modules/@internationalized/date/dist/TaiwanCalendar.mjs
+// node_modules/radix-vue/node_modules/@internationalized/date/dist/TaiwanCalendar.mjs
 var $5f31bd6f0c8940b2$var$TAIWAN_ERA_START = 1911;
 function $5f31bd6f0c8940b2$var$gregorianYear(date) {
   return date.era === "minguo" ? date.year + $5f31bd6f0c8940b2$var$TAIWAN_ERA_START : 1 - date.year + $5f31bd6f0c8940b2$var$TAIWAN_ERA_START;
@@ -1300,7 +1290,7 @@ function $5f31bd6f0c8940b2$var$toGregorian(date) {
   return new (0, $35ea8db9cb2ccb90$export$99faa760c7908e4f)(era, year, date.month, date.day);
 }
 
-// node_modules/@internationalized/date/dist/PersianCalendar.mjs
+// node_modules/radix-vue/node_modules/@internationalized/date/dist/PersianCalendar.mjs
 var $f3ed2e4472ae7e25$var$PERSIAN_EPOCH = 1948320;
 var $f3ed2e4472ae7e25$var$MONTH_START = [
   0,
@@ -1355,7 +1345,7 @@ var $f3ed2e4472ae7e25$export$37fccdbfd14c5939 = class {
   }
 };
 
-// node_modules/@internationalized/date/dist/IndianCalendar.mjs
+// node_modules/radix-vue/node_modules/@internationalized/date/dist/IndianCalendar.mjs
 var $82c358003bdda0a8$var$INDIAN_ERA_START = 78;
 var $82c358003bdda0a8$var$INDIAN_YEAR_START = 80;
 var $82c358003bdda0a8$export$39f31c639fa15726 = class extends (0, $3b62074eb05584b2$export$80ee6245ec4f29ec) {
@@ -1428,7 +1418,7 @@ var $82c358003bdda0a8$export$39f31c639fa15726 = class extends (0, $3b62074eb0558
   }
 };
 
-// node_modules/@internationalized/date/dist/IslamicCalendar.mjs
+// node_modules/radix-vue/node_modules/@internationalized/date/dist/IslamicCalendar.mjs
 var $f2f3e0e3a817edbd$var$CIVIL_EPOC = 1948440;
 var $f2f3e0e3a817edbd$var$ASTRONOMICAL_EPOC = 1948439;
 var $f2f3e0e3a817edbd$var$UMALQURA_YEAR_START = 1300;
@@ -1564,7 +1554,7 @@ var $f2f3e0e3a817edbd$export$5baab4758c231076 = class extends $f2f3e0e3a817edbd$
   }
 };
 
-// node_modules/@internationalized/date/dist/HebrewCalendar.mjs
+// node_modules/radix-vue/node_modules/@internationalized/date/dist/HebrewCalendar.mjs
 var $7c5f6fbf42389787$var$HEBREW_EPOCH = 347997;
 var $7c5f6fbf42389787$var$HOUR_PARTS = 1080;
 var $7c5f6fbf42389787$var$DAY_PARTS = 24 * $7c5f6fbf42389787$var$HOUR_PARTS;
@@ -1672,7 +1662,7 @@ var $7c5f6fbf42389787$export$ca405048b8fb5af = class {
   }
 };
 
-// node_modules/@internationalized/date/dist/EthiopicCalendar.mjs
+// node_modules/radix-vue/node_modules/@internationalized/date/dist/EthiopicCalendar.mjs
 var $b956b2d7a6cf451f$var$ETHIOPIC_EPOCH = 1723856;
 var $b956b2d7a6cf451f$var$COPTIC_EPOCH = 1824665;
 var $b956b2d7a6cf451f$var$AMETE_MIHRET_DELTA = 5500;
@@ -1796,7 +1786,7 @@ var $b956b2d7a6cf451f$export$fe6243cbe1a4b7c1 = class extends $b956b2d7a6cf451f$
   }
 };
 
-// node_modules/@internationalized/date/dist/createCalendar.mjs
+// node_modules/radix-vue/node_modules/@internationalized/date/dist/createCalendar.mjs
 function $64244302c3013299$export$dd0bbc9b26defe37(name) {
   switch (name) {
     case "buddhist":
@@ -1829,7 +1819,7 @@ function $64244302c3013299$export$dd0bbc9b26defe37(name) {
   }
 }
 
-// node_modules/@internationalized/date/dist/DateFormatter.mjs
+// node_modules/radix-vue/node_modules/@internationalized/date/dist/DateFormatter.mjs
 var $fb18d541ea1ad717$var$formatterCache = /* @__PURE__ */ new Map();
 var $fb18d541ea1ad717$export$ad991b66133851cf = class {
   /** Formats a date as a string according to the locale and format options passed to the constructor. */
@@ -1934,12 +1924,12 @@ function $fb18d541ea1ad717$var$getResolvedHourCycle(locale, options) {
     timeZone: void 0
     // use local timezone
   });
-  let min2 = parseInt(formatter.formatToParts(new Date(2020, 2, 3, 0)).find((p) => p.type === "hour").value, 10);
-  let max2 = parseInt(formatter.formatToParts(new Date(2020, 2, 3, 23)).find((p) => p.type === "hour").value, 10);
-  if (min2 === 0 && max2 === 23) return "h23";
-  if (min2 === 24 && max2 === 23) return "h24";
-  if (min2 === 0 && max2 === 11) return "h11";
-  if (min2 === 12 && max2 === 11) return "h12";
+  let min3 = parseInt(formatter.formatToParts(new Date(2020, 2, 3, 0)).find((p) => p.type === "hour").value, 10);
+  let max3 = parseInt(formatter.formatToParts(new Date(2020, 2, 3, 23)).find((p) => p.type === "hour").value, 10);
+  if (min3 === 0 && max3 === 23) return "h23";
+  if (min3 === 24 && max3 === 23) return "h24";
+  if (min3 === 0 && max3 === 11) return "h11";
+  if (min3 === 12 && max3 === 11) return "h12";
   throw new Error("Unexpected hour cycle result");
 }
 
@@ -2061,18 +2051,12 @@ function rt(t) {
   return a2;
 }
 
-// node_modules/@floating-ui/utils/dist/floating-ui.utils.mjs
+// node_modules/@floating-ui/core/node_modules/@floating-ui/utils/dist/floating-ui.utils.mjs
 var sides = ["top", "right", "bottom", "left"];
 var alignments = ["start", "end"];
 var placements = sides.reduce((acc, side) => acc.concat(side, side + "-" + alignments[0], side + "-" + alignments[1]), []);
 var min = Math.min;
 var max = Math.max;
-var round = Math.round;
-var floor = Math.floor;
-var createCoords = (v2) => ({
-  x: v2,
-  y: v2
-});
 var oppositeSideMap = {
   left: "right",
   right: "left",
@@ -2433,11 +2417,11 @@ var arrow = (options) => ({
     const minPadding = min(paddingObject[minProp], largestPossiblePadding);
     const maxPadding = min(paddingObject[maxProp], largestPossiblePadding);
     const min$1 = minPadding;
-    const max2 = clientSize - arrowDimensions[length] - maxPadding;
+    const max3 = clientSize - arrowDimensions[length] - maxPadding;
     const center = clientSize / 2 - arrowDimensions[length] / 2 + centerToReference;
-    const offset3 = clamp(min$1, center, max2);
+    const offset3 = clamp(min$1, center, max3);
     const shouldAddOffset = !middlewareData.arrow && getAlignment(placement) != null && center !== offset3 && rects.reference[length] / 2 - (center < min$1 ? minPadding : maxPadding) - arrowDimensions[length] / 2 < 0;
-    const alignmentOffset = shouldAddOffset ? center < min$1 ? center - min$1 : center - max2 : 0;
+    const alignmentOffset = shouldAddOffset ? center < min$1 ? center - min$1 : center - max3 : 0;
     return {
       [axis]: coords[axis] + alignmentOffset,
       data: {
@@ -2489,7 +2473,7 @@ var flip = function(options) {
       if (!specifiedFallbackPlacements && hasFallbackAxisSideDirection) {
         fallbackPlacements.push(...getOppositeAxisPlacements(initialPlacement, flipAlignment, fallbackAxisSideDirection, rtl));
       }
-      const placements2 = [initialPlacement, ...fallbackPlacements];
+      const placements3 = [initialPlacement, ...fallbackPlacements];
       const overflow = await detectOverflow(state, detectOverflowOptions);
       const overflows = [];
       let overflowsData = ((_middlewareData$flip = middlewareData.flip) == null ? void 0 : _middlewareData$flip.overflows) || [];
@@ -2497,8 +2481,8 @@ var flip = function(options) {
         overflows.push(overflow[side]);
       }
       if (checkCrossAxis) {
-        const sides2 = getAlignmentSides(placement, rects, rtl);
-        overflows.push(overflow[sides2[0]], overflow[sides2[1]]);
+        const sides3 = getAlignmentSides(placement, rects, rtl);
+        overflows.push(overflow[sides3[0]], overflow[sides3[1]]);
       }
       overflowsData = [...overflowsData, {
         placement,
@@ -2507,7 +2491,7 @@ var flip = function(options) {
       if (!overflows.every((side2) => side2 <= 0)) {
         var _middlewareData$flip2, _overflowsData$filter;
         const nextIndex = (((_middlewareData$flip2 = middlewareData.flip) == null ? void 0 : _middlewareData$flip2.index) || 0) + 1;
-        const nextPlacement = placements2[nextIndex];
+        const nextPlacement = placements3[nextIndex];
         if (nextPlacement) {
           return {
             data: {
@@ -2724,16 +2708,16 @@ var shift = function(options) {
       if (checkMainAxis) {
         const minSide = mainAxis === "y" ? "top" : "left";
         const maxSide = mainAxis === "y" ? "bottom" : "right";
-        const min2 = mainAxisCoord + overflow[minSide];
-        const max2 = mainAxisCoord - overflow[maxSide];
-        mainAxisCoord = clamp(min2, mainAxisCoord, max2);
+        const min3 = mainAxisCoord + overflow[minSide];
+        const max3 = mainAxisCoord - overflow[maxSide];
+        mainAxisCoord = clamp(min3, mainAxisCoord, max3);
       }
       if (checkCrossAxis) {
         const minSide = crossAxis === "y" ? "top" : "left";
         const maxSide = crossAxis === "y" ? "bottom" : "right";
-        const min2 = crossAxisCoord + overflow[minSide];
-        const max2 = crossAxisCoord - overflow[maxSide];
-        crossAxisCoord = clamp(min2, crossAxisCoord, max2);
+        const min3 = crossAxisCoord + overflow[minSide];
+        const max3 = crossAxisCoord - overflow[maxSide];
+        crossAxisCoord = clamp(min3, crossAxisCoord, max3);
       }
       const limitedCoords = limiter.fn({
         ...state,
@@ -2898,7 +2882,20 @@ var size = function(options) {
   };
 };
 
-// node_modules/@floating-ui/utils/dist/floating-ui.utils.dom.mjs
+// node_modules/@floating-ui/dom/node_modules/@floating-ui/utils/dist/floating-ui.utils.mjs
+var sides2 = ["top", "right", "bottom", "left"];
+var alignments2 = ["start", "end"];
+var placements2 = sides2.reduce((acc, side) => acc.concat(side, side + "-" + alignments2[0], side + "-" + alignments2[1]), []);
+var min2 = Math.min;
+var max2 = Math.max;
+var round = Math.round;
+var floor = Math.floor;
+var createCoords = (v2) => ({
+  x: v2,
+  y: v2
+});
+
+// node_modules/@floating-ui/dom/node_modules/@floating-ui/utils/dist/floating-ui.utils.dom.mjs
 function hasWindow() {
   return typeof window !== "undefined";
 }
@@ -3230,12 +3227,12 @@ function getDocumentRect(element) {
   const html = getDocumentElement(element);
   const scroll = getNodeScroll(element);
   const body = element.ownerDocument.body;
-  const width = max(html.scrollWidth, html.clientWidth, body.scrollWidth, body.clientWidth);
-  const height = max(html.scrollHeight, html.clientHeight, body.scrollHeight, body.clientHeight);
+  const width = max2(html.scrollWidth, html.clientWidth, body.scrollWidth, body.clientWidth);
+  const height = max2(html.scrollHeight, html.clientHeight, body.scrollHeight, body.clientHeight);
   let x = -scroll.scrollLeft + getWindowScrollBarX(element);
   const y2 = -scroll.scrollTop;
   if (getComputedStyle2(body).direction === "rtl") {
-    x += max(html.clientWidth, body.clientWidth) - width;
+    x += max2(html.clientWidth, body.clientWidth) - width;
   }
   return {
     width,
@@ -3348,10 +3345,10 @@ function getClippingRect(_ref) {
   const firstClippingAncestor = clippingAncestors[0];
   const clippingRect = clippingAncestors.reduce((accRect, clippingAncestor) => {
     const rect = getClientRectFromClippingAncestor(element, clippingAncestor, strategy);
-    accRect.top = max(rect.top, accRect.top);
-    accRect.right = min(rect.right, accRect.right);
-    accRect.bottom = min(rect.bottom, accRect.bottom);
-    accRect.left = max(rect.left, accRect.left);
+    accRect.top = max2(rect.top, accRect.top);
+    accRect.right = min2(rect.right, accRect.right);
+    accRect.bottom = min2(rect.bottom, accRect.bottom);
+    accRect.left = max2(rect.left, accRect.left);
     return accRect;
   }, getClientRectFromClippingAncestor(element, firstClippingAncestor, strategy));
   return {
@@ -3513,7 +3510,7 @@ function observeMove(element, onMove) {
     const rootMargin = -insetTop + "px " + -insetRight + "px " + -insetBottom + "px " + -insetLeft + "px";
     const options = {
       rootMargin,
-      threshold: max(0, min(1, threshold)) || 1
+      threshold: max2(0, min2(1, threshold)) || 1
     };
     let isFirstUpdate = true;
     function handleObserve(entries) {
@@ -3640,6 +3637,27 @@ var computePosition2 = (reference, floating, options) => {
   });
 };
 
+// node_modules/@floating-ui/vue/node_modules/@floating-ui/utils/dist/floating-ui.utils.dom.mjs
+function hasWindow2() {
+  return typeof window !== "undefined";
+}
+function getNodeName2(node) {
+  if (isNode2(node)) {
+    return (node.nodeName || "").toLowerCase();
+  }
+  return "#document";
+}
+function getWindow2(node) {
+  var _node$ownerDocument;
+  return (node == null || (_node$ownerDocument = node.ownerDocument) == null ? void 0 : _node$ownerDocument.defaultView) || window;
+}
+function isNode2(value) {
+  if (!hasWindow2()) {
+    return false;
+  }
+  return value instanceof Node || value instanceof getWindow2(value).Node;
+}
+
 // node_modules/@floating-ui/vue/dist/floating-ui.vue.mjs
 function isComponentPublicInstance(target) {
   return target != null && typeof target === "object" && "$el" in target;
@@ -3647,7 +3665,7 @@ function isComponentPublicInstance(target) {
 function unwrapElement2(target) {
   if (isComponentPublicInstance(target)) {
     const element = target.$el;
-    return isNode(element) && getNodeName(element) === "#comment" ? null : element;
+    return isNode2(element) && getNodeName2(element) === "#comment" ? null : element;
   }
   return target;
 }
@@ -3802,7 +3820,7 @@ function useFloating(reference, floating, options) {
   };
 }
 
-// node_modules/@internationalized/number/dist/NumberFormatter.mjs
+// node_modules/radix-vue/node_modules/@internationalized/number/dist/NumberFormatter.mjs
 var $488c6ddbf4ef74c2$var$formatterCache = /* @__PURE__ */ new Map();
 var $488c6ddbf4ef74c2$var$supportsSignDisplay = false;
 try {
@@ -3941,7 +3959,7 @@ function $488c6ddbf4ef74c2$export$711b50b3c525e0f2(numberFormat, signDisplay, nu
   }
 }
 
-// node_modules/@internationalized/number/dist/NumberParser.mjs
+// node_modules/radix-vue/node_modules/@internationalized/number/dist/NumberParser.mjs
 var $6c7bd7858deea686$var$CURRENCY_SIGN_REGEX = new RegExp("^.*\\(.*\\).*$");
 var $6c7bd7858deea686$var$NUMBERING_SYSTEMS = [
   "latn",

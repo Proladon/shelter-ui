@@ -72,12 +72,12 @@ const mergedSize = computed(() => {
 })
 
 // 計算描邊寬度
-const mergedStrokeWidth = computed(() => {
-  if (props.strokeWidth !== undefined) {
-    return props.strokeWidth
-  }
-  return 2
-})
+// const mergedStrokeWidth = computed(() => {
+//   if (props.strokeWidth !== undefined) {
+//     return props.strokeWidth
+//   }
+//   return 2
+// })
 
 // 計算顏色
 const mergedStroke = computed(() => {

@@ -55,7 +55,7 @@ import {
   DialogRoot,
   DialogTitle,
   DialogTrigger,
-} from 'radix-vue'
+} from 'reka-ui'
 import type { DialogProps, DialogEmits } from './types'
 
 defineOptions({

@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import {
   PopoverArrow,
-  PopoverClose,
+  // PopoverClose,
   PopoverContent,
   PopoverPortal,
   PopoverRoot,
   PopoverTrigger,
-} from 'radix-vue'
+} from 'reka-ui'
 import type { PopoverProps, PopoverEmits } from './types'
+// import { IconX } from '@tabler/icons-vue'
 
 defineOptions({
   name: 'SPopover',
@@ -55,11 +56,11 @@ const handleOpenChange = (value: boolean) => {
         <div class="s-popover-body">
           <slot></slot>
         </div>
-        <slot name="close">
+        <!-- <slot name="close">
           <PopoverClose class="s-popover-close" aria-label="Close">
-            x
+            <IconX :size="14" />
           </PopoverClose>
-        </slot>
+        </slot> -->
         <PopoverArrow v-if="arrow" class="s-popover-arrow" />
       </PopoverContent>
     </PopoverPortal>
