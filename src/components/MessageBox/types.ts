@@ -1,4 +1,9 @@
-export type MessageBoxType = 'info' | 'danger' | 'success' | 'warning' | 'normal'
+export type MessageBoxType =
+  | 'info'
+  | 'danger'
+  | 'success'
+  | 'warning'
+  | 'normal'
 
 import type { Component } from 'vue'
 

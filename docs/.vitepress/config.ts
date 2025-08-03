@@ -26,7 +26,10 @@ export default defineConfig({
         {
           text: '基礎組件',
           items: [
-            { text: 'ActiveButtonGroup 活動按鈕組', link: '/components/active-button-group' },
+            {
+              text: 'ActiveButtonGroup 活動按鈕組',
+              link: '/components/active-button-group',
+            },
             { text: 'Badge 徽章', link: '/components/badge' },
             { text: 'Button 按鈕', link: '/components/button' },
             { text: 'Input 輸入框', link: '/components/input' },
@@ -38,6 +41,7 @@ export default defineConfig({
             { text: 'Dialog 對話框', link: '/components/dialog' },
             { text: 'Popover 彈出框', link: '/components/popover' },
             { text: 'Tooltip 工具提示', link: '/components/tooltip' },
+            { text: 'MessageBox 訊息盒', link: '/components/message-box' },
             {
               text: 'EditableArea 可編輯區域',
               link: '/components/editable-area',

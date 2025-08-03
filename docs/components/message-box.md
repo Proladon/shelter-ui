@@ -2,6 +2,17 @@
 
 `MessageBox` 是一個帶有邊框與 icon 的訊息提示容器，支援 info、danger、success、normal 四種型態，icon 可自訂。
 
+## 範例
+
+<Demo>
+<BasicDemo />
+</Demo>
+
+<script setup>
+import { SConfigProvider } from '@/index'
+import BasicDemo from '@/components/MessageBox/demos/BasicDemo.vue'
+</script>
+
 ## 基本用法
 
 ```vue
@@ -33,14 +44,3 @@
 
 - `default`：訊息內容
 - `icon`：自訂 icon slot，會覆蓋 props.icon
-
-## 範例
-
-<Demo>
-<BasicDemo />
-</Demo>
-
-<script setup>
-import { SConfigProvider } from '@/index'
-import BasicDemo from '@/components/MessageBox/demos/BasicDemo.vue'
-</script>

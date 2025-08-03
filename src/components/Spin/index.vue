@@ -6,8 +6,8 @@
       {
         's-spin--rotating': rotate,
         's-spin--with-description': !!description,
-        's-spin--with-content': !!$slots.default
-      }
+        's-spin--with-content': !!$slots.default,
+      },
     ]"
   >
     <div v-if="$slots.default" class="s-spin__container">
@@ -18,30 +18,8 @@
         <div class="s-spin__mask-inner">
           <div class="s-spin__body">
             <slot name="icon">
-              <div
-                class="s-spin__icon"
-                :style="{
-                  color: stroke,
-                  width: `${mergedSize}px`,
-                  height: `${mergedSize}px`
-                }"
-              >
-                <svg
-                  class="s-spin__svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <circle
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    :stroke-width="mergedStrokeWidth"
-                    stroke-linecap="round"
-                    stroke-dasharray="60 30"
-                  />
-                </svg>
+              <div class="s-spin__icon">
+                <Spinner :color="mergedStroke" :size="mergedSize" />
               </div>
             </slot>
             <div v-if="description" class="s-spin__description">
@@ -53,30 +31,8 @@
     </div>
     <div v-else class="s-spin__body">
       <slot name="icon">
-        <div
-          class="s-spin__icon"
-          :style="{
-            color: stroke,
-            width: `${mergedSize}px`,
-            height: `${mergedSize}px`
-          }"
-        >
-          <svg
-            class="s-spin__svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle
-              cx="12"
-              cy="12"
-              r="10"
-              stroke="currentColor"
-              :stroke-width="mergedStrokeWidth"
-              stroke-linecap="round"
-              stroke-dasharray="60 30"
-            />
-          </svg>
+        <div class="s-spin__icon">
+          <Spinner :color="mergedStroke" :size="mergedSize" />
         </div>
       </slot>
       <div v-if="description" class="s-spin__description">
@@ -90,13 +46,14 @@
 import type { CSSProperties } from 'vue'
 import { computed, ref, watch, onBeforeUnmount } from 'vue'
 import type { SpinProps } from './types'
+import Spinner from '@/components/Spinner/index.vue'
 
 const props = withDefaults(defineProps<SpinProps>(), {
   size: 'medium',
   rotate: true,
   show: true,
   strokeWidth: 2,
-  delay: 0
+  delay: 0,
 })
 
 // 計算實際尺寸
@@ -106,11 +63,11 @@ const mergedSize = computed(() => {
   }
   switch (props.size) {
     case 'small':
-      return 18
-    case 'large':
-      return 36
-    default:
       return 24
+    case 'large':
+      return 50
+    default:
+      return 36
   }
 })
 
@@ -120,6 +77,14 @@ const mergedStrokeWidth = computed(() => {
     return props.strokeWidth
   }
   return 2
+})
+
+// 計算顏色
+const mergedStroke = computed(() => {
+  if (props.stroke) {
+    return props.stroke
+  }
+  return 'var(--sh-text-base)'
 })
 
 // 處理延遲顯示
@@ -133,7 +98,9 @@ const shouldShowSpin = computed(() => {
 const contentStyle = computed(() => {
   return {
     opacity: shouldShowSpin.value ? 0.5 : 1,
-    pointerEvents: shouldShowSpin.value ? 'none' : ('auto' as CSSProperties['pointerEvents'])
+    pointerEvents: shouldShowSpin.value
+      ? 'none'
+      : ('auto' as CSSProperties['pointerEvents']),
   }
 })
 
@@ -157,7 +124,7 @@ watch(
       active.value = false
     }
   },
-  { immediate: true }
+  { immediate: true },
 )
 
 onBeforeUnmount(() => {
