@@ -87,12 +87,12 @@ const handleOpenChange = (value: boolean) => {
 }
 
 .s-dialog {
-  @apply fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2;
+  @apply fixed inset-0 m-auto z-99;
   @apply bg-bg.primary rounded-md shadow-lg;
   @apply p-6 shadow-md;
   @apply focus:outline-none;
-  @apply max-h-[85vh] overflow-y-auto;
-  @apply min-w-[320px];
+  @apply overflow-y-auto;
+  @apply h-fit;
   //   animation: contentShow 200ms cubic-bezier(0.16, 1, 0.3, 1);
 
   /* Type styles - enhanced border styles */
@@ -139,7 +139,9 @@ const handleOpenChange = (value: boolean) => {
   }
 
   &__header {
-    @apply flex items-center justify-between mb-4 pb-3 border-b border-border-base;
+    @apply flex items-center justify-between 
+    @apply mb-4 pb-3;
+    @apply border-b border-border-base;
 
     /* Type styles for header */
     &.type-primary {
