@@ -17,7 +17,13 @@
     :disabled="disabled || loading"
     @click="handleClick"
   >
-    <span v-if="loading" class="s-button__loading">
+    <Spinner
+      v-if="loading"
+      class="mr-4px"
+      :color="spinnerColor"
+      :size="size === 'default' ? 20 : size"
+    />
+    <!-- <span v-if="loading" class="s-button__loading">
       <svg
         class="s-button__loading-icon"
         viewBox="0 0 24 24"
@@ -34,13 +40,15 @@
           stroke-dasharray="60 30"
         />
       </svg>
-    </span>
+    </span> -->
     <slot></slot>
   </button>
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import type { ButtonProps, ButtonEmits } from './types'
+import Spinner from '@/components/Spinner/index.vue'
 
 const props = withDefaults(defineProps<ButtonProps>(), {
   type: 'default',
@@ -60,6 +68,14 @@ const handleClick = (event: MouseEvent) => {
   if (props.disabled || props.loading) return
   emit('click', event)
 }
+
+const spinnerColor = computed(() => {
+  if (props.type === 'default') return 'var(--sh-text-base)'
+  if (['success', 'warning', 'danger', 'info'].includes(props.type)) {
+    return `var(--sh-status-${props.type})`
+  }
+  return `var(--sh-${props.type})`
+})
 </script>
 
 <style lang="scss" scoped>

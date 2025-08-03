@@ -4,6 +4,7 @@ import type { App } from 'vue'
 import SConfigProvider from './components/ConfigProvider/index.vue'
 import SButton from './components/Button/index.vue'
 import SInput from './components/Input/index.vue'
+import SSelect from './components/Select/index.vue'
 import SSpin from './components/Spin/index.vue'
 import SBorderContainer from './components/BorderContainer/index.vue'
 import SPopover from './components/Popover/index.vue'
@@ -22,6 +23,7 @@ const components = {
   SButton,
   SSpin,
   SInput,
+  SSelect,
   SBorderContainer,
   SPopover,
   SEditableArea,
@@ -45,6 +47,11 @@ export function sayHello(name: string = 'world'): string {
 export type { ThemeVarsConfig } from './components/ConfigProvider/types'
 export type { ButtonProps, ButtonEmits } from './components/Button/types'
 export type { InputProps, InputEmits } from './components/Input/types'
+export type {
+  SelectProps,
+  SelectEmits,
+  SelectOption,
+} from './components/Select/types'
 export type { SpinProps, SpinEmits } from './components/Spin/types'
 export type {
   BorderContainerProps,
@@ -79,6 +86,7 @@ export default { install, version: '0.1.0', ...components }
 export {
   SButton,
   SInput,
+  SSelect,
   SSpin,
   SConfigProvider,
   SBorderContainer,
