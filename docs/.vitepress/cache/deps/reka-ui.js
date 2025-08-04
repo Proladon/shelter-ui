@@ -1,31 +1,31 @@
 import {
   computedEager,
+  computedWithControl,
   createEventHook,
   createGlobalState,
   createSharedComposable,
-  defaultWindow,
+  identity,
   isClient,
+  isDef,
   isIOS,
-  onKeyStroke,
+  isObject,
+  noop,
+  notNullish,
   reactiveComputed,
   reactiveOmit,
   refAutoReset,
   syncRef,
+  toArray,
   toValue as toValue2,
   tryOnBeforeUnmount,
-  unrefElement,
+  tryOnMounted,
+  tryOnScopeDispose,
   useDebounceFn,
-  useEventListener,
-  useFocusWithin,
-  useMounted,
-  useParentElement,
-  useRafFn,
-  useResizeObserver,
   useTimeout,
   useTimeoutFn,
-  useVModel,
+  watchImmediate,
   watchOnce
-} from "./chunk-Q3EOJPOC.js";
+} from "./chunk-TBTZDRNA.js";
 import {
   Comment,
   Fragment,
@@ -57,9 +57,11 @@ import {
   onMounted,
   onScopeDispose,
   onUnmounted,
+  onUpdated,
   openBlock,
   provide,
   reactive,
+  readonly,
   ref,
   renderList,
   renderSlot,
@@ -395,6 +397,511 @@ var ConfigProvider_vue_vue_type_script_setup_true_lang_default = defineComponent
   }
 });
 var ConfigProvider_default = ConfigProvider_vue_vue_type_script_setup_true_lang_default;
+
+// node_modules/reka-ui/node_modules/@vueuse/core/index.mjs
+var defaultWindow = isClient ? window : void 0;
+var defaultDocument = isClient ? window.document : void 0;
+var defaultNavigator = isClient ? window.navigator : void 0;
+var defaultLocation = isClient ? window.location : void 0;
+function unrefElement(elRef) {
+  var _a;
+  const plain = toValue(elRef);
+  return (_a = plain == null ? void 0 : plain.$el) != null ? _a : plain;
+}
+function useEventListener(...args) {
+  const cleanups = [];
+  const cleanup = () => {
+    cleanups.forEach((fn) => fn());
+    cleanups.length = 0;
+  };
+  const register = (el, event, listener, options) => {
+    el.addEventListener(event, listener, options);
+    return () => el.removeEventListener(event, listener, options);
+  };
+  const firstParamTargets = computed(() => {
+    const test = toArray(toValue(args[0])).filter((e) => e != null);
+    return test.every((e) => typeof e !== "string") ? test : void 0;
+  });
+  const stopWatch = watchImmediate(
+    () => {
+      var _a, _b;
+      return [
+        (_b = (_a = firstParamTargets.value) == null ? void 0 : _a.map((e) => unrefElement(e))) != null ? _b : [defaultWindow].filter((e) => e != null),
+        toArray(toValue(firstParamTargets.value ? args[1] : args[0])),
+        toArray(unref(firstParamTargets.value ? args[2] : args[1])),
+        // @ts-expect-error - TypeScript gets the correct types, but somehow still complains
+        toValue(firstParamTargets.value ? args[3] : args[2])
+      ];
+    },
+    ([raw_targets, raw_events, raw_listeners, raw_options]) => {
+      cleanup();
+      if (!(raw_targets == null ? void 0 : raw_targets.length) || !(raw_events == null ? void 0 : raw_events.length) || !(raw_listeners == null ? void 0 : raw_listeners.length))
+        return;
+      const optionsClone = isObject(raw_options) ? { ...raw_options } : raw_options;
+      cleanups.push(
+        ...raw_targets.flatMap(
+          (el) => raw_events.flatMap(
+            (event) => raw_listeners.map((listener) => register(el, event, listener, optionsClone))
+          )
+        )
+      );
+    },
+    { flush: "post" }
+  );
+  const stop = () => {
+    stopWatch();
+    cleanup();
+  };
+  tryOnScopeDispose(cleanup);
+  return stop;
+}
+function useMounted() {
+  const isMounted = shallowRef(false);
+  const instance = getCurrentInstance();
+  if (instance) {
+    onMounted(() => {
+      isMounted.value = true;
+    }, instance);
+  }
+  return isMounted;
+}
+function useSupported(callback) {
+  const isMounted = useMounted();
+  return computed(() => {
+    isMounted.value;
+    return Boolean(callback());
+  });
+}
+function useMutationObserver(target, callback, options = {}) {
+  const { window: window2 = defaultWindow, ...mutationOptions } = options;
+  let observer;
+  const isSupported = useSupported(() => window2 && "MutationObserver" in window2);
+  const cleanup = () => {
+    if (observer) {
+      observer.disconnect();
+      observer = void 0;
+    }
+  };
+  const targets = computed(() => {
+    const value = toValue(target);
+    const items = toArray(value).map(unrefElement).filter(notNullish);
+    return new Set(items);
+  });
+  const stopWatch = watch(
+    () => targets.value,
+    (targets2) => {
+      cleanup();
+      if (isSupported.value && targets2.size) {
+        observer = new MutationObserver(callback);
+        targets2.forEach((el) => observer.observe(el, mutationOptions));
+      }
+    },
+    { immediate: true, flush: "post" }
+  );
+  const takeRecords = () => {
+    return observer == null ? void 0 : observer.takeRecords();
+  };
+  const stop = () => {
+    stopWatch();
+    cleanup();
+  };
+  tryOnScopeDispose(stop);
+  return {
+    isSupported,
+    stop,
+    takeRecords
+  };
+}
+function onElementRemoval(target, callback, options = {}) {
+  const {
+    window: window2 = defaultWindow,
+    document: document2 = window2 == null ? void 0 : window2.document,
+    flush = "sync"
+  } = options;
+  if (!window2 || !document2)
+    return noop;
+  let stopFn;
+  const cleanupAndUpdate = (fn) => {
+    stopFn == null ? void 0 : stopFn();
+    stopFn = fn;
+  };
+  const stopWatch = watchEffect(() => {
+    const el = unrefElement(target);
+    if (el) {
+      const { stop } = useMutationObserver(
+        document2,
+        (mutationsList) => {
+          const targetRemoved = mutationsList.map((mutation) => [...mutation.removedNodes]).flat().some((node) => node === el || node.contains(el));
+          if (targetRemoved) {
+            callback(mutationsList);
+          }
+        },
+        {
+          window: window2,
+          childList: true,
+          subtree: true
+        }
+      );
+      cleanupAndUpdate(stop);
+    }
+  }, { flush });
+  const stopHandle = () => {
+    stopWatch();
+    cleanupAndUpdate();
+  };
+  tryOnScopeDispose(stopHandle);
+  return stopHandle;
+}
+function createKeyPredicate(keyFilter) {
+  if (typeof keyFilter === "function")
+    return keyFilter;
+  else if (typeof keyFilter === "string")
+    return (event) => event.key === keyFilter;
+  else if (Array.isArray(keyFilter))
+    return (event) => keyFilter.includes(event.key);
+  return () => true;
+}
+function onKeyStroke(...args) {
+  let key;
+  let handler;
+  let options = {};
+  if (args.length === 3) {
+    key = args[0];
+    handler = args[1];
+    options = args[2];
+  } else if (args.length === 2) {
+    if (typeof args[1] === "object") {
+      key = true;
+      handler = args[0];
+      options = args[1];
+    } else {
+      key = args[0];
+      handler = args[1];
+    }
+  } else {
+    key = true;
+    handler = args[0];
+  }
+  const {
+    target = defaultWindow,
+    eventName = "keydown",
+    passive = false,
+    dedupe = false
+  } = options;
+  const predicate = createKeyPredicate(key);
+  const listener = (e) => {
+    if (e.repeat && toValue(dedupe))
+      return;
+    if (predicate(e))
+      handler(e);
+  };
+  return useEventListener(target, eventName, listener, passive);
+}
+function useActiveElement(options = {}) {
+  var _a;
+  const {
+    window: window2 = defaultWindow,
+    deep = true,
+    triggerOnRemoval = false
+  } = options;
+  const document2 = (_a = options.document) != null ? _a : window2 == null ? void 0 : window2.document;
+  const getDeepActiveElement = () => {
+    var _a2;
+    let element = document2 == null ? void 0 : document2.activeElement;
+    if (deep) {
+      while (element == null ? void 0 : element.shadowRoot)
+        element = (_a2 = element == null ? void 0 : element.shadowRoot) == null ? void 0 : _a2.activeElement;
+    }
+    return element;
+  };
+  const activeElement = shallowRef();
+  const trigger = () => {
+    activeElement.value = getDeepActiveElement();
+  };
+  if (window2) {
+    const listenerOptions = {
+      capture: true,
+      passive: true
+    };
+    useEventListener(
+      window2,
+      "blur",
+      (event) => {
+        if (event.relatedTarget !== null)
+          return;
+        trigger();
+      },
+      listenerOptions
+    );
+    useEventListener(
+      window2,
+      "focus",
+      trigger,
+      listenerOptions
+    );
+  }
+  if (triggerOnRemoval) {
+    onElementRemoval(activeElement, trigger, { document: document2 });
+  }
+  trigger();
+  return activeElement;
+}
+function useRafFn(fn, options = {}) {
+  const {
+    immediate = true,
+    fpsLimit = void 0,
+    window: window2 = defaultWindow,
+    once = false
+  } = options;
+  const isActive = shallowRef(false);
+  const intervalLimit = computed(() => {
+    return fpsLimit ? 1e3 / toValue(fpsLimit) : null;
+  });
+  let previousFrameTimestamp = 0;
+  let rafId = null;
+  function loop(timestamp2) {
+    if (!isActive.value || !window2)
+      return;
+    if (!previousFrameTimestamp)
+      previousFrameTimestamp = timestamp2;
+    const delta = timestamp2 - previousFrameTimestamp;
+    if (intervalLimit.value && delta < intervalLimit.value) {
+      rafId = window2.requestAnimationFrame(loop);
+      return;
+    }
+    previousFrameTimestamp = timestamp2;
+    fn({ delta, timestamp: timestamp2 });
+    if (once) {
+      isActive.value = false;
+      rafId = null;
+      return;
+    }
+    rafId = window2.requestAnimationFrame(loop);
+  }
+  function resume() {
+    if (!isActive.value && window2) {
+      isActive.value = true;
+      previousFrameTimestamp = 0;
+      rafId = window2.requestAnimationFrame(loop);
+    }
+  }
+  function pause() {
+    isActive.value = false;
+    if (rafId != null && window2) {
+      window2.cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+  }
+  if (immediate)
+    resume();
+  tryOnScopeDispose(pause);
+  return {
+    isActive: readonly(isActive),
+    pause,
+    resume
+  };
+}
+var ssrWidthSymbol = Symbol("vueuse-ssr-width");
+function cloneFnJSON(source) {
+  return JSON.parse(JSON.stringify(source));
+}
+var _global = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
+var globalKey = "__vueuse_ssr_handlers__";
+var handlers = getHandlers();
+function getHandlers() {
+  if (!(globalKey in _global))
+    _global[globalKey] = _global[globalKey] || {};
+  return _global[globalKey];
+}
+function useCurrentElement(rootComponent) {
+  const vm = getCurrentInstance();
+  const currentElement = computedWithControl(
+    () => null,
+    () => rootComponent ? unrefElement(rootComponent) : vm.proxy.$el
+  );
+  onUpdated(currentElement.trigger);
+  onMounted(currentElement.trigger);
+  return currentElement;
+}
+function useResizeObserver(target, callback, options = {}) {
+  const { window: window2 = defaultWindow, ...observerOptions } = options;
+  let observer;
+  const isSupported = useSupported(() => window2 && "ResizeObserver" in window2);
+  const cleanup = () => {
+    if (observer) {
+      observer.disconnect();
+      observer = void 0;
+    }
+  };
+  const targets = computed(() => {
+    const _targets = toValue(target);
+    return Array.isArray(_targets) ? _targets.map((el) => unrefElement(el)) : [unrefElement(_targets)];
+  });
+  const stopWatch = watch(
+    targets,
+    (els) => {
+      cleanup();
+      if (isSupported.value && window2) {
+        observer = new ResizeObserver(callback);
+        for (const _el of els) {
+          if (_el)
+            observer.observe(_el, observerOptions);
+        }
+      }
+    },
+    { immediate: true, flush: "post" }
+  );
+  const stop = () => {
+    cleanup();
+    stopWatch();
+  };
+  tryOnScopeDispose(stop);
+  return {
+    isSupported,
+    stop
+  };
+}
+var EVENT_FOCUS_IN = "focusin";
+var EVENT_FOCUS_OUT = "focusout";
+var PSEUDO_CLASS_FOCUS_WITHIN = ":focus-within";
+function useFocusWithin(target, options = {}) {
+  const { window: window2 = defaultWindow } = options;
+  const targetElement = computed(() => unrefElement(target));
+  const _focused = shallowRef(false);
+  const focused = computed(() => _focused.value);
+  const activeElement = useActiveElement(options);
+  if (!window2 || !activeElement.value) {
+    return { focused };
+  }
+  const listenerOptions = { passive: true };
+  useEventListener(targetElement, EVENT_FOCUS_IN, () => _focused.value = true, listenerOptions);
+  useEventListener(targetElement, EVENT_FOCUS_OUT, () => {
+    var _a, _b, _c;
+    return _focused.value = (_c = (_b = (_a = targetElement.value) == null ? void 0 : _a.matches) == null ? void 0 : _b.call(_a, PSEUDO_CLASS_FOCUS_WITHIN)) != null ? _c : false;
+  }, listenerOptions);
+  return { focused };
+}
+function useParentElement(element = useCurrentElement()) {
+  const parentElement = shallowRef();
+  const update = () => {
+    const el = unrefElement(element);
+    if (el)
+      parentElement.value = el.parentElement;
+  };
+  tryOnMounted(update);
+  watch(() => toValue(element), update);
+  return parentElement;
+}
+var defaultState = {
+  x: 0,
+  y: 0,
+  pointerId: 0,
+  pressure: 0,
+  tiltX: 0,
+  tiltY: 0,
+  width: 0,
+  height: 0,
+  twist: 0,
+  pointerType: null
+};
+var keys = Object.keys(defaultState);
+var DEFAULT_UNITS = [
+  { max: 6e4, value: 1e3, name: "second" },
+  { max: 276e4, value: 6e4, name: "minute" },
+  { max: 72e6, value: 36e5, name: "hour" },
+  { max: 5184e5, value: 864e5, name: "day" },
+  { max: 24192e5, value: 6048e5, name: "week" },
+  { max: 28512e6, value: 2592e6, name: "month" },
+  { max: Number.POSITIVE_INFINITY, value: 31536e6, name: "year" }
+];
+var _TransitionPresets = {
+  easeInSine: [0.12, 0, 0.39, 0],
+  easeOutSine: [0.61, 1, 0.88, 1],
+  easeInOutSine: [0.37, 0, 0.63, 1],
+  easeInQuad: [0.11, 0, 0.5, 0],
+  easeOutQuad: [0.5, 1, 0.89, 1],
+  easeInOutQuad: [0.45, 0, 0.55, 1],
+  easeInCubic: [0.32, 0, 0.67, 0],
+  easeOutCubic: [0.33, 1, 0.68, 1],
+  easeInOutCubic: [0.65, 0, 0.35, 1],
+  easeInQuart: [0.5, 0, 0.75, 0],
+  easeOutQuart: [0.25, 1, 0.5, 1],
+  easeInOutQuart: [0.76, 0, 0.24, 1],
+  easeInQuint: [0.64, 0, 0.78, 0],
+  easeOutQuint: [0.22, 1, 0.36, 1],
+  easeInOutQuint: [0.83, 0, 0.17, 1],
+  easeInExpo: [0.7, 0, 0.84, 0],
+  easeOutExpo: [0.16, 1, 0.3, 1],
+  easeInOutExpo: [0.87, 0, 0.13, 1],
+  easeInCirc: [0.55, 0, 1, 0.45],
+  easeOutCirc: [0, 0.55, 0.45, 1],
+  easeInOutCirc: [0.85, 0, 0.15, 1],
+  easeInBack: [0.36, 0, 0.66, -0.56],
+  easeOutBack: [0.34, 1.56, 0.64, 1],
+  easeInOutBack: [0.68, -0.6, 0.32, 1.6]
+};
+var TransitionPresets = Object.assign({}, { linear: identity }, _TransitionPresets);
+function useVModel(props2, key, emit, options = {}) {
+  var _a, _b, _c;
+  const {
+    clone = false,
+    passive = false,
+    eventName,
+    deep = false,
+    defaultValue,
+    shouldEmit
+  } = options;
+  const vm = getCurrentInstance();
+  const _emit = emit || (vm == null ? void 0 : vm.emit) || ((_a = vm == null ? void 0 : vm.$emit) == null ? void 0 : _a.bind(vm)) || ((_c = (_b = vm == null ? void 0 : vm.proxy) == null ? void 0 : _b.$emit) == null ? void 0 : _c.bind(vm == null ? void 0 : vm.proxy));
+  let event = eventName;
+  if (!key) {
+    key = "modelValue";
+  }
+  event = event || `update:${key.toString()}`;
+  const cloneFn = (val) => !clone ? val : typeof clone === "function" ? clone(val) : cloneFnJSON(val);
+  const getValue = () => isDef(props2[key]) ? cloneFn(props2[key]) : defaultValue;
+  const triggerEmit = (value) => {
+    if (shouldEmit) {
+      if (shouldEmit(value))
+        _emit(event, value);
+    } else {
+      _emit(event, value);
+    }
+  };
+  if (passive) {
+    const initialValue = getValue();
+    const proxy = ref(initialValue);
+    let isUpdating = false;
+    watch(
+      () => props2[key],
+      (v) => {
+        if (!isUpdating) {
+          isUpdating = true;
+          proxy.value = cloneFn(v);
+          nextTick(() => isUpdating = false);
+        }
+      }
+    );
+    watch(
+      proxy,
+      (v) => {
+        if (!isUpdating && (v !== props2[key] || deep))
+          triggerEmit(v);
+      },
+      { deep }
+    );
+    return proxy;
+  } else {
+    return computed({
+      get() {
+        return getValue();
+      },
+      set(value) {
+        triggerEmit(value);
+      }
+    });
+  }
+}
 
 // node_modules/defu/dist/defu.mjs
 function isPlainObject(value) {
@@ -7337,9 +7844,9 @@ function useDateField(props2) {
   }
   function handleSegmentKeydown(e) {
     const disabled = props2.disabled.value;
-    const readonly = props2.readonly.value;
+    const readonly2 = props2.readonly.value;
     if (e.key !== kbd.TAB) e.preventDefault();
-    if (disabled || readonly) return;
+    if (disabled || readonly2) return;
     const segmentKeydownHandlers = {
       day: handleDaySegmentKeydown,
       month: handleMonthSegmentKeydown,
@@ -7748,7 +8255,7 @@ var CalendarRoot_vue_vue_type_script_setup_true_lang_default = defineComponent({
   setup(__props, { emit: __emit }) {
     const props2 = __props;
     const emits = __emit;
-    const { disabled, readonly, initialFocus, pagedNavigation, weekStartsOn, weekdayFormat, fixedWeeks, multiple, minValue, maxValue, numberOfMonths, preventDeselect, isDateDisabled: propsIsDateDisabled, isDateUnavailable: propsIsDateUnavailable, calendarLabel, defaultValue, nextPage: propsNextPage, prevPage: propsPrevPage, dir: propDir, locale: propLocale, disableDaysOutsideCurrentView } = toRefs(props2);
+    const { disabled, readonly: readonly2, initialFocus, pagedNavigation, weekStartsOn, weekdayFormat, fixedWeeks, multiple, minValue, maxValue, numberOfMonths, preventDeselect, isDateDisabled: propsIsDateDisabled, isDateUnavailable: propsIsDateUnavailable, calendarLabel, defaultValue, nextPage: propsNextPage, prevPage: propsPrevPage, dir: propDir, locale: propLocale, disableDaysOutsideCurrentView } = toRefs(props2);
     const { primitiveElement, currentElement: parentElement } = usePrimitiveElement();
     const locale = useLocale(propLocale);
     const dir = useDirection(propDir);
@@ -7842,7 +8349,7 @@ var CalendarRoot_vue_vue_type_script_setup_true_lang_default = defineComponent({
       fixedWeeks,
       multiple,
       numberOfMonths,
-      readonly,
+      readonly: readonly2,
       preventDeselect,
       fullCalendarLabel,
       headingValue,
@@ -7866,7 +8373,7 @@ var CalendarRoot_vue_vue_type_script_setup_true_lang_default = defineComponent({
         "as-child": _ctx.asChild,
         role: "application",
         "aria-label": unref(fullCalendarLabel),
-        "data-readonly": unref(readonly) ? "" : void 0,
+        "data-readonly": unref(readonly2) ? "" : void 0,
         "data-disabled": unref(disabled) ? "" : void 0,
         "data-invalid": unref(isInvalid) ? "" : void 0,
         dir: unref(dir)
@@ -8155,14 +8662,14 @@ var CalendarGrid_vue_vue_type_script_setup_true_lang_default = defineComponent({
     const props2 = __props;
     const rootContext = injectCalendarRootContext();
     const disabled = computed(() => rootContext.disabled.value ? true : void 0);
-    const readonly = computed(() => rootContext.readonly.value ? true : void 0);
+    const readonly2 = computed(() => rootContext.readonly.value ? true : void 0);
     return (_ctx, _cache) => {
       return openBlock(), createBlock(unref(Primitive), mergeProps(props2, {
         tabindex: "-1",
         role: "grid",
-        "aria-readonly": readonly.value,
+        "aria-readonly": readonly2.value,
         "aria-disabled": disabled.value,
-        "data-readonly": readonly.value && "",
+        "data-readonly": readonly2.value && "",
         "data-disabled": disabled.value && ""
       }), {
         default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
@@ -9440,7 +9947,7 @@ var oppositeAlignmentMap = {
   start: "end",
   end: "start"
 };
-function clamp2(start, value, end) {
+function clamp3(start, value, end) {
   return max(start, min(value, end));
 }
 function evaluate(value, param) {
@@ -9552,7 +10059,7 @@ function rectToClientRect(rect) {
   };
 }
 
-// node_modules/reka-ui/node_modules/@floating-ui/core/dist/floating-ui.core.mjs
+// node_modules/@floating-ui/core/dist/floating-ui.core.mjs
 function computeCoordsFromPlacement(_ref, placement, rtl) {
   let {
     reference,
@@ -9793,7 +10300,7 @@ var arrow = (options) => ({
     const min$1 = minPadding;
     const max2 = clientSize - arrowDimensions[length] - maxPadding;
     const center = clientSize / 2 - arrowDimensions[length] / 2 + centerToReference;
-    const offset3 = clamp2(min$1, center, max2);
+    const offset3 = clamp3(min$1, center, max2);
     const shouldAddOffset = !middlewareData.arrow && getAlignment(placement) != null && center !== offset3 && rects.reference[length] / 2 - (center < min$1 ? minPadding : maxPadding) - arrowDimensions[length] / 2 < 0;
     const alignmentOffset = shouldAddOffset ? center < min$1 ? center - min$1 : center - max2 : 0;
     return {
@@ -10090,14 +10597,14 @@ var shift = function(options) {
         const maxSide = mainAxis === "y" ? "bottom" : "right";
         const min2 = mainAxisCoord + overflow[minSide];
         const max2 = mainAxisCoord - overflow[maxSide];
-        mainAxisCoord = clamp2(min2, mainAxisCoord, max2);
+        mainAxisCoord = clamp3(min2, mainAxisCoord, max2);
       }
       if (checkCrossAxis) {
         const minSide = crossAxis === "y" ? "top" : "left";
         const maxSide = crossAxis === "y" ? "bottom" : "right";
         const min2 = crossAxisCoord + overflow[minSide];
         const max2 = crossAxisCoord - overflow[maxSide];
-        crossAxisCoord = clamp2(min2, crossAxisCoord, max2);
+        crossAxisCoord = clamp3(min2, crossAxisCoord, max2);
       }
       const limitedCoords = limiter.fn({
         ...state,
@@ -10415,7 +10922,7 @@ function getFrameElement(win) {
   return win.parent && Object.getPrototypeOf(win.parent) ? win.frameElement : null;
 }
 
-// node_modules/reka-ui/node_modules/@floating-ui/dom/dist/floating-ui.dom.mjs
+// node_modules/@floating-ui/dom/dist/floating-ui.dom.mjs
 function getCssDimensions(element) {
   const css = getComputedStyle2(element);
   let width = parseFloat(css.width) || 0;
@@ -11018,7 +11525,7 @@ var computePosition2 = (reference, floating, options) => {
   });
 };
 
-// node_modules/reka-ui/node_modules/@floating-ui/vue/dist/floating-ui.vue.mjs
+// node_modules/@floating-ui/vue/dist/floating-ui.vue.mjs
 function isComponentPublicInstance(target) {
   return target != null && typeof target === "object" && "$el" in target;
 }
@@ -16982,7 +17489,7 @@ var DateFieldRoot_vue_vue_type_script_setup_true_lang_default = defineComponent(
   setup(__props, { expose: __expose, emit: __emit }) {
     const props2 = __props;
     const emits = __emit;
-    const { disabled, readonly, isDateUnavailable: propsIsDateUnavailable, granularity, defaultValue, dir: propDir, locale: propLocale } = toRefs(props2);
+    const { disabled, readonly: readonly2, isDateUnavailable: propsIsDateUnavailable, granularity, defaultValue, dir: propDir, locale: propLocale } = toRefs(props2);
     const locale = useLocale(propLocale);
     const dir = useDirection(propDir);
     const formatter = useDateFormatter(locale.value, { hourCycle: normalizeHourCycle(props2.hourCycle) });
@@ -17091,7 +17598,7 @@ var DateFieldRoot_vue_vue_type_script_setup_true_lang_default = defineComponent(
       formatter,
       hourCycle: props2.hourCycle,
       step,
-      readonly,
+      readonly: readonly2,
       segmentValues,
       isInvalid,
       segmentContents: editableSegmentContents,
@@ -17110,7 +17617,7 @@ var DateFieldRoot_vue_vue_type_script_setup_true_lang_default = defineComponent(
         role: "group",
         "aria-disabled": unref(disabled) ? true : void 0,
         "data-disabled": unref(disabled) ? "" : void 0,
-        "data-readonly": unref(readonly) ? "" : void 0,
+        "data-readonly": unref(readonly2) ? "" : void 0,
         "data-invalid": isInvalid.value ? "" : void 0,
         dir: unref(dir),
         onKeydown: withKeys(handleKeydown, ["left", "right"])
@@ -17189,17 +17696,17 @@ var DateFieldInput_vue_vue_type_script_setup_true_lang_default = defineComponent
       modelValue: rootContext.modelValue
     });
     const disabled = computed(() => rootContext.disabled.value);
-    const readonly = computed(() => rootContext.readonly.value);
+    const readonly2 = computed(() => rootContext.readonly.value);
     const isInvalid = computed(() => rootContext.isInvalid.value);
     return (_ctx, _cache) => {
       return openBlock(), createBlock(unref(Primitive), mergeProps({
         as: _ctx.as,
         "as-child": _ctx.asChild
       }, unref(attributes), {
-        contenteditable: disabled.value || readonly.value ? false : _ctx.part !== "literal",
+        contenteditable: disabled.value || readonly2.value ? false : _ctx.part !== "literal",
         "data-reka-date-field-segment": _ctx.part,
         "aria-disabled": disabled.value ? true : void 0,
-        "aria-readonly": readonly.value ? true : void 0,
+        "aria-readonly": readonly2.value ? true : void 0,
         "data-disabled": disabled.value ? "" : void 0,
         "data-invalid": isInvalid.value ? "" : void 0,
         "aria-invalid": isInvalid.value ? true : void 0
@@ -17585,7 +18092,7 @@ var DatePickerRoot_vue_vue_type_script_setup_true_lang_default = defineComponent
   setup(__props, { emit: __emit }) {
     const props2 = __props;
     const emits = __emit;
-    const { locale, disabled, readonly, pagedNavigation, weekStartsOn, weekdayFormat, fixedWeeks, numberOfMonths, preventDeselect, isDateDisabled: propsIsDateDisabled, isDateUnavailable: propsIsDateUnavailable, defaultOpen, modal, id, name, required, minValue, maxValue, granularity, hideTimeZone, hourCycle, defaultValue, dir: propDir, step } = toRefs(props2);
+    const { locale, disabled, readonly: readonly2, pagedNavigation, weekStartsOn, weekdayFormat, fixedWeeks, numberOfMonths, preventDeselect, isDateDisabled: propsIsDateDisabled, isDateUnavailable: propsIsDateUnavailable, defaultOpen, modal, id, name, required, minValue, maxValue, granularity, hideTimeZone, hourCycle, defaultValue, dir: propDir, step } = toRefs(props2);
     const dir = useDirection(propDir);
     const modelValue = useVModel(props2, "modelValue", emits, {
       defaultValue: defaultValue.value,
@@ -17619,7 +18126,7 @@ var DatePickerRoot_vue_vue_type_script_setup_true_lang_default = defineComponent
       weekdayFormat,
       fixedWeeks,
       numberOfMonths,
-      readonly,
+      readonly: readonly2,
       preventDeselect,
       modelValue,
       placeholder,
@@ -19030,7 +19537,7 @@ var DateRangeFieldRoot_vue_vue_type_script_setup_true_lang_default = defineCompo
     var _a, _b, _c, _d, _e, _f, _g;
     const props2 = __props;
     const emits = __emit;
-    const { disabled, readonly, isDateUnavailable: propsIsDateUnavailable, dir: propDir, locale: propLocale } = toRefs(props2);
+    const { disabled, readonly: readonly2, isDateUnavailable: propsIsDateUnavailable, dir: propDir, locale: propLocale } = toRefs(props2);
     const locale = useLocale(propLocale);
     const dir = useDirection(propDir);
     const formatter = useDateFormatter(locale.value, { hourCycle: normalizeHourCycle(props2.hourCycle) });
@@ -19203,7 +19710,7 @@ var DateRangeFieldRoot_vue_vue_type_script_setup_true_lang_default = defineCompo
       formatter,
       hourCycle: props2.hourCycle,
       step,
-      readonly,
+      readonly: readonly2,
       segmentValues: {
         start: startSegmentValues,
         end: endSegmentValues
@@ -19225,7 +19732,7 @@ var DateRangeFieldRoot_vue_vue_type_script_setup_true_lang_default = defineCompo
         role: "group",
         "aria-disabled": unref(disabled) ? true : void 0,
         "data-disabled": unref(disabled) ? "" : void 0,
-        "data-readonly": unref(readonly) ? "" : void 0,
+        "data-readonly": unref(readonly2) ? "" : void 0,
         "data-invalid": isInvalid.value ? "" : void 0,
         dir: unref(dir),
         onKeydown: withKeys(handleKeydown, ["left", "right"])
@@ -19310,17 +19817,17 @@ var DateRangeFieldInput_vue_vue_type_script_setup_true_lang_default = defineComp
       modelValue: props2.type === "start" ? rootContext.startValue : rootContext.endValue
     });
     const disabled = computed(() => rootContext.disabled.value);
-    const readonly = computed(() => rootContext.readonly.value);
+    const readonly2 = computed(() => rootContext.readonly.value);
     const isInvalid = computed(() => rootContext.isInvalid.value);
     return (_ctx, _cache) => {
       return openBlock(), createBlock(unref(Primitive), mergeProps({
         as: _ctx.as,
         "as-child": _ctx.asChild
       }, unref(attributes), {
-        contenteditable: disabled.value || readonly.value ? false : _ctx.part !== "literal",
+        contenteditable: disabled.value || readonly2.value ? false : _ctx.part !== "literal",
         "data-reka-date-field-segment": _ctx.part,
         "aria-disabled": disabled.value ? true : void 0,
-        "aria-readonly": readonly.value ? true : void 0,
+        "aria-readonly": readonly2.value ? true : void 0,
         "data-disabled": disabled.value ? "" : void 0,
         "data-reka-date-range-field-segment-type": _ctx.type,
         "data-invalid": isInvalid.value ? "" : void 0,
@@ -19595,7 +20102,7 @@ var DateRangePickerRoot_vue_vue_type_script_setup_true_lang_default = defineComp
     var _a;
     const props2 = __props;
     const emits = __emit;
-    const { locale, disabled, readonly, pagedNavigation, weekStartsOn, weekdayFormat, fixedWeeks, numberOfMonths, preventDeselect, isDateDisabled: propsIsDateDisabled, isDateUnavailable: propsIsDateUnavailable, isDateHighlightable: propsIsDateHighlightable, defaultOpen, modal, id, name, required, minValue, maxValue, granularity, hideTimeZone, hourCycle, dir: propsDir, allowNonContiguousRanges, fixedDate, maximumDays, step } = toRefs(props2);
+    const { locale, disabled, readonly: readonly2, pagedNavigation, weekStartsOn, weekdayFormat, fixedWeeks, numberOfMonths, preventDeselect, isDateDisabled: propsIsDateDisabled, isDateUnavailable: propsIsDateUnavailable, isDateHighlightable: propsIsDateHighlightable, defaultOpen, modal, id, name, required, minValue, maxValue, granularity, hideTimeZone, hourCycle, dir: propsDir, allowNonContiguousRanges, fixedDate, maximumDays, step } = toRefs(props2);
     const dir = useDirection(propsDir);
     const modelValue = useVModel(props2, "modelValue", emits, {
       defaultValue: props2.defaultValue ?? {
@@ -19634,7 +20141,7 @@ var DateRangePickerRoot_vue_vue_type_script_setup_true_lang_default = defineComp
       weekdayFormat,
       fixedWeeks,
       numberOfMonths,
-      readonly,
+      readonly: readonly2,
       preventDeselect,
       modelValue,
       placeholder,
@@ -19964,7 +20471,7 @@ var RangeCalendarRoot_vue_vue_type_script_setup_true_lang_default = defineCompon
   setup(__props, { emit: __emit }) {
     const props2 = __props;
     const emits = __emit;
-    const { disabled, readonly, initialFocus, pagedNavigation, weekStartsOn, weekdayFormat, fixedWeeks, numberOfMonths, preventDeselect, isDateUnavailable: propsIsDateUnavailable, isDateHighlightable: propsIsDateHighlightable, isDateDisabled: propsIsDateDisabled, calendarLabel, maxValue, minValue, dir: propDir, locale: propLocale, nextPage: propsNextPage, prevPage: propsPrevPage, allowNonContiguousRanges, disableDaysOutsideCurrentView, fixedDate, maximumDays } = toRefs(props2);
+    const { disabled, readonly: readonly2, initialFocus, pagedNavigation, weekStartsOn, weekdayFormat, fixedWeeks, numberOfMonths, preventDeselect, isDateUnavailable: propsIsDateUnavailable, isDateHighlightable: propsIsDateHighlightable, isDateDisabled: propsIsDateDisabled, calendarLabel, maxValue, minValue, dir: propDir, locale: propLocale, nextPage: propsNextPage, prevPage: propsPrevPage, allowNonContiguousRanges, disableDaysOutsideCurrentView, fixedDate, maximumDays } = toRefs(props2);
     const { primitiveElement, currentElement: parentElement } = usePrimitiveElement();
     const dir = useDirection(propDir);
     const locale = useLocale(propLocale);
@@ -20075,7 +20582,7 @@ var RangeCalendarRoot_vue_vue_type_script_setup_true_lang_default = defineCompon
       weekdayFormat,
       fixedWeeks,
       numberOfMonths,
-      readonly,
+      readonly: readonly2,
       preventDeselect,
       fullCalendarLabel,
       headingValue,
@@ -20114,7 +20621,7 @@ var RangeCalendarRoot_vue_vue_type_script_setup_true_lang_default = defineCompon
         "as-child": _ctx.asChild,
         role: "application",
         "aria-label": unref(fullCalendarLabel),
-        "data-readonly": unref(readonly) ? "" : void 0,
+        "data-readonly": unref(readonly2) ? "" : void 0,
         "data-disabled": unref(disabled) ? "" : void 0,
         "data-invalid": unref(isInvalid) ? "" : void 0,
         dir: unref(dir)
@@ -20773,14 +21280,14 @@ var RangeCalendarGrid_vue_vue_type_script_setup_true_lang_default = defineCompon
     const props2 = __props;
     const rootContext = injectRangeCalendarRootContext();
     const disabled = computed(() => rootContext.disabled.value ? true : void 0);
-    const readonly = computed(() => rootContext.readonly.value ? true : void 0);
+    const readonly2 = computed(() => rootContext.readonly.value ? true : void 0);
     return (_ctx, _cache) => {
       return openBlock(), createBlock(unref(Primitive), mergeProps(props2, {
         tabindex: "-1",
         role: "grid",
-        "aria-readonly": readonly.value,
+        "aria-readonly": readonly2.value,
         "aria-disabled": disabled.value,
-        "data-readonly": readonly.value && "",
+        "data-readonly": readonly2.value && "",
         "data-disabled": disabled.value && ""
       }), {
         default: withCtx(() => [renderSlot(_ctx.$slots, "default")]),
@@ -22250,7 +22757,7 @@ var EditableRoot_vue_vue_type_script_setup_true_lang_default = defineComponent({
   setup(__props, { expose: __expose, emit: __emit }) {
     const props2 = __props;
     const emits = __emit;
-    const { id, name, defaultValue, startWithEditMode, placeholder: propPlaceholder, maxLength, disabled, dir: propDir, submitMode, activationMode, selectOnFocus, readonly, autoResize, required } = toRefs(props2);
+    const { id, name, defaultValue, startWithEditMode, placeholder: propPlaceholder, maxLength, disabled, dir: propDir, submitMode, activationMode, selectOnFocus, readonly: readonly2, autoResize, required } = toRefs(props2);
     const inputRef = ref();
     const dir = useDirection(propDir);
     const isEditing = ref(startWithEditMode.value ?? false);
@@ -22318,7 +22825,7 @@ var EditableRoot_vue_vue_type_script_setup_true_lang_default = defineComponent({
       inputRef,
       startWithEditMode,
       isEmpty,
-      readonly,
+      readonly: readonly2,
       autoResize
     });
     return (_ctx, _cache) => {
@@ -25787,7 +26294,7 @@ var NumberFieldRoot_vue_vue_type_script_setup_true_lang_default = defineComponen
   setup(__props, { emit: __emit }) {
     const props2 = __props;
     const emits = __emit;
-    const { disabled, readonly, disableWheelChange, invertWheelChange, min: min2, max: max2, step, stepSnapping, formatOptions, id, locale: propLocale } = toRefs(props2);
+    const { disabled, readonly: readonly2, disableWheelChange, invertWheelChange, min: min2, max: max2, step, stepSnapping, formatOptions, id, locale: propLocale } = toRefs(props2);
     const modelValue = useVModel(props2, "modelValue", emits, {
       defaultValue: props2.defaultValue,
       passive: props2.modelValue === void 0
@@ -25857,7 +26364,7 @@ var NumberFieldRoot_vue_vue_type_script_setup_true_lang_default = defineComponen
       validate,
       applyInputValue,
       disabled,
-      readonly,
+      readonly: readonly2,
       disableWheelChange,
       invertWheelChange,
       max: max2,
@@ -25874,7 +26381,7 @@ var NumberFieldRoot_vue_vue_type_script_setup_true_lang_default = defineComponen
         as: _ctx.as,
         "as-child": _ctx.asChild,
         "data-disabled": unref(disabled) ? "" : void 0,
-        "data-readonly": unref(readonly) ? "" : void 0
+        "data-readonly": unref(readonly2) ? "" : void 0
       }), {
         default: withCtx(() => [renderSlot(_ctx.$slots, "default", {
           modelValue: unref(modelValue),
@@ -25885,7 +26392,7 @@ var NumberFieldRoot_vue_vue_type_script_setup_true_lang_default = defineComponen
           value: unref(modelValue),
           name: _ctx.name,
           disabled: unref(disabled),
-          readonly: unref(readonly),
+          readonly: unref(readonly2),
           required: _ctx.required
         }, null, 8, [
           "value",
@@ -34153,7 +34660,7 @@ var TimeFieldRoot_vue_vue_type_script_setup_true_lang_default = defineComponent(
   setup(__props, { expose: __expose, emit: __emit }) {
     const props2 = __props;
     const emits = __emit;
-    const { disabled, readonly, granularity, defaultValue, minValue, maxValue, dir: propDir, locale: propLocale } = toRefs(props2);
+    const { disabled, readonly: readonly2, granularity, defaultValue, minValue, maxValue, dir: propDir, locale: propLocale } = toRefs(props2);
     const locale = useLocale(propLocale);
     const dir = useDirection(propDir);
     const formatter = useDateFormatter(locale.value, { hourCycle: normalizeHourCycle(props2.hourCycle) });
@@ -34282,7 +34789,7 @@ var TimeFieldRoot_vue_vue_type_script_setup_true_lang_default = defineComponent(
       formatter,
       hourCycle: props2.hourCycle,
       step,
-      readonly,
+      readonly: readonly2,
       segmentValues,
       isInvalid,
       segmentContents: editableSegmentContents,
@@ -34301,7 +34808,7 @@ var TimeFieldRoot_vue_vue_type_script_setup_true_lang_default = defineComponent(
         role: "group",
         "aria-disabled": unref(disabled) ? true : void 0,
         "data-disabled": unref(disabled) ? "" : void 0,
-        "data-readonly": unref(readonly) ? "" : void 0,
+        "data-readonly": unref(readonly2) ? "" : void 0,
         "data-invalid": isInvalid.value ? "" : void 0,
         dir: unref(dir),
         onKeydown: withKeys(handleKeydown, ["left", "right"])
@@ -34380,17 +34887,17 @@ var TimeFieldInput_vue_vue_type_script_setup_true_lang_default = defineComponent
       modelValue: rootContext.modelValue
     });
     const disabled = computed(() => rootContext.disabled.value);
-    const readonly = computed(() => rootContext.readonly.value);
+    const readonly2 = computed(() => rootContext.readonly.value);
     const isInvalid = computed(() => rootContext.isInvalid.value);
     return (_ctx, _cache) => {
       return openBlock(), createBlock(unref(Primitive), mergeProps({
         as: _ctx.as,
         "as-child": _ctx.asChild
       }, unref(attributes), {
-        contenteditable: disabled.value || readonly.value ? false : _ctx.part !== "literal",
+        contenteditable: disabled.value || readonly2.value ? false : _ctx.part !== "literal",
         "data-reka-time-field-segment": _ctx.part,
         "aria-disabled": disabled.value ? true : void 0,
-        "aria-readonly": readonly.value ? true : void 0,
+        "aria-readonly": readonly2.value ? true : void 0,
         "data-disabled": disabled.value ? "" : void 0,
         "data-invalid": isInvalid.value ? "" : void 0,
         "aria-invalid": isInvalid.value ? true : void 0
@@ -34745,9 +35252,9 @@ var ToastRootImpl_vue_vue_type_script_setup_true_lang_default = defineComponent(
             const y = event.clientY - pointerStartRef.value.y;
             const hasSwipeMoveStarted = Boolean(swipeDeltaRef.value);
             const isHorizontalSwipe = ["left", "right"].includes(unref(providerContext).swipeDirection.value);
-            const clamp3 = ["left", "up"].includes(unref(providerContext).swipeDirection.value) ? Math.min : Math.max;
-            const clampedX = isHorizontalSwipe ? clamp3(0, x) : 0;
-            const clampedY = !isHorizontalSwipe ? clamp3(0, y) : 0;
+            const clamp4 = ["left", "up"].includes(unref(providerContext).swipeDirection.value) ? Math.min : Math.max;
+            const clampedX = isHorizontalSwipe ? clamp4(0, x) : 0;
+            const clampedY = !isHorizontalSwipe ? clamp4(0, y) : 0;
             const moveStartBuffer = event.pointerType === "touch" ? 10 : 2;
             const delta = {
               x: clampedX,

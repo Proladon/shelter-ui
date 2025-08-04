@@ -1,49 +1,55 @@
 {
-  "hash": "67fa8d05",
-  "configHash": "30b2b312",
-  "lockfileHash": "72f42841",
-  "browserHash": "837a88df",
+  "hash": "b239837f",
+  "configHash": "ffe3bd0e",
+  "lockfileHash": "0d3fc351",
+  "browserHash": "ab95b55e",
   "optimized": {
     "vue": {
       "src": "../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "2dfc0e47",
+      "fileHash": "a3084b94",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../../node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "fde481fc",
+      "fileHash": "85e73de0",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
-      "src": "../../../../node_modules/@vueuse/core/index.mjs",
+      "src": "../../../../node_modules/vitepress/node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "9bda1dcf",
-      "needsInterop": false
-    },
-    "@tabler/icons-vue": {
-      "src": "../../../../node_modules/@tabler/icons-vue/dist/esm/tabler-icons-vue.mjs",
-      "file": "@tabler_icons-vue.js",
-      "fileHash": "f6c3f436",
-      "needsInterop": false
-    },
-    "color": {
-      "src": "../../../../node_modules/color/index.js",
-      "file": "color.js",
-      "fileHash": "e5b25fd1",
+      "fileHash": "8e829b91",
       "needsInterop": false
     },
     "reka-ui": {
       "src": "../../../../node_modules/reka-ui/dist/index.js",
       "file": "reka-ui.js",
-      "fileHash": "41c9532a",
+      "fileHash": "10238be8",
+      "needsInterop": false
+    },
+    "@tabler/icons-vue": {
+      "src": "../../../../node_modules/@tabler/icons-vue/dist/esm/tabler-icons-vue.mjs",
+      "file": "@tabler_icons-vue.js",
+      "fileHash": "d87d8173",
+      "needsInterop": false
+    },
+    "color": {
+      "src": "../../../../node_modules/color/index.js",
+      "file": "color.js",
+      "fileHash": "bdc9957c",
+      "needsInterop": false
+    },
+    "@vueuse/core": {
+      "src": "../../../../node_modules/@vueuse/core/index.mjs",
+      "file": "@vueuse_core.js",
+      "fileHash": "d3f30124",
       "needsInterop": false
     }
   },
   "chunks": {
-    "chunk-Q3EOJPOC": {
-      "file": "chunk-Q3EOJPOC.js"
+    "chunk-TBTZDRNA": {
+      "file": "chunk-TBTZDRNA.js"
     },
     "chunk-64JB73B4": {
       "file": "chunk-64JB73B4.js"

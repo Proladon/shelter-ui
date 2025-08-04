@@ -5,7 +5,7 @@
       class="sh-select"
       :class="{
         'is-focused': visible,
-        'is-clearable': clearable && !disabled && !isEmpty,
+        'is-clearable': showControl.btn.clear,
         'is-multiple': multiple,
       }"
       @click="handleTriggerClick"
@@ -17,7 +17,10 @@
       </div>
 
       <!-- Single selection display -->
-      <div v-if="!multiple" class="sh-select-selection">
+      <div
+        v-if="!multiple && !hideSelectionDisplay"
+        class="sh-select-selection"
+      >
         <span v-if="selectedOption" class="sh-select-selected-value">
           {{ selectedOption.label }}
         </span>
@@ -27,7 +30,10 @@
       </div>
 
       <!-- Multiple selection display -->
-      <div v-else class="sh-select-selection sh-select-selection-multiple">
+      <div
+        v-else-if="!hideSelectionDisplay"
+        class="sh-select-selection sh-select-selection-multiple"
+      >
         <div v-if="selectedOptions.length > 0" class="sh-select-tags">
           <span
             v-for="option in selectedOptions"
@@ -65,30 +71,24 @@
         @keydown.stop
       />
 
-      <div v-if="showSuffix" class="sh-select-suffix">
-        <slot name="suffix"></slot>
-
+      <div class="sh-select-suffix">
         <span
-          v-if="clearable && !disabled && !isEmpty"
+          v-if="showControl.btn.clear"
           class="sh-select-clear"
           @click.stop="handleClear"
         >
-          <svg viewBox="0 0 1024 1024" width="12" height="12">
-            <path
-              d="M512 421.490332 331.092324 240.582656c-25.037934-25.037934-65.590616-25.037934-90.62855 0-25.037934 25.037934-25.037934 65.590616 0 90.62855L421.37145 512 240.463774 692.907676c-25.037934 25.037934-25.037934 65.590616 0 90.62855 25.037934 25.037934 65.590616 25.037934 90.62855 0L512 602.62855l180.907676 180.907676c25.037934 25.037934 65.590616 25.037934 90.62855 0 25.037934-25.037934 25.037934-65.590616 0-90.62855L602.62855 512l180.907676-180.907676c25.037934-25.037934 25.037934-65.590616 0-90.62855-25.037934-25.037934-65.590616-25.037934-90.62855 0L512 421.490332z"
-              fill="currentColor"
-            ></path>
-          </svg>
+          <IconX />
         </span>
 
-        <span class="sh-select-arrow" :class="{ 'is-reverse': visible }">
-          <svg viewBox="0 0 1024 1024" width="12" height="12">
-            <path
-              d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"
-              fill="currentColor"
-            ></path>
-          </svg>
-        </span>
+        <slot name="suffix">
+          <span
+            v-if="showControl.btn.suffix"
+            class="sh-select-arrow"
+            :class="{ 'is-reverse': visible }"
+          >
+            <IconChevronDown />
+          </span>
+        </slot>
       </div>
     </div>
 
@@ -189,7 +189,9 @@
 
 <script setup lang="ts">
 import { ref, computed, nextTick, onMounted, onUnmounted, watch } from 'vue'
+import { onClickOutside } from '@vueuse/core'
 import type { SelectProps, SelectEmits, SelectOption } from './types'
+import { IconChevronDown, IconX } from '@tabler/icons-vue'
 
 defineOptions({
   name: 'SSelect',
@@ -234,8 +236,21 @@ const isEmpty = computed(() => {
   )
 })
 
-const showSuffix = computed(() => {
-  return props.clearable || !!slots.suffix
+const hideSelectionDisplay = ref(false)
+
+const showControl = computed(() => {
+  const controls = {
+    btn: {
+      clear: props.clearable && !props.disabled && !isEmpty.value,
+      suffix: true,
+    },
+  }
+
+  if (controls.btn.clear) {
+    controls.btn.suffix = false
+  }
+
+  return controls
 })
 
 const selectedOption = computed(() => {
@@ -321,6 +336,7 @@ const toggleDropdown = () => {
       updateDropdownPosition()
       if (props.filterable && searchInputRef.value) {
         searchInputRef.value.focus()
+        hideSelectionDisplay.value = true
       }
     })
   }
@@ -466,16 +482,6 @@ const updateDropdownPosition = () => {
   dropdownStyle.value = style
 }
 
-const handleClickOutside = (event: Event) => {
-  if (
-    !triggerRef.value?.contains(event.target as Node) &&
-    !dropdownRef.value?.contains(event.target as Node)
-  ) {
-    visible.value = false
-    emit('visible-change', false)
-  }
-}
-
 const onDropdownEnter = () => {
   updateDropdownPosition()
 }
@@ -489,17 +495,28 @@ const onDropdownLeave = () => {
 watch(visible, (newVal) => {
   if (newVal) {
     nextTick(updateDropdownPosition)
+  } else {
+    hideSelectionDisplay.value = false
+  }
+})
+
+onClickOutside(triggerRef, (event: Event) => {
+  if (
+    !triggerRef.value?.contains(event.target as Node) &&
+    !dropdownRef.value?.contains(event.target as Node)
+  ) {
+    visible.value = false
+    hideSelectionDisplay.value = false
+    emit('visible-change', false)
   }
 })
 
 onMounted(() => {
-  document.addEventListener('click', handleClickOutside)
   window.addEventListener('resize', updateDropdownPosition)
   window.addEventListener('scroll', updateDropdownPosition)
 })
 
 onUnmounted(() => {
-  document.removeEventListener('click', handleClickOutside)
   window.removeEventListener('resize', updateDropdownPosition)
   window.removeEventListener('scroll', updateDropdownPosition)
 })
