@@ -1,7 +1,4 @@
 import {
-  _class_private_field_init
-} from "./chunk-DKXJ6YOE.js";
-import {
   computedEager,
   createEventHook,
   createGlobalState,
@@ -1342,6 +1339,19 @@ function $fae977aafc393c5c$var$offsetToString(offset3) {
 }
 function $fae977aafc393c5c$export$bf79f1ebf4b18792(date) {
   return `${$fae977aafc393c5c$export$4223de14708adc63(date)}${$fae977aafc393c5c$var$offsetToString(date.offset)}[${date.timeZone}]`;
+}
+
+// node_modules/@swc/helpers/esm/_check_private_redeclaration.js
+function _check_private_redeclaration(obj, privateCollection) {
+  if (privateCollection.has(obj)) {
+    throw new TypeError("Cannot initialize the same private elements twice on an object");
+  }
+}
+
+// node_modules/@swc/helpers/esm/_class_private_field_init.js
+function _class_private_field_init(obj, privateMap, value) {
+  _check_private_redeclaration(obj, privateMap);
+  privateMap.set(obj, value);
 }
 
 // node_modules/@internationalized/date/dist/CalendarDate.mjs
@@ -9542,7 +9552,7 @@ function rectToClientRect(rect) {
   };
 }
 
-// node_modules/reka-ui/node_modules/@floating-ui/core/dist/floating-ui.core.mjs
+// node_modules/@floating-ui/core/dist/floating-ui.core.mjs
 function computeCoordsFromPlacement(_ref, placement, rtl) {
   let {
     reference,
@@ -10405,7 +10415,7 @@ function getFrameElement(win) {
   return win.parent && Object.getPrototypeOf(win.parent) ? win.frameElement : null;
 }
 
-// node_modules/reka-ui/node_modules/@floating-ui/dom/dist/floating-ui.dom.mjs
+// node_modules/@floating-ui/dom/dist/floating-ui.dom.mjs
 function getCssDimensions(element) {
   const css = getComputedStyle2(element);
   let width = parseFloat(css.width) || 0;
@@ -11008,7 +11018,7 @@ var computePosition2 = (reference, floating, options) => {
   });
 };
 
-// node_modules/reka-ui/node_modules/@floating-ui/vue/dist/floating-ui.vue.mjs
+// node_modules/@floating-ui/vue/dist/floating-ui.vue.mjs
 function isComponentPublicInstance(target) {
   return target != null && typeof target === "object" && "$el" in target;
 }
