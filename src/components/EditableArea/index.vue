@@ -72,7 +72,7 @@ const handleEdit = () => {
 .sh-editable-area__edit-btn {
   @apply absolute top-0 right-0;
   @apply inline-flex items-center justify-center;
-  @apply text-text.base.darken;
+  @apply text-text.primary.darken;
   @apply bg-border.base;
   @apply rounded-bl-[6px] z-1;
   @apply py-[3px] px-[8px];

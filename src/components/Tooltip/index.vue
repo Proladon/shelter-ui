@@ -63,7 +63,7 @@ const handleOpenChange = (value: boolean) => {
 
 <style lang="scss" scoped>
 :deep(.sh-tooltip-content) {
-  @apply rounded-md py-2 px-3 bg-bg.primary text-text.base shadow-lg;
+  @apply rounded-md py-2 px-3 bg-bg.primary text-text.primary shadow-lg;
   @apply z-50 outline-none text-sm;
   animation-duration: 400ms;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);

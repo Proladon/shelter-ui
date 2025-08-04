@@ -86,10 +86,10 @@ const spinnerColor = computed(() => {
   @apply border-solid border;
   @apply hover:(brightness-90);
   @apply active:(brightness-80);
-  @apply text-text.base;
+  @apply text-text.primary;
 
   /* Default styles (previously plain style) */
-  @apply bg-opacity-10 bg-text.base.fade text-text.base border-transparent;
+  @apply bg-opacity-10 bg-text.primary.fade text-text.primary border-transparent;
 
   &.type-primary {
     @apply bg-opacity-10 bg-primary.fade text-primary border-transparent;
@@ -143,7 +143,7 @@ const spinnerColor = computed(() => {
     }
 
     &-default {
-      @include dashed-variant('text.base');
+      @include dashed-variant('text.primary');
     }
     &-primary {
       @include dashed-variant('primary');
@@ -171,7 +171,7 @@ const spinnerColor = computed(() => {
     }
 
     &-default {
-      @include ghost-variant('text.base');
+      @include ghost-variant('text.primary');
     }
 
     &-primary {
@@ -204,7 +204,7 @@ const spinnerColor = computed(() => {
     }
 
     &-default {
-      @include text-variant('text.base');
+      @include text-variant('text.primary');
     }
 
     &-primary {
@@ -237,7 +237,7 @@ const spinnerColor = computed(() => {
     }
 
     &-default {
-      @include outline-variant('text.base');
+      @include outline-variant('text.primary');
     }
     &-primary {
       @include outline-variant('primary');
@@ -269,7 +269,7 @@ const spinnerColor = computed(() => {
     }
 
     &-default {
-      @include borderd-variant('text.base');
+      @include borderd-variant('text.primary');
     }
     &-primary {
       @include borderd-variant('primary');

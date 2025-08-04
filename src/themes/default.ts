@@ -6,10 +6,12 @@ export default {
     secondary: '#1b1f27',
   },
   text: {
-    base: '#E3C9AA',
+    base: '#6b7280',
+    primary: '#E3C9AA',
   },
   border: {
     base: '#3e4451',
+    primary: '#E3C9AA',
   },
   status: {
     info: '#d5d5d5',

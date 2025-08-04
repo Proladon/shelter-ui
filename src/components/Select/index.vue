@@ -561,11 +561,11 @@ const slots = defineSlots<{
 }
 
 .sh-select-selected-value {
-  @apply text-text.base truncate;
+  @apply text-text.primary truncate;
 }
 
 .sh-select-placeholder {
-  @apply text-gray-500;
+  @apply text-text.base;
 }
 
 .sh-select-tags {
@@ -573,8 +573,8 @@ const slots = defineSlots<{
 }
 
 .sh-select-tag {
-  @apply inline-flex items-center bg-gray-100 text-gray-700 px-2 py-1 rounded text-sm;
-  @apply border border-gray-200;
+  @apply inline-flex items-center bg-bg.primary text-text.primary px-2 py-1 rounded text-sm;
+  @apply border border-solid border-border.primary.fade;
 }
 
 .sh-select-tag-text {
@@ -582,13 +582,13 @@ const slots = defineSlots<{
 }
 
 .sh-select-tag-close {
-  @apply ml-1 cursor-pointer text-gray-400 hover:text-gray-600;
+  @apply ml-1 cursor-pointer text-gray-400 hover:text-text.primary;
   @apply flex items-center justify-center;
 }
 
 .sh-select-search-input {
-  @apply flex-1 outline-none bg-transparent text-text.base;
-  @apply placeholder:text-gray-500;
+  @apply flex-1 outline-none bg-transparent text-text.primary;
+  @apply placeholder:text-text.base;
   min-width: 60px;
 }
 
@@ -598,7 +598,7 @@ const slots = defineSlots<{
 
 .sh-select-clear {
   @apply inline-flex items-center justify-center cursor-pointer;
-  @apply text-gray-400 hover:text-text.base transition-colors;
+  @apply text-gray-400 hover:text-text.primary transition-colors;
   width: 16px;
   height: 16px;
 }
@@ -620,7 +620,7 @@ const slots = defineSlots<{
 }
 
 .sh-select-loading {
-  @apply flex items-center justify-center p-4 text-gray-500;
+  @apply flex items-center justify-center p-4 text-text.base;
 }
 
 .sh-select-loading-spinner {
@@ -628,7 +628,7 @@ const slots = defineSlots<{
 }
 
 .sh-select-empty {
-  @apply p-4 text-center text-gray-500;
+  @apply p-4 text-center text-text.base;
 }
 
 .sh-select-options {
@@ -636,20 +636,21 @@ const slots = defineSlots<{
 }
 
 .sh-select-group-title {
-  @apply px-3 py-2 text-xs font-medium text-gray-500 bg-gray-50;
+  @apply p-3 text-normal font-medium text-status.info.fade bg-bg.secondary;
   @apply border-b border-border.base;
 }
 
 .sh-select-option {
   @apply flex items-center justify-between px-3 py-2 cursor-pointer;
-  @apply hover:bg-gray-50 transition-colors;
+  @apply hover:bg-primary.fade transition-colors;
+  @apply text-text.base;
 
   &.is-selected {
-    @apply bg-primary/10 text-primary;
+    @apply bg-primary.fade text-text.primary;
   }
 
   &.is-highlighted {
-    @apply bg-gray-100;
+    @apply bg-primary.fade text-text.primary;
   }
 
   &.is-disabled {
