@@ -3,7 +3,7 @@
 - [ ] Progress
 - [ ] Divider
 - [ ] FlexLayout
-- [ ] Select
+- [x] Select
 - [ ] Pin Input
 - [ ] Switch
 - [ ] Chip

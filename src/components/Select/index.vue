@@ -106,7 +106,7 @@
           :style="dropdownStyle"
         >
           <div v-if="loading" class="sh-select-loading">
-            <div class="sh-select-loading-spinner"></div>
+            <Spinner :size="20" />
             <span>載入中...</span>
           </div>
           <div v-else-if="filteredOptions.length === 0" class="sh-select-empty">
@@ -192,6 +192,7 @@ import { ref, computed, nextTick, onMounted, onUnmounted, watch } from 'vue'
 import { onClickOutside } from '@vueuse/core'
 import type { SelectProps, SelectEmits, SelectOption } from './types'
 import { IconChevronDown, IconX } from '@tabler/icons-vue'
+import Spinner from '@/components/Spinner/index.vue'
 
 defineOptions({
   name: 'SSelect',
@@ -637,11 +638,8 @@ const slots = defineSlots<{
 }
 
 .sh-select-loading {
-  @apply flex items-center justify-center p-4 text-text.base;
-}
-
-.sh-select-loading-spinner {
-  @apply w-4 h-4 border-2 border-gray-300 border-t-primary rounded-full animate-spin mr-2;
+  @apply p-4 text-text.base;
+  @apply flex items-center justify-center gap-[8px];
 }
 
 .sh-select-empty {

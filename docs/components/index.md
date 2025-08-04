@@ -11,6 +11,7 @@ Shelter UI 提供了一系列簡潔、高效、易用的 UI 組件，幫助你�
 - [Button 按鈕](/components/button) - 用於觸發操作的按鈕組件
 - [Input 輸入框](/components/input) - 用於接收用戶輸入的文本框組件
 - [Select 選擇器](/components/select) - 用於從一組選項中選擇一個或多個值的下拉選擇組件
+- [Switch 開關](/components/switch) - 用於切換開啟/關閉狀態的開關元件
 - [Spin 加載中](/components/spin) - 用於顯示加載中的狀態組件
 - [BorderContainer 邊框容器](/components/border-container) - 用於創建具有自定義邊框的容器
 - [Dialog 對話框](/components/dialog) - 用於在不離開當前頁面的情況下與用戶進行交互

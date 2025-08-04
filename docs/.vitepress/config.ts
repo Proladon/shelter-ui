@@ -34,6 +34,7 @@ export default defineConfig({
             { text: 'Button 按鈕', link: '/components/button' },
             { text: 'Input 輸入框', link: '/components/input' },
             { text: 'Select 選擇器', link: '/components/select' },
+            { text: 'Switch 開關', link: '/components/switch' },
             { text: 'Spin 加載中', link: '/components/spin' },
             {
               text: 'BorderContainer 邊框容器',
