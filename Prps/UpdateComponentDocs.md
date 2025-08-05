@@ -4,7 +4,7 @@
 
 ## What
 
-將 Component 的內容更新到 `docs/` 中，與 `sidebar`
+將 Component 的內容更新到組件文檔中
 
 ## All Needed Context
 
@@ -13,9 +13,8 @@
 ```
 # MUST READ - Include these in your context window
 
-- file: docs\.vitepress\config.ts
+- file: docs/.vitepress/config.ts
     why: Current docs config
-
 ```
 
 ## Implementation Blueprint
@@ -27,8 +26,12 @@
 CREATE: docs/components/<component_name>.md
 
 - Task2: Edit component doc content
-EDIT: docs/components/<component_name>.md
+UPDATE: docs/components/<component_name>.md
   - FOLLOW: Prps/ComponentDocContent.md
+
+- Task3: Update component doc sidebar
+UPDATE: docs/.vitepress/config.ts
+  - UPDATE themeConfig.sidebar
 ```
 
 ## Important

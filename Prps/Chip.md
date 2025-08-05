@@ -53,11 +53,16 @@ CREATE: src/components/Chip/
 - Task2: 建立 Chip 組件相關 demo
 UPDATE: src/components/Chip/demos/
 
-- Task2: 建立 Chip 組件相關檔案
+- Task3:
 EXECUTE: Prps/UpdateComponentDocs.md
+
+- Task4:
+EXECUTE: Prps/ExportComponent.md
 ```
 
 ### Component Style
+
+- use `<style lang="postcss">` and `@apply` css syntax
 
 ```
 - Chip:

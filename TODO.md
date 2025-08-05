@@ -6,4 +6,5 @@
 - [x] Select
 - [ ] Pin Input
 - [ ] Switch
-- [ ] Chip
+- [x] Chip
+- [ ] BlockArea
