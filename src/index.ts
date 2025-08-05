@@ -13,6 +13,7 @@ import STooltip from "./components/Tooltip/index.vue"
 import SBadge from "./components/Badge/index.vue"
 import SChip from "./components/Chip/index.vue"
 import SDialog from "./components/Dialog/index.vue"
+import SBlockArea from "./components/BlockArea/index.vue"
 import {
   SActiveButtonGroup,
   SActiveButtonItem,
@@ -32,6 +33,7 @@ const components = {
   SBadge,
   SChip,
   SDialog,
+  SBlockArea,
   SActiveButtonGroup,
   SActiveButtonItem,
 }
@@ -69,6 +71,10 @@ export type { BadgeProps, BadgeEmits } from "./components/Badge/types"
 export type { ChipProps, ChipEmits } from "./components/Chip/types"
 export type { DialogProps, DialogEmits } from "./components/Dialog/types"
 export type {
+  BlockAreaProps,
+  BlockAreaSlots,
+} from "./components/BlockArea/types"
+export type {
   ActiveButtonGroupProps,
   ActiveButtonGroupEmits,
   ActiveButtonItemProps,
@@ -99,6 +105,7 @@ export {
   SBadge,
   SChip,
   SDialog,
+  SBlockArea,
   SActiveButtonGroup,
   SActiveButtonItem,
 }

@@ -31,6 +31,7 @@ export default defineConfig({
               link: "/components/active-button-group",
             },
             { text: "Badge 徽章", link: "/components/badge" },
+            { text: "BlockArea 禁用區域", link: "/components/block-area" },
             { text: "Button 按鈕", link: "/components/button" },
             { text: "Chip 標籤", link: "/components/chip" },
             { text: "Input 輸入框", link: "/components/input" },
