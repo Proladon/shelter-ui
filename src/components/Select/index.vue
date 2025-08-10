@@ -188,7 +188,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, nextTick, onMounted, onUnmounted, watch } from 'vue'
+import {
+  ref,
+  computed,
+  nextTick,
+  onMounted,
+  onUnmounted,
+  watch,
+  useTemplateRef,
+} from 'vue'
 import { onClickOutside } from '@vueuse/core'
 import type { SelectProps, SelectEmits, SelectOption } from './types'
 import { IconChevronDown, IconX } from '@tabler/icons-vue'
@@ -219,9 +227,9 @@ const props = withDefaults(defineProps<SelectProps>(), {
 
 const emit = defineEmits<SelectEmits>()
 
-const triggerRef = ref<HTMLElement | null>(null)
-const dropdownRef = ref<HTMLElement | null>(null)
-const searchInputRef = ref<HTMLInputElement | null>(null)
+const triggerRef = useTemplateRef<HTMLElement>('targetRef')
+const dropdownRef = useTemplateRef<HTMLElement>('dropdownRef')
+const searchInputRef = useTemplateRef<HTMLInputElement>('searchInputRef')
 const visible = ref(false)
 const searchQuery = ref('')
 const highlightedIndex = ref(-1)

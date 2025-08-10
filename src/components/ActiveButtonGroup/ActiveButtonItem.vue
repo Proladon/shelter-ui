@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, inject, onMounted, computed } from 'vue'
+import { ref, inject, onMounted, computed, useTemplateRef } from 'vue'
 import type { ActiveButtonItemProps } from './types'
 
 defineOptions({
@@ -10,7 +10,7 @@ const props = withDefaults(defineProps<ActiveButtonItemProps>(), {
   disabled: false,
 })
 
-const buttonRef = ref<HTMLElement | null>(null)
+const buttonRef = useTemplateRef<HTMLElement>('buttonRef')
 
 // Inject functions and values from parent
 const addButton = inject('addButton', null) as
