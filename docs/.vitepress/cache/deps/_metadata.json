@@ -1,58 +1,58 @@
 {
-  "hash": "b65330b9",
-  "configHash": "410a753f",
-  "lockfileHash": "71e489a4",
-  "browserHash": "9180077a",
+  "hash": "fbd1326c",
+  "configHash": "ffe3bd0e",
+  "lockfileHash": "6b361339",
+  "browserHash": "1ea996e5",
   "optimized": {
     "vue": {
       "src": "../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "696f6e08",
+      "fileHash": "ebcc48b3",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../../node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "ebafaf84",
+      "fileHash": "1298a6b0",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
       "src": "../../../../node_modules/vitepress/node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "81e4592d",
+      "fileHash": "937abf42",
       "needsInterop": false
     },
     "color": {
       "src": "../../../../node_modules/color/index.js",
       "file": "color.js",
-      "fileHash": "58b2e51b",
+      "fileHash": "1a870ca8",
       "needsInterop": false
     },
     "reka-ui": {
       "src": "../../../../node_modules/reka-ui/dist/index.js",
       "file": "reka-ui.js",
-      "fileHash": "2dd34ed8",
+      "fileHash": "f7fe6e22",
       "needsInterop": false
     },
     "@tabler/icons-vue": {
       "src": "../../../../node_modules/@tabler/icons-vue/dist/esm/tabler-icons-vue.mjs",
       "file": "@tabler_icons-vue.js",
-      "fileHash": "dcb1a533",
+      "fileHash": "38a20079",
       "needsInterop": false
     },
     "@vueuse/core": {
       "src": "../../../../node_modules/@vueuse/core/index.mjs",
       "file": "@vueuse_core.js",
-      "fileHash": "f6eba3da",
+      "fileHash": "b2091ee2",
       "needsInterop": false
     }
   },
   "chunks": {
-    "chunk-TBTZDRNA": {
-      "file": "chunk-TBTZDRNA.js"
+    "chunk-SFGNGNK6": {
+      "file": "chunk-SFGNGNK6.js"
     },
-    "chunk-64JB73B4": {
-      "file": "chunk-64JB73B4.js"
+    "chunk-AUVNIKOZ": {
+      "file": "chunk-AUVNIKOZ.js"
     },
     "chunk-OYQD7GAK": {
       "file": "chunk-OYQD7GAK.js"

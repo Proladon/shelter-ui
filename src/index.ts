@@ -1,23 +1,24 @@
-import type { App } from "vue"
+import type { App } from 'vue'
 
 // 導入組件
-import SConfigProvider from "./components/ConfigProvider/index.vue"
-import SButton from "./components/Button/index.vue"
-import SInput from "./components/Input/index.vue"
-import SSelect from "./components/Select/index.vue"
-import SSpin from "./components/Spin/index.vue"
-import SBorderContainer from "./components/BorderContainer/index.vue"
-import SPopover from "./components/Popover/index.vue"
-import SEditableArea from "./components/EditableArea/index.vue"
-import STooltip from "./components/Tooltip/index.vue"
-import SBadge from "./components/Badge/index.vue"
-import SChip from "./components/Chip/index.vue"
-import SDialog from "./components/Dialog/index.vue"
-import SBlockArea from "./components/BlockArea/index.vue"
+import SConfigProvider from './components/ConfigProvider/index.vue'
+import SButton from './components/Button/index.vue'
+import SInput from './components/Input/index.vue'
+import SSelect from './components/Select/index.vue'
+import SSpin from './components/Spin/index.vue'
+import SBorderContainer from './components/BorderContainer/index.vue'
+import SPopover from './components/Popover/index.vue'
+import SEditableArea from './components/EditableArea/index.vue'
+import STooltip from './components/Tooltip/index.vue'
+import SBadge from './components/Badge/index.vue'
+import SChip from './components/Chip/index.vue'
+import SDialog from './components/Dialog/index.vue'
+import SBlockArea from './components/BlockArea/index.vue'
 import {
   SActiveButtonGroup,
   SActiveButtonItem,
-} from "./components/ActiveButtonGroup"
+} from './components/ActiveButtonGroup'
+import SFlexContainer from './components/FlexContainer/index.vue'
 
 // 組件列表
 const components = {
@@ -36,6 +37,7 @@ const components = {
   SBlockArea,
   SActiveButtonGroup,
   SActiveButtonItem,
+  SFlexContainer,
 }
 
 /**
@@ -43,42 +45,43 @@ const components = {
  * @param name - Optional name to greet, defaults to "world"
  * @returns A greeting message
  */
-export function sayHello(name: string = "world"): string {
+export function sayHello(name: string = 'world'): string {
   return `Hello, ${name}!`
 }
 
 // 類型聲明
-export type { ThemeVarsConfig } from "./components/ConfigProvider/types"
-export type { ButtonProps, ButtonEmits } from "./components/Button/types"
-export type { InputProps, InputEmits } from "./components/Input/types"
+export type { ThemeVarsConfig } from './components/ConfigProvider/types'
+export type { ButtonProps, ButtonEmits } from './components/Button/types'
+export type { InputProps, InputEmits } from './components/Input/types'
 export type {
   SelectProps,
   SelectEmits,
   SelectOption,
-} from "./components/Select/types"
-export type { SpinProps, SpinEmits } from "./components/Spin/types"
+} from './components/Select/types'
+export type { SpinProps, SpinEmits } from './components/Spin/types'
 export type {
   BorderContainerProps,
   BorderContainerEmits,
-} from "./components/BorderContainer/types"
-export type { PopoverProps, PopoverEmits } from "./components/Popover/types"
+} from './components/BorderContainer/types'
+export type { PopoverProps, PopoverEmits } from './components/Popover/types'
 export type {
   EditableAreaProps,
   EditableAreaEmits,
-} from "./components/EditableArea/types"
-export type { TooltipProps, TooltipEmits } from "./components/Tooltip/types"
-export type { BadgeProps, BadgeEmits } from "./components/Badge/types"
-export type { ChipProps, ChipEmits } from "./components/Chip/types"
-export type { DialogProps, DialogEmits } from "./components/Dialog/types"
+} from './components/EditableArea/types'
+export type { TooltipProps, TooltipEmits } from './components/Tooltip/types'
+export type { BadgeProps, BadgeEmits } from './components/Badge/types'
+export type { ChipProps, ChipEmits } from './components/Chip/types'
+export type { DialogProps, DialogEmits } from './components/Dialog/types'
 export type {
   BlockAreaProps,
   BlockAreaSlots,
-} from "./components/BlockArea/types"
+} from './components/BlockArea/types'
+export type { IFlexLayoutProps } from './components/FlexContainer/types'
 export type {
   ActiveButtonGroupProps,
   ActiveButtonGroupEmits,
   ActiveButtonItemProps,
-} from "./components/ActiveButtonGroup/types"
+} from './components/ActiveButtonGroup/types'
 
 // 安裝函數
 const install = (app: App) => {
@@ -89,7 +92,7 @@ const install = (app: App) => {
 }
 
 // 默認導出
-export default { install, version: "0.1.0", ...components }
+export default { install, version: '0.1.0', ...components }
 
 // 單獨導出組件
 export {
@@ -108,4 +111,5 @@ export {
   SBlockArea,
   SActiveButtonGroup,
   SActiveButtonItem,
+  SFlexContainer,
 }

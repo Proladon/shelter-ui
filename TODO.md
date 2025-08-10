@@ -2,9 +2,9 @@
 - [ ] Context Menu
 - [ ] Progress
 - [ ] Divider
-- [ ] FlexLayout
+- [ ] FlexContainer
 - [x] Select
 - [ ] Pin Input
-- [ ] Switch
+- [x] Switch
 - [x] Chip
-- [ ] BlockArea
+- [x] BlockArea
