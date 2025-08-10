@@ -48,7 +48,7 @@
     "@vueuse/core": "^13.6.0",
     "color": "^5.0.0",
     "reka-ui": "^2.4.1",
-    "vue": "^3.5.13"
+    "vue": "^3.5.18"
   },
   "devDependencies": {
     "@types/color": "^4.2.0",
@@ -57,13 +57,13 @@
     "@unocss/transformer-variant-group": "^66.4.1",
     "@vitejs/plugin-vue": "^6.0.1",
     "@vue/tsconfig": "^0.7.0",
-    "sass": "^1.87.0",
-    "typescript": "~5.7.2",
+    "sass": "^1.90.0",
+    "typescript": "^5.9.2",
     "unocss": "^66.4.1",
-    "vite": "^7.0.6",
+    "vite": "^7.1.1",
     "vite-plugin-dts": "^4.5.4",
-    "vitepress": "^1.6.3",
-    "vue-tsc": "^2.2.8"
+    "vitepress": "^1.6.4",
+    "vue-tsc": "^3.0.5"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
