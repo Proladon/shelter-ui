@@ -19,7 +19,7 @@ FlexContainer 可以透過 props 來設定子元素的排列方式、對齊方�
 </template>
 
 <script setup lang="ts">
-interface IFlexLayoutProps {
+interface FlexContainerProps {
   align?: 'start' | 'center' | 'end' | 'between' | 'around' | 'evenly'
   justify?: 'start' | 'center' | 'end' | 'between' | 'around' | 'evenly'
   gap?: number
@@ -27,7 +27,7 @@ interface IFlexLayoutProps {
   wrap?: boolean
 }
 
-const props = withDefaults(defineProps<IFlexLayoutProps>(), {
+const props = withDefaults(defineProps<FlexContainerProps>(), {
   gap: 0,
   col: false,
 })
