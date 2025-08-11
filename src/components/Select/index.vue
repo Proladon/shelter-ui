@@ -227,7 +227,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
 
 const emit = defineEmits<SelectEmits>()
 
-const triggerRef = useTemplateRef<HTMLElement>('targetRef')
+const triggerRef = useTemplateRef<HTMLElement>('triggerRef')
 const dropdownRef = useTemplateRef<HTMLElement>('dropdownRef')
 const searchInputRef = useTemplateRef<HTMLInputElement>('searchInputRef')
 const visible = ref(false)
