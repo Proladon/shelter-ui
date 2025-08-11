@@ -43,7 +43,7 @@ title: <Component Name>
 
 
 <script setup>
-import { SConfigProvider } from '@/index'
+import { SHConfigProvider } from '@/index'
 import BasicDemo from '@/components/<Component Name>/demos/BasicDemo.vue'
 import XXXDemo from '@/components/<Component Name>/demos/XXXDemo.vue'
 ...

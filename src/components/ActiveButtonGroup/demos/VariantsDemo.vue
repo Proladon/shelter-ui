@@ -2,20 +2,18 @@
   <div class="demo-container">
     <div class="variant-section">
       <h4>Disabled Button Example</h4>
-      <s-active-button-group v-model="disabled" class="mb-4">
-        <s-active-button-item value="tab1">Normal</s-active-button-item>
-        <s-active-button-item value="tab2" disabled
-          >Disabled</s-active-button-item
-        >
-        <s-active-button-item value="tab3">Button</s-active-button-item>
-      </s-active-button-group>
+      <SHActiveButtonGroup v-model="disabled" class="mb-4">
+        <SHActiveButtonItem value="tab1">Normal</SHActiveButtonItem>
+        <SHActiveButtonItem value="tab2" disabled>Disabled</SHActiveButtonItem>
+        <SHActiveButtonItem value="tab3">Button</SHActiveButtonItem>
+      </SHActiveButtonGroup>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { SActiveButtonItem } from '../'
+import { SHActiveButtonItem } from '../'
 
 const disabled = ref('tab1')
 </script>

@@ -1,18 +1,18 @@
 <template>
   <div class="demo-container">
-    <s-chip
+    <SHChip
       label="Amy Elsner"
       image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png"
     />
-    <s-chip
+    <SHChip
       label="Asiya Javayant"
       image="https://primefaces.org/cdn/primevue/images/avatar/asiyajavayant.png"
     />
-    <s-chip
+    <SHChip
       label="Onyama Limba"
       image="https://primefaces.org/cdn/primevue/images/avatar/onyamalimba.png"
     />
-    <s-chip
+    <SHChip
       label="Xuxue Feng"
       image="https://primefaces.org/cdn/primevue/images/avatar/xuxuefeng.png"
       removable

@@ -17,7 +17,7 @@ Input 輸入框組件用於接收用戶的文本輸入，支持多種功能如�
 
 ```vue
 <template>
-  <s-input v-model="inputValue" placeholder="Please input..." />
+  <SHInput v-model="inputValue" placeholder="Please input..." />
 </template>
 
 <script setup>
@@ -41,7 +41,7 @@ const inputValue = ref('')
 
 ```vue
 <template>
-  <s-input
+  <SHInput
     v-model="inputValue"
     placeholder="Hover to see clear button"
     clearable
@@ -69,7 +69,7 @@ const inputValue = ref('This text can be cleared')
 
 ```vue
 <template>
-  <s-input v-model="inputValue" placeholder="Disabled input" disabled />
+  <SHInput v-model="inputValue" placeholder="Disabled input" disabled />
 </template>
 
 <script setup>
@@ -95,14 +95,14 @@ const inputValue = ref('This input is disabled')
 <template>
   <div>
     <h4>Prefix Slot</h4>
-    <s-input v-model="userInput" placeholder="Enter username">
+    <SHInput v-model="userInput" placeholder="Enter username">
       <template #prefix>
         <svg class="icon"><!-- User icon SVG --></svg>
       </template>
-    </s-input>
+    </SHInput>
 
     <h4>Suffix Slot</h4>
-    <s-input
+    <SHInput
       v-model="passwordInput"
       placeholder="Enter password"
       type="password"
@@ -110,17 +110,17 @@ const inputValue = ref('This input is disabled')
       <template #suffix>
         <svg class="icon"><!-- Lock icon SVG --></svg>
       </template>
-    </s-input>
+    </SHInput>
 
     <h4>Both Slots</h4>
-    <s-input v-model="searchInput" placeholder="Search..." clearable>
+    <SHInput v-model="searchInput" placeholder="Search..." clearable>
       <template #prefix>
         <svg class="icon"><!-- Search icon SVG --></svg>
       </template>
       <template #suffix>
         <span class="search-hint">Press Enter</span>
       </template>
-    </s-input>
+    </SHInput>
   </div>
 </template>
 
@@ -190,7 +190,7 @@ const searchInput = ref('')
 | select | 選中輸入框中的文本 | —    |
 
 <script setup>
-import { SConfigProvider } from '@/index'
+import { SHConfigProvider } from '@/index'
 import BasicDemo from '@/components/Input/demos/BasicDemo.vue'
 import ClearableDemo from '@/components/Input/demos/ClearableDemo.vue'
 import DisabledDemo from '@/components/Input/demos/DisabledDemo.vue'

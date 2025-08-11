@@ -1,8 +1,8 @@
 <template>
   <div class="flex items-center gap-2">
-    <s-button size="small">小按鈕</s-button>
-    <s-button>默認按鈕</s-button>
-    <s-button size="large">大按鈕</s-button>
+    <SHButton size="small">小按鈕</SHButton>
+    <SHButton>默認按鈕</SHButton>
+    <SHButton size="large">大按鈕</SHButton>
   </div>
 </template>
 

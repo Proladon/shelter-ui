@@ -18,21 +18,21 @@ Badge 徽章組件用於在圖標或文本旁邊顯示計數或狀態信息。
 ```vue
 <template>
   <div class="demo-container">
-    <s-badge value="5">
+    <SHBadge value="5">
       <div class="demo-item"></div>
-    </s-badge>
+    </SHBadge>
 
-    <s-badge value="New">
+    <SHBadge value="New">
       <div class="demo-item"></div>
-    </s-badge>
+    </SHBadge>
 
-    <s-badge :value="12">
+    <SHBadge :value="12">
       <div class="demo-item"></div>
-    </s-badge>
+    </SHBadge>
 
-    <s-badge is-dot>
+    <SHBadge is-dot>
       <div class="demo-item"></div>
-    </s-badge>
+    </SHBadge>
   </div>
 </template>
 
@@ -66,21 +66,21 @@ Badge 徽章組件支持自定義背景顏色和文本顏色。
 ```vue
 <template>
   <div class="demo-container">
-    <s-badge value="8" color="#4CAF50" textColor="#ffffff">
+    <SHBadge value="8" color="#4CAF50" textColor="#ffffff">
       <div class="demo-item"></div>
-    </s-badge>
+    </SHBadge>
 
-    <s-badge value="7" color="#2196F3" textColor="#ffffff">
+    <SHBadge value="7" color="#2196F3" textColor="#ffffff">
       <div class="demo-item"></div>
-    </s-badge>
+    </SHBadge>
 
-    <s-badge value="9" color="#FF9800" textColor="#ffffff">
+    <SHBadge value="9" color="#FF9800" textColor="#ffffff">
       <div class="demo-item"></div>
-    </s-badge>
+    </SHBadge>
 
-    <s-badge is-dot color="#9C27B0">
+    <SHBadge is-dot color="#9C27B0">
       <div class="demo-item"></div>
-    </s-badge>
+    </SHBadge>
   </div>
 </template>
 
@@ -115,22 +115,22 @@ Badge 徽章組件支持自定義背景顏色和文本顏色。
 <template>
   <div>
     <div class="control-section">
-      <s-button @click="visible = !visible"> Toggle Badge Visibility </s-button>
+      <SHButton @click="visible = !visible"> Toggle Badge Visibility </SHButton>
       <div>Current state: {{ visible ? 'Visible' : 'Hidden' }}</div>
     </div>
 
     <div class="badges-section">
-      <s-badge :value="8" :show="visible">
+      <SHBadge :value="8" :show="visible">
         <div class="demo-item"></div>
-      </s-badge>
+      </SHBadge>
 
-      <s-badge is-dot :show="visible">
+      <SHBadge is-dot :show="visible">
         <div class="demo-item"></div>
-      </s-badge>
+      </SHBadge>
 
-      <s-badge value="New" :show="visible">
+      <SHBadge value="New" :show="visible">
         <div class="demo-item"></div>
-      </s-badge>
+      </SHBadge>
     </div>
   </div>
 </template>
@@ -177,28 +177,28 @@ const visible = ref(true)
 ```vue
 <template>
   <div class="demo-container">
-    <s-badge>
+    <SHBadge>
       <div class="demo-item"></div>
       <template #content>
         <div class="custom-content">
           <span class="custom-icon">!</span>
         </div>
       </template>
-    </s-badge>
+    </SHBadge>
 
-    <s-badge>
+    <SHBadge>
       <div class="demo-item"></div>
       <template #content>
         <span style="font-size: 10px;">NEW</span>
       </template>
-    </s-badge>
+    </SHBadge>
 
-    <s-badge color="#8E44AD">
+    <SHBadge color="#8E44AD">
       <div class="demo-item"></div>
       <template #content>
         <span class="custom-emoji">🔥</span>
       </template>
-    </s-badge>
+    </SHBadge>
   </div>
 </template>
 

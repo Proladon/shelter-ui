@@ -8,9 +8,9 @@
 
 <Demo>
   <div class="flex items-center gap-8">
-    <s-spin size="small" />
-    <s-spin />
-    <s-spin size="large" />
+    <SHSpin size="small" />
+    <SHSpin />
+    <SHSpin size="large" />
   </div>
   
   <template #code>
@@ -18,9 +18,9 @@
 ```vue
 <template>
   <div class="flex items-center gap-8">
-    <s-spin size="small" />
-    <s-spin />
-    <s-spin size="large" />
+    <SHSpin size="small" />
+    <SHSpin />
+    <SHSpin size="large" />
   </div>
 </template>
 ```
@@ -34,8 +34,8 @@
 
 <Demo>
   <div class="flex items-center gap-8">
-    <s-spin description="加載中..." />
-    <s-spin size="large" description="正在處理..." />
+    <SHSpin description="加載中..." />
+    <SHSpin size="large" description="正在處理..." />
   </div>
   
   <template #code>
@@ -43,8 +43,8 @@
 ```vue
 <template>
   <div class="flex items-center gap-8">
-    <s-spin description="加載中..." />
-    <s-spin size="large" description="正在處理..." />
+    <SHSpin description="加載中..." />
+    <SHSpin size="large" description="正在處理..." />
   </div>
 </template>
 ```
@@ -58,10 +58,10 @@
 
 <Demo>
   <div class="flex items-center gap-8">
-    <s-spin stroke="#1890ff" />
-    <s-spin stroke="#52c41a" />
-    <s-spin stroke="#faad14" />
-    <s-spin stroke="#f5222d" />
+    <SHSpin stroke="#1890ff" />
+    <SHSpin stroke="#52c41a" />
+    <SHSpin stroke="#faad14" />
+    <SHSpin stroke="#f5222d" />
   </div>
   
   <template #code>
@@ -69,10 +69,10 @@
 ```vue
 <template>
   <div class="flex items-center gap-8">
-    <s-spin stroke="#1890ff" />
-    <s-spin stroke="#52c41a" />
-    <s-spin stroke="#faad14" />
-    <s-spin stroke="#f5222d" />
+    <SHSpin stroke="#1890ff" />
+    <SHSpin stroke="#52c41a" />
+    <SHSpin stroke="#faad14" />
+    <SHSpin stroke="#f5222d" />
   </div>
 </template>
 ```
@@ -86,14 +86,14 @@
 
 <Demo>
   <div>
-    <s-spin :show="spinning">
+    <SHSpin :show="spinning">
       <div class="p-4 border border-gray-200 rounded">
         <p>這是一個包含內容的 Spin 組件示例</p>
         <p>當 Spin 處於活動狀態時，內容將被遮罩</p>
       </div>
-    </s-spin>
+    </SHSpin>
     <div class="mt-4">
-      <s-button @click="toggleSpin">{{ spinning ? '停止加載' : '開始加載' }}</s-button>
+      <SHButton @click="toggleSpin">{{ spinning ? '停止加載' : '開始加載' }}</SHButton>
     </div>
   </div>
   
@@ -102,14 +102,16 @@
 ```vue
 <template>
   <div>
-    <s-spin :show="spinning">
+    <SHSpin :show="spinning">
       <div class="p-4 border border-gray-200 rounded">
         <p>這是一個包含內容的 Spin 組件示例</p>
         <p>當 Spin 處於活動狀態時，內容將被遮罩</p>
       </div>
-    </s-spin>
+    </SHSpin>
     <div class="mt-4">
-      <s-button @click="toggleSpin">{{ spinning ? '停止加載' : '開始加載' }}</s-button>
+      <SHButton @click="toggleSpin">{{
+        spinning ? '停止加載' : '開始加載'
+      }}</SHButton>
     </div>
   </div>
 </template>
@@ -149,14 +151,14 @@ const toggleDelayedSpin = () => {
 
 <Demo>
   <div>
-    <s-spin :show="delayedSpinning" :delay="500">
+    <SHSpin :show="delayedSpinning" :delay="500">
       <div class="p-4 border border-gray-200 rounded">
         <p>這個示例設置了 500ms 的延遲</p>
         <p>短時間的加載過程不會顯示加載動畫，避免閃爍</p>
       </div>
-    </s-spin>
+    </SHSpin>
     <div class="mt-4">
-      <s-button @click="toggleDelayedSpin">{{ delayedSpinning ? '停止加載' : '開始加載' }}</s-button>
+      <SHButton @click="toggleDelayedSpin">{{ delayedSpinning ? '停止加載' : '開始加載' }}</SHButton>
     </div>
   </div>
   
@@ -165,14 +167,16 @@ const toggleDelayedSpin = () => {
 ```vue
 <template>
   <div>
-    <s-spin :show="spinning" :delay="500">
+    <SHSpin :show="spinning" :delay="500">
       <div class="p-4 border border-gray-200 rounded">
         <p>這個示例設置了 500ms 的延遲</p>
         <p>短時間的加載過程不會顯示加載動畫，避免閃爍</p>
       </div>
-    </s-spin>
+    </SHSpin>
     <div class="mt-4">
-      <s-button @click="toggleSpin">{{ spinning ? '停止加載' : '開始加載' }}</s-button>
+      <SHButton @click="toggleSpin">{{
+        spinning ? '停止加載' : '開始加載'
+      }}</SHButton>
     </div>
   </div>
 </template>
@@ -194,26 +198,26 @@ const toggleSpin = () => {
 
 ### 屬性
 
-| 屬性名 | 說明 | 類型 | 默認值 |
-| --- | --- | --- | --- |
-| size | 組件大小，可選值為 `small`、`medium`、`large` 或數字 | string \| number | `medium` |
-| description | 描述文字 | string | - |
-| rotate | 是否旋轉動畫 | boolean | `true` |
-| show | 是否顯示加載中組件 | boolean | `true` |
-| stroke | 加載圖標的顏色 | string | - |
-| strokeWidth | 加載圖標的線條寬度 | number | `2` |
-| delay | 延遲顯示加載效果的時間（毫秒） | number | `0` |
+| 屬性名      | 說明                                                 | 類型             | 默認值   |
+| ----------- | ---------------------------------------------------- | ---------------- | -------- |
+| size        | 組件大小，可選值為 `small`、`medium`、`large` 或數字 | string \| number | `medium` |
+| description | 描述文字                                             | string           | -        |
+| rotate      | 是否旋轉動畫                                         | boolean          | `true`   |
+| show        | 是否顯示加載中組件                                   | boolean          | `true`   |
+| stroke      | 加載圖標的顏色                                       | string           | -        |
+| strokeWidth | 加載圖標的線條寬度                                   | number           | `2`      |
+| delay       | 延遲顯示加載效果的時間（毫秒）                       | number           | `0`      |
 
 ### 事件
 
-| 事件名 | 說明 | 回調參數 |
-| --- | --- | --- |
+| 事件名      | 說明                     | 回調參數         |
+| ----------- | ------------------------ | ---------------- |
 | update:show | 當 `show` 屬性變化時觸發 | (value: boolean) |
 
 ### 插槽
 
-| 插槽名 | 說明 |
-| --- | --- |
-| default | 自定義內容，當有默認插槽時，Spin 將作為包裹容器 |
-| icon | 自定義加載圖標 |
-| description | 自定義描述文字 |
+| 插槽名      | 說明                                            |
+| ----------- | ----------------------------------------------- |
+| default     | 自定義內容，當有默認插槽時，Spin 將作為包裹容器 |
+| icon        | 自定義加載圖標                                  |
+| description | 自定義描述文字                                  |

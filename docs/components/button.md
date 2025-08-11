@@ -18,12 +18,12 @@ title: Button 按鈕
 ```vue
 <template>
   <div class="flex gap-2">
-    <s-button>Default</s-button>
-    <s-button type="primary">Primary</s-button>
-    <s-button type="success">Success</s-button>
-    <s-button type="warning">Warning</s-button>
-    <s-button type="danger">Danger</s-button>
-    <s-button type="info">Info</s-button>
+    <SHButton>Default</SHButton>
+    <SHButton type="primary">Primary</SHButton>
+    <SHButton type="success">Success</SHButton>
+    <SHButton type="warning">Warning</SHButton>
+    <SHButton type="danger">Danger</SHButton>
+    <SHButton type="info">Info</SHButton>
   </div>
 </template>
 ```
@@ -43,12 +43,12 @@ Button 組件提供了多種樣式變化，包括文字、幽靈、虛線、描�
 ```vue
 <template>
   <div class="flex gap-2">
-    <s-button dashed>Dashed</s-button>
-    <s-button type="warning" outline>Outline</s-button>
-    <s-button type="primary" borderd>Borderd</s-button>
-    <s-button type="primary" plain>Plain</s-button>
-    <s-button type="danger" ghost>Ghost</s-button>
-    <s-button type="success" text>Text</s-button>
+    <SHButton dashed>Dashed</SHButton>
+    <SHButton type="warning" outline>Outline</SHButton>
+    <SHButton type="primary" borderd>Borderd</SHButton>
+    <SHButton type="primary" plain>Plain</SHButton>
+    <SHButton type="danger" ghost>Ghost</SHButton>
+    <SHButton type="success" text>Text</SHButton>
   </div>
 </template>
 ```
@@ -66,52 +66,52 @@ Button 組件提供了多種樣式變化，包括文字、幽靈、虛線、描�
   <div>
     <h4>Text 文字按鈕</h4>
     <div class="flex gap-2 mb-2">
-      <s-button text>Default</s-button>
-      <s-button type="primary" text>Primary</s-button>
-      <s-button type="success" text>Success</s-button>
-      <s-button type="warning" text>Warning</s-button>
-      <s-button type="danger" text>Danger</s-button>
-      <s-button type="info" text>Info</s-button>
+      <SHButton text>Default</SHButton>
+      <SHButton type="primary" text>Primary</SHButton>
+      <SHButton type="success" text>Success</SHButton>
+      <SHButton type="warning" text>Warning</SHButton>
+      <SHButton type="danger" text>Danger</SHButton>
+      <SHButton type="info" text>Info</SHButton>
     </div>
 
     <h4>Ghost 幽靈按鈕</h4>
     <div class="flex gap-2 mb-2">
-      <s-button ghost>Default</s-button>
-      <s-button type="primary" ghost>Primary</s-button>
-      <s-button type="success" ghost>Success</s-button>
-      <s-button type="warning" ghost>Warning</s-button>
-      <s-button type="danger" ghost>Danger</s-button>
-      <s-button type="info" ghost>Info</s-button>
+      <SHButton ghost>Default</SHButton>
+      <SHButton type="primary" ghost>Primary</SHButton>
+      <SHButton type="success" ghost>Success</SHButton>
+      <SHButton type="warning" ghost>Warning</SHButton>
+      <SHButton type="danger" ghost>Danger</SHButton>
+      <SHButton type="info" ghost>Info</SHButton>
     </div>
 
     <h4>Dashed 虛線按鈕</h4>
     <div class="flex gap-2 mb-2">
-      <s-button dashed>Default</s-button>
-      <s-button type="primary" dashed>Primary</s-button>
-      <s-button type="success" dashed>Success</s-button>
-      <s-button type="warning" dashed>Warning</s-button>
-      <s-button type="danger" dashed>Danger</s-button>
-      <s-button type="info" dashed>Info</s-button>
+      <SHButton dashed>Default</SHButton>
+      <SHButton type="primary" dashed>Primary</SHButton>
+      <SHButton type="success" dashed>Success</SHButton>
+      <SHButton type="warning" dashed>Warning</SHButton>
+      <SHButton type="danger" dashed>Danger</SHButton>
+      <SHButton type="info" dashed>Info</SHButton>
     </div>
 
     <h4>Outline 描邊按鈕</h4>
     <div class="flex gap-2 mb-2">
-      <s-button outline>Default</s-button>
-      <s-button type="primary" outline>Primary</s-button>
-      <s-button type="success" outline>Success</s-button>
-      <s-button type="warning" outline>Warning</s-button>
-      <s-button type="danger" outline>Danger</s-button>
-      <s-button type="info" outline>Info</s-button>
+      <SHButton outline>Default</SHButton>
+      <SHButton type="primary" outline>Primary</SHButton>
+      <SHButton type="success" outline>Success</SHButton>
+      <SHButton type="warning" outline>Warning</SHButton>
+      <SHButton type="danger" outline>Danger</SHButton>
+      <SHButton type="info" outline>Info</SHButton>
     </div>
 
     <h4>Borderd 帶邊框按鈕</h4>
     <div class="flex gap-2 mb-2">
-      <s-button borderd>Default</s-button>
-      <s-button type="primary" borderd>Primary</s-button>
-      <s-button type="success" borderd>Success</s-button>
-      <s-button type="warning" borderd>Warning</s-button>
-      <s-button type="danger" borderd>Danger</s-button>
-      <s-button type="info" borderd>Info</s-button>
+      <SHButton borderd>Default</SHButton>
+      <SHButton type="primary" borderd>Primary</SHButton>
+      <SHButton type="success" borderd>Success</SHButton>
+      <SHButton type="warning" borderd>Warning</SHButton>
+      <SHButton type="danger" borderd>Danger</SHButton>
+      <SHButton type="info" borderd>Info</SHButton>
     </div>
   </div>
 </template>
@@ -132,9 +132,9 @@ Button 組件提供三種尺寸：小、默認、大。
 ```vue
 <template>
   <div class="flex items-center gap-2">
-    <s-button size="small">小按鈕</s-button>
-    <s-button>默認按鈕</s-button>
-    <s-button size="large">大按鈕</s-button>
+    <SHButton size="small">小按鈕</SHButton>
+    <SHButton>默認按鈕</SHButton>
+    <SHButton size="large">大按鈕</SHButton>
   </div>
 </template>
 ```
@@ -154,8 +154,8 @@ Button 組件提供三種尺寸：小、默認、大。
 ```vue
 <template>
   <div class="flex gap-2">
-    <s-button disabled>禁用按鈕</s-button>
-    <s-button type="primary" disabled>禁用主要按鈕</s-button>
+    <SHButton disabled>禁用按鈕</SHButton>
+    <SHButton type="primary" disabled>禁用主要按鈕</SHButton>
   </div>
 </template>
 ```
@@ -175,15 +175,15 @@ Button 組件提供三種尺寸：小、默認、大。
 ```vue
 <template>
   <div class="flex gap-2">
-    <s-button type="primary" :loading="true">加載中</s-button>
-    <s-button type="success" :loading="loading">{{
+    <SHButton type="primary" :loading="true">加載中</SHButton>
+    <SHButton type="success" :loading="loading">{{
       loading ? '加載中...' : '點擊加載'
-    }}</s-button>
-    <s-button
+    }}</SHButton>
+    <SHButton
       plain
       :type="loading ? 'warning' : 'info'"
       @click="toggleLoading"
-      >{{ loading ? '停止加載' : '開始加載' }}</s-button
+      >{{ loading ? '停止加載' : '開始加載' }}</SHButton
     >
   </div>
 </template>
@@ -230,7 +230,7 @@ const toggleLoading = () => {
 | default | 按鈕的內容 |
 
 <script setup>
-import { SConfigProvider } from '@/index'
+import { SHConfigProvider } from '@/index'
 import BasicDemo from '@/components/Button/demos/BasicDemo.vue'
 import TypeDemo from '@/components/Button/demos/TypeDemo.vue'
 import DisabledDemo from '@/components/Button/demos/DisabledDemo.vue'

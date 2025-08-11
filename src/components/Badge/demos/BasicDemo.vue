@@ -1,20 +1,20 @@
 <template>
   <div class="demo-container">
-    <s-badge value="5">
+    <SHBadge value="5">
       <div class="demo-item"></div>
-    </s-badge>
+    </SHBadge>
 
-    <s-badge value="New">
+    <SHBadge value="New">
       <div class="demo-item"></div>
-    </s-badge>
+    </SHBadge>
 
-    <s-badge :value="12">
+    <SHBadge :value="12">
       <div class="demo-item"></div>
-    </s-badge>
+    </SHBadge>
 
-    <s-badge is-dot>
+    <SHBadge is-dot>
       <div class="demo-item"></div>
-    </s-badge>
+    </SHBadge>
   </div>
 </template>
 

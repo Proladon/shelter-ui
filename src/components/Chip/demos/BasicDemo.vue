@@ -1,9 +1,9 @@
 <template>
   <div class="demo-container">
-    <s-chip label="動作" />
-    <s-chip label="喜劇" />
-    <s-chip label="懸疑" />
-    <s-chip label="驚悚" removable />
+    <SHChip label="動作" />
+    <SHChip label="喜劇" />
+    <SHChip label="懸疑" />
+    <SHChip label="驚悚" removable />
   </div>
 </template>
 

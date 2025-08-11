@@ -1,16 +1,16 @@
 <template>
   <div class="flex flex-col gap-4">
-    <s-border-container>
+    <SHBorderContainer>
       <p>This is a basic border container with default styling.</p>
-    </s-border-container>
+    </SHBorderContainer>
 
-    <s-border-container type="primary">
+    <SHBorderContainer type="primary">
       <p>This is a border container with primary color.</p>
-    </s-border-container>
+    </SHBorderContainer>
 
-    <s-border-container type="success">
+    <SHBorderContainer type="success">
       <p>This is a border container with success color.</p>
-    </s-border-container>
+    </SHBorderContainer>
   </div>
 </template>
 

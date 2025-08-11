@@ -63,7 +63,7 @@ FlexContainer 組件可以將包覆的區塊進行彈性布局，讓使用者可
 | default  | 容器內容 |
 
 <script setup>
-import { SConfigProvider } from '@/index'
+import { SHConfigProvider } from '@/index'
 import BasicDemo from '@/components/FlexContainer/demos/BasicDemo.vue'
 import ColDemo from '@/components/FlexContainer/demos/ColDemo.vue'
 </script>

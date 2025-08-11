@@ -1,12 +1,12 @@
 <template>
   <div
-    class="s-spin"
+    class="sh-spin"
     :class="[
-      `s-spin--${mergedSize}`,
+      `sh-spin--${mergedSize}`,
       {
-        's-spin--rotating': rotate,
-        's-spin--with-description': !!description,
-        's-spin--with-content': !!$slots.default,
+        'sh-spin--rotating': rotate,
+        'sh-spin--with-description': !!description,
+        'sh-spin--with-content': !!$slots.default,
       },
     ]"
   >
@@ -136,7 +136,7 @@ onBeforeUnmount(() => {
 </script>
 
 <style lang="postcss">
-.s-spin {
+.sh-spin {
   @apply inline-flex items-center justify-center box-border;
   position: relative;
 }
@@ -169,27 +169,27 @@ onBeforeUnmount(() => {
   @apply w-full h-full;
 }
 
-.s-spin--rotating .s-spin__svg {
-  animation: s-spin-rotate 1.2s linear infinite;
+.sh-spin--rotating .s-spin__svg {
+  animation: sh-spin-rotate 1.2s linear infinite;
 }
 
 .s-spin__description {
   @apply mt-2 text-sm text-gray-600;
 }
 
-.s-spin--small .s-spin__description {
+.sh-spin--small .s-spin__description {
   @apply text-xs;
 }
 
-.s-spin--large .s-spin__description {
+.sh-spin--large .s-spin__description {
   @apply text-base;
 }
 
-.s-spin--with-description .s-spin__icon {
+.sh-spin--with-description .s-spin__icon {
   @apply mb-1;
 }
 
-@keyframes s-spin-rotate {
+@keyframes sh-spin-rotate {
   from {
     transform: rotate(0deg);
   }

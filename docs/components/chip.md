@@ -18,10 +18,10 @@ Chip 標籤用於顯示實體資訊，支持圖示、標籤文字和圖片。
 ```vue
 <template>
   <div class="flex gap-3">
-    <s-chip label="動作" />
-    <s-chip label="喜劇" />
-    <s-chip label="懸疑" />
-    <s-chip label="驚悚" removable />
+    <SHChip label="動作" />
+    <SHChip label="喜劇" />
+    <SHChip label="懸疑" />
+    <SHChip label="驚悚" removable />
   </div>
 </template>
 ```
@@ -41,11 +41,11 @@ Chip 標籤用於顯示實體資訊，支持圖示、標籤文字和圖片。
 ```vue
 <template>
   <div class="flex gap-3">
-    <s-chip label="Apple" :icon="IconApple" />
-    <s-chip label="Brand Facebook" :icon="IconBrandFacebook" />
-    <s-chip label="Brand Google" :icon="IconBrandGoogle" />
-    <s-chip label="Brand Windows" :icon="IconBrandWindows" removable />
-    <s-chip label="Brand GitHub" :icon="IconBrandGithub" removable>
+    <SHChip label="Apple" :icon="IconApple" />
+    <SHChip label="Brand Facebook" :icon="IconBrandFacebook" />
+    <SHChip label="Brand Google" :icon="IconBrandGoogle" />
+    <SHChip label="Brand Windows" :icon="IconBrandWindows" removable />
+    <SHChip label="Brand GitHub" :icon="IconBrandGithub" removable>
       <template #removeicon="{ removeCallback, keydownCallback }">
         <icon-minus
           @click="removeCallback"
@@ -53,7 +53,7 @@ Chip 標籤用於顯示實體資訊，支持圖示、標籤文字和圖片。
           class="w-4 h-4 cursor-pointer hover:opacity-70 transition-opacity"
         />
       </template>
-    </s-chip>
+    </SHChip>
   </div>
 </template>
 
@@ -65,7 +65,7 @@ import {
   IconBrandWindows,
   IconBrandGithub,
   IconMinus,
-} from "@tabler/icons-vue"
+} from '@tabler/icons-vue'
 </script>
 ```
 
@@ -84,19 +84,19 @@ import {
 ```vue
 <template>
   <div class="flex gap-3">
-    <s-chip
+    <SHChip
       label="Amy Elsner"
       image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png"
     />
-    <s-chip
+    <SHChip
       label="Asiya Javayant"
       image="https://primefaces.org/cdn/primevue/images/avatar/asiyajavayant.png"
     />
-    <s-chip
+    <SHChip
       label="Onyama Limba"
       image="https://primefaces.org/cdn/primevue/images/avatar/onyamalimba.png"
     />
-    <s-chip
+    <SHChip
       label="Xuxue Feng"
       image="https://primefaces.org/cdn/primevue/images/avatar/xuxuefeng.png"
       removable
@@ -120,33 +120,33 @@ import {
 ```vue
 <template>
   <div class="flex gap-3">
-    <s-chip class="py-0 pl-0 pr-4">
+    <SHChip class="py-0 pl-0 pr-4">
       <span
         class="bg-primary text-primary-contrast rounded-full w-8 h-8 flex items-center justify-center"
         >P</span
       >
       <span class="ml-2 font-medium">PRIME</span>
-    </s-chip>
+    </SHChip>
 
-    <s-chip class="py-0 pl-0 pr-4">
+    <SHChip class="py-0 pl-0 pr-4">
       <span
         class="bg-status-success text-white rounded-full w-8 h-8 flex items-center justify-center"
         >S</span
       >
       <span class="ml-2 font-medium">SHELTER</span>
-    </s-chip>
+    </SHChip>
 
-    <s-chip removable>
+    <SHChip removable>
       <template #icon>
         <icon-heart class="w-4 h-4 text-red-500" />
       </template>
       <span class="font-medium">最愛</span>
-    </s-chip>
+    </SHChip>
   </div>
 </template>
 
 <script setup lang="ts">
-import { IconHeart } from "@tabler/icons-vue"
+import { IconHeart } from '@tabler/icons-vue'
 </script>
 ```
 

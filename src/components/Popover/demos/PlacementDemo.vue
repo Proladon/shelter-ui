@@ -3,33 +3,33 @@
     <div>
       <h4>不同方位</h4>
       <div class="flex flex-wrap gap-4">
-        <s-popover side="top">
+        <SHPopover side="top">
           <template #trigger>
-            <s-button>上方</s-button>
+            <SHButton>上方</SHButton>
           </template>
           <div class="py-2">彈出框顯示在上方</div>
-        </s-popover>
+        </SHPopover>
 
-        <s-popover side="right">
+        <SHPopover side="right">
           <template #trigger>
-            <s-button>右方</s-button>
+            <SHButton>右方</SHButton>
           </template>
           <div class="py-2">彈出框顯示在右方</div>
-        </s-popover>
+        </SHPopover>
 
-        <s-popover side="bottom">
+        <SHPopover side="bottom">
           <template #trigger>
-            <s-button>下方</s-button>
+            <SHButton>下方</SHButton>
           </template>
           <div class="py-2">彈出框顯示在下方</div>
-        </s-popover>
+        </SHPopover>
 
-        <s-popover side="left">
+        <SHPopover side="left">
           <template #trigger>
-            <s-button>左方</s-button>
+            <SHButton>左方</SHButton>
           </template>
           <div class="py-2">彈出框顯示在左方</div>
-        </s-popover>
+        </SHPopover>
       </div>
     </div>
   </div>

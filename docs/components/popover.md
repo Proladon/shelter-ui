@@ -17,15 +17,15 @@ Popover 彈出框是一個可以懸浮在頁面上的輕量級對話框，通常
 
 ```vue
 <template>
-  <s-popover>
+  <SHPopover>
     <template #trigger>
-      <s-button>點擊顯示彈出框</s-button>
+      <SHButton>點擊顯示彈出框</SHButton>
     </template>
     <div :style="{ display: 'flex', flexDirection: 'column', gap: 10 }">
       <p class="text-lg font-medium">彈出框內容</p>
       <p>這是一個基本的彈出框示例</p>
     </div>
-  </s-popover>
+  </SHPopover>
 </template>
 ```
 
@@ -44,33 +44,33 @@ Popover 支持四個不同的彈出方位：上、右、下、左。
 ```vue
 <template>
   <div class="flex flex-wrap gap-4">
-    <s-popover side="top">
+    <SHPopover side="top">
       <template #trigger>
-        <s-button>上方</s-button>
+        <SHButton>上方</SHButton>
       </template>
       <div class="py-2">彈出框顯示在上方</div>
-    </s-popover>
+    </SHPopover>
 
-    <s-popover side="right">
+    <SHPopover side="right">
       <template #trigger>
-        <s-button>右方</s-button>
+        <SHButton>右方</SHButton>
       </template>
       <div class="py-2">彈出框顯示在右方</div>
-    </s-popover>
+    </SHPopover>
 
-    <s-popover side="bottom">
+    <SHPopover side="bottom">
       <template #trigger>
-        <s-button>下方</s-button>
+        <SHButton>下方</SHButton>
       </template>
       <div class="py-2">彈出框顯示在下方</div>
-    </s-popover>
+    </SHPopover>
 
-    <s-popover side="left">
+    <SHPopover side="left">
       <template #trigger>
-        <s-button>左方</s-button>
+        <SHButton>左方</SHButton>
       </template>
       <div class="py-2">彈出框顯示在左方</div>
-    </s-popover>
+    </SHPopover>
   </div>
 </template>
 ```
@@ -109,7 +109,7 @@ Popover 支持四個不同的彈出方位：上、右、下、左。
 | close   | 關閉按鈕，可自定義 |
 
 <script setup>
-import { SConfigProvider } from '@/index'
+import { SHConfigProvider } from '@/index'
 import BasicDemo from '@/components/Popover/demos/BasicDemo.vue'
 import PlacementDemo from '@/components/Popover/demos/PlacementDemo.vue'
 </script>

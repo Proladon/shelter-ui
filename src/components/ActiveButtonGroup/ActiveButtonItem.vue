@@ -3,7 +3,7 @@ import { ref, inject, onMounted, computed, useTemplateRef } from 'vue'
 import type { ActiveButtonItemProps } from './types'
 
 defineOptions({
-  name: 'SActiveButtonItem',
+  name: 'SHActiveButtonItem',
 })
 
 const props = withDefaults(defineProps<ActiveButtonItemProps>(), {

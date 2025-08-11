@@ -18,17 +18,17 @@ BorderContainer 提供一個具有可自定義邊框的容器元素，可用於�
 ```vue
 <template>
   <div class="flex flex-col gap-4">
-    <s-border-container>
+    <SHBorderContainer>
       <p>This is a basic border container with default styling.</p>
-    </s-border-container>
+    </SHBorderContainer>
 
-    <s-border-container type="primary">
+    <SHBorderContainer type="primary">
       <p>This is a border container with primary color.</p>
-    </s-border-container>
+    </SHBorderContainer>
 
-    <s-border-container type="success">
+    <SHBorderContainer type="success">
       <p>This is a border container with success color.</p>
-    </s-border-container>
+    </SHBorderContainer>
   </div>
 </template>
 ```
@@ -50,21 +50,21 @@ BorderContainer 允許您設置不同的邊框寬度。
   <div class="flex flex-col gap-4">
     <h4>Border Widths</h4>
     <div class="grid grid-cols-2 gap-4">
-      <s-border-container :borderWidth="1">
+      <SHBorderContainer :borderWidth="1">
         <p>1px border width</p>
-      </s-border-container>
+      </SHBorderContainer>
 
-      <s-border-container :borderWidth="2">
+      <SHBorderContainer :borderWidth="2">
         <p>2px border width</p>
-      </s-border-container>
+      </SHBorderContainer>
 
-      <s-border-container :borderWidth="3">
+      <SHBorderContainer :borderWidth="3">
         <p>3px border width</p>
-      </s-border-container>
+      </SHBorderContainer>
 
-      <s-border-container :borderWidth="4">
+      <SHBorderContainer :borderWidth="4">
         <p>4px border width</p>
-      </s-border-container>
+      </SHBorderContainer>
     </div>
   </div>
 </template>
@@ -87,21 +87,21 @@ BorderContainer 允許您設置不同的邊框寬度。
   <div class="flex flex-col gap-4">
     <h4>Disabled State</h4>
     <div class="grid grid-cols-2 gap-4">
-      <s-border-container disabled>
+      <SHBorderContainer disabled>
         <p>Disabled border container with default styling</p>
-      </s-border-container>
+      </SHBorderContainer>
 
-      <s-border-container type="primary" disabled>
+      <SHBorderContainer type="primary" disabled>
         <p>Disabled border container with primary color</p>
-      </s-border-container>
+      </SHBorderContainer>
 
-      <s-border-container type="success" shadow disabled>
+      <SHBorderContainer type="success" shadow disabled>
         <p>Disabled border container with shadow</p>
-      </s-border-container>
+      </SHBorderContainer>
 
-      <s-border-container type="warning" transparent disabled>
+      <SHBorderContainer type="warning" transparent disabled>
         <p>Disabled border container with transparent background</p>
-      </s-border-container>
+      </SHBorderContainer>
     </div>
   </div>
 </template>
@@ -124,21 +124,21 @@ BorderContainer 支持多種自定義選項，包括陰影、透明背景、自�
   <div class="flex flex-col gap-4">
     <h4>Advanced Customization</h4>
     <div class="grid grid-cols-2 gap-4">
-      <s-border-container type="primary" shadow>
+      <SHBorderContainer type="primary" shadow>
         <p>Border container with shadow effect</p>
-      </s-border-container>
+      </SHBorderContainer>
 
-      <s-border-container type="success" transparent>
+      <SHBorderContainer type="success" transparent>
         <p>Border container with transparent background</p>
-      </s-border-container>
+      </SHBorderContainer>
 
-      <s-border-container type="warning" :borderRadius="12">
+      <SHBorderContainer type="warning" :borderRadius="12">
         <p>Border container with custom border radius</p>
-      </s-border-container>
+      </SHBorderContainer>
 
-      <s-border-container type="info" :borderWidth="3" :padding="8">
+      <SHBorderContainer type="info" :borderWidth="3" :padding="8">
         <p>Border container with custom border width and padding</p>
-      </s-border-container>
+      </SHBorderContainer>
     </div>
   </div>
 </template>

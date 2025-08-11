@@ -1,11 +1,11 @@
 <template>
   <div class="flex gap-2">
-  <sh-button dashed>Dashed</sh-button>
-  <sh-button type="warning" outline>outline</sh-button>
-  <sh-button type="primary" borderd>borderd</sh-button>
-  <sh-button type="primary" plain>Plain</sh-button>
-  <sh-button type="danger" ghost>Ghost</sh-button>
-  <sh-button type="success" text>Text</sh-button>
+    <SHButton dashed>Dashed</SHButton>
+    <SHButton type="warning" outline>outline</SHButton>
+    <SHButton type="primary" borderd>borderd</SHButton>
+    <SHButton type="primary" plain>Plain</SHButton>
+    <SHButton type="danger" ghost>Ghost</SHButton>
+    <SHButton type="success" text>Text</SHButton>
   </div>
 </template>
 

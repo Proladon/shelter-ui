@@ -1,7 +1,7 @@
 <template>
   <div class="flex gap-2">
-    <s-button disabled>禁用按鈕</s-button>
-    <s-button type="primary" disabled>禁用主要按鈕</s-button>
+    <SHButton disabled>禁用按鈕</SHButton>
+    <SHButton type="primary" disabled>禁用主要按鈕</SHButton>
   </div>
 </template>
 

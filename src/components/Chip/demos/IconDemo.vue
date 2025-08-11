@@ -1,10 +1,10 @@
 <template>
   <div class="demo-container">
-    <s-chip label="Apple" :icon="IconApple" />
-    <s-chip label="Brand Facebook" :icon="IconBrandFacebook" />
-    <s-chip label="Brand Google" :icon="IconBrandGoogle" />
-    <s-chip label="Brand Windows" :icon="IconBrandWindows" removable />
-    <s-chip label="Brand GitHub" :icon="IconBrandGithub" removable>
+    <SHChip label="Apple" :icon="IconApple" />
+    <SHChip label="Brand Facebook" :icon="IconBrandFacebook" />
+    <SHChip label="Brand Google" :icon="IconBrandGoogle" />
+    <SHChip label="Brand Windows" :icon="IconBrandWindows" removable />
+    <SHChip label="Brand GitHub" :icon="IconBrandGithub" removable>
       <template #removeicon="{ removeCallback, keydownCallback }">
         <icon-minus
           @click="removeCallback"
@@ -12,7 +12,7 @@
           class="w-4 h-4 cursor-pointer hover:opacity-70 transition-opacity"
         />
       </template>
-    </s-chip>
+    </SHChip>
   </div>
 </template>
 
@@ -24,7 +24,7 @@ import {
   IconBrandWindows,
   IconBrandGithub,
   IconMinus,
-} from "@tabler/icons-vue"
+} from '@tabler/icons-vue'
 </script>
 
 <style scoped>

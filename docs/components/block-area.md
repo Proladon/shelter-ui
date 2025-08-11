@@ -55,7 +55,7 @@ BlockArea 組件可以將包覆的區塊禁用，讓使用者無法執行選取�
 </template>
 
 <script setup>
-import { ref } from "vue"
+import { ref } from 'vue'
 const isActive = ref(false)
 </script>
 ```
@@ -97,7 +97,7 @@ const isActive = ref(false)
 </template>
 
 <script setup>
-import { IconLock, IconExclamationCircle } from "@tabler/icons-vue"
+import { IconLock, IconExclamationCircle } from '@tabler/icons-vue'
 </script>
 ```
 
@@ -145,7 +145,7 @@ import { IconLock, IconExclamationCircle } from "@tabler/icons-vue"
 </template>
 
 <script setup>
-import { IconLock } from "@tabler/icons-vue"
+import { IconLock } from '@tabler/icons-vue'
 </script>
 ```
 
@@ -215,7 +215,7 @@ import { IconLock } from "@tabler/icons-vue"
 </template>
 
 <script setup>
-import { IconShieldLock, IconClock } from "@tabler/icons-vue"
+import { IconShieldLock, IconClock } from '@tabler/icons-vue'
 </script>
 ```
 
@@ -241,7 +241,7 @@ import { IconShieldLock, IconClock } from "@tabler/icons-vue"
 | text    | 文字內容 |
 
 <script setup>
-import { SConfigProvider } from '@/index'
+import { SHConfigProvider } from '@/index'
 import BasicDemo from '@/components/BlockArea/demos/BasicDemo.vue'
 import IconDemo from '@/components/BlockArea/demos/IconDemo.vue'
 import TextDemo from '@/components/BlockArea/demos/TextDemo.vue'

@@ -17,12 +17,12 @@ Tooltip 工具提示組件用於在用戶懸停在元素上時顯示提示信息
 
 ```vue
 <template>
-  <s-tooltip>
+  <SHTooltip>
     <template #trigger>
       <button class="demo-button">懸停在此</button>
     </template>
     這是一個簡單的工具提示
-  </s-tooltip>
+  </SHTooltip>
 </template>
 ```
 
@@ -41,33 +41,33 @@ Tooltip 支持四個不同的彈出方位：上、右、下、左。
 ```vue
 <template>
   <div class="tooltip-grid">
-    <s-tooltip side="top">
+    <SHTooltip side="top">
       <template #trigger>
         <button class="demo-button">上方</button>
       </template>
       Tooltip 顯示在上方
-    </s-tooltip>
+    </SHTooltip>
 
-    <s-tooltip side="right">
+    <SHTooltip side="right">
       <template #trigger>
         <button class="demo-button">右方</button>
       </template>
       Tooltip 顯示在右方
-    </s-tooltip>
+    </SHTooltip>
 
-    <s-tooltip side="bottom">
+    <SHTooltip side="bottom">
       <template #trigger>
         <button class="demo-button">下方</button>
       </template>
       Tooltip 顯示在下方
-    </s-tooltip>
+    </SHTooltip>
 
-    <s-tooltip side="left">
+    <SHTooltip side="left">
       <template #trigger>
         <button class="demo-button">左方</button>
       </template>
       Tooltip 顯示在左方
-    </s-tooltip>
+    </SHTooltip>
   </div>
 </template>
 

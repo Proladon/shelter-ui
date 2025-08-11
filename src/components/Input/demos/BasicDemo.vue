@@ -1,6 +1,6 @@
 <template>
   <div class="demo-container">
-    <s-input v-model="inputValue" placeholder="Please input..." />
+    <SHInput v-model="inputValue" placeholder="Please input..." />
     <div class="value-display">Current Value: {{ inputValue }}</div>
   </div>
 </template>

@@ -39,7 +39,7 @@ app.mount('#app')
 
 ```vue
 <template>
-  <sh-button type="primary">按鈕</sh-button>
+  <SHButton type="primary">按鈕</SHButton>
 </template>
 
 <script setup lang="ts">

@@ -1,20 +1,20 @@
 <template>
   <div class="demo-container">
-    <s-badge value="8" color="#4CAF50" textColor="#ffffff">
+    <SHBadge value="8" color="#4CAF50" textColor="#ffffff">
       <div class="demo-item"></div>
-    </s-badge>
+    </SHBadge>
 
-    <s-badge value="7" color="#2196F3" textColor="#ffffff">
+    <SHBadge value="7" color="#2196F3" textColor="#ffffff">
       <div class="demo-item"></div>
-    </s-badge>
+    </SHBadge>
 
-    <s-badge value="9" color="#FF9800" textColor="#ffffff">
+    <SHBadge value="9" color="#FF9800" textColor="#ffffff">
       <div class="demo-item"></div>
-    </s-badge>
+    </SHBadge>
 
-    <s-badge is-dot color="#9C27B0">
+    <SHBadge is-dot color="#9C27B0">
       <div class="demo-item"></div>
-    </s-badge>
+    </SHBadge>
   </div>
 </template>
 

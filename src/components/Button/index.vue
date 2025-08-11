@@ -1,6 +1,6 @@
 <template>
   <button
-    class="s-button"
+    class="sh-button"
     :class="[
       `type-${type}`,
       `size-${size}`,
@@ -11,7 +11,7 @@
       dashed ? `style-dashed-${type}` : '',
       {
         'is-disabled': disabled || loading,
-        's-button--loading': loading,
+        'sh-button--loading': loading,
       },
     ]"
     :disabled="disabled || loading"
@@ -79,7 +79,7 @@ const spinnerColor = computed(() => {
 </script>
 
 <style lang="scss" scoped>
-.s-button {
+.sh-button {
   @apply px-4 py-1 rounded-md font-medium cursor-pointer relative text-shadow-md;
   @apply flex items-center justify-center;
   @apply transition-all duration-300 ease-in-out;

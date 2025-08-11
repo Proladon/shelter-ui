@@ -1,6 +1,6 @@
 <template>
   <div
-    class="s-border-container"
+    class="sh-border-container"
     :class="[
       `type-${type}`,
       {
@@ -50,7 +50,7 @@ const handleClick = (event: MouseEvent) => {
 </script>
 
 <style lang="scss" scoped>
-.s-border-container {
+.sh-border-container {
   @apply relative box-border border-solid border-border.base transition-all duration-300 ease-in-out;
 
   /* Default styles */

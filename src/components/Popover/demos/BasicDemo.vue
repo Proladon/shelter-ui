@@ -3,15 +3,15 @@
     <div>
       <h4>基本用法</h4>
       <div class="flex flex-wrap gap-4">
-        <s-popover>
+        <SHPopover>
           <template #trigger>
-            <s-button>點擊顯示彈出框</s-button>
+            <SHButton>點擊顯示彈出框</SHButton>
           </template>
           <div :style="{ display: 'flex', flexDirection: 'column', gap: 10 }">
             <p class="text-lg font-medium">彈出框內容</p>
             <p>這是一個基本的彈出框示例</p>
           </div>
-        </s-popover>
+        </SHPopover>
       </div>
     </div>
   </div>

@@ -19,7 +19,7 @@ Select 選擇器組件用於從一組選項中選擇一個或多個值，支持�
 <template>
   <div class="space-y-4">
     <!-- 基本選擇器 -->
-    <s-select
+    <SHSelect
       v-model="value1"
       :options="basicOptions"
       placeholder="請選擇一個選項"
@@ -27,7 +27,7 @@ Select 選擇器組件用於從一組選項中選擇一個或多個值，支持�
     />
 
     <!-- 可清空 -->
-    <s-select
+    <SHSelect
       v-model="value2"
       :options="basicOptions"
       placeholder="請選擇一個選項"
@@ -36,7 +36,7 @@ Select 選擇器組件用於從一組選項中選擇一個或多個值，支持�
     />
 
     <!-- 可搜索 -->
-    <s-select
+    <SHSelect
       v-model="value3"
       :options="basicOptions"
       placeholder="輸入關鍵字搜索"
@@ -78,7 +78,7 @@ const basicOptions = [
 <template>
   <div class="space-y-4">
     <!-- 多選模式 -->
-    <s-select
+    <SHSelect
       v-model="multipleValue"
       :options="options"
       placeholder="請選擇多個選項"
@@ -88,7 +88,7 @@ const basicOptions = [
     />
 
     <!-- 限制選擇數量 -->
-    <s-select
+    <SHSelect
       v-model="limitedValue"
       :options="options"
       placeholder="最多選擇3個選項"
@@ -132,7 +132,7 @@ const options = [
 <template>
   <div class="space-y-4">
     <!-- 分組選項 -->
-    <s-select
+    <SHSelect
       v-model="groupedValue"
       :options="groupedOptions"
       placeholder="請選擇一個選項"
@@ -141,7 +141,7 @@ const options = [
     />
 
     <!-- 禁用選項 -->
-    <s-select
+    <SHSelect
       v-model="disabledValue"
       :options="disabledOptions"
       placeholder="某些選項被禁用"
@@ -194,7 +194,7 @@ const disabledOptions = [
 <template>
   <div class="space-y-4">
     <!-- 加載狀態 -->
-    <s-select
+    <SHSelect
       v-model="loadingValue"
       :options="[]"
       placeholder="載入中..."
@@ -203,7 +203,7 @@ const disabledOptions = [
     />
 
     <!-- 空數據狀態 -->
-    <s-select
+    <SHSelect
       v-model="emptyValue"
       :options="[]"
       placeholder="無數據"
@@ -212,7 +212,7 @@ const disabledOptions = [
     />
 
     <!-- 自定義位置 -->
-    <s-select
+    <SHSelect
       v-model="topValue"
       :options="options"
       placeholder="向上展開"

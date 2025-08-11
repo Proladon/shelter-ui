@@ -2,7 +2,7 @@
   <div class="space-y-4">
     <div>
       <h3 class="text-lg font-medium mb-2">基本選擇器</h3>
-      <s-select
+      <SHSelect
         v-model="value1"
         :options="basicOptions"
         placeholder="請選擇一個選項"
@@ -15,7 +15,7 @@
 
     <div>
       <h3 class="text-lg font-medium mb-2">可清空</h3>
-      <s-select
+      <SHSelect
         v-model="value2"
         :options="basicOptions"
         placeholder="請選擇一個選項"
@@ -29,7 +29,7 @@
 
     <div>
       <h3 class="text-lg font-medium mb-2">禁用狀態</h3>
-      <s-select
+      <SHSelect
         v-model="value3"
         :options="basicOptions"
         placeholder="請選擇一個選項"
@@ -40,7 +40,7 @@
 
     <div>
       <h3 class="text-lg font-medium mb-2">可搜索</h3>
-      <s-select
+      <SHSelect
         v-model="value4"
         :options="searchOptions"
         placeholder="輸入關鍵字搜索"
@@ -57,6 +57,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import type { SelectOption } from '../types'
+import { SHSelect } from '@/index'
 
 const value1 = ref('')
 const value2 = ref('')

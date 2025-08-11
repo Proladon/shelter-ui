@@ -2,21 +2,21 @@
   <div class="flex flex-col gap-4">
     <h4>Disabled State</h4>
     <div class="grid grid-cols-2 gap-4">
-      <s-border-container disabled>
+      <SHBorderContainer disabled>
         <p>Disabled border container with default styling</p>
-      </s-border-container>
+      </SHBorderContainer>
 
-      <s-border-container type="primary" disabled>
+      <SHBorderContainer type="primary" disabled>
         <p>Disabled border container with primary color</p>
-      </s-border-container>
+      </SHBorderContainer>
 
-      <s-border-container type="success" shadow disabled>
+      <SHBorderContainer type="success" shadow disabled>
         <p>Disabled border container with shadow</p>
-      </s-border-container>
+      </SHBorderContainer>
 
-      <s-border-container type="warning" transparent disabled>
+      <SHBorderContainer type="warning" transparent disabled>
         <p>Disabled border container with transparent background</p>
-      </s-border-container>
+      </SHBorderContainer>
     </div>
   </div>
 </template>

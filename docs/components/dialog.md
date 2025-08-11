@@ -6,9 +6,9 @@
 
 基础的对话框，用于展示内容和收集用户输入。
 
-<SConfigProvider>
+<SHConfigProvider>
     <BasicDemo />
-</SConfigProvider>
+</SHConfigProvider>
 
 ## API
 
@@ -41,6 +41,6 @@
 | footer      | 对话框底部操作按钮区域              |
 
 <script setup>
-import { SConfigProvider } from '@/index'
+import { SHConfigProvider } from '@/index'
 import BasicDemo from '@/components/Dialog/demos/BasicDemo.vue'
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="visible"
-    class="s-chip"
+    class="sh-chip"
     :tabindex="removable ? 0 : undefined"
     @keydown="onKeyDown"
   >
@@ -36,17 +36,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue"
-import { IconX } from "@tabler/icons-vue"
-import type { ChipProps, ChipEmits } from "./types"
+import { ref } from 'vue'
+import { IconX } from '@tabler/icons-vue'
+import type { ChipProps, ChipEmits } from './types'
 
 defineOptions({
-  name: "SHChip",
+  name: 'SHChip',
 })
 
 const props = withDefaults(defineProps<ChipProps>(), {
-  label: "",
-  image: "",
+  label: '',
+  image: '',
   removable: false,
 })
 
@@ -57,30 +57,30 @@ const XIcon = IconX
 
 const remove = (event: Event) => {
   visible.value = false
-  emit("remove", event)
-  emit("removeicon", event)
+  emit('remove', event)
+  emit('removeicon', event)
 }
 
 const onKeyDown = (event: KeyboardEvent) => {
-  if (props.removable && (event.key === "Backspace" || event.key === "Enter")) {
+  if (props.removable && (event.key === 'Backspace' || event.key === 'Enter')) {
     remove(event)
   }
 }
 </script>
 
 <style lang="postcss" scoped>
-.s-chip {
+.sh-chip {
   @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200;
   background-color: rgba(227, 201, 170, 0.1); /* secondary.fade */
   color: #e3c9aa; /* text.primary */
   border: 1px solid transparent;
 }
 
-.s-chip:hover {
+.sh-chip:hover {
   @apply opacity-80;
 }
 
-.s-chip:focus {
+.sh-chip:focus {
   @apply outline-none;
   box-shadow: 0 0 0 2px rgba(227, 201, 170, 0.5);
 }

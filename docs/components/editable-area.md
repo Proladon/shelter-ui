@@ -17,19 +17,19 @@ EditableArea 組件可以讓任何內容加上一個外框與編輯按鈕，代�
 
 ```vue
 <template>
-  <s-editable-area>
+  <SHEditableArea>
     <div>
       <p>這是一個可編輯區域的示例內容</p>
       <p>點擊右上角的編輯按鈕可觸發編輯事件</p>
     </div>
-  </s-editable-area>
+  </SHEditableArea>
 
-  <s-editable-area :editable="false">
+  <SHEditableArea :editable="false">
     <div>
       <p>這是一個不可編輯區域的示例內容</p>
       <p>此區域的編輯按鈕呈現禁用狀態</p>
     </div>
-  </s-editable-area>
+  </SHEditableArea>
 </template>
 ```
 

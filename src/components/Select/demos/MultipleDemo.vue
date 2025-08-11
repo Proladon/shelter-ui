@@ -2,7 +2,7 @@
   <div class="space-y-4">
     <div>
       <h3 class="text-lg font-medium mb-2">多選模式</h3>
-      <s-select
+      <SHSelect
         v-model="multipleValue"
         :options="options"
         placeholder="請選擇多個選項"
@@ -17,7 +17,7 @@
 
     <div>
       <h3 class="text-lg font-medium mb-2">限制選擇數量 (最多3個)</h3>
-      <s-select
+      <SHSelect
         v-model="limitedValue"
         :options="options"
         placeholder="最多選擇3個選項"
@@ -33,7 +33,7 @@
 
     <div>
       <h3 class="text-lg font-medium mb-2">多選 + 搜索</h3>
-      <s-select
+      <SHSelect
         v-model="searchMultipleValue"
         :options="searchOptions"
         placeholder="可搜索多選"

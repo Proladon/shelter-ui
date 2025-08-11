@@ -2,30 +2,31 @@
   <div class="demo-container">
     <div>
       <div class="control-section">
-        <sh-button @click="visible = !visible">
+        <SHButton @click="visible = !visible">
           Toggle Badge Visibility
-        </sh-button>
+        </SHButton>
         <div>Current state: {{ visible ? 'Visible' : 'Hidden' }}</div>
       </div>
 
       <div class="badges-section">
-        <sh-badge :value="8" :show="visible">
+        <SHBadge :value="8" :show="visible">
           <div class="demo-item"></div>
-        </sh-badge>
+        </SHBadge>
 
-        <sh-badge is-dot :show="visible">
+        <SHBadge is-dot :show="visible">
           <div class="demo-item"></div>
-        </sh-badge>
+        </SHBadge>
 
-        <sh-badge value="New" :show="visible">
+        <SHBadge value="New" :show="visible">
           <div class="demo-item"></div>
-        </sh-badge>
+        </SHBadge>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { SHButton } from '@/index'
 import { ref } from 'vue'
 
 const visible = ref(true)

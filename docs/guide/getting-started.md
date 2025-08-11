@@ -35,7 +35,7 @@ app.mount('#app')
 
 ```vue
 <template>
-  <s-button type="primary">按鈕</s-button>
+  <SHButton type="primary">按鈕</SHButton>
 </template>
 
 <script setup lang="ts">
@@ -50,8 +50,8 @@ import { SButton } from 'shelter-ui'
 ```vue
 <template>
   <div>
-    <s-button type="primary" @click="handleClick">點擊我</s-button>
-    <s-input v-model="inputValue" placeholder="請輸入內容" />
+    <SHButton type="primary" @click="handleClick">點擊我</SHButton>
+    <SHInput v-model="inputValue" placeholder="請輸入內容" />
   </div>
 </template>
 

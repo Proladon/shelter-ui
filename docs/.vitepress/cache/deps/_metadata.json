@@ -1,49 +1,49 @@
 {
-  "hash": "fbd1326c",
+  "hash": "a570a12e",
   "configHash": "ffe3bd0e",
-  "lockfileHash": "6b361339",
-  "browserHash": "1ea996e5",
+  "lockfileHash": "56e6ecb4",
+  "browserHash": "90e42496",
   "optimized": {
     "vue": {
       "src": "../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "ebcc48b3",
+      "fileHash": "0322832d",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../../node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "1298a6b0",
+      "fileHash": "2a9e09be",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
       "src": "../../../../node_modules/vitepress/node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "937abf42",
-      "needsInterop": false
-    },
-    "color": {
-      "src": "../../../../node_modules/color/index.js",
-      "file": "color.js",
-      "fileHash": "1a870ca8",
+      "fileHash": "f3a0cf49",
       "needsInterop": false
     },
     "reka-ui": {
       "src": "../../../../node_modules/reka-ui/dist/index.js",
       "file": "reka-ui.js",
-      "fileHash": "f7fe6e22",
+      "fileHash": "1a776d08",
+      "needsInterop": false
+    },
+    "color": {
+      "src": "../../../../node_modules/color/index.js",
+      "file": "color.js",
+      "fileHash": "516150b8",
       "needsInterop": false
     },
     "@tabler/icons-vue": {
       "src": "../../../../node_modules/@tabler/icons-vue/dist/esm/tabler-icons-vue.mjs",
       "file": "@tabler_icons-vue.js",
-      "fileHash": "38a20079",
+      "fileHash": "07568081",
       "needsInterop": false
     },
     "@vueuse/core": {
       "src": "../../../../node_modules/@vueuse/core/index.mjs",
       "file": "@vueuse_core.js",
-      "fileHash": "b2091ee2",
+      "fileHash": "c34b7950",
       "needsInterop": false
     }
   },

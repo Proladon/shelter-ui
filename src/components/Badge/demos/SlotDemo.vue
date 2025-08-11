@@ -1,27 +1,27 @@
 <template>
   <div class="demo-container">
-    <s-badge>
+    <SHBadge>
       <div class="demo-item"></div>
       <template #content>
         <div class="custom-content">
           <span class="custom-icon">!</span>
         </div>
       </template>
-    </s-badge>
+    </SHBadge>
 
-    <s-badge>
+    <SHBadge>
       <div class="demo-item"></div>
       <template #content>
         <span style="font-size: 10px">NEW</span>
       </template>
-    </s-badge>
+    </SHBadge>
 
-    <s-badge color="#8E44AD">
+    <SHBadge color="#8E44AD">
       <div class="demo-item"></div>
       <template #content>
         <span class="custom-emoji">🔥</span>
       </template>
-    </s-badge>
+    </SHBadge>
   </div>
 </template>
 

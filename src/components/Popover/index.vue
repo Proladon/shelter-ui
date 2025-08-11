@@ -42,7 +42,7 @@ const handleOpenChange = (value: boolean) => {
     :modal="modal"
     @update:open="handleOpenChange"
   >
-    <PopoverTrigger :disabled="disabled" class="s-popover-trigger">
+    <PopoverTrigger :disabled="disabled" class="sh-popover-trigger">
       <slot name="trigger"></slot>
     </PopoverTrigger>
     <PopoverPortal>
@@ -51,9 +51,9 @@ const handleOpenChange = (value: boolean) => {
         :side-offset="sideOffset"
         :align="align"
         :align-offset="alignOffset"
-        class="s-popover-content"
+        class="sh-popover-content"
       >
-        <div class="s-popover-body">
+        <div class="sh-popover-body">
           <slot></slot>
         </div>
         <!-- <slot name="close">
@@ -61,14 +61,14 @@ const handleOpenChange = (value: boolean) => {
             <IconX :size="14" />
           </PopoverClose>
         </slot> -->
-        <PopoverArrow v-if="arrow" class="s-popover-arrow" />
+        <PopoverArrow v-if="arrow" class="sh-popover-arrow" />
       </PopoverContent>
     </PopoverPortal>
   </PopoverRoot>
 </template>
 
 <style lang="scss" scoped>
-:deep(.s-popover-content) {
+:deep(.sh-popover-content) {
   @apply rounded-md py-5 px-5 bg-bg.primary text-text.primary shadow-lg;
   @apply z-50 outline-none;
   animation-duration: 400ms;
@@ -91,14 +91,14 @@ const handleOpenChange = (value: boolean) => {
     animation-name: slideRightAndFade;
   }
 }
-:deep(.s-popover-trigger) {
+:deep(.sh-popover-trigger) {
   @apply inline-flex items-center justify-center h-[35px] w-[35px] rounded-full cursor-pointer;
 }
-:deep(.s-popover-trigger:disabled) {
+:deep(.sh-popover-trigger:disabled) {
   @apply cursor-not-allowed opacity-50;
 }
 
-:deep(.s-popover-body) {
+:deep(.sh-popover-body) {
   @apply w-full text-text-base;
 }
 
@@ -109,7 +109,7 @@ const handleOpenChange = (value: boolean) => {
   @apply focus:(outline-none);
 }
 
-:deep(.s-popover-arrow) {
+:deep(.sh-popover-arrow) {
   @apply fill-bg.primary;
 }
 

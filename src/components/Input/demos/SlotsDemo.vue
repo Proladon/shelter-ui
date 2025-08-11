@@ -1,7 +1,7 @@
 <template>
   <div class="demo-container">
     <h4>Prefix Slot</h4>
-    <s-input v-model="userInput" placeholder="Enter username">
+    <SHInput v-model="userInput" placeholder="Enter username">
       <template #prefix>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -19,10 +19,10 @@
           <circle cx="12" cy="7" r="4"></circle>
         </svg>
       </template>
-    </s-input>
+    </SHInput>
 
     <h4>Suffix Slot</h4>
-    <s-input
+    <SHInput
       v-model="passwordInput"
       placeholder="Enter password"
       type="password"
@@ -44,10 +44,10 @@
           <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
         </svg>
       </template>
-    </s-input>
+    </SHInput>
 
     <h4>Both Slots</h4>
-    <s-input v-model="searchInput" placeholder="Search..." clearable>
+    <SHInput v-model="searchInput" placeholder="Search..." clearable>
       <template #prefix>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -68,7 +68,7 @@
       <template #suffix>
         <span class="search-hint">Press Enter</span>
       </template>
-    </s-input>
+    </SHInput>
   </div>
 </template>
 

@@ -2,7 +2,7 @@
   <div class="space-y-4">
     <div>
       <h3 class="text-lg font-medium mb-2">分組選項</h3>
-      <s-select
+      <SHSelect
         v-model="groupedValue"
         :options="groupedOptions"
         placeholder="請選擇一個選項"
@@ -16,7 +16,7 @@
 
     <div>
       <h3 class="text-lg font-medium mb-2">分組 + 多選</h3>
-      <s-select
+      <SHSelect
         v-model="groupedMultipleValue"
         :options="groupedOptions"
         placeholder="請選擇多個選項"
@@ -31,7 +31,7 @@
 
     <div>
       <h3 class="text-lg font-medium mb-2">分組 + 搜索</h3>
-      <s-select
+      <SHSelect
         v-model="groupedSearchValue"
         :options="groupedOptions"
         placeholder="可搜索分組選項"
@@ -46,7 +46,7 @@
 
     <div>
       <h3 class="text-lg font-medium mb-2">禁用選項</h3>
-      <s-select
+      <SHSelect
         v-model="disabledValue"
         :options="disabledOptions"
         placeholder="某些選項被禁用"

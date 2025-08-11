@@ -1,5 +1,5 @@
 <template>
-  <SConfigProvider>
+  <SHConfigProvider>
     <div class="shelter-demo">
       <div class="shelter-demo-preview">
         <div class="shelter-demo-content s-component-container">
@@ -15,7 +15,7 @@
         </SButton>
       </div>
     </div>
-  </SConfigProvider>
+  </SHConfigProvider>
 </template>
 
 <script setup lang="ts">
@@ -42,98 +42,98 @@ const toggleCode = () => {
   @apply flex justify-center items-center;
 }
 
-.s-component-container :deep(.s-button) {
+.s-component-container :deep(.sh-button) {
   @apply px-4 py-2 rounded-lg font-medium transition-colors duration-300 cursor-pointer;
 }
 
-.s-component-container :deep(.s-button--primary) {
+.s-component-container :deep(.sh-button--primary) {
   @apply bg-primary text-white hover:bg-primary-dark;
 }
 
-.s-component-container :deep(.s-button--success) {
+.s-component-container :deep(.sh-button--success) {
   @apply bg-secondary text-white hover:bg-secondary-dark;
 }
 
-.s-component-container :deep(.s-button--warning) {
+.s-component-container :deep(.sh-button--warning) {
   @apply bg-yellow-500 text-white hover:bg-yellow-600;
 }
 
-.s-component-container :deep(.s-button--danger) {
+.s-component-container :deep(.sh-button--danger) {
   @apply bg-red-500 text-white hover:bg-red-600;
 }
 
-.s-component-container :deep(.s-button--info) {
+.s-component-container :deep(.sh-button--info) {
   @apply bg-gray-500 text-white hover:bg-gray-600;
 }
 
-.s-component-container :deep(.s-button--default) {
+.s-component-container :deep(.sh-button--default) {
   @apply bg-white text-gray-700 border border-gray-300 hover:bg-gray-100;
 }
 
-.s-component-container :deep(.s-button--large) {
+.s-component-container :deep(.sh-button--large) {
   @apply text-lg px-6 py-3;
 }
 
-.s-component-container :deep(.s-button--small) {
+.s-component-container :deep(.sh-button--small) {
   @apply text-sm px-3 py-1;
 }
 
-.s-component-container :deep(.s-button.is-disabled) {
+.s-component-container :deep(.sh-button.is-disabled) {
   @apply opacity-60 cursor-not-allowed;
 }
 
 /* Input 组件样式 */
-.s-component-container :deep(.s-input-wrapper) {
+.s-component-container :deep(.sh-input-wrapper) {
   @apply inline-block w-full;
 }
 
-.s-component-container :deep(.s-input-container) {
+.s-component-container :deep(.sh-input-container) {
   @apply relative flex items-center w-full;
 }
 
-.s-component-container :deep(.s-input) {
+.s-component-container :deep(.sh-input) {
   @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300;
 }
 
-.s-component-container :deep(.s-input--with-prefix) {
+.s-component-container :deep(.sh-input--with-prefix) {
   @apply pl-10;
 }
 
-.s-component-container :deep(.s-input--with-suffix) {
+.s-component-container :deep(.sh-input--with-suffix) {
   @apply pr-10;
 }
 
-.s-component-container :deep(.s-input--large) {
+.s-component-container :deep(.sh-input--large) {
   @apply text-lg px-5 py-3;
 }
 
-.s-component-container :deep(.s-input--small) {
+.s-component-container :deep(.sh-input--small) {
   @apply text-sm px-3 py-1;
 }
 
-.s-component-container :deep(.s-input-prefix) {
+.s-component-container :deep(.sh-input-prefix) {
   @apply absolute left-3 flex items-center justify-center text-gray-500;
 }
 
-.s-component-container :deep(.s-input-suffix) {
+.s-component-container :deep(.sh-input-suffix) {
   @apply absolute right-3 flex items-center justify-center text-gray-500;
 }
 
-.s-component-container :deep(.s-input-clear) {
+.s-component-container :deep(.sh-input-clear) {
   @apply absolute right-3 flex items-center justify-center text-gray-400 hover:text-gray-600 cursor-pointer;
 }
 
-.s-component-container :deep(.s-input-clear-icon) {
+.s-component-container :deep(.sh-input-clear-icon) {
   @apply text-lg font-light;
 }
 
-.s-component-container :deep(.s-input-wrapper.is-disabled .s-input) {
+.s-component-container :deep(.sh-input-wrapper.is-disabled .sh-input) {
   @apply bg-gray-100 text-gray-400 cursor-not-allowed;
 }
 
-.s-component-container :deep(.s-input-wrapper.is-disabled .s-input-prefix),
-.s-component-container :deep(.s-input-wrapper.is-disabled .s-input-suffix),
-.s-component-container :deep(.s-input-wrapper.is-disabled .s-input-clear) {
+.s-component-container :deep(.sh-input-wrapper.is-disabled .sh-input-prefix),
+.s-component-container :deep(.sh-input-wrapper.is-disabled .sh-input-suffix),
+.s-component-container :deep(.sh-input-wrapper.is-disabled .sh-input-clear) {
   @apply text-gray-300 cursor-not-allowed;
 }
 

@@ -1,6 +1,6 @@
 <template>
   <div class="demo-container">
-    <s-input
+    <SHInput
       v-model="inputValue"
       placeholder="Hover to see clear button"
       clearable

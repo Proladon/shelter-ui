@@ -18,11 +18,11 @@ ActiveButtonGroup 是一個提供類似標籤頁切換的按鈕組件，特點�
 ```vue
 <template>
   <div>
-    <s-active-button-group v-model="activeTab" class="mb-5">
-      <s-active-button-item value="all">All</s-active-button-item>
-      <s-active-button-item value="active">Active</s-active-button-item>
-      <s-active-button-item value="completed">Completed</s-active-button-item>
-    </s-active-button-group>
+    <SHActiveButtonGroup v-model="activeTab" class="mb-5">
+      <SHActiveButtonItem value="all">All</SHActiveButtonItem>
+      <SHActiveButtonItem value="active">Active</SHActiveButtonItem>
+      <SHActiveButtonItem value="completed">Completed</SHActiveButtonItem>
+    </SHActiveButtonGroup>
 
     <div class="content-area">
       <div v-if="activeTab === 'all'">
@@ -87,13 +87,11 @@ ActiveButtonGroup 的其他使用示例，包括禁用按鈕等。
   <div class="demo-container">
     <div class="variant-section">
       <h4>Disabled Button Example</h4>
-      <s-active-button-group v-model="disabled" class="mb-4">
-        <s-active-button-item value="tab1">Normal</s-active-button-item>
-        <s-active-button-item value="tab2" disabled
-          >Disabled</s-active-button-item
-        >
-        <s-active-button-item value="tab3">Button</s-active-button-item>
-      </s-active-button-group>
+      <SHActiveButtonGroup v-model="disabled" class="mb-4">
+        <SHActiveButtonItem value="tab1">Normal</SHActiveButtonItem>
+        <SHActiveButtonItem value="tab2" disabled>Disabled</SHActiveButtonItem>
+        <SHActiveButtonItem value="tab3">Button</SHActiveButtonItem>
+      </SHActiveButtonGroup>
     </div>
   </div>
 </template>
