@@ -58,7 +58,7 @@ import { ref, computed, nextTick } from 'vue'
 import type { InputProps, InputEmits } from './types'
 
 defineOptions({
-  name: 'SInput',
+  name: 'SHInput',
 })
 
 const props = withDefaults(defineProps<InputProps>(), {

@@ -59,7 +59,7 @@ import {
 import type { DialogProps, DialogEmits } from './types'
 
 defineOptions({
-  name: 'SDialog',
+  name: 'SHDialog',
 })
 
 const props = withDefaults(defineProps<DialogProps>(), {

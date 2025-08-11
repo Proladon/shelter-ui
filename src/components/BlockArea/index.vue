@@ -27,7 +27,7 @@
 import type { BlockAreaProps } from "./types"
 
 defineOptions({
-  name: "SBlockArea",
+  name: "SHBlockArea",
 })
 
 withDefaults(defineProps<BlockAreaProps>(), {

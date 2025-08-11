@@ -21,7 +21,7 @@ import { computed } from 'vue'
 import type { BadgeProps, BadgeEmits } from './types'
 
 defineOptions({
-  name: 'SBadge',
+  name: 'SHBadge',
 })
 
 const props = withDefaults(defineProps<BadgeProps>(), {

@@ -11,7 +11,7 @@ import type { PopoverProps, PopoverEmits } from './types'
 // import { IconX } from '@tabler/icons-vue'
 
 defineOptions({
-  name: 'SPopover',
+  name: 'SHPopover',
 })
 
 // Props are used in the template

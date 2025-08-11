@@ -10,7 +10,7 @@ import {
 import type { TooltipProps, TooltipEmits } from './types'
 
 defineOptions({
-  name: 'STooltip',
+  name: 'SHTooltip',
 })
 
 // Props are used in the template

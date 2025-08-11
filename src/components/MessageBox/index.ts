@@ -1,3 +1,3 @@
-import MessageBox from './index.vue'
+import SHMessageBox from './index.vue'
 export type { MessageBoxProps, MessageBoxType } from './types'
-export default MessageBox
+export default SHMessageBox

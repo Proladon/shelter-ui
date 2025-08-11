@@ -1,5 +1,5 @@
-import SActiveButtonGroup from './index.vue'
+import SHActiveButtonGroup from './index.vue'
 import SActiveButtonItem from './ActiveButtonItem.vue'
 
-export { SActiveButtonGroup, SActiveButtonItem }
-export default SActiveButtonGroup
+export { SHActiveButtonGroup, SActiveButtonItem }
+export default SHActiveButtonGroup

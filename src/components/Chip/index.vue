@@ -41,7 +41,7 @@ import { IconX } from "@tabler/icons-vue"
 import type { ChipProps, ChipEmits } from "./types"
 
 defineOptions({
-  name: "SChip",
+  name: "SHChip",
 })
 
 const props = withDefaults(defineProps<ChipProps>(), {

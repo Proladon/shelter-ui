@@ -1,43 +1,43 @@
 import type { App, Plugin } from "vue"
 
 // 導入組件
-import SConfigProvider from "./components/ConfigProvider/index.vue"
-import SButton from "./components/Button/index.vue"
-import SInput from "./components/Input/index.vue"
-import SSelect from "./components/Select/index.vue"
-import SSpin from "./components/Spin/index.vue"
-import SBorderContainer from "./components/BorderContainer/index.vue"
-import SPopover from "./components/Popover/index.vue"
-import SEditableArea from "./components/EditableArea/index.vue"
-import STooltip from "./components/Tooltip/index.vue"
-import SBadge from "./components/Badge/index.vue"
-import SChip from "./components/Chip/index.vue"
-import SDialog from "./components/Dialog/index.vue"
-import SBlockArea from "./components/BlockArea/index.vue"
+import SHConfigProvider from "./components/ConfigProvider/index.vue"
+import SHButton from "./components/Button/index.vue"
+import SHInput from "./components/Input/index.vue"
+import SHSelect from "./components/Select/index.vue"
+import SHSpin from "./components/Spin/index.vue"
+import SHBorderContainer from "./components/BorderContainer/index.vue"
+import SHPopover from "./components/Popover/index.vue"
+import SHEditableArea from "./components/EditableArea/index.vue"
+import SHTooltip from "./components/Tooltip/index.vue"
+import SHBadge from "./components/Badge/index.vue"
+import SHChip from "./components/Chip/index.vue"
+import SHDialog from "./components/Dialog/index.vue"
+import SHBlockArea from "./components/BlockArea/index.vue"
 import {
-  SActiveButtonGroup,
+  SHActiveButtonGroup,
   SActiveButtonItem,
 } from "./components/ActiveButtonGroup"
-import SFlexContainer from "./components/FlexContainer/index.vue"
+import SHFlexContainer from "./components/FlexContainer/index.vue"
 
 // 組件列表
 const components = {
-  SConfigProvider,
-  SButton,
-  SSpin,
-  SInput,
-  SSelect,
-  SBorderContainer,
-  SPopover,
-  SEditableArea,
-  STooltip,
-  SBadge,
-  SChip,
-  SDialog,
-  SBlockArea,
-  SActiveButtonGroup,
+  SHConfigProvider,
+  SHButton,
+  SHSpin,
+  SHInput,
+  SHSelect,
+  SHBorderContainer,
+  SHPopover,
+  SHEditableArea,
+  SHTooltip,
+  SHBadge,
+  SHChip,
+  SHDialog,
+  SHBlockArea,
+  SHActiveButtonGroup,
   SActiveButtonItem,
-  SFlexContainer,
+  SHFlexContainer,
 }
 
 /**
@@ -107,20 +107,20 @@ export { version }
 
 // 單獨導出組件
 export {
-  SButton,
-  SInput,
-  SSelect,
-  SSpin,
-  SConfigProvider,
-  SBorderContainer,
-  SPopover,
-  SEditableArea,
-  STooltip,
-  SBadge,
-  SChip,
-  SDialog,
-  SBlockArea,
-  SActiveButtonGroup,
+  SHButton,
+  SHInput,
+  SHSelect,
+  SHSpin,
+  SHConfigProvider,
+  SHBorderContainer,
+  SHPopover,
+  SHEditableArea,
+  SHTooltip,
+  SHBadge,
+  SHChip,
+  SHDialog,
+  SHBlockArea,
+  SHActiveButtonGroup,
   SActiveButtonItem,
-  SFlexContainer,
+  SHFlexContainer,
 }

@@ -1,5 +1,5 @@
-import SBlockArea from "./index.vue"
+import SHBlockArea from "./index.vue"
 
-export { SBlockArea }
-export default SBlockArea
+export { SHBlockArea }
+export default SHBlockArea
 export type { BlockAreaProps, BlockAreaSlots } from "./types"

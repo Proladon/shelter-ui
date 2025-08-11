@@ -3,7 +3,7 @@ import { ref, provide, computed, onMounted, watch, nextTick } from 'vue'
 import type { ActiveButtonGroupProps, ActiveButtonGroupEmits } from './types'
 
 defineOptions({
-  name: 'SActiveButtonGroup',
+  name: 'SHActiveButtonGroup',
 })
 
 const props = withDefaults(defineProps<ActiveButtonGroupProps>(), {

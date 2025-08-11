@@ -17,7 +17,7 @@ import type { MessageBoxProps } from './types'
 import { messageBoxIconMap } from './_icon-map'
 
 defineOptions({
-  name: 'SMessageBox',
+  name: 'SHMessageBox',
 })
 
 const props = withDefaults(defineProps<MessageBoxProps>(), {

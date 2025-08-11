@@ -203,7 +203,7 @@ import { IconChevronDown, IconX } from '@tabler/icons-vue'
 import Spinner from '@/components/Spinner/index.vue'
 
 defineOptions({
-  name: 'SSelect',
+  name: 'SHSelect',
 })
 
 const props = withDefaults(defineProps<SelectProps>(), {

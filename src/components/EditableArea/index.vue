@@ -4,7 +4,7 @@ import type { EditableAreaProps, EditableAreaEmits } from './types'
 import { IconPencil } from '@tabler/icons-vue'
 
 defineOptions({
-  name: 'SEditableArea',
+  name: 'SHEditableArea',
 })
 
 const props = withDefaults(defineProps<EditableAreaProps>(), {

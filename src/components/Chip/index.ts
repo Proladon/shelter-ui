@@ -1,4 +1,4 @@
-import SChip from "./index.vue"
+import SHChip from "./index.vue"
 
-export { SChip }
-export default SChip
+export { SHChip }
+export default SHChip
