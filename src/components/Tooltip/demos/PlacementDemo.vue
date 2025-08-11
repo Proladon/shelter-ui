@@ -1,40 +1,40 @@
 <template>
   <div class="demo-container">
     <div class="tooltip-grid">
-      <STooltip side="top">
+  <SHTooltip side="top">
         <template #trigger>
-          <SButton type="primary" class="w-full">Top</SButton>
+          <SHButton type="primary" class="w-full">Top</SHButton>
         </template>
         Tooltip on top
-      </STooltip>
+  </SHTooltip>
 
-      <STooltip side="right">
+  <SHTooltip side="right">
         <template #trigger>
-          <SButton type="primary" class="w-full">Right</SButton>
+          <SHButton type="primary" class="w-full">Right</SHButton>
         </template>
         Tooltip on right
-      </STooltip>
+  </SHTooltip>
 
-      <STooltip side="bottom">
+  <SHTooltip side="bottom">
         <template #trigger>
-          <SButton type="primary" class="w-full">Bottom</SButton>
+          <SHButton type="primary" class="w-full">Bottom</SHButton>
         </template>
         Tooltip on bottom
-      </STooltip>
+  </SHTooltip>
 
-      <STooltip side="left">
+  <SHTooltip side="left">
         <template #trigger>
-          <SButton type="primary" class="w-full">Left</SButton>
+          <SHButton type="primary" class="w-full">Left</SHButton>
         </template>
         Tooltip on left
-      </STooltip>
+  </SHTooltip>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import STooltip from '../index.vue'
-import SButton from '@/components/Button/index.vue'
+import SHTooltip from '../index.vue'
+import SHButton from '@/components/Button/index.vue'
 </script>
 
 <style scoped>

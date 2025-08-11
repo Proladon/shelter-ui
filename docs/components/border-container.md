@@ -176,7 +176,7 @@ BorderContainer 支持多種自定義選項，包括陰影、透明背景、自�
 | default | 容器內容 |
 
 <script setup>
-import { SConfigProvider } from '@/index'
+import { SHConfigProvider } from '@/index'
 import BasicDemo from '@/components/BorderContainer/demos/BasicDemo.vue'
 import StyleDemo from '@/components/BorderContainer/demos/StyleDemo.vue'
 import DisabledDemo from '@/components/BorderContainer/demos/DisabledDemo.vue'

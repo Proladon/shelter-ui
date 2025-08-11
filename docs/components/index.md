@@ -39,10 +39,10 @@ app.mount('#app')
 
 ```vue
 <template>
-  <s-button type="primary">按鈕</s-button>
+  <sh-button type="primary">按鈕</sh-button>
 </template>
 
 <script setup lang="ts">
-import { SButton } from 'shelter-ui'
+import { SHButton } from 'shelter-ui'
 </script>
 ```

@@ -1,12 +1,12 @@
 <template>
   <div class="demo-row">
-    <SSwitch v-model="checked">啟用</SSwitch>
+  <SHSwitch v-model="checked">啟用</SHSwitch>
     <p class="ml-4">目前狀態：{{ checked ? '開啟' : '關閉' }}</p>
   </div>
 </template>
 
 <script setup lang="ts">
-import SSwitch from '../index.vue'
+import SHSwitch from '../index.vue'
 import { ref } from 'vue'
 const checked = ref(false)
 </script>

@@ -57,6 +57,6 @@ EditableArea 組件可以讓任何內容加上一個外框與編輯按鈕，代�
 | default | 區域內容 |
 
 <script setup>
-import { SConfigProvider } from '@/index'
+import { SHConfigProvider } from '@/index'
 import BasicDemo from '@/components/EditableArea/demos/BasicDemo.vue'
 </script>

@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { SActiveButtonGroup, SActiveButtonItem } from '../'
+import { SActiveButtonItem } from '../'
 
 const disabled = ref('tab1')
 </script>

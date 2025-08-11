@@ -126,7 +126,7 @@ Tooltip 支持四個不同的彈出方位：上、右、下、左。
 | trigger | 觸發工具提示的元素   |
 
 <script setup>
-import { SConfigProvider } from '@/index'
+import { SHConfigProvider } from '@/index'
 import BasicDemo from '@/components/Tooltip/demos/BasicDemo.vue'
 import PlacementDemo from '@/components/Tooltip/demos/PlacementDemo.vue'
 </script>

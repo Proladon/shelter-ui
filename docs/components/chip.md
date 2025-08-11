@@ -179,7 +179,7 @@ import { IconHeart } from "@tabler/icons-vue"
 | removeicon | 移除圖示內容 | `{ removeCallback: (event: Event) => void, keydownCallback: (event: Event) => void }` |
 
 <script setup>
-import { SConfigProvider } from '@/index'
+import { SHConfigProvider } from '@/index'
 import BasicDemo from '@/components/Chip/demos/BasicDemo.vue'
 import IconDemo from '@/components/Chip/demos/IconDemo.vue'
 import ImageDemo from '@/components/Chip/demos/ImageDemo.vue'

@@ -1,10 +1,10 @@
 <template>
   <div>
-    <s-active-button-group v-model="activeTab" class="mb-5">
-      <s-active-button-item value="all">All</s-active-button-item>
-      <s-active-button-item value="active">Active</s-active-button-item>
-      <s-active-button-item value="completed">Completed</s-active-button-item>
-    </s-active-button-group>
+    <sh-active-button-group v-model="activeTab" class="mb-5">
+      <sh-active-button-item value="all">All</sh-active-button-item>
+      <sh-active-button-item value="active">Active</sh-active-button-item>
+      <sh-active-button-item value="completed">Completed</sh-active-button-item>
+    </sh-active-button-group>
 
     <div class="content-area">
       <div v-if="activeTab === 'all'">
@@ -25,7 +25,6 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { SActiveButtonGroup, SActiveButtonItem } from '../'
 
 const activeTab = ref('all')
 </script>

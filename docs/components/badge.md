@@ -255,7 +255,7 @@ const visible = ref(true)
 | content | 自定義徽章內容 |
 
 <script setup>
-import { SConfigProvider } from '@/index'
+import { SHConfigProvider } from '@/index'
 import BasicDemo from '@/components/Badge/demos/BasicDemo.vue'
 import ColorDemo from '@/components/Badge/demos/ColorDemo.vue'
 import SlotDemo from '@/components/Badge/demos/SlotDemo.vue'

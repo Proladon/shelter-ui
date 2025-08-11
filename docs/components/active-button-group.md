@@ -162,7 +162,7 @@ h4 {
 | default | 按鈕的內容 |
 
 <script setup>
-import { SConfigProvider } from '@/index'
+import { SHConfigProvider } from '@/index'
 import BasicDemo from '@/components/ActiveButtonGroup/demos/BasicDemo.vue'
 import VariantsDemo from '@/components/ActiveButtonGroup/demos/VariantsDemo.vue'
 </script>
