@@ -84,3 +84,5 @@ export const generateUnoThemeColors = (themeVarsConfig?: ThemeVarsConfig) => {
     },
   )
 }
+
+export const unoColorsConfig = generateUnoThemeColors()

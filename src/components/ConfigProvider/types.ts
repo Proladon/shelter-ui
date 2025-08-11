@@ -1,6 +1,5 @@
 export interface ThemeVarsConfig {
   primary: string
-  'primary-light': string
   bg: {
     primary: string
     secondary: string
