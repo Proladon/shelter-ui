@@ -1,7 +1,7 @@
 <template>
   <div class="sh-select-wrapper" :class="{ 'is-disabled': disabled }">
     <div
-      ref="triggerRef"
+      ref="trigger"
       class="sh-select"
       :class="{
         'is-focused': visible,
@@ -63,7 +63,7 @@
       <!-- Search input for filterable -->
       <input
         v-if="filterable && visible"
-        ref="searchInputRef"
+        ref="searchInput"
         v-model="searchQuery"
         class="sh-select-search-input"
         :placeholder="searchPlaceholder"
@@ -101,7 +101,7 @@
       >
         <div
           v-if="visible"
-          ref="dropdownRef"
+          ref="dropdown"
           class="sh-select-dropdown"
           :style="dropdownStyle"
         >
@@ -197,7 +197,7 @@ import {
   watch,
   useTemplateRef,
 } from 'vue'
-import { onClickOutside } from '@vueuse/core'
+import { onClickOutside, useVModel } from '@vueuse/core'
 import type { SelectProps, SelectEmits, SelectOption } from './types'
 import { IconChevronDown, IconX } from '@tabler/icons-vue'
 import Spinner from '@/components/Spinner/index.vue'
@@ -207,7 +207,7 @@ defineOptions({
 })
 
 const props = withDefaults(defineProps<SelectProps>(), {
-  modelValue: undefined,
+  value: undefined,
   options: () => [],
   disabled: false,
   clearable: false,
@@ -227,21 +227,23 @@ const props = withDefaults(defineProps<SelectProps>(), {
 
 const emit = defineEmits<SelectEmits>()
 
-const triggerRef = useTemplateRef<HTMLElement>('triggerRef')
-const dropdownRef = useTemplateRef<HTMLElement>('dropdownRef')
-const searchInputRef = useTemplateRef<HTMLInputElement>('searchInputRef')
+const syncValue = useVModel(props, 'value', emit)
+
+const triggerRef = useTemplateRef<HTMLElement>('trigger')
+const dropdownRef = useTemplateRef<HTMLElement>('dropdown')
+const searchInputRef = useTemplateRef<HTMLInputElement>('searchInput')
 const visible = ref(false)
 const searchQuery = ref('')
 const highlightedIndex = ref(-1)
 
 const isEmpty = computed(() => {
   if (props.multiple) {
-    return !Array.isArray(props.modelValue) || props.modelValue.length === 0
+    return !Array.isArray(syncValue.value) || syncValue.value.length === 0
   }
   return (
-    props.modelValue === '' ||
-    props.modelValue === undefined ||
-    props.modelValue === null
+    syncValue.value === '' ||
+    syncValue.value === undefined ||
+    syncValue.value === null
   )
 })
 
@@ -264,12 +266,12 @@ const showControl = computed(() => {
 
 const selectedOption = computed(() => {
   if (props.multiple || isEmpty.value) return null
-  return props.options.find((option) => option.value === props.modelValue)
+  return props.options.find((option) => option.value === syncValue.value)
 })
 
 const selectedOptions = computed(() => {
   if (!props.multiple || isEmpty.value) return []
-  const values = Array.isArray(props.modelValue) ? props.modelValue : []
+  const values = Array.isArray(syncValue.value) ? syncValue.value : []
   return props.options.filter((option) => values.includes(option.value))
 })
 
@@ -322,9 +324,9 @@ const dropdownStyle = ref<Record<string, string>>({})
 
 const isSelected = (value: string | number) => {
   if (props.multiple) {
-    return Array.isArray(props.modelValue) && props.modelValue.includes(value)
+    return Array.isArray(syncValue.value) && syncValue.value.includes(value)
   }
-  return props.modelValue === value
+  return syncValue.value === value
 }
 
 const getOptionIndex = (option: SelectOption) => {
@@ -355,7 +357,7 @@ const handleOptionClick = (option: SelectOption) => {
   if (option.disabled) return
 
   if (props.multiple) {
-    const values = Array.isArray(props.modelValue) ? [...props.modelValue] : []
+    const values = Array.isArray(syncValue.value) ? [...syncValue.value] : []
     const index = values.indexOf(option.value)
 
     if (index > -1) {
@@ -367,10 +369,10 @@ const handleOptionClick = (option: SelectOption) => {
       values.push(option.value)
     }
 
-    emit('update:modelValue', values)
+    syncValue.value = values
     emit('change', values)
   } else {
-    emit('update:modelValue', option.value)
+    syncValue.value = option.value
     emit('change', option.value)
     visible.value = false
     emit('visible-change', false)
@@ -380,12 +382,12 @@ const handleOptionClick = (option: SelectOption) => {
 const removeTag = (value: string | number) => {
   if (!props.multiple) return
 
-  const values = Array.isArray(props.modelValue) ? [...props.modelValue] : []
+  const values = Array.isArray(syncValue.value) ? [...syncValue.value] : []
   const index = values.indexOf(value)
 
   if (index > -1) {
     values.splice(index, 1)
-    emit('update:modelValue', values)
+    syncValue.value = values
     emit('change', values)
     emit('remove-tag', value)
   }
@@ -393,7 +395,7 @@ const removeTag = (value: string | number) => {
 
 const handleClear = () => {
   const emptyValue = props.multiple ? [] : ''
-  emit('update:modelValue', emptyValue)
+  syncValue.value = emptyValue
   emit('clear')
   visible.value = false
   emit('visible-change', false)

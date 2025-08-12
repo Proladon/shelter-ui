@@ -21,7 +21,7 @@ export interface SelectProps {
   /**
    * Select model value
    */
-  modelValue?: string | number | (string | number)[]
+  value?: string | number | (string | number)[]
   /**
    * Select options
    */
@@ -85,7 +85,7 @@ export interface SelectProps {
 }
 
 export interface SelectEmits {
-  (e: 'update:modelValue', value: string | number | (string | number)[]): void
+  (e: 'update:value', value: string | number | (string | number)[]): void
   (e: 'change', value: string | number | (string | number)[]): void
   (e: 'focus', event: FocusEvent): void
   (e: 'blur', event: FocusEvent): void

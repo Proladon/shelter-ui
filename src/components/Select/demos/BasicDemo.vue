@@ -3,7 +3,7 @@
     <div>
       <h3 class="text-lg font-medium mb-2">基本選擇器</h3>
       <SHSelect
-        v-model="value1"
+        v-model:value="value1"
         :options="basicOptions"
         placeholder="請選擇一個選項"
         style="width: 200px"
@@ -16,7 +16,7 @@
     <div>
       <h3 class="text-lg font-medium mb-2">可清空</h3>
       <SHSelect
-        v-model="value2"
+        v-model:value="value2"
         :options="basicOptions"
         placeholder="請選擇一個選項"
         clearable
@@ -30,7 +30,7 @@
     <div>
       <h3 class="text-lg font-medium mb-2">禁用狀態</h3>
       <SHSelect
-        v-model="value3"
+        v-model:value="value3"
         :options="basicOptions"
         placeholder="請選擇一個選項"
         disabled

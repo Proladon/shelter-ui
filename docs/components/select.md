@@ -20,7 +20,7 @@ Select 選擇器組件用於從一組選項中選擇一個或多個值，支持�
   <div class="space-y-4">
     <!-- 基本選擇器 -->
     <SHSelect
-      v-model="value1"
+      v-model:value="value1"
       :options="basicOptions"
       placeholder="請選擇一個選項"
       style="width: 200px"
@@ -28,7 +28,7 @@ Select 選擇器組件用於從一組選項中選擇一個或多個值，支持�
 
     <!-- 可清空 -->
     <SHSelect
-      v-model="value2"
+      v-model:value="value2"
       :options="basicOptions"
       placeholder="請選擇一個選項"
       clearable
@@ -37,7 +37,7 @@ Select 選擇器組件用於從一組選項中選擇一個或多個值，支持�
 
     <!-- 可搜索 -->
     <SHSelect
-      v-model="value3"
+      v-model:value="value3"
       :options="basicOptions"
       placeholder="輸入關鍵字搜索"
       filterable
@@ -79,7 +79,7 @@ const basicOptions = [
   <div class="space-y-4">
     <!-- 多選模式 -->
     <SHSelect
-      v-model="multipleValue"
+      v-model:value="multipleValue"
       :options="options"
       placeholder="請選擇多個選項"
       multiple
@@ -89,7 +89,7 @@ const basicOptions = [
 
     <!-- 限制選擇數量 -->
     <SHSelect
-      v-model="limitedValue"
+      v-model:value="limitedValue"
       :options="options"
       placeholder="最多選擇3個選項"
       multiple
@@ -133,7 +133,7 @@ const options = [
   <div class="space-y-4">
     <!-- 分組選項 -->
     <SHSelect
-      v-model="groupedValue"
+      v-model:value="groupedValue"
       :options="groupedOptions"
       placeholder="請選擇一個選項"
       clearable
@@ -142,7 +142,7 @@ const options = [
 
     <!-- 禁用選項 -->
     <SHSelect
-      v-model="disabledValue"
+      v-model:value="disabledValue"
       :options="disabledOptions"
       placeholder="某些選項被禁用"
       clearable
@@ -195,7 +195,7 @@ const disabledOptions = [
   <div class="space-y-4">
     <!-- 加載狀態 -->
     <SHSelect
-      v-model="loadingValue"
+      v-model:value="loadingValue"
       :options="[]"
       placeholder="載入中..."
       loading
@@ -204,7 +204,7 @@ const disabledOptions = [
 
     <!-- 空數據狀態 -->
     <SHSelect
-      v-model="emptyValue"
+      v-model:value="emptyValue"
       :options="[]"
       placeholder="無數據"
       no-data-text="沒有可用選項"
@@ -213,7 +213,7 @@ const disabledOptions = [
 
     <!-- 自定義位置 -->
     <SHSelect
-      v-model="topValue"
+      v-model:value="topValue"
       :options="options"
       placeholder="向上展開"
       placement="top"

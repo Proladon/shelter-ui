@@ -3,7 +3,7 @@
     <div>
       <h3 class="text-lg font-medium mb-2">分組選項</h3>
       <SHSelect
-        v-model="groupedValue"
+        v-model:value="groupedValue"
         :options="groupedOptions"
         placeholder="請選擇一個選項"
         clearable
@@ -47,7 +47,7 @@
     <div>
       <h3 class="text-lg font-medium mb-2">禁用選項</h3>
       <SHSelect
-        v-model="disabledValue"
+        v-model:value="disabledValue"
         :options="disabledOptions"
         placeholder="某些選項被禁用"
         clearable

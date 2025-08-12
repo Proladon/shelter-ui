@@ -3,7 +3,7 @@
     <div>
       <h3 class="text-lg font-medium mb-2">加載狀態</h3>
       <SHSelect
-        v-model="loadingValue"
+        v-model:value="loadingValue"
         :options="[]"
         placeholder="載入中..."
         loading
@@ -14,7 +14,7 @@
     <div>
       <h3 class="text-lg font-medium mb-2">空數據狀態</h3>
       <SHSelect
-        v-model="emptyValue"
+        v-model:value="emptyValue"
         :options="[]"
         placeholder="無數據"
         no-data-text="沒有可用選項"
@@ -25,7 +25,7 @@
     <div>
       <h3 class="text-lg font-medium mb-2">搜索無結果</h3>
       <SHSelect
-        v-model="noMatchValue"
+        v-model:value="noMatchValue"
         :options="options"
         placeholder="搜索試試"
         filterable
@@ -41,7 +41,7 @@
         <div>
           <label class="block text-sm font-medium mb-1">向上展開</label>
           <SHSelect
-            v-model="topValue"
+            v-model:value="topValue"
             :options="options"
             placeholder="向上展開"
             placement="top"
@@ -51,7 +51,7 @@
         <div>
           <label class="block text-sm font-medium mb-1">向下展開</label>
           <SHSelect
-            v-model="bottomValue"
+            v-model:value="bottomValue"
             :options="options"
             placeholder="向下展開"
             placement="bottom"
@@ -61,7 +61,7 @@
         <div>
           <label class="block text-sm font-medium mb-1">自動判斷</label>
           <SHSelect
-            v-model="autoValue"
+            v-model:value="autoValue"
             :options="options"
             placeholder="自動判斷"
             placement="auto"
@@ -77,7 +77,7 @@
         <div>
           <label class="block text-sm font-medium mb-1">固定寬度 300px</label>
           <SHSelect
-            v-model="customWidthValue"
+            v-model:value="customWidthValue"
             :options="options"
             placeholder="固定寬度"
             dropdown-width="300px"
@@ -87,7 +87,7 @@
         <div>
           <label class="block text-sm font-medium mb-1">最大高度 100px</label>
           <SHSelect
-            v-model="customHeightValue"
+            v-model:value="customHeightValue"
             :options="longOptions"
             placeholder="限制高度"
             max-height="100px"
