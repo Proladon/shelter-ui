@@ -3,6 +3,7 @@ import ConfigProvider from '@/components/ConfigProvider/index.vue'
 import ButtonBasicDemo from '@/components/Button/demos/BasicDemo.vue'
 import sButton from '@/components/Button/index.vue'
 import sSpin from '@/components/Spin/index.vue'
+import SHMentionableTextArea from '@/components/MentionableTextArea/index.vue'
 import { ref } from 'vue'
 
 const spinning = ref(true)
@@ -14,6 +15,8 @@ const loadingState = ref(false)
 const toggleLoading = () => {
   loadingState.value = !loadingState.value
 }
+
+const mentionValue = ref('嘗試輸入 @user 或 #issue 或 :emoji 來測試提及功能')
 </script>
 
 <template>
@@ -59,6 +62,20 @@ const toggleLoading = () => {
           <sButton @click="toggleLoading">{{
             loadingState ? '停止加載' : '開始加載'
           }}</sButton>
+        </div>
+      </div>
+
+      <div class="mentionable-textarea-demo">
+        <h2>MentionableTextArea 組件示例</h2>
+        <SHMentionableTextArea
+          v-model="mentionValue"
+          label="可提及文本域"
+          placeholder="輸入 @, # 或 : 來觸發提及功能"
+          :rows="4"
+        />
+        <div class="mt-4 p-3 bg-gray-100 rounded">
+          <h3 class="text-sm font-semibold mb-2">當前值：</h3>
+          <pre class="text-xs whitespace-pre-wrap">{{ mentionValue }}</pre>
         </div>
       </div>
     </div>

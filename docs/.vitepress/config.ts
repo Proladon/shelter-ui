@@ -54,6 +54,10 @@ export default defineConfig({
               text: 'EditableArea 可編輯區域',
               link: '/components/editable-area',
             },
+            {
+              text: 'MentionableTextArea 可提及文本域',
+              link: '/components/mentionable-textarea',
+            },
           ],
         },
       ],

@@ -19,6 +19,7 @@ import {
   SHActiveButtonItem,
 } from './components/ActiveButtonGroup'
 import SHFlexContainer from './components/FlexContainer/index.vue'
+import SHMentionableTextArea from './components/MentionableTextArea/index.vue'
 
 // 組件列表
 const components = {
@@ -38,6 +39,7 @@ const components = {
   SHActiveButtonGroup,
   SHActiveButtonItem,
   SHFlexContainer,
+  SHMentionableTextArea,
 }
 
 /**
@@ -82,6 +84,12 @@ export type {
   ActiveButtonGroupEmits,
   ActiveButtonItemProps,
 } from './components/ActiveButtonGroup/types'
+export type {
+  MentionableTextAreaProps,
+  MentionableTextAreaEmits,
+  MentionItem,
+  MentionData,
+} from './components/MentionableTextArea/types'
 
 // 安裝函數
 const install = (app: App) => {
@@ -123,4 +131,5 @@ export {
   SHActiveButtonGroup,
   SHActiveButtonItem,
   SHFlexContainer,
+  SHMentionableTextArea,
 }

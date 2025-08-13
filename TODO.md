@@ -3,6 +3,8 @@
 - [ ] Progress
 - [ ] Divider
 - [ ] FlexContainer
+- [ ] Textarea
+- [ ] Table
 - [x] Select
 - [ ] Pin Input
 - [x] Switch
