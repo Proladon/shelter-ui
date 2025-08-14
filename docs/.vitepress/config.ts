@@ -39,6 +39,7 @@ export default defineConfig({
               link: '/components/flex-container',
             },
             { text: 'Input 輸入框', link: '/components/input' },
+            { text: 'Textarea 多行文字輸入框', link: '/components/textarea' },
             { text: 'Select 選擇器', link: '/components/select' },
             { text: 'Switch 開關', link: '/components/switch' },
             { text: 'Spin 加載中', link: '/components/spin' },

@@ -4,6 +4,7 @@ import type { App, Plugin } from 'vue'
 import SHConfigProvider from './components/ConfigProvider/index.vue'
 import SHButton from './components/Button/index.vue'
 import SHInput from './components/Input/index.vue'
+import SHTextarea from './components/Textarea/index.vue'
 import SHSelect from './components/Select/index.vue'
 import SHSpin from './components/Spin/index.vue'
 import SHBorderContainer from './components/BorderContainer/index.vue'
@@ -27,6 +28,7 @@ const components = {
   SHButton,
   SHSpin,
   SHInput,
+  SHTextarea,
   SHSelect,
   SHBorderContainer,
   SHPopover,
@@ -55,6 +57,7 @@ export function sayHello(name: string = 'world'): string {
 export type { ThemeVarsConfig } from './components/ConfigProvider/types'
 export type { ButtonProps, ButtonEmits } from './components/Button/types'
 export type { InputProps, InputEmits } from './components/Input/types'
+export type { TextareaProps, TextareaEmits } from './components/Textarea/types'
 export type {
   SelectProps,
   SelectEmits,
@@ -117,6 +120,7 @@ export { version }
 export {
   SHButton,
   SHInput,
+  SHTextarea,
   SHSelect,
   SHSpin,
   SHConfigProvider,

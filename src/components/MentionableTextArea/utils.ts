@@ -71,37 +71,44 @@ const emoji: MentionItem[] = [
   { value: '👌', listValue: '👌 ok_hand' },
 ]
 
-export function getList(trigger: string | null, customLists?: {
-  userList?: MentionItem[]
-  issueList?: MentionItem[]
-  emojiList?: MentionItem[]
-}) {
+export function getList(
+  trigger: string | null,
+  customLists?: {
+    userList?: MentionItem[]
+    issueList?: MentionItem[]
+    emojiList?: MentionItem[]
+  },
+) {
   switch (trigger) {
     case '@':
-      return (customLists?.userList || users).map(user => user.listValue)
+      return (customLists?.userList || users).map((user) => user.listValue)
     case '#':
-      return (customLists?.issueList || issues).map(issue => issue.listValue)
+      return (customLists?.issueList || issues).map((issue) => issue.listValue)
     case ':':
-      return (customLists?.emojiList || emoji).map(item => item.listValue)
+      return (customLists?.emojiList || emoji).map((item) => item.listValue)
     default:
       return []
   }
 }
 
-export function getValue(listValue: string, trigger: string | null, customLists?: {
-  userList?: MentionItem[]
-  issueList?: MentionItem[]
-  emojiList?: MentionItem[]
-}) {
-  const list
-    = trigger === '@'
-      ? (customLists?.userList || users)
+export function getValue(
+  listValue: string,
+  trigger: string | null,
+  customLists?: {
+    userList?: MentionItem[]
+    issueList?: MentionItem[]
+    emojiList?: MentionItem[]
+  },
+) {
+  const list =
+    trigger === '@'
+      ? customLists?.userList || users
       : trigger === '#'
-        ? (customLists?.issueList || issues)
-        : trigger === ':'
-          ? (customLists?.emojiList || emoji)
-          : []
-  return list.find(item => item.listValue === listValue)?.value
+      ? customLists?.issueList || issues
+      : trigger === ':'
+      ? customLists?.emojiList || emoji
+      : []
+  return list.find((item) => item.listValue === listValue)?.value
 }
 
 export function getTriggerOffset(
@@ -124,14 +131,11 @@ export function getTrigger(
 ) {
   const { value, selectionStart } = element
   const previousChar = value[selectionStart - 1]
-  if (!previousChar)
-    return null
+  if (!previousChar) return null
   const secondPreviousChar = value[selectionStart - 2]
   const isIsolated = !secondPreviousChar || /\s/.test(secondPreviousChar)
-  if (!isIsolated)
-    return null
-  if (triggers.includes(previousChar))
-    return previousChar
+  if (!isIsolated) return null
+  if (triggers.includes(previousChar)) return previousChar
   return null
 }
 
@@ -140,8 +144,7 @@ export function getSearchValue(
   triggers = defaultTriggers,
 ) {
   const offset = getTriggerOffset(element, triggers)
-  if (offset === -1)
-    return ''
+  if (offset === -1) return ''
   return element.value.slice(offset + 1, element.selectionStart)
 }
 
@@ -216,11 +219,18 @@ const properties = [
 ] as const
 
 const isBrowser = typeof window !== 'undefined'
-const isFirefox = isBrowser && window.navigator.userAgent.toLowerCase().includes('firefox')
+const isFirefox =
+  isBrowser && window.navigator.userAgent.toLowerCase().includes('firefox')
 
-function getCaretCoordinates(element: HTMLInputElement | HTMLTextAreaElement, position: number, options?: CaretOptions): CaretCoordinates {
+function getCaretCoordinates(
+  element: HTMLInputElement | HTMLTextAreaElement,
+  position: number,
+  options?: CaretOptions,
+): CaretCoordinates {
   if (!isBrowser) {
-    throw new Error('textarea-caret-position#getCaretCoordinates should only be called in a browser')
+    throw new Error(
+      'textarea-caret-position#getCaretCoordinates should only be called in a browser',
+    )
   }
 
   const debug = options?.debug ?? false
@@ -234,17 +244,14 @@ function getCaretCoordinates(element: HTMLInputElement | HTMLTextAreaElement, po
   const computed = window.getComputedStyle(element)
 
   style.whiteSpace = 'pre-wrap'
-  if (!isInput)
-    style.wordWrap = 'break-word'
+  if (!isInput) style.wordWrap = 'break-word'
   style.position = 'absolute'
-  if (!debug)
-    style.visibility = 'hidden'
+  if (!debug) style.visibility = 'hidden'
 
   properties.forEach((prop) => {
     if (isInput && prop === 'lineHeight') {
       handleInputLineHeight(style, computed)
-    }
-    else {
+    } else {
       ;(style as any)[prop] = computed[prop]
     }
   })
@@ -253,14 +260,12 @@ function getCaretCoordinates(element: HTMLInputElement | HTMLTextAreaElement, po
     if (element.scrollHeight > parseInt(computed.height)) {
       style.overflowY = 'scroll'
     }
-  }
-  else {
+  } else {
     style.overflow = 'hidden'
   }
 
   div.textContent = element.value.substring(0, position)
-  if (isInput)
-    div.textContent = div.textContent.replace(/\s/g, '\u00A0')
+  if (isInput) div.textContent = div.textContent.replace(/\s/g, '\u00A0')
 
   const span = document.createElement('span')
   span.textContent = element.value.substring(position) || '.'
@@ -274,34 +279,33 @@ function getCaretCoordinates(element: HTMLInputElement | HTMLTextAreaElement, po
 
   if (debug) {
     span.style.backgroundColor = '#aaa'
-  }
-  else {
+  } else {
     document.body.removeChild(div)
   }
 
   return coordinates
 }
 
-function handleInputLineHeight(style: CSSStyleDeclaration, computed: CSSStyleDeclaration): void {
+function handleInputLineHeight(
+  style: CSSStyleDeclaration,
+  computed: CSSStyleDeclaration,
+): void {
   if (computed.boxSizing === 'border-box') {
     const height = parseInt(computed.height)
-    const outerHeight
-      = parseInt(computed.paddingTop)
-        + parseInt(computed.paddingBottom)
-        + parseInt(computed.borderTopWidth)
-        + parseInt(computed.borderBottomWidth)
+    const outerHeight =
+      parseInt(computed.paddingTop) +
+      parseInt(computed.paddingBottom) +
+      parseInt(computed.borderTopWidth) +
+      parseInt(computed.borderBottomWidth)
     const targetHeight = outerHeight + parseInt(computed.lineHeight)
     if (height > targetHeight) {
       style.lineHeight = `${height - outerHeight}px`
-    }
-    else if (height === targetHeight) {
+    } else if (height === targetHeight) {
       style.lineHeight = computed.lineHeight
-    }
-    else {
+    } else {
       style.lineHeight = '0'
     }
-  }
-  else {
+  } else {
     style.lineHeight = computed.height
   }
 }

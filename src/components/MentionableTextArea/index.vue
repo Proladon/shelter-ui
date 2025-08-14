@@ -6,11 +6,7 @@
       :reset-search-term-on-blur="false"
       class="text-foreground flex flex-col"
     >
-      <Label
-        v-if="label"
-        :for="textareaId"
-        class="text-sm font-semibold mb-2"
-      >
+      <Label v-if="label" :for="textareaId" class="text-sm font-semibold mb-2">
         {{ label }}
       </Label>
 
@@ -59,10 +55,31 @@
 <script setup lang="ts">
 import type { ReferenceElement } from 'reka-ui'
 import { computedWithControl } from '@vueuse/core'
-import { ComboboxAnchor, ComboboxContent, ComboboxInput, ComboboxItem, ComboboxPortal, ComboboxRoot, Label, useFilter } from 'reka-ui'
+import {
+  ComboboxAnchor,
+  ComboboxContent,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxPortal,
+  ComboboxRoot,
+  Label,
+  useFilter,
+} from 'reka-ui'
 import { computed, ref, watch, watchEffect } from 'vue'
-import type { MentionableTextAreaEmits, MentionableTextAreaProps } from './types'
-import { getList, getValue, getAnchorRect, getSearchValue, getTrigger, getTriggerOffset, replaceValue, defaultTriggers } from './utils'
+import type {
+  MentionableTextAreaEmits,
+  MentionableTextAreaProps,
+} from './types'
+import {
+  getList,
+  getValue,
+  getAnchorRect,
+  getSearchValue,
+  getTrigger,
+  getTriggerOffset,
+  replaceValue,
+  defaultTriggers,
+} from './utils'
 
 const props = withDefaults(defineProps<MentionableTextAreaProps>(), {
   rows: 5,
@@ -84,29 +101,40 @@ const open = ref(false)
 const searchValue = ref('')
 
 // Generate unique ID for textarea
-const textareaId = `mentionable-textarea-${Math.random().toString(36).substr(2, 9)}`
+const textareaId = `mentionable-textarea-${Math.random()
+  .toString(36)
+  .substr(2, 9)}`
 
 const textareaRef = ref<InstanceType<typeof ComboboxInput>>()
 
 // Watch for external model changes
-watch(() => props.modelValue, (newValue) => {
-  if (newValue !== internalValue.value) {
-    internalValue.value = newValue || ''
-  }
-})
-
-// Reference for popup positioning
-const reference = computedWithControl(() => [searchValue.value, open.value], () => ({
-  getBoundingClientRect: () => {
-    if (textareaRef.value?.$el) {
-      const { x, y, height } = getAnchorRect(textareaRef.value?.$el, props.triggers)
-      return { x, y, height, top: y, left: x, width: 0 }
-    }
-    else {
-      return null
+watch(
+  () => props.modelValue,
+  (newValue) => {
+    if (newValue !== internalValue.value) {
+      internalValue.value = newValue || ''
     }
   },
-}) as ReferenceElement)
+)
+
+// Reference for popup positioning
+const reference = computedWithControl(
+  () => [searchValue.value, open.value],
+  () =>
+    ({
+      getBoundingClientRect: () => {
+        if (textareaRef.value?.$el) {
+          const { x, y, height } = getAnchorRect(
+            textareaRef.value?.$el,
+            props.triggers,
+          )
+          return { x, y, height, top: y, left: x, width: 0 }
+        } else {
+          return null
+        }
+      },
+    } as ReferenceElement),
+)
 
 // Compute filtered list based on search
 const list = computed(() => {
@@ -116,13 +144,16 @@ const list = computed(() => {
     emojiList: props.emojiList,
   }
   const _list = getList(trigger.value, customLists)
-  return _list.filter(item => contains(item, searchValue.value))
+  return _list.filter((item) => contains(item, searchValue.value))
 })
 
 // Auto-close when no items
-watch(() => list.value.length, () => {
-  open.value = !!list.value.length
-})
+watch(
+  () => list.value.length,
+  () => {
+    open.value = !!list.value.length
+  },
+)
 
 // Handle caret positioning
 watchEffect(() => {
@@ -134,11 +165,16 @@ watchEffect(() => {
 
 // Computed classes for textarea
 const textareaClasses = computed(() => {
-  const baseClasses = 'border rounded-md border-muted p-2 transition-colors focus:border-primary focus:outline-none resize-none'
-  const disabledClasses = props.disabled ? 'bg-muted cursor-not-allowed opacity-50' : ''
+  const baseClasses =
+    'border rounded-md border-muted p-2 transition-colors focus:border-primary focus:outline-none resize-none'
+  const disabledClasses = props.disabled
+    ? 'bg-muted cursor-not-allowed opacity-50'
+    : ''
   const readonlyClasses = props.readonly ? 'bg-muted/50' : ''
-  
-  return [baseClasses, disabledClasses, readonlyClasses, props.class].filter(Boolean).join(' ')
+
+  return [baseClasses, disabledClasses, readonlyClasses, props.class]
+    .filter(Boolean)
+    .join(' ')
 })
 
 // Event handlers
@@ -151,8 +187,7 @@ function handleChange(ev: InputEvent) {
     trigger.value = _trigger
     open.value = true
     emit('mention', _trigger, _searchValue)
-  }
-  else if (!_searchValue) {
+  } else if (!_searchValue) {
     trigger.value = null
     open.value = false
   }
@@ -160,8 +195,7 @@ function handleChange(ev: InputEvent) {
   internalValue.value = target.value
   searchValue.value = _searchValue
 
-  if (!_trigger)
-    open.value = false
+  if (!_trigger) open.value = false
 
   emit('update:modelValue', target.value)
   emit('change', target.value)
@@ -169,8 +203,7 @@ function handleChange(ev: InputEvent) {
 
 function handleSelect(ev: CustomEvent) {
   const textarea = textareaRef.value?.$el
-  if (!textarea)
-    return
+  if (!textarea) return
 
   const offset = getTriggerOffset(textarea, props.triggers)
   const customLists = {
@@ -179,14 +212,18 @@ function handleSelect(ev: CustomEvent) {
     emojiList: props.emojiList,
   }
   const displayValue = getValue(ev.detail.value, trigger.value, customLists)
-  if (!displayValue)
-    return
+  if (!displayValue) return
 
   // Prevent setting ComboboxInput
   ev.preventDefault()
 
   trigger.value = null
-  const newValue = replaceValue(internalValue.value, offset, searchValue.value, displayValue)
+  const newValue = replaceValue(
+    internalValue.value,
+    offset,
+    searchValue.value,
+    displayValue,
+  )
   internalValue.value = newValue
   const nextCaretOffset = offset + displayValue.length + 1
   caretOffset.value = nextCaretOffset
@@ -196,8 +233,7 @@ function handleSelect(ev: CustomEvent) {
 }
 
 function handleEnterKey(ev: KeyboardEvent) {
-  if (open.value)
-    ev.preventDefault()
+  if (open.value) ev.preventDefault()
 }
 
 function handleFocus(ev: FocusEvent) {

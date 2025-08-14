@@ -35,16 +35,16 @@
           v-model="isDisabled"
           type="checkbox"
           class="rounded border-muted"
-        >
+        />
         <span class="text-sm">禁用</span>
       </label>
-      
+
       <label class="flex items-center gap-2">
         <input
           v-model="isReadonly"
           type="checkbox"
           class="rounded border-muted"
-        >
+        />
         <span class="text-sm">只讀</span>
       </label>
     </div>

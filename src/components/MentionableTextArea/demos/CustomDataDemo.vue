@@ -9,7 +9,7 @@
       :issue-list="customIssues"
       :emoji-list="customEmojis"
     />
-    
+
     <div class="mt-4 p-3 bg-muted rounded">
       <h3 class="text-sm font-medium mb-2">當前值：</h3>
       <pre class="text-xs">{{ value }}</pre>

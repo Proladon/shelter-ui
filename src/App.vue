@@ -26,7 +26,6 @@ const mentionValue = ref('嘗試輸入 @user 或 #issue 或 :emoji 來測試提�
       <p class="text-[var(--sh-primary)]">This is Text</p>
       <p class="text-[rgb(var(--sh-primary-lighten))]">This is Text</p>
 
-
       <div class="spin-demo">
         <h2>Spin 組件示例</h2>
         <div class="spin-types">
@@ -82,6 +81,4 @@ const mentionValue = ref('嘗試輸入 @user 或 #issue 或 :emoji 來測試提�
   </ConfigProvider>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

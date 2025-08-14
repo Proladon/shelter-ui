@@ -19,10 +19,10 @@ export interface MentionableTextAreaProps {
 
 export interface MentionableTextAreaEmits {
   'update:modelValue': [value: string]
-  'change': [value: string]
-  'focus': [event: FocusEvent]
-  'blur': [event: FocusEvent]
-  'mention': [trigger: string, searchValue: string]
+  change: [value: string]
+  focus: [event: FocusEvent]
+  blur: [event: FocusEvent]
+  mention: [trigger: string, searchValue: string]
 }
 
 export interface MentionData {

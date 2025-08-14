@@ -6,7 +6,7 @@
       placeholder="輸入 @, # 或 : 來觸發提及功能"
       :rows="4"
     />
-    
+
     <div class="mt-4 p-3 bg-muted rounded">
       <h3 class="text-sm font-medium mb-2">當前值：</h3>
       <pre class="text-xs">{{ value }}</pre>

@@ -10,7 +10,7 @@
       @blur="handleBlur"
       @mention="handleMention"
     />
-    
+
     <div class="mt-4 p-3 bg-muted rounded">
       <h3 class="text-sm font-medium mb-2">事件日誌：</h3>
       <div class="max-h-32 overflow-y-auto">
@@ -35,12 +35,12 @@ const events = ref<string[]>([])
 
 function addEvent(eventName: string, data?: any) {
   const timestamp = new Date().toLocaleTimeString()
-  const eventText = data 
+  const eventText = data
     ? `[${timestamp}] ${eventName}: ${JSON.stringify(data)}`
     : `[${timestamp}] ${eventName}`
-  
+
   events.value.unshift(eventText)
-  
+
   // 保持最多 10 個事件
   if (events.value.length > 10) {
     events.value.splice(10)
