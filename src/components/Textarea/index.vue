@@ -61,11 +61,11 @@ const textareaStyle = computed(() => {
   const style: Record<string, string> = {
     resize: props.resize,
   }
-  
+
   if (props.autosize && textareaHeight.value) {
     style.height = textareaHeight.value
   }
-  
+
   return style
 })
 
@@ -87,16 +87,17 @@ const valueLength = computed(() => {
 
 const calculateHeight = () => {
   if (!props.autosize || !textareaRef.value) return
-  
+
   const textarea = textareaRef.value
-  
+
   // 重置高度以獲得正確的 scrollHeight
   textarea.style.height = 'auto'
-  
+
   // 計算新的高度
   const scrollHeight = textarea.scrollHeight
-  const minHeight = parseInt(getComputedStyle(textarea).lineHeight) * (props.rows || 3)
-  
+  const minHeight =
+    parseInt(getComputedStyle(textarea).lineHeight) * (props.rows || 3)
+
   const newHeight = Math.max(scrollHeight, minHeight)
   textareaHeight.value = `${newHeight}px`
 }
@@ -117,7 +118,7 @@ const handleInput = (event: Event) => {
   const value = (event.target as HTMLTextAreaElement).value
   emit('update:value', value)
   emit('input', value)
-  
+
   if (props.autosize) {
     nextTick(() => {
       calculateHeight()
@@ -150,7 +151,7 @@ watch(
       })
     }
   },
-  { immediate: true }
+  { immediate: true },
 )
 
 // 暴露方法給父組件

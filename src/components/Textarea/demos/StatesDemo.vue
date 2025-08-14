@@ -1,7 +1,7 @@
 <template>
   <div class="demo-container">
     <h3>不同狀態</h3>
-    
+
     <div class="demo-section">
       <h4>正常狀態</h4>
       <Textarea

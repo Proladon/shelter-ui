@@ -1,7 +1,7 @@
 <template>
   <div class="demo-container">
     <h3>調整大小選項</h3>
-    
+
     <div class="demo-section">
       <h4>垂直調整（預設）</h4>
       <Textarea

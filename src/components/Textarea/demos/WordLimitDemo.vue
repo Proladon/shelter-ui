@@ -1,7 +1,7 @@
 <template>
   <div class="demo-container">
     <h3>字元計數</h3>
-    
+
     <div class="demo-section">
       <h4>顯示字元計數（最大 100 字元）</h4>
       <Textarea

@@ -19,12 +19,8 @@ title: Textarea 多行文字輸入框
 <template>
   <div class="demo-container">
     <h3>基本用法</h3>
-    <Textarea
-      v-model:value="text"
-      placeholder="請輸入內容..."
-      :rows="4"
-    />
-    
+    <Textarea v-model:value="text" placeholder="請輸入內容..." :rows="4" />
+
     <div class="mt-4">
       <strong>輸入的內容：</strong>
       <p class="mt-2 p-2 bg-gray-100 rounded">{{ text || '尚未輸入內容' }}</p>
@@ -265,34 +261,34 @@ const readonlyText = ref('這是唯讀狀態的內容，無法編輯')
 
 ### 屬性
 
-| 屬性名        | 說明               | 類型                                         | 默認值     |
-| ------------- | ------------------ | -------------------------------------------- | ---------- |
-| value         | 綁定值             | string                                       | ''         |
-| placeholder   | 占位符文字         | string                                       | —          |
-| rows          | 預設顯示的行數     | number                                       | 3          |
-| resize        | 調整大小的方式     | 'none' \| 'both' \| 'horizontal' \| 'vertical' | 'vertical' |
-| disabled      | 是否禁用           | boolean                                      | false      |
-| readonly      | 是否唯讀           | boolean                                      | false      |
-| maxlength     | 最大字元長度       | number                                       | —          |
-| showWordLimit | 是否顯示字元計數   | boolean                                      | false      |
-| autosize      | 是否自動調整高度   | boolean                                      | false      |
+| 屬性名        | 說明             | 類型                                           | 默認值     |
+| ------------- | ---------------- | ---------------------------------------------- | ---------- |
+| value         | 綁定值           | string                                         | ''         |
+| placeholder   | 占位符文字       | string                                         | —          |
+| rows          | 預設顯示的行數   | number                                         | 3          |
+| resize        | 調整大小的方式   | 'none' \| 'both' \| 'horizontal' \| 'vertical' | 'vertical' |
+| disabled      | 是否禁用         | boolean                                        | false      |
+| readonly      | 是否唯讀         | boolean                                        | false      |
+| maxlength     | 最大字元長度     | number                                         | —          |
+| showWordLimit | 是否顯示字元計數 | boolean                                        | false      |
+| autosize      | 是否自動調整高度 | boolean                                        | false      |
 
 ### 事件 Events
 
-| 事件名 | 說明                 | 回調參數                      |
-| ------ | -------------------- | ----------------------------- |
-| update:value | 值改變時觸發     | (value: string) => void       |
-| input  | 輸入時觸發           | (value: string) => void       |
-| change | 值改變且失去焦點時觸發 | (value: string) => void       |
-| focus  | 獲得焦點時觸發       | (event: FocusEvent) => void   |
-| blur   | 失去焦點時觸發       | (event: FocusEvent) => void   |
+| 事件名       | 說明                   | 回調參數                    |
+| ------------ | ---------------------- | --------------------------- |
+| update:value | 值改變時觸發           | (value: string) => void     |
+| input        | 輸入時觸發             | (value: string) => void     |
+| change       | 值改變且失去焦點時觸發 | (value: string) => void     |
+| focus        | 獲得焦點時觸發         | (event: FocusEvent) => void |
+| blur         | 失去焦點時觸發         | (event: FocusEvent) => void |
 
 ### 方法 Methods
 
-| 方法名 | 說明       | 參數 |
-| ------ | ---------- | ---- |
-| focus  | 使輸入框獲得焦點 | —    |
-| blur   | 使輸入框失去焦點 | —    |
+| 方法名 | 說明               | 參數 |
+| ------ | ------------------ | ---- |
+| focus  | 使輸入框獲得焦點   | —    |
+| blur   | 使輸入框失去焦點   | —    |
 | select | 選中輸入框中的文字 | —    |
 
 <script setup>
