@@ -34,6 +34,7 @@ export default defineConfig({
             { text: 'BlockArea 禁用區域', link: '/components/block-area' },
             { text: 'Button 按鈕', link: '/components/button' },
             { text: 'Chip 標籤', link: '/components/chip' },
+            { text: 'ContextMenu 右鍵選單', link: '/components/context-menu' },
             {
               text: 'FlexContainer 彈性容器',
               link: '/components/flex-container',

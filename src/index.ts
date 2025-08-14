@@ -21,6 +21,7 @@ import {
 } from './components/ActiveButtonGroup'
 import SHFlexContainer from './components/FlexContainer/index.vue'
 import SHMentionableTextArea from './components/MentionableTextArea/index.vue'
+import SHContextMenu from './components/ContextMenu/index.vue'
 
 // 組件列表
 const components = {
@@ -42,6 +43,7 @@ const components = {
   SHActiveButtonItem,
   SHFlexContainer,
   SHMentionableTextArea,
+  SHContextMenu,
 }
 
 /**
@@ -93,6 +95,11 @@ export type {
   MentionItem,
   MentionData,
 } from './components/MentionableTextArea/types'
+export type {
+  ContextMenuProps,
+  ContextMenuEmits,
+  ContextMenuItemOption,
+} from './components/ContextMenu/types'
 
 // 安裝函數
 const install = (app: App) => {
@@ -136,4 +143,5 @@ export {
   SHActiveButtonItem,
   SHFlexContainer,
   SHMentionableTextArea,
+  SHContextMenu,
 }

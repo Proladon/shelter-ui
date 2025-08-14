@@ -2,8 +2,8 @@
 - [ ] Context Menu
 - [ ] Progress
 - [ ] Divider
-- [ ] FlexContainer
-- [ ] Textarea
+- [x] FlexContainer
+- [x] Textarea
 - [ ] Table
 - [x] Select
 - [ ] Pin Input
