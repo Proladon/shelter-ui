@@ -2,7 +2,7 @@ import type { SliderRootProps } from 'reka-ui'
 
 export interface SliderProps extends SliderRootProps {
   size?: 'small' | 'default' | 'large'
-  color?: 'primary' | 'success' | 'warning' | 'danger' | 'info'
+  color?: 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'info'
   showTooltip?: boolean
   formatTooltip?: (value: number) => string
   showMarks?: boolean

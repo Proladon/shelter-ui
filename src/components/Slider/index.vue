@@ -5,9 +5,9 @@
       v-bind="rootProps"
       class="sh-slider"
       :class="[
-        `sh-slider--${size}`,
-        `sh-slider--${color}`,
-        `sh-slider--${orientation}`,
+        `sh-slider-size--${size}`,
+        `sh-slider-color--${color}`,
+        `sh-slider-orientation--${orientation}`,
       ]"
     >
       <SliderTrack class="sh-slider__track">
@@ -102,44 +102,56 @@ const getMarkStyle = (value: number) => {
   @apply relative flex items-center select-none touch-none;
 }
 
-.sh-slider--horizontal {
-  @apply w-full h-5;
+.sh-slider-orientation--horizontal {
+  @apply w-full;
 }
 
-.sh-slider--vertical {
-  @apply flex-col h-48 w-5;
+.sh-slider-orientation--vertical {
+  @apply flex-col h-full;
 }
 
 .sh-slider__track {
-  @apply relative grow rounded-full bg-gray-300;
+  @apply relative grow rounded-full bg-stone-950;
 }
 
-.sh-slider--horizontal .sh-slider__track {
-  @apply h-2;
+.sh-slider-orientation--horizontal {
+  .sh-slider__track {
+    @apply h-[5px];
+  }
 }
 
-.sh-slider--vertical .sh-slider__track {
-  @apply w-2 h-full;
+.sh-slider-orientation--vertical {
+  .sh-slider__track {
+    @apply w-[5px] h-full;
+  }
 }
 
 .sh-slider__range {
   @apply absolute rounded-full;
 }
 
-.sh-slider--horizontal .sh-slider__range {
-  @apply h-full;
+.sh-slider-orientation--horizontal {
+  .sh-slider__range {
+    @apply h-full;
+  }
 }
 
-.sh-slider--vertical .sh-slider__range {
-  @apply w-full;
+.sh-slider-orientation--vertical {
+  .sh-slider__range {
+    @apply w-full;
+  }
 }
 
 .sh-slider__thumb {
-  @apply relative block rounded-full bg-white border-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-grab active:cursor-grabbing;
-
+  @apply relative block rounded-full bg-gray-300 border-2 shadow-lg
+  @apply cursor-grab;
+  /* @apply focus:(outline-none ring-2 ring-offset-2); */
+  @apply focus:(outline-none);
+  @apply active:cursor-grabbing;
+  /* 
   &:focus {
     @apply ring-blue-500;
-  }
+  } */
 
   &:hover {
     @apply shadow-md;
@@ -147,62 +159,71 @@ const getMarkStyle = (value: number) => {
 }
 
 /* 尺寸變化 */
-.sh-slider--small .sh-slider__thumb {
-  @apply w-4 h-4;
+.sh-slider-size--small {
+  .sh-slider__thumb {
+    @apply w-[15px] h-[15px];
+  }
 }
 
-.sh-slider--default .sh-slider__thumb {
-  @apply w-5 h-5;
+.sh-slider-size--default {
+  .sh-slider__track {
+    @apply h-[7px];
+  }
+  .sh-slider__thumb {
+    @apply w-[16px] h-[16px];
+  }
 }
 
-.sh-slider--large .sh-slider__thumb {
-  @apply w-6 h-6;
+.sh-slider-size--large {
+  .sh-slider__track {
+    @apply h-[10px];
+  }
+  .sh-slider__thumb {
+    @apply w-[20px] h-[20px];
+  }
 }
 
 /* 顏色變化 */
-.sh-slider--primary .sh-slider__range {
-  @apply bg-blue-500;
+.sh-slider-color--primary {
+  .sh-slider__range {
+    @apply bg-primary;
+  }
 }
 
-.sh-slider--primary .sh-slider__thumb {
-  @apply border-blue-500;
+.sh-slider-color--secondary {
+  .sh-slider__range {
+    @apply bg-secondary;
+  }
 }
 
-.sh-slider--success .sh-slider__range {
-  @apply bg-green-500;
+.sh-slider-color--success {
+  .sh-slider__range {
+    @apply bg-status.success;
+  }
 }
 
-.sh-slider--success .sh-slider__thumb {
-  @apply border-green-500;
+.sh-slider-color--warning {
+  .sh-slider__range {
+    @apply bg-status.warning;
+  }
 }
 
-.sh-slider--warning .sh-slider__range {
-  @apply bg-yellow-500;
+.sh-slider-color--danger {
+  .sh-slider__range {
+    @apply bg-status.danger;
+  }
 }
 
-.sh-slider--warning .sh-slider__thumb {
-  @apply border-yellow-500;
-}
-
-.sh-slider--danger .sh-slider__range {
-  @apply bg-red-500;
-}
-
-.sh-slider--danger .sh-slider__thumb {
-  @apply border-red-500;
-}
-
-.sh-slider--info .sh-slider__range {
-  @apply bg-cyan-500;
-}
-
-.sh-slider--info .sh-slider__thumb {
-  @apply border-cyan-500;
+.sh-slider-color--info {
+  .sh-slider__range {
+    @apply bg-status.info;
+  }
 }
 
 /* 提示框 */
 .sh-slider__tooltip {
-  @apply absolute bg-gray-900 text-white text-xs rounded px-2 py-1 pointer-events-none whitespace-nowrap;
+  @apply absolute bg-bg.secondary text-text.primary text-xs rounded px-2 py-1 pointer-events-none whitespace-nowrap;
+  @apply border-solid border-border.primary border-1;
   transform: translateX(-50%);
   bottom: calc(100% + 8px);
 
@@ -212,15 +233,17 @@ const getMarkStyle = (value: number) => {
   }
 }
 
-.sh-slider--vertical .sh-slider__tooltip {
-  @apply transform translate-y-1/2;
-  bottom: auto;
-  left: calc(100% + 8px);
-  top: 50%;
+.sh-slider-orientation--vertical {
+  .sh-slider__tooltip {
+    @apply transform translate-y-1/2;
+    bottom: auto;
+    left: calc(100% + 8px);
+    top: 50%;
 
-  &::after {
-    @apply top-1/2 left-0 transform -translate-y-1/2 border-r-4 border-r-gray-900 border-t-4 border-t-transparent border-b-4 border-b-transparent border-l-0;
-    left: -4px;
+    &::after {
+      @apply top-1/2 left-0 transform -translate-y-1/2 border-r-4 border-r-gray-900 border-t-4 border-t-transparent border-b-4 border-b-transparent border-l-0;
+      left: -4px;
+    }
   }
 }
 
@@ -241,12 +264,16 @@ const getMarkStyle = (value: number) => {
   @apply absolute;
 }
 
-.sh-slider__marks--horizontal .sh-slider__mark {
-  @apply transform -translate-x-1/2;
+.sh-slider__marks--horizontal {
+  .sh-slider__mark {
+    @apply transform -translate-x-1/2;
+  }
 }
 
-.sh-slider__marks--vertical .sh-slider__mark {
-  @apply transform -translate-y-1/2;
+.sh-slider__marks--vertical {
+  .sh-slider__mark {
+    @apply transform -translate-y-1/2;
+  }
 }
 
 .sh-slider__mark-label {

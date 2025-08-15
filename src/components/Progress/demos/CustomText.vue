@@ -12,13 +12,14 @@
         }
       "
     />
-    <button @click="increaseCustom" class="demo-button">增加進度</button>
+    <SHButton @click="increaseCustom">增加進度</SHButton>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 import Progress from '../index.vue'
+import { SHButton } from '@/index'
 
 const customProgress = ref(40)
 
@@ -34,8 +35,5 @@ const increaseCustom = () => {
 <style scoped lang="postcss">
 .demo-section {
   @apply space-y-5 w-[300px];
-}
-.demo-button {
-  @apply px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors;
 }
 </style>

@@ -1,6 +1,5 @@
 - [ ] Pagination
 - [x] Context Menu
-- [ ] Progress
 - [ ] Divider
 - [x] FlexContainer
 - [x] Textarea
@@ -11,8 +10,8 @@
 - [x] Chip
 - [x] BlockArea
 - [ ] TreeView
-- [ ] Collapsible
 - [ ] Splitter
-- [ ] Progress
+- [ ] Collapsible
+- [x] Progress
 - [ ] Tabs
-- [ ] Slider
+- [x] Slider
