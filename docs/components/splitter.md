@@ -7,12 +7,12 @@
 <Demo>
   <BasicDemo />
   <template #code>
-  
+
     ```vue
     <template>
       <div class="demo-container">
         <h3>Splitter 基本示例</h3>
-        
+
         <div class="demo-section">
           <h4>水平分割</h4>
           <div class="demo-wrapper">
@@ -23,36 +23,13 @@
                   <p>這是左側的內容區域</p>
                 </div>
               </SplitterPanel>
-              
+
               <SplitterResizeHandle />
-              
+
               <SplitterPanel :default-size="70" class="demo-panel">
                 <div class="panel-content">
                   <h5>右側面板</h5>
                   <p>這是右側的內容區域，可以通過拖拽中間的分割線來調整大小。</p>
-                </div>
-              </SplitterPanel>
-            </Splitter>
-          </div>
-        </div>
-
-        <div class="demo-section">
-          <h4>垂直分割</h4>
-          <div class="demo-wrapper">
-            <Splitter direction="vertical" class="h-64">
-              <SplitterPanel :default-size="40" class="demo-panel">
-                <div class="panel-content">
-                  <h5>上方面板</h5>
-                  <p>這是上方的內容區域</p>
-                </div>
-              </SplitterPanel>
-
-              <SplitterResizeHandle />
-
-              <SplitterPanel :default-size="60" class="demo-panel">
-                <div class="panel-content">
-                  <h5>下方面板</h5>
-                  <p>這是下方的內容區域</p>
                 </div>
               </SplitterPanel>
             </Splitter>
@@ -73,19 +50,165 @@
   </template>
 </Demo>
 
+## 水平分割
+
+<Demo>
+  <HorizontalDemo />
+  <template #code>
+
+    ```vue
+    <template>
+      <div class="demo-wrapper">
+        <Splitter direction="horizontal" class="h-64">
+          <SplitterPanel :default-size="30" class="demo-panel">...</SplitterPanel>
+          <SplitterResizeHandle />
+          <SplitterPanel :default-size="70" class="demo-panel">...</SplitterPanel>
+        </Splitter>
+      </div>
+    </template>
+
+    <script setup lang="ts">
+    import { SHSplitter as Splitter, SHSplitterPanel as SplitterPanel, SHSplitterResizeHandle as SplitterResizeHandle } from '@proladon/shelter-ui'
+    </script>
+    ```
+
+  </template>
+</Demo>
+
+## 垂直分割
+
+<Demo>
+  <VerticalDemo />
+  <template #code>
+
+    ```vue
+    <template>
+      <div class="demo-wrapper">
+        <Splitter direction="vertical" class="h-64">
+          <SplitterPanel :default-size="40" class="demo-panel">...</SplitterPanel>
+          <SplitterResizeHandle />
+          <SplitterPanel :default-size="60" class="demo-panel">...</SplitterPanel>
+        </Splitter>
+      </div>
+    </template>
+
+    <script setup lang="ts">
+    import { SHSplitter as Splitter, SHSplitterPanel as SplitterPanel, SHSplitterResizeHandle as SplitterResizeHandle } from '@proladon/shelter-ui'
+    </script>
+    ```
+
+  </template>
+</Demo>
+
+## 嵌套分割
+
+<Demo>
+  <NestedDemo />
+  <template #code>
+
+    ```vue
+    <template>
+      <div class="demo-wrapper">
+        <Splitter direction="horizontal" class="h-64">...
+          <SplitterPanel :default-size="70">
+            <Splitter direction="vertical">...</Splitter>
+          </SplitterPanel>
+        </Splitter>
+      </div>
+    </template>
+
+    <script setup lang="ts">
+    import { SHSplitter as Splitter, SHSplitterPanel as SplitterPanel, SHSplitterResizeHandle as SplitterResizeHandle } from '@proladon/shelter-ui'
+    </script>
+    ```
+
+  </template>
+</Demo>
+
+## 可收縮面板
+
+<Demo>
+  <CollapsibleDemo />
+  <template #code>
+
+    ```vue
+    <template>
+      <div class="demo-wrapper">
+        <Splitter direction="horizontal" class="h-64">
+          <SplitterPanel :default-size="30" :min-size="20" :collapsible="true" :collapsed-size="5">...</SplitterPanel>
+          <SplitterResizeHandle />
+          <SplitterPanel :default-size="70">...</SplitterPanel>
+        </Splitter>
+      </div>
+    </template>
+
+    <script setup lang="ts">
+    import { SHSplitter as Splitter, SHSplitterPanel as SplitterPanel, SHSplitterResizeHandle as SplitterResizeHandle } from '@proladon/shelter-ui'
+    </script>
+    ```
+
+  </template>
+</Demo>
+
+## 控制桿常亮
+
+<Demo>
+  <VisibleDemo />
+  <template #code>
+
+    ```vue
+    <template>
+      <Splitter direction="horizontal" class="h-32">
+        <SplitterPanel :default-size="50">A</SplitterPanel>
+        <SplitterResizeHandle :visable="true" />
+        <SplitterPanel :default-size="50">B</SplitterPanel>
+      </Splitter>
+    </template>
+
+    <script setup lang="ts">
+    import { SHSplitter as Splitter, SHSplitterPanel as SplitterPanel, SHSplitterResizeHandle as SplitterResizeHandle } from '@proladon/shelter-ui'
+    </script>
+    ```
+
+  </template>
+</Demo>
+
+## 控制桿顏色
+
+<Demo>
+  <ColorDemo />
+  <template #code>
+
+    ```vue
+    <template>
+      <Splitter direction="horizontal" class="h-32">
+        <SplitterPanel :default-size="50">A</SplitterPanel>
+        <SplitterResizeHandle color="#f97316" />
+        <SplitterPanel :default-size="50">B</SplitterPanel>
+      </Splitter>
+    </template>
+
+    <script setup lang="ts">
+    import { SHSplitter as Splitter, SHSplitterPanel as SplitterPanel, SHSplitterResizeHandle as SplitterResizeHandle } from '@proladon/shelter-ui'
+    </script>
+    ```
+
+  </template>
+</Demo>
+
 ## API
 
 ### Splitter (SplitterGroup)
 
 #### 屬性
 
-| 屬性名           | 說明         | 類型                                | 默認值      |
-| ---------------- | ------------ | ----------------------------------- | ----------- |
-| direction        | 分割方向     | `'horizontal' \| 'vertical'`        | 必填        |
-| variant          | 分割器變體   | `'default' \| 'bordered' \| 'card'` | `'default'` |
-| gap              | 面板間隙     | `number`                            | `0`         |
-| autoSaveId       | 自動保存 ID  | `string \| null`                    | `null`      |
-| keyboardResizeBy | 鍵盤調整步長 | `number`                            | `10`        |
+| 屬性名           | 說明         | 類型                         | 默認值 |
+| ---------------- | ------------ | ---------------------------- | ------ |
+| direction        | 分割方向     | `'horizontal' \| 'vertical'` | 必填   |
+| gap              | 面板間隙     | `number`                     | `0`    |
+| color            | 分隔條顏色   | `string`                     | -      |
+| autoSaveId       | 自動保存 ID  | `string \| null`             | `null` |
+| keyboardResizeBy | 鍵盤調整步長 | `number`                     | `10`   |
 
 #### 事件
 
@@ -104,7 +227,6 @@
 | maxSize       | 最大面板大小 | `number`                                    | `100`       |
 | collapsible   | 是否可收縮   | `boolean`                                   | `false`     |
 | collapsedSize | 收縮時大小   | `number`                                    | -           |
-| variant       | 面板變體     | `'default' \| 'bordered' \| 'card'`         | `'default'` |
 | padding       | 面板內距     | `'none' \| 'small' \| 'default' \| 'large'` | `'default'` |
 
 #### 事件
@@ -119,11 +241,13 @@
 
 #### 屬性
 
-| 屬性名     | 說明               | 類型                                  | 默認值      |
-| ---------- | ------------------ | ------------------------------------- | ----------- |
-| variant    | 控制桿變體         | `'default' \| 'thick' \| 'invisible'` | `'default'` |
-| showHandle | 是否顯示拖拽指示器 | `boolean`                             | `true`      |
-| disabled   | 是否禁用           | `boolean`                             | `false`     |
+| 屬性名     | 說明             | 類型      | 默認值  |
+| ---------- | ---------------- | --------- | ------- |
+| visable    | 是否讓控制桿常亮 | `boolean` | `false` |
+| color      | 控制桿顏色       | `string`  | -       |
+| hoverColor | 滑鼠懸停顏色     | `string`  | -       |
+| dragColor  | 拖拽時顏色       | `string`  | -       |
+| disabled   | 是否禁用         | `boolean` | `false` |
 
 #### 事件
 
@@ -140,4 +264,10 @@
 <script setup>
 import { SHConfigProvider } from '@/index'
 import BasicDemo from '@/components/Splitter/demos/Basic.vue'
+import HorizontalDemo from '@/components/Splitter/demos/Horizontal.vue'
+import VerticalDemo from '@/components/Splitter/demos/Vertical.vue'
+import NestedDemo from '@/components/Splitter/demos/Nested.vue'
+import CollapsibleDemo from '@/components/Splitter/demos/Collapsible.vue'
+import VisibleDemo from '@/components/Splitter/demos/Visible.vue'
+import ColorDemo from '@/components/Splitter/demos/Color.vue'
 </script>

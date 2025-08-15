@@ -5,19 +5,20 @@ import type {
 } from 'reka-ui'
 
 export interface SplitterGroupCustomProps extends SplitterGroupProps {
-  variant?: 'default' | 'bordered' | 'card'
   gap?: number
+  color?: string
 }
 
 export interface SplitterPanelCustomProps extends SplitterPanelProps {
-  variant?: 'default' | 'bordered' | 'card'
   padding?: 'none' | 'small' | 'default' | 'large'
 }
 
 export interface SplitterResizeHandleCustomProps
   extends SplitterResizeHandleProps {
-  variant?: 'default' | 'thick' | 'invisible'
-  showHandle?: boolean
+  visable?: boolean
+  color?: string
+  hoverColor?: string
+  dragColor?: string
 }
 
 export interface SplitterGroupSlots {

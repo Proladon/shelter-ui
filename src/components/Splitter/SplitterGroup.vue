@@ -2,10 +2,7 @@
   <SplitterGroup
     v-bind="rootProps"
     class="sh-splitter-group"
-    :class="[
-      `sh-splitter-group--${variant}`,
-      `sh-splitter-group--${direction}`,
-    ]"
+    :class="[`sh-splitter-group--${direction}`]"
     :style="gapStyle"
   >
     <slot />
@@ -18,7 +15,6 @@ import { SplitterGroup, useForwardPropsEmits } from 'reka-ui'
 import type { SplitterGroupCustomProps } from './types'
 
 const props = withDefaults(defineProps<SplitterGroupCustomProps>(), {
-  variant: 'default',
   gap: 0,
 })
 
@@ -41,18 +37,6 @@ const gapStyle = computed(() => {
 <style lang="postcss">
 .sh-splitter-group {
   @apply w-full h-full;
-}
-
-.sh-splitter-group--default {
-  @apply bg-transparent;
-}
-
-.sh-splitter-group--bordered {
-  @apply border border-gray-200 rounded-lg overflow-hidden;
-}
-
-.sh-splitter-group--card {
-  @apply bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden;
 }
 
 .sh-splitter-group--horizontal {

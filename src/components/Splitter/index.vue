@@ -1,7 +1,6 @@
 <template>
   <SplitterGroup
     v-bind="$attrs"
-    :variant="variant"
     :gap="gap"
     :direction="direction"
     @layout="$emit('layout', $event)"
@@ -14,7 +13,7 @@
 import SplitterGroup from './SplitterGroup.vue'
 import type { SplitterGroupCustomProps } from './types'
 
-interface SplitterProps extends SplitterGroupCustomProps {
+interface SplitterProps extends Omit<SplitterGroupCustomProps, 'variant'> {
   direction: 'horizontal' | 'vertical'
 }
 
