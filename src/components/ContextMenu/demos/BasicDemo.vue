@@ -1,7 +1,5 @@
 <template>
-  <div class="space-y-8 p-8">
-    <h2 class="text-2xl font-bold">ContextMenu Demo</h2>
-
+  <div class="space-y-8">
     <!-- Basic Menu -->
     <div class="space-y-4">
       <h3 class="text-lg font-semibold">Basic Menu</h3>

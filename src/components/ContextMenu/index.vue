@@ -1,21 +1,15 @@
 <template>
-  <ContextMenuRoot>
+  <ContextMenuRoot class="sh-context-menu-root">
     <ContextMenuTrigger
       as-child
-      :class="
-        triggerClass ||
-        'block border-2 border-stone-700 dark:border-white border-dashed text-stone-700 dark:text-white rounded-xl text-sm select-none py-[45px] w-[300px] text-center'
-      "
+      class="block border-2 border-stone-700 dark:border-white border-dashed dark:text-white rounded-xl text-sm select-none py-[45px] w-[300px] text-center"
     >
       <slot>
         <span>{{ triggerContent || 'Right click here.' }}</span>
       </slot>
     </ContextMenuTrigger>
     <ContextMenuPortal>
-      <ContextMenuContent
-        class="min-w-[220px] z-30 bg-white outline-none rounded-md p-[5px] shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),_0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)] will-change-[opacity,transform] data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade"
-        :side-offset="5"
-      >
+      <ContextMenuContent class="sh-context-menu-content" :side-offset="5">
         <template v-if="radioGroup">
           <ContextMenuRadioGroup
             :model-value="radioValue?.toString()"
@@ -26,7 +20,7 @@
               :key="item.value"
               :value="item.value?.toString() || ''"
               :disabled="item.disabled"
-              class="text-xs leading-none text-grass11 rounded-[3px] flex items-center h-[25px] px-[5px] relative pl-[25px] select-none outline-none data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:bg-green9 data-[highlighted]:text-green1"
+              class="sh-context-menu-radio-item"
             >
               <ContextMenuItemIndicator
                 class="absolute left-0 w-[25px] inline-flex items-center justify-center"
@@ -72,6 +66,7 @@ import type {
   ContextMenuItemOption,
   ContextMenuProps,
 } from './types'
+import { IconCheck, IconChevronRight, IconPointFilled } from '@tabler/icons-vue'
 
 const props = withDefaults(defineProps<ContextMenuProps>(), {
   items: () => [],
@@ -134,51 +129,22 @@ const handleCheckboxChange = (
 }
 
 // Icon components
-const CheckIcon = () =>
-  h(
-    'svg',
-    {
-      viewBox: '0 0 24 24',
-      width: '12',
-      height: '12',
-      fill: 'currentColor',
-    },
-    [h('path', { d: 'M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z' })],
-  )
-
-const ChevronRightIcon = () =>
-  h(
-    'svg',
-    {
-      viewBox: '0 0 24 24',
-      width: '12',
-      height: '12',
-      fill: 'currentColor',
-    },
-    [h('path', { d: 'M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z' })],
-  )
+const CheckIcon = () => h(IconCheck, { size: '14', color: 'var(--sh-primary)' })
 
 const DotIcon = () =>
-  h(
-    'svg',
-    {
-      viewBox: '0 0 24 24',
-      width: '12',
-      height: '12',
-      fill: 'currentColor',
-    },
-    [h('circle', { cx: '12', cy: '12', r: '3' })],
-  )
+  h(IconPointFilled, { size: '14', color: 'var(--sh-primary)' })
+
+const shortcutClass =
+  'ml-auto pl-[20px] text-text.base group-data-[highlighted]:text-white group-data-[disabled]:text-text.base.fade'
 
 // Recursive component rendering for menu items
 const renderMenuItem = (item: ContextMenuItemOption): VNode => {
-  const baseClass =
-    'text-xs leading-none text-grass11 rounded-[3px] flex items-center h-[25px] px-[5px] relative pl-[25px] select-none outline-none data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:bg-green9 data-[highlighted]:text-green1'
+  const baseClass = 'sh-context-menu-item'
   const groupClass = 'group ' + baseClass
 
   switch (item.type) {
     case 'separator':
-      return h(ContextMenuSeparator, { class: 'h-[1px] bg-green6 m-[5px]' })
+      return h(ContextMenuSeparator, { class: 'sh-context-menu-separator' })
 
     case 'label':
       return h(
@@ -214,8 +180,7 @@ const renderMenuItem = (item: ContextMenuItemOption): VNode => {
             h(
               'div',
               {
-                class:
-                  'ml-auto pl-[20px] text-mauve11 group-data-[highlighted]:text-white group-data-[disabled]:text-mauve8',
+                class: shortcutClass,
               },
               item.shortcut,
             ),
@@ -229,18 +194,19 @@ const renderMenuItem = (item: ContextMenuItemOption): VNode => {
           {
             value: item.value,
             disabled: item.disabled,
-            class:
-              'group w-full text-xs leading-none text-grass11 rounded-[3px] flex items-center h-[25px] px-[5px] relative pl-[25px] select-none outline-none data-[state=open]:bg-green4 data-[state=open]:text-grass11 data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:bg-green9 data-[highlighted]:text-green1 data-[highlighted]:data-[state=open]:bg-green9 data-[highlighted]:data-[state=open]:text-green1',
+            class: 'sh-context-menu-sub-trigger',
           },
           (): (string | VNode)[] => [
-            item.label || '',
+            h('div', { class: 'flex-1' }, item.label || ''),
             h(
               'div',
               {
                 class:
-                  'ml-auto pl-[20px] text-mauve11 group-data-[highlighted]:text-white group-data-[disabled]:text-mauve8',
+                  'text-text.base group-data-[highlighted]:text-white group-data-[disabled]:text-text.base.fade',
               },
-              () => ChevronRightIcon(),
+              h(IconChevronRight, {
+                size: '14',
+              }),
             ),
           ],
         ),
@@ -251,8 +217,7 @@ const renderMenuItem = (item: ContextMenuItemOption): VNode => {
             h(
               ContextMenuSubContent,
               {
-                class:
-                  'min-w-[220px] z-30 outline-none bg-white rounded-md p-[5px] shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),_0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)] will-change-[opacity,transform] data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade',
+                class: 'sh-context-menu-sub-conent',
                 sideOffset: 2,
                 alignOffset: -5,
               },
@@ -282,8 +247,7 @@ const renderMenuItem = (item: ContextMenuItemOption): VNode => {
             h(
               'div',
               {
-                class:
-                  'ml-auto pl-[20px] text-mauve11 group-data-[highlighted]:text-white group-data-[disabled]:text-mauve8',
+                class: shortcutClass,
               },
               item.shortcut,
             ),
@@ -293,4 +257,58 @@ const renderMenuItem = (item: ContextMenuItemOption): VNode => {
 }
 </script>
 
-<style scoped lang="postcss"></style>
+<style scoped lang="postcss">
+:deep(.sh-context-menu-content) {
+  @apply min-w-[220px] z-[30] bg-bg.primary shadow-lg outline-none rounded-md p-[5px];
+  @apply will-change-[opacity,transform];
+  @apply data-[side=top]:animate-slideDownAndFade;
+  @apply data-[side=right]:animate-slideLeftAndFade;
+  @apply data-[side=bottom]:animate-slideUpAndFade;
+  @apply data-[side=left]:animate-slideRightAndFade;
+}
+
+:deep(.sh-context-menu-item) {
+  @apply text-xs leading-none text-text.base;
+  @apply select-none outline-none;
+  @apply h-[25px] px-[5px] relative pl-[25px];
+  @apply flex items-center;
+  @apply rounded-[3px];
+  @apply data-[disabled]:text-text.base.fade;
+  @apply data-[state=checked]:text-primary;
+  @apply data-[disabled]:pointer-events-none;
+  @apply data-[highlighted]:(bg-primary.fade text-text.primary);
+}
+
+:deep(.sh-context-menu-separator) {
+  @apply h-[1px] bg-border.primary m-[5px];
+}
+
+:deep(.sh-context-menu-sub-conent) {
+  @apply min-w-[220px] z-30 outline-none bg-bg.primary rounded-md p-[5px];
+  @apply shadow-lg;
+  @apply will-change-[opacity,transform];
+  @apply data-[side=top]:animate-slideDownAndFade;
+  @apply data-[side=right]:animate-slideLeftAndFade;
+  @apply data-[side=bottom]:animate-slideUpAndFade;
+  @apply data-[side=left]:animate-slideRightAndFade;
+}
+
+:deep(.sh-context-menu-sub-trigger) {
+  @apply group w-full rounded-[3px] h-[25px] px-[5px] relative pl-[25px] select-none outline-none;
+  @apply text-xs leading-none text-text.base;
+  @apply flex items-center;
+  @apply data-[state=open]:bg-primary.fade data-[state=open]:text-text.primary;
+  @apply data-[disabled]:text-text.base.fade data-[disabled]:pointer-events-none;
+  @apply data-[highlighted]:bg-primary.fade data-[highlighted]:text-text.primary;
+  @apply data-[highlighted]:data-[state=open]:bg-primary.fade data-[highlighted]:data-[state=open]:text-text.primary;
+}
+
+:deep(.sh-context-menu-radio-item) {
+  @apply text-xs leading-none text-text.base rounded-[3px] flex items-center h-[25px] px-[5px] relative pl-[25px] select-none outline-none
+  @apply  data-[disabled]:text-text.base.fade;
+  @apply data-[disabled]:pointer-events-none;
+  @apply data-[highlighted]:bg-bg.primary.fade;
+  @apply data-[highlighted]:text-text.primary;
+  @apply data-[state=checked]:text-primary;
+}
+</style>
