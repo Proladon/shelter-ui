@@ -1,5 +1,5 @@
 - [ ] Pagination
-- [ ] Context Menu
+- [x] Context Menu
 - [ ] Progress
 - [ ] Divider
 - [x] FlexContainer
@@ -10,3 +10,9 @@
 - [x] Switch
 - [x] Chip
 - [x] BlockArea
+- [ ] TreeView
+- [ ] Collapsible
+- [ ] Splitter
+- [ ] Progress
+- [ ] Tabs
+- [ ] Slider

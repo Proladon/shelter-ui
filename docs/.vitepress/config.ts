@@ -34,6 +34,7 @@ export default defineConfig({
             { text: 'BlockArea 禁用區域', link: '/components/block-area' },
             { text: 'Button 按鈕', link: '/components/button' },
             { text: 'Chip 標籤', link: '/components/chip' },
+            { text: 'Collapsible 折疊面板', link: '/components/collapsible' },
             { text: 'ContextMenu 右鍵選單', link: '/components/context-menu' },
             {
               text: 'FlexContainer 彈性容器',
@@ -60,6 +61,9 @@ export default defineConfig({
               text: 'MentionableTextArea 可提及文本域',
               link: '/components/mentionable-textarea',
             },
+            { text: 'Progress 進度條', link: '/components/progress' },
+            { text: 'Slider 滑桿', link: '/components/slider' },
+            { text: 'Splitter 分割器', link: '/components/splitter' },
           ],
         },
       ],

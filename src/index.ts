@@ -22,6 +22,15 @@ import {
 import SHFlexContainer from './components/FlexContainer/index.vue'
 import SHMentionableTextArea from './components/MentionableTextArea/index.vue'
 import SHContextMenu from './components/ContextMenu/index.vue'
+import SHProgress from './components/Progress/index.vue'
+import SHSlider from './components/Slider/index.vue'
+import SHCollapsible from './components/Collapsible/index.vue'
+import SHSplitter from './components/Splitter/index.vue'
+import {
+  SplitterGroup as SHSplitterGroup,
+  SplitterPanel as SHSplitterPanel,
+  SplitterResizeHandle as SHSplitterResizeHandle,
+} from './components/Splitter'
 
 // 組件列表
 const components = {
@@ -44,6 +53,13 @@ const components = {
   SHFlexContainer,
   SHMentionableTextArea,
   SHContextMenu,
+  SHProgress,
+  SHSlider,
+  SHCollapsible,
+  SHSplitter,
+  SHSplitterGroup,
+  SHSplitterPanel,
+  SHSplitterResizeHandle,
 }
 
 /**
@@ -100,6 +116,21 @@ export type {
   ContextMenuEmits,
   ContextMenuItemOption,
 } from './components/ContextMenu/types'
+export type { ProgressProps, ProgressSlots } from './components/Progress/types'
+export type { SliderProps, SliderSlots } from './components/Slider/types'
+export type {
+  CollapsibleProps,
+  CollapsibleSlots,
+  CollapsibleEmits,
+} from './components/Collapsible/types'
+export type {
+  SplitterGroupCustomProps,
+  SplitterPanelCustomProps,
+  SplitterResizeHandleCustomProps,
+  SplitterGroupSlots,
+  SplitterPanelSlots,
+  SplitterResizeHandleSlots,
+} from './components/Splitter/types'
 
 // 安裝函數
 const install = (app: App) => {
@@ -144,4 +175,11 @@ export {
   SHFlexContainer,
   SHMentionableTextArea,
   SHContextMenu,
+  SHProgress,
+  SHSlider,
+  SHCollapsible,
+  SHSplitter,
+  SHSplitterGroup,
+  SHSplitterPanel,
+  SHSplitterResizeHandle,
 }
