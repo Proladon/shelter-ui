@@ -1,8 +1,6 @@
 import type { CollapsibleRootProps } from 'reka-ui'
 
 export interface CollapsibleProps extends CollapsibleRootProps {
-  variant?: 'default' | 'card' | 'ghost'
-  size?: 'small' | 'default' | 'large'
   headerClass?: string
   contentClass?: string
   triggerPosition?: 'left' | 'right'
