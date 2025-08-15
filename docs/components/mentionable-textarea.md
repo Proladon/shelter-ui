@@ -1,8 +1,4 @@
----
-title: MentionableTextArea 可提及文本域
----
-
-## 描述
+# MentionableTextArea 可提及文本域
 
 MentionableTextArea 是一個支持提及功能的多行文本輸入組件。用戶可以通過輸入特定的觸發字符（如 @、#、:）來觸發下拉選單，選擇用戶、議題或表情符號等內容。
 

@@ -1,15 +1,16 @@
 <template>
   <div class="demo-section">
-    <h4>基本折疊面板</h4>
-    <Collapsible v-model:open="basicOpen">
-      <template #trigger>
-        <span>點擊展開/收合內容</span>
-      </template>
-      <div class="demo-content">
-        <p>這是一段可以展開和收合的內容。</p>
-        <p>你可以在這裡放置任何內容，比如表單、列表或其他組件。</p>
-      </div>
-    </Collapsible>
+    <SHBorderContainer>
+      <Collapsible v-model:open="basicOpen">
+        <template #trigger>
+          <span>點擊展開/收合內容</span>
+        </template>
+        <div class="demo-content">
+          <p>這是一段可以展開和收合的內容。</p>
+          <p>你可以在這裡放置任何內容，比如表單、列表或其他組件。</p>
+        </div>
+      </Collapsible>
+    </SHBorderContainer>
   </div>
 </template>
 

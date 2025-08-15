@@ -1,6 +1,5 @@
 <template>
   <div class="demo-section">
-    <h4>自定義觸發器</h4>
     <Collapsible v-model:open="customOpen">
       <template #trigger>
         <div class="custom-trigger">

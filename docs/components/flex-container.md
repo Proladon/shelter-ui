@@ -1,8 +1,4 @@
----
-title: FlexContainer 彈性容器
----
-
-## Description
+# FlexContainer 彈性容器
 
 FlexContainer 組件可以將包覆的區塊進行彈性布局，讓使用者可以更方便地進行排版。可透過 props 設定子元素的排列方式、對齊方式等屬性，並支援響應式設計。
 

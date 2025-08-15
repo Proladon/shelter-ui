@@ -1,14 +1,8 @@
----
-title: Collapsible 折疊面板
----
-
-## 說明
+# Collapsible 折疊面板
 
 一個可展開/收合面板的互動組件。
 
 ## 基本用法
-
-## 基本折疊面板
 
 <Demo>
 
@@ -139,8 +133,6 @@ const innerOpen = ref(false)
 <script setup>
 import { SHConfigProvider } from '@/index'
 import DemoBasic from '@/components/Collapsible/demos/DemoBasic.vue'
-import DemoVariants from '@/components/Collapsible/demos/DemoVariants.vue'
-import DemoSizes from '@/components/Collapsible/demos/DemoSizes.vue'
 import DemoCustomTrigger from '@/components/Collapsible/demos/DemoCustomTrigger.vue'
 import DemoNested from '@/components/Collapsible/demos/DemoNested.vue'
 </script>
