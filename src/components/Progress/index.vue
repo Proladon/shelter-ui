@@ -1,27 +1,32 @@
 <template>
   <ProgressRoot
-    v-bind="rootProps"
+    v-model="syncValue"
     class="sh-progress"
     :class="[
       `sh-progress--${size}`,
-      `sh-progress--${variant}`,
+      textPositionClass,
       {
         'sh-progress--with-text': showText,
       },
     ]"
   >
-    <div class="sh-progress__container">
-      <ProgressIndicator
-        class="sh-progress__indicator"
-        :class="{
-          'sh-progress__indicator--striped': variant === 'striped',
-          'sh-progress__indicator--animated': variant === 'animated',
-        }"
-      />
-    </div>
+    <div class="sh-progress__inner">
+      <div class="sh-progress__container" :style="containerStyle">
+        <ProgressIndicator
+          class="sh-progress__indicator"
+          :class="{
+            'sh-progress__indicator--striped': variant === 'striped',
+            'sh-progress__indicator--animated': variant === 'animated',
+          }"
+          :style="indicatorStyle"
+        />
+      </div>
 
-    <div v-if="showText" class="sh-progress__text">
-      {{ displayText }}
+      <slot name="text">
+        <div v-if="showText" class="sh-progress__text">
+          {{ displayText }}
+        </div>
+      </slot>
     </div>
 
     <slot />
@@ -30,47 +35,79 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { ProgressRoot, ProgressIndicator, useForwardPropsEmits } from 'reka-ui'
+import { ProgressRoot, ProgressIndicator } from 'reka-ui'
 import type { ProgressProps } from './types'
+import { useVModel } from '@vueuse/core'
 
 const props = withDefaults(defineProps<ProgressProps>(), {
+  value: null,
   size: 'default',
   variant: 'default',
   showText: false,
   max: 100,
+  color: undefined,
+  height: undefined,
+  textPosition: 'bottom',
 })
 
 const emits = defineEmits<{
-  'update:modelValue': [value: number | null]
-  'update:max': [value: number]
+  'update:value': [value: number]
 }>()
 
-const rootProps = useForwardPropsEmits(props, emits)
+const syncValue = useVModel(props, 'value', emits)
 
-const displayText = computed(() => {
-  if (props.formatText) {
-    return props.formatText(props.modelValue ?? null, props.max ?? 100)
+const containerStyle = computed(() => {
+  const styles: Record<string, string> = {}
+
+  if (props.height !== undefined) {
+    const heightValue =
+      typeof props.height === 'number' ? `${props.height}px` : props.height
+    styles.height = heightValue
   }
 
-  const value = props.modelValue ?? 0
+  return styles
+})
+
+const indicatorStyle = computed(() => {
+  const value = syncValue.value ?? 0
+  const styles: Record<string, string> = {
+    transform: `translateX(-${100 - value}%)`,
+  }
+
+  if (props.color) {
+    styles.backgroundColor = props.color
+  }
+
+  return styles
+})
+const displayText = computed(() => {
+  const value = syncValue.value ?? 0
   const max = props.max ?? 100
+
+  if (props.formatText) {
+    return props.formatText(value, max)
+  }
+
   const percentage = Math.round((value / max) * 100)
   return `${percentage}%`
 })
+
+const textPositionClass = computed(
+  () => `sh-progress--text-${props.textPosition}`,
+)
 </script>
 
-<style lang="postcss">
+<style scoped lang="postcss">
 .sh-progress {
   @apply relative w-full;
 }
 
 .sh-progress__container {
-  @apply relative w-full bg-gray-200 rounded-full overflow-hidden;
+  @apply rounded-full w-full overflow-hidden bg-white dark:bg-stone-950 border border-muted;
 }
 
 .sh-progress__indicator {
   @apply h-full bg-blue-500 rounded-full transition-all duration-300 ease-out;
-  transform: translateX(calc(-100% + (var(--reka-progress-value, 0) * 1%)));
 }
 
 .sh-progress__indicator--striped {
@@ -103,20 +140,40 @@ const displayText = computed(() => {
 }
 
 .sh-progress__text {
-  @apply text-sm text-gray-600 mt-1 text-center;
+  @apply text-sm text-gray-600 text-center font-medium;
 }
 
-/* 尺寸變化 */
-.sh-progress--small .sh-progress__container {
-  @apply h-2;
+/* 布局：當文字在左或右時，水平排列 */
+.sh-progress__inner {
+  @apply flex items-center gap-[12px];
 }
 
-.sh-progress--default .sh-progress__container {
-  @apply h-3;
+.sh-progress--text-bottom {
+  .sh-progress__inner {
+    @apply flex-col gap-[4px];
+  }
 }
 
-.sh-progress--large .sh-progress__container {
-  @apply h-4;
+.sh-progress--text-left {
+  .sh-progress__inner {
+    @apply flex-row-reverse;
+  }
+}
+
+/* .sh-progress--text-right .sh-progress__text {
+} */
+
+/* 尺寸變化 - 如果沒有自定義 height 才生效 */
+.sh-progress--small .sh-progress__container:not([style*='height']) {
+  @apply h-[2px];
+}
+
+.sh-progress--default .sh-progress__container:not([style*='height']) {
+  @apply h-[6px];
+}
+
+.sh-progress--large .sh-progress__container:not([style*='height']) {
+  @apply h-[8px];
 }
 
 /* 條紋動畫 */
@@ -132,15 +189,15 @@ const displayText = computed(() => {
 /* 顏色變化 */
 .sh-progress__indicator {
   &[data-state='complete'] {
-    @apply bg-green-500;
+    @apply bg-primary;
   }
 
   &[data-state='loading'] {
-    @apply bg-blue-500;
+    @apply bg-primary;
   }
 
   &[data-state='indeterminate'] {
-    @apply bg-gray-400;
+    @apply bg-border.base;
     animation: sh-progress-indeterminate 2s ease-in-out infinite;
   }
 }
