@@ -26,7 +26,6 @@ import {
   CollapsibleContent,
   useForwardPropsEmits,
 } from 'reka-ui'
-import { IconChevronDown } from '@tabler/icons-vue'
 import type { CollapsibleProps, CollapsibleEmits } from './types'
 
 const props = withDefaults(defineProps<CollapsibleProps>(), {

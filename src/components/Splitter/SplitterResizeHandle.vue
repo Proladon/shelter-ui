@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject } from 'vue'
+import { computed } from 'vue'
 import { SplitterResizeHandle, useForwardPropsEmits } from 'reka-ui'
 import type { SplitterResizeHandleCustomProps } from './types'
 
@@ -36,6 +36,7 @@ const visable = computed(() => {
   return (props as any).visable
 })
 
+//@ts-ignore
 const handleStyle = computed(() => {
   return {
     default: props.visable ? props.color : 'transparent',
@@ -43,8 +44,6 @@ const handleStyle = computed(() => {
     drag: props.dragColor || props.color,
   }
 })
-
-// orientation is provided by parent but not required directly here
 </script>
 
 <style lang="postcss">
