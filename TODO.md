@@ -1,17 +1,17 @@
-- [ ] Pagination
 - [x] Context Menu
-- [ ] Divider
 - [x] FlexContainer
 - [x] Textarea
-- [ ] Table
 - [x] Select
-- [ ] Pin Input
 - [x] Switch
 - [x] Chip
 - [x] BlockArea
-- [ ] TreeView
-- [ ] Splitter
-- [ ] Collapsible
+- [x] Splitter
+- [x] Collapsible
 - [x] Progress
-- [ ] Tabs
 - [x] Slider
+- [ ] Pagination
+- [ ] Divider
+- [ ] Table
+- [ ] Pin Input
+- [ ] TreeView
+- [ ] Toast / Notification

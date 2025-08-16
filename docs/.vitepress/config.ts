@@ -58,6 +58,10 @@ export default defineConfig({
               link: '/components/editable-area',
             },
             {
+              text: 'Notification 通知',
+              link: '/components/notification',
+            },
+            {
               text: 'MentionableTextArea 可提及文本域',
               link: '/components/mentionable-textarea',
             },

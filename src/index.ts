@@ -31,6 +31,11 @@ import {
   SplitterPanel as SHSplitterPanel,
   SplitterResizeHandle as SHSplitterResizeHandle,
 } from './components/Splitter'
+import {
+  SHNotificationProvider,
+  SHNotification,
+  useNotification,
+} from './components/Notification'
 
 // 組件列表
 const components = {
@@ -60,6 +65,8 @@ const components = {
   SHSplitterGroup,
   SHSplitterPanel,
   SHSplitterResizeHandle,
+  SHNotificationProvider,
+  SHNotification,
 }
 
 /**
@@ -131,6 +138,16 @@ export type {
   SplitterPanelSlots,
   SplitterResizeHandleSlots,
 } from './components/Splitter/types'
+export type {
+  NotificationConfig,
+  NotificationInstance,
+  NotificationProviderProps,
+  NotificationApi,
+  NotificationProps,
+  NotificationEmits,
+  NotificationSlots,
+  NotificationType,
+} from './components/Notification/types'
 
 // 安裝函數
 const install = (app: App) => {
@@ -182,4 +199,7 @@ export {
   SHSplitterGroup,
   SHSplitterPanel,
   SHSplitterResizeHandle,
+  SHNotificationProvider,
+  SHNotification,
+  useNotification,
 }
