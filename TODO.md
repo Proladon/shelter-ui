@@ -9,9 +9,9 @@
 - [x] Collapsible
 - [x] Progress
 - [x] Slider
+- [x] Toast / Notification
 - [ ] Pagination
 - [ ] Divider
 - [ ] Table
 - [ ] Pin Input
 - [ ] TreeView
-- [ ] Toast / Notification
