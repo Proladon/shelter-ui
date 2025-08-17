@@ -9,6 +9,7 @@
   >
     <div
       v-if="visible"
+      ref="notificationRef"
       class="sh-notification"
       :class="[
         `sh-notification--${config.type}`,
@@ -17,8 +18,6 @@
         },
       ]"
       @click="handleClick"
-      @mouseenter="handleMouseEnter"
-      @mouseleave="handleMouseLeave"
     >
       <!-- 圖標區域 -->
       <div class="sh-notification__icon">
@@ -62,10 +61,12 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, watch, onUnmounted } from 'vue'
 import { IconX } from '@tabler/icons-vue'
 import type { NotificationProps, NotificationEmits } from './types'
 import { notificationIconMap } from './_icon-map'
+import { useMouseInElement } from '@vueuse/core'
+import { useTemplateRef } from 'vue'
 
 defineOptions({
   name: 'SHNotification',
@@ -78,6 +79,9 @@ const props = withDefaults(defineProps<NotificationProps>(), {
 const emit = defineEmits<NotificationEmits>()
 
 const visible = ref(false)
+const notificationEl = useTemplateRef<HTMLDivElement>('notificationRef')
+const { isOutside } = useMouseInElement(notificationEl)
+
 let timer: number | null = null
 
 const iconComponent = computed(() => {
@@ -127,20 +131,27 @@ onMounted(() => {
   startAutoCloseTimer()
 })
 
-// 滑鼠懸停時暫停自動關閉
-const handleMouseEnter = () => {
-  clearAutoCloseTimer()
-}
+// 監聽 isOutside，滑鼠進入通知元件時暫停自動關閉；滑鼠離開時恢復
+watch(isOutside, (outside) => {
+  if (outside === false) {
+    // mouse is inside element
+    clearAutoCloseTimer()
+  } else if (outside === true) {
+    // mouse left element
+    startAutoCloseTimer()
+  }
+})
 
-const handleMouseLeave = () => {
-  startAutoCloseTimer()
-}
+onUnmounted(() => {
+  clearAutoCloseTimer()
+})
 </script>
 
 <style lang="scss" scoped>
 .sh-notification {
   @apply relative flex items-start gap-3 p-4 rounded-lg shadow-lg;
-  @apply bg-bg.primary border border-border.base;
+  @apply backdrop-blur-md;
+  @apply bg-bg.primary border border-solid border-border.base;
   @apply min-w-[320px] max-w-[400px];
   @apply cursor-pointer select-none;
   @apply transition-all duration-200;
@@ -199,12 +210,12 @@ const handleMouseLeave = () => {
   }
 
   &__title {
-    @apply font-medium text-text.base mb-1;
+    @apply font-semibold text-gray-300 mb-1;
     @apply text-sm leading-5;
   }
 
   &__message {
-    @apply text-text.base.fade text-sm leading-5;
+    @apply text-gray-400 text-sm leading-5;
   }
 
   &__actions {
@@ -214,12 +225,12 @@ const handleMouseLeave = () => {
   &__close {
     @apply absolute top-3 right-3;
     @apply w-5 h-5 flex items-center justify-center;
-    @apply text-text.base.fade hover:text-text.base;
+    @apply text-text.base hover:text-text.base;
     @apply rounded transition-colors;
-    @apply focus:outline-none focus:ring-2 focus:ring-primary;
+    @apply outline-none;
 
     &:hover {
-      @apply bg-bg.secondary;
+      @apply text-text.base.lighten;
     }
   }
 }

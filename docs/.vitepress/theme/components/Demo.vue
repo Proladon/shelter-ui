@@ -1,20 +1,22 @@
 <template>
   <SHConfigProvider>
-    <div class="shelter-demo">
-      <div class="shelter-demo-preview">
-        <div class="shelter-demo-content s-component-container">
-          <slot></slot>
+    <SHNotificationProvider>
+      <div class="shelter-demo">
+        <div class="shelter-demo-preview">
+          <div class="shelter-demo-content s-component-container">
+            <slot></slot>
+          </div>
+        </div>
+        <div class="shelter-demo-code" v-if="showCode">
+          <slot name="code"></slot>
+        </div>
+        <div class="shelter-demo-footer" @click="toggleCode">
+          <SButton class="w-full" text type="success">
+            {{ showCode ? '隱藏代碼' : '顯示代碼' }}
+          </SButton>
         </div>
       </div>
-      <div class="shelter-demo-code" v-if="showCode">
-        <slot name="code"></slot>
-      </div>
-      <div class="shelter-demo-footer" @click="toggleCode">
-        <SButton class="w-full" text type="success">
-          {{ showCode ? '隱藏代碼' : '顯示代碼' }}
-        </SButton>
-      </div>
-    </div>
+    </SHNotificationProvider>
   </SHConfigProvider>
 </template>
 
