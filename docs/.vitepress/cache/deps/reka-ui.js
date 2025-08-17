@@ -25,7 +25,7 @@ import {
   useTimeoutFn,
   watchImmediate,
   watchOnce
-} from "./chunk-SFGNGNK6.js";
+} from "./chunk-C6OTK2XB.js";
 import {
   Comment,
   Fragment,
@@ -90,7 +90,7 @@ import {
   withKeys,
   withMemo,
   withModifiers
-} from "./chunk-AUVNIKOZ.js";
+} from "./chunk-VZ6GO55D.js";
 import {
   __privateAdd,
   __privateGet
@@ -3823,7 +3823,7 @@ var hideOthers = function(originalTarget, parentNode, markerName) {
       return null;
     };
   }
-  targets.push.apply(targets, Array.from(activeParentNode.querySelectorAll("[aria-live]")));
+  targets.push.apply(targets, Array.from(activeParentNode.querySelectorAll("[aria-live], script")));
   return applyAttributeToOthers(targets, activeParentNode, markerName, "aria-hidden");
 };
 

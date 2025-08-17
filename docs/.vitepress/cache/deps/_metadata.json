@@ -1,58 +1,58 @@
 {
-  "hash": "a570a12e",
+  "hash": "3a12d8e2",
   "configHash": "ffe3bd0e",
-  "lockfileHash": "56e6ecb4",
-  "browserHash": "90e42496",
+  "lockfileHash": "4ca20232",
+  "browserHash": "f717998c",
   "optimized": {
     "vue": {
       "src": "../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "0322832d",
+      "fileHash": "7cde5897",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../../node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "2a9e09be",
+      "fileHash": "4917bc4a",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
       "src": "../../../../node_modules/vitepress/node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "f3a0cf49",
-      "needsInterop": false
-    },
-    "reka-ui": {
-      "src": "../../../../node_modules/reka-ui/dist/index.js",
-      "file": "reka-ui.js",
-      "fileHash": "1a776d08",
-      "needsInterop": false
-    },
-    "color": {
-      "src": "../../../../node_modules/color/index.js",
-      "file": "color.js",
-      "fileHash": "516150b8",
-      "needsInterop": false
-    },
-    "@tabler/icons-vue": {
-      "src": "../../../../node_modules/@tabler/icons-vue/dist/esm/tabler-icons-vue.mjs",
-      "file": "@tabler_icons-vue.js",
-      "fileHash": "07568081",
+      "fileHash": "e7bfea48",
       "needsInterop": false
     },
     "@vueuse/core": {
       "src": "../../../../node_modules/@vueuse/core/index.mjs",
       "file": "@vueuse_core.js",
-      "fileHash": "c34b7950",
+      "fileHash": "352b6a83",
+      "needsInterop": false
+    },
+    "@tabler/icons-vue": {
+      "src": "../../../../node_modules/@tabler/icons-vue/dist/esm/tabler-icons-vue.mjs",
+      "file": "@tabler_icons-vue.js",
+      "fileHash": "743f391b",
+      "needsInterop": false
+    },
+    "color": {
+      "src": "../../../../node_modules/color/index.js",
+      "file": "color.js",
+      "fileHash": "0d636253",
+      "needsInterop": false
+    },
+    "reka-ui": {
+      "src": "../../../../node_modules/reka-ui/dist/index.js",
+      "file": "reka-ui.js",
+      "fileHash": "5829f7ed",
       "needsInterop": false
     }
   },
   "chunks": {
-    "chunk-SFGNGNK6": {
-      "file": "chunk-SFGNGNK6.js"
+    "chunk-C6OTK2XB": {
+      "file": "chunk-C6OTK2XB.js"
     },
-    "chunk-AUVNIKOZ": {
-      "file": "chunk-AUVNIKOZ.js"
+    "chunk-VZ6GO55D": {
+      "file": "chunk-VZ6GO55D.js"
     },
     "chunk-OYQD7GAK": {
       "file": "chunk-OYQD7GAK.js"

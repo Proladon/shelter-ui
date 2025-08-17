@@ -194,16 +194,16 @@ defineExpose<ScrollAreaMethods>({
 
 /* 主題變數 - 可透過 CSS 變數客製化 */
 .sh-scroll-area {
-  --scroll-thumb-color: theme('colors.gray.400');
-  --scroll-thumb-hover-color: theme('colors.gray.500');
-  --scroll-thumb-active-color: theme('colors.gray.600');
-  --scroll-track-color: theme('colors.gray.100');
+  --scroll-thumb-color: #9ca3af;
+  --scroll-thumb-hover-color: #6b7280;
+  --scroll-thumb-active-color: #4b5563;
+  --scroll-track-color: #f3f4f6;
 
   .dark & {
-    --scroll-thumb-color: theme('colors.gray.600');
-    --scroll-thumb-hover-color: theme('colors.gray.500');
-    --scroll-thumb-active-color: theme('colors.gray.400');
-    --scroll-track-color: theme('colors.gray.800');
+    --scroll-thumb-color: #4b5563;
+    --scroll-thumb-hover-color: #6b7280;
+    --scroll-thumb-active-color: #9ca3af;
+    --scroll-track-color: #1f2937;
   }
 
   & .sh-scroll-thumb {

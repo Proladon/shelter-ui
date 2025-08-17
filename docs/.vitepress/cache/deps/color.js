@@ -333,7 +333,9 @@ var convert = {
   cmyk: { channels: 4, labels: "cmyk" },
   xyz: { channels: 3, labels: "xyz" },
   lab: { channels: 3, labels: "lab" },
+  oklab: { channels: 3, labels: ["okl", "oka", "okb"] },
   lch: { channels: 3, labels: "lch" },
+  oklch: { channels: 3, labels: ["okl", "okc", "okh"] },
   hex: { channels: 1, labels: ["hex"] },
   keyword: { channels: 1, labels: ["keyword"] },
   ansi16: { channels: 1, labels: ["ansi16"] },
@@ -344,6 +346,13 @@ var convert = {
 };
 var conversions_default = convert;
 var LAB_FT = (6 / 29) ** 3;
+function srgbNonlinearTransform(c) {
+  const cc = c > 31308e-7 ? 1.055 * c ** (1 / 2.4) - 0.055 : c * 12.92;
+  return Math.min(Math.max(0, cc), 1);
+}
+function srgbNonlinearTransformInv(c) {
+  return c > 0.04045 ? ((c + 0.055) / 1.055) ** 2.4 : c / 12.92;
+}
 for (const model of Object.keys(convert)) {
   if (!("channels" in convert[model])) {
     throw new Error("missing channels property: " + model);
@@ -458,6 +467,18 @@ convert.rgb.hwb = function(rgb) {
   b = 1 - 1 / 255 * Math.max(r, Math.max(g, b));
   return [h, w * 100, b * 100];
 };
+convert.rgb.oklab = function(rgb) {
+  const r = srgbNonlinearTransformInv(rgb[0] / 255);
+  const g = srgbNonlinearTransformInv(rgb[1] / 255);
+  const b = srgbNonlinearTransformInv(rgb[2] / 255);
+  const lp = Math.cbrt(0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b);
+  const mp = Math.cbrt(0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b);
+  const sp = Math.cbrt(0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b);
+  const l = 0.2104542553 * lp + 0.793617785 * mp - 0.0040720468 * sp;
+  const aa = 1.9779984951 * lp - 2.428592205 * mp + 0.4505937099 * sp;
+  const bb = 0.0259040371 * lp + 0.7827717662 * mp - 0.808675766 * sp;
+  return [l * 100, aa * 100, bb * 100];
+};
 convert.rgb.cmyk = function(rgb) {
   const r = rgb[0] / 255;
   const g = rgb[1] / 255;
@@ -492,12 +513,9 @@ convert.keyword.rgb = function(keyword) {
   return color_name_default[keyword];
 };
 convert.rgb.xyz = function(rgb) {
-  let r = rgb[0] / 255;
-  let g = rgb[1] / 255;
-  let b = rgb[2] / 255;
-  r = r > 0.04045 ? ((r + 0.055) / 1.055) ** 2.4 : r / 12.92;
-  g = g > 0.04045 ? ((g + 0.055) / 1.055) ** 2.4 : g / 12.92;
-  b = b > 0.04045 ? ((b + 0.055) / 1.055) ** 2.4 : b / 12.92;
+  const r = srgbNonlinearTransformInv(rgb[0] / 255);
+  const g = srgbNonlinearTransformInv(rgb[1] / 255);
+  const b = srgbNonlinearTransformInv(rgb[2] / 255);
   const x = r * 0.4124564 + g * 0.3575761 + b * 0.1804375;
   const y = r * 0.2126729 + g * 0.7151522 + b * 0.072175;
   const z = r * 0.0193339 + g * 0.119192 + b * 0.9503041;
@@ -694,12 +712,9 @@ convert.xyz.rgb = function(xyz) {
   r = x * 3.2404542 + y * -1.5371385 + z * -0.4985314;
   g = x * -0.969266 + y * 1.8760108 + z * 0.041556;
   b = x * 0.0556434 + y * -0.2040259 + z * 1.0572252;
-  r = r > 31308e-7 ? 1.055 * r ** (1 / 2.4) - 0.055 : r * 12.92;
-  g = g > 31308e-7 ? 1.055 * g ** (1 / 2.4) - 0.055 : g * 12.92;
-  b = b > 31308e-7 ? 1.055 * b ** (1 / 2.4) - 0.055 : b * 12.92;
-  r = Math.min(Math.max(0, r), 1);
-  g = Math.min(Math.max(0, g), 1);
-  b = Math.min(Math.max(0, b), 1);
+  r = srgbNonlinearTransform(r);
+  g = srgbNonlinearTransform(g);
+  b = srgbNonlinearTransform(b);
   return [r * 255, g * 255, b * 255];
 };
 convert.xyz.lab = function(xyz) {
@@ -716,6 +731,48 @@ convert.xyz.lab = function(xyz) {
   const a = 500 * (x - y);
   const b = 200 * (y - z);
   return [l, a, b];
+};
+convert.xyz.oklab = function(xyz) {
+  const x = xyz[0] / 100;
+  const y = xyz[1] / 100;
+  const z = xyz[2] / 100;
+  const lp = Math.cbrt(0.8189330101 * x + 0.3618667424 * y - 0.1288597137 * z);
+  const mp = Math.cbrt(0.0329845436 * x + 0.9293118715 * y + 0.0361456387 * z);
+  const sp = Math.cbrt(0.0482003018 * x + 0.2643662691 * y + 0.633851707 * z);
+  const l = 0.2104542553 * lp + 0.793617785 * mp - 0.0040720468 * sp;
+  const a = 1.9779984951 * lp - 2.428592205 * mp + 0.4505937099 * sp;
+  const b = 0.0259040371 * lp + 0.7827717662 * mp - 0.808675766 * sp;
+  return [l * 100, a * 100, b * 100];
+};
+convert.oklab.oklch = function(oklab) {
+  return convert.lab.lch(oklab);
+};
+convert.oklab.xyz = function(oklab) {
+  const ll = oklab[0] / 100;
+  const a = oklab[1] / 100;
+  const b = oklab[2] / 100;
+  const l = (0.999999998 * ll + 0.396337792 * a + 0.215803758 * b) ** 3;
+  const m = (1.000000008 * ll - 0.105561342 * a - 0.063854175 * b) ** 3;
+  const s = (1.000000055 * ll - 0.089484182 * a - 1.291485538 * b) ** 3;
+  const x = 1.227013851 * l - 0.55779998 * m + 0.281256149 * s;
+  const y = -0.040580178 * l + 1.11225687 * m - 0.071676679 * s;
+  const z = -0.076381285 * l - 0.421481978 * m + 1.58616322 * s;
+  return [x * 100, y * 100, z * 100];
+};
+convert.oklab.rgb = function(oklab) {
+  const ll = oklab[0] / 100;
+  const aa = oklab[1] / 100;
+  const bb = oklab[2] / 100;
+  const l = (ll + 0.3963377774 * aa + 0.2158037573 * bb) ** 3;
+  const m = (ll - 0.1055613458 * aa - 0.0638541728 * bb) ** 3;
+  const s = (ll - 0.0894841775 * aa - 1.291485548 * bb) ** 3;
+  const r = srgbNonlinearTransform(4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s);
+  const g = srgbNonlinearTransform(-1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s);
+  const b = srgbNonlinearTransform(-0.0041960863 * l - 0.7034186147 * m + 1.707614701 * s);
+  return [r * 255, g * 255, b * 255];
+};
+convert.oklch.oklab = function(oklch) {
+  return convert.lch.lab(oklch);
 };
 convert.lab.xyz = function(lab) {
   const l = lab[0];
