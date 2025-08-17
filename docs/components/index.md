@@ -10,6 +10,7 @@ Shelter UI 提供了一系列簡潔、高效、易用的 UI 組件，幫助你�
 - [Badge 徽章](/components/badge) - 用於顯示計數或狀態信息的小型標記
 - [Button 按鈕](/components/button) - 用於觸發操作的按鈕組件
 - [Input 輸入框](/components/input) - 用於接收用戶輸入的文本框組件
+- [ScrollArea 滾動區域](/components/scroll-area) - 可客製化樣式的滾動區塊元件
 - [Select 選擇器](/components/select) - 用於從一組選項中選擇一個或多個值的下拉選擇組件
 - [Switch 開關](/components/switch) - 用於切換開啟/關閉狀態的開關元件
 - [Spin 加載中](/components/spin) - 用於顯示加載中的狀態組件

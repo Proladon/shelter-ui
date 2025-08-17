@@ -25,6 +25,7 @@ import SHContextMenu from './components/ContextMenu/index.vue'
 import SHProgress from './components/Progress/index.vue'
 import SHSlider from './components/Slider/index.vue'
 import SHCollapsible from './components/Collapsible/index.vue'
+import SHScrollArea from './components/ScrollArea/index.vue'
 import SHSplitter from './components/Splitter/index.vue'
 import {
   SplitterGroup as SHSplitterGroup,
@@ -61,6 +62,7 @@ const components = {
   SHProgress,
   SHSlider,
   SHCollapsible,
+  SHScrollArea,
   SHSplitter,
   SHSplitterGroup,
   SHSplitterPanel,
@@ -131,6 +133,11 @@ export type {
   CollapsibleEmits,
 } from './components/Collapsible/types'
 export type {
+  ScrollAreaProps,
+  ScrollAreaMethods,
+  ScrollAreaSlots,
+} from './components/ScrollArea/types'
+export type {
   SplitterGroupCustomProps,
   SplitterPanelCustomProps,
   SplitterResizeHandleCustomProps,
@@ -195,6 +202,7 @@ export {
   SHProgress,
   SHSlider,
   SHCollapsible,
+  SHScrollArea,
   SHSplitter,
   SHSplitterGroup,
   SHSplitterPanel,

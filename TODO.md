@@ -13,5 +13,7 @@
 - [ ] Pagination
 - [ ] Divider
 - [ ] Table
+- [ ] Tag
 - [ ] Pin Input
 - [ ] TreeView
+- [ ] ScrollArea

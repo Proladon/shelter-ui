@@ -29,9 +29,9 @@ CREATE: docs/components/<component_name>.md
 UPDATE: docs/components/<component_name>.md
   - FOLLOW: Prps/ComponentDocContent.md
 
-- Task3: Update component doc sidebar
+- Task3: Add component to docs sidebar
 UPDATE: docs/.vitepress/config.ts
-  - UPDATE themeConfig.sidebar
+  - UPDATE: themeConfig.sidebar
 ```
 
 ## Important

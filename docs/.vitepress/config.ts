@@ -45,6 +45,7 @@ export default defineConfig({
             { text: 'Select 選擇器', link: '/components/select' },
             { text: 'Switch 開關', link: '/components/switch' },
             { text: 'Spin 加載中', link: '/components/spin' },
+            { text: 'ScrollArea 滾動區域', link: '/components/scroll-area' },
             {
               text: 'BorderContainer 邊框容器',
               link: '/components/border-container',
