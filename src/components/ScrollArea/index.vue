@@ -93,7 +93,7 @@ const scrollTo = (options: ScrollToOptions) => {
   }
 }
 
-const getViewport = () => scrollAreaRoot.value?.viewport
+const getViewport = () => scrollAreaRoot.value?.viewport || null
 
 // 暴露給父組件的方法和屬性
 defineExpose<ScrollAreaMethods>({
@@ -173,7 +173,6 @@ defineExpose<ScrollAreaMethods>({
   & .sh-scroll-corner {
     @apply absolute bottom-0 right-0 w-2.5 h-2.5;
     /* @apply bg-gray-50 dark:bg-gray-900/20; */
-    @apply bg-secondary dark:(bg-secondary);
   }
 
   & .sh-scroll-viewport {
