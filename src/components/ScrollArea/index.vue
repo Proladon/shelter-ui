@@ -11,15 +11,23 @@
       <slot />
     </ScrollAreaViewport>
 
-    <ScrollAreaScrollbar orientation="vertical" :class="scrollbarClasses">
+    <ScrollAreaScrollbar
+      v-if="scrollY"
+      orientation="vertical"
+      :class="scrollbarClasses"
+    >
       <ScrollAreaThumb :class="thumbClasses" />
     </ScrollAreaScrollbar>
 
-    <ScrollAreaScrollbar orientation="horizontal" :class="scrollbarClasses">
+    <ScrollAreaScrollbar
+      v-if="scrollX"
+      orientation="horizontal"
+      :class="scrollbarClasses"
+    >
       <ScrollAreaThumb :class="thumbClasses" />
     </ScrollAreaScrollbar>
 
-    <ScrollAreaCorner :class="cornerClasses" />
+    <ScrollAreaCorner v-if="scrollX && scrollY" :class="cornerClasses" />
   </ScrollAreaRoot>
 </template>
 
@@ -38,9 +46,11 @@ const props = withDefaults(defineProps<ScrollAreaProps>(), {
   type: 'hover',
   scrollHideDelay: 600,
   dir: 'ltr',
+  scrollX: false,
+  scrollY: true,
 })
 
-const scrollAreaRoot = ref<HTMLElement | null>(null)
+const scrollAreaRoot = ref<InstanceType<typeof ScrollAreaRoot> | null>(null)
 
 // 樣式類別
 const rootClasses = computed(() => ['sh-scroll-area', props.class])
@@ -57,7 +67,6 @@ const cornerClasses = computed(() => ['sh-scroll-corner'])
 const scrollTop = () => {
   const viewportEl = scrollAreaRoot.value?.viewport
   if (viewportEl) {
-    console.log(viewportEl)
     viewportEl.scrollTo({ top: 0, behavior: 'smooth' })
   }
 }
@@ -97,28 +106,37 @@ defineExpose<ScrollAreaMethods>({
 </script>
 
 <style lang="postcss">
+:root {
+  --reka-scroll-area-thumb-width: 100%;
+  --reka-scroll-area-thumb-height: 100%;
+}
+
 .sh-scroll-area {
   @apply relative overflow-hidden;
 
   /* 確保滾動條在內容之上，不佔用布局空間 */
   & .sh-scrollbar {
     @apply absolute z-10 select-none touch-none;
-    @apply bg-transparent transition-colors duration-150;
+    @apply rounded-full;
+    @apply transition transition-all duration-300;
+    @apply bg-transparent;
 
     &[data-orientation='vertical'] {
-      @apply top-0 right-0 h-full w-2.5;
-      @apply border-l border-l-transparent;
+      @apply top-0 right-0 h-full w-[8px];
+      /* @apply border-l border-l-transparent; */
+      @apply border-none;
       @apply pl-px;
     }
 
     &[data-orientation='horizontal'] {
-      @apply bottom-0 left-0 w-full h-2.5;
-      @apply border-t border-t-transparent;
+      @apply bottom-0 left-0 w-full h-[8px];
+      /* @apply border-t border-t-transparent; */
+      @apply border-none;
       @apply pt-px;
     }
 
     &:hover {
-      @apply bg-gray-50 dark:bg-gray-900/20;
+      @apply bg-bg-text.base.fade dark:(bg-text.base.fade);
     }
 
     &[data-state='hidden'] {
@@ -131,9 +149,11 @@ defineExpose<ScrollAreaMethods>({
   }
 
   & .sh-scroll-thumb {
-    @apply relative block rounded-full bg-gray-400/50;
+    /* @apply relative block rounded-full bg-gray-400/50; */
+    @apply relative block rounded-full bg-secondary;
     @apply transition-colors duration-150;
-    @apply hover:bg-gray-400/70 active:bg-gray-400/90;
+    /* @apply hover:bg-gray-400/70 active:bg-gray-400/90; */
+    @apply hover:bg-secondary active:bg-secondary;
 
     &[data-state='hidden'] {
       @apply opacity-0;
@@ -152,7 +172,8 @@ defineExpose<ScrollAreaMethods>({
 
   & .sh-scroll-corner {
     @apply absolute bottom-0 right-0 w-2.5 h-2.5;
-    @apply bg-gray-50 dark:bg-gray-900/20;
+    /* @apply bg-gray-50 dark:bg-gray-900/20; */
+    @apply bg-secondary dark:(bg-secondary);
   }
 
   & .sh-scroll-viewport {

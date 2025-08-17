@@ -17,9 +17,11 @@
         基本的滾動區域，包含垂直和水平滾動
       </p>
     </div>
-    
+
     <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-      <ScrollArea class="h-48 w-full border border-gray-300 dark:border-gray-600 rounded">
+      <ScrollArea
+        class="h-48 w-full border border-gray-300 dark:border-gray-600 rounded"
+      >
         <div class="p-4 w-[600px]">
           <h4 class="mb-4 text-sm font-medium leading-none">標籤</h4>
           <div v-for="tag in tags" :key="tag" class="text-sm mb-2 last:mb-0">
@@ -58,7 +60,7 @@ const tags = Array.from({ length: 50 }, (_, i) => `v1.2.0-beta.${i + 1}`)
         透過組件方法控制滾動位置，支援滾動到頂部、底部等功能
       </p>
     </div>
-    
+
     <div class="space-y-4">
       <!-- 控制按鈕 -->
       <div class="flex flex-wrap gap-2">
@@ -81,7 +83,7 @@ const tags = Array.from({ length: 50 }, (_, i) => `v1.2.0-beta.${i + 1}`)
           滾動到中間
         </button>
       </div>
-      
+
       <!-- 滾動區域 -->
       <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
         <ScrollArea
@@ -98,14 +100,16 @@ const tags = Array.from({ length: 50 }, (_, i) => `v1.2.0-beta.${i + 1}`)
                   這是滾動區域的頂部內容
                 </p>
               </div>
-              
-              <div 
-                v-for="item in items" 
-                :key="item.id" 
+
+              <div
+                v-for="item in items"
+                :key="item.id"
                 class="p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm"
               >
                 <h5 class="font-medium mb-1">{{ item.title }}</h5>
-                <p class="text-sm text-gray-600 dark:text-gray-400">{{ item.description }}</p>
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                  {{ item.description }}
+                </p>
               </div>
             </div>
           </div>
@@ -134,7 +138,7 @@ const scrollToMiddle = () => {
     const maxScrollTop = viewport.scrollHeight - viewport.clientHeight
     scrollArea.value?.scrollTo({
       top: maxScrollTop / 2,
-      behavior: 'smooth'
+      behavior: 'smooth',
     })
   }
 }
@@ -162,7 +166,7 @@ const scrollToMiddle = () => {
           <h4 class="font-medium">Auto（預設）</h4>
           <p class="text-xs text-gray-500">內容溢出時顯示捲軸</p>
         </div>
-        <ScrollArea 
+        <ScrollArea
           type="auto"
           class="h-32 w-full border border-gray-300 dark:border-gray-600 rounded"
         >
@@ -173,14 +177,14 @@ const scrollToMiddle = () => {
           </div>
         </ScrollArea>
       </div>
-      
+
       <!-- Always 類型 -->
       <div class="space-y-3">
         <div>
           <h4 class="font-medium">Always</h4>
           <p class="text-xs text-gray-500">總是顯示捲軸</p>
         </div>
-        <ScrollArea 
+        <ScrollArea
           type="always"
           class="h-32 w-full border border-gray-300 dark:border-gray-600 rounded"
         >
@@ -191,14 +195,14 @@ const scrollToMiddle = () => {
           </div>
         </ScrollArea>
       </div>
-      
+
       <!-- Scroll 類型 -->
       <div class="space-y-3">
         <div>
           <h4 class="font-medium">Scroll</h4>
           <p class="text-xs text-gray-500">滾動時顯示捲軸</p>
         </div>
-        <ScrollArea 
+        <ScrollArea
           type="scroll"
           class="h-32 w-full border border-gray-300 dark:border-gray-600 rounded"
         >
@@ -209,20 +213,112 @@ const scrollToMiddle = () => {
           </div>
         </ScrollArea>
       </div>
-      
+
       <!-- Hover 類型 -->
       <div class="space-y-3">
         <div>
           <h4 class="font-medium">Hover</h4>
           <p class="text-xs text-gray-500">hover 或滾動時顯示捲軸</p>
         </div>
-        <ScrollArea 
+        <ScrollArea
           type="hover"
           class="h-32 w-full border border-gray-300 dark:border-gray-600 rounded"
         >
           <div class="p-3 space-y-2">
             <div v-for="i in 12" :key="`hover-${i}`" class="text-sm">
               Hover 類型項目 {{ i }}
+            </div>
+          </div>
+        </ScrollArea>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ScrollArea } from '../index'
+</script>
+```
+
+  </template>
+</Demo>
+
+## 滾動方向控制
+
+透過 `scrollX` 和 `scrollY` props 控制允許的滾動方向。
+
+<Demo>
+  <Direction />
+  <template #code>
+
+```vue
+<template>
+  <div class="space-y-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- 僅垂直滾動 -->
+      <div class="space-y-3">
+        <div>
+          <h4 class="font-medium">僅垂直滾動</h4>
+          <p class="text-xs text-gray-500">
+            scrollY=true, scrollX=false（預設）
+          </p>
+        </div>
+        <ScrollArea
+          :scroll-y="true"
+          :scroll-x="false"
+          class="h-32 w-full border rounded"
+        >
+          <div class="p-3 w-[400px]">
+            <div class="space-y-2">
+              <div v-for="i in 12" :key="`vertical-${i}`" class="text-sm">
+                垂直滾動項目 {{ i }} - 長文字內容
+              </div>
+            </div>
+          </div>
+        </ScrollArea>
+      </div>
+
+      <!-- 僅水平滾動 -->
+      <div class="space-y-3">
+        <div>
+          <h4 class="font-medium">僅水平滾動</h4>
+          <p class="text-xs text-gray-500">scrollY=false, scrollX=true</p>
+        </div>
+        <ScrollArea
+          :scroll-y="false"
+          :scroll-x="true"
+          class="h-32 w-full border rounded"
+        >
+          <div class="p-3 w-[600px] h-20 flex items-center">
+            <div class="flex gap-4 whitespace-nowrap">
+              <div
+                v-for="i in 20"
+                :key="`horizontal-${i}`"
+                class="text-sm bg-gray-100 px-3 py-1 rounded"
+              >
+                水平項目 {{ i }}
+              </div>
+            </div>
+          </div>
+        </ScrollArea>
+      </div>
+
+      <!-- 雙向滾動 -->
+      <div class="space-y-3">
+        <div>
+          <h4 class="font-medium">雙向滾動</h4>
+          <p class="text-xs text-gray-500">scrollY=true, scrollX=true</p>
+        </div>
+        <ScrollArea
+          :scroll-y="true"
+          :scroll-x="true"
+          class="h-32 w-full border rounded"
+        >
+          <div class="p-3 w-[500px]">
+            <div class="space-y-2">
+              <div v-for="i in 10" :key="`both-${i}`" class="text-sm">
+                雙向滾動項目 {{ i }}: 長文字內容會觸發水平和垂直滾動
+              </div>
             </div>
           </div>
         </ScrollArea>
@@ -248,6 +344,8 @@ import { ScrollArea } from '../index'
 | `type`            | `'auto' \| 'always' \| 'scroll' \| 'hover'` | `'hover'` | 捲軸顯示策略                         |
 | `scrollHideDelay` | `number`                                    | `600`     | 停止互動後隱藏捲軸的延遲時間（毫秒） |
 | `dir`             | `'ltr' \| 'rtl'`                            | `'ltr'`   | 讀取方向                             |
+| `scrollX`         | `boolean`                                   | `false`   | 是否允許水平滾動                     |
+| `scrollY`         | `boolean`                                   | `true`    | 是否允許垂直滾動                     |
 | `class`           | `string`                                    | -         | 自定義根元素的 class                 |
 | `style`           | `string \| object`                          | -         | 自定義根元素的 style                 |
 
@@ -301,4 +399,5 @@ import { SHConfigProvider } from '@/index'
 import Basic from '@/components/ScrollArea/demos/Basic.vue'
 import CustomScroll from '@/components/ScrollArea/demos/CustomScroll.vue'
 import Types from '@/components/ScrollArea/demos/Types.vue'
+import Direction from '@/components/ScrollArea/demos/Direction.vue'
 </script>

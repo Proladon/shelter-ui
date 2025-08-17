@@ -20,6 +20,16 @@ export interface ScrollAreaProps {
   dir?: 'ltr' | 'rtl'
 
   /**
+   * 是否允許水平滾動
+   */
+  scrollX?: boolean
+
+  /**
+   * 是否允許垂直滾動
+   */
+  scrollY?: boolean
+
+  /**
    * 自定義根元素的 class
    */
   class?: string
