@@ -20,6 +20,10 @@ export interface NotificationConfig {
    */
   icon?: Component
   /**
+   * 自定義圖標顏色
+   */
+  iconColor?: string
+  /**
    * 自動關閉延遲時間（毫秒），設為 0 表示不自動關閉
    */
   duration?: number

@@ -25,6 +25,7 @@
           <component
             :is="config.icon || iconComponent"
             class="sh-notification__icon-component"
+            :color="config.iconColor || iconColor"
           />
         </slot>
       </div>
@@ -54,7 +55,7 @@
         @click.stop="handleClose"
         :aria-label="'關閉通知'"
       >
-        <IconX />
+        <IconX :size="16" color="var(--sh-status-info)" />
       </button>
     </div>
   </Transition>
@@ -67,6 +68,7 @@ import type { NotificationProps, NotificationEmits } from './types'
 import { notificationIconMap } from './_icon-map'
 import { useMouseInElement } from '@vueuse/core'
 import { useTemplateRef } from 'vue'
+import { getCssVar } from '@/utils/style'
 
 defineOptions({
   name: 'SHNotification',
@@ -86,6 +88,17 @@ let timer: number | null = null
 
 const iconComponent = computed(() => {
   return notificationIconMap[props.config.type || 'info']
+})
+
+const iconColor = computed(() => {
+  const statusMap = {
+    info: 'info',
+    success: 'success',
+    warning: 'warning',
+    error: 'danger',
+  }
+
+  return getCssVar(`sh-status-${statusMap[props.config.type || 'info']}`)
 })
 
 const handleClick = () => {
