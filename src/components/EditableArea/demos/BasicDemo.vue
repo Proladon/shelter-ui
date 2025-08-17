@@ -2,10 +2,14 @@
   <div class="flex flex-col gap-4">
     <h4>基本用法</h4>
     <SHEditableArea>
-      <div>
-        <p>這是一個可編輯區域的示例內容</p>
-        <p>點擊右上角的編輯按鈕可觸發編輯事件</p>
-      </div>
+      <template v-slot="{ editing }">
+        <div v-if="!editing">
+          <p>現在處於檢視模式</p>
+        </div>
+        <div v-else>
+          <p>現在處於編輯模式</p>
+        </div>
+      </template>
     </SHEditableArea>
 
     <h4>不可編輯狀態</h4>
