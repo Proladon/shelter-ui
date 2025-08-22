@@ -38,6 +38,14 @@ import {
   SHNotification,
   useNotification,
 } from "./components/Notification"
+import SHRadio, { RadioGroup as SHRadioGroup } from "./components/Radio"
+import { SHCheckbox, SHCheckboxGroup } from "./components/Checkbox"
+import {
+  SHCarousel,
+  SHCarouselItem,
+  SHCarouselNavigation,
+  SHCarouselIndicators,
+} from "./components/Carousel"
 
 // 組件列表
 const components = {
@@ -71,6 +79,14 @@ const components = {
   SHSplitterResizeHandle,
   SHNotificationProvider,
   SHNotification,
+  SHRadio,
+  SHRadioGroup,
+  SHCheckbox,
+  SHCheckboxGroup,
+  SHCarousel,
+  SHCarouselItem,
+  SHCarouselNavigation,
+  SHCarouselIndicators,
 }
 
 /**
@@ -214,4 +230,12 @@ export {
   SHNotificationProvider,
   SHNotification,
   useNotification,
+  SHRadio,
+  SHRadioGroup,
+  SHCheckbox,
+  SHCheckboxGroup,
+  SHCarousel,
+  SHCarouselItem,
+  SHCarouselNavigation,
+  SHCarouselIndicators,
 }

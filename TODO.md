@@ -11,9 +11,13 @@
 - [x] Slider
 - [x] Toast / Notification
 - [x] Tag
+- [x] ScrollArea
 - [ ] Pagination
 - [ ] Divider
 - [ ] Table
 - [ ] Pin Input
 - [ ] TreeView
-- [ ] ScrollArea
+- [ ] Carousel
+- [ ] Radio
+- [ ] Radio Group
+- [ ] Checkbox
