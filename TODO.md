@@ -10,10 +10,10 @@
 - [x] Progress
 - [x] Slider
 - [x] Toast / Notification
+- [x] Tag
 - [ ] Pagination
 - [ ] Divider
 - [ ] Table
-- [ ] Tag
 - [ ] Pin Input
 - [ ] TreeView
 - [ ] ScrollArea

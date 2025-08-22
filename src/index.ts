@@ -1,42 +1,43 @@
-import type { App, Plugin } from 'vue'
+import type { App, Plugin } from "vue"
 
 // 導入組件
-import SHConfigProvider from './components/ConfigProvider/index.vue'
-import SHButton from './components/Button/index.vue'
-import SHInput from './components/Input/index.vue'
-import SHTextarea from './components/Textarea/index.vue'
-import SHSelect from './components/Select/index.vue'
-import SHSpin from './components/Spin/index.vue'
-import SHBorderContainer from './components/BorderContainer/index.vue'
-import SHPopover from './components/Popover/index.vue'
-import SHEditableArea from './components/EditableArea/index.vue'
-import SHTooltip from './components/Tooltip/index.vue'
-import SHBadge from './components/Badge/index.vue'
-import SHChip from './components/Chip/index.vue'
-import SHDialog from './components/Dialog/index.vue'
-import SHBlockArea from './components/BlockArea/index.vue'
+import SHConfigProvider from "./components/ConfigProvider/index.vue"
+import SHButton from "./components/Button/index.vue"
+import SHInput from "./components/Input/index.vue"
+import SHTextarea from "./components/Textarea/index.vue"
+import SHSelect from "./components/Select/index.vue"
+import SHSpin from "./components/Spin/index.vue"
+import SHBorderContainer from "./components/BorderContainer/index.vue"
+import SHPopover from "./components/Popover/index.vue"
+import SHEditableArea from "./components/EditableArea/index.vue"
+import SHTooltip from "./components/Tooltip/index.vue"
+import SHBadge from "./components/Badge/index.vue"
+import SHChip from "./components/Chip/index.vue"
+import SHTag from "./components/Tag/index.vue"
+import SHDialog from "./components/Dialog/index.vue"
+import SHBlockArea from "./components/BlockArea/index.vue"
 import {
   SHActiveButtonGroup,
   SHActiveButtonItem,
-} from './components/ActiveButtonGroup'
-import SHFlexContainer from './components/FlexContainer/index.vue'
-import SHMentionableTextArea from './components/MentionableTextArea/index.vue'
-import SHContextMenu from './components/ContextMenu/index.vue'
-import SHProgress from './components/Progress/index.vue'
-import SHSlider from './components/Slider/index.vue'
-import SHCollapsible from './components/Collapsible/index.vue'
-import SHScrollArea from './components/ScrollArea/index.vue'
-import SHSplitter from './components/Splitter/index.vue'
+} from "./components/ActiveButtonGroup"
+import SHFlexContainer from "./components/FlexContainer/index.vue"
+import SHMentionableTextArea from "./components/MentionableTextArea/index.vue"
+import SHContextMenu from "./components/ContextMenu/index.vue"
+import SHProgress from "./components/Progress/index.vue"
+import SHSlider from "./components/Slider/index.vue"
+import SHCollapsible from "./components/Collapsible/index.vue"
+import SHScrollArea from "./components/ScrollArea/index.vue"
+import SHSplitter from "./components/Splitter/index.vue"
 import {
   SplitterGroup as SHSplitterGroup,
   SplitterPanel as SHSplitterPanel,
   SplitterResizeHandle as SHSplitterResizeHandle,
-} from './components/Splitter'
+} from "./components/Splitter"
 import {
   SHNotificationProvider,
   SHNotification,
   useNotification,
-} from './components/Notification'
+} from "./components/Notification"
 
 // 組件列表
 const components = {
@@ -52,6 +53,7 @@ const components = {
   SHTooltip,
   SHBadge,
   SHChip,
+  SHTag,
   SHDialog,
   SHBlockArea,
   SHActiveButtonGroup,
@@ -76,67 +78,68 @@ const components = {
  * @param name - Optional name to greet, defaults to "world"
  * @returns A greeting message
  */
-export function sayHello(name: string = 'world'): string {
+export function sayHello(name: string = "world"): string {
   return `Hello, ${name}!`
 }
 
 // 類型聲明
-export type { ThemeVarsConfig } from './components/ConfigProvider/types'
-export type { ButtonProps, ButtonEmits } from './components/Button/types'
-export type { InputProps, InputEmits } from './components/Input/types'
-export type { TextareaProps, TextareaEmits } from './components/Textarea/types'
+export type { ThemeVarsConfig } from "./components/ConfigProvider/types"
+export type { ButtonProps, ButtonEmits } from "./components/Button/types"
+export type { InputProps, InputEmits } from "./components/Input/types"
+export type { TextareaProps, TextareaEmits } from "./components/Textarea/types"
 export type {
   SelectProps,
   SelectEmits,
   SelectOption,
-} from './components/Select/types'
-export type { SpinProps, SpinEmits } from './components/Spin/types'
+} from "./components/Select/types"
+export type { SpinProps, SpinEmits } from "./components/Spin/types"
 export type {
   BorderContainerProps,
   BorderContainerEmits,
-} from './components/BorderContainer/types'
-export type { PopoverProps, PopoverEmits } from './components/Popover/types'
+} from "./components/BorderContainer/types"
+export type { PopoverProps, PopoverEmits } from "./components/Popover/types"
 export type {
   EditableAreaProps,
   EditableAreaEmits,
-} from './components/EditableArea/types'
-export type { TooltipProps, TooltipEmits } from './components/Tooltip/types'
-export type { BadgeProps, BadgeEmits } from './components/Badge/types'
-export type { ChipProps, ChipEmits } from './components/Chip/types'
-export type { DialogProps, DialogEmits } from './components/Dialog/types'
+} from "./components/EditableArea/types"
+export type { TooltipProps, TooltipEmits } from "./components/Tooltip/types"
+export type { BadgeProps, BadgeEmits } from "./components/Badge/types"
+export type { ChipProps, ChipEmits } from "./components/Chip/types"
+export type { TagProps, TagSlots, TagEmits } from "./components/Tag/types"
+export type { DialogProps, DialogEmits } from "./components/Dialog/types"
 export type {
   BlockAreaProps,
   BlockAreaSlots,
-} from './components/BlockArea/types'
-export type { FlexContainerProps } from './components/FlexContainer/types'
+} from "./components/BlockArea/types"
+export type { FlexContainerProps } from "./components/FlexContainer/types"
 export type {
   ActiveButtonGroupProps,
   ActiveButtonGroupEmits,
   ActiveButtonItemProps,
-} from './components/ActiveButtonGroup/types'
+} from "./components/ActiveButtonGroup/types"
 export type {
   MentionableTextAreaProps,
   MentionableTextAreaEmits,
   MentionItem,
   MentionData,
-} from './components/MentionableTextArea/types'
+} from "./components/MentionableTextArea/types"
 export type {
   ContextMenuProps,
   ContextMenuEmits,
   ContextMenuItemOption,
-} from './components/ContextMenu/types'
-export type { ProgressProps, ProgressSlots } from './components/Progress/types'
-export type { SliderProps, SliderSlots } from './components/Slider/types'
+} from "./components/ContextMenu/types"
+export type { ProgressProps, ProgressSlots } from "./components/Progress/types"
+export type { SliderProps, SliderSlots } from "./components/Slider/types"
 export type {
   CollapsibleProps,
   CollapsibleSlots,
   CollapsibleEmits,
-} from './components/Collapsible/types'
+} from "./components/Collapsible/types"
 export type {
   ScrollAreaProps,
   ScrollAreaMethods,
   ScrollAreaSlots,
-} from './components/ScrollArea/types'
+} from "./components/ScrollArea/types"
 export type {
   SplitterGroupCustomProps,
   SplitterPanelCustomProps,
@@ -144,7 +147,7 @@ export type {
   SplitterGroupSlots,
   SplitterPanelSlots,
   SplitterResizeHandleSlots,
-} from './components/Splitter/types'
+} from "./components/Splitter/types"
 export type {
   NotificationConfig,
   NotificationInstance,
@@ -154,7 +157,7 @@ export type {
   NotificationEmits,
   NotificationSlots,
   NotificationType,
-} from './components/Notification/types'
+} from "./components/Notification/types"
 
 // 安裝函數
 const install = (app: App) => {
@@ -165,7 +168,7 @@ const install = (app: App) => {
 }
 
 // 版本號
-const version = '0.1.0'
+const version = "0.1.0"
 
 // Vue 插件對象
 const ShelterUI: Plugin = {
@@ -192,6 +195,7 @@ export {
   SHTooltip,
   SHBadge,
   SHChip,
+  SHTag,
   SHDialog,
   SHBlockArea,
   SHActiveButtonGroup,
