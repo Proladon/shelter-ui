@@ -1,49 +1,49 @@
 {
-  "hash": "3a12d8e2",
-  "configHash": "ffe3bd0e",
+  "hash": "08c19036",
+  "configHash": "410a753f",
   "lockfileHash": "4ca20232",
-  "browserHash": "f717998c",
+  "browserHash": "6e10d03e",
   "optimized": {
     "vue": {
       "src": "../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "7cde5897",
+      "fileHash": "9a32576a",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../../node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "4917bc4a",
+      "fileHash": "13c08010",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
       "src": "../../../../node_modules/vitepress/node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "e7bfea48",
-      "needsInterop": false
-    },
-    "@vueuse/core": {
-      "src": "../../../../node_modules/@vueuse/core/index.mjs",
-      "file": "@vueuse_core.js",
-      "fileHash": "352b6a83",
-      "needsInterop": false
-    },
-    "@tabler/icons-vue": {
-      "src": "../../../../node_modules/@tabler/icons-vue/dist/esm/tabler-icons-vue.mjs",
-      "file": "@tabler_icons-vue.js",
-      "fileHash": "743f391b",
+      "fileHash": "2e9f908e",
       "needsInterop": false
     },
     "color": {
       "src": "../../../../node_modules/color/index.js",
       "file": "color.js",
-      "fileHash": "0d636253",
+      "fileHash": "a9a82009",
       "needsInterop": false
     },
     "reka-ui": {
       "src": "../../../../node_modules/reka-ui/dist/index.js",
       "file": "reka-ui.js",
-      "fileHash": "5829f7ed",
+      "fileHash": "370765fc",
+      "needsInterop": false
+    },
+    "@tabler/icons-vue": {
+      "src": "../../../../node_modules/@tabler/icons-vue/dist/esm/tabler-icons-vue.mjs",
+      "file": "@tabler_icons-vue.js",
+      "fileHash": "6b8359ef",
+      "needsInterop": false
+    },
+    "@vueuse/core": {
+      "src": "../../../../node_modules/@vueuse/core/index.mjs",
+      "file": "@vueuse_core.js",
+      "fileHash": "e00678c6",
       "needsInterop": false
     }
   },
