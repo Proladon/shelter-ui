@@ -21,3 +21,6 @@
 - [ ] Radio
 - [ ] Radio Group
 - [ ] Checkbox
+- [ ] TextEditor
+- [ ] CodeEditor
+- [ ] MarkdownEditor
