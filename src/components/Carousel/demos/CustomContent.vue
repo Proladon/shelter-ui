@@ -5,7 +5,6 @@
       <SHCarousel
         v-model="currentSlide"
         :items="customItems"
-        height="250px"
         :show-indicators="false"
         effect="fade"
       >
@@ -15,8 +14,8 @@
               <h2>{{ item.title }}</h2>
               <p>{{ item.description }}</p>
               <div class="custom-actions">
-                <button class="action-btn">Learn More</button>
-                <button class="action-btn secondary">Contact</button>
+                <SHButton>Learn More</SHButton>
+                <SHButton>Contact</SHButton>
               </div>
             </div>
           </div>
@@ -27,48 +26,42 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue"
-import SHCarousel from "../index.vue"
-import type { CarouselItem } from "../types"
+import { ref } from 'vue'
+import SHCarousel from '../index.vue'
+import type { CarouselItem } from '../types'
+import { SHButton } from '@/index'
 
 const currentSlide = ref(0)
 
 const customItems: CarouselItem[] = [
   {
     id: 1,
-    title: "Welcome to Our Service",
+    title: 'Welcome to Our Service',
     description:
-      "Discover amazing features that will transform your workflow and boost productivity.",
+      'Discover amazing features that will transform your workflow and boost productivity.',
   },
   {
     id: 2,
-    title: "Easy Integration",
+    title: 'Easy Integration',
     description:
-      "Seamlessly integrate with your existing tools and platforms in just a few clicks.",
+      'Seamlessly integrate with your existing tools and platforms in just a few clicks.',
   },
   {
     id: 3,
-    title: "Expert Support",
+    title: 'Expert Support',
     description:
-      "24/7 customer support from our team of experts ready to help you succeed.",
+      '24/7 customer support from our team of experts ready to help you succeed.',
   },
 ]
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
 .demo {
   padding: 1rem;
 }
 
 .demo > * + * {
   margin-top: 1rem;
-}
-
-.demo__content {
-  margin-bottom: 1rem;
-  padding: 1rem;
-  border: 1px solid #e5e7eb;
-  border-radius: 0.5rem;
 }
 
 .custom-item {
@@ -109,31 +102,5 @@ const customItems: CarouselItem[] = [
   display: flex;
   gap: 1rem;
   justify-content: center;
-}
-
-.action-btn {
-  padding: 0.75rem 1.5rem;
-  border: 2px solid white;
-  background: transparent;
-  color: white;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  font-weight: 500;
-  transition: all 0.2s;
-}
-
-.action-btn:hover {
-  background: white;
-  color: #667eea;
-}
-
-.action-btn.secondary {
-  background: white;
-  color: #667eea;
-}
-
-.action-btn.secondary:hover {
-  background: transparent;
-  color: white;
 }
 </style>

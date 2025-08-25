@@ -16,18 +16,18 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue"
-import type { CarouselIndicatorsProps, CarouselIndicatorsEmits } from "./types"
+import { computed } from 'vue'
+import type { CarouselIndicatorsProps, CarouselIndicatorsEmits } from './types'
 
 defineOptions({
-  name: "SHCarouselIndicators",
+  name: 'SHCarouselIndicators',
 })
 
 const props = withDefaults(defineProps<CarouselIndicatorsProps>(), {
   currentIndex: 0,
   totalItems: 0,
   disabled: false,
-  position: "bottom",
+  position: 'bottom',
 })
 
 const emit = defineEmits<CarouselIndicatorsEmits>()
@@ -35,19 +35,19 @@ const emit = defineEmits<CarouselIndicatorsEmits>()
 const indicatorsClasses = computed(() => {
   return {
     [`sh-carousel-indicators--${props.position}`]: true,
-    "sh-carousel-indicators--disabled": props.disabled,
+    'sh-carousel-indicators--disabled': props.disabled,
   }
 })
 
 const getIndicatorClasses = (index: number) => {
   return {
-    "sh-carousel-indicators__item--active": index === props.currentIndex,
+    'sh-carousel-indicators__item--active': index === props.currentIndex,
   }
 }
 
 const handleIndicatorClick = (index: number) => {
   if (!props.disabled) {
-    emit("indicator-click", index)
+    emit('indicator-click', index)
   }
 }
 </script>
@@ -75,11 +75,12 @@ const handleIndicatorClick = (index: number) => {
 
 .sh-carousel-indicators__item {
   @apply w-3 h-3 rounded-full bg-white/50 border-0 cursor-pointer transition-all duration-200;
-  @apply hover:bg-white/75 focus:outline-none focus:ring-2 focus:ring-white/50;
+  @apply hover:(bg-primary);
+  @apply focus:(outline-none ring-2 ring-primary.fade);
 }
 
 .sh-carousel-indicators__item--active {
-  @apply bg-white scale-110;
+  @apply bg-primary scale-110;
 }
 
 .sh-carousel-indicators__item:disabled {

@@ -40,11 +40,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue"
-import type { CarouselItem } from "./types"
+import { computed } from 'vue'
+import type { CarouselItem } from './types'
 
 defineOptions({
-  name: "SHCarouselItem",
+  name: 'SHCarouselItem',
 })
 
 interface Props {
@@ -61,13 +61,13 @@ const emit = defineEmits<{
 
 const itemClasses = computed(() => {
   return {
-    "sh-carousel-item--active": props.active,
-    "sh-carousel-item--clickable": props.item.href || emit,
+    'sh-carousel-item--active': props.active,
+    'sh-carousel-item--clickable': props.item.href,
   }
 })
 
 const handleClick = () => {
-  emit("click", props.item, props.index)
+  emit('click', props.item, props.index)
 }
 </script>
 
