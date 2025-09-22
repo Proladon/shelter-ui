@@ -3,14 +3,16 @@
     <h3>基本使用</h3>
     <p>最基本的代碼編輯器使用方式</p>
 
-    <SHCodeEditor
-      v-model="code"
-      language="javascript"
-      width="400px"
-      height="400px"
-      @ready="onEditorReady"
-      @change="onCodeChange"
-    />
+    <ClientOnly>
+      <SHCodeEditor
+        v-model="code"
+        language="javascript"
+        width="400px"
+        height="400px"
+        @ready="onEditorReady"
+        @change="onCodeChange"
+      />
+    </ClientOnly>
 
     <div class="mt-4">
       <h4>當前代碼值:</h4>

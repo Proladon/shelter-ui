@@ -1,5 +1,3 @@
-import type * as monaco from 'monaco-editor'
-
 export interface CodeEditorProps {
   /** 綁定的代碼值 */
   modelValue?: string
@@ -8,7 +6,7 @@ export interface CodeEditorProps {
   /** 編輯器主題 */
   theme?: 'vs' | 'vs-dark' | 'hc-black' | 'hc-light'
   /** Monaco Editor 選項 */
-  options?: monaco.editor.IStandaloneEditorConstructionOptions
+  options?: any
   /** 編輯器寬度 */
   width?: string | number
   /** 編輯器高度 */
@@ -35,15 +33,15 @@ export interface CodeEditorProps {
 
 export interface CodeEditorEmits {
   'update:modelValue': [value: string]
-  change: [value: string, event: monaco.editor.IModelContentChangedEvent]
-  ready: [editor: monaco.editor.IStandaloneCodeEditor]
+  change: [value: string, event: any]
+  ready: [editor: any]
   focus: [event: any]
   blur: [event: any]
-  keydown: [event: monaco.IKeyboardEvent]
-  keyup: [event: monaco.IKeyboardEvent]
-  mousedown: [event: monaco.editor.IEditorMouseEvent]
-  mouseup: [event: monaco.editor.IEditorMouseEvent]
-  contextmenu: [event: monaco.editor.IEditorMouseEvent]
+  keydown: [event: any]
+  keyup: [event: any]
+  mousedown: [event: any]
+  mouseup: [event: any]
+  contextmenu: [event: any]
 }
 
 export interface CodeEditorSlots {
@@ -55,7 +53,7 @@ export interface CodeEditorSlots {
 
 export type CodeEditorInstance = {
   /** Monaco Editor 實例 */
-  editor: monaco.editor.IStandaloneCodeEditor | null
+  editor: any | null
   /** 獲取編輯器值 */
   getValue: () => string
   /** 設置編輯器值 */

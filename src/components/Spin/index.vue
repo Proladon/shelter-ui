@@ -107,6 +107,8 @@ const contentStyle = computed(() => {
 watch(
   () => props.show,
   (show) => {
+    if (typeof window === 'undefined') return
+
     if (timerId !== null) {
       window.clearTimeout(timerId)
       timerId = null
@@ -128,7 +130,7 @@ watch(
 )
 
 onBeforeUnmount(() => {
-  if (timerId !== null) {
+  if (typeof window !== 'undefined' && timerId !== null) {
     window.clearTimeout(timerId)
     timerId = null
   }

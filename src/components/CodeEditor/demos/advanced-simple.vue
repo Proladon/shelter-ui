@@ -26,15 +26,17 @@
       </button>
     </div>
 
-    <SHCodeEditor
-      ref="editorRef"
-      v-model="code"
-      language="javascript"
-      theme="vs-dark"
-      height="400px"
-      @ready="onEditorReady"
-      @change="onCodeChange"
-    />
+    <ClientOnly>
+      <SHCodeEditor
+        ref="editorRef"
+        v-model="code"
+        language="javascript"
+        theme="vs-dark"
+        height="400px"
+        @ready="onEditorReady"
+        @change="onCodeChange"
+      />
+    </ClientOnly>
 
     <div class="mt-4 bg-gray-100 dark:bg-gray-800 p-4 rounded">
       <h4 class="font-medium mb-2">編輯器狀態</h4>

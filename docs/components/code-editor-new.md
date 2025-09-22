@@ -53,23 +53,18 @@ const onCodeChange = (value) => {
 
 <template #code>
 
-````vue
-
+```vue
 <template>
-    <div>
-        <select v-model="selectedLanguage" class="mb-4">
-        <option value="javascript">JavaScript</option>
-        <option value="typescript">TypeScript</option>
-        <option value="python">Python</option>
-        <option value="java">Java</option>
-        </select>
+  <div>
+    <select v-model="selectedLanguage" class="mb-4">
+      <option value="javascript">JavaScript</option>
+      <option value="typescript">TypeScript</option>
+      <option value="python">Python</option>
+      <option value="java">Java</option>
+    </select>
 
-        <SHCodeEditor
-            v-model="code"
-            :language="selectedLanguage"
-            height="400px"
-        />
-    </div>
+    <SHCodeEditor v-model="code" :language="selectedLanguage" height="400px" />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -90,36 +85,38 @@ const code = ref('console.log("Hello World!");')
   <ThemesDemo />
 
 <template #code>
+
 ```vue
 <template>
-<div>
-<select v-model="currentTheme" class="mb-4">
-<option value="vs">Light</option>
-<option value="vs-dark">Dark</option>
-<option value="hc-black">High Contrast Black</option>
-<option value="hc-light">High Contrast Light</option>
-</select>
+  <div>
+    <select v-model="currentTheme" class="mb-4">
+      <option value="vs">Light</option>
+      <option value="vs-dark">Dark</option>
+      <option value="hc-black">High Contrast Black</option>
+      <option value="hc-light">High Contrast Light</option>
+    </select>
 
-        <SHCodeEditor
-          v-model="code"
-          language="typescript"
-          :theme="currentTheme"
-          height="300px"
-        />
-      </div>
-    </template>
+    <SHCodeEditor
+      v-model="code"
+      language="typescript"
+      :theme="currentTheme"
+      height="300px"
+    />
+  </div>
+</template>
 
-    <script setup lang="ts">
-    import { ref } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 
-    const currentTheme = ref('vs')
-    const code = ref(`interface User {
-      id: number;
-      name: string;
-      email: string;
-    }`)
-    </script>
-    ```
+const currentTheme = ref('vs')
+const code = ref(`interface User {
+  id: number;
+  name: string;
+  email: string;
+}`)
+</script>
+```
+
   </template>
 
 </Demo>
@@ -130,33 +127,35 @@ const code = ref('console.log("Hello World!");')
   <ReadonlyDemo />
 
 <template #code>
+
 ```vue
 <template>
-<div>
-<label class="flex items-center mb-4">
-<input v-model="isReadOnly" type="checkbox" class="mr-2">
-只讀模式
-</label>
+  <div>
+    <label class="flex items-center mb-4">
+      <input v-model="isReadOnly" type="checkbox" class="mr-2" />
+      只讀模式
+    </label>
 
-        <SHCodeEditor
-          v-model="code"
-          language="vue"
-          theme="vs-dark"
-          :read-only="isReadOnly"
-          height="300px"
-        />
-      </div>
-    </template>
+    <SHCodeEditor
+      v-model="code"
+      language="vue"
+      theme="vs-dark"
+      :read-only="isReadOnly"
+      height="300px"
+    />
+  </div>
+</template>
 
-    <script setup lang="ts">
-    import { ref } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 
-    const isReadOnly = ref(true)
-    const code = ref(`<template>
-      <div>Hello Vue!</div>
-    </template>`)
-    </script>
-    ```
+const isReadOnly = ref(true)
+const code = ref(`<template>
+  <div>Hello Vue!</div>
+</template>`)
+</script>
+```
+
 </template>
 
 </Demo>
@@ -224,4 +223,3 @@ import LanguagesDemo from '@/components/CodeEditor/demos/languages.vue'
 import ThemesDemo from '@/components/CodeEditor/demos/themes.vue'
 import ReadonlyDemo from '@/components/CodeEditor/demos/readonly.vue'
 </script>
-````

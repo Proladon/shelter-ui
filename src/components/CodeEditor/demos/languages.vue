@@ -22,13 +22,15 @@
       </select>
     </div>
 
-    <SHCodeEditor
-      v-model="codeByLanguage[selectedLanguage as keyof typeof codeByLanguage]"
-      :language="selectedLanguage"
-      width="400px"
-      height="400px"
-      theme="vs-dark"
-    />
+    <ClientOnly>
+      <SHCodeEditor
+        v-model="codeByLanguage[selectedLanguage as keyof typeof codeByLanguage]"
+        :language="selectedLanguage"
+        width="400px"
+        height="400px"
+        theme="vs-dark"
+      />
+    </ClientOnly>
   </div>
 </template>
 

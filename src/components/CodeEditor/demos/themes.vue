@@ -16,14 +16,16 @@
       </select>
     </div>
 
-    <SHCodeEditor
-      v-model="code"
-      language="typescript"
-      :theme="selectedTheme"
-      width="400px"
-      height="400px"
-      :options="editorOptions"
-    />
+    <ClientOnly>
+      <SHCodeEditor
+        v-model="code"
+        language="typescript"
+        :theme="selectedTheme"
+        width="400px"
+        height="400px"
+        :options="editorOptions"
+      />
+    </ClientOnly>
   </div>
 </template>
 

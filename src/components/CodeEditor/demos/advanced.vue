@@ -33,18 +33,20 @@
       </button>
     </div>
 
-    <SHCodeEditor
-      ref="editorRef"
-      v-model="code"
-      language="vue"
-      theme="vs-dark"
-      height="500px"
-      :options="editorOptions"
-      @ready="onEditorReady"
-      @change="onCodeChange"
-      @focus="onEditorFocus"
-      @blur="onEditorBlur"
-    />
+    <ClientOnly>
+      <SHCodeEditor
+        ref="editorRef"
+        v-model="code"
+        language="vue"
+        theme="vs-dark"
+        height="500px"
+        :options="editorOptions"
+        @ready="onEditorReady"
+        @change="onCodeChange"
+        @focus="onEditorFocus"
+        @blur="onEditorBlur"
+      />
+    </ClientOnly>
 
     <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
       <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded">

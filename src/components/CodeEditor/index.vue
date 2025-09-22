@@ -5,26 +5,17 @@
     :class="containerClasses"
     :style="containerStyles"
   >
-    <!-- Loading State -->
-    <div v-if="isLoading" class="sh-code-editor__loading">
-      <slot name="loading">
-        <slot>
-          <div class="sh-code-editor__loading-content">
-            <IconLoader class="sh-code-editor__loading-spinner" />
-            <span class="sh-code-editor__loading-text">{{
-              loading || '載入中...'
-            }}</span>
-          </div>
-        </slot>
-      </slot>
-    </div>
-
-    <!-- Monaco Editor Container -->
-    <div
-      ref="editorRef"
-      class="sh-code-editor__editor"
-      :style="{ opacity: isLoading ? 0 : 1 }"
-    />
+    <Spin
+      class="h-full"
+      :show="isLoading"
+      :description="loading || '載入中...'"
+    >
+      <template #loading>
+        <slot name="loading" />
+      </template>
+      <!-- Monaco Editor Container -->
+      <div ref="editorRef" class="sh-code-editor__editor" />
+    </Spin>
   </div>
 </template>
 
@@ -38,8 +29,7 @@ import {
   nextTick,
   shallowRef,
 } from 'vue'
-import { IconLoader } from '@tabler/icons-vue'
-import * as monaco from 'monaco-editor'
+import Spin from '@/components/Spin/index.vue'
 import type {
   CodeEditorProps,
   CodeEditorEmits,
@@ -69,10 +59,16 @@ const props = withDefaults(defineProps<CodeEditorProps>(), {
 
 const emit = defineEmits<CodeEditorEmits>()
 
+// Monaco editor type (will be loaded dynamically)
+type Monaco = typeof import('monaco-editor')
+type IStandaloneCodeEditor =
+  import('monaco-editor').editor.IStandaloneCodeEditor
+
 // Refs
 const containerRef = ref<HTMLElement>()
 const editorRef = ref<HTMLElement>()
-const editor = shallowRef<monaco.editor.IStandaloneCodeEditor | null>(null)
+const editor = shallowRef<IStandaloneCodeEditor | null>(null)
+const monaco = shallowRef<Monaco | null>(null)
 const isLoading = ref(true)
 const isReady = ref(false)
 
@@ -123,49 +119,69 @@ const editorOptions = computed(() => {
   }
 })
 
+// Load Monaco Editor dynamically
+const loadMonaco = async (): Promise<Monaco> => {
+  if (monaco.value) return monaco.value
+
+  try {
+    const monacoModule = await import('monaco-editor')
+    monaco.value = monacoModule
+    return monacoModule
+  } catch (error) {
+    console.error('Failed to load Monaco Editor:', error)
+    throw error
+  }
+}
+
 // Methods
 const initEditor = async () => {
   if (!editorRef.value) return
 
   try {
+    // Load Monaco Editor
+    const monacoModule = await loadMonaco()
+
     // 創建編輯器
-    editor.value = monaco.editor.create(editorRef.value, editorOptions.value)
+    editor.value = monacoModule.editor.create(
+      editorRef.value,
+      editorOptions.value,
+    )
 
     // 監聽內容變化
-    editor.value.onDidChangeModelContent((event) => {
+    editor.value.onDidChangeModelContent((event: any) => {
       const value = editor.value?.getValue() || ''
       emit('update:modelValue', value)
       emit('change', value, event)
     })
 
     // 監聽焦點事件
-    editor.value.onDidFocusEditorText((event) => {
+    editor.value.onDidFocusEditorText((event: any) => {
       emit('focus', event)
     })
 
-    editor.value.onDidBlurEditorText((event) => {
+    editor.value.onDidBlurEditorText((event: any) => {
       emit('blur', event)
     })
 
     // 監聽鍵盤事件
-    editor.value.onKeyDown((event) => {
+    editor.value.onKeyDown((event: any) => {
       emit('keydown', event)
     })
 
-    editor.value.onKeyUp((event) => {
+    editor.value.onKeyUp((event: any) => {
       emit('keyup', event)
     })
 
     // 監聽滑鼠事件
-    editor.value.onMouseDown((event) => {
+    editor.value.onMouseDown((event: any) => {
       emit('mousedown', event)
     })
 
-    editor.value.onMouseUp((event) => {
+    editor.value.onMouseUp((event: any) => {
       emit('mouseup', event)
     })
 
-    editor.value.onContextMenu((event) => {
+    editor.value.onContextMenu((event: any) => {
       emit('contextmenu', event)
     })
 
@@ -193,21 +209,21 @@ const updateEditorValue = (value: string) => {
 }
 
 const updateEditorLanguage = (language: string) => {
-  if (editor.value) {
+  if (editor.value && monaco.value) {
     const model = editor.value.getModel()
     if (model) {
-      monaco.editor.setModelLanguage(model, language)
+      monaco.value.editor.setModelLanguage(model, language)
     }
   }
 }
 
 const updateEditorTheme = (theme: string) => {
-  monaco.editor.setTheme(theme)
+  if (monaco.value) {
+    monaco.value.editor.setTheme(theme)
+  }
 }
 
-const updateEditorOptions = (
-  options: monaco.editor.IStandaloneEditorConstructionOptions,
-) => {
+const updateEditorOptions = (options: any) => {
   if (editor.value) {
     editor.value.updateOptions(options)
   }
@@ -278,8 +294,11 @@ watch(
 
 // Lifecycle
 onMounted(async () => {
-  await nextTick()
-  initEditor()
+  // Only initialize in browser environment
+  if (typeof window !== 'undefined') {
+    await nextTick()
+    initEditor()
+  }
 })
 
 onBeforeUnmount(() => {
@@ -299,38 +318,23 @@ defineExpose<CodeEditorInstance>({
 })
 </script>
 
-<style lang="postcss">
+<style scoped lang="postcss">
 .sh-code-editor {
-  @apply relative border border-gray-300 dark:border-gray-600 rounded-md overflow-hidden bg-white dark:bg-gray-900 transition-colors duration-200;
   @apply flex flex-col;
-  @apply border border-solid border-secondary;
+  @apply border border-solid border-border.base;
+  @apply dark:(rounded-md overflow-hidden transition-colors duration-200);
+  @apply bg-bg.primary;
 
   /* &:focus-within {
     @apply ring-2 ring-primary ring-offset-2;
   } */
 
   &--readonly {
-    @apply bg-gray-50 dark:bg-gray-800;
+    /* @apply ; */
   }
 
   &--loading {
     @apply opacity-50;
-  }
-
-  &__loading {
-    @apply absolute inset-0 z-10 flex items-center justify-center bg-white/80 dark:bg-gray-900/80;
-  }
-
-  &__loading-content {
-    @apply flex items-center justify-center;
-  }
-
-  &__loading-spinner {
-    @apply animate-spin w-6 h-6 text-primary;
-  }
-
-  &__loading-text {
-    @apply text-sm text-gray-500 dark:text-gray-400 ml-2;
   }
 
   &__editor {

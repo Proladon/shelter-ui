@@ -15,14 +15,16 @@
       </label>
     </div>
 
-    <SHCodeEditor
-      v-model="code"
-      language="vue"
-      theme="vs-dark"
-      :read-only="isReadOnly"
-      :minimap="showMinimap"
-      height="450px"
-    />
+    <ClientOnly>
+      <SHCodeEditor
+        v-model="code"
+        language="vue"
+        theme="vs-dark"
+        :read-only="isReadOnly"
+        :minimap="showMinimap"
+        height="450px"
+      />
+    </ClientOnly>
 
     <div class="mt-4">
       <h4>編輯器狀態:</h4>
