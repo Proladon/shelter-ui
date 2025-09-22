@@ -2,16 +2,16 @@
 
 ## 安裝
 
-使用 npm 安裝 Shelter UI：
-
-```bash
-npm install shelter-ui
-```
-
-或使用 yarn：
+使用 yarn 安裝 Shelter UI（推薦）：
 
 ```bash
 yarn add shelter-ui
+```
+
+或使用 npm：
+
+```bash
+npm install shelter-ui
 ```
 
 ## 全局引入
@@ -19,14 +19,14 @@ yarn add shelter-ui
 在你的 main.ts 文件中引入 Shelter UI：
 
 ```ts
-import { createApp } from "vue"
-import App from "./App.vue"
-import ShelterUI from "shelter-ui"
-import "shelter-ui/dist/style.css"
+import { createApp } from 'vue'
+import App from './App.vue'
+import ShelterUI from 'shelter-ui'
+import 'shelter-ui/dist/style.css'
 
 const app = createApp(App)
 app.use(ShelterUI)
-app.mount("#app")
+app.mount('#app')
 ```
 
 ## 按需引入
@@ -39,7 +39,7 @@ app.mount("#app")
 </template>
 
 <script setup lang="ts">
-import { SButton } from "shelter-ui"
+import { SButton } from 'shelter-ui'
 </script>
 ```
 
@@ -56,11 +56,11 @@ import { SButton } from "shelter-ui"
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue"
+import { ref } from 'vue'
 
-const inputValue = ref("")
+const inputValue = ref('')
 const handleClick = () => {
-  alert("按鈕被點擊了！")
+  alert('按鈕被點擊了！')
 }
 </script>
 ```
@@ -79,26 +79,26 @@ const handleClick = () => {
 </template>
 
 <script setup lang="ts">
-import { SHConfigProvider } from "shelter-ui"
-import type { ThemeVarsConfig } from "shelter-ui"
+import { SHConfigProvider } from 'shelter-ui'
+import type { ThemeVarsConfig } from 'shelter-ui'
 
 const customTheme: ThemeVarsConfig = {
-  primary: "#1890ff",
+  primary: '#1890ff',
   bg: {
-    primary: "#ffffff",
-    secondary: "#f5f5f5",
+    primary: '#ffffff',
+    secondary: '#f5f5f5',
   },
   text: {
-    base: "#333333",
+    base: '#333333',
   },
   border: {
-    base: "#d9d9d9",
+    base: '#d9d9d9',
   },
   status: {
-    info: "#1890ff",
-    danger: "#ff4d4f",
-    warning: "#faad14",
-    success: "#52c41a",
+    info: '#1890ff',
+    danger: '#ff4d4f',
+    warning: '#faad14',
+    success: '#52c41a',
   },
 }
 </script>

@@ -12,7 +12,7 @@
 ## 安裝
 
 ```bash
-npm install shelter-ui
+yarn add shelter-ui
 ```
 
 ## 使用
@@ -51,19 +51,19 @@ const input = ref('')
 
 ```bash
 # 安裝依賴
-npm install
+yarn install
 
-# 啟動開發服務器
-npm run dev
+# 啟動開發伺服器
+yarn dev
 
 # 構建組件庫
-npm run lib:build
+yarn lib:build
 
-# 啟動文檔開發服務器
-npm run docs:dev
+# 啟動文件開發伺服器
+yarn docs:dev
 
 # 構建文檔
-npm run docs:build
+yarn docs:build
 ```
 
 ## 文檔
