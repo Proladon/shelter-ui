@@ -9,6 +9,7 @@ Shelter UI 提供了一系列簡潔、高效、易用的 UI 組件，幫助你�
 - [ActiveButtonGroup 活動按鈕組](/components/active-button-group) - 提供帶平滑過渡動畫的按鈕組切換功能
 - [Badge 徽章](/components/badge) - 用於顯示計數或狀態信息的小型標記
 - [Button 按鈕](/components/button) - 用於觸發操作的按鈕組件
+- [ConfigProvider 配置提供者](/components/config-provider) - 全局主題配置和樣式變數管理組件
 - [Input 輸入框](/components/input) - 用於接收用戶輸入的文本框組件
 - [ScrollArea 滾動區域](/components/scroll-area) - 可客製化樣式的滾動區塊元件
 - [Select 選擇器](/components/select) - 用於從一組選項中選擇一個或多個值的下拉選擇組件
@@ -26,14 +27,14 @@ Shelter UI 提供了一系列簡潔、高效、易用的 UI 組件，幫助你�
 ### 全局引入
 
 ```ts
-import { createApp } from 'vue'
-import App from './App.vue'
-import ShelterUI from 'shelter-ui'
-import 'shelter-ui/dist/style.css'
+import { createApp } from "vue"
+import App from "./App.vue"
+import ShelterUI from "shelter-ui"
+import "shelter-ui/dist/style.css"
 
 const app = createApp(App)
 app.use(ShelterUI)
-app.mount('#app')
+app.mount("#app")
 ```
 
 ### 按需引入
@@ -44,6 +45,6 @@ app.mount('#app')
 </template>
 
 <script setup lang="ts">
-import { SHButton } from 'shelter-ui'
+import { SHButton } from "shelter-ui"
 </script>
 ```

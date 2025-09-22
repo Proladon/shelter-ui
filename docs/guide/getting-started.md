@@ -19,14 +19,14 @@ yarn add shelter-ui
 在你的 main.ts 文件中引入 Shelter UI：
 
 ```ts
-import { createApp } from 'vue'
-import App from './App.vue'
-import ShelterUI from 'shelter-ui'
-import 'shelter-ui/dist/style.css'
+import { createApp } from "vue"
+import App from "./App.vue"
+import ShelterUI from "shelter-ui"
+import "shelter-ui/dist/style.css"
 
 const app = createApp(App)
 app.use(ShelterUI)
-app.mount('#app')
+app.mount("#app")
 ```
 
 ## 按需引入
@@ -39,7 +39,7 @@ app.mount('#app')
 </template>
 
 <script setup lang="ts">
-import { SButton } from 'shelter-ui'
+import { SButton } from "shelter-ui"
 </script>
 ```
 
@@ -56,11 +56,50 @@ import { SButton } from 'shelter-ui'
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from "vue"
 
-const inputValue = ref('')
+const inputValue = ref("")
 const handleClick = () => {
-  alert('按鈕被點擊了！')
+  alert("按鈕被點擊了！")
+}
+</script>
+```
+
+## 配置主題
+
+你可以使用 `SHConfigProvider` 來配置全局主題：
+
+```vue
+<template>
+  <SHConfigProvider :theme-config="customTheme">
+    <div id="app">
+      <!-- 你的應用內容 -->
+    </div>
+  </SHConfigProvider>
+</template>
+
+<script setup lang="ts">
+import { SHConfigProvider } from "shelter-ui"
+import type { ThemeVarsConfig } from "shelter-ui"
+
+const customTheme: ThemeVarsConfig = {
+  primary: "#1890ff",
+  bg: {
+    primary: "#ffffff",
+    secondary: "#f5f5f5",
+  },
+  text: {
+    base: "#333333",
+  },
+  border: {
+    base: "#d9d9d9",
+  },
+  status: {
+    info: "#1890ff",
+    danger: "#ff4d4f",
+    warning: "#faad14",
+    success: "#52c41a",
+  },
 }
 </script>
 ```
