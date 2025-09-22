@@ -95,8 +95,11 @@ const calculateHeight = () => {
 
   // 計算新的高度
   const scrollHeight = textarea.scrollHeight
-  const minHeight =
-    parseInt(getComputedStyle(textarea).lineHeight) * (props.rows || 3)
+  // 確保傳入 getComputedStyle 的參數為 Element，並安全解析 lineHeight（處理 "normal" 等情況）
+  const computedStyle = getComputedStyle(textarea as any)
+  const lineHeightStr = computedStyle.lineHeight
+  const parsedLineHeight = Number.parseFloat(lineHeightStr) || 16
+  const minHeight = parsedLineHeight * (props.rows || 3)
 
   const newHeight = Math.max(scrollHeight, minHeight)
   textareaHeight.value = `${newHeight}px`

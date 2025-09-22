@@ -2,37 +2,37 @@
   <div class="demo-advanced">
     <h3>高級功能</h3>
     <p>展示代碼編輯器的高級功能，包括自定義選項和事件處理</p>
-    
+
     <div class="mb-4 flex items-center space-x-4">
-      <button 
-        @click="formatCode" 
+      <button
+        @click="formatCode"
         class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
       >
         格式化代碼
       </button>
-      
-      <button 
-        @click="clearCode" 
+
+      <button
+        @click="clearCode"
         class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
       >
         清空代碼
       </button>
-      
-      <button 
-        @click="insertTemplate" 
+
+      <button
+        @click="insertTemplate"
         class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
       >
         插入模板
       </button>
-      
-      <button 
-        @click="focusEditor" 
+
+      <button
+        @click="focusEditor"
         class="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600"
       >
         聚焦編輯器
       </button>
     </div>
-    
+
     <SHCodeEditor
       ref="editorRef"
       v-model="code"
@@ -45,7 +45,7 @@
       @focus="onEditorFocus"
       @blur="onEditorBlur"
     />
-    
+
     <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
       <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded">
         <h4 class="font-medium mb-2">編輯器狀態</h4>
@@ -54,15 +54,18 @@
           <li>是否聚焦: {{ isFocused ? '是' : '否' }}</li>
           <li>代碼長度: {{ code.length }} 字符</li>
           <li>行數: {{ lineCount }} 行</li>
-          <li>游標位置: 第 {{ cursorPosition.line }} 行，第 {{ cursorPosition.column }} 列</li>
+          <li>
+            游標位置: 第 {{ cursorPosition.line }} 行，第
+            {{ cursorPosition.column }} 列
+          </li>
         </ul>
       </div>
-      
+
       <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded">
         <h4 class="font-medium mb-2">事件日誌</h4>
         <div class="text-sm max-h-32 overflow-y-auto space-y-1">
-          <div 
-            v-for="(log, index) in eventLogs" 
+          <div
+            v-for="(log, index) in eventLogs"
             :key="index"
             class="text-gray-600 dark:text-gray-400"
           >
@@ -78,48 +81,15 @@
 import { ref, computed, type Ref } from 'vue'
 import SHCodeEditor from '../index.vue'
 import type { CodeEditorInstance } from '../types'
+import { sampleCode, sampleInsertCode } from './demo-content'
 
 const editorRef: Ref<CodeEditorInstance | null> = ref(null)
-const code = ref(`<template>
-  <div class="user-profile">
-    <h1>用戶資料</h1>
-    <UserCard 
-      :user="currentUser" 
-      @edit="editUser"
-      @delete="deleteUser"
-    />
-  </div>
-</template>
-
-<script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import UserCard from './components/UserCard.vue'
-
-interface User {
-  id: number
-  name: string
-  email: string
-  avatar?: string
-}
-
-const currentUser = ref<User | null>(null)
-const editUser = (user: User) => console.log('編輯用戶:', user)
-const deleteUser = (userId: number) => console.log('刪除用戶:', userId)
-
-onMounted(async () => {
-  try {
-    const response = await fetch('/api/user/current')
-    currentUser.value = await response.json()
-  } catch (error) {
-    console.error('載入用戶資料失敗:', error)
-  }
-})
-</script>`)
+const code = ref(sampleCode)
 
 const isReady = ref(false)
 const isFocused = ref(false)
 const cursorPosition = ref({ line: 1, column: 1 })
-const eventLogs = ref<Array<{ time: string, message: string }>>([])
+const eventLogs = ref<Array<{ time: string; message: string }>>([])
 
 const lineCount = computed(() => code.value.split('\n').length)
 
@@ -132,13 +102,13 @@ const editorOptions = {
   automaticLayout: true,
   scrollBeyondLastLine: false,
   folding: true,
-  renderWhitespace: 'selection' as const
+  renderWhitespace: 'selection' as const,
 }
 
 const addLog = (message: string) => {
   const time = new Date().toLocaleTimeString()
   eventLogs.value.unshift({ time, message })
-  
+
   // 保持最多 10 條日誌
   if (eventLogs.value.length > 10) {
     eventLogs.value.pop()
@@ -148,12 +118,12 @@ const addLog = (message: string) => {
 const onEditorReady = (editor: any) => {
   isReady.value = true
   addLog('編輯器準備就緒')
-  
+
   // 監聽游標位置變化
   editor.onDidChangeCursorPosition((e: any) => {
     cursorPosition.value = {
       line: e.position.lineNumber,
-      column: e.position.column
+      column: e.position.column,
     }
   })
 }
@@ -185,29 +155,7 @@ const clearCode = () => {
 }
 
 const insertTemplate = () => {
-  code.value = `<template>
-  <div class="component">
-    <h1>{{ title }}</h1>
-    <p>{{ description }}</p>
-  </div>
-</template>
-
-<script setup lang="ts">
-interface Props {
-  title: string
-  description?: string
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  description: '預設描述'
-})
-</script>
-
-<style lang="postcss" scoped>
-.component {
-  @apply p-4 border rounded-lg;
-}
-</style>`
+  code.value = sampleInsertCode
   addLog('模板已插入')
 }
 

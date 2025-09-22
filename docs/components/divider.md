@@ -17,12 +17,18 @@ title: Divider 分隔線
 
 ```vue
 <template>
-  <div>
-    <p>第一段內容</p>
-    <SHDivider />
-    <p>第二段內容</p>
+  <div class="space-y-4">
+    <div class="p-4 border rounded">
+      <p>第一段內容</p>
+      <Divider />
+      <p>第二段內容</p>
+    </div>
   </div>
 </template>
+
+<script setup>
+import Divider from '../index.vue'
+</script>
 ```
 
   </template>
@@ -39,14 +45,20 @@ title: Divider 分隔線
 
 ```vue
 <template>
-  <div>
-    <p>這是一些內容</p>
-    <SHDivider>或</SHDivider>
-    <p>這是另一些內容</p>
-    <SHDivider>重要分隔</SHDivider>
-    <p>更多內容在這裡</p>
+  <div class="space-y-4">
+    <div class="p-4 border rounded">
+      <p>這是一些內容</p>
+      <Divider>或</Divider>
+      <p>這是另一些內容</p>
+      <Divider>重要分隔</Divider>
+      <p>更多內容在這裡</p>
+    </div>
   </div>
 </template>
+
+<script setup>
+import Divider from '../index.vue'
+</script>
 ```
 
   </template>
@@ -63,68 +75,81 @@ title: Divider 分隔線
 
 ```vue
 <template>
-  <div class="flex items-center space-x-4">
-    <div>Blog</div>
-    <SHDivider orientation="vertical" />
-    <div>Docs</div>
-    <SHDivider orientation="vertical" />
-    <div>Source</div>
+  <div class="flex items-center h-20 space-x-4">
+    <div class="text-center">
+      <p class="font-semibold">Blog</p>
+      <p class="text-sm text-gray-500">部落格</p>
+    </div>
+    <Divider orientation="vertical" />
+    <div class="text-center">
+      <p class="font-semibold">Docs</p>
+      <p class="text-sm text-gray-500">文檔</p>
+    </div>
+    <Divider orientation="vertical" />
+    <div class="text-center">
+      <p class="font-semibold">Source</p>
+      <p class="text-sm text-gray-500">原始碼</p>
+    </div>
   </div>
 </template>
+
+<script setup>
+import Divider from '../index.vue'
+</script>
 ```
 
   </template>
 </Demo>
 
-## 不同樣式
+## 自定義顏色
 
-分隔線支持實線、虛線和點線三種樣式。
+可以通過 `color` 屬性自定義分隔線的顏色。
 
 <Demo>
-  <VariantDividerDemo />
+  <ColorDividerDemo />
   
   <template #code>
 
 ```vue
 <template>
-  <div>
-    <!-- 實線 -->
-    <SHDivider variant="solid" />
+  <div class="space-y-6">
+    <div>
+      <h3 class="text-sm font-medium text-gray-700 mb-3">不同顏色的分隔線</h3>
+      <div class="space-y-4">
+        <!-- 預設顏色 -->
+        <div>
+          <p class="text-sm text-gray-500 mb-2">預設顏色 (#e5e7eb)</p>
+          <Divider />
+        </div>
 
-    <!-- 虛線 -->
-    <SHDivider variant="dashed" />
+        <!-- 紅色 -->
+        <div>
+          <p class="text-sm text-gray-500 mb-2">紅色 (#ef4444)</p>
+          <Divider color="#ef4444" />
+        </div>
 
-    <!-- 點線 -->
-    <SHDivider variant="dotted" />
+        <!-- 藍色 -->
+        <div>
+          <p class="text-sm text-gray-500 mb-2">藍色 (#3b82f6)</p>
+          <Divider color="#3b82f6" />
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="text-sm font-medium text-gray-700 mb-3">帶文字的彩色分隔線</h3>
+      <div class="space-y-4">
+        <Divider color="#ef4444">紅色分隔線</Divider>
+        <Divider color="#3b82f6">藍色分隔線</Divider>
+        <Divider color="#10b981">綠色分隔線</Divider>
+      </div>
+    </div>
   </div>
 </template>
-```
 
-  </template>
-</Demo>
-
-## 不同粗細
-
-可以通過 `thickness` 屬性設置分隔線的粗細。
-
-<Demo>
-  <ThicknessDividerDemo />
-  
-  <template #code>
-
-```vue
-<template>
-  <div>
-    <!-- 細線 -->
-    <SHDivider thickness="thin" />
-
-    <!-- 中等粗細 -->
-    <SHDivider thickness="medium" />
-
-    <!-- 粗線 -->
-    <SHDivider thickness="thick" />
-  </div>
-</template>
+<script setup>
+import Divider from '../index.vue'
+</script>
 ```
 
   </template>
@@ -132,7 +157,7 @@ title: Divider 分隔線
 
 ## 組合使用
 
-結合不同樣式和粗細來創建豐富的內容分割效果。
+結合不同顏色和文字來創建豐富的內容分割效果。
 
 <Demo>
   <CombinedDividerDemo />
@@ -145,7 +170,7 @@ title: Divider 分隔線
     <h4 class="font-semibold">產品介紹</h4>
     <p class="text-sm text-gray-600">這是一個很棒的產品</p>
 
-    <SHDivider variant="dashed" thickness="medium">特色功能</SHDivider>
+    <Divider color="#6366f1">特色功能</Divider>
 
     <ul class="list-disc list-inside space-y-1 text-sm">
       <li>功能一</li>
@@ -153,7 +178,7 @@ title: Divider 分隔線
       <li>功能三</li>
     </ul>
 
-    <SHDivider variant="dotted">價格資訊</SHDivider>
+    <Divider color="#10b981">價格資訊</Divider>
 
     <div class="flex items-center justify-between">
       <span>基礎版</span>
@@ -161,6 +186,10 @@ title: Divider 分隔線
     </div>
   </div>
 </template>
+
+<script setup>
+import Divider from '../index.vue'
+</script>
 ```
 
   </template>
@@ -170,12 +199,11 @@ title: Divider 分隔線
 
 ### Props
 
-| 屬性名      | 類型                              | 預設值         | 說明       |
-| ----------- | --------------------------------- | -------------- | ---------- |
-| orientation | `'horizontal' \| 'vertical'`      | `'horizontal'` | 分隔線方向 |
-| variant     | `'solid' \| 'dashed' \| 'dotted'` | `'solid'`      | 分隔線樣式 |
-| thickness   | `'thin' \| 'medium' \| 'thick'`   | `'thin'`       | 分隔線粗細 |
-| class       | `string`                          | —              | 自定義類名 |
+| 屬性名      | 類型                         | 預設值         | 說明       |
+| ----------- | ---------------------------- | -------------- | ---------- |
+| orientation | `'horizontal' \| 'vertical'` | `'horizontal'` | 分隔線方向 |
+| color       | `string`                     | `'#e5e7eb'`    | 分隔線顏色 |
+| class       | `string`                     | —              | 自定義類名 |
 
 ### Slots
 
@@ -192,23 +220,22 @@ title: Divider 分隔線
 
 ## 樣式自定義
 
-組件提供了豐富的 CSS 類名供樣式自定義：
+組件提供了 CSS 類名和 CSS 變數供樣式自定義：
+
+### CSS 類名
 
 - `.sh-divider` - 分隔線容器
-- `.sh-divider--horizontal` - 水平分隔線
-- `.sh-divider--vertical` - 垂直分隔線
-- `.sh-divider--solid` - 實線樣式
-- `.sh-divider--dashed` - 虛線樣式
-- `.sh-divider--dotted` - 點線樣式
-- `.sh-divider--thin` - 細線
-- `.sh-divider--medium` - 中等粗細
-- `.sh-divider--thick` - 粗線
+- `.sh-divider[data-orientation='horizontal']` - 水平分隔線
+- `.sh-divider[data-orientation='vertical']` - 垂直分隔線
+
+### CSS 變數
+
+- `--sh-divider-color` - 分隔線顏色，可透過 `color` 屬性或 CSS 變數覆蓋
 
 <script setup>
     import BasicDividerDemo from '@/components/Divider/demos/Basic.vue'
     import TextDividerDemo from '@/components/Divider/demos/Text.vue'
     import VerticalDividerDemo from '@/components/Divider/demos/Vertical.vue'
-    import VariantDividerDemo from '@/components/Divider/demos/Variant.vue'
-    import ThicknessDividerDemo from '@/components/Divider/demos/Thickness.vue'
+    import ColorDividerDemo from '@/components/Divider/demos/Color.vue'
     import CombinedDividerDemo from '@/components/Divider/demos/Combined.vue'
 </script>

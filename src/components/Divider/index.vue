@@ -1,128 +1,97 @@
 <template>
   <div
     class="sh-divider"
-    :class="[
-      `sh-divider--${orientation}`,
-      `sh-divider--${variant}`,
-      `sh-divider--${thickness}`,
-      props.class,
-    ]"
+    :class="props.class"
     role="separator"
     :aria-orientation="orientation"
+    :data-orientation="orientation"
+    :style="computedStyle"
   >
     <slot />
   </div>
 </template>
 
 <script setup lang="ts">
-import type { DividerProps } from "./types"
+import { computed } from 'vue'
+import type { DividerProps } from './types'
 
 // Props
 const props = withDefaults(defineProps<DividerProps>(), {
-  orientation: "horizontal",
-  variant: "solid",
-  thickness: "thin",
+  orientation: 'horizontal',
+  color: 'var(--sh-text-base)',
+})
+
+const computedStyle = computed(() => {
+  const style: Record<string, string> = {
+    '--sh-divider-color': props.color,
+  }
+
+  return style
 })
 </script>
 
-<style lang="postcss">
+<style scoped lang="postcss">
 .sh-divider {
-  @apply border-gray-300;
+  --sh-divider-color: var(--sh-text-base);
+
+  @apply border-0 bg-transparent;
 }
 
-/* 方向樣式 */
-.sh-divider--horizontal {
-  @apply w-full border-t;
+/* 基本分隔線樣式 - 水平 */
+.sh-divider[data-orientation='horizontal'] {
+  @apply w-full h-px;
+  background-color: var(--sh-divider-color);
 }
 
-.sh-divider--vertical {
-  @apply h-full border-l;
-  min-height: 1rem;
+/* 基本分隔線樣式 - 垂直 */
+.sh-divider[data-orientation='vertical'] {
+  @apply h-full w-px;
+  background-color: var(--sh-divider-color);
 }
 
-/* 樣式變體 */
-.sh-divider--solid {
-  border-style: solid;
+/* 帶文字的分隔線 - 水平 */
+.sh-divider[data-orientation='horizontal']:not(:empty) {
+  @apply flex items-center text-sm text-gray-500 h-auto;
+  background-color: transparent;
 }
 
-.sh-divider--dashed {
-  border-style: dashed;
+.sh-divider[data-orientation='horizontal']:not(:empty)::before,
+.sh-divider[data-orientation='horizontal']:not(:empty)::after {
+  @apply flex-1;
+  content: '';
+  height: 1px;
+  background-color: var(--sh-divider-color);
 }
 
-.sh-divider--dotted {
-  border-style: dotted;
-}
-
-/* 粗細樣式 */
-.sh-divider--thin.sh-divider--horizontal {
-  @apply border-t;
-}
-
-.sh-divider--thin.sh-divider--vertical {
-  @apply border-l;
-}
-
-.sh-divider--medium.sh-divider--horizontal {
-  @apply border-t-2;
-}
-
-.sh-divider--medium.sh-divider--vertical {
-  @apply border-l-2;
-}
-
-.sh-divider--thick.sh-divider--horizontal {
-  @apply border-t-4;
-}
-
-.sh-divider--thick.sh-divider--vertical {
-  @apply border-l-4;
-}
-
-/* 帶文字的分隔線 */
-.sh-divider:not(:empty) {
-  @apply flex items-center text-sm text-gray-500;
-}
-
-.sh-divider--horizontal:not(:empty) {
-  @apply flex-row;
-}
-
-.sh-divider--horizontal:not(:empty)::before,
-.sh-divider--horizontal:not(:empty)::after {
-  @apply flex-1 border-t border-gray-300;
-  content: "";
-}
-
-.sh-divider--horizontal:not(:empty)::before {
+.sh-divider[data-orientation='horizontal']:not(:empty)::before {
   @apply mr-4;
 }
 
-.sh-divider--horizontal:not(:empty)::after {
+.sh-divider[data-orientation='horizontal']:not(:empty)::after {
   @apply ml-4;
 }
 
-.sh-divider--vertical:not(:empty) {
-  @apply flex-col;
+/* 帶文字的分隔線 - 垂直 */
+.sh-divider[data-orientation='vertical']:not(:empty) {
+  @apply flex flex-col items-center text-sm text-gray-500 w-auto;
+  background-color: transparent;
   writing-mode: vertical-lr;
   text-orientation: mixed;
 }
 
-.sh-divider--vertical:not(:empty)::before,
-.sh-divider--vertical:not(:empty)::after {
-  @apply flex-1 border-l border-gray-300;
-  content: "";
+.sh-divider[data-orientation='vertical']:not(:empty)::before,
+.sh-divider[data-orientation='vertical']:not(:empty)::after {
+  @apply flex-1;
+  content: '';
+  width: 1px;
+  background-color: var(--sh-divider-color);
 }
 
-.sh-divider--vertical:not(:empty)::before {
+.sh-divider[data-orientation='vertical']:not(:empty)::before {
   @apply mb-4;
 }
 
-.sh-divider--vertical:not(:empty)::after {
+.sh-divider[data-orientation='vertical']:not(:empty)::after {
   @apply mt-4;
-}
-
-/* 當有內容時移除主要邊框 */
-.sh-divider:not(:empty) {
-  border: none;
 }
 </style>
