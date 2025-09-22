@@ -12,15 +12,14 @@
 - [x] Toast / Notification
 - [x] Tag
 - [x] ScrollArea
+- [x] Carousel
+- [x] Radio
+- [x] Checkbox
 - [ ] Pagination
 - [ ] Divider
 - [ ] Table
 - [ ] Pin Input
 - [ ] TreeView
-- [ ] Carousel
-- [ ] Radio
-- [ ] Radio Group
-- [ ] Checkbox
 - [ ] TextEditor
 - [ ] CodeEditor
 - [ ] MarkdownEditor

@@ -76,10 +76,10 @@ CREATE: src/components/Slider/
 UPDATE: src/components/Slider/demos/
 
 - Task3:
-EXECUTE: Prps/UpdateComponentDocs.md
+IMPLEMENT: Prps/UpdateComponentDocs.md
 
 - Task4:
-EXECUTE: Prps/ExportComponent.md
+IMPLEMENT: Prps/ExportComponent.md
 ```
 
 ### Component Style

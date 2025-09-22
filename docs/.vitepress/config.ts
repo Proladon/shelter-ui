@@ -43,6 +43,7 @@ export default defineConfig({
               text: "ConfigProvider 配置提供者",
               link: "/components/config-provider",
             },
+            { text: "Divider 分隔線", link: "/components/divider" },
             { text: "Tag 標籤", link: "/components/tag" },
             { text: "ContextMenu 右鍵選單", link: "/components/context-menu" },
             {
@@ -76,6 +77,7 @@ export default defineConfig({
               link: "/components/mentionable-textarea",
             },
             { text: "Progress 進度條", link: "/components/progress" },
+            { text: "Pagination 分頁", link: "/components/pagination" },
             { text: "Radio 單選框", link: "/components/radio" },
             { text: "Slider 滑桿", link: "/components/slider" },
             { text: "Splitter 分割器", link: "/components/splitter" },
