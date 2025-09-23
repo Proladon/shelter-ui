@@ -15,11 +15,11 @@
 - [x] Carousel
 - [x] Radio
 - [x] Checkbox
-- [ ] Pagination
-- [ ] Divider
+- [x] Pagination
+- [x] Divider
+- [x] CodeEditor
 - [ ] Table
 - [ ] Pin Input
 - [ ] TreeView
 - [ ] TextEditor
-- [ ] CodeEditor
 - [ ] MarkdownEditor
