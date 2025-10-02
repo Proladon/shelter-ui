@@ -52,6 +52,7 @@ import { Divider as SHDivider } from './components/Divider'
 import SHDatePicker from './components/DatePicker/index.vue'
 import SHTimePicker from './components/TimePicker/index.vue'
 import SHDateTimePicker from './components/DateTimePicker/index.vue'
+import SHCalendar from './components/Calendar/index.vue'
 
 // 組件列表
 const components = {
@@ -99,6 +100,7 @@ const components = {
   SHDatePicker,
   SHTimePicker,
   SHDateTimePicker,
+  SHCalendar,
 }
 
 /**
@@ -216,6 +218,11 @@ export type {
   DateTimePickerExpose,
   DateTimeRange,
 } from './components/DateTimePicker/types'
+export type {
+  CalendarProps,
+  CalendarEmits,
+  CalendarExpose,
+} from './components/Calendar/types'
 
 // 安裝函數
 const install = (app: App) => {
@@ -286,4 +293,5 @@ export {
   SHDatePicker,
   SHTimePicker,
   SHDateTimePicker,
+  SHCalendar,
 }
