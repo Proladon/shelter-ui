@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import UnoCSS from 'unocss/vite'
 import { resolve } from 'path'
 import dts from 'vite-plugin-dts'
+import { analyzer } from 'vite-bundle-analyzer'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -14,6 +15,7 @@ export default defineConfig({
       outDir: 'dist',
       tsconfigPath: './tsconfig.app.json',
     }),
+    analyzer(),
   ],
   resolve: {
     alias: {

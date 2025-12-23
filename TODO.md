@@ -17,7 +17,6 @@
 - [x] Checkbox
 - [x] Pagination
 - [x] Divider
-- [x] CodeEditor
 - [ ] Table
 - [ ] Pin Input
 - [ ] TreeView

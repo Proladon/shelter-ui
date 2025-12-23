@@ -46,7 +46,6 @@ import {
   SHCarouselNavigation,
   SHCarouselIndicators,
 } from './components/Carousel'
-import SHCodeEditor from './components/CodeEditor/index.vue'
 import { Pagination as SHPagination } from './components/Pagination'
 import { Divider as SHDivider } from './components/Divider'
 import SHDatePicker from './components/DatePicker/index.vue'
@@ -94,7 +93,6 @@ const components = {
   SHCarouselItem,
   SHCarouselNavigation,
   SHCarouselIndicators,
-  SHCodeEditor,
   SHPagination,
   SHDivider,
   SHDatePicker,
@@ -189,12 +187,6 @@ export type {
   NotificationType,
 } from './components/Notification/types'
 export type {
-  CodeEditorProps,
-  CodeEditorEmits,
-  CodeEditorSlots,
-  CodeEditorInstance,
-} from './components/CodeEditor/types'
-export type {
   PaginationProps,
   PaginationEmits,
   PaginationItemType,
@@ -287,7 +279,6 @@ export {
   SHCarouselItem,
   SHCarouselNavigation,
   SHCarouselIndicators,
-  SHCodeEditor,
   SHPagination,
   SHDivider,
   SHDatePicker,

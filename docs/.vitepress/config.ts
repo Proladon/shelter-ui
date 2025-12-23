@@ -37,7 +37,6 @@ export default defineConfig({
             { text: 'Carousel 輪播', link: '/components/carousel' },
             { text: 'Checkbox 複選框', link: '/components/checkbox' },
             { text: 'Chip 標籤', link: '/components/chip' },
-            { text: 'CodeEditor 代碼編輯器', link: '/components/code-editor' },
             { text: 'Collapsible 折疊面板', link: '/components/collapsible' },
             {
               text: 'ConfigProvider 配置提供者',
@@ -103,15 +102,12 @@ export default defineConfig({
     plugins: [UnoCSS()],
     ssr: {
       noExternal: ['unocss'],
-      external: ['monaco-editor'],
     },
     resolve: {
       alias: {
         '@': resolve(__dirname, '../../src'),
       },
     },
-    optimizeDeps: {
-      exclude: ['monaco-editor'],
-    },
+    optimizeDeps: {},
   },
 })
