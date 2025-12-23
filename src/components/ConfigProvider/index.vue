@@ -41,19 +41,12 @@ const flattenThemeVars = (
 
 // 更新 CSS 變數
 const updateThemeVars = (themeVars: Record<string, string>) => {
-  for (const key in themeVars) {
-    // const rgbArray = color(themeVars[key]).rgb().array()
-    // setCssVar(key, `${rgbArray[0]}, ${rgbArray[1]}, ${rgbArray[2]}`)
-    // const darkenRgbArray = color(themeVars[key]).darken(0.3).rgb().array()
-    // setCssVar(`${key}-darken`, `${darkenRgbArray[0]}, ${darkenRgbArray[1]}, ${darkenRgbArray[2]}`)
-    // const lightenRgbArray = color(themeVars[key]).lighten(0.3).rgb().array()
-    // setCssVar(`${key}-lighten`, `${lightenRgbArray[0]}, ${lightenRgbArray[1]}, ${lightenRgbArray[2]}`)
-
-    setCssVar(key, themeVars[key])
-    setCssVar(`${key}-darken`, color(themeVars[key]).blacken(0.3).hex())
-    setCssVar(`${key}-lighten`, color(themeVars[key]).whiten(0.3).hex())
-    setCssVar(`${key}-fade`, color(themeVars[key]).fade(0.7).hexa())
-  }
+  Object.entries(themeVars).forEach(([key, value]) => {
+    setCssVar(key, value)
+    setCssVar(`${key}-darken`, color(value).blacken(0.3).hex())
+    setCssVar(`${key}-lighten`, color(value).whiten(0.3).hex())
+    setCssVar(`${key}-fade`, color(value).fade(0.7).hexa())
+  })
 }
 
 onBeforeMount(() => {

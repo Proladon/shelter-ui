@@ -10,7 +10,6 @@
   >
     <div class="sh-carousel__container">
       <div
-        ref="carouselTrack"
         class="sh-carousel__track"
         :style="trackStyle"
         @touchstart="handleTouchStart"
@@ -71,18 +70,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, onMounted, onUnmounted, nextTick } from "vue"
+import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue'
 import type {
   CarouselProps,
   CarouselEmits,
   CarouselItem as CarouselItemType,
-} from "./types"
-import CarouselItem from "./CarouselItem.vue"
-import CarouselNavigation from "./CarouselNavigation.vue"
-import CarouselIndicators from "./CarouselIndicators.vue"
+} from './types'
+import CarouselItem from './CarouselItem.vue'
+import CarouselNavigation from './CarouselNavigation.vue'
+import CarouselIndicators from './CarouselIndicators.vue'
 
 defineOptions({
-  name: "SHCarousel",
+  name: 'SHCarousel',
 })
 
 const props = withDefaults(defineProps<CarouselProps>(), {
@@ -95,8 +94,8 @@ const props = withDefaults(defineProps<CarouselProps>(), {
   loop: true,
   pauseOnHover: true,
   duration: 300,
-  effect: "slide",
-  height: "400px",
+  effect: 'slide',
+  height: '400px',
   disabled: false,
 })
 
@@ -105,7 +104,6 @@ const emit = defineEmits<CarouselEmits>()
 const currentIndex = defineModel<number>({ default: 0 })
 
 // Refs
-const carouselTrack = ref<HTMLElement>()
 const autoplayTimer = ref<number>()
 const isTransitioning = ref(false)
 const isHovered = ref(false)
@@ -119,14 +117,14 @@ const isDragging = ref(false)
 const carouselClasses = computed(() => {
   return {
     [`sh-carousel--${props.effect}`]: true,
-    "sh-carousel--disabled": props.disabled,
+    'sh-carousel--disabled': props.disabled,
   }
 })
 
 const carouselStyle = computed(() => {
   const style: Record<string, any> = {
     height:
-      typeof props.height === "number" ? `${props.height}px` : props.height,
+      typeof props.height === 'number' ? `${props.height}px` : props.height,
   }
 
   if (props.style) {
@@ -141,12 +139,12 @@ const normalizedItems = computed(() => {
 })
 
 const trackStyle = computed(() => {
-  if (props.effect === "slide") {
+  if (props.effect === 'slide') {
     return {
       transform: `translateX(-${currentIndex.value * 100}%)`,
       transition: isTransitioning.value
         ? `transform ${props.duration}ms ease-in-out`
-        : "none",
+        : 'none',
     }
   }
   return {}
@@ -163,7 +161,7 @@ const goToSlide = (index: number) => {
 
   isTransitioning.value = true
 
-  emit("change", index, previousIndex)
+  emit('change', index, previousIndex)
 
   setTimeout(() => {
     isTransitioning.value = false
@@ -210,14 +208,14 @@ const startAutoplay = () => {
     }
   }, props.interval)
 
-  emit("autoplay-start")
+  emit('autoplay-start')
 }
 
 const stopAutoplay = () => {
   if (autoplayTimer.value) {
     clearInterval(autoplayTimer.value)
     autoplayTimer.value = undefined
-    emit("autoplay-stop")
+    emit('autoplay-stop')
   }
 }
 
@@ -230,7 +228,7 @@ const handleMouseLeave = () => {
 }
 
 const handleItemClick = (item: CarouselItemType, index: number) => {
-  emit("item-click", item, index)
+  emit('item-click', item, index)
 }
 
 // Touch events
@@ -238,6 +236,7 @@ const handleTouchStart = (event: TouchEvent) => {
   if (props.disabled) return
 
   const touch = event.touches[0]
+  if (!touch) return
   touchStartX.value = touch.clientX
   touchStartY.value = touch.clientY
   isDragging.value = true
@@ -253,6 +252,7 @@ const handleTouchEnd = (event: TouchEvent) => {
   if (!isDragging.value || props.disabled) return
 
   const touch = event.changedTouches[0]
+  if (!touch) return
   const deltaX = touch.clientX - touchStartX.value
   const deltaY = touch.clientY - touchStartY.value
 
@@ -277,7 +277,7 @@ watch(
     } else {
       stopAutoplay()
     }
-  }
+  },
 )
 
 watch(
@@ -286,7 +286,7 @@ watch(
     if (props.autoplay) {
       startAutoplay()
     }
-  }
+  },
 )
 
 watch(currentIndex, (newValue) => {

@@ -17,7 +17,6 @@ const emit = defineEmits<ActiveButtonGroupEmits>()
 const buttons = ref<
   Array<{ value: string; disabled?: boolean; ref?: HTMLElement }>
 >([])
-const groupRef = ref<HTMLElement | null>(null)
 const indicatorRef = ref<HTMLElement | null>(null)
 const indicatorStyle = ref({
   width: '0px',
@@ -93,7 +92,6 @@ onMounted(() => {
 
 <template>
   <div
-    ref="groupRef"
     class="sh-active-button-group"
     :class="{
       'sh-active-button-group--primary': true,

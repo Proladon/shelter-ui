@@ -438,9 +438,9 @@ const parseTimeString = (timeStr: string) => {
   if (!timeStr) return { hour: 0, minute: 0, second: 0, ampm: 'AM' as const }
 
   const parts = timeStr.split(':')
-  let hour = parseInt(parts[0]) || 0
-  const minute = parseInt(parts[1]) || 0
-  const second = parseInt(parts[2]) || 0
+  let hour = parseInt(parts[0] || '0') || 0
+  const minute = parseInt(parts[1] || '0') || 0
+  const second = parseInt(parts[2] || '0') || 0
 
   let ampm: 'AM' | 'PM' = 'AM'
 

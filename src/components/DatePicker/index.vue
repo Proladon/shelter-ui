@@ -196,7 +196,7 @@ const formatDate = (date: Date | undefined): string => {
 
   try {
     if (props.utcMode) {
-      return date.toISOString().split('T')[0]
+      return date.toISOString().split('T')[0] || ''
     }
 
     if (props.timezone) {
