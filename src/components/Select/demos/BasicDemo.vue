@@ -41,7 +41,7 @@
     <div>
       <h3 class="text-lg font-medium mb-2">可搜索</h3>
       <SHSelect
-        v-model="value4"
+        v-model:value="value4"
         :options="searchOptions"
         placeholder="輸入關鍵字搜索"
         filterable

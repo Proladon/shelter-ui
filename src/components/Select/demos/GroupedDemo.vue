@@ -17,7 +17,7 @@
     <div>
       <h3 class="text-lg font-medium mb-2">分組 + 多選</h3>
       <SHSelect
-        v-model="groupedMultipleValue"
+        v-model:value="groupedMultipleValue"
         :options="groupedOptions"
         placeholder="請選擇多個選項"
         multiple
@@ -32,7 +32,7 @@
     <div>
       <h3 class="text-lg font-medium mb-2">分組 + 搜索</h3>
       <SHSelect
-        v-model="groupedSearchValue"
+        v-model:value="groupedSearchValue"
         :options="groupedOptions"
         placeholder="可搜索分組選項"
         filterable

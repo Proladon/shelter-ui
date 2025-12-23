@@ -34,7 +34,7 @@
     <div>
       <h3 class="text-lg font-medium mb-2">多選 + 搜索</h3>
       <SHSelect
-        v-model="searchMultipleValue"
+        v-model:value="searchMultipleValue"
         :options="searchOptions"
         placeholder="可搜索多選"
         multiple

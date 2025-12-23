@@ -18,7 +18,8 @@
 
       <!-- Single selection display -->
       <div
-        v-if="!multiple && !hideSelectionDisplay"
+        v-if="!multiple"
+        v-show="!hideSelectionDisplay"
         class="sh-select-selection"
       >
         <span v-if="selectedOption" class="sh-select-selected-value">
@@ -69,6 +70,7 @@
         :placeholder="searchPlaceholder"
         @input="handleSearch"
         @keydown.stop
+        @click.stop
       />
 
       <div class="sh-select-suffix">
@@ -247,7 +249,7 @@ const isEmpty = computed(() => {
   )
 })
 
-const hideSelectionDisplay = ref(false)
+const hideSelectionDisplay = computed(() => props.filterable && visible.value)
 
 const showControl = computed(() => {
   const controls = {
@@ -347,13 +349,13 @@ const toggleDropdown = () => {
       updateDropdownPosition()
       if (props.filterable && searchInputRef.value) {
         searchInputRef.value.focus()
-        hideSelectionDisplay.value = true
       }
     })
   }
 }
 
 const handleOptionClick = (option: SelectOption) => {
+  console.log('Option clicked:', option)
   if (option.disabled) return
 
   if (props.multiple) {
@@ -506,8 +508,6 @@ const onDropdownLeave = () => {
 watch(visible, (newVal) => {
   if (newVal) {
     nextTick(updateDropdownPosition)
-  } else {
-    hideSelectionDisplay.value = false
   }
 })
 
@@ -517,7 +517,6 @@ onClickOutside(triggerRef, (event: Event) => {
     !dropdownRef.value?.contains(event.target as Node)
   ) {
     visible.value = false
-    hideSelectionDisplay.value = false
     emit('visible-change', false)
   }
 })
