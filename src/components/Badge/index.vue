@@ -3,8 +3,8 @@
     <slot name="default"></slot>
     <div
       v-if="show"
-      class="sh-badge"
-      :class="{ 'is-dot': isDot }"
+      class="sh-badge -translate-y-1/2"
+      :class="[{ 'is-dot': isDot }, positionClass]"
       :style="badgeStyle"
       @click="handleClick"
     >
@@ -31,6 +31,8 @@ const props = withDefaults(defineProps<BadgeProps>(), {
   isDot: false,
   max: Infinity,
   show: true,
+  position: 'right',
+  size: 12,
 })
 
 const emit = defineEmits<BadgeEmits>()
@@ -42,6 +44,10 @@ const content = computed(() => {
   return props.value
 })
 
+const formatUnit = (value: string | number) => {
+  return typeof value === 'number' ? `${value}px` : value
+}
+
 const badgeStyle = computed(() => {
   const style: Record<string, string> = {}
   if (props.color) {
@@ -50,7 +56,47 @@ const badgeStyle = computed(() => {
   if (props.textColor) {
     style.color = props.textColor
   }
+
+  if (props.size) {
+    style.fontSize = `${props.size}px`
+  }
+
+  if (props.offsetTop !== undefined) {
+    style.top = formatUnit(props.offsetTop)
+  }
+  if (props.offsetBottom !== undefined) {
+    style.bottom = formatUnit(props.offsetBottom)
+    if (props.offsetTop === undefined) {
+      style.top = 'auto'
+    }
+  }
+
+  if (props.offsetLeft !== undefined) {
+    style.left = formatUnit(props.offsetLeft)
+    if (props.offsetRight === undefined) {
+      style.right = 'auto'
+    }
+  }
+  if (props.offsetRight !== undefined) {
+    style.right = formatUnit(props.offsetRight)
+    if (props.offsetLeft === undefined) {
+      style.left = 'auto'
+    }
+  }
+
   return style
+})
+
+const positionClass = computed(() => {
+  switch (props.position) {
+    case 'left':
+      return 'left-0 -translate-x-1/2'
+    case 'center':
+      return 'left-1/2 -translate-x-1/2'
+    case 'right':
+    default:
+      return 'right-0 translate-x-1/2'
+  }
 })
 
 const handleClick = (event: MouseEvent) => {
@@ -64,9 +110,10 @@ const handleClick = (event: MouseEvent) => {
 }
 
 .sh-badge {
-  @apply rounded-full bg-status-danger text-white text-xs font-bold;
-  @apply px-2 py-1 absolute top-0 right-0 translate-x-1/2 -translate-y-1/2;
-  @apply min-w-[1.5rem] h-[1.5rem] flex items-center justify-center whitespace-nowrap z-10;
+  @apply rounded-full bg-status-danger text-white font-bold;
+  @apply absolute top-0;
+  @apply flex items-center justify-center whitespace-nowrap z-10;
+  @apply px-2 py-1 min-w-[1.5rem] h-[1.5rem];
 
   &.is-dot {
     @apply w-2 h-2 p-0 min-w-0 rounded-full;

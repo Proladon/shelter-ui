@@ -23,6 +23,32 @@ export interface BadgeProps {
    * Whether to show the badge
    */
   show?: boolean
+  /**
+   * Position of the badge
+   * @default 'right'
+   */
+  position?: 'left' | 'center' | 'right'
+  /**
+   * Offset from the left
+   */
+  offsetLeft?: string | number
+  /**
+   * Offset from the right
+   */
+  offsetRight?: string | number
+  /**
+   * Offset from the top
+   */
+  offsetTop?: string | number
+  /**
+   * Offset from the bottom
+   */
+  offsetBottom?: string | number
+  /**
+   * Size of the badge (font size in px)
+   * @default 12
+   */
+  size?: number
 }
 
 export interface BadgeEmits {
