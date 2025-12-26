@@ -104,6 +104,29 @@ const customTheme: ThemeVarsConfig = {
 </script>
 ```
 
+## 配置通知
+
+如果你需要使用通知組件（Notification），需要在應用的最外層包裹 `SHNotificationProvider`：
+
+```vue
+<template>
+  <SHConfigProvider :theme-config="customTheme">
+    <SHNotificationProvider>
+      <div id="app">
+        <!-- 你的應用內容 -->
+      </div>
+    </SHNotificationProvider>
+  </SHConfigProvider>
+</template>
+
+<script setup lang="ts">
+import { SHConfigProvider, SHNotificationProvider } from 'shelter-ui'
+// ...
+</script>
+```
+
+這樣你就可以在任何子組件中使用 `useNotification` hook 來顯示通知了。
+
 ## TypeScript 支持
 
 Shelter UI 提供了完整的 TypeScript 類型定義，可以獲得良好的開發體驗。
