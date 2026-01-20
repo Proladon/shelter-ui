@@ -192,7 +192,7 @@ defineExpose({
 }
 
 .sh-textarea-inner {
-  @apply flex-1 w-full outline-none bg-transparent text-text.primary;
+  @apply flex-1 w-full outline-none bg-transparent text-text.base;
   @apply placeholder:text-gray-500;
   @apply resize-none;
   min-height: 0;

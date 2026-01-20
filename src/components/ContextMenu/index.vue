@@ -135,7 +135,7 @@ const DotIcon = () =>
   h(IconPointFilled, { size: '14', color: 'var(--sh-primary)' })
 
 const shortcutClass =
-  'ml-auto pl-[20px] text-text.base group-data-[highlighted]:text-white group-data-[disabled]:text-text.base.fade'
+  'ml-auto pl-[20px] text-text.base group-data-[highlighted]:text-secondary group-data-[disabled]:text-text.base.fade'
 
 // Recursive component rendering for menu items
 const renderMenuItem = (item: ContextMenuItemOption): VNode => {
@@ -276,11 +276,11 @@ const renderMenuItem = (item: ContextMenuItemOption): VNode => {
   @apply data-[disabled]:text-text.base.fade;
   @apply data-[state=checked]:text-primary;
   @apply data-[disabled]:pointer-events-none;
-  @apply data-[highlighted]:(bg-primary.fade text-text.primary);
+  @apply data-[highlighted]:(bg-primary.fade text-secondary);
 }
 
 :deep(.sh-context-menu-separator) {
-  @apply h-[1px] bg-border.primary m-[5px];
+  @apply h-[1px] bg-border.base m-[5px];
 }
 
 :deep(.sh-context-menu-sub-conent) {
@@ -297,10 +297,10 @@ const renderMenuItem = (item: ContextMenuItemOption): VNode => {
   @apply group w-full rounded-[3px] h-[25px] px-[5px] relative pl-[25px] select-none outline-none;
   @apply text-xs leading-none text-text.base;
   @apply flex items-center;
-  @apply data-[state=open]:bg-primary.fade data-[state=open]:text-text.primary;
+  @apply data-[state=open]:bg-primary.fade data-[state=open]:text-secondary;
   @apply data-[disabled]:text-text.base.fade data-[disabled]:pointer-events-none;
-  @apply data-[highlighted]:bg-primary.fade data-[highlighted]:text-text.primary;
-  @apply data-[highlighted]:data-[state=open]:bg-primary.fade data-[highlighted]:data-[state=open]:text-text.primary;
+  @apply data-[highlighted]:bg-primary.fade data-[highlighted]:text-secondary;
+  @apply data-[highlighted]:data-[state=open]:bg-primary.fade data-[highlighted]:data-[state=open]:text-secondary;
 }
 
 :deep(.sh-context-menu-radio-item) {
@@ -308,7 +308,7 @@ const renderMenuItem = (item: ContextMenuItemOption): VNode => {
   @apply  data-[disabled]:text-text.base.fade;
   @apply data-[disabled]:pointer-events-none;
   @apply data-[highlighted]:bg-bg.primary.fade;
-  @apply data-[highlighted]:text-text.primary;
+  @apply data-[highlighted]:text-secondary;
   @apply data-[state=checked]:text-primary;
 }
 </style>

@@ -80,7 +80,7 @@ const handleEdit = async () => {
 }
 
 .sh-editable-area--editable:not(.sh-editable-area--active) {
-  @apply hover:(border-border.primary);
+  @apply hover:(border-primary);
 }
 
 .sh-editable-area--not-editable {
@@ -90,11 +90,12 @@ const handleEdit = async () => {
 .sh-editable-area__edit-btn {
   @apply absolute top-0 right-0;
   @apply inline-flex items-center justify-center;
-  @apply text-text.primary.darken;
+  @apply text-text.base.darken;
   @apply bg-border.base outline-none;
   @apply rounded-bl-[6px] z-1;
   @apply py-[3px] px-[8px];
-  @apply hover:(brightness-110) active:(brightness-90);
+  @apply hover:(brightness-110 text-primary) active:(brightness-90);
+  @apply transition-all duration-300;
 }
 
 .sh-editable-area__edit-btn--disabled {

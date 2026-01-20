@@ -588,7 +588,7 @@ const slots = defineSlots<{
 }
 
 .sh-select-selected-value {
-  @apply text-text.primary truncate;
+  @apply text-text.base truncate;
 }
 
 .sh-select-placeholder {
@@ -600,7 +600,7 @@ const slots = defineSlots<{
 }
 
 .sh-select-tag {
-  @apply inline-flex items-center bg-bg.primary text-text.primary px-2 py-1 rounded text-sm;
+  @apply inline-flex items-center bg-bg.primary text-text.base px-2 py-1 rounded text-sm;
   @apply border border-solid border-border.primary.fade;
 }
 
@@ -609,12 +609,12 @@ const slots = defineSlots<{
 }
 
 .sh-select-tag-close {
-  @apply ml-1 cursor-pointer text-gray-400 hover:text-text.primary;
+  @apply ml-1 cursor-pointer text-gray-400 hover:text-text.base;
   @apply flex items-center justify-center;
 }
 
 .sh-select-search-input {
-  @apply flex-1 outline-none bg-transparent text-text.primary;
+  @apply flex-1 outline-none bg-transparent text-text.base;
   @apply placeholder:text-text.base;
   min-width: 60px;
 }
@@ -625,7 +625,7 @@ const slots = defineSlots<{
 
 .sh-select-clear {
   @apply inline-flex items-center justify-center cursor-pointer;
-  @apply text-gray-400 hover:text-text.primary transition-colors;
+  @apply text-gray-400 hover:text-text.base transition-colors;
   width: 16px;
   height: 16px;
 }
@@ -670,11 +670,11 @@ const slots = defineSlots<{
   @apply text-text.base;
 
   &.is-selected {
-    @apply bg-primary.fade text-text.primary;
+    @apply bg-primary.fade text-text.base;
   }
 
   &.is-highlighted {
-    @apply bg-primary.fade text-text.primary;
+    @apply bg-primary.fade text-text.base;
   }
 
   &.is-disabled {

@@ -111,7 +111,7 @@ const getMarkStyle = (value: number) => {
 }
 
 .sh-slider__track {
-  @apply relative grow rounded-full bg-stone-950;
+  @apply relative grow rounded-full bg-bg.primary.lighten;
 }
 
 .sh-slider-orientation--horizontal {
@@ -143,7 +143,7 @@ const getMarkStyle = (value: number) => {
 }
 
 .sh-slider__thumb {
-  @apply relative block rounded-full bg-gray-300 border-2 shadow-lg
+  @apply relative block rounded-full bg-text.base border-2 shadow-lg
   @apply cursor-grab;
   /* @apply focus:(outline-none ring-2 ring-offset-2); */
   @apply focus:(outline-none);
@@ -222,8 +222,8 @@ const getMarkStyle = (value: number) => {
 
 /* 提示框 */
 .sh-slider__tooltip {
-  @apply absolute bg-bg.secondary text-text.primary text-xs rounded px-2 py-1 pointer-events-none whitespace-nowrap;
-  @apply border-solid border-border.primary border-1;
+  @apply absolute bg-bg.primary text-secondary text-xs rounded px-2 py-1 pointer-events-none whitespace-nowrap;
+  @apply border-solid border-border.base border-1;
   transform: translateX(-50%);
   bottom: calc(100% + 8px);
 

@@ -69,7 +69,7 @@ const handleOpenChange = (value: boolean) => {
 
 <style lang="scss" scoped>
 :deep(.sh-popover-content) {
-  @apply rounded-md py-5 px-5 bg-bg.primary text-text.primary shadow-lg;
+  @apply rounded-md py-5 px-5 bg-bg.primary text-text.base shadow-lg;
   @apply z-50 outline-none;
   animation-duration: 400ms;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);

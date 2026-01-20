@@ -63,10 +63,10 @@ const onClick = () => {
   @apply relative px-4 py-2 rounded-md text-center cursor-pointer z-10;
   @apply flex-1 flex-shrink-0;
   @apply transition-colors duration-200 ease-in-out;
-  @apply hover:(text-primary);
+  @apply hover:(text-secondary);
 
   &--active {
-    @apply text-white;
+    @apply text-primary;
   }
 
   &--disabled {

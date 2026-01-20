@@ -109,7 +109,7 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .sh-active-button-group {
-  @apply relative flex rounded-md overflow-hidden bg-bg.secondary text-text.primary p-1;
+  @apply relative flex rounded-md overflow-hidden bg-bg.primary text-text.base p-1;
   @apply border border-solid border-border.base;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 
@@ -121,6 +121,8 @@ onMounted(() => {
 
 .sh-active-button-indicator {
   @apply absolute rounded-md z-0;
-  transition: transform 250ms ease, width 250ms ease;
+  transition:
+    transform 250ms ease,
+    width 250ms ease;
 }
 </style>

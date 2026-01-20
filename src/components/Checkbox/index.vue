@@ -29,12 +29,12 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from "vue"
-import type { CheckboxProps, CheckboxEmits } from "./types"
-import CheckboxIndicator from "./CheckboxIndicator.vue"
+import { computed, ref, watch } from 'vue'
+import type { CheckboxProps, CheckboxEmits } from './types'
+import CheckboxIndicator from './CheckboxIndicator.vue'
 
 defineOptions({
-  name: "SHCheckbox",
+  name: 'SHCheckbox',
 })
 
 const props = withDefaults(defineProps<CheckboxProps>(), {
@@ -46,14 +46,14 @@ const props = withDefaults(defineProps<CheckboxProps>(), {
 
 const emit = defineEmits<CheckboxEmits>()
 
-const modelValue = defineModel<boolean | "indeterminate" | null | any[]>()
+const modelValue = defineModel<boolean | 'indeterminate' | null | any[]>()
 const inputRef = ref<HTMLInputElement>()
 
 const checkboxClasses = computed(() => {
   return {
-    "sh-checkbox--disabled": props.disabled,
-    "sh-checkbox--checked": isChecked.value,
-    "sh-checkbox--indeterminate": isIndeterminate.value,
+    'sh-checkbox--disabled': props.disabled,
+    'sh-checkbox--checked': isChecked.value,
+    'sh-checkbox--indeterminate': isIndeterminate.value,
   }
 })
 
@@ -70,13 +70,13 @@ const isChecked = computed(() => {
 })
 
 const isIndeterminate = computed(() => {
-  return modelValue.value === "indeterminate" || props.indeterminate
+  return modelValue.value === 'indeterminate' || props.indeterminate
 })
 
 const checkboxState = computed(() => {
-  if (isIndeterminate.value) return "indeterminate"
-  if (isChecked.value) return "checked"
-  return "unchecked"
+  if (isIndeterminate.value) return 'indeterminate'
+  if (isChecked.value) return 'checked'
+  return 'unchecked'
 })
 
 const onChange = (event: Event) => {
@@ -106,15 +106,15 @@ const onChange = (event: Event) => {
     modelValue.value = checked
   }
 
-  emit("change", event)
+  emit('change', event)
 }
 
 const onFocus = (event: FocusEvent) => {
-  emit("focus", event)
+  emit('focus', event)
 }
 
 const onBlur = (event: FocusEvent) => {
-  emit("blur", event)
+  emit('blur', event)
 }
 
 // 同步 indeterminate 狀態到 DOM
@@ -125,7 +125,7 @@ watch(
       inputRef.value.indeterminate = newValue
     }
   },
-  { immediate: true }
+  { immediate: true },
 )
 
 // 同步 checked 狀態到 DOM
@@ -136,7 +136,7 @@ watch(
       inputRef.value.checked = newValue
     }
   },
-  { immediate: true }
+  { immediate: true },
 )
 </script>
 
@@ -154,9 +154,9 @@ watch(
 }
 
 .sh-checkbox__indicator {
-  @apply relative w-4 h-4 border border-gray-300 dark:border-gray-600 rounded;
-  @apply bg-white dark:bg-gray-800 transition-all duration-200;
-  @apply flex items-center justify-center;
+  @apply relative w-4 h-4 border border-solid border-border.base dark:border-border.base rounded;
+  @apply bg-white dark:bg-bg.primary transition-all duration-200;
+  @apply flex items-center justify-center shadow-sm;
 }
 
 .sh-checkbox__input:checked + .sh-checkbox__indicator,
@@ -165,7 +165,7 @@ watch(
 }
 
 .sh-checkbox__input:focus + .sh-checkbox__indicator {
-  @apply ring-2 ring-primary.fade ring-offset-2;
+  /* @apply ring-2 ring-primary.fade ring-offset-2; */
 }
 
 .sh-checkbox__input:disabled + .sh-checkbox__indicator {
@@ -178,5 +178,9 @@ watch(
 
 .sh-checkbox--disabled .sh-checkbox__label {
   @apply text-gray-400 dark:text-gray-600;
+}
+
+.sh-checkbox-indicator__icon {
+  @apply text-bg.primary;
 }
 </style>

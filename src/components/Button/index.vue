@@ -46,13 +46,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue"
-import type { ButtonProps, ButtonEmits } from "./types"
-import Spinner from "@/components/Spinner/index.vue"
+import { computed } from 'vue'
+import type { ButtonProps, ButtonEmits } from './types'
+import Spinner from '@/components/Spinner/index.vue'
 
 const props = withDefaults(defineProps<ButtonProps>(), {
-  type: "default",
-  size: "default",
+  type: 'default',
+  size: 'default',
   disabled: false,
   loading: false,
   text: false,
@@ -66,12 +66,12 @@ const emit = defineEmits<ButtonEmits>()
 
 const handleClick = (event: MouseEvent) => {
   if (props.disabled || props.loading) return
-  emit("click", event)
+  emit('click', event)
 }
 
 const spinnerColor = computed(() => {
-  if (props.type === "default") return "var(--sh-text-base)"
-  if (["success", "warning", "danger", "info"].includes(props.type)) {
+  if (props.type === 'default') return 'var(--sh-text-base)'
+  if (['success', 'warning', 'danger', 'info'].includes(props.type)) {
     return `var(--sh-status-${props.type})`
   }
   return `var(--sh-${props.type})`
@@ -86,10 +86,10 @@ const spinnerColor = computed(() => {
   @apply border-solid border;
   @apply hover:(brightness-90);
   @apply active:(brightness-80);
-  @apply text-text.primary;
+  @apply text-text.base;
 
   /* Default styles (previously plain style) */
-  @apply bg-opacity-10 bg-text.primary.fade text-text.primary border-transparent;
+  @apply bg-opacity-10 bg-text.primary.fade text-text.base border-transparent;
 
   &.type-primary {
     @apply bg-opacity-10 bg-primary.fade text-primary border-transparent;
@@ -143,22 +143,22 @@ const spinnerColor = computed(() => {
     }
 
     &-default {
-      @include dashed-variant("text.primary");
+      @include dashed-variant('text.primary');
     }
     &-primary {
-      @include dashed-variant("primary");
+      @include dashed-variant('primary');
     }
     &-success {
-      @include dashed-variant("status.success");
+      @include dashed-variant('status.success');
     }
     &-warning {
-      @include dashed-variant("status.warning");
+      @include dashed-variant('status.warning');
     }
     &-danger {
-      @include dashed-variant("status.danger");
+      @include dashed-variant('status.danger');
     }
     &-info {
-      @include dashed-variant("status.info");
+      @include dashed-variant('status.info');
     }
   }
 
@@ -171,27 +171,27 @@ const spinnerColor = computed(() => {
     }
 
     &-default {
-      @include ghost-variant("text.primary");
+      @include ghost-variant('text.primary');
     }
 
     &-primary {
-      @include ghost-variant("primary");
+      @include ghost-variant('primary');
     }
 
     &-success {
-      @include ghost-variant("status.success");
+      @include ghost-variant('status.success');
     }
 
     &-warning {
-      @include ghost-variant("status.warning");
+      @include ghost-variant('status.warning');
     }
 
     &-danger {
-      @include ghost-variant("status.danger");
+      @include ghost-variant('status.danger');
     }
 
     &-info {
-      @include ghost-variant("status.info");
+      @include ghost-variant('status.info');
     }
   }
 
@@ -204,27 +204,27 @@ const spinnerColor = computed(() => {
     }
 
     &-default {
-      @include text-variant("text.primary");
+      @include text-variant('text.primary');
     }
 
     &-primary {
-      @include text-variant("primary");
+      @include text-variant('primary');
     }
 
     &-success {
-      @include text-variant("status.success");
+      @include text-variant('status.success');
     }
 
     &-warning {
-      @include text-variant("status.warning");
+      @include text-variant('status.warning');
     }
 
     &-danger {
-      @include text-variant("status.danger");
+      @include text-variant('status.danger');
     }
 
     &-info {
-      @include text-variant("status.info");
+      @include text-variant('status.info');
     }
   }
 
@@ -237,26 +237,26 @@ const spinnerColor = computed(() => {
     }
 
     &-default {
-      @include outline-variant("text.primary");
+      @include outline-variant('text.primary');
     }
     &-primary {
-      @include outline-variant("primary");
+      @include outline-variant('primary');
     }
 
     &-success {
-      @include outline-variant("status.success");
+      @include outline-variant('status.success');
     }
 
     &-warning {
-      @include outline-variant("status.warning");
+      @include outline-variant('status.warning');
     }
 
     &-danger {
-      @include outline-variant("status.danger");
+      @include outline-variant('status.danger');
     }
 
     &-info {
-      @include outline-variant("status.info");
+      @include outline-variant('status.info');
     }
   }
 
@@ -269,25 +269,25 @@ const spinnerColor = computed(() => {
     }
 
     &-default {
-      @include borderd-variant("text.primary");
+      @include borderd-variant('text.primary');
     }
     &-primary {
-      @include borderd-variant("primary");
+      @include borderd-variant('primary');
     }
     &-success {
-      @include borderd-variant("status.success");
+      @include borderd-variant('status.success');
     }
 
     &-warning {
-      @include borderd-variant("status.warning");
+      @include borderd-variant('status.warning');
     }
 
     &-danger {
-      @include borderd-variant("status.danger");
+      @include borderd-variant('status.danger');
     }
 
     &-info {
-      @include borderd-variant("status.info");
+      @include borderd-variant('status.info');
     }
   }
 }

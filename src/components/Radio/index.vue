@@ -24,11 +24,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue"
-import type { RadioProps, RadioEmits } from "./types"
+import { computed } from 'vue'
+import type { RadioProps, RadioEmits } from './types'
 
 defineOptions({
-  name: "SHRadio",
+  name: 'SHRadio',
 })
 
 const props = withDefaults(defineProps<RadioProps>(), {
@@ -42,23 +42,23 @@ const modelValue = defineModel<any>()
 
 const radioClasses = computed(() => {
   return {
-    "sh-radio--disabled": props.disabled,
-    "sh-radio--checked": modelValue.value === props.value,
+    'sh-radio--disabled': props.disabled,
+    'sh-radio--checked': modelValue.value === props.value,
   }
 })
 
 const onChange = (event: Event) => {
   if (!props.disabled) {
-    emit("change", event)
+    emit('change', event)
   }
 }
 
 const onFocus = (event: FocusEvent) => {
-  emit("focus", event)
+  emit('focus', event)
 }
 
 const onBlur = (event: FocusEvent) => {
-  emit("blur", event)
+  emit('blur', event)
 }
 </script>
 
@@ -76,9 +76,9 @@ const onBlur = (event: FocusEvent) => {
 }
 
 .sh-radio__indicator {
-  @apply relative w-4 h-4 border border-gray-300 dark:border-gray-600 rounded-full;
-  @apply bg-white dark:bg-gray-800 transition-colors duration-200;
-  @apply flex items-center justify-center;
+  @apply relative w-4 h-4 border-1 border border-solid border-border.base dark:border-border.base rounded-full;
+  @apply bg-white dark:bg-bg.primary transition-colors duration-300;
+  @apply flex items-center justify-center shadow-md;
 }
 
 .sh-radio__input:checked + .sh-radio__indicator {
@@ -86,15 +86,15 @@ const onBlur = (event: FocusEvent) => {
 }
 
 .sh-radio__input:focus + .sh-radio__indicator {
-  @apply ring-2 ring-primary.fade ring-offset-2;
+  /* @apply ring-2 ring-primary.fade ring-offset-2 outline-none; */
 }
 
 .sh-radio__input:disabled + .sh-radio__indicator {
-  @apply opacity-50;
+  @apply opacity-70;
 }
 
 .sh-radio__dot {
-  @apply w-2 h-2 rounded-full bg-white opacity-0 transition-opacity duration-200;
+  @apply w-2 h-2 rounded-full bg-border.base opacity-0 transition-opacity duration-300;
 }
 
 .sh-radio__input:checked + .sh-radio__indicator .sh-radio__dot {
@@ -102,10 +102,11 @@ const onBlur = (event: FocusEvent) => {
 }
 
 .sh-radio__label {
-  @apply text-sm text-gray-700 dark:text-gray-300;
+  @apply text-sm text-text.base dark:text-text.base;
 }
 
 .sh-radio--disabled .sh-radio__label {
-  @apply text-gray-400 dark:text-gray-600;
+  /* @apply text-gray-400 dark:text-gray-600; */
+  @apply opacity-70;
 }
 </style>

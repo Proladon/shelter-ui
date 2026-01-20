@@ -709,7 +709,7 @@ defineExpose<TimePickerExpose>({
 }
 
 .sh-time-picker__input {
-  @apply flex-1 w-full h-full outline-none bg-transparent text-text.primary;
+  @apply flex-1 w-full h-full outline-none bg-transparent text-text.base;
   @apply placeholder:text-gray-500;
 }
 
@@ -721,14 +721,15 @@ defineExpose<TimePickerExpose>({
 }
 
 .sh-time-picker__clear-icon {
-  @apply text-gray-400 hover:text-text.primary transition-colors cursor-pointer;
+  @apply text-gray-400 hover:text-text.base transition-colors cursor-pointer;
 }
 
 .sh-time-picker__popover {
   background: white;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
     0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
@@ -770,7 +771,9 @@ defineExpose<TimePickerExpose>({
   min-width: 64px;
   text-align: center;
   background: white;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
 
   &:focus {
     outline: none;

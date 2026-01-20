@@ -1,5 +1,8 @@
 <template>
-  <div class="mentionable-textarea">
+  <div
+    class="mentionable-textarea sh-textarea-wrapper"
+    :class="{ 'is-disabled': disabled }"
+  >
     <ComboboxRoot
       v-model:open="open"
       ignore-filter
@@ -10,23 +13,30 @@
         {{ label }}
       </Label>
 
-      <ComboboxInput
-        :id="textareaId"
-        ref="textareaRef"
-        v-model="internalValue"
-        as="textarea"
-        :class="textareaClasses"
-        :rows="rows"
-        :placeholder="placeholder"
-        :disabled="disabled"
-        :readonly="readonly"
-        @input="handleChange"
-        @focus="handleFocus"
-        @blur="handleBlur"
-        @pointerdown="open = false"
-        @keydown.enter="handleEnterKey"
-        @keydown.left.right="open = false"
-      />
+      <div
+        class="sh-textarea"
+        :class="{
+          'is-focused': focused,
+        }"
+      >
+        <ComboboxInput
+          :id="textareaId"
+          ref="textareaRef"
+          v-model="internalValue"
+          as="textarea"
+          class="sh-textarea-inner"
+          :rows="rows"
+          :placeholder="placeholder"
+          :disabled="disabled"
+          :readonly="readonly"
+          @input="handleChange"
+          @focus="handleFocus"
+          @blur="handleBlur"
+          @pointerdown="open = false"
+          @keydown.enter="handleEnterKey"
+          @keydown.left.right="open = false"
+        />
+      </div>
       <ComboboxAnchor :reference="reference" />
 
       <ComboboxPortal>
@@ -35,13 +45,13 @@
           position="popper"
           side="bottom"
           align="start"
-          class="overflow-y-auto overflow-x-hidden max-h-48 max-w-80 bg-card border border-muted-foreground/30 p-1.5 rounded-md shadow-lg z-50"
+          class="overflow-y-auto overflow-x-hidden max-h-48 max-w-80 bg-bg.primary border p-1.5 rounded-md shadow-lg z-50"
         >
           <ComboboxItem
             v-for="item in list"
             :key="item"
             :value="item"
-            class="px-2 py-1 data-[highlighted]:bg-muted rounded flex cursor-default hover:bg-muted/50 transition-colors"
+            class="text-text.base px-2 py-1 data-[highlighted]:(bg-primary.fade text-secondary rounded flex cursor-default) hover:(bg-muted/50 transition-colors)"
             @select="handleSelect"
           >
             <span class="truncate">{{ item }}</span>
@@ -81,6 +91,10 @@ import {
   defaultTriggers,
 } from './utils'
 
+defineOptions({
+  name: 'SHMentionableTextArea',
+})
+
 const props = withDefaults(defineProps<MentionableTextAreaProps>(), {
   rows: 5,
   triggers: () => defaultTriggers,
@@ -99,6 +113,7 @@ const trigger = ref<string | null>(null)
 const caretOffset = ref<number | null>(null)
 const open = ref(false)
 const searchValue = ref('')
+const focused = ref(false)
 
 // Generate unique ID for textarea
 const textareaId = `mentionable-textarea-${Math.random()
@@ -133,7 +148,7 @@ const reference = computedWithControl(
           return null
         }
       },
-    } as ReferenceElement),
+    }) as ReferenceElement,
 )
 
 // Compute filtered list based on search
@@ -161,20 +176,6 @@ watchEffect(() => {
   if (caretOffset.value !== null && textarea) {
     textarea.setSelectionRange(caretOffset.value, caretOffset.value)
   }
-})
-
-// Computed classes for textarea
-const textareaClasses = computed(() => {
-  const baseClasses =
-    'border rounded-md border-muted p-2 transition-colors focus:border-primary focus:outline-none resize-none'
-  const disabledClasses = props.disabled
-    ? 'bg-muted cursor-not-allowed opacity-50'
-    : ''
-  const readonlyClasses = props.readonly ? 'bg-muted/50' : ''
-
-  return [baseClasses, disabledClasses, readonlyClasses, props.class]
-    .filter(Boolean)
-    .join(' ')
 })
 
 // Event handlers
@@ -237,16 +238,58 @@ function handleEnterKey(ev: KeyboardEvent) {
 }
 
 function handleFocus(ev: FocusEvent) {
+  focused.value = true
   emit('focus', ev)
 }
 
 function handleBlur(ev: FocusEvent) {
+  focused.value = false
   emit('blur', ev)
 }
 </script>
 
-<style lang="postcss">
-.mentionable-textarea {
-  @apply relative;
+<style lang="postcss" scoped>
+.sh-textarea-wrapper {
+  @apply w-full inline-flex flex-col relative;
+
+  &:not(.is-disabled) {
+    .sh-textarea:hover {
+      @apply border-primary;
+    }
+  }
+}
+
+.sh-textarea {
+  @apply inline-flex w-full bg-bg.primary relative;
+  @apply rounded-md overflow-hidden;
+  @apply transition duration-300 ease-in-out;
+  @apply border-[1px] border-solid border-border.base;
+
+  padding: 12px;
+
+  &.is-focused {
+    @apply border-primary outline-none;
+    box-shadow: 0 0 0 2px rgba(var(--sh-primary-fade), 0.2);
+  }
+}
+
+.sh-textarea-inner {
+  @apply flex-1 w-full outline-none bg-transparent text-text.base;
+  @apply placeholder:text-gray-500;
+  @apply resize-none;
+  min-height: 0;
+}
+
+/* 禁用狀態 */
+.is-disabled {
+  @apply opacity-60;
+
+  .sh-textarea {
+    @apply cursor-not-allowed;
+  }
+
+  .sh-textarea-inner {
+    @apply cursor-not-allowed;
+  }
 }
 </style>

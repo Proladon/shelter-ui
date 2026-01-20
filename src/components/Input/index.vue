@@ -198,7 +198,7 @@ const slots = defineSlots<{
 }
 
 .sh-input-inner {
-  @apply flex-1 w-full h-full outline-none bg-transparent text-text.primary;
+  @apply flex-1 w-full h-full outline-none bg-transparent text-text.base;
   @apply placeholder:text-gray-500;
 }
 
@@ -212,7 +212,7 @@ const slots = defineSlots<{
 
 .sh-input-clear {
   @apply inline-flex items-center justify-center cursor-pointer;
-  @apply text-gray-400 hover:text-text.primary transition-colors;
+  @apply text-gray-400 hover:text-text.base transition-colors;
   @apply ml-1;
   width: 16px;
   height: 16px;

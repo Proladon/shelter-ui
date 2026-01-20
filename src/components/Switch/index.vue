@@ -18,7 +18,7 @@ import { SwitchRoot, SwitchThumb } from 'reka-ui'
 }
 
 .shelter-switch-thumb {
-  @apply w-3.5 h-3.5 my-auto bg-white text-xs flex items-center justify-center shadow-xl rounded-full transition-transform translate-x-0.5 will-change-transform;
-  @apply data-[state=checked]:translate-x-full;
+  @apply w-3.5 h-3.5 my-auto bg-text.base text-xs flex items-center justify-center shadow-xl rounded-full transition-transform translate-x-0.5 will-change-transform;
+  @apply data-[state=checked]:(translate-x-full bg-gray-300);
 }
 </style>

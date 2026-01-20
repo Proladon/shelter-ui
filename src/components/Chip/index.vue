@@ -71,9 +71,8 @@ const onKeyDown = (event: KeyboardEvent) => {
 <style lang="postcss" scoped>
 .sh-chip {
   @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200;
-  background-color: rgba(227, 201, 170, 0.1); /* secondary.fade */
-  color: #e3c9aa; /* text.primary */
-  border: 1px solid transparent;
+  @apply bg-bg.primary text-text.primary;
+  @apply border-none shadow-sm;
 }
 
 .sh-chip:hover {
@@ -82,7 +81,6 @@ const onKeyDown = (event: KeyboardEvent) => {
 
 .sh-chip:focus {
   @apply outline-none;
-  box-shadow: 0 0 0 2px rgba(227, 201, 170, 0.5);
 }
 
 .s-chip__image {

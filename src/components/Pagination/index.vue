@@ -84,19 +84,19 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from "vue"
+import { computed, ref, watch } from 'vue'
 import {
   IconChevronLeft,
   IconChevronRight,
   IconChevronsLeft,
   IconChevronsRight,
-} from "@tabler/icons-vue"
-import SHButton from "../Button/index.vue"
+} from '@tabler/icons-vue'
+import SHButton from '../Button/index.vue'
 import type {
   PaginationProps,
   PaginationEmits,
   PaginationItemType,
-} from "./types"
+} from './types'
 
 // Props
 const props = withDefaults(defineProps<PaginationProps>(), {
@@ -110,7 +110,7 @@ const props = withDefaults(defineProps<PaginationProps>(), {
   ghost: false,
   outline: false,
   borderd: false,
-  size: "default",
+  size: 'default',
 })
 
 // Emits
@@ -137,6 +137,7 @@ const activeButtonProps = (active: boolean) => {
     outline: props.outline,
     borderd: props.borderd,
     size: props.size,
+    type: active ? 'primary' : 'default',
   }
 
   if (active) {
@@ -180,7 +181,7 @@ const paginationItems = computed((): PaginationItemType[] => {
   // 情況1: 不需要顯示省略號
   if (!shouldShowLeftDots && !shouldShowRightDots) {
     for (let i = 1; i <= total; i++) {
-      items.push({ type: "page", value: i })
+      items.push({ type: 'page', value: i })
     }
     return items
   }
@@ -188,34 +189,34 @@ const paginationItems = computed((): PaginationItemType[] => {
   // 情況2: 只需要右側省略號
   if (!shouldShowLeftDots && shouldShowRightDots) {
     for (let i = 1; i <= rightSiblingIndex; i++) {
-      items.push({ type: "page", value: i })
+      items.push({ type: 'page', value: i })
     }
-    items.push({ type: "ellipsis" })
-    items.push({ type: "page", value: total })
+    items.push({ type: 'ellipsis' })
+    items.push({ type: 'page', value: total })
     return items
   }
 
   // 情況3: 只需要左側省略號
   if (shouldShowLeftDots && !shouldShowRightDots) {
-    items.push({ type: "page", value: 1 })
-    items.push({ type: "ellipsis" })
+    items.push({ type: 'page', value: 1 })
+    items.push({ type: 'ellipsis' })
     for (let i = leftSiblingIndex; i <= total; i++) {
-      items.push({ type: "page", value: i })
+      items.push({ type: 'page', value: i })
     }
     return items
   }
 
   // 情況4: 需要兩側省略號
   if (shouldShowLeftDots && shouldShowRightDots) {
-    items.push({ type: "page", value: firstPageIndex })
-    items.push({ type: "ellipsis" })
+    items.push({ type: 'page', value: firstPageIndex })
+    items.push({ type: 'ellipsis' })
 
     for (let i = leftSiblingIndex; i <= rightSiblingIndex; i++) {
-      items.push({ type: "page", value: i })
+      items.push({ type: 'page', value: i })
     }
 
-    items.push({ type: "ellipsis" })
-    items.push({ type: "page", value: lastPageIndex })
+    items.push({ type: 'ellipsis' })
+    items.push({ type: 'page', value: lastPageIndex })
     return items
   }
 
@@ -234,8 +235,8 @@ const goToPage = (page: number) => {
   }
 
   currentPage.value = page
-  emit("update:modelValue", page)
-  emit("change", page)
+  emit('update:modelValue', page)
+  emit('change', page)
 }
 
 // Watchers
@@ -246,13 +247,13 @@ watch(
       currentPage.value = newPage
     }
   },
-  { immediate: true }
+  { immediate: true },
 )
 </script>
 
 <style scoped lang="postcss">
 .sh-pagination {
-  @apply flex items-center justify-between gap-4;
+  @apply flex items-center justify-between gap-4 flex-wrap;
 }
 
 .sh-pagination__list {
@@ -270,7 +271,7 @@ watch(
 }
 
 .sh-pagination__button--active {
-  /* @apply brightness-70; */
+  /* @apply brightness-150; */
 }
 
 .sh-pagination__icon {
