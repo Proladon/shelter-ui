@@ -122,7 +122,7 @@ const selectedDate = ref()
 | `suffix` | 後綴內容 | -    |
 
 <script setup>
-    import BasicDatePicker from '@/components/DatePicker/demos/BasicDatePicker.vue'
+    import BasicDatePicker from '@/components/DatePicker/demos/Basic.vue'
     import RangeDatePicker from '@/components/DatePicker/demos/RangeDatePicker.vue'
     import TimezoneDatePicker from '@/components/DatePicker/demos/TimezoneDatePicker.vue'
 </script>

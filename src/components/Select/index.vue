@@ -547,6 +547,7 @@ const slots = defineSlots<{
 <style lang="scss" scoped>
 .sh-select-wrapper {
   @apply w-full inline-flex flex-col relative;
+  @apply bg-bg.primary;
 
   &:not(.is-disabled) {
     .sh-select:hover {
@@ -670,11 +671,11 @@ const slots = defineSlots<{
   @apply text-text.base;
 
   &.is-selected {
-    @apply bg-primary.fade text-text.base;
+    @apply bg-primary.fade text-secondary;
   }
 
   &.is-highlighted {
-    @apply bg-primary.fade text-text.base;
+    @apply bg-primary.fade text-secondary;
   }
 
   &.is-disabled {

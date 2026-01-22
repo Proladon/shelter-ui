@@ -74,7 +74,7 @@ const disabledDate = ref<Date>(new Date())
 const readonlyDate = ref<Date>(new Date())
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
 .demo-container {
   max-width: 800px;
   margin: 0 auto;
@@ -82,22 +82,10 @@ const readonlyDate = ref<Date>(new Date())
 }
 
 .demo-item {
-  margin-bottom: 30px;
-  padding: 20px;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-}
-
-.demo-result {
-  margin-top: 10px;
-  padding: 10px;
-  background-color: #f3f4f6;
-  border-radius: 4px;
-  font-family: monospace;
+  @apply flex flex-col;
 }
 
 h3 {
-  margin-bottom: 15px;
-  color: #374151;
+  @apply text-text.base mb-15px;
 }
 </style>

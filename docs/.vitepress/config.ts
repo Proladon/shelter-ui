@@ -13,6 +13,9 @@ export default defineConfig({
       { text: '指南', link: '/guide/' },
       { text: '組件', link: '/components/' },
     ],
+    search: {
+      provider: 'local',
+    },
     sidebar: {
       '/guide/': [
         {

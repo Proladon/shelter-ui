@@ -14,7 +14,7 @@ title: Switch 開關
 
 ```vue
 <template>
-  <s-switch v-model="checked">啟用</s-switch>
+  <SHSwitch v-model="checked">啟用</SHSwitch>
   <span class="ml-4">目前狀態：{{ checked ? '開啟' : '關閉' }}</span>
 </template>
 
