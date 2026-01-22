@@ -1,32 +1,30 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref, watch } from 'vue'
 import {
   IconCalendar,
   IconChevronLeft,
   IconChevronRight,
 } from '@tabler/icons-vue'
-import { fromDate, getLocalTimeZone } from '@internationalized/date'
+import { fromDate, getLocalTimeZone, today } from '@internationalized/date'
 import {
   DatePickerArrow,
   DatePickerCalendar,
   DatePickerCell,
   DatePickerCellTrigger,
   DatePickerContent,
-  DatePickerField,
   DatePickerGrid,
   DatePickerGridBody,
   DatePickerGridHead,
   DatePickerGridRow,
   DatePickerHeadCell,
   DatePickerHeader,
-  DatePickerHeading,
-  DatePickerInput,
   DatePickerNext,
   DatePickerPrev,
   DatePickerRoot,
   DatePickerTrigger,
 } from 'reka-ui'
-import type { DatePickerProps, DatePickerEmits } from './types'
+import type { DatePickerProps, DatePickerEmits, DateRange } from './types'
+import SHSelect from '../Select/index.vue'
 
 defineOptions({
   name: 'SHDatePicker',
@@ -82,63 +80,184 @@ const internalValue = computed({
   },
 })
 
+const toInternalPlaceholder = (val: any) => {
+  const internal = toInternalValue(val)
+  if (!internal) return today(getLocalTimeZone())
+  if ('start' in internal) return internal.start || today(getLocalTimeZone())
+  return internal
+}
+
+const internalPlaceholder = ref<any>(toInternalPlaceholder(props.modelValue))
+const isOpen = ref(false)
+
+watch(
+  () => internalPlaceholder.value,
+  (val) => {
+    if (!val) {
+      internalPlaceholder.value = today(getLocalTimeZone())
+    }
+  },
+)
+
+watch(
+  () => props.modelValue,
+  (newVal) => {
+    internalPlaceholder.value = toInternalPlaceholder(newVal)
+  },
+)
+
+const currentYear = computed({
+  get: () => internalPlaceholder.value?.year || today(getLocalTimeZone()).year,
+  set: (y) => {
+    if (internalPlaceholder.value) {
+      internalPlaceholder.value = internalPlaceholder.value.set({ year: y })
+    }
+  },
+})
+
+const currentMonth = computed({
+  get: () =>
+    internalPlaceholder.value?.month || today(getLocalTimeZone()).month,
+  set: (m) => {
+    if (internalPlaceholder.value) {
+      internalPlaceholder.value = internalPlaceholder.value.set({ month: m })
+    }
+  },
+})
+
+const handleInteractOutside = (event: Event) => {
+  const target = event.target as HTMLElement
+  if (target?.closest('.sh-select-dropdown')) {
+    event.preventDefault()
+  }
+}
+
+const handleValueChange = (val: any) => {
+  if (!props.range && val) {
+    isOpen.value = false
+  } else if (props.range && val?.start && val?.end) {
+    isOpen.value = false
+  }
+}
+
+const years = computed(() => {
+  const current = today(getLocalTimeZone()).year
+  const start = props.minDate?.getFullYear() || current - 100
+  const end = props.maxDate?.getFullYear() || current + 100
+  const res = []
+  for (let i = start; i <= end; i++) {
+    res.push({ label: `${i}年`, value: i })
+  }
+  return res.reverse()
+})
+
+const monthsList = [
+  { value: 1, label: '1月' },
+  { value: 2, label: '2月' },
+  { value: 3, label: '3月' },
+  { value: 4, label: '4月' },
+  { value: 5, label: '5月' },
+  { value: 6, label: '6月' },
+  { value: 7, label: '7月' },
+  { value: 8, label: '8月' },
+  { value: 9, label: '9月' },
+  { value: 10, label: '10月' },
+  { value: 11, label: '11月' },
+  { value: 12, label: '12月' },
+]
+
 const minValue = computed(() =>
   props.minDate ? fromDate(props.minDate, getLocalTimeZone()) : undefined,
 )
 const maxValue = computed(() =>
   props.maxDate ? fromDate(props.maxDate, getLocalTimeZone()) : undefined,
 )
+
+const displayFormattedValue = computed(() => {
+  if (!props.modelValue) return ''
+
+  const formatFn = (d: Date) => {
+    const year = d.getFullYear()
+    const month = String(d.getMonth() + 1).padStart(2, '0')
+    const day = String(d.getDate()).padStart(2, '0')
+    return `${year}-${month}-${day}`
+  }
+
+  if (props.range) {
+    const range = props.modelValue as DateRange
+    const start = range.start ? formatFn(range.start) : ''
+    const end = range.end ? formatFn(range.end) : ''
+    if (!start && !end) return ''
+    return `${start} ~ ${end}`
+  }
+
+  return props.modelValue instanceof Date ? formatFn(props.modelValue) : ''
+})
 </script>
 
 <template>
   <div class="sh-datepicker">
     <DatePickerRoot
       v-model="internalValue"
+      v-model:placeholder="internalPlaceholder"
+      v-model:open="isOpen"
       :disabled="disabled"
       :min-value="minValue"
       :max-value="maxValue"
+      @update:model-value="handleValueChange"
     >
-      <DatePickerField v-slot="{ segments }" class="sh-datepicker__field">
-        <div class="sh-datepicker__input">
-          <template v-for="item in segments" :key="item.part">
-            <DatePickerInput
-              v-if="item.part === 'literal'"
-              :part="item.part"
-              class="sh-datepicker__literal"
-            >
-              {{ item.value }}
-            </DatePickerInput>
-            <DatePickerInput
-              v-else
-              :part="item.part"
-              class="sh-datepicker__segment"
-            >
-              {{ item.value }}
-            </DatePickerInput>
-          </template>
-        </div>
-
-        <DatePickerTrigger class="sh-datepicker__trigger">
+      <DatePickerTrigger as-child>
+        <div class="sh-datepicker__field">
+          <div class="sh-datepicker__display">
+            <template v-if="displayFormattedValue">
+              {{ displayFormattedValue }}
+            </template>
+            <template v-else>
+              <span class="sh-datepicker__placeholder">{{ placeholder }}</span>
+            </template>
+          </div>
           <IconCalendar class="sh-datepicker__icon" />
-        </DatePickerTrigger>
-      </DatePickerField>
+        </div>
+      </DatePickerTrigger>
 
-      <DatePickerContent :side-offset="4" class="sh-datepicker__dropdown">
+      <DatePickerContent
+        :side-offset="4"
+        class="sh-datepicker__dropdown"
+        @interact-outside="handleInteractOutside"
+        @pointer-down-outside="handleInteractOutside"
+      >
         <DatePickerArrow class="sh-datepicker__arrow" />
         <DatePickerCalendar
           v-slot="{ weekDays, grid }"
           class="sh-datepicker__calendar"
         >
           <DatePickerHeader class="sh-datepicker__header">
-            <DatePickerPrev class="sh-datepicker__nav-btn">
+            <DatePickerPrev
+              class="sh-datepicker__nav-btn hover:(text-secondary bg-primary.fade)"
+            >
               <IconChevronLeft class="sh-datepicker__nav-icon" />
             </DatePickerPrev>
 
-            <DatePickerHeading class="sh-datepicker__heading" />
-            <DatePickerNext class="sh-datepicker__nav-btn">
+            <div class="sh-datepicker__selector">
+              <SHSelect
+                v-model:value="currentYear"
+                :options="years"
+                class="min-w-28"
+              />
+              <SHSelect
+                v-model:value="currentMonth"
+                :options="monthsList"
+                class="min-w-24"
+              />
+            </div>
+
+            <DatePickerNext
+              class="sh-datepicker__nav-btn hover:(text-secondary bg-primary.fade)"
+            >
               <IconChevronRight class="sh-datepicker__nav-icon" />
             </DatePickerNext>
           </DatePickerHeader>
+
           <div class="sh-datepicker__calendar-grid-wrapper">
             <DatePickerGrid
               v-for="month in grid"
@@ -171,7 +290,7 @@ const maxValue = computed(() =>
                     <DatePickerCellTrigger
                       :day="weekDate"
                       :month="month.value"
-                      class="sh-datepicker__cell-trigger"
+                      class="sh-datepicker__cell-trigger hover:(text-secondary)"
                     />
                   </DatePickerCell>
                 </DatePickerGridRow>
@@ -192,15 +311,16 @@ const maxValue = computed(() =>
 .sh-datepicker__field {
   @apply flex items-center justify-between w-full h-[36px] px-3;
   @apply bg-bg.primary border border-solid border-border.base rounded-md;
-  @apply transition-colors duration-200 cursor-text;
-  @apply select-none;
+  @apply transition-colors duration-200 cursor-pointer;
+  @apply select-none outline-none;
 
   &:hover {
     @apply border-primary;
   }
 
-  &[data-focused] {
-    @apply border-primary outline-none;
+  &:focus-visible,
+  &[data-state='open'] {
+    @apply border-primary;
     box-shadow: 0 0 0 2px rgba(var(--sh-primary-fade), 0.2);
   }
 
@@ -213,18 +333,12 @@ const maxValue = computed(() =>
   }
 }
 
-.sh-datepicker__input {
-  @apply flex items-center gap-0.5;
+.sh-datepicker__display {
+  @apply flex-1 text-sm text-text.base truncate text-left;
 }
 
-.sh-datepicker__segment {
-  @apply px-0.5 rounded-sm outline-none text-text.base;
-  @apply focus:bg-primary.fade focus:text-primary;
-  @apply data-[placeholder]:text-text.base/40;
-}
-
-.sh-datepicker__literal {
-  @apply text-text.base/60;
+.sh-datepicker__placeholder {
+  @apply text-text.base/40;
 }
 
 .sh-datepicker__trigger {
@@ -233,7 +347,7 @@ const maxValue = computed(() =>
 }
 
 .sh-datepicker__icon {
-  @apply w-4 h-4;
+  @apply w-4 h-4 text-text.base/60 ml-2;
 }
 
 .sh-datepicker__dropdown {
@@ -262,6 +376,22 @@ const maxValue = computed(() =>
 
 .sh-datepicker__nav-icon {
   @apply w-4 h-4;
+}
+
+.sh-datepicker__selector {
+  @apply flex items-center gap-2;
+
+  :deep(.sh-select) {
+    @apply h-8 py-0 border-none bg-transparent hover:bg-bg.secondary transition-colors;
+
+    .sh-select-arrow {
+      @apply hidden;
+    }
+
+    .sh-select-selection {
+      @apply text-text.base font-medium;
+    }
+  }
 }
 
 .sh-datepicker__heading {
