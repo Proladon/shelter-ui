@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { EditableAreaProps, EditableAreaEmits } from './types'
+import type { EditableContainerProps, EditableContainerEmits } from './types'
 import { IconCheck, IconPencil } from '@tabler/icons-vue'
 import { SHSpin } from '@/index'
 
 defineOptions({
-  name: 'SHEditableArea',
+  name: 'SHEditableContainer',
 })
 
-const props = withDefaults(defineProps<EditableAreaProps>(), {
+const props = withDefaults(defineProps<EditableContainerProps>(), {
   editable: true,
 })
 
-const emit = defineEmits<EditableAreaEmits>()
+const emit = defineEmits<EditableContainerEmits>()
 
 const editing = ref(false)
 const loading = ref(false)
@@ -40,19 +40,19 @@ const handleEdit = async () => {
 
 <template>
   <div
-    class="sh-editable-area"
+    class="sh-editable-container"
     :class="{
-      'sh-editable-area--editable': editable,
-      'sh-editable-area--not-editable': !editable,
-      'sh-editable-area--active': editing,
-      'sh-editable-area--loading': loading,
+      'sh-editable-container--editable': editable,
+      'sh-editable-container--not-editable': !editable,
+      'sh-editable-container--active': editing,
+      'sh-editable-container--loading': loading,
     }"
   >
     <button
-      class="sh-editable-area__edit-btn"
+      class="sh-editable-container__edit-btn"
       :class="{
-        'sh-editable-area__edit-btn--disabled': !editable,
-        'sh-editable-area__edit-btn--active': editing,
+        'sh-editable-container__edit-btn--disabled': !editable,
+        'sh-editable-container__edit-btn--active': editing,
       }"
       @click="handleEdit"
       aria-label="edit"
@@ -62,32 +62,32 @@ const handleEdit = async () => {
       <IconCheck v-if="!loading && editing" :size="18" />
       <SHSpin v-if="loading" :size="18" />
     </button>
-    <div class="sh-editable-area__content">
+    <div class="sh-editable-container__content">
       <slot :editing="editing" :loading="loading"></slot>
     </div>
   </div>
 </template>
 
 <style lang="postcss" scoped>
-.sh-editable-area {
+.sh-editable-container {
   @apply relative rounded-md transition-all duration-300;
   @apply border border-border.base border-solid;
   @apply overflow-hidden;
 }
 
-.sh-editable-area--active {
+.sh-editable-container--active {
   @apply border-primary;
 }
 
-.sh-editable-area--editable:not(.sh-editable-area--active) {
+.sh-editable-container--editable:not(.sh-editable-container--active) {
   @apply hover:(border-primary);
 }
 
-.sh-editable-area--not-editable {
+.sh-editable-container--not-editable {
   @apply cursor-default opacity-50;
 }
 
-.sh-editable-area__edit-btn {
+.sh-editable-container__edit-btn {
   @apply absolute top-0 right-0;
   @apply inline-flex items-center justify-center;
   @apply text-text.base.darken;
@@ -98,19 +98,19 @@ const handleEdit = async () => {
   @apply transition-all duration-300;
 }
 
-.sh-editable-area__edit-btn--disabled {
+.sh-editable-container__edit-btn--disabled {
   @apply opacity-40 cursor-not-allowed;
 }
 
-.sh-editable-area__edit-btn--active {
+.sh-editable-container__edit-btn--active {
   @apply text-primary;
 }
 
-.sh-editable-area__content {
+.sh-editable-container__content {
   @apply p-3;
 }
 
-.sh-editable-area--loading {
+.sh-editable-container--loading {
   @apply pointer-events-none select-none opacity-70;
 }
 </style>

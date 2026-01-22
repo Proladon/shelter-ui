@@ -1,9 +1,9 @@
-export interface EditableAreaProps {
+export interface EditableContainerProps {
   editable?: boolean
   updateFn?: () => Promise<void>
 }
 
-export interface EditableAreaEmits {
+export interface EditableContainerEmits {
   (e: 'edit'): void
   (e: 'done'): void
 }

@@ -9,7 +9,7 @@ import SHSelect from './components/Select/index.vue'
 import SHSpin from './components/Spin/index.vue'
 import SHBorderContainer from './components/BorderContainer/index.vue'
 import SHPopover from './components/Popover/index.vue'
-import SHEditableArea from './components/EditableArea/index.vue'
+import SHEditableContainer from './components/EditableContainer/index.vue'
 import SHTooltip from './components/Tooltip/index.vue'
 import SHBadge from './components/Badge/index.vue'
 import SHChip from './components/Chip/index.vue'
@@ -63,7 +63,7 @@ const components = {
   SHSelect,
   SHBorderContainer,
   SHPopover,
-  SHEditableArea,
+  SHEditableContainer,
   SHTooltip,
   SHBadge,
   SHChip,
@@ -127,9 +127,9 @@ export type {
 } from './components/BorderContainer/types'
 export type { PopoverProps, PopoverEmits } from './components/Popover/types'
 export type {
-  EditableAreaProps,
-  EditableAreaEmits,
-} from './components/EditableArea/types'
+  EditableContainerProps,
+  EditableContainerEmits,
+} from './components/EditableContainer/types'
 export type { TooltipProps, TooltipEmits } from './components/Tooltip/types'
 export type { BadgeProps, BadgeEmits } from './components/Badge/types'
 export type { ChipProps, ChipEmits } from './components/Chip/types'
@@ -248,7 +248,7 @@ export {
   SHConfigProvider,
   SHBorderContainer,
   SHPopover,
-  SHEditableArea,
+  SHEditableContainer,
   SHTooltip,
   SHBadge,
   SHChip,

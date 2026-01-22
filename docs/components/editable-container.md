@@ -1,14 +1,14 @@
 ---
-title: EditableArea 可編輯區域
+title: EditableContainer 可編輯容器
 ---
 
-# EditableArea 可編輯區域
+# EditableContainer 可編輯容器
 
-EditableArea 組件可以讓任何內容加上一個外框與編輯按鈕，代表該區塊是可被編輯的。
+EditableContainer 組件可以讓任何內容加上一個外框與編輯按鈕，代表該區塊是可被編輯的。
 
 ## 基本用法
 
-最簡單的用法，提供一個可編輯的區域。
+最簡單的用法，提供一個可編輯的容器。
 
 <Demo>
   <BasicDemo />
@@ -17,10 +17,10 @@ EditableArea 組件可以讓任何內容加上一個外框與編輯按鈕，代�
 
 ```vue
 <template>
-  <SHEditableArea>
+  <SHEditableContainer>
     <template #default="{ editing, loading }">
       <div v-if="!editing">
-        <p>這是一個可編輯區域的示例內容（檢視模式）</p>
+        <p>這是一個可編輯容器的示例內容（檢視模式）</p>
         <p>點擊右上角的編輯按鈕可進入編輯模式</p>
       </div>
       <div v-else>
@@ -28,14 +28,14 @@ EditableArea 組件可以讓任何內容加上一個外框與編輯按鈕，代�
         <p v-if="loading">正在保存變更…</p>
       </div>
     </template>
-  </SHEditableArea>
+  </SHEditableContainer>
 
-  <SHEditableArea :editable="false">
+  <SHEditableContainer :editable="false">
     <div>
-      <p>這是一個不可編輯區域的示例內容</p>
+      <p>這是一個不可編輯容器的示例內容</p>
       <p>此區域的編輯按鈕呈現禁用狀態</p>
     </div>
-  </SHEditableArea>
+  </SHEditableContainer>
 </template>
 ```
 
@@ -66,5 +66,5 @@ EditableArea 組件可以讓任何內容加上一個外框與編輯按鈕，代�
 
 <script setup>
 import { SHConfigProvider } from '@/index'
-import BasicDemo from '@/components/EditableArea/demos/BasicDemo.vue'
+import BasicDemo from '@/components/EditableContainer/demos/BasicDemo.vue'
 </script>

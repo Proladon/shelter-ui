@@ -34,28 +34,48 @@ const iconComponent = computed(() => {
 <style lang="scss" scoped>
 .s-message-box {
   @apply flex items-start gap-3 p-4 rounded-md border bg-bg.primary.fade;
-  @apply text-text-base;
+  @apply text-text.base.lighten;
   @apply w-full;
 
   &.type-info {
     @apply bg-primary.fade;
     @apply border-[1px] border-solid border-primary;
+
+    & .s-message-box__icon {
+      @apply text-primary;
+    }
   }
   &.type-danger {
     @apply bg-status.danger.fade;
     @apply border-[1px] border-solid border-status.danger;
+
+    & .s-message-box__icon {
+      @apply text-status.danger;
+    }
   }
   &.type-success {
     @apply bg-status.success.fade;
     @apply border-[1px] border-solid border-status.success;
+
+    & .s-message-box__icon {
+      @apply text-status.success;
+    }
   }
   &.type-warning {
     @apply bg-status.warning.fade;
     @apply border-[1px] border-solid border-status.warning;
+
+    & .s-message-box__icon {
+      @apply text-status.warning;
+    }
   }
   &.type-normal {
     @apply bg-status.info.fade;
     @apply border-[1px] border-solid border-status.info;
+
+    & .s-message-box__icon {
+      @apply text-status.info;
+    }
   }
 
   &__icon {
