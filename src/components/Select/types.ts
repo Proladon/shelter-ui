@@ -47,10 +47,6 @@ export interface SelectProps {
    */
   multiple?: boolean
   /**
-   * Maximum number of selections (only for multiple)
-   */
-  maxSelections?: number
-  /**
    * Whether to allow search/filter
    */
   filterable?: boolean
@@ -71,13 +67,13 @@ export interface SelectProps {
    */
   noMatchText?: string
   /**
+   * Component width
+   */
+  width?: string | number
+  /**
    * Dropdown placement
    */
   placement?: 'top' | 'bottom' | 'auto'
-  /**
-   * Dropdown width
-   */
-  dropdownWidth?: string | number
   /**
    * Maximum height of dropdown
    */

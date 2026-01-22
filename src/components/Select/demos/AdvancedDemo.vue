@@ -80,8 +80,7 @@
             v-model:value="customWidthValue"
             :options="options"
             placeholder="固定寬度"
-            dropdown-width="300px"
-            style="width: 200px"
+            width="300px"
           />
         </div>
         <div>
@@ -91,7 +90,7 @@
             :options="longOptions"
             placeholder="限制高度"
             max-height="100px"
-            style="width: 200px"
+            width="200px"
           />
         </div>
       </div>

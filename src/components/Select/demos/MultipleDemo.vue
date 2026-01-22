@@ -16,22 +16,6 @@
     </div>
 
     <div>
-      <h3 class="text-lg font-medium mb-2">限制選擇數量 (最多3個)</h3>
-      <SHSelect
-        v-model:value="limitedValue"
-        :options="options"
-        placeholder="最多選擇3個選項"
-        multiple
-        :max-selections="3"
-        clearable
-        style="width: 300px"
-      />
-      <p class="mt-2 text-sm text-gray-600">
-        選中的值: <code>{{ limitedValue }}</code>
-      </p>
-    </div>
-
-    <div>
       <h3 class="text-lg font-medium mb-2">多選 + 搜索</h3>
       <SHSelect
         v-model:value="searchMultipleValue"
@@ -54,7 +38,6 @@ import { ref } from 'vue'
 import type { SelectOption } from '../types'
 
 const multipleValue = ref<(string | number)[]>([])
-const limitedValue = ref<(string | number)[]>(['option1'])
 const searchMultipleValue = ref<(string | number)[]>([])
 
 const options: SelectOption[] = [
