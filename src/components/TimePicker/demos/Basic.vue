@@ -22,11 +22,7 @@ const singleTime = ref<string>()
 }
 
 .demo-result {
-  margin-top: 10px;
-  padding: 10px;
-  background-color: #f3f4f6;
-  border-radius: 4px;
-  font-family: monospace;
+  @apply text-text.base;
 }
 
 h3 {

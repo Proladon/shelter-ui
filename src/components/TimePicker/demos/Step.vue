@@ -2,9 +2,10 @@
   <div class="demo-container">
     <TimePicker
       v-model="stepTime"
+      :hour-step="2"
       :minute-step="15"
       :second-step="30"
-      placeholder="分鐘步進15，秒數步進30"
+      placeholder="小時步進2，分鐘步進15，秒數步進30"
     />
     <p class="demo-result">選中的時間: {{ stepTime || '無' }}</p>
   </div>
@@ -23,10 +24,6 @@ const stepTime = ref<string>()
 }
 
 .demo-result {
-  margin-top: 10px;
-  padding: 10px;
-  background-color: #f3f4f6;
-  border-radius: 4px;
-  font-family: monospace;
+  @apply text-text.base;
 }
 </style>

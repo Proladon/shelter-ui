@@ -105,38 +105,8 @@ const selectedTime = ref()
   <div>
     <SHTimePicker
       v-model="selectedTime"
-      :show-seconds="false"
+      :second="false"
       placeholder="選擇時間（不含秒）"
-    />
-    <p>選中的時間: {{ selectedTime || '無' }}</p>
-  </div>
-</template>
-
-<script setup>
-import { ref } from 'vue'
-import { SHTimePicker } from '@proladon/shelter-ui'
-
-const selectedTime = ref()
-</script>
-```
-
-  </template>
-</Demo>
-
-### 時區支援
-
-<Demo>
-  <TimezoneTimePicker />
-  <template #code>
-
-```vue
-<template>
-  <div>
-    <SHTimePicker
-      v-model="selectedTime"
-      :show-timezone="true"
-      timezone="Asia/Taipei"
-      placeholder="選擇時間（台北時區）"
     />
     <p>選中的時間: {{ selectedTime || '無' }}</p>
   </div>
@@ -164,9 +134,10 @@ const selectedTime = ref()
   <div>
     <SHTimePicker
       v-model="selectedTime"
+      :hour-step="2"
       :minute-step="15"
       :second-step="30"
-      placeholder="分鐘步進15，秒數步進30"
+      placeholder="小時步進2，分鐘步進15，秒數步進30"
     />
     <p>選中的時間: {{ selectedTime || '無' }}</p>
   </div>
@@ -234,22 +205,25 @@ interface TimeRange {
 
 ### Props
 
-| 屬性名         | 類型                             | 預設值          | 說明               |
-| -------------- | -------------------------------- | --------------- | ------------------ |
-| `modelValue`   | `string \| TimeRange \| null`    | `null`          | 選中的時間值       |
-| `range`        | `boolean`                        | `false`         | 是否為範圍選擇模式 |
-| `placeholder`  | `string`                         | `'請選擇時間'`  | 佔位符文字         |
-| `disabled`     | `boolean`                        | `false`         | 是否禁用           |
-| `readonly`     | `boolean`                        | `false`         | 是否唯讀           |
-| `clearable`    | `boolean`                        | `true`          | 是否可清除         |
-| `use12Hour`    | `boolean`                        | `false`         | 是否使用 12 小時制 |
-| `showSeconds`  | `boolean`                        | `true`          | 是否顯示秒         |
-| `hourStep`     | `number`                         | `1`             | 小時步長           |
-| `minuteStep`   | `number`                         | `1`             | 分鐘步長           |
-| `secondStep`   | `number`                         | `1`             | 秒步長             |
-| `timezone`     | `string`                         | `'Asia/Taipei'` | 時區               |
-| `showTimezone` | `boolean`                        | `false`         | 是否顯示時區資訊   |
-| `size`         | `'small' \| 'medium' \| 'large'` | `'medium'`      | 尺寸               |
+| 屬性名          | 類型                          | 預設值         | 說明                                     |
+| --------------- | ----------------------------- | -------------- | ---------------------------------------- |
+| `modelValue`    | `string \| TimeRange \| null` | `null`         | 選中的時間值                             |
+| `range`         | `boolean`                     | `false`        | 是否為範圍選擇模式                       |
+| `placeholder`   | `string`                      | `'請選擇時間'` | 佔位符文字                               |
+| `disabled`      | `boolean`                     | `false`        | 是否禁用                                 |
+| `readonly`      | `boolean`                     | `false`        | 是否唯讀                                 |
+| `format`        | `string`                      | `'HH:mm:ss'`   | 時間顯示格式                             |
+| `use12Hour`     | `boolean`                     | `false`        | 是否使用 12 小時制                       |
+| `hour`          | `boolean`                     | `true`         | 是否顯示小時                             |
+| `minute`        | `boolean`                     | `true`         | 是否顯示分鐘                             |
+| `second`        | `boolean`                     | `true`         | 是否顯示秒                               |
+| `showSeconds`   | `boolean`                     | `true`         | (Deprecated) 是否顯示秒，請使用 `second` |
+| `hourStep`      | `number`                      | `1`            | 小時步長                                 |
+| `minuteStep`    | `number`                      | `1`            | 分鐘步長                                 |
+| `secondStep`    | `number`                      | `1`            | 秒步長                                   |
+| `minTime`       | `string`                      | -              | 最小可選時間                             |
+| `maxTime`       | `string`                      | -              | 最大可選時間                             |
+| `disabledTimes` | `string[]`                    | `[]`           | 禁用的特定時間列表                       |
 
 ### Events
 
@@ -273,7 +247,6 @@ import BasicTimePicker from '@/components/TimePicker/demos/Basic.vue'
 import RangeTimePicker from '@/components/TimePicker/demos/Range.vue'
 import TwelveHourTimePicker from '@/components/TimePicker/demos/TwelveHour.vue'
 import NoSecondsTimePicker from '@/components/TimePicker/demos/NoSeconds.vue'
-import TimezoneTimePicker from '@/components/TimePicker/demos/Timezone.vue'
 import StepTimePicker from '@/components/TimePicker/demos/Step.vue'
 import DisabledTimePicker from '@/components/TimePicker/demos/Disabled.vue'
 </script>

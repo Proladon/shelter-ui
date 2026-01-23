@@ -1,394 +1,421 @@
 <template>
   <div class="sh-time-picker" :class="{ 'sh-time-picker--disabled': disabled }">
-    <div
-      ref="triggerRef"
-      class="sh-time-picker__trigger"
-      :class="{
-        'sh-time-picker__trigger--active': isOpen,
-        'sh-time-picker__trigger--readonly': readonly,
-      }"
-      @click="handleTriggerClick"
+    <SHPopover
+      v-model:open="isOpen"
+      side="bottom"
+      align="start"
+      :disabled="disabled || readonly"
     >
-      <input
-        ref="inputRef"
-        v-model="displayValue"
-        class="sh-time-picker__input"
-        :placeholder="computedPlaceholder"
-        :disabled="disabled"
-        :readonly="readonly"
-        @focus="handleFocus"
-        @blur="handleBlur"
-        @keydown="handleKeydown"
-      />
-      <div class="sh-time-picker__icon">
-        <IconClock
-          v-if="
-            !modelValue ||
-            (!range && !modelValue) ||
-            (range && (!modelValue || (!rangeValue?.start && !rangeValue?.end)))
-          "
-        />
-        <IconX
-          v-else-if="!readonly && !disabled"
-          @click.stop="handleClear"
-          class="sh-time-picker__clear-icon"
-        />
-        <IconClock v-else />
-      </div>
-    </div>
-
-    <Teleport to="body">
-      <Transition name="sh-time-picker-fade">
+      <template #trigger>
         <div
-          v-if="isOpen"
-          ref="popoverRef"
-          class="sh-time-picker__popover"
-          :style="popoverStyle"
+          class="sh-time-picker__trigger"
+          :class="{
+            'sh-time-picker__trigger--active': isOpen,
+            'sh-time-picker__trigger--readonly': readonly,
+          }"
         >
-          <div class="sh-time-picker__content">
-            <div
-              v-if="showTimezone && timezone"
-              class="sh-time-picker__timezone-info"
-            >
-              時區: {{ timezone }}
-            </div>
+          <input
+            ref="inputRef"
+            :value="displayValue"
+            class="sh-time-picker__input"
+            :placeholder="computedPlaceholder"
+            :disabled="disabled"
+            readonly
+          />
+          <div class="sh-time-picker__icon">
+            <IconClock
+              class="text-text.base"
+              v-if="
+                !displayValue ||
+                (!range && !modelValue) ||
+                (range && !rangeValue?.start && !rangeValue?.end)
+              "
+            />
+            <IconX
+              v-else-if="!readonly && !disabled"
+              @click.stop="handleClear"
+              class="sh-time-picker__clear-icon"
+            />
+            <IconClock v-else />
+          </div>
+        </div>
+      </template>
 
-            <div v-if="!range" class="sh-time-picker__single-selector">
-              <div class="sh-time-picker__time-selector">
-                <!-- Hour Selector -->
-                <div class="sh-time-picker__time-unit">
-                  <label class="sh-time-picker__label">時</label>
-                  <select
-                    v-model="currentHour"
-                    class="sh-time-picker__select"
-                    @change="updateSingleTime"
-                  >
-                    <option
-                      v-for="hour in hourOptions"
-                      :key="hour.value"
-                      :value="hour.value"
-                      :disabled="hour.disabled"
-                    >
-                      {{ hour.label }}
-                    </option>
-                  </select>
-                </div>
-
-                <!-- Minute Selector -->
-                <div class="sh-time-picker__time-unit">
-                  <label class="sh-time-picker__label">分</label>
-                  <select
-                    v-model="currentMinute"
-                    class="sh-time-picker__select"
-                    @change="updateSingleTime"
-                  >
-                    <option
-                      v-for="minute in minuteOptions"
-                      :key="minute.value"
-                      :value="minute.value"
-                      :disabled="minute.disabled"
-                    >
-                      {{ minute.label }}
-                    </option>
-                  </select>
-                </div>
-
-                <!-- Second Selector -->
-                <div v-if="showSeconds" class="sh-time-picker__time-unit">
-                  <label class="sh-time-picker__label">秒</label>
-                  <select
-                    v-model="currentSecond"
-                    class="sh-time-picker__select"
-                    @change="updateSingleTime"
-                  >
-                    <option
-                      v-for="second in secondOptions"
-                      :key="second.value"
-                      :value="second.value"
-                      :disabled="second.disabled"
-                    >
-                      {{ second.label }}
-                    </option>
-                  </select>
-                </div>
-
-                <!-- AM/PM Selector -->
-                <div v-if="use12Hour" class="sh-time-picker__time-unit">
-                  <label class="sh-time-picker__label">時段</label>
-                  <select
-                    v-model="currentAmPm"
-                    class="sh-time-picker__select"
-                    @change="updateSingleTime"
-                  >
-                    <option value="AM">上午</option>
-                    <option value="PM">下午</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            <div v-else class="sh-time-picker__range-selector">
-              <!-- Start Time -->
-              <div class="sh-time-picker__range-section">
-                <h4 class="sh-time-picker__range-title">開始時間</h4>
-                <div class="sh-time-picker__time-selector">
-                  <div class="sh-time-picker__time-unit">
-                    <label class="sh-time-picker__label">時</label>
-                    <select
-                      v-model="startHour"
-                      class="sh-time-picker__select"
-                      @change="updateRangeTime"
-                    >
-                      <option
-                        v-for="hour in hourOptions"
-                        :key="hour.value"
-                        :value="hour.value"
-                        :disabled="hour.disabled"
-                      >
-                        {{ hour.label }}
-                      </option>
-                    </select>
-                  </div>
-
-                  <div class="sh-time-picker__time-unit">
-                    <label class="sh-time-picker__label">分</label>
-                    <select
-                      v-model="startMinute"
-                      class="sh-time-picker__select"
-                      @change="updateRangeTime"
-                    >
-                      <option
-                        v-for="minute in minuteOptions"
-                        :key="minute.value"
-                        :value="minute.value"
-                        :disabled="minute.disabled"
-                      >
-                        {{ minute.label }}
-                      </option>
-                    </select>
-                  </div>
-
-                  <div v-if="showSeconds" class="sh-time-picker__time-unit">
-                    <label class="sh-time-picker__label">秒</label>
-                    <select
-                      v-model="startSecond"
-                      class="sh-time-picker__select"
-                      @change="updateRangeTime"
-                    >
-                      <option
-                        v-for="second in secondOptions"
-                        :key="second.value"
-                        :value="second.value"
-                        :disabled="second.disabled"
-                      >
-                        {{ second.label }}
-                      </option>
-                    </select>
-                  </div>
-
-                  <div v-if="use12Hour" class="sh-time-picker__time-unit">
-                    <label class="sh-time-picker__label">時段</label>
-                    <select
-                      v-model="startAmPm"
-                      class="sh-time-picker__select"
-                      @change="updateRangeTime"
-                    >
-                      <option value="AM">上午</option>
-                      <option value="PM">下午</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-              <!-- End Time -->
-              <div class="sh-time-picker__range-section">
-                <h4 class="sh-time-picker__range-title">結束時間</h4>
-                <div class="sh-time-picker__time-selector">
-                  <div class="sh-time-picker__time-unit">
-                    <label class="sh-time-picker__label">時</label>
-                    <select
-                      v-model="endHour"
-                      class="sh-time-picker__select"
-                      @change="updateRangeTime"
-                    >
-                      <option
-                        v-for="hour in hourOptions"
-                        :key="hour.value"
-                        :value="hour.value"
-                        :disabled="hour.disabled"
-                      >
-                        {{ hour.label }}
-                      </option>
-                    </select>
-                  </div>
-
-                  <div class="sh-time-picker__time-unit">
-                    <label class="sh-time-picker__label">分</label>
-                    <select
-                      v-model="endMinute"
-                      class="sh-time-picker__select"
-                      @change="updateRangeTime"
-                    >
-                      <option
-                        v-for="minute in minuteOptions"
-                        :key="minute.value"
-                        :value="minute.value"
-                        :disabled="minute.disabled"
-                      >
-                        {{ minute.label }}
-                      </option>
-                    </select>
-                  </div>
-
-                  <div v-if="showSeconds" class="sh-time-picker__time-unit">
-                    <label class="sh-time-picker__label">秒</label>
-                    <select
-                      v-model="endSecond"
-                      class="sh-time-picker__select"
-                      @change="updateRangeTime"
-                    >
-                      <option
-                        v-for="second in secondOptions"
-                        :key="second.value"
-                        :value="second.value"
-                        :disabled="second.disabled"
-                      >
-                        {{ second.label }}
-                      </option>
-                    </select>
-                  </div>
-
-                  <div v-if="use12Hour" class="sh-time-picker__time-unit">
-                    <label class="sh-time-picker__label">時段</label>
-                    <select
-                      v-model="endAmPm"
-                      class="sh-time-picker__select"
-                      @change="updateRangeTime"
-                    >
-                      <option value="AM">上午</option>
-                      <option value="PM">下午</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="sh-time-picker__actions">
-              <button
-                class="sh-time-picker__button sh-time-picker__button--secondary"
-                @click="handleClear"
+      <div class="sh-time-picker__content" @mousedown.prevent>
+        <div
+          class="sh-time-picker__panels"
+          :class="{ 'sh-time-picker__panels--range': range }"
+        >
+          <!-- Start Time Panel -->
+          <div class="sh-time-picker__panel">
+            <div v-if="range" class="sh-time-picker__panel-title">開始時間</div>
+            <div class="sh-time-picker__columns">
+              <!-- Hour -->
+              <div
+                v-if="hour"
+                ref="startHourRef"
+                class="sh-time-picker__column"
+                @scroll="handleScroll('start', 'hour', $event)"
+                @mousedown="handleMouseDown"
               >
-                清除
-              </button>
-              <button
-                class="sh-time-picker__button sh-time-picker__button--primary"
-                @click="handleConfirm"
+                <div class="sh-time-picker__spacer"></div>
+                <div
+                  v-for="item in hourOptions"
+                  :key="item.value"
+                  class="sh-time-picker__item"
+                  :class="{
+                    'sh-time-picker__item--active': item.value === startHour,
+                  }"
+                  @click="scrollToItem('start', 'hour', item.value)"
+                >
+                  {{ item.label }}
+                </div>
+                <div class="sh-time-picker__spacer"></div>
+              </div>
+
+              <!-- Minute -->
+              <div
+                v-if="minute"
+                ref="startMinuteRef"
+                class="sh-time-picker__column"
+                @scroll="handleScroll('start', 'minute', $event)"
+                @mousedown="handleMouseDown"
               >
-                確認
-              </button>
+                <div class="sh-time-picker__spacer"></div>
+                <div
+                  v-for="item in minuteOptions"
+                  :key="item.value"
+                  class="sh-time-picker__item"
+                  :class="{
+                    'sh-time-picker__item--active': item.value === startMinute,
+                  }"
+                  @click="scrollToItem('start', 'minute', item.value)"
+                >
+                  {{ item.label }}
+                </div>
+                <div class="sh-time-picker__spacer"></div>
+              </div>
+
+              <!-- Second -->
+              <div
+                v-if="second"
+                ref="startSecondRef"
+                class="sh-time-picker__column"
+                @scroll="handleScroll('start', 'second', $event)"
+                @mousedown="handleMouseDown"
+              >
+                <div class="sh-time-picker__spacer"></div>
+                <div
+                  v-for="item in secondOptions"
+                  :key="item.value"
+                  class="sh-time-picker__item"
+                  :class="{
+                    'sh-time-picker__item--active': item.value === startSecond,
+                  }"
+                  @click="scrollToItem('start', 'second', item.value)"
+                >
+                  {{ item.label }}
+                </div>
+                <div class="sh-time-picker__spacer"></div>
+              </div>
+
+              <!-- AM/PM -->
+              <div
+                v-if="use12Hour"
+                ref="startAmPmRef"
+                class="sh-time-picker__column"
+                @scroll="handleScroll('start', 'ampm', $event)"
+                @mousedown="handleMouseDown"
+              >
+                <div class="sh-time-picker__spacer"></div>
+                <div
+                  v-for="item in amPmOptions"
+                  :key="item.value"
+                  class="sh-time-picker__item"
+                  :class="{
+                    'sh-time-picker__item--active': item.value === startAmPm,
+                  }"
+                  @click="scrollToItem('start', 'ampm', item.value)"
+                >
+                  {{ item.label }}
+                </div>
+                <div class="sh-time-picker__spacer"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- End Time Panel (Only for range) -->
+          <div v-if="range" class="sh-time-picker__panel">
+            <div class="sh-time-picker__panel-title">結束時間</div>
+            <div class="sh-time-picker__columns">
+              <!-- Hour -->
+              <div
+                v-if="hour"
+                ref="endHourRef"
+                class="sh-time-picker__column"
+                @scroll="handleScroll('end', 'hour', $event)"
+                @mousedown="handleMouseDown"
+              >
+                <div class="sh-time-picker__spacer"></div>
+                <div
+                  v-for="item in hourOptions"
+                  :key="item.value"
+                  class="sh-time-picker__item"
+                  :class="{
+                    'sh-time-picker__item--active': item.value === endHour,
+                  }"
+                  @click="scrollToItem('end', 'hour', item.value)"
+                >
+                  {{ item.label }}
+                </div>
+                <div class="sh-time-picker__spacer"></div>
+              </div>
+
+              <!-- Minute -->
+              <div
+                v-if="minute"
+                ref="endMinuteRef"
+                class="sh-time-picker__column"
+                @scroll="handleScroll('end', 'minute', $event)"
+                @mousedown="handleMouseDown"
+              >
+                <div class="sh-time-picker__spacer"></div>
+                <div
+                  v-for="item in minuteOptions"
+                  :key="item.value"
+                  class="sh-time-picker__item"
+                  :class="{
+                    'sh-time-picker__item--active': item.value === endMinute,
+                  }"
+                  @click="scrollToItem('end', 'minute', item.value)"
+                >
+                  {{ item.label }}
+                </div>
+                <div class="sh-time-picker__spacer"></div>
+              </div>
+
+              <!-- Second -->
+              <div
+                v-if="second"
+                ref="endSecondRef"
+                class="sh-time-picker__column"
+                @scroll="handleScroll('end', 'second', $event)"
+                @mousedown="handleMouseDown"
+              >
+                <div class="sh-time-picker__spacer"></div>
+                <div
+                  v-for="item in secondOptions"
+                  :key="item.value"
+                  class="sh-time-picker__item"
+                  :class="{
+                    'sh-time-picker__item--active': item.value === endSecond,
+                  }"
+                  @click="scrollToItem('end', 'second', item.value)"
+                >
+                  {{ item.label }}
+                </div>
+                <div class="sh-time-picker__spacer"></div>
+              </div>
+
+              <!-- AM/PM -->
+              <div
+                v-if="use12Hour"
+                ref="endAmPmRef"
+                class="sh-time-picker__column"
+                @scroll="handleScroll('end', 'ampm', $event)"
+                @mousedown="handleMouseDown"
+              >
+                <div class="sh-time-picker__spacer"></div>
+                <div
+                  v-for="item in amPmOptions"
+                  :key="item.value"
+                  class="sh-time-picker__item"
+                  :class="{
+                    'sh-time-picker__item--active': item.value === endAmPm,
+                  }"
+                  @click="scrollToItem('end', 'ampm', item.value)"
+                >
+                  {{ item.label }}
+                </div>
+                <div class="sh-time-picker__spacer"></div>
+              </div>
             </div>
           </div>
         </div>
-      </Transition>
-    </Teleport>
+
+        <div class="sh-time-picker__actions">
+          <button
+            class="sh-time-picker__button sh-time-picker__button--secondary"
+            @click="handleClear"
+          >
+            清除
+          </button>
+          <button
+            class="sh-time-picker__button sh-time-picker__button--primary"
+            @click="handleConfirm"
+          >
+            確認
+          </button>
+        </div>
+      </div>
+    </SHPopover>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch, nextTick, onMounted, onUnmounted } from 'vue'
+import { computed, ref, watch, nextTick } from 'vue'
 import { IconClock, IconX } from '@tabler/icons-vue'
-import type {
-  TimePickerProps,
-  TimePickerEmits,
-  TimePickerExpose,
-  TimeRange,
-} from './types'
+import SHPopover from '../Popover/index.vue'
+import type { TimePickerProps, TimePickerEmits, TimeRange } from './types'
 
 defineOptions({
-  name: 'ShTimePicker',
+  name: 'SHTimePicker',
 })
 
 const props = withDefaults(defineProps<TimePickerProps>(), {
   range: false,
   format: 'HH:mm:ss',
-  showSeconds: true,
+  hour: true,
+  minute: true,
+  second: true,
+  // Maintaining compatibility if needed, but props above take precedence defaults
   use12Hour: false,
+  hourStep: 1,
   minuteStep: 1,
   secondStep: 1,
-  showTimezone: false,
-  utcMode: false,
-  autoTimezoneDetection: true,
-  timezone: undefined,
 })
 
 const emit = defineEmits<TimePickerEmits>()
 
-// Refs
-const triggerRef = ref<HTMLDivElement>()
-const inputRef = ref<HTMLInputElement>()
-const popoverRef = ref<HTMLDivElement>()
-
-// State
 const isOpen = ref(false)
 
-// Single time state
-const currentHour = ref<number>(0)
-const currentMinute = ref<number>(0)
-const currentSecond = ref<number>(0)
-const currentAmPm = ref<'AM' | 'PM'>('AM')
+// Refs
+const startHourRef = ref<HTMLElement>()
+const startMinuteRef = ref<HTMLElement>()
+const startSecondRef = ref<HTMLElement>()
+const startAmPmRef = ref<HTMLElement>()
 
-// Range time state
-const startHour = ref<number>(0)
-const startMinute = ref<number>(0)
-const startSecond = ref<number>(0)
+const endHourRef = ref<HTMLElement>()
+const endMinuteRef = ref<HTMLElement>()
+const endSecondRef = ref<HTMLElement>()
+const endAmPmRef = ref<HTMLElement>()
+
+// State
+const startHour = ref(0)
+const startMinute = ref(0)
+const startSecond = ref(0)
 const startAmPm = ref<'AM' | 'PM'>('AM')
 
-const endHour = ref<number>(0)
-const endMinute = ref<number>(0)
-const endSecond = ref<number>(0)
+const endHour = ref(0)
+const endMinute = ref(0)
+const endSecond = ref(0)
 const endAmPm = ref<'AM' | 'PM'>('AM')
 
-// Computed
-const computedPlaceholder = computed(() => {
-  if (props.placeholder) return props.placeholder
-  return props.range ? '選擇時間範圍' : '選擇時間'
-})
+const ITEM_HEIGHT = 32
 
-const singleValue = computed(() => {
-  return props.range ? undefined : (props.modelValue as string | undefined)
-})
+// Drag to scroll
+const isDragging = ref(false)
+// Flag to prevent click event after dragging
+const wasDragging = ref(false)
+const startY = ref(0)
+const startScrollTop = ref(0)
+let currentScrollTarget: HTMLElement | null = null
 
-const rangeValue = computed(() => {
-  return props.range ? (props.modelValue as TimeRange | undefined) : undefined
-})
+const handleMouseDown = (e: MouseEvent) => {
+  const target = e.currentTarget as HTMLElement
+  isDragging.value = true
+  wasDragging.value = false
+  startY.value = e.clientY
+  startScrollTop.value = target.scrollTop
+  currentScrollTarget = target
 
-// Generate time options
-const hourOptions = computed(() => {
-  const maxHour = props.use12Hour ? 12 : 23
-  const minHour = props.use12Hour ? 1 : 0
-  const options = []
+  target.style.cursor = 'grabbing'
+  target.style.scrollSnapType = 'none'
+  target.style.scrollBehavior = 'auto'
 
-  for (let i = minHour; i <= maxHour; i++) {
-    const value = props.use12Hour ? i : i
-    const label = String(i).padStart(2, '0')
-    options.push({
-      value,
-      label,
-      disabled: false, // TODO: Add time validation logic
-    })
+  document.addEventListener('mousemove', handleMouseMove)
+  document.addEventListener('mouseup', handleMouseUp)
+}
+
+const handleMouseMove = (e: MouseEvent) => {
+  if (!isDragging.value || !currentScrollTarget) return
+  e.preventDefault()
+
+  // Check if moved significantly to consider it a drag
+  if (Math.abs(e.clientY - startY.value) > 5) {
+    wasDragging.value = true
   }
 
+  const deltaY = e.clientY - startY.value
+  currentScrollTarget.scrollTop = startScrollTop.value - deltaY
+}
+
+const handleMouseUp = () => {
+  if (currentScrollTarget) {
+    currentScrollTarget.style.cursor = 'grab'
+
+    // Calculate precise snap position
+    const scrollTop = currentScrollTarget.scrollTop
+    const index = Math.round(scrollTop / ITEM_HEIGHT)
+    const targetScrollTop = index * ITEM_HEIGHT
+
+    // Manually snap first without enabling css snap yet to avoid conflict
+    currentScrollTarget.scrollTo({
+      top: targetScrollTop,
+      behavior: 'smooth',
+    })
+
+    // Re-enable CSS snap after a delay to allow smooth scroll to finish
+    // or just let CSS snap take over if we didn't scroll?
+    // Actually, setting scrollSnapType 'y mandatory' immediately might force the browser to snap
+    // to where IT thinks it should go, which might fight with our scrollTo.
+    // Let's rely on our manual snap for the drag end, then restore properties.
+
+    const target = currentScrollTarget
+    setTimeout(() => {
+      if (target) {
+        target.style.scrollSnapType = 'y mandatory'
+        target.style.scrollBehavior = 'smooth'
+      }
+    }, 500) // Accessing variable from closure might be risky if currentScrollTarget is nullified. Capture it.
+
+    currentScrollTarget = null
+  }
+  isDragging.value = false
+
+  // Reset wasDragging after a short delay to block immediate click events
+  setTimeout(() => {
+    wasDragging.value = false
+  }, 0)
+
+  document.removeEventListener('mousemove', handleMouseMove)
+  document.removeEventListener('mouseup', handleMouseUp)
+}
+
+// Options
+const hourOptions = computed(() => {
+  const options = []
+  if (props.use12Hour) {
+    for (let i = 1; i <= 12; i += props.hourStep) {
+      options.push({ value: i, label: String(i).padStart(2, '0') })
+    }
+  } else {
+    for (let i = 0; i <= 23; i += props.hourStep) {
+      options.push({ value: i, label: String(i).padStart(2, '0') })
+    }
+  }
   return options
 })
+
+const amPmOptions = [
+  { value: 'AM', label: 'AM' },
+  { value: 'PM', label: 'PM' },
+]
 
 const minuteOptions = computed(() => {
   const options = []
   for (let i = 0; i < 60; i += props.minuteStep) {
-    options.push({
-      value: i,
-      label: String(i).padStart(2, '0'),
-      disabled: false,
-    })
+    options.push({ value: i, label: String(i).padStart(2, '0') })
   }
   return options
 })
@@ -396,185 +423,293 @@ const minuteOptions = computed(() => {
 const secondOptions = computed(() => {
   const options = []
   for (let i = 0; i < 60; i += props.secondStep) {
-    options.push({
-      value: i,
-      label: String(i).padStart(2, '0'),
-      disabled: false,
-    })
+    options.push({ value: i, label: String(i).padStart(2, '0') })
   }
   return options
 })
 
-// Format time string
-const formatTimeString = (
-  hour: number,
-  minute: number,
-  second: number,
-  ampm?: 'AM' | 'PM',
-): string => {
-  let actualHour = hour
-
+// Helpers
+const formatTime = (h: number, m: number, s: number, ampm?: 'AM' | 'PM') => {
+  let hour = h
   if (props.use12Hour && ampm) {
-    if (ampm === 'PM' && hour !== 12) {
-      actualHour = hour + 12
-    } else if (ampm === 'AM' && hour === 12) {
-      actualHour = 0
-    }
+    if (ampm === 'PM' && h < 12) hour = h + 12
+    if (ampm === 'AM' && h === 12) hour = 0
   }
 
-  const h = String(actualHour).padStart(2, '0')
-  const m = String(minute).padStart(2, '0')
-  const s = String(second).padStart(2, '0')
-
-  if (props.showSeconds) {
-    return `${h}:${m}:${s}`
-  } else {
-    return `${h}:${m}`
-  }
+  const pad = (n: number) => String(n).padStart(2, '0')
+  const parts = []
+  if (props.hour) parts.push(pad(hour))
+  if (props.minute) parts.push(pad(m))
+  if (props.second) parts.push(pad(s))
+  return parts.join(':')
 }
 
-// Parse time string
-const parseTimeString = (timeStr: string) => {
-  if (!timeStr) return { hour: 0, minute: 0, second: 0, ampm: 'AM' as const }
+const parseTime = (str?: string) => {
+  if (!str) {
+    return { h: props.use12Hour ? 12 : 0, m: 0, s: 0, ampm: 'AM' as const }
+  }
+  const parts = str.split(':').map((p) => parseInt(p, 10))
 
-  const parts = timeStr.split(':')
-  let hour = parseInt(parts[0] || '0') || 0
-  const minute = parseInt(parts[1] || '0') || 0
-  const second = parseInt(parts[2] || '0') || 0
+  let h = 0,
+    m = 0,
+    s = 0
+
+  if (props.hour) h = parts.shift() || 0
+  if (props.minute) m = parts.shift() || 0
+  if (props.second) s = parts.shift() || 0
 
   let ampm: 'AM' | 'PM' = 'AM'
 
   if (props.use12Hour) {
-    if (hour >= 12) {
+    if (h >= 12) {
       ampm = 'PM'
-      if (hour > 12) hour -= 12
-    } else if (hour === 0) {
-      hour = 12
+      if (h > 12) h -= 12
+    } else {
+      ampm = 'AM'
+      if (h === 0) h = 12
     }
   }
 
-  return { hour, minute, second, ampm }
+  return { h, m, s, ampm }
 }
 
 const displayValue = computed(() => {
-  if (props.range && rangeValue.value) {
-    const start = rangeValue.value.start || ''
-    const end = rangeValue.value.end || ''
-    if (start && end) {
-      return `${start} ~ ${end}`
-    } else if (start) {
-      return start
+  if (props.range) {
+    const v = props.modelValue as TimeRange
+    if (v?.start || v?.end) {
+      if (props.use12Hour) {
+        // Display in 12h format?
+        // Assuming modelValue is stored as 24h, we want to show it as is or formatted?
+        // Since native input type="text" is used, we can format it.
+        // Let's format it for display if use12Hour is true
+        const s = parseTime(v.start)
+        const e = parseTime(v.end)
+        // Only if start/end exists
+        const startStr = v.start
+          ? `${s.h}:${String(s.m).padStart(2, '0')}:${String(s.s).padStart(2, '0')} ${s.ampm}`
+          : '--'
+        const endStr = v.end
+          ? `${e.h}:${String(e.m).padStart(2, '0')}:${String(e.s).padStart(2, '0')} ${e.ampm}`
+          : '--'
+        return `${startStr} ~ ${endStr}`
+      }
+      return `${v?.start || '--'} ~ ${v?.end || '--'}`
     }
     return ''
-  } else if (singleValue.value) {
-    return singleValue.value
   }
-  return ''
+
+  const val = props.modelValue as string
+  if (props.use12Hour && val) {
+    const t = parseTime(val)
+    return `${t.h}:${String(t.m).padStart(2, '0')}:${String(t.s).padStart(2, '0')} ${t.ampm}`
+  }
+  return val || ''
 })
 
-// Popover positioning
-const popoverStyle = ref<Record<string, string>>({})
+const computedPlaceholder = computed(
+  () => props.placeholder || (props.range ? '選擇時間範圍' : '選擇時間'),
+)
+const rangeValue = computed(() =>
+  props.range ? (props.modelValue as TimeRange) : undefined,
+)
 
-const updatePopoverPosition = async () => {
-  if (!triggerRef.value || !popoverRef.value) return
-
-  await nextTick()
-
-  const triggerRect = triggerRef.value.getBoundingClientRect()
-  const popoverRect = popoverRef.value.getBoundingClientRect()
-  const viewportHeight = window.innerHeight
-  const viewportWidth = window.innerWidth
-
-  let top = triggerRect.bottom + 4
-  let left = triggerRect.left
-
-  // Adjust if popover would go off-screen
-  if (top + popoverRect.height > viewportHeight) {
-    top = triggerRect.top - popoverRect.height - 4
-  }
-
-  if (left + popoverRect.width > viewportWidth) {
-    left = viewportWidth - popoverRect.width - 8
-  }
-
-  if (left < 8) {
-    left = 8
-  }
-
-  popoverStyle.value = {
-    position: 'fixed',
-    top: `${top}px`,
-    left: `${left}px`,
-    zIndex: '1000',
-  }
-}
-
-// Event handlers
-const handleTriggerClick = () => {
-  if (props.disabled || props.readonly) return
-  isOpen.value = !isOpen.value
-}
-
-const handleFocus = (event: FocusEvent) => {
-  emit('focus', event)
-}
-
-const handleBlur = (event: FocusEvent) => {
-  emit('blur', event)
-}
-
-const handleKeydown = (event: KeyboardEvent) => {
-  if (event.key === 'Enter' || event.key === ' ') {
-    event.preventDefault()
-    handleTriggerClick()
-  } else if (event.key === 'Escape') {
-    isOpen.value = false
+const updateModel = () => {
+  if (props.range) {
+    const startStr = formatTime(
+      startHour.value,
+      startMinute.value,
+      startSecond.value,
+      startAmPm.value,
+    )
+    const endStr = formatTime(
+      endHour.value,
+      endMinute.value,
+      endSecond.value,
+      endAmPm.value,
+    )
+    const newVal = { start: startStr, end: endStr }
+    emit('update:modelValue', newVal)
+    emit('change', newVal)
+  } else {
+    const str = formatTime(
+      startHour.value,
+      startMinute.value,
+      startSecond.value,
+      startAmPm.value,
+    )
+    emit('update:modelValue', str)
+    emit('change', str)
   }
 }
 
-const updateSingleTime = () => {
-  const timeStr = formatTimeString(
-    currentHour.value,
-    currentMinute.value,
-    currentSecond.value,
-    currentAmPm.value,
-  )
-  emit('update:modelValue', timeStr)
-  emit('change', timeStr)
+// Scroll Handling
+const debounceTimers: Record<string, any> = {}
+
+const handleScroll = (
+  type: 'start' | 'end',
+  unit: 'hour' | 'minute' | 'second' | 'ampm',
+  e: Event,
+) => {
+  const target = e.target as HTMLElement
+  const key = `${type}-${unit}`
+
+  if (debounceTimers[key]) clearTimeout(debounceTimers[key])
+
+  debounceTimers[key] = setTimeout(() => {
+    const scrollTop = target.scrollTop
+    const index = Math.round(scrollTop / ITEM_HEIGHT)
+
+    let options: any[] = []
+    if (unit === 'hour') options = hourOptions.value
+    else if (unit === 'minute') options = minuteOptions.value
+    else if (unit === 'second') options = secondOptions.value
+    else if (unit === 'ampm') options = amPmOptions
+
+    // Safety check
+    if (index < 0 || index >= options.length) return
+
+    const val = options[index].value
+
+    // Update state
+    if (type === 'start') {
+      if (unit === 'hour') startHour.value = val
+      else if (unit === 'minute') startMinute.value = val
+      else if (unit === 'second') startSecond.value = val
+      else if (unit === 'ampm') startAmPm.value = val
+    } else {
+      if (unit === 'hour') endHour.value = val
+      else if (unit === 'minute') endMinute.value = val
+      else if (unit === 'second') endSecond.value = val
+      else if (unit === 'ampm') endAmPm.value = val
+    }
+
+    updateModel()
+  }, 100)
 }
 
-const updateRangeTime = () => {
-  const startTime = formatTimeString(
-    startHour.value,
-    startMinute.value,
-    startSecond.value,
-    startAmPm.value,
-  )
-  const endTime = formatTimeString(
-    endHour.value,
-    endMinute.value,
-    endSecond.value,
-    endAmPm.value,
-  )
+const scrollToItem = (
+  type: 'start' | 'end',
+  unit: 'hour' | 'minute' | 'second' | 'ampm',
+  value: number | string,
+) => {
+  if (wasDragging.value) return
 
-  const newRange: TimeRange = {
-    start: startTime,
-    end: endTime,
+  // Directly set value
+  if (type === 'start') {
+    if (unit === 'hour') startHour.value = value as number
+    else if (unit === 'minute') startMinute.value = value as number
+    else if (unit === 'second') startSecond.value = value as number
+    else if (unit === 'ampm') startAmPm.value = value as 'AM' | 'PM'
+  } else {
+    if (unit === 'hour') endHour.value = value as number
+    else if (unit === 'minute') endMinute.value = value as number
+    else if (unit === 'second') endSecond.value = value as number
+    else if (unit === 'ampm') endAmPm.value = value as 'AM' | 'PM'
   }
 
-  emit('update:modelValue', newRange)
-  emit('change', newRange)
+  updateModel()
+
+  // Scroll UI
+  scrollToValue(type, unit, value, true)
 }
+
+const scrollToValue = (
+  type: 'start' | 'end',
+  unit: 'hour' | 'minute' | 'second' | 'ampm',
+  value: number | string,
+  smooth = false,
+) => {
+  const refMap: any = {
+    'start-hour': startHourRef,
+    'start-minute': startMinuteRef,
+    'start-second': startSecondRef,
+    'start-ampm': startAmPmRef,
+    'end-hour': endHourRef,
+    'end-minute': endMinuteRef,
+    'end-second': endSecondRef,
+    'end-ampm': endAmPmRef,
+  }
+
+  const element = refMap[`${type}-${unit}`]?.value
+  if (!element) return
+
+  let options: any[] = []
+  if (unit === 'hour') options = hourOptions.value
+  else if (unit === 'minute') options = minuteOptions.value
+  else if (unit === 'second') options = secondOptions.value
+  else if (unit === 'ampm') options = amPmOptions
+
+  const index = options.findIndex((o) => o.value === value)
+  if (index >= 0) {
+    element.scrollTo({
+      top: index * ITEM_HEIGHT,
+      behavior: smooth ? 'smooth' : 'auto',
+    })
+  }
+}
+
+const syncScrollToCurrentValues = () => {
+  // Start
+  if (props.hour) scrollToValue('start', 'hour', startHour.value)
+  if (props.minute) scrollToValue('start', 'minute', startMinute.value)
+  if (props.second) scrollToValue('start', 'second', startSecond.value)
+  if (props.use12Hour) scrollToValue('start', 'ampm', startAmPm.value)
+
+  // End
+  if (props.range) {
+    if (props.hour) scrollToValue('end', 'hour', endHour.value)
+    if (props.minute) scrollToValue('end', 'minute', endMinute.value)
+    if (props.second) scrollToValue('end', 'second', endSecond.value)
+    if (props.use12Hour) scrollToValue('end', 'ampm', endAmPm.value)
+  }
+}
+
+const initValues = () => {
+  if (props.range) {
+    const val = props.modelValue as TimeRange
+    const s = parseTime(val?.start)
+    const e = parseTime(val?.end)
+    startHour.value = s.h
+    startMinute.value = s.m
+    startSecond.value = s.s
+    startAmPm.value = s.ampm
+    endHour.value = e.h
+    endMinute.value = e.m
+    endSecond.value = e.s
+    endAmPm.value = e.ampm
+  } else {
+    const val = parseTime(props.modelValue as string)
+    startHour.value = val.h
+    startMinute.value = val.m
+    startSecond.value = val.s
+    startAmPm.value = val.ampm
+  }
+}
+
+watch(
+  () => isOpen.value,
+  (val) => {
+    if (val) {
+      initValues()
+      nextTick(() => {
+        syncScrollToCurrentValues()
+      })
+    }
+  },
+)
+
+watch(
+  () => props.modelValue,
+  () => {
+    if (!isOpen.value) {
+      initValues()
+    }
+  },
+)
 
 const handleClear = () => {
-  if (props.range) {
-    const emptyRange: TimeRange = { start: undefined, end: undefined }
-    emit('update:modelValue', emptyRange)
-    emit('change', emptyRange)
-  } else {
-    emit('update:modelValue', undefined)
-    emit('change', undefined)
-  }
+  emit('update:modelValue', props.range ? {} : undefined)
+  emit('change', props.range ? {} : undefined)
   emit('clear')
 }
 
@@ -582,102 +717,24 @@ const handleConfirm = () => {
   isOpen.value = false
 }
 
-// Click outside handler
-const handleClickOutside = (event: MouseEvent) => {
-  if (
-    !triggerRef.value?.contains(event.target as Node) &&
-    !popoverRef.value?.contains(event.target as Node)
-  ) {
-    isOpen.value = false
-  }
-}
-
-// Initialize values from props
-const initializeValues = () => {
-  if (props.range && rangeValue.value) {
-    if (rangeValue.value.start) {
-      const startParsed = parseTimeString(rangeValue.value.start)
-      startHour.value = startParsed.hour
-      startMinute.value = startParsed.minute
-      startSecond.value = startParsed.second
-      startAmPm.value = startParsed.ampm
-    }
-
-    if (rangeValue.value.end) {
-      const endParsed = parseTimeString(rangeValue.value.end)
-      endHour.value = endParsed.hour
-      endMinute.value = endParsed.minute
-      endSecond.value = endParsed.second
-      endAmPm.value = endParsed.ampm
-    }
-  } else if (singleValue.value) {
-    const parsed = parseTimeString(singleValue.value)
-    currentHour.value = parsed.hour
-    currentMinute.value = parsed.minute
-    currentSecond.value = parsed.second
-    currentAmPm.value = parsed.ampm
-  }
-}
-
-// Watchers
-watch(isOpen, async (newValue) => {
-  if (newValue) {
-    await updatePopoverPosition()
-    document.addEventListener('click', handleClickOutside)
-  } else {
-    document.removeEventListener('click', handleClickOutside)
-  }
-})
-
-watch(
-  () => props.modelValue,
-  () => {
-    initializeValues()
-  },
-  { immediate: true },
-)
-
-// Lifecycle
-onMounted(() => {
-  initializeValues()
-})
-
-onUnmounted(() => {
-  document.removeEventListener('click', handleClickOutside)
-})
-
-// Expose
+// Expose methods
 const focus = () => {
-  inputRef.value?.focus()
+  /* No direct input focus needed on trigger */
 }
-
 const blur = () => {
-  inputRef.value?.blur()
+  /* */
 }
+const clear = handleClear
 
-const clear = () => {
-  handleClear()
-}
-
-defineExpose<TimePickerExpose>({
-  focus,
-  blur,
-  clear,
-})
+defineExpose({ focus, blur, clear })
 </script>
 
 <style lang="scss" scoped>
 .sh-time-picker {
-  @apply w-full inline-flex flex-col relative;
+  @apply inline-block relative border-1 border-solid border-border.base p-0 rounded-md;
 
-  &:not(.sh-time-picker--disabled) {
-    .sh-time-picker__trigger:hover {
-      @apply border-primary;
-    }
-  }
-
-  &.sh-time-picker--disabled {
-    @apply opacity-60;
+  &--disabled {
+    @apply opacity-60 cursor-not-allowed;
 
     .sh-time-picker__trigger {
       @apply cursor-not-allowed;
@@ -690,162 +747,126 @@ defineExpose<TimePickerExpose>({
 }
 
 .sh-time-picker__trigger {
-  @apply inline-flex items-center w-full bg-bg.primary;
-  @apply rounded-md overflow-hidden;
-  @apply transition duration-300 ease-in-out;
-  @apply border-[1px] border-solid border-border.base;
-  @apply h-[36px];
-  padding: 0 12px;
-  cursor: pointer;
+  @apply flex items-center w-full px-3 py-2 h-[36px];
+  @apply bg-bg.primary border border-border.base rounded-md text-sm;
+  @apply transition-colors duration-200 cursor-pointer;
 
-  &.sh-time-picker__trigger--active {
-    @apply border-primary outline-none;
-    box-shadow: 0 0 0 2px rgba(var(--sh-primary-fade), 0.2);
+  &:hover:not(&--readonly) {
+    @apply border-primary;
   }
 
-  &.sh-time-picker__trigger--readonly {
-    @apply cursor-default;
+  &--active {
+    @apply border-primary ring-2 ring-primary-fade;
+  }
+
+  &--readonly {
+    @apply bg-bg-secondary cursor-default;
   }
 }
 
 .sh-time-picker__input {
-  @apply flex-1 w-full h-full outline-none bg-transparent text-text.base;
-  @apply placeholder:text-gray-500;
+  @apply flex-1 w-full bg-transparent border-none outline-none text-text.base p-0 m-0 cursor-pointer;
+
+  &::placeholder {
+    @apply text-text-placeholder;
+  }
 }
 
 .sh-time-picker__icon {
-  @apply inline-flex items-center justify-center;
-  @apply ml-2;
-  width: 16px;
-  height: 16px;
+  @apply ml-2 text-text-secondary flex items-center justify-center w-4 h-4;
 }
 
 .sh-time-picker__clear-icon {
-  @apply text-gray-400 hover:text-text.base transition-colors cursor-pointer;
-}
-
-.sh-time-picker__popover {
-  background: white;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  box-shadow:
-    0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  @apply text-text.base cursor-pointer hover:(text-secondary);
 }
 
 .sh-time-picker__content {
-  padding: 16px;
-  min-width: 320px;
+  @apply flex flex-col gap-4;
+  min-width: 200px;
 }
 
 .sh-time-picker__timezone-info {
-  font-size: 12px;
-  color: #6b7280;
-  margin-bottom: 12px;
-  text-align: center;
+  @apply text-xs text-text-secondary text-center;
 }
 
-.sh-time-picker__time-selector {
-  display: flex;
-  align-items: end;
-  gap: 12px;
-}
+.sh-time-picker__panels {
+  @apply flex gap-4;
 
-.sh-time-picker__time-unit {
-  display: flex;
-  flex-direction: column;
-}
-
-.sh-time-picker__label {
-  font-size: 12px;
-  color: #6b7280;
-  margin-bottom: 4px;
-  text-align: center;
-}
-
-.sh-time-picker__select {
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
-  padding: 4px 8px;
-  font-size: 14px;
-  min-width: 64px;
-  text-align: center;
-  background: white;
-  transition:
-    border-color 0.2s,
-    box-shadow 0.2s;
-
-  &:focus {
-    outline: none;
-    border-color: rgb(var(--sh-primary));
-    box-shadow: 0 0 0 2px rgba(var(--sh-primary-fade), 0.2);
+  &--range {
+    /* Special styling for range if needed */
   }
 }
 
-.sh-time-picker__range-selector {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+.sh-time-picker__panel {
+  @apply flex flex-col gap-2 w-full;
 }
 
-.sh-time-picker__range-section {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+.sh-time-picker__panel-title {
+  @apply text-xs font-semibold text-text-secondary text-center;
 }
 
-.sh-time-picker__range-title {
-  font-size: 14px;
-  font-weight: 500;
-  color: #374151;
+.sh-time-picker__columns {
+  @apply flex gap-0 border-t border-b border-border.base relative w-full;
+  height: calc(32px * 7); /* 7 items visible */
+
+  /* Selection Highlight - Centered Absolute Div */
+  &::after {
+    content: '';
+    @apply absolute left-0 right-0 h-8 pointer-events-none;
+    top: calc(50% - 16px); /* Center */
+    @apply bg-bg-secondary opacity-30;
+    z-index: 0;
+  }
+}
+
+.sh-time-picker__column {
+  @apply w-full h-full overflow-y-auto overflow-x-hidden flex flex-col text-center relative;
+  @apply cursor-grab active:cursor-grabbing select-none;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE */
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  z-index: 1;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.sh-time-picker__spacer {
+  height: calc(32px * 3); /* 3 items spacer top and bottom */
+  flex-shrink: 0;
+}
+
+.sh-time-picker__item {
+  @apply flex items-center justify-center text-sm text-text.base transition-colors duration-200 select-none;
+  @apply rounded-md;
+  height: 32px; /* Fixed height for calc */
+  flex-shrink: 0;
+  scroll-snap-align: center;
+
+  &:hover {
+    @apply bg-primary.fade text-secondary;
+  }
+
+  &--active {
+    @apply font-bold text-primary;
+  }
 }
 
 .sh-time-picker__actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 8px;
-  margin-top: 16px;
-  padding-top: 16px;
-  border-top: 1px solid #e5e7eb;
+  @apply flex justify-end gap-2 pt-2 border-t border-border.base;
 }
 
 .sh-time-picker__button {
-  padding: 6px 12px;
-  font-size: 14px;
-  border-radius: 6px;
-  transition: all 0.2s;
-  cursor: pointer;
-  border: none;
+  @apply px-3 py-1 rounded text-sm transition-colors duration-200;
 
-  &.sh-time-picker__button--primary {
-    background: rgb(var(--sh-primary));
-    color: white;
-
-    &:hover {
-      background: rgb(var(--sh-primary-dark));
-    }
+  &--secondary {
+    @apply text-text-base bg-bg-secondary hover:bg-bg-tertiary;
   }
 
-  &.sh-time-picker__button--secondary {
-    border: 1px solid #d1d5db;
-    color: #374151;
-    background: white;
-
-    &:hover {
-      background: #f9fafb;
-    }
+  &--primary {
+    @apply text-white bg-primary hover:bg-primary-dark;
   }
-}
-
-/* Transitions */
-.sh-time-picker-fade-enter-active,
-.sh-time-picker-fade-leave-active {
-  transition: all 0.2s ease;
-}
-
-.sh-time-picker-fade-enter-from,
-.sh-time-picker-fade-leave-to {
-  opacity: 0;
-  transform: scale(0.95);
 }
 </style>

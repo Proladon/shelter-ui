@@ -2,7 +2,7 @@
   <div class="demo-container">
     <TimePicker
       v-model="timeNoSeconds"
-      :show-seconds="false"
+      :second="false"
       placeholder="選擇時間（不含秒）"
     />
     <p class="demo-result">選中的時間: {{ timeNoSeconds || '無' }}</p>
@@ -22,10 +22,6 @@ const timeNoSeconds = ref<string>()
 }
 
 .demo-result {
-  margin-top: 10px;
-  padding: 10px;
-  background-color: #f3f4f6;
-  border-radius: 4px;
-  font-family: monospace;
+  @apply text-text.base;
 }
 </style>
