@@ -5,6 +5,8 @@ import { generateUnoThemeColors } from './src/core'
 
 const colors = generateUnoThemeColors()
 
+console.log(colors)
+
 export default defineConfig({
   transformers: [transformerDirectives(), transformerVariantGroup()],
   shortcuts: {},

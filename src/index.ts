@@ -14,6 +14,7 @@ import SHTooltip from './components/Tooltip/index.vue'
 import SHBadge from './components/Badge/index.vue'
 import SHChip from './components/Chip/index.vue'
 import SHTag from './components/Tag/index.vue'
+import SHSwitch from './components/Switch/index.vue'
 import SHDialog from './components/Dialog/index.vue'
 import SHBlockArea from './components/BlockArea/index.vue'
 import {
@@ -52,6 +53,7 @@ import SHDatePicker from './components/DatePicker/index.vue'
 import SHTimePicker from './components/TimePicker/index.vue'
 import SHDateTimePicker from './components/DateTimePicker/index.vue'
 import SHCalendar from './components/Calendar/index.vue'
+import SHMessageBox from './components/MessageBox'
 
 // 組件列表
 const components = {
@@ -70,6 +72,8 @@ const components = {
   SHTag,
   SHDialog,
   SHBlockArea,
+  SHMessageBox,
+  SHSwitch,
   SHActiveButtonGroup,
   SHActiveButtonItem,
   SHFlexContainer,
@@ -215,6 +219,11 @@ export type {
   CalendarEmits,
   CalendarExpose,
 } from './components/Calendar/types'
+export type {
+  MessageBoxProps,
+  MessageBoxType,
+} from './components/MessageBox/types'
+export type { SwitchProps, SwitchEmits } from './components/Switch/types'
 
 // 安裝函數
 const install = (app: App) => {
@@ -255,6 +264,7 @@ export {
   SHTag,
   SHDialog,
   SHBlockArea,
+  SHMessageBox,
   SHActiveButtonGroup,
   SHActiveButtonItem,
   SHFlexContainer,
@@ -285,4 +295,5 @@ export {
   SHTimePicker,
   SHDateTimePicker,
   SHCalendar,
+  SHSwitch,
 }

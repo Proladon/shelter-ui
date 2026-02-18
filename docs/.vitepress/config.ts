@@ -12,6 +12,7 @@ export default defineConfig({
     nav: [
       { text: '指南', link: '/guide/' },
       { text: '組件', link: '/components/' },
+      { text: '範例', link: '/guide/dashboard' },
     ],
     search: {
       provider: 'local',
@@ -22,6 +23,7 @@ export default defineConfig({
           text: '指南',
           items: [
             { text: '介紹', link: '/guide/' },
+            { text: 'Dashboard 範例', link: '/guide/dashboard' },
             { text: '快速開始', link: '/guide/getting-started' },
           ],
         },
