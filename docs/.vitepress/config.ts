@@ -34,6 +34,10 @@ export default defineConfig({
           items: [
             { text: 'Button 按鈕', link: '/components/button' },
             { text: 'Input 輸入框', link: '/components/input' },
+            {
+              text: 'NumberInput 數字輸入框',
+              link: '/components/number-input',
+            },
             { text: 'Textarea 多行文字輸入框', link: '/components/textarea' },
             { text: 'Select 選擇器', link: '/components/select' },
             { text: 'Checkbox 複選框', link: '/components/checkbox' },
