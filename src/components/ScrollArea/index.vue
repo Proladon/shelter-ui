@@ -122,15 +122,13 @@ defineExpose<ScrollAreaMethods>({
     @apply bg-transparent;
 
     &[data-orientation='vertical'] {
-      @apply top-0 right-0 h-full w-[8px];
-      /* @apply border-l border-l-transparent; */
+      @apply top-0 right-0 h-full w-2;
       @apply border-none;
       @apply pl-px;
     }
 
     &[data-orientation='horizontal'] {
-      @apply bottom-0 left-0 w-full h-[8px];
-      /* @apply border-t border-t-transparent; */
+      @apply bottom-0 left-0 w-full h-2;
       @apply border-none;
       @apply pt-px;
     }

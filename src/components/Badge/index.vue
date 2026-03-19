@@ -113,7 +113,7 @@ const handleClick = (event: MouseEvent) => {
   @apply rounded-full bg-status-danger text-white font-bold;
   @apply absolute top-0;
   @apply flex items-center justify-center whitespace-nowrap z-10;
-  @apply px-2 py-1 min-w-[1.5rem] h-[1.5rem];
+  @apply px-2 py-1 min-w-6 h-6;
 
   &.is-dot {
     @apply w-2 h-2 p-0 min-w-0 rounded-full;

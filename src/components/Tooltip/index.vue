@@ -61,29 +61,29 @@ const handleOpenChange = (value: boolean) => {
   </TooltipProvider>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 :deep(.sh-tooltip-content) {
   @apply rounded-md py-2 px-3 bg-bg.primary text-text.base shadow-lg;
   @apply z-50 outline-none text-sm;
   animation-duration: 400ms;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
+}
 
-  &[data-state='delayed-open'][data-side='top'] {
-    animation-name: slideDownAndFade;
-  }
+:deep(.sh-tooltip-content[data-state='delayed-open'][data-side='top']) {
+  animation-name: slideDownAndFade;
+}
 
-  &[data-state='delayed-open'][data-side='right'] {
-    animation-name: slideLeftAndFade;
-  }
+:deep(.sh-tooltip-content[data-state='delayed-open'][data-side='right']) {
+  animation-name: slideLeftAndFade;
+}
 
-  &[data-state='delayed-open'][data-side='bottom'] {
-    animation-name: slideUpAndFade;
-  }
+:deep(.sh-tooltip-content[data-state='delayed-open'][data-side='bottom']) {
+  animation-name: slideUpAndFade;
+}
 
-  &[data-state='delayed-open'][data-side='left'] {
-    animation-name: slideRightAndFade;
-  }
+:deep(.sh-tooltip-content[data-state='delayed-open'][data-side='left']) {
+  animation-name: slideRightAndFade;
 }
 
 :deep(.sh-tooltip-trigger) {

@@ -171,67 +171,57 @@ const slots = defineSlots<{
 }>()
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .sh-input-wrapper {
   @apply w-full inline-flex flex-col relative;
+}
 
-  &:not(.is-disabled) {
-    .sh-input:hover {
-      @apply border-primary;
-    }
-  }
+.sh-input-wrapper:not(.is-disabled) .sh-input:hover {
+  @apply border-primary;
 }
 
 .sh-input {
-  @apply inline-flex items-center w-full  bg-bg.primary;
+  @apply inline-flex items-center w-full bg-bg.primary;
   @apply rounded-md overflow-hidden;
   @apply transition duration-300 ease-in-out;
-  @apply border-[1px] border-solid border-border.base;
+  @apply border border-solid border-border.base;
+  @apply h-[var(--sh-component-size-md)] px-[var(--sh-spacing-md)];
+}
 
-  @apply h-[36px];
-  padding: 0 12px;
-
-  &.is-focused {
-    @apply border-primary outline-none;
-    box-shadow: 0 0 0 2px rgba(var(--sh-primary-fade), 0.2);
-  }
+.sh-input.is-focused {
+  @apply border-primary outline-none;
+  box-shadow: 0 0 0 2px var(--sh-primary-fade);
 }
 
 .sh-input-inner {
   @apply flex-1 w-full h-full outline-none bg-transparent text-text.base;
-  @apply placeholder:text-gray-500;
+  @apply placeholder:text-text.primary;
 }
 
 .sh-input-prefix {
-  @apply flex items-center mr-2;
+  @apply flex items-center mr-[var(--sh-spacing-sm)];
 }
 
 .sh-input-suffix {
-  @apply flex items-center ml-2;
+  @apply flex items-center ml-[var(--sh-spacing-sm)];
 }
 
 .sh-input-clear {
-  @apply inline-flex items-center justify-center cursor-pointer;
-  @apply text-gray-400 hover:text-text.base transition-colors;
+  @apply inline-flex items-center justify-center cursor-pointer w-4 h-4;
+  @apply text-text.primary hover:text-text.base transition-colors;
   @apply ml-1;
-  width: 16px;
-  height: 16px;
 }
 
 .sh-input-count {
-  @apply ml-1 text-xs text-gray-400;
+  @apply ml-1 text-xs text-text.primary;
 }
 
-/* Updated disabled style to use opacity instead of color changes */
 .is-disabled {
   @apply opacity-60;
+}
 
-  .sh-input {
-    @apply cursor-not-allowed;
-  }
-
-  .sh-input-inner {
-    @apply cursor-not-allowed;
-  }
+.is-disabled .sh-input,
+.is-disabled .sh-input-inner {
+  @apply cursor-not-allowed;
 }
 </style>

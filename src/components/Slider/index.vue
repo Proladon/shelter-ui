@@ -116,13 +116,13 @@ const getMarkStyle = (value: number) => {
 
 .sh-slider-orientation--horizontal {
   .sh-slider__track {
-    @apply h-[5px];
+    @apply h-1;
   }
 }
 
 .sh-slider-orientation--vertical {
   .sh-slider__track {
-    @apply w-[5px] h-full;
+    @apply w-1 h-full;
   }
 }
 
@@ -161,25 +161,25 @@ const getMarkStyle = (value: number) => {
 /* 尺寸變化 */
 .sh-slider-size--small {
   .sh-slider__thumb {
-    @apply w-[15px] h-[15px];
+    @apply w-4 h-4;
   }
 }
 
 .sh-slider-size--default {
   .sh-slider__track {
-    @apply h-[7px];
+    @apply h-2;
   }
   .sh-slider__thumb {
-    @apply w-[16px] h-[16px];
+    @apply w-4 h-4;
   }
 }
 
 .sh-slider-size--large {
   .sh-slider__track {
-    @apply h-[10px];
+    @apply h-2.5;
   }
   .sh-slider__thumb {
-    @apply w-[20px] h-[20px];
+    @apply w-5 h-5;
   }
 }
 
