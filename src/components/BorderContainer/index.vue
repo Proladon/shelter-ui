@@ -49,68 +49,67 @@ const handleClick = (event: MouseEvent) => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="postcss" scoped>
 .sh-border-container {
   @apply relative box-border border-solid border-border.base transition-all duration-300 ease-in-out;
-
   /* Default styles */
   @apply border-text-base-fade bg-background-base;
+}
 
-  &.type-primary {
-    @apply border-primary;
-  }
+.sh-border-container.type-primary {
+  @apply border-primary;
+}
 
-  &.type-success {
-    @apply border-status-success;
-  }
+.sh-border-container.type-success {
+  @apply border-status-success;
+}
 
-  &.type-warning {
-    @apply border-status-warning;
-  }
+.sh-border-container.type-warning {
+  @apply border-status-warning;
+}
 
-  &.type-danger {
-    @apply border-status-danger;
-  }
+.sh-border-container.type-danger {
+  @apply border-status-danger;
+}
 
-  &.type-info {
-    @apply border-status-info;
-  }
+.sh-border-container.type-info {
+  @apply border-status-info;
+}
 
-  &.with-shadow {
-    @apply shadow-md;
+.sh-border-container.with-shadow {
+  @apply shadow-md;
+}
 
-    &.type-primary {
-      @apply shadow-primary-fade;
-    }
+.sh-border-container.with-shadow.type-primary {
+  @apply shadow-primary-fade;
+}
 
-    &.type-success {
-      @apply shadow-status-success-fade;
-    }
+.sh-border-container.with-shadow.type-success {
+  @apply shadow-status-success-fade;
+}
 
-    &.type-warning {
-      @apply shadow-status-warning-fade;
-    }
+.sh-border-container.with-shadow.type-warning {
+  @apply shadow-status-warning-fade;
+}
 
-    &.type-danger {
-      @apply shadow-status-danger-fade;
-    }
+.sh-border-container.with-shadow.type-danger {
+  @apply shadow-status-danger-fade;
+}
 
-    &.type-info {
-      @apply shadow-status-info-fade;
-    }
-  }
+.sh-border-container.with-shadow.type-info {
+  @apply shadow-status-info-fade;
+}
 
-  &.is-transparent {
-    @apply bg-transparent;
-  }
+.sh-border-container.is-transparent {
+  @apply bg-transparent;
+}
 
-  &.is-disabled {
-    @apply opacity-50 cursor-not-allowed;
-    @apply pointer-events-none select-none;
-  }
+.sh-border-container.is-disabled {
+  @apply opacity-50 cursor-not-allowed;
+  @apply pointer-events-none select-none;
+}
 
-  &__content {
-    @apply w-full h-full;
-  }
+.sh-border-container__content {
+  @apply w-full h-full;
 }
 </style>

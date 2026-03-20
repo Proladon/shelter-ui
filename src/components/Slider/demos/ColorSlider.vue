@@ -12,7 +12,6 @@
       </div>
       <div>
         <span class="demo-label">次要：</span>
-        <Slider v-model="colorValue" color="secondary" :min="0" :max="100" />
       </div>
       <div>
         <span class="demo-label">成功：</span>

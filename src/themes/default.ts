@@ -1,9 +1,8 @@
-import type { DesignTokens } from '@/core/theme-utils'
+﻿import type { DesignTokens } from '../core/theme-utils'
 
 const defaultTokens: DesignTokens = {
   colors: {
-    primary: '#7EAFBA',
-    secondary: '#b1a69a',
+    primary: '#b1a69a',
     bg: {
       primary: '#22272e',
       secondary: '#1b1f27',

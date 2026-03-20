@@ -48,12 +48,16 @@ defineOptions({
 })
 
 interface Props {
-  item: CarouselItem
-  index: number
-  active: boolean
+  item?: CarouselItem
+  index?: number
+  active?: boolean
 }
 
-const props = defineProps<Props>()
+const props = withDefaults(defineProps<Props>(), {
+  item: () => ({}) as CarouselItem,
+  index: 0,
+  active: false,
+})
 
 const emit = defineEmits<{
   click: [item: CarouselItem, index: number]

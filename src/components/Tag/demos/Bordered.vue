@@ -3,7 +3,6 @@
     <h3>邊框標籤</h3>
     <div class="demo-section">
       <SHTag value="Primary" type="primary" bordered />
-      <SHTag value="Secondary" type="secondary" bordered />
       <SHTag value="Success" type="success" bordered />
       <SHTag value="Info" type="info" bordered />
       <SHTag value="Warning" type="warning" bordered />

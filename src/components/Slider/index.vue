@@ -5,9 +5,9 @@
       v-bind="rootProps"
       class="sh-slider"
       :class="[
-        `sh-slider-size--${size}`,
-        `sh-slider-color--${color}`,
-        `sh-slider-orientation--${orientation}`,
+        `sh-slider-size--${props.size}`,
+        `sh-slider-color--${props.color}`,
+        `sh-slider-orientation--${props.orientation}`,
       ]"
     >
       <SliderTrack class="sh-slider__track">
@@ -18,11 +18,11 @@
         v-for="(value, index) in modelValue"
         :key="index"
         class="sh-slider__thumb"
-        :class="`sh-slider__thumb--${color}`"
+        :class="`sh-slider__thumb--${props.color}`"
       >
-        <div v-if="showTooltip" class="sh-slider__tooltip">
+        <div v-if="props.showTooltip" class="sh-slider__tooltip">
           <slot name="tooltip" :value="value" :index="index">
-            {{ formatTooltip ? formatTooltip(value) : value }}
+            {{ props.formatTooltip ? props.formatTooltip(value) : value }}
           </slot>
         </div>
       </SliderThumb>
@@ -30,9 +30,9 @@
 
     <!-- 標記 -->
     <div
-      v-if="showMarks && marks"
+      v-if="props.showMarks && props.marks"
       class="sh-slider__marks"
-      :class="`sh-slider__marks--${orientation}`"
+      :class="`sh-slider__marks--${props.orientation}`"
     >
       <div
         v-for="(label, value) in marks"
@@ -56,7 +56,7 @@ import {
   SliderThumb,
   useForwardPropsEmits,
 } from 'reka-ui'
-import type { SliderProps } from './types'
+import type { SliderProps, SliderSlots } from './types'
 
 const props = withDefaults(defineProps<SliderProps>(), {
   size: 'default',
@@ -68,6 +68,8 @@ const props = withDefaults(defineProps<SliderProps>(), {
   max: 100,
   step: 1,
 })
+
+defineSlots<SliderSlots>()
 
 const emits = defineEmits<{
   'update:modelValue': [value: number[]]
@@ -148,7 +150,7 @@ const getMarkStyle = (value: number) => {
   /* @apply focus:(outline-none ring-2 ring-offset-2); */
   @apply focus:(outline-none);
   @apply active:cursor-grabbing;
-  /* 
+  /*
   &:focus {
     @apply ring-blue-500;
   } */
@@ -190,12 +192,6 @@ const getMarkStyle = (value: number) => {
   }
 }
 
-.sh-slider-color--secondary {
-  .sh-slider__range {
-    @apply bg-secondary;
-  }
-}
-
 .sh-slider-color--success {
   .sh-slider__range {
     @apply bg-status.success;
@@ -222,7 +218,7 @@ const getMarkStyle = (value: number) => {
 
 /* 提示框 */
 .sh-slider__tooltip {
-  @apply absolute bg-bg.primary text-secondary text-xs rounded px-2 py-1 pointer-events-none whitespace-nowrap;
+  @apply absolute bg-bg.primary text-text.base text-xs rounded px-2 py-1 pointer-events-none whitespace-nowrap;
   @apply border-solid border-border.base border-1;
   transform: translateX(-50%);
   bottom: calc(100% + 8px);

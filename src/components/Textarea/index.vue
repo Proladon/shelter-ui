@@ -169,12 +169,6 @@ defineExpose({
 <style lang="postcss" scoped>
 .sh-textarea-wrapper {
   @apply w-full inline-flex flex-col relative;
-
-  &:not(.is-disabled) {
-    .sh-textarea:hover {
-      @apply border-primary;
-    }
-  }
 }
 
 .sh-textarea {
@@ -187,7 +181,7 @@ defineExpose({
 
   &.is-focused {
     @apply border-primary outline-none;
-    box-shadow: 0 0 0 2px rgba(var(--sh-primary-fade), 0.2);
+    box-shadow: 0 0 0 2px var(--sh-primary-fade);
   }
 }
 

@@ -3,7 +3,7 @@
     <h3>帶圖示標籤</h3>
     <div class="demo-section">
       <SHTag value="使用者" type="primary" :icon="IconUser" />
-      <SHTag value="搜尋" type="secondary" :icon="IconSearch" />
+      <SHTag value="搜尋" type="primary" :icon="IconSearch" />
       <SHTag value="成功" type="success" :icon="IconCheck" />
       <SHTag value="資訊" type="info" :icon="IconInfoCircle" />
       <SHTag value="警告" type="warning" :icon="IconAlertTriangle" />
@@ -13,7 +13,7 @@
     <h3>圓角帶圖示標籤</h3>
     <div class="demo-section">
       <SHTag value="使用者" type="primary" :icon="IconUser" rounded />
-      <SHTag value="搜尋" type="secondary" :icon="IconSearch" rounded />
+      <SHTag value="搜尋" type="primary" :icon="IconSearch" rounded />
       <SHTag value="成功" type="success" :icon="IconCheck" rounded />
       <SHTag value="資訊" type="info" :icon="IconInfoCircle" rounded />
       <SHTag value="警告" type="warning" :icon="IconAlertTriangle" rounded />

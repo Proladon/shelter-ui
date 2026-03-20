@@ -233,7 +233,7 @@ const displayFormattedValue = computed(() => {
         >
           <DatePickerHeader class="sh-datepicker__header">
             <DatePickerPrev
-              class="sh-datepicker__nav-btn hover:(text-secondary bg-primary.fade)"
+              class="sh-datepicker__nav-btn hover:(text-primary bg-primary.fade)"
             >
               <IconChevronLeft class="sh-datepicker__nav-icon" />
             </DatePickerPrev>
@@ -252,7 +252,7 @@ const displayFormattedValue = computed(() => {
             </div>
 
             <DatePickerNext
-              class="sh-datepicker__nav-btn hover:(text-secondary bg-primary.fade)"
+              class="sh-datepicker__nav-btn hover:(text-primary bg-primary.fade)"
             >
               <IconChevronRight class="sh-datepicker__nav-icon" />
             </DatePickerNext>
@@ -290,7 +290,7 @@ const displayFormattedValue = computed(() => {
                     <DatePickerCellTrigger
                       :day="weekDate"
                       :month="month.value"
-                      class="sh-datepicker__cell-trigger hover:(text-secondary)"
+                      class="sh-datepicker__cell-trigger hover:(text-primary)"
                     />
                   </DatePickerCell>
                 </DatePickerGridRow>
@@ -320,8 +320,8 @@ const displayFormattedValue = computed(() => {
 
   &:focus-visible,
   &[data-state='open'] {
-    @apply border-primary;
-    box-shadow: 0 0 0 2px rgba(var(--sh-primary-fade), 0.2);
+    @apply border-primary outline-none;
+    box-shadow: 0 0 0 2px var(--sh-primary-fade);
   }
 
   &[data-disabled] {

@@ -6,7 +6,6 @@ import { onBeforeMount } from 'vue'
 import type { ThemeVarsConfig } from './types'
 import { flattenTokens, deriveColorVariants } from '@/core/theme-utils'
 import { setCssVar } from '@/utils/style'
-import defaultTokens from '@/themes/default'
 
 const props = withDefaults(
   defineProps<{

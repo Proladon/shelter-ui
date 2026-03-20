@@ -127,6 +127,161 @@ Common utility shortcuts:
 - Import shared types from `@/core/theme-utils` when working with theme/token data.
 - All props must have explicit TypeScript interfaces in `types.ts`.
 
+### 6. Dot Notation (Mandatory)
+
+Always use **dot notation** (`.`) for nested tokens — **never hyphen notation** (`-`):
+
+```
+✅ text-text.base         → var(--sh-text-base)
+✅ border-border.base     → var(--sh-border-base)
+✅ bg-bg.primary          → var(--sh-bg-primary)
+✅ bg-primary.fade        → var(--sh-primary-fade)
+✅ ring-primary.fade      → var(--sh-primary-fade)
+
+❌ text-text-base
+❌ bg-bg-primary
+❌ border-border-base
+```
+
+### 7. Semantic Color Tokens
+
+All color decisions must map to the canonical semantic tokens:
+
+| Token              | CSS Variable          | Purpose                                                                    |
+| ------------------ | --------------------- | -------------------------------------------------------------------------- |
+| **primary**        | `--sh-primary`        | Brand color, focus states, interactive highlight text, selected indicators |
+| **bg.primary**     | `--sh-bg-primary`     | Component main background (inputs, dropdowns, dialogs)                     |
+| **bg.secondary**   | `--sh-bg-secondary`   | Secondary background (disabled state, table headers)                       |
+| **text.base**      | `--sh-text-base`      | **All general text** (labels, options, content)                            |
+| **text.primary**   | `--sh-text-primary`   | **Low-emphasis text** (placeholder, default icon color)                    |
+| **border.base**    | `--sh-border-base`    | All default borders (inputs, menus, dividers)                              |
+| **border.primary** | `--sh-border-primary` | Emphasized borders (e.g. NumberInput hover)                                |
+| **status.info**    | `--sh-status-info`    | Info status                                                                |
+| **status.danger**  | `--sh-status-danger`  | Error / danger status                                                      |
+| **status.warning** | `--sh-status-warning` | Warning status                                                             |
+| **status.success** | `--sh-status-success` | Success status                                                             |
+
+#### ⚠️ primary Use Cases
+
+> **Common patterns — follow strictly.**
+
+| Scenario                           | Use            | Notes                                    |
+| ---------------------------------- | -------------- | ---------------------------------------- |
+| Focus ring / border                | `primary`      | Input border color when focused          |
+| Checkbox / Radio selected          | `primary`      | Indicator background / border            |
+| Switch on state                    | `primary`      | Track color when on                      |
+| Option hover / selected **bg**     | `primary-fade` | Dropdown, menu item highlight background |
+| Option hover / selected **text**   | `primary`      | Text on top of `primary-fade` background |
+| Button fill background             | `primary-fade` | Fill button background                   |
+| Button fill text                   | `primary`      | Fill button text                         |
+| Progress bar / Slider active track | `primary`      | Completed/active portion                 |
+| Tag / Chip background              | `{type}-fade`  | Based on component type                  |
+| Tag / Chip text                    | `{type}`       | Matching full-color text                 |
+
+**Mnemonic:**
+
+- `primary` = focus border, selected marker, progress indicator, text **inside** highlighted container
+- `primary-fade` = highlighted container **background**
+
+#### Text Color Roles
+
+| Role                    | UnoCSS class        | When to use                                                                  |
+| ----------------------- | ------------------- | ---------------------------------------------------------------------------- |
+| General text            | `text-text.base`    | Options, labels, content, table cells                                        |
+| Low-emphasis text       | `text-text.primary` | Placeholder, secondary description, default icon                             |
+| Highlighted text        | `text-primary`      | hover / selected state text                                                  |
+| Interacti / Interactive | `text-primary`      | Clickable links, selected indicator, check mark, hover / selected state text |
+
+**Forbidden text classes:**
+
+- ❌ `text-gray-500`, `text-gray-700`, `text-stone-*` (Tailwind defaults)
+- ❌ `text-[#6b7280]` (hardcoded hex)
+- ❌ `text-white` (breaks theme switching — use `text-text.base`)
+- ❌ `text-mauve11` (third-party palette names)
+
+#### Background Roles
+
+| Role                  | UnoCSS class            | When to use                          |
+| --------------------- | ----------------------- | ------------------------------------ |
+| Component background  | `bg-bg.primary`         | Inputs, dropdowns, dialogs           |
+| Page/area background  | `bg-bg.secondary`       | Secondary areas, disabled element bg |
+| Interactive highlight | `bg-primary.fade`       | hover / selected options             |
+| Status fill           | `bg-status.{type}.fade` | Notifications, Tags, Badges          |
+
+**Forbidden background classes:**
+
+- ❌ `bg-white`, `bg-gray-50`
+- ❌ Hardcoded `rgba(0,0,0,0.4)` — use `bg-bg.primary/40` or define a new token
+- ❌ Hyphen notation: `bg-bg-primary`
+
+#### Border Roles
+
+| State         | Class                      | Notes                          |
+| ------------- | -------------------------- | ------------------------------ |
+| Default       | `border-border.base`       | All inputs, menus, cards       |
+| Focus         | `border-primary`           | When element is focused        |
+| Open/Expanded | `ring-2 ring-primary.fade` | Select, DatePicker, TimePicker |
+| Error         | `border-status.danger`     | Form validation failure        |
+
+**Forbidden border classes:**
+
+- ❌ `border-gray-300`, `border-stone-700` (Tailwind defaults)
+- ❌ `border-[#e5e7eb]` (hardcoded hex)
+- ❌ Hyphen notation: `border-border-base`
+
+### 8. Component State Patterns
+
+#### Form Inputs (Input, Select, Textarea, NumberInput, DatePicker, TimePicker)
+
+| State       | Border                 | Background        | Text                            |
+| ----------- | ---------------------- | ----------------- | ------------------------------- |
+| Default     | `border-border.base`   | `bg-bg.primary`   | `text-text.base`                |
+| Hover       | `border-border.base`   | `bg-bg.primary`   | `text-text.base`                |
+| Focus       | `border-primary`       | `bg-bg.primary`   | `text-text.base`                |
+| Disabled    | `border-border.base`   | `bg-bg.secondary` | `text-text.base` + `opacity-60` |
+| Error       | `border-status.danger` | `bg-bg.primary`   | `text-text.base`                |
+| Placeholder | —                      | —                 | `text-text.primary`             |
+
+Standard PostCSS pattern:
+
+```postcss
+/* Default */
+@apply border border-solid border-border.base rounded-md;
+
+/* Focus */
+&:focus,
+&--focused {
+  @apply border-primary outline-none;
+}
+
+/* Expandable (Select, DatePicker, TimePicker) */
+&--open {
+  @apply border-primary ring-2 ring-primary.fade;
+}
+
+/* Error */
+&--error {
+  @apply border-status.danger;
+}
+```
+
+#### Dropdown Options (Select option, ContextMenu item, DatePicker cell)
+
+| State               | Background        | Text                            |
+| ------------------- | ----------------- | ------------------------------- |
+| Default             | `transparent`     | `text-text.base`                |
+| Hover / Highlighted | `bg-primary.fade` | `text-primary`                  |
+| Selected / Checked  | `bg-primary.fade` | `text-primary`                  |
+| Disabled            | `transparent`     | `text-text.base` + `opacity-50` |
+
+#### Floating Panels (Popover, Select dropdown, ContextMenu, DatePicker panel, Tooltip)
+
+```postcss
+@apply bg-bg.primary border border-solid border-border.base rounded-md shadow-lg;
+```
+
+Ensure `z-[30]` or higher for z-index.
+
 ## Suggested `index.ts` Pattern
 
 ```ts
@@ -150,3 +305,14 @@ export default ComponentName
 - [ ] **No `any` types** — strict TypeScript throughout
 - [ ] **Variants use `sh-*` shortcuts** from uno.config.ts, not manual CSS
 - [ ] **Sizes use `sh-size-*` shortcuts** or `var(--sh-component-size-*)` tokens
+- [ ] **Dot notation used** — `.` not `-` for nested tokens (`bg-bg.primary`, not `bg-bg-primary`)
+- [ ] **Text colors correct** — `text-text.base` (general), `text-text.primary` (placeholder/low-emphasis), `text-primary` (highlighted)
+- [ ] **No forbidden text classes** — no `text-gray-*`, `text-white`, hardcoded hex
+- [ ] **Borders correct** — `border-border.base` default, `border-primary` focus, `border-status.danger` error
+- [ ] **No forbidden border classes** — no `border-gray-*`, hardcoded hex
+- [ ] **Backgrounds correct** — `bg-bg.primary` (component), `bg-bg.secondary` (disabled), `bg-primary.fade` (highlighted option)
+- [ ] **No forbidden bg classes** — no `bg-white`, `bg-gray-*`, hardcoded rgba
+- [ ] **Highlighted options** use `bg-primary.fade text-primary`
+- [ ] **Floating panels** have `border border-solid border-border.base shadow-lg`
+- [ ] **Disabled state** uses `sh-disabled` or `opacity-60 cursor-not-allowed`
+- [ ] **Transitions** use `sh-interactive` or `transition-all duration-300 ease-in-out`

@@ -1,7 +1,8 @@
 import type { ProgressRootProps } from 'reka-ui'
 
 export interface ProgressProps extends ProgressRootProps {
-  value: number | null
+  value?: number | null
+  percentage?: number
   max?: number
   size?: 'small' | 'default' | 'large'
   variant?: 'default' | 'striped' | 'animated'
@@ -10,6 +11,8 @@ export interface ProgressProps extends ProgressRootProps {
   color?: string
   height?: string | number
   textPosition?: 'left' | 'bottom' | 'right'
+  status?: string
+  strokeWidth?: number
 }
 
 export interface ProgressSlots {

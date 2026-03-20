@@ -163,20 +163,20 @@ defineExpose({
 })
 </script>
 
-<style lang="scss">
+<style lang="postcss">
 .sh-calendar {
   --sh-calendar-border-radius: 8px;
-  --sh-calendar-bg: #ffffff;
-  --sh-calendar-border: #e5e7eb;
-  --sh-calendar-text: #374151;
-  --sh-calendar-text-muted: #9ca3af;
-  --sh-calendar-selected-bg: #3b82f6;
-  --sh-calendar-selected-text: #ffffff;
-  --sh-calendar-hover-bg: #f3f4f6;
-  --sh-calendar-today-bg: #dbeafe;
-  --sh-calendar-today-text: #1d4ed8;
-  --sh-calendar-disabled-text: #d1d5db;
-  --sh-calendar-nav-hover-bg: #f9fafb;
+  --sh-calendar-bg: var(--sh-bg-primary);
+  --sh-calendar-border: var(--sh-border-base);
+  --sh-calendar-text: var(--sh-text-base);
+  --sh-calendar-text-muted: var(--sh-text-primary);
+  --sh-calendar-selected-bg: var(--sh-primary);
+  --sh-calendar-selected-text: var(--sh-bg-secondary);
+  --sh-calendar-hover-bg: var(--sh-primary-fade);
+  --sh-calendar-today-bg: var(--sh-primary-fade);
+  --sh-calendar-today-text: var(--sh-primary);
+  --sh-calendar-disabled-text: var(--sh-text-primary);
+  --sh-calendar-nav-hover-bg: var(--sh-bg-secondary);
 
   display: inline-block;
   border-radius: var(--sh-calendar-border-radius);
@@ -184,17 +184,15 @@ defineExpose({
   border: 1px solid var(--sh-calendar-border);
   padding: 1rem;
   color: var(--sh-calendar-text);
+}
 
-  &--disabled {
-    opacity: 0.6;
-    pointer-events: none;
-  }
+.sh-calendar--disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
 
-  &--readonly {
-    .sh-calendar__cell-trigger {
-      pointer-events: none;
-    }
-  }
+.sh-calendar--readonly .sh-calendar__cell-trigger {
+  pointer-events: none;
 }
 
 .sh-calendar__root {
@@ -220,20 +218,20 @@ defineExpose({
   color: var(--sh-calendar-text);
   cursor: pointer;
   transition: background-color 0.2s ease;
+}
 
-  &:hover:not([data-disabled]) {
-    background: var(--sh-calendar-nav-hover-bg);
-  }
+.sh-calendar__nav-button:hover:not([data-disabled]) {
+  background: var(--sh-calendar-nav-hover-bg);
+}
 
-  &[data-disabled] {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
+.sh-calendar__nav-button[data-disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 
-  &:focus-visible {
-    outline: 2px solid var(--sh-calendar-selected-bg);
-    outline-offset: 2px;
-  }
+.sh-calendar__nav-button:focus-visible {
+  outline: 2px solid var(--sh-calendar-selected-bg);
+  outline-offset: 2px;
 }
 
 .sh-calendar__nav-icon {
@@ -250,16 +248,14 @@ defineExpose({
 .sh-calendar__content {
   display: flex;
   gap: 1.5rem;
+}
 
-  &--multiple-months {
-    flex-direction: row;
-  }
+.sh-calendar__content--multiple-months {
+  flex-direction: row;
+}
 
-  &--months-1 {
-    .sh-calendar__grid {
-      width: 100%;
-    }
-  }
+.sh-calendar__content--months-1 .sh-calendar__grid {
+  width: 100%;
 }
 
 .sh-calendar__grid {
@@ -268,19 +264,15 @@ defineExpose({
   user-select: none;
 }
 
-.sh-calendar__grid-head {
-  .sh-calendar__grid-row {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    margin-bottom: 0.5rem;
-  }
+.sh-calendar__grid-head .sh-calendar__grid-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 0.5rem;
 }
 
-.sh-calendar__grid-body {
-  .sh-calendar__grid-row {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-  }
+.sh-calendar__grid-body .sh-calendar__grid-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
 }
 
 .sh-calendar__head-cell {
@@ -314,69 +306,52 @@ defineExpose({
   cursor: pointer;
   transition: all 0.2s ease;
   outline: none;
-
-  &:hover:not([data-disabled]):not([data-outside-view]) {
-    background: var(--sh-calendar-hover-bg);
-  }
-
-  &:focus-visible {
-    outline: 2px solid var(--sh-calendar-selected-bg);
-    outline-offset: 2px;
-  }
-
-  &[data-selected] {
-    background: var(--sh-calendar-selected-bg) !important;
-    color: var(--sh-calendar-selected-text) !important;
-    font-weight: 500;
-  }
-
-  &[data-today]:not([data-selected]) {
-    background: var(--sh-calendar-today-bg);
-    color: var(--sh-calendar-today-text);
-    font-weight: 500;
-  }
-
-  &[data-outside-view] {
-    color: var(--sh-calendar-text-muted);
-    opacity: 0.5;
-  }
-
-  &[data-disabled] {
-    color: var(--sh-calendar-disabled-text);
-    cursor: not-allowed;
-    opacity: 0.5;
-  }
-
-  &[data-unavailable] {
-    color: var(--sh-calendar-disabled-text);
-    text-decoration: line-through;
-    cursor: not-allowed;
-    opacity: 0.5;
-  }
 }
 
-// 多月份顯示的響應式布局
+.sh-calendar__cell-trigger:hover:not([data-disabled]):not([data-outside-view]) {
+  background: var(--sh-calendar-hover-bg);
+}
+
+.sh-calendar__cell-trigger:focus-visible {
+  outline: 2px solid var(--sh-calendar-selected-bg);
+  outline-offset: 2px;
+}
+
+.sh-calendar__cell-trigger[data-selected] {
+  background: var(--sh-calendar-selected-bg) !important;
+  color: var(--sh-calendar-selected-text) !important;
+  font-weight: 500;
+}
+
+.sh-calendar__cell-trigger[data-today]:not([data-selected]) {
+  background: var(--sh-calendar-today-bg);
+  color: var(--sh-calendar-today-text);
+  font-weight: 500;
+}
+
+.sh-calendar__cell-trigger[data-outside-view] {
+  color: var(--sh-calendar-text-muted);
+  opacity: 0.5;
+}
+
+.sh-calendar__cell-trigger[data-disabled] {
+  color: var(--sh-calendar-disabled-text);
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.sh-calendar__cell-trigger[data-unavailable] {
+  color: var(--sh-calendar-disabled-text);
+  text-decoration: line-through;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* 多月份顯示的響應式布局 */
 @media (max-width: 640px) {
   .sh-calendar__content--multiple-months {
     flex-direction: column;
     gap: 1rem;
-  }
-}
-
-// 深色模式支援（如果需要）
-@media (prefers-color-scheme: dark) {
-  .sh-calendar {
-    --sh-calendar-bg: #1f2937;
-    --sh-calendar-border: #374151;
-    --sh-calendar-text: #f9fafb;
-    --sh-calendar-text-muted: #6b7280;
-    --sh-calendar-selected-bg: #3b82f6;
-    --sh-calendar-selected-text: #ffffff;
-    --sh-calendar-hover-bg: #374151;
-    --sh-calendar-today-bg: #1e3a8a;
-    --sh-calendar-today-text: #60a5fa;
-    --sh-calendar-disabled-text: #4b5563;
-    --sh-calendar-nav-hover-bg: #374151;
   }
 }
 </style>

@@ -86,7 +86,7 @@ const onBlur = (event: FocusEvent) => {
 }
 
 .sh-radio__input:focus + .sh-radio__indicator {
-  /* @apply ring-2 ring-primary.fade ring-offset-2 outline-none; */
+  box-shadow: 0 0 0 2px var(--sh-primary-fade);
 }
 
 .sh-radio__input:disabled + .sh-radio__indicator {

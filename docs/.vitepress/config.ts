@@ -25,6 +25,7 @@ export default defineConfig({
             { text: '介紹', link: '/guide/' },
             { text: 'Dashboard 範例', link: '/guide/dashboard' },
             { text: '快速開始', link: '/guide/getting-started' },
+            { text: 'Design System 設計規範', link: '/guide/design-system' },
           ],
         },
       ],

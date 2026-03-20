@@ -160,7 +160,7 @@ onUnmounted(() => {
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="postcss" scoped>
 .sh-notification {
   @apply relative flex items-start gap-3 p-4 rounded-lg shadow-lg;
   @apply backdrop-blur-md;
@@ -168,83 +168,77 @@ onUnmounted(() => {
   @apply min-w-[320px] max-w-[400px];
   @apply cursor-pointer select-none;
   @apply transition-all duration-200;
+}
+.sh-notification:hover {
+  @apply shadow-xl;
+  @apply -translate-y-0.5;
+}
 
-  &:hover {
-    @apply shadow-xl;
-    @apply -translate-y-0.5;
-  }
+.sh-notification--info {
+  @apply border-primary bg-primary.fade;
+}
+.sh-notification--info .sh-notification__icon-component {
+  @apply text-primary;
+}
 
-  &--info {
-    @apply border-primary bg-primary.fade;
+.sh-notification--success {
+  @apply border-status.success bg-status.success.fade;
+}
+.sh-notification--success .sh-notification__icon-component {
+  @apply text-status.success;
+}
 
-    .sh-notification__icon-component {
-      @apply text-primary;
-    }
-  }
+.sh-notification--warning {
+  @apply border-status.warning bg-status.warning.fade;
+}
+.sh-notification--warning .sh-notification__icon-component {
+  @apply text-status.warning;
+}
 
-  &--success {
-    @apply border-status.success bg-status.success.fade;
+.sh-notification--error {
+  @apply border-status.danger bg-status.danger.fade;
+}
+.sh-notification--error .sh-notification__icon-component {
+  @apply text-status.danger;
+}
 
-    .sh-notification__icon-component {
-      @apply text-status.success;
-    }
-  }
+.sh-notification--closable {
+  @apply pr-10;
+}
 
-  &--warning {
-    @apply border-status.warning bg-status.warning.fade;
+.sh-notification__icon {
+  @apply flex-shrink-0 flex items-center justify-center w-6 h-6 mt-0.5;
+}
 
-    .sh-notification__icon-component {
-      @apply text-status.warning;
-    }
-  }
+.sh-notification__icon-component {
+  @apply w-5 h-5;
+}
 
-  &--error {
-    @apply border-status.danger bg-status.danger.fade;
+.sh-notification__content {
+  @apply flex-1 min-w-0;
+}
 
-    .sh-notification__icon-component {
-      @apply text-status.danger;
-    }
-  }
+.sh-notification__title {
+  @apply font-semibold text-gray-300 mb-1;
+  @apply text-sm leading-5;
+}
 
-  &--closable {
-    @apply pr-10;
-  }
+.sh-notification__message {
+  @apply text-gray-400 text-sm leading-5;
+}
 
-  &__icon {
-    @apply flex-shrink-0 flex items-center justify-center w-6 h-6 mt-0.5;
-  }
+.sh-notification__actions {
+  @apply mt-3 flex gap-2;
+}
 
-  &__icon-component {
-    @apply w-5 h-5;
-  }
-
-  &__content {
-    @apply flex-1 min-w-0;
-  }
-
-  &__title {
-    @apply font-semibold text-gray-300 mb-1;
-    @apply text-sm leading-5;
-  }
-
-  &__message {
-    @apply text-gray-400 text-sm leading-5;
-  }
-
-  &__actions {
-    @apply mt-3 flex gap-2;
-  }
-
-  &__close {
-    @apply absolute top-3 right-3;
-    @apply w-5 h-5 flex items-center justify-center;
-    @apply text-text.base hover:text-text.base;
-    @apply rounded transition-colors;
-    @apply outline-none;
-
-    &:hover {
-      @apply text-text.base.lighten;
-    }
-  }
+.sh-notification__close {
+  @apply absolute top-3 right-3;
+  @apply w-5 h-5 flex items-center justify-center;
+  @apply text-text.base hover:text-text.base;
+  @apply rounded transition-colors;
+  @apply outline-none;
+}
+.sh-notification__close:hover {
+  @apply text-text.base.lighten;
 }
 </style>

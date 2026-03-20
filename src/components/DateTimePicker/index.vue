@@ -229,7 +229,7 @@
 
             <div class="sh-datetime-picker__actions">
               <button
-                class="sh-datetime-picker__button sh-datetime-picker__button--secondary"
+                class="sh-datetime-picker__button sh-datetime-picker__button--primary"
                 @click="handleClear"
               >
                 清除
@@ -705,19 +705,20 @@ defineExpose<DateTimePickerExpose>({
 }
 
 .sh-datetime-picker__trigger {
-  @apply relative flex items-center w-full px-3 py-2 border border-gray-300 rounded-md bg-white cursor-pointer transition-colors duration-200;
+  @apply relative flex items-center w-full px-3 py-2 border border-border.base rounded-md bg-bg.primary cursor-pointer transition-colors duration-200;
 }
 
 .sh-datetime-picker__trigger:hover:not(.sh-datetime-picker__trigger--readonly) {
-  @apply border-blue-400;
+  @apply border-primary;
 }
 
 .sh-datetime-picker__trigger--active {
-  @apply border-blue-500 ring-2 ring-blue-200;
+  @apply border-primary outline-none;
+  box-shadow: 0 0 0 2px var(--sh-primary-fade);
 }
 
 .sh-datetime-picker__trigger--readonly {
-  @apply cursor-default bg-gray-50;
+  @apply cursor-default bg-bg.secondary;
 }
 
 .sh-datetime-picker__input {
@@ -729,15 +730,15 @@ defineExpose<DateTimePickerExpose>({
 }
 
 .sh-datetime-picker__icon {
-  @apply flex items-center justify-center w-5 h-5 text-gray-400;
+  @apply flex items-center justify-center w-5 h-5 text-text.base;
 }
 
 .sh-datetime-picker__clear-icon {
-  @apply cursor-pointer hover:text-gray-600 transition-colors duration-200;
+  @apply cursor-pointer hover:text-text.base transition-colors duration-200;
 }
 
 .sh-datetime-picker__popover {
-  @apply bg-white border border-gray-200 rounded-lg shadow-lg;
+  @apply bg-bg.primary border border-border.base rounded-lg shadow-lg;
 }
 
 .sh-datetime-picker__content {
@@ -745,15 +746,15 @@ defineExpose<DateTimePickerExpose>({
 }
 
 .sh-datetime-picker__timezone-info {
-  @apply mb-4 p-3 bg-gray-50 rounded-md;
+  @apply mb-4 p-3 bg-bg.secondary rounded-md;
 }
 
 .sh-datetime-picker__timezone-current {
-  @apply text-sm text-gray-600 mb-2;
+  @apply text-sm text-text.base mb-2;
 }
 
 .sh-datetime-picker__timezone-select {
-  @apply w-full text-sm border border-gray-300 rounded px-2 py-1;
+  @apply w-full text-sm border border-border.base rounded px-2 py-1 bg-bg.primary text-text.base;
 }
 
 .sh-datetime-picker__datetime-selector {
@@ -766,7 +767,7 @@ defineExpose<DateTimePickerExpose>({
 }
 
 .sh-datetime-picker__section-title {
-  @apply text-sm font-medium text-gray-700 mb-3;
+  @apply text-sm font-medium text-text.base mb-3;
 }
 
 .sh-datetime-picker__calendar-header {
@@ -774,7 +775,7 @@ defineExpose<DateTimePickerExpose>({
 }
 
 .sh-datetime-picker__nav-button {
-  @apply flex items-center justify-center w-8 h-8 rounded-md hover:bg-gray-100 transition-colors duration-200;
+  @apply flex items-center justify-center w-8 h-8 rounded-md hover:bg-bg.secondary transition-colors duration-200;
 }
 
 .sh-datetime-picker__nav-button:disabled {
@@ -794,7 +795,7 @@ defineExpose<DateTimePickerExpose>({
 }
 
 .sh-datetime-picker__weekday {
-  @apply flex items-center justify-center w-8 h-8 text-xs font-medium text-gray-500;
+  @apply flex items-center justify-center w-8 h-8 text-xs font-medium text-text.primary;
 }
 
 .sh-datetime-picker__dates {
@@ -802,19 +803,19 @@ defineExpose<DateTimePickerExpose>({
 }
 
 .sh-datetime-picker__date {
-  @apply flex items-center justify-center w-8 h-8 text-sm rounded-md hover:bg-gray-100 transition-colors duration-200;
+  @apply flex items-center justify-center w-8 h-8 text-sm rounded-md hover:bg-primary.fade transition-colors duration-200;
 }
 
 .sh-datetime-picker__date--today {
-  @apply font-semibold text-blue-600;
+  @apply font-semibold text-primary;
 }
 
 .sh-datetime-picker__date--selected {
-  @apply bg-blue-500 text-white hover:bg-blue-600;
+  @apply bg-primary text-white hover:bg-primary.darken;
 }
 
 .sh-datetime-picker__date--other-month {
-  @apply text-gray-300;
+  @apply text-text.primary opacity-50;
 }
 
 .sh-datetime-picker__date--disabled {
@@ -830,15 +831,16 @@ defineExpose<DateTimePickerExpose>({
 }
 
 .sh-datetime-picker__time-label {
-  @apply text-xs text-gray-500 mb-1 text-center;
+  @apply text-xs text-text.primary mb-1 text-center;
 }
 
 .sh-datetime-picker__time-select {
-  @apply border border-gray-300 rounded px-2 py-1 text-sm min-w-16 text-center;
+  @apply border border-border.base rounded px-2 py-1 text-sm min-w-16 text-center bg-bg.primary text-text.base;
 }
 
 .sh-datetime-picker__time-select:focus {
-  @apply outline-none border-blue-500 ring-1 ring-blue-200;
+  @apply outline-none border-primary;
+  box-shadow: 0 0 0 2px var(--sh-primary-fade);
 }
 
 .sh-datetime-picker__range-container {
@@ -846,7 +848,7 @@ defineExpose<DateTimePickerExpose>({
 }
 
 .sh-datetime-picker__range-info {
-  @apply space-y-2 p-3 bg-gray-50 rounded-md;
+  @apply space-y-2 p-3 bg-bg.secondary rounded-md;
 }
 
 .sh-datetime-picker__range-item {
@@ -854,7 +856,7 @@ defineExpose<DateTimePickerExpose>({
 }
 
 .sh-datetime-picker__range-label {
-  @apply text-gray-500;
+  @apply text-text.primary;
 }
 
 .sh-datetime-picker__range-value {
@@ -862,11 +864,11 @@ defineExpose<DateTimePickerExpose>({
 }
 
 .sh-datetime-picker__range-note {
-  @apply text-center text-gray-500 text-sm py-8;
+  @apply text-center text-text.primary text-sm py-8;
 }
 
 .sh-datetime-picker__actions {
-  @apply flex justify-end gap-2 mt-4 pt-4 border-t border-gray-200;
+  @apply flex justify-end gap-2 mt-4 pt-4 border-t border-border.base;
 }
 
 .sh-datetime-picker__button {
@@ -874,11 +876,11 @@ defineExpose<DateTimePickerExpose>({
 }
 
 .sh-datetime-picker__button--primary {
-  @apply bg-blue-500 text-white hover:bg-blue-600;
+  @apply bg-primary text-white hover:bg-primary.darken;
 }
 
-.sh-datetime-picker__button--secondary {
-  @apply border border-gray-300 text-gray-700 hover:bg-gray-50;
+.sh-datetime-picker__button--primary {
+  @apply border border-border.base text-text.base hover:bg-bg.secondary;
 }
 
 /* Transitions */

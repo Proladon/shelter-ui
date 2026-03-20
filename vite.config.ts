@@ -48,6 +48,7 @@ export default defineConfig({
     },
   },
   build: {
+    cssMinify: 'esbuild',
     lib: {
       // 使用物件形式定義多個入口點
       entry: {

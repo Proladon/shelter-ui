@@ -11,7 +11,6 @@ These map to CSS variables and can be used in class attributes like `class="bg-b
 {
   // Base colors
   primary: 'var(--sh-primary)',
-  secondary: 'var(--sh-secondary)',
   'bg.primary': 'var(--sh-bg-primary)',
   'bg.secondary': 'var(--sh-bg-secondary)',
   'text.base': 'var(--sh-text-base)',

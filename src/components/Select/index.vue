@@ -184,7 +184,7 @@ const wrapperStyle = computed(() => {
               <div
                 class="sh-select-input truncate"
                 :class="{
-                  'text-text.secondary opacity-50':
+                  'text-text.primary opacity-50':
                     !internalValue ||
                     (Array.isArray(internalValue) &&
                       internalValue.length === 0),
@@ -368,10 +368,11 @@ const wrapperStyle = computed(() => {
 
   &[data-state='open'],
   &.is-open {
-    @apply border-primary ring-2 ring-primary.fade;
+    @apply border-primary outline-none;
+    box-shadow: 0 0 0 2px var(--sh-primary-fade);
 
     .sh-select-trigger-icon {
-      @apply text-secondary;
+      @apply text-primary;
     }
   }
 
@@ -381,13 +382,14 @@ const wrapperStyle = computed(() => {
 
   /* Focus within works for input */
   &:focus-within {
-    @apply outline-none border-primary ring-2 ring-primary.fade;
+    @apply outline-none border-primary;
+    box-shadow: 0 0 0 2px var(--sh-primary-fade);
   }
 }
 
 .sh-select-input {
   @apply flex-1 truncate text-left bg-transparent border-none outline-none;
-  @apply text-text.base placeholder-text.secondary;
+  @apply text-text.base placeholder-text.primary;
   @apply min-w-0;
 
   &:read-only {
@@ -404,7 +406,7 @@ const wrapperStyle = computed(() => {
 }
 
 .sh-select-clear {
-  @apply text-text.secondary cursor-pointer flex items-center;
+  @apply text-text.primary cursor-pointer flex items-center;
 }
 
 .sh-select-dropdown {
@@ -418,7 +420,7 @@ const wrapperStyle = computed(() => {
 }
 
 .sh-select-group-title {
-  @apply px-2 py-1.5 text-xs font-semibold text-text.secondary;
+  @apply px-2 py-1.5 text-xs font-semibold text-text.primary;
 }
 
 .sh-select-option {
@@ -428,14 +430,14 @@ const wrapperStyle = computed(() => {
   @apply pr-8;
 
   &[data-highlighted] {
-    @apply bg-primary.fade text-secondary;
+    @apply bg-primary.fade text-primary;
   }
 
   &[data-disabled] {
     @apply opacity-50 cursor-not-allowed;
   }
   &[data-state='checked'] {
-    @apply bg-primary.fade text-secondary;
+    @apply bg-primary.fade text-primary;
   }
 }
 
@@ -460,7 +462,7 @@ const wrapperStyle = computed(() => {
   @apply pr-8; /* Space for the check */
 
   &[data-highlighted] {
-    @apply bg-primary.fade text-secondary;
+    @apply bg-primary.fade text-primary;
   }
 
   &[data-disabled] {
@@ -474,15 +476,15 @@ const wrapperStyle = computed(() => {
 
 .sh-select-loading,
 .sh-select-empty {
-  @apply p-4 text-center text-text.secondary text-sm flex items-center justify-center gap-2;
+  @apply p-4 text-center text-text.primary text-sm flex items-center justify-center gap-2;
 }
 
 .sh-select-clear,
 .sh-select-trigger-icon {
-  @apply transition-all duration-300 hover:(text-secondary);
+  @apply transition-all duration-300 hover:(text-primary);
 }
 
 .sh-select-group-title {
-  @apply text-secondary;
+  @apply text-primary;
 }
 </style>

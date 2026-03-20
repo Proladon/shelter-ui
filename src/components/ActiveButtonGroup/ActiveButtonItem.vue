@@ -58,20 +58,20 @@ const onClick = () => {
   </button>
 </template>
 
-<style lang="scss" scoped>
+<style lang="postcss" scoped>
 .sh-active-button-item {
   @apply relative px-4 py-2 rounded-md text-center cursor-pointer z-10;
   @apply flex-1 flex-shrink-0;
   @apply transition-colors duration-200 ease-in-out;
-  @apply hover:(text-secondary);
+  @apply hover:(text-primary);
+}
 
-  &--active {
-    @apply text-primary;
-  }
+.sh-active-button-item--active {
+  @apply text-primary;
+}
 
-  &--disabled {
-    @apply opacity-50 cursor-not-allowed;
-    @apply hover:text-inherit;
-  }
+.sh-active-button-item--disabled {
+  @apply opacity-50 cursor-not-allowed;
+  @apply hover:text-inherit;
 }
 </style>

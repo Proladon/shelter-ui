@@ -5,7 +5,7 @@ export interface DateRange {
 
 export interface DatePickerProps {
   /** 綁定的值，單一日期選擇時為 Date，範圍選擇時為 DateRange */
-  modelValue?: Date | DateRange
+  modelValue?: Date | DateRange | null
   /** 是否啟用日期範圍選擇模式，預設為 false */
   range?: boolean
   /** 輸入框佔位符文字 */

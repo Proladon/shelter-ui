@@ -18,67 +18,6 @@ const cssVarMap: Record<string, string> = {
   info: 'status-info',
 }
 
-// ── Helper: generate per-type variant shortcuts ─────────────────────
-// Uses arbitrary CSS variable syntax bg-[var(--sh-*)] instead of theme color
-// dot-notation (bg-status.danger.fade) which does NOT resolve inside shortcuts.
-function variantShortcuts(): Record<string, string> {
-  const result: Record<string, string> = {}
-
-  for (const [type, v] of Object.entries(cssVarMap)) {
-    // Fill: colored bg + matching text
-    result[`sh-fill-${type}`] = [
-      `bg-[var(--sh-${v}-fade)]`,
-      `text-[var(--sh-${v})]`,
-      `border-transparent`,
-    ].join(' ')
-
-    // Ghost: transparent bg, colored text, bg on hover
-    result[`sh-ghost-${type}`] = [
-      `bg-transparent`,
-      `text-[var(--sh-${v})]`,
-      `border-transparent`,
-      `hover:bg-[var(--sh-${v}-fade)]`,
-      `active:brightness-80`,
-    ].join(' ')
-
-    // Text: no bg or border, colored text only
-    result[`sh-text-${type}`] = [
-      `bg-transparent`,
-      `text-[var(--sh-${v})]`,
-      `border-transparent`,
-      `hover:text-[var(--sh-${v}-lighten)]`,
-    ].join(' ')
-
-    // Outline: transparent bg, solid colored border
-    result[`sh-outline-${type}`] = [
-      `bg-transparent`,
-      `text-[var(--sh-${v})]`,
-      `border-[var(--sh-${v})]`,
-      `border-solid`,
-      `hover:bg-[var(--sh-${v}-fade)]`,
-    ].join(' ')
-
-    // Dashed: transparent bg, dashed colored border
-    result[`sh-dashed-${type}`] = [
-      `bg-transparent`,
-      `text-[var(--sh-${v})]`,
-      `border-[var(--sh-${v})]`,
-      `border-dashed`,
-      `hover:bg-[var(--sh-${v}-fade)]`,
-    ].join(' ')
-
-    // Bordered: fill bg + colored border
-    result[`sh-bordered-${type}`] = [
-      `bg-[var(--sh-${v}-fade)]`,
-      `text-[var(--sh-${v})]`,
-      `border-[var(--sh-${v})]`,
-      `border-solid`,
-    ].join(' ')
-  }
-
-  return result
-}
-
 // ── Safelist: all dynamic shortcut combinations ─────────────────────
 // Required because UnoCSS cannot statically detect template literal class
 // names like `sh-fill-${props.type}`. All generated shortcuts must be listed.
@@ -105,22 +44,48 @@ export default defineConfig({
 
   safelist,
 
-  shortcuts: {
-    // ── Shared Component Variant Shortcuts ─────────────────────────
-    ...variantShortcuts(),
+  shortcuts: [
+    // ── Dynamic Variant Shortcuts ────────────────────────────────
+    [
+      /^sh-(fill|ghost|text|outline|dashed|bordered)-(.*)$/,
+      (match) => {
+        const [, variant, type] = match
+        const v = cssVarMap[type]
+        if (!v) return '' // ignore if type not mapped
 
-    // ── Size Shortcuts (use design tokens) ────────────────────────
-    'sh-size-sm':
-      'h-[var(--sh-component-size-sm)] text-[var(--sh-font-size-sm)] px-[var(--sh-spacing-sm)]',
-    'sh-size-md':
-      'h-[var(--sh-component-size-md)] text-[var(--sh-font-size-md)] px-[var(--sh-spacing-md)]',
-    'sh-size-lg':
-      'h-[var(--sh-component-size-lg)] text-[var(--sh-font-size-lg)] px-[var(--sh-spacing-lg)]',
+        switch (variant) {
+          case 'fill':
+            return `bg-[var(--sh-${v}-fade)] text-[var(--sh-${v})] border-transparent`
+          case 'ghost':
+            return `bg-transparent text-[var(--sh-${v})] border-transparent hover:bg-[var(--sh-${v}-fade)] active:brightness-80`
+          case 'text':
+            return `bg-transparent text-[var(--sh-${v})] border-transparent hover:text-[var(--sh-${v}-lighten)]`
+          case 'outline':
+            return `bg-transparent text-[var(--sh-${v})] border-[var(--sh-${v})] border-solid hover:bg-[var(--sh-${v}-fade)]`
+          case 'dashed':
+            return `bg-transparent text-[var(--sh-${v})] border-[var(--sh-${v})] border-dashed hover:bg-[var(--sh-${v}-fade)]`
+          case 'bordered':
+            return `bg-[var(--sh-${v}-fade)] text-[var(--sh-${v})] border-[var(--sh-${v})] border-solid`
+          default:
+            return ''
+        }
+      },
+    ],
+
+    // ── Dynamic Size Shortcuts ──────────────────────────────────
+    [
+      /^sh-size-(sm|md|lg)$/,
+      ([, size]) =>
+        `h-[var(--sh-component-size-${size})] text-[var(--sh-font-size-${size})] px-[var(--sh-spacing-${size})]`,
+    ],
 
     // ── Common component base styles ──────────────────────────────
-    'sh-interactive': 'cursor-pointer transition-all duration-300 ease-in-out',
-    'sh-disabled': 'opacity-60 cursor-not-allowed',
-  },
+    {
+      'sh-interactive':
+        'cursor-pointer transition-all duration-300 ease-in-out',
+      'sh-disabled': 'opacity-60 cursor-not-allowed',
+    },
+  ],
 
   theme: {
     colors: {

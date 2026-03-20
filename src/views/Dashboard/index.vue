@@ -8,7 +8,6 @@ import {
   SHInput,
   SHSwitch,
   SHBadge,
-  SHSplitter,
   SHSplitterGroup,
   SHSplitterPanel,
   SHSplitterResizeHandle,
@@ -60,11 +59,11 @@ const formData = ref({
   role: 'admin',
   notifications: ['email'],
   themeMode: 'system',
-  scheduleDate: null,
-  scheduleTime: null,
-  startDateTime: null,
+  scheduleDate: null as Date | null,
+  scheduleTime: null as string | null,
+  startDateTime: null as Date | null,
   bio: '',
-  sliderVal: 30,
+  sliderVal: [30],
   mentionContent: 'Hello @user',
 })
 
@@ -469,7 +468,7 @@ const carouselImages = [
                       class="aspect-video w-full rounded-lg overflow-hidden shadow-lg bg-bg.secondary"
                     >
                       <SHCarouselItem
-                        v-for="(img, idx) in carouselImages"
+                        v-for="(_, idx) in carouselImages"
                         :key="idx"
                       >
                         <div

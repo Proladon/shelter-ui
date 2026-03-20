@@ -54,8 +54,8 @@ const tagClasses = computed(() => {
   @apply bg-primary.fade text-primary;
 }
 
-.sh-tag--secondary {
-  @apply bg-secondary.fade text-secondary;
+.sh-tag--primary {
+  @apply bg-primary.fade text-primary;
 }
 
 .sh-tag--success {
@@ -82,8 +82,8 @@ const tagClasses = computed(() => {
     @apply text-primary border-primary;
   }
 
-  &.sh-tag--secondary {
-    @apply text-secondary border-secondary;
+  &.sh-tag--primary {
+    @apply text-primary border-primary;
   }
 
   &.sh-tag--success {

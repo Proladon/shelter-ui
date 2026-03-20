@@ -1,35 +1,34 @@
-import color from 'color'
+﻿import color from 'color'
 
 // ── Recursive Token Type ────────────────────────────────────────────
 export type TokenValue = string
 export type TokenGroup = { [key: string]: TokenValue | TokenGroup }
 
 // ── Color Theme Types ───────────────────────────────────────────────
-export interface ColorTokens {
+export interface ColorTokens extends Record<string, any> {
   primary: string
-  secondary: string
   bg: {
     primary: string
     secondary: string
-  }
+  } & Record<string, string>
   text: {
     base: string
-    primary: string
-  }
+    primary?: string
+  } & Record<string, string>
   border: {
     base: string
-    primary: string
-  }
+    primary?: string
+  } & Record<string, string>
   status: {
     info: string
     danger: string
     warning: string
     success: string
-  }
+  } & Record<string, string>
 }
 
 // ── Design Token Types ──────────────────────────────────────────────
-export interface SpacingTokens {
+export interface SpacingTokens extends Record<string, string> {
   xs: string
   sm: string
   md: string
@@ -38,7 +37,7 @@ export interface SpacingTokens {
   '2xl': string
 }
 
-export interface RadiusTokens {
+export interface RadiusTokens extends Record<string, string> {
   none: string
   sm: string
   md: string
@@ -47,7 +46,7 @@ export interface RadiusTokens {
   full: string
 }
 
-export interface TypographyTokens {
+export interface TypographyTokens extends Record<string, string> {
   xs: string
   sm: string
   md: string
@@ -56,7 +55,7 @@ export interface TypographyTokens {
   '2xl': string
 }
 
-export interface SizeTokens {
+export interface SizeTokens extends Record<string, string> {
   xs: string
   sm: string
   md: string

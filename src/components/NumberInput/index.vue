@@ -65,12 +65,12 @@ const rootProps = useForwardPropsEmits(delegatedProps, emits)
   @apply transition-colors duration-200;
 
   &:not(.is-disabled):hover {
-    @apply border-border.primary;
+    @apply border-primary;
   }
 
   &:focus-within {
-    @apply border-border.primary;
-    box-shadow: 0 0 0 2px rgba(var(--sh-primary-fade), 0.2);
+    @apply border-primary outline-none;
+    box-shadow: 0 0 0 2px var(--sh-primary-fade);
   }
 }
 
@@ -140,8 +140,8 @@ const rootProps = useForwardPropsEmits(delegatedProps, emits)
   @apply border-status.danger;
 
   &:focus-within {
-    @apply border-status.danger;
-    box-shadow: 0 0 0 2px rgba(var(--sh-status-danger-fade), 0.2);
+    @apply border-status.danger outline-none;
+    box-shadow: 0 0 0 2px var(--sh-status-danger-fade);
   }
 }
 </style>

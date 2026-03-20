@@ -107,16 +107,16 @@ onMounted(() => {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="postcss" scoped>
 .sh-active-button-group {
   @apply relative flex rounded-md overflow-hidden bg-bg.primary text-text.base p-1;
   @apply border border-solid border-border.base;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
 
-  // Indicator style - always primary
-  .sh-active-button-indicator {
-    @apply bg-primary.fade;
-  }
+/* Indicator style - always primary */
+.sh-active-button-group .sh-active-button-indicator {
+  @apply bg-primary.fade;
 }
 
 .sh-active-button-indicator {
