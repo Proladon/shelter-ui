@@ -7,9 +7,24 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 interface FlexContainerProps {
-  align?: 'start' | 'center' | 'end' | 'between' | 'around' | 'evenly'
-  justify?: 'start' | 'center' | 'end' | 'between' | 'around' | 'evenly'
-  gap?: number
+  align?:
+    | 'start'
+    | 'center'
+    | 'end'
+    | 'between'
+    | 'around'
+    | 'evenly'
+    | 'flex-end'
+  justify?:
+    | 'start'
+    | 'center'
+    | 'end'
+    | 'between'
+    | 'around'
+    | 'evenly'
+    | 'space-between'
+    | 'flex-end'
+  gap?: number | string
   col?: boolean
   wrap?: boolean
 }
@@ -23,6 +38,7 @@ const alignMap: Record<string, string> = {
   start: 'flex-start',
   center: 'center',
   end: 'flex-end',
+  'flex-end': 'flex-end',
   between: 'space-between',
   around: 'space-around',
   evenly: 'space-evenly',
@@ -32,7 +48,9 @@ const justifyMap: Record<string, string> = {
   start: 'flex-start',
   center: 'center',
   end: 'flex-end',
+  'flex-end': 'flex-end',
   between: 'space-between',
+  'space-between': 'space-between',
   around: 'space-around',
   evenly: 'space-evenly',
 }
@@ -53,7 +71,7 @@ const computedStyle = computed(() => {
     style.justifyContent = justifyMap[props.justify] || 'flex-start'
   }
   if (props.gap) {
-    style.gap = `${props.gap}px`
+    style.gap = typeof props.gap === 'number' ? `${props.gap}px` : props.gap
   }
   if (props.wrap) {
     style.flexWrap = 'wrap'

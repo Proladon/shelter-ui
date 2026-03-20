@@ -1,4 +1,4 @@
-import type { StyleValue } from "vue"
+import type { StyleValue } from 'vue'
 
 export interface CarouselProps {
   /**
@@ -40,7 +40,7 @@ export interface CarouselProps {
   /**
    * 動畫效果類型
    */
-  effect?: "slide" | "fade"
+  effect?: 'slide' | 'fade'
   /**
    * 輪播容器高度
    */
@@ -91,7 +91,7 @@ export interface CarouselItem {
   /**
    * 是否在新視窗打開
    */
-  target?: "_blank" | "_self"
+  target?: '_blank' | '_self'
   /**
    * 自定義數據
    */
@@ -114,18 +114,18 @@ export interface CarouselSlots {
   /**
    * 前一個按鈕插槽
    */
-  "prev-button": () => any
+  'prev-button': () => any
   /**
    * 下一個按鈕插槽
    */
-  "next-button": () => any
+  'next-button': () => any
 }
 
 export interface CarouselEmits {
   /**
    * 更新模型值
    */
-  "update:modelValue": [value: number]
+  'update:modelValue': [value: number]
   /**
    * 項目變更事件
    */
@@ -133,26 +133,26 @@ export interface CarouselEmits {
   /**
    * 項目點擊事件
    */
-  "item-click": [item: CarouselItem, index: number]
+  'item-click': [item: CarouselItem, index: number]
   /**
    * 自動播放開始事件
    */
-  "autoplay-start": []
+  'autoplay-start': []
   /**
    * 自動播放停止事件
    */
-  "autoplay-stop": []
+  'autoplay-stop': []
 }
 
 export interface CarouselNavigationProps {
   /**
    * 當前索引
    */
-  currentIndex: number
+  currentIndex?: number
   /**
    * 總項目數
    */
-  totalItems: number
+  totalItems?: number
   /**
    * 是否循環
    */
@@ -178,11 +178,11 @@ export interface CarouselIndicatorsProps {
   /**
    * 當前索引
    */
-  currentIndex: number
+  currentIndex?: number
   /**
    * 總項目數
    */
-  totalItems: number
+  totalItems?: number
   /**
    * 是否禁用
    */
@@ -190,12 +190,12 @@ export interface CarouselIndicatorsProps {
   /**
    * 指示器位置
    */
-  position?: "bottom" | "top" | "left" | "right"
+  position?: 'bottom' | 'top' | 'left' | 'right'
 }
 
 export interface CarouselIndicatorsEmits {
   /**
    * 指示器點擊
    */
-  "indicator-click": [index: number]
+  'indicator-click': [index: number]
 }

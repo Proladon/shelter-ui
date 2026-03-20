@@ -3,12 +3,11 @@ import { ref, computed } from 'vue'
 import {
   SHConfigProvider,
   SHFlexContainer,
-  SHBorderContainer,
+  SHBaseContainer,
   SHButton,
   SHInput,
   SHSwitch,
   SHBadge,
-  SHSplitter,
   SHSplitterGroup,
   SHSplitterPanel,
   SHSplitterResizeHandle,
@@ -60,11 +59,11 @@ const formData = ref({
   role: 'admin',
   notifications: ['email'],
   themeMode: 'system',
-  scheduleDate: null,
-  scheduleTime: null,
-  startDateTime: null,
+  scheduleDate: null as Date | null,
+  scheduleTime: null as string | null,
+  startDateTime: null as Date | null,
   bio: '',
-  sliderVal: 30,
+  sliderVal: [30],
   mentionContent: 'Hello @user',
 })
 
@@ -105,7 +104,7 @@ const carouselImages = [
   <SHConfigProvider :theme="theme">
     <div class="text-text.base">
       <!-- Top Bar -->
-      <SHBorderContainer :hover="false">
+      <SHBaseContainer :hover="false">
         <SHFlexContainer justify="space-between" align="center">
           <SHFlexContainer gap="16px" align="center">
             <div class="text-xl font-bold text-primary">Shelter UI</div>
@@ -151,7 +150,7 @@ const carouselImages = [
             </SHTooltip>
           </SHFlexContainer>
         </SHFlexContainer>
-      </SHBorderContainer>
+      </SHBaseContainer>
 
       <!-- Main Layout -->
       <div class="flex-1 overflow-hidden flex">
@@ -246,7 +245,7 @@ const carouselImages = [
                   </div>
 
                   <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <SHBorderContainer class="p-5" hover>
+                    <SHBaseContainer class="p-5" hover>
                       <div class="text-text.base.fade text-sm font-medium">
                         Total Revenue
                       </div>
@@ -259,8 +258,8 @@ const carouselImages = [
                           >vs last month</span
                         >
                       </div>
-                    </SHBorderContainer>
-                    <SHBorderContainer class="p-5" hover>
+                    </SHBaseContainer>
+                    <SHBaseContainer class="p-5" hover>
                       <div class="text-text.base.fade text-sm font-medium">
                         Active Users
                       </div>
@@ -273,8 +272,8 @@ const carouselImages = [
                           >new this week</span
                         >
                       </div>
-                    </SHBorderContainer>
-                    <SHBorderContainer class="p-5" hover>
+                    </SHBaseContainer>
+                    <SHBaseContainer class="p-5" hover>
                       <div class="text-text.base.fade text-sm font-medium">
                         Avg. Response Time
                       </div>
@@ -287,7 +286,7 @@ const carouselImages = [
                           >improvement</span
                         >
                       </div>
-                    </SHBorderContainer>
+                    </SHBaseContainer>
                   </div>
 
                   <SHFlexContainer class="mt-8" gap="24px">
@@ -322,7 +321,7 @@ const carouselImages = [
                     </div>
                     <div class="w-full md:w-1/3 space-y-4">
                       <h3 class="text-lg font-bold">Server Load</h3>
-                      <SHBorderContainer
+                      <SHBaseContainer
                         class="p-6 text-center h-full flex flex-col items-center justify-center"
                       >
                         <SHSpin :spinning="isLoading">
@@ -346,7 +345,7 @@ const carouselImages = [
                           variant="outline"
                           >{{ isLoading ? 'Stop' : 'Refresh Data' }}</SHButton
                         >
-                      </SHBorderContainer>
+                      </SHBaseContainer>
                     </div>
                   </SHFlexContainer>
                 </div>
@@ -469,7 +468,7 @@ const carouselImages = [
                       class="aspect-video w-full rounded-lg overflow-hidden shadow-lg bg-bg.secondary"
                     >
                       <SHCarouselItem
-                        v-for="(img, idx) in carouselImages"
+                        v-for="(_, idx) in carouselImages"
                         :key="idx"
                       >
                         <div

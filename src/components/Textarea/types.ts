@@ -2,7 +2,8 @@ export interface TextareaProps {
   /**
    * Textarea 的值
    */
-  value: string
+  value?: string
+  modelValue?: string
   /**
    * 占位符文字
    */

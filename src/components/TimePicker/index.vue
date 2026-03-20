@@ -245,7 +245,7 @@
 
         <div class="sh-time-picker__actions">
           <button
-            class="sh-time-picker__button sh-time-picker__button--secondary"
+            class="sh-time-picker__button sh-time-picker__button--primary"
             @click="handleClear"
           >
             清除
@@ -729,55 +729,49 @@ const clear = handleClear
 defineExpose({ focus, blur, clear })
 </script>
 
-<style lang="scss" scoped>
+<style lang="postcss" scoped>
 .sh-time-picker {
   @apply inline-block relative border-1 border-solid border-border.base p-0 rounded-md;
-
-  &--disabled {
-    @apply opacity-60 cursor-not-allowed;
-
-    .sh-time-picker__trigger {
-      @apply cursor-not-allowed;
-    }
-
-    .sh-time-picker__input {
-      @apply cursor-not-allowed;
-    }
-  }
+}
+.sh-time-picker--disabled {
+  @apply opacity-60 cursor-not-allowed;
+}
+.sh-time-picker--disabled .sh-time-picker__trigger {
+  @apply cursor-not-allowed;
+}
+.sh-time-picker--disabled .sh-time-picker__input {
+  @apply cursor-not-allowed;
 }
 
 .sh-time-picker__trigger {
   @apply flex items-center w-full px-3 py-2 h-[36px];
   @apply bg-bg.primary border border-border.base rounded-md text-sm;
   @apply transition-colors duration-200 cursor-pointer;
-
-  &:hover:not(&--readonly) {
-    @apply border-primary;
-  }
-
-  &--active {
-    @apply border-primary ring-2 ring-primary-fade;
-  }
-
-  &--readonly {
-    @apply bg-bg-secondary cursor-default;
-  }
+}
+.sh-time-picker__trigger:hover:not(.sh-time-picker__trigger--readonly) {
+  @apply border-primary;
+}
+.sh-time-picker__trigger--active {
+  @apply border-primary outline-none;
+  box-shadow: 0 0 0 2px var(--sh-primary-fade);
+}
+.sh-time-picker__trigger--readonly {
+  @apply bg-bg.secondary cursor-default;
 }
 
 .sh-time-picker__input {
   @apply flex-1 w-full bg-transparent border-none outline-none text-text.base p-0 m-0 cursor-pointer;
-
-  &::placeholder {
-    @apply text-text-placeholder;
-  }
+}
+.sh-time-picker__input::placeholder {
+  @apply text-text-placeholder;
 }
 
 .sh-time-picker__icon {
-  @apply ml-2 text-text-secondary flex items-center justify-center w-4 h-4;
+  @apply ml-2 text-text-primary flex items-center justify-center w-4 h-4;
 }
 
 .sh-time-picker__clear-icon {
-  @apply text-text.base cursor-pointer hover:(text-secondary);
+  @apply text-text.base cursor-pointer hover:(text-primary);
 }
 
 .sh-time-picker__content {
@@ -786,15 +780,14 @@ defineExpose({ focus, blur, clear })
 }
 
 .sh-time-picker__timezone-info {
-  @apply text-xs text-text-secondary text-center;
+  @apply text-xs text-text-primary text-center;
 }
 
 .sh-time-picker__panels {
   @apply flex gap-4;
-
-  &--range {
-    /* Special styling for range if needed */
-  }
+}
+.sh-time-picker__panels--range {
+  /* Special styling for range if needed */
 }
 
 .sh-time-picker__panel {
@@ -802,21 +795,21 @@ defineExpose({ focus, blur, clear })
 }
 
 .sh-time-picker__panel-title {
-  @apply text-xs font-semibold text-text-secondary text-center;
+  @apply text-xs font-semibold text-text-primary text-center;
 }
 
 .sh-time-picker__columns {
   @apply flex gap-0 border-t border-b border-border.base relative w-full;
   height: calc(32px * 7); /* 7 items visible */
+}
 
-  /* Selection Highlight - Centered Absolute Div */
-  &::after {
-    content: '';
-    @apply absolute left-0 right-0 h-8 pointer-events-none;
-    top: calc(50% - 16px); /* Center */
-    @apply bg-bg-secondary opacity-30;
-    z-index: 0;
-  }
+/* Selection Highlight - Centered Absolute Div */
+.sh-time-picker__columns::after {
+  content: '';
+  @apply absolute left-0 right-0 h-8 pointer-events-none;
+  top: calc(50% - 16px); /* Center */
+  @apply bg-bg-secondary opacity-30;
+  z-index: 0;
 }
 
 .sh-time-picker__column {
@@ -827,10 +820,9 @@ defineExpose({ focus, blur, clear })
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
   z-index: 1;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
+}
+.sh-time-picker__column::-webkit-scrollbar {
+  display: none;
 }
 
 .sh-time-picker__spacer {
@@ -844,14 +836,12 @@ defineExpose({ focus, blur, clear })
   height: 32px; /* Fixed height for calc */
   flex-shrink: 0;
   scroll-snap-align: center;
-
-  &:hover {
-    @apply bg-primary.fade text-secondary;
-  }
-
-  &--active {
-    @apply font-bold text-primary;
-  }
+}
+.sh-time-picker__item:hover {
+  @apply bg-primary.fade text-primary;
+}
+.sh-time-picker__item--active {
+  @apply font-bold text-primary;
 }
 
 .sh-time-picker__actions {
@@ -860,13 +850,11 @@ defineExpose({ focus, blur, clear })
 
 .sh-time-picker__button {
   @apply px-3 py-1 rounded text-sm transition-colors duration-200;
-
-  &--secondary {
-    @apply text-text-base bg-bg-secondary hover:bg-bg-tertiary;
-  }
-
-  &--primary {
-    @apply text-white bg-primary hover:bg-primary-dark;
-  }
+}
+.sh-time-picker__button--primary {
+  @apply text-text.base bg-bg.secondary hover:bg-bg.secondary.lighten;
+}
+.sh-time-picker__button--primary {
+  @apply text-white bg-primary hover:bg-primary.darken;
 }
 </style>

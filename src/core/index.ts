@@ -1,88 +1,86 @@
-import type { ThemeVarsConfig } from '@/components/ConfigProvider/types'
-import color from 'color'
-import defaultTheme from '../themes/default'
+import type { DesignTokens, ColorTokens } from './theme-utils'
+import {
+  flattenTokens,
+  deriveColorVariants,
+  buildUnoColorMap,
+  generateCssVarBlock,
+} from './theme-utils'
+import defaultTokens from '../themes/default'
 
-function convertToUnoColorsConfig(
-  obj: any,
-  {
-    colorPrefix = '',
-    cssVarPrefix = '',
-  }: {
-    colorPrefix?: string
-    cssVarPrefix?: string
-  },
-): any {
-  const innerFn = (obj: any, lastObjKey: string) => {
-    const result: any = {}
+// ── Re-export theme utilities & types ───────────────────────────────
+export {
+  flattenTokens,
+  deriveColorVariants,
+  buildUnoColorMap,
+  generateCssVarBlock,
+}
+export type {
+  DesignTokens,
+  ColorTokens,
+  SpacingTokens,
+  RadiusTokens,
+  TypographyTokens,
+  SizeTokens,
+  TokenGroup,
+  TokenValue,
+} from './theme-utils'
 
-    for (const key in obj) {
-      const objKey = lastObjKey ? `${lastObjKey}-${key}` : key
-      if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
-        Object.assign(result, innerFn(obj[key], key))
-      } else if (typeof obj[key] === 'string') {
-        const colorKey = colorPrefix
-          ? `${colorPrefix}-${objKey.replace(/-/g, '.')}`
-          : objKey.replace(/-/g, '.')
-        // result[colorKey] = `rgb(var(--${
-        //   cssVarPrefix ? `${cssVarPrefix}-` : ''
-        // }${objKey.replace(/([A-Z])/g, '-$1').toLowerCase()}), <alpha-value>)`
-        result[colorKey] = `var(--${
-          cssVarPrefix ? `${cssVarPrefix}-` : ''
-        }${objKey.replace(/([A-Z])/g, '-$1').toLowerCase()})`
-      }
-    }
+// ── Build-time UnoCSS helpers ───────────────────────────────────────
 
-    return result
-  }
-
-  return innerFn(obj, '')
+/** Generate the UnoCSS `theme.colors` map from color tokens. */
+export const generateUnoThemeColors = (colorTokens?: ColorTokens) => {
+  const colors = colorTokens ?? defaultTokens.colors
+  const flat = flattenTokens(colors)
+  const withVariants = deriveColorVariants(flat)
+  return buildUnoColorMap(withVariants, 'sh')
 }
 
-// 將 themeVars 物件展平成 key-value 的形式
-const flattenThemeVars = (
-  themeVars: any,
-  prefix = '',
-): Record<string, string> => {
-  return Object.keys(themeVars).reduce((acc, key) => {
-    const value = themeVars[key]
-    const newKey = prefix ? `${prefix}-${key}` : key
-
-    if (typeof value === 'object' && !Array.isArray(value)) {
-      return { ...acc, ...flattenThemeVars(value, newKey) }
-    }
-
-    return { ...acc, [newKey]: value }
-  }, {})
-}
-
-const addDarkenAndLighten = (
-  themeVars: Record<string, string>,
-): Record<string, string> => {
-  const needAdd: Record<string, string> = {}
-
-  for (const key in themeVars) {
-    // darken
-    needAdd[`${key}-darken`] = color(themeVars[key]).darken(0.3).hex()
-    // lighten
-    needAdd[`${key}-lighten`] = color(themeVars[key]).lighten(0.3).hex()
-    //  fade
-    needAdd[`${key}-fade`] = color(themeVars[key]).fade(0.3).hex()
-  }
+/** Generate all non-color token maps for UnoCSS theme extension. */
+export const generateUnoThemeTokens = (tokens?: DesignTokens) => {
+  const t = tokens ?? defaultTokens
   return {
-    ...themeVars,
-    ...needAdd,
+    spacing: prefixKeys(t.spacing, 'sh'),
+    borderRadius: prefixKeys(t.radius, 'sh'),
+    fontSize: prefixKeys(t.fontSize, 'sh'),
+    // Custom component sizes exposed as --sh-component-size-*
+    componentSize: prefixKeys(t.componentSize, 'sh'),
   }
 }
 
-export const generateUnoThemeColors = (themeVarsConfig?: ThemeVarsConfig) => {
-  const themes = themeVarsConfig || defaultTheme
-  return convertToUnoColorsConfig(
-    addDarkenAndLighten(flattenThemeVars(themes)),
-    {
-      colorPrefix: '',
-      cssVarPrefix: 'sh',
-    },
-  )
+/** Generate the static baseline CSS variable block (for SSR / style.css). */
+export const generateBaselineCss = (tokens?: DesignTokens): string => {
+  const t = tokens ?? defaultTokens
+  const colorVars = deriveColorVariants(flattenTokens(t.colors))
+  const spacingVars = flattenTokens(t.spacing)
+  const radiusVars = flattenTokens(t.radius)
+  const fontSizeVars = flattenTokens(t.fontSize)
+  const sizeVars = flattenTokens(t.componentSize)
+
+  const all: Record<string, string> = {}
+
+  // Colors → --sh-{key}
+  for (const [k, v] of Object.entries(colorVars)) all[k] = v
+  // Spacing → --sh-spacing-{key}
+  for (const [k, v] of Object.entries(spacingVars)) all[`spacing-${k}`] = v
+  // Radius → --sh-radius-{key}
+  for (const [k, v] of Object.entries(radiusVars)) all[`radius-${k}`] = v
+  // FontSize → --sh-font-size-{key}
+  for (const [k, v] of Object.entries(fontSizeVars)) all[`font-size-${k}`] = v
+  // Component Size → --sh-component-size-{key}
+  for (const [k, v] of Object.entries(sizeVars)) all[`component-size-${k}`] = v
+
+  return generateCssVarBlock(all, 'sh')
 }
 
-export const unoColorsConfig = generateUnoThemeColors()
+// ── Internal Helpers ────────────────────────────────────────────────
+
+function prefixKeys(
+  obj: Record<string, string>,
+  prefix: string,
+): Record<string, string> {
+  const result: Record<string, string> = {}
+  for (const [k, v] of Object.entries(obj)) {
+    result[`${prefix}-${k}`] = v
+  }
+  return result
+}

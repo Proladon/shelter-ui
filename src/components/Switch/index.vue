@@ -15,7 +15,10 @@ import { SwitchRoot, SwitchThumb } from 'reka-ui'
   @apply data-[state=unchecked]:(bg-bg.secondary) data-[state=checked]:(bg-primary);
   @apply dark:data-[state=unchecked]:(bg-bg.primary.lighten) dark:data-[state=checked]:(bg-primary);
   @apply border-bg.secondary data-[state=checked]:(border-border.base) dark:(border-border.base);
-  @apply focus-within:outline-none focus-within:shadow-[0_0_0_1px] focus-within:border-border.base focus-within:shadow-stone-800;
+  @apply focus-within:outline-none;
+  &:focus-within {
+    box-shadow: 0 0 0 2px var(--sh-primary-fade);
+  }
 }
 
 .shelter-switch-thumb {

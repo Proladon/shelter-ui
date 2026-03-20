@@ -71,7 +71,7 @@ const onKeyDown = (event: KeyboardEvent) => {
 <style lang="postcss" scoped>
 .sh-chip {
   @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200;
-  @apply bg-bg.primary text-text.primary;
+  @apply bg-bg.primary text-text.base;
   @apply border-none shadow-sm;
 }
 

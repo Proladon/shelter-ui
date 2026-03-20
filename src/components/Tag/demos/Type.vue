@@ -3,7 +3,6 @@
     <h3>類型變化</h3>
     <div class="demo-section">
       <SHTag value="Primary" type="primary" />
-      <SHTag value="Secondary" type="secondary" />
       <SHTag value="Success" type="success" />
       <SHTag value="Info" type="info" />
       <SHTag value="Warning" type="warning" />
@@ -13,7 +12,6 @@
     <h3>圓角標籤</h3>
     <div class="demo-section">
       <SHTag value="Primary" type="primary" rounded />
-      <SHTag value="Secondary" type="secondary" rounded />
       <SHTag value="Success" type="success" rounded />
       <SHTag value="Info" type="info" rounded />
       <SHTag value="Warning" type="warning" rounded />
@@ -23,7 +21,6 @@
     <h3>邊框標籤</h3>
     <div class="demo-section">
       <SHTag value="Primary" type="primary" bordered />
-      <SHTag value="Secondary" type="secondary" bordered />
       <SHTag value="Success" type="success" bordered />
       <SHTag value="Info" type="info" bordered />
       <SHTag value="Warning" type="warning" bordered />
@@ -33,7 +30,6 @@
     <h3>圓角邊框標籤</h3>
     <div class="demo-section">
       <SHTag value="Primary" type="primary" rounded bordered />
-      <SHTag value="Secondary" type="secondary" rounded bordered />
       <SHTag value="Success" type="success" rounded bordered />
       <SHTag value="Info" type="info" rounded bordered />
       <SHTag value="Warning" type="warning" rounded bordered />

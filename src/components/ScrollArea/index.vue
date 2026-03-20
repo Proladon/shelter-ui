@@ -122,15 +122,13 @@ defineExpose<ScrollAreaMethods>({
     @apply bg-transparent;
 
     &[data-orientation='vertical'] {
-      @apply top-0 right-0 h-full w-[8px];
-      /* @apply border-l border-l-transparent; */
+      @apply top-0 right-0 h-full w-2;
       @apply border-none;
       @apply pl-px;
     }
 
     &[data-orientation='horizontal'] {
-      @apply bottom-0 left-0 w-full h-[8px];
-      /* @apply border-t border-t-transparent; */
+      @apply bottom-0 left-0 w-full h-2;
       @apply border-none;
       @apply pt-px;
     }
@@ -150,10 +148,10 @@ defineExpose<ScrollAreaMethods>({
 
   & .sh-scroll-thumb {
     /* @apply relative block rounded-full bg-gray-400/50; */
-    @apply relative block rounded-full bg-secondary;
+    @apply relative block rounded-full bg-primary;
     @apply transition-colors duration-150;
     /* @apply hover:bg-gray-400/70 active:bg-gray-400/90; */
-    @apply hover:bg-secondary active:bg-secondary;
+    @apply hover:bg-primary active:bg-primary;
 
     &[data-state='hidden'] {
       @apply opacity-0;
@@ -194,17 +192,10 @@ defineExpose<ScrollAreaMethods>({
 
 /* 主題變數 - 可透過 CSS 變數客製化 */
 .sh-scroll-area {
-  --scroll-thumb-color: #9ca3af;
-  --scroll-thumb-hover-color: #6b7280;
-  --scroll-thumb-active-color: #4b5563;
-  --scroll-track-color: #f3f4f6;
-
-  .dark & {
-    --scroll-thumb-color: #4b5563;
-    --scroll-thumb-hover-color: #6b7280;
-    --scroll-thumb-active-color: #9ca3af;
-    --scroll-track-color: #1f2937;
-  }
+  --scroll-thumb-color: var(--sh-primary);
+  --scroll-thumb-hover-color: var(--sh-primary-darken);
+  --scroll-thumb-active-color: var(--sh-text-base);
+  --scroll-track-color: var(--sh-bg-primary);
 
   & .sh-scroll-thumb {
     background-color: var(--scroll-thumb-color);

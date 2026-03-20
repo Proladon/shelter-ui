@@ -19,9 +19,9 @@ import type { SplitterResizeHandleCustomProps } from './types'
 const props = withDefaults(defineProps<SplitterResizeHandleCustomProps>(), {
   showHandle: true,
   visable: false,
-  color: 'var(--sh-secondary)',
-  hoverColor: 'var(--sh-secondary)',
-  dragColor: 'var(--sh-secondary)',
+  color: 'var(--sh-primary)',
+  hoverColor: 'var(--sh-primary)',
+  dragColor: 'var(--sh-primary)',
 })
 
 const emits = defineEmits<{

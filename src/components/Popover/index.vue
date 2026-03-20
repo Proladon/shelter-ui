@@ -67,30 +67,31 @@ const handleOpenChange = (value: boolean) => {
   </PopoverRoot>
 </template>
 
-<style lang="scss" scoped>
+<style lang="postcss" scoped>
 :deep(.sh-popover-content) {
   @apply rounded-md py-5 px-5 bg-bg.primary text-text.base shadow-lg;
   @apply z-50 outline-none;
   animation-duration: 400ms;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
-
-  &[data-state='open'][data-side='top'] {
-    animation-name: slideDownAndFade;
-  }
-
-  &[data-state='open'][data-side='right'] {
-    animation-name: slideLeftAndFade;
-  }
-
-  &[data-state='open'][data-side='bottom'] {
-    animation-name: slideUpAndFade;
-  }
-
-  &[data-state='open'][data-side='left'] {
-    animation-name: slideRightAndFade;
-  }
 }
+
+:deep(.sh-popover-content[data-state='open'][data-side='top']) {
+  animation-name: slideDownAndFade;
+}
+
+:deep(.sh-popover-content[data-state='open'][data-side='right']) {
+  animation-name: slideLeftAndFade;
+}
+
+:deep(.sh-popover-content[data-state='open'][data-side='bottom']) {
+  animation-name: slideUpAndFade;
+}
+
+:deep(.sh-popover-content[data-state='open'][data-side='left']) {
+  animation-name: slideRightAndFade;
+}
+
 :deep(.sh-popover-trigger) {
   @apply inline-flex items-center justify-center h-[35px] w-[35px] rounded-full cursor-pointer;
 }

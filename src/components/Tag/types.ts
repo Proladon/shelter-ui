@@ -8,7 +8,7 @@ export interface TagProps {
   /**
    * 標籤類型
    */
-  type?: "primary" | "secondary" | "success" | "info" | "warning" | "danger"
+  type?: "primary" | "success" | "info" | "warning" | "danger"
   /**
    * 是否圓角
    */

@@ -1,7 +1,13 @@
 /* @import '@unocss/reset/normalize.css' */
 
+/* ── Baseline design tokens (auto-generated, SSR-safe) ──────────── */
+/* Source: src/themes/default.ts                                     */
+/* Regenerated automatically by Vite on `pnpm dev` / `pnpm build`.  */
+/* To update: edit src/themes/default.ts, then rebuild.             */
+@import './generated/baseline.css';
+
 html,
 body,
 #app {
-  @apply p-0 m-0 h-full w-full ;
+  @apply p-0 m-0 h-full w-full;
 }

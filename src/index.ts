@@ -4,11 +4,12 @@ import type { App, Plugin } from 'vue'
 import SHConfigProvider from './components/ConfigProvider/index.vue'
 import SHButton from './components/Button/index.vue'
 import SHInput from './components/Input/index.vue'
+import { SHInputGroup, SHInputGroupAddon } from './components/InputGroup'
 import SHNumberInput from './components/NumberInput/index.vue'
 import SHTextarea from './components/Textarea/index.vue'
 import SHSelect from './components/Select/index.vue'
 import SHSpin from './components/Spin/index.vue'
-import SHBorderContainer from './components/BorderContainer/index.vue'
+import SHBaseContainer from './components/BaseContainer/index.vue'
 import SHPopover from './components/Popover/index.vue'
 import SHEditableContainer from './components/EditableContainer/index.vue'
 import SHTooltip from './components/Tooltip/index.vue'
@@ -50,10 +51,7 @@ import {
 } from './components/Carousel'
 import { Pagination as SHPagination } from './components/Pagination'
 import { Divider as SHDivider } from './components/Divider'
-import SHDatePicker from './components/DatePicker/index.vue'
 import SHTimePicker from './components/TimePicker/index.vue'
-import SHDateTimePicker from './components/DateTimePicker/index.vue'
-import SHCalendar from './components/Calendar/index.vue'
 import SHMessageBox from './components/MessageBox'
 
 // 組件列表
@@ -62,10 +60,12 @@ const components = {
   SHButton,
   SHSpin,
   SHInput,
+  SHInputGroup,
+  SHInputGroupAddon,
   SHNumberInput,
   SHTextarea,
   SHSelect,
-  SHBorderContainer,
+  SHBaseContainer,
   SHPopover,
   SHEditableContainer,
   SHTooltip,
@@ -101,10 +101,6 @@ const components = {
   SHCarouselIndicators,
   SHPagination,
   SHDivider,
-  SHDatePicker,
-  SHTimePicker,
-  SHDateTimePicker,
-  SHCalendar,
 }
 
 /**
@@ -121,6 +117,10 @@ export type { ThemeVarsConfig } from './components/ConfigProvider/types'
 export type { ButtonProps, ButtonEmits } from './components/Button/types'
 export type { InputProps, InputEmits } from './components/Input/types'
 export type {
+  InputGroupProps,
+  InputGroupAddonProps,
+} from './components/InputGroup/types'
+export type {
   NumberInputProps,
   NumberInputEmits,
   NumberInputSlots,
@@ -133,9 +133,9 @@ export type {
 } from './components/Select/types'
 export type { SpinProps, SpinEmits } from './components/Spin/types'
 export type {
-  BorderContainerProps,
-  BorderContainerEmits,
-} from './components/BorderContainer/types'
+  BaseContainerProps,
+  BaseContainerEmits,
+} from './components/BaseContainer/types'
 export type { PopoverProps, PopoverEmits } from './components/Popover/types'
 export type {
   EditableContainerProps,
@@ -258,12 +258,14 @@ export { version }
 export {
   SHButton,
   SHInput,
+  SHInputGroup,
+  SHInputGroupAddon,
   SHNumberInput,
   SHTextarea,
   SHSelect,
   SHSpin,
   SHConfigProvider,
-  SHBorderContainer,
+  SHBaseContainer,
   SHPopover,
   SHEditableContainer,
   SHTooltip,

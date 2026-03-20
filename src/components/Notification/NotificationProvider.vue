@@ -153,7 +153,7 @@ const listStyle = computed(() => ({
 }))
 </script>
 
-<style lang="scss" scoped>
+<style lang="postcss" scoped>
 .sh-notification-container {
   @apply max-w-screen-sm;
 }

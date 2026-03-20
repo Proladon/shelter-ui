@@ -7,19 +7,19 @@
       <div class="demo-wrapper">
         <Splitter direction="horizontal" class="h-64">
           <SplitterPanel :default-size="30">
-            <SHBorderContainer class="bg-bg.primary" height="100%">
+            <SHBaseContainer class="bg-bg.primary" height="100%">
               <h5>左側面板</h5>
               <p>這是左側的內容區域</p>
-            </SHBorderContainer>
+            </SHBaseContainer>
           </SplitterPanel>
 
           <SplitterResizeHandle />
 
           <SplitterPanel :default-size="70">
-            <SHBorderContainer class="bg-bg.primary" height="100%">
+            <SHBaseContainer class="bg-bg.primary" height="100%">
               <h5>右側面板</h5>
               <p>這是右側的內容區域，可以通過拖拽中間的分割線來調整大小。</p>
-            </SHBorderContainer>
+            </SHBaseContainer>
           </SplitterPanel>
         </Splitter>
       </div>

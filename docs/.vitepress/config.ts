@@ -25,6 +25,7 @@ export default defineConfig({
             { text: '介紹', link: '/guide/' },
             { text: 'Dashboard 範例', link: '/guide/dashboard' },
             { text: '快速開始', link: '/guide/getting-started' },
+            { text: 'Design System 設計規範', link: '/guide/design-system' },
           ],
         },
       ],
@@ -34,6 +35,7 @@ export default defineConfig({
           items: [
             { text: 'Button 按鈕', link: '/components/button' },
             { text: 'Input 輸入框', link: '/components/input' },
+            { text: 'InputGroup 輸入框組合', link: '/components/input-group' },
             {
               text: 'NumberInput 數字輸入框',
               link: '/components/number-input',
@@ -54,8 +56,8 @@ export default defineConfig({
               link: '/components/flex-container',
             },
             {
-              text: 'BorderContainer 邊框容器',
-              link: '/components/border-container',
+              text: 'BaseContainer 基礎容器',
+              link: '/components/base-container',
             },
             {
               text: 'ConfigProvider 配置提供者',
@@ -96,11 +98,6 @@ export default defineConfig({
         {
           text: '日期組件',
           items: [
-            { text: 'DatePicker 日期選擇器', link: '/components/date-picker' },
-            {
-              text: 'DateTimePicker 日期時間選擇器',
-              link: '/components/date-time-picker',
-            },
             { text: 'TimePicker 時間選擇器', link: '/components/time-picker' },
           ],
         },

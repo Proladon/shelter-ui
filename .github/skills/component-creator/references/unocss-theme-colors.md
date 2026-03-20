@@ -1,11 +1,16 @@
-# UnoCSS Theme Colors
+# UnoCSS Theme Tokens
 
-This file defines the allowed UnoCSS theme colors for new components in this repository.
+This file defines ALL allowed design tokens for new components in this repository.
+**Do not use hardcoded values. Always reference tokens.**
+
+## Color Tokens (UnoCSS utility classes)
+
+These map to CSS variables and can be used in class attributes like `class="bg-bg.primary"`:
 
 ```ts
 {
+  // Base colors
   primary: 'var(--sh-primary)',
-  secondary: 'var(--sh-secondary)',
   'bg.primary': 'var(--sh-bg-primary)',
   'bg.secondary': 'var(--sh-bg-secondary)',
   'text.base': 'var(--sh-text-base)',
@@ -16,56 +21,109 @@ This file defines the allowed UnoCSS theme colors for new components in this rep
   'status.danger': 'var(--sh-status-danger)',
   'status.warning': 'var(--sh-status-warning)',
   'status.success': 'var(--sh-status-success)',
-  'primary.darken': 'var(--sh-primary-darken)',
-  'primary.lighten': 'var(--sh-primary-lighten)',
-  'primary.fade': 'var(--sh-primary-fade)',
-  'secondary.darken': 'var(--sh-secondary-darken)',
-  'secondary.lighten': 'var(--sh-secondary-lighten)',
-  'secondary.fade': 'var(--sh-secondary-fade)',
-  'bg.primary.darken': 'var(--sh-bg-primary-darken)',
-  'bg.primary.lighten': 'var(--sh-bg-primary-lighten)',
-  'bg.primary.fade': 'var(--sh-bg-primary-fade)',
-  'bg.secondary.darken': 'var(--sh-bg-secondary-darken)',
-  'bg.secondary.lighten': 'var(--sh-bg-secondary-lighten)',
-  'bg.secondary.fade': 'var(--sh-bg-secondary-fade)',
-  'text.base.darken': 'var(--sh-text-base-darken)',
-  'text.base.lighten': 'var(--sh-text-base-lighten)',
-  'text.base.fade': 'var(--sh-text-base-fade)',
-  'text.primary.darken': 'var(--sh-text-primary-darken)',
-  'text.primary.lighten': 'var(--sh-text-primary-lighten)',
-  'text.primary.fade': 'var(--sh-text-primary-fade)',
-  'border.base.darken': 'var(--sh-border-base-darken)',
-  'border.base.lighten': 'var(--sh-border-base-lighten)',
-  'border.base.fade': 'var(--sh-border-base-fade)',
-  'border.primary.darken': 'var(--sh-border-primary-darken)',
-  'border.primary.lighten': 'var(--sh-border-primary-lighten)',
-  'border.primary.fade': 'var(--sh-border-primary-fade)',
-  'status.info.darken': 'var(--sh-status-info-darken)',
-  'status.info.lighten': 'var(--sh-status-info-lighten)',
-  'status.info.fade': 'var(--sh-status-info-fade)',
-  'status.danger.darken': 'var(--sh-status-danger-darken)',
-  'status.danger.lighten': 'var(--sh-status-danger-lighten)',
-  'status.danger.fade': 'var(--sh-status-danger-fade)',
-  'status.warning.darken': 'var(--sh-status-warning-darken)',
-  'status.warning.lighten': 'var(--sh-status-warning-lighten)',
-  'status.warning.fade': 'var(--sh-status-warning-fade)',
-  'status.success.darken': 'var(--sh-status-success-darken)',
-  'status.success.lighten': 'var(--sh-status-success-lighten)',
-  'status.success.fade': 'var(--sh-status-success-fade)'
+
+  // Each base color also has .darken, .lighten, .fade variants:
+  // e.g. 'primary.darken', 'primary.lighten', 'primary.fade'
+  //      'bg.primary.darken', 'status.danger.fade', etc.
 }
 ```
 
-## Usage
+## Spacing Tokens (CSS Variables)
 
-- In class attributes, use Uno utility tokens, for example: `class="bg-bg.primary"`.
-- In `<style>` blocks, use `@apply`, for example:
+Use in styles or as UnoCSS arbitrary values:
 
-```css
-.some-class {
-  @apply bg-bg.primary border-border.primary;
-}
-```
+| Token | CSS Variable            | Default |
+| ----- | ----------------------- | ------- |
+| xs    | `var(--sh-spacing-xs)`  | 4px     |
+| sm    | `var(--sh-spacing-sm)`  | 8px     |
+| md    | `var(--sh-spacing-md)`  | 12px    |
+| lg    | `var(--sh-spacing-lg)`  | 16px    |
+| xl    | `var(--sh-spacing-xl)`  | 24px    |
+| 2xl   | `var(--sh-spacing-2xl)` | 32px    |
 
-- In inline style or script logic, use CSS variables directly (for example `var(--sh-primary)`) instead of hard-coded colors.
+## Border Radius Tokens (CSS Variables)
 
-Do not introduce hard-coded `hex/rgb/hsl` colors for component UI styles.
+| Token | CSS Variable            | Default |
+| ----- | ----------------------- | ------- |
+| none  | `var(--sh-radius-none)` | 0px     |
+| sm    | `var(--sh-radius-sm)`   | 4px     |
+| md    | `var(--sh-radius-md)`   | 6px     |
+| lg    | `var(--sh-radius-lg)`   | 8px     |
+| xl    | `var(--sh-radius-xl)`   | 12px    |
+| full  | `var(--sh-radius-full)` | 9999px  |
+
+## Font Size Tokens (CSS Variables)
+
+| Token | CSS Variable              | Default |
+| ----- | ------------------------- | ------- |
+| xs    | `var(--sh-font-size-xs)`  | 12px    |
+| sm    | `var(--sh-font-size-sm)`  | 14px    |
+| md    | `var(--sh-font-size-md)`  | 16px    |
+| lg    | `var(--sh-font-size-lg)`  | 18px    |
+| xl    | `var(--sh-font-size-xl)`  | 20px    |
+| 2xl   | `var(--sh-font-size-2xl)` | 24px    |
+
+## Component Size Tokens (CSS Variables)
+
+For component height (buttons, inputs, selects, etc.):
+
+| Token | CSS Variable                  | Default |
+| ----- | ----------------------------- | ------- |
+| xs    | `var(--sh-component-size-xs)` | 24px    |
+| sm    | `var(--sh-component-size-sm)` | 30px    |
+| md    | `var(--sh-component-size-md)` | 36px    |
+| lg    | `var(--sh-component-size-lg)` | 42px    |
+| xl    | `var(--sh-component-size-xl)` | 48px    |
+
+## UnoCSS Variant Shortcuts
+
+Use these in `:class` bindings for component type/style variants.
+
+### Fill Variants: `sh-fill-{type}`
+
+Default look — colored bg + matching text.
+
+### Ghost Variants: `sh-ghost-{type}`
+
+Transparent bg, colored text, bg appears on hover.
+
+### Text Variants: `sh-text-{type}`
+
+No bg or border, just colored text.
+
+### Outline Variants: `sh-outline-{type}`
+
+Transparent bg, solid colored border.
+
+### Dashed Variants: `sh-dashed-{type}`
+
+Same as outline but with dashed border.
+
+### Bordered Variants: `sh-bordered-{type}`
+
+Filled bg with colored border.
+
+**`{type}`** is one of: `default`, `primary`, `success`, `warning`, `danger`, `info`.
+
+### Size Shortcuts
+
+| Shortcut     | Description                                                                  |
+| ------------ | ---------------------------------------------------------------------------- |
+| `sh-size-sm` | Small: uses `--sh-component-size-sm`, `--sh-font-size-sm`, `--sh-spacing-sm` |
+| `sh-size-md` | Medium (default): uses md tokens                                             |
+| `sh-size-lg` | Large: uses lg tokens                                                        |
+
+### Utility Shortcuts
+
+| Shortcut         | Description                                |
+| ---------------- | ------------------------------------------ |
+| `sh-interactive` | Standard hover transition + pointer cursor |
+| `sh-disabled`    | Disabled opacity + not-allowed cursor      |
+
+## Usage Rules
+
+- In class attributes, use Uno utility tokens: `class="bg-bg.primary"`.
+- In `<style>` blocks, use `@apply`: `.cls { @apply bg-bg.primary; }`
+- In script/inline style, use CSS variables: `var(--sh-primary)`.
+- **NEVER** use hardcoded `hex/rgb/hsl` colors.
+- **NEVER** use arbitrary pixel values like `h-[36px]`. Use token variables instead.

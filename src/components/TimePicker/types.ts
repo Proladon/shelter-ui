@@ -5,7 +5,7 @@ export interface TimeRange {
 
 export interface TimePickerProps {
   /** 綁定的值，單一時間選擇時為 string (HH:mm:ss)，範圍選擇時為 TimeRange */
-  modelValue?: string | TimeRange
+  modelValue?: string | TimeRange | null
   /** 是否啟用時間範圍選擇模式，預設為 false */
   range?: boolean
   /** 輸入框佔位符文字 */

@@ -2,7 +2,7 @@
   <ContextMenuRoot class="sh-context-menu-root">
     <ContextMenuTrigger
       as-child
-      class="block border-2 border-stone-700 dark:border-white border-dashed dark:text-white rounded-xl text-sm select-none py-[45px] w-[300px] text-center"
+      class="block border-2 border-border.base border-dashed text-text.base rounded-xl text-sm select-none py-[45px] w-[300px] text-center"
     >
       <slot>
         <span>{{ triggerContent || 'Right click here.' }}</span>
@@ -104,9 +104,11 @@ const initializeCheckboxStates = (): void => {
 initializeCheckboxStates()
 
 // Event handlers
-const handleRadioChange = (value: string): void => {
-  const numValue = Number(value)
-  const finalValue = isNaN(numValue) ? value : numValue
+const handleRadioChange = (value: any): void => {
+  if (value === null) return
+  const stringValue = String(value)
+  const numValue = Number(stringValue)
+  const finalValue = isNaN(numValue) ? stringValue : numValue
   emit('radio-change', finalValue)
   emit('update:radioValue', finalValue)
 }
@@ -135,7 +137,7 @@ const DotIcon = () =>
   h(IconPointFilled, { size: '14', color: 'var(--sh-primary)' })
 
 const shortcutClass =
-  'ml-auto pl-[20px] text-text.base group-data-[highlighted]:text-secondary group-data-[disabled]:text-text.base.fade'
+  'ml-auto pl-[20px] text-text.base group-data-[highlighted]:text-primary group-data-[disabled]:text-text.base.fade'
 
 // Recursive component rendering for menu items
 const renderMenuItem = (item: ContextMenuItemOption): VNode => {
@@ -276,7 +278,7 @@ const renderMenuItem = (item: ContextMenuItemOption): VNode => {
   @apply data-[disabled]:text-text.base.fade;
   @apply data-[state=checked]:text-primary;
   @apply data-[disabled]:pointer-events-none;
-  @apply data-[highlighted]:(bg-primary.fade text-secondary);
+  @apply data-[highlighted]:(bg-primary.fade text-primary);
 }
 
 :deep(.sh-context-menu-separator) {
@@ -297,10 +299,10 @@ const renderMenuItem = (item: ContextMenuItemOption): VNode => {
   @apply group w-full rounded-[3px] h-[25px] px-[5px] relative pl-[25px] select-none outline-none;
   @apply text-xs leading-none text-text.base;
   @apply flex items-center;
-  @apply data-[state=open]:bg-primary.fade data-[state=open]:text-secondary;
+  @apply data-[state=open]:bg-primary.fade data-[state=open]:text-primary;
   @apply data-[disabled]:text-text.base.fade data-[disabled]:pointer-events-none;
-  @apply data-[highlighted]:bg-primary.fade data-[highlighted]:text-secondary;
-  @apply data-[highlighted]:data-[state=open]:bg-primary.fade data-[highlighted]:data-[state=open]:text-secondary;
+  @apply data-[highlighted]:bg-primary.fade data-[highlighted]:text-primary;
+  @apply data-[highlighted]:data-[state=open]:bg-primary.fade data-[highlighted]:data-[state=open]:text-primary;
 }
 
 :deep(.sh-context-menu-radio-item) {
@@ -308,7 +310,7 @@ const renderMenuItem = (item: ContextMenuItemOption): VNode => {
   @apply  data-[disabled]:text-text.base.fade;
   @apply data-[disabled]:pointer-events-none;
   @apply data-[highlighted]:bg-bg.primary.fade;
-  @apply data-[highlighted]:text-secondary;
+  @apply data-[highlighted]:text-primary;
   @apply data-[state=checked]:text-primary;
 }
 </style>

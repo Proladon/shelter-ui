@@ -165,7 +165,7 @@ watch(
 }
 
 .sh-checkbox__input:focus + .sh-checkbox__indicator {
-  /* @apply ring-2 ring-primary.fade ring-offset-2; */
+  box-shadow: 0 0 0 2px var(--sh-primary-fade);
 }
 
 .sh-checkbox__input:disabled + .sh-checkbox__indicator {
@@ -173,11 +173,11 @@ watch(
 }
 
 .sh-checkbox__label {
-  @apply text-sm text-gray-700 dark:text-gray-300;
+  @apply text-sm text-text.base;
 }
 
 .sh-checkbox--disabled .sh-checkbox__label {
-  @apply text-gray-400 dark:text-gray-600;
+  @apply text-text.primary;
 }
 
 .sh-checkbox-indicator__icon {

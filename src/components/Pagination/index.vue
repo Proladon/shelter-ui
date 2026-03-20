@@ -131,7 +131,7 @@ const buttonProps = computed(() => ({
 }))
 
 const activeButtonProps = (active: boolean) => {
-  const data = {
+  const data: any = {
     text: props.text,
     ghost: props.ghost,
     outline: props.outline,
@@ -283,11 +283,11 @@ watch(
 }
 
 .sh-pagination__ellipsis {
-  @apply flex items-center justify-center w-10 h-10 text-gray-500 select-none;
+  @apply flex items-center justify-center w-10 h-10 text-text.primary select-none;
 }
 
 .sh-pagination__info {
-  @apply text-sm text-gray-600;
+  @apply text-sm text-text.base;
 }
 
 .sh-pagination--disabled {

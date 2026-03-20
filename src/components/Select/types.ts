@@ -81,8 +81,11 @@ export interface SelectProps {
 }
 
 export interface SelectEmits {
-  (e: 'update:value', value: string | number | (string | number)[]): void
-  (e: 'change', value: string | number | (string | number)[]): void
+  (
+    e: 'update:value',
+    value: string | number | (string | number)[] | undefined,
+  ): void
+  (e: 'change', value: string | number | (string | number)[] | undefined): void
   (e: 'focus', event: FocusEvent): void
   (e: 'blur', event: FocusEvent): void
   (e: 'clear'): void
