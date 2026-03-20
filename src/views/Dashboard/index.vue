@@ -20,9 +20,7 @@ import {
   SHCheckboxGroup,
   SHRadio,
   SHRadioGroup,
-  SHDatePicker,
   SHTimePicker,
-  SHDateTimePicker,
   SHCalendar,
   SHPagination,
   SHChip,
@@ -59,9 +57,7 @@ const formData = ref({
   role: 'admin',
   notifications: ['email'],
   themeMode: 'system',
-  scheduleDate: null as Date | null,
   scheduleTime: null as string | null,
-  startDateTime: null as Date | null,
   bio: '',
   sliderVal: [30],
   mentionContent: 'Hello @user',
@@ -238,8 +234,8 @@ const carouselImages = [
                         Global analytics and reporting
                       </p>
                     </div>
-                    <SHDateTimePicker
-                      v-model="formData.startDateTime"
+                    <SHTimePicker
+                      v-model="formData.scheduleTime"
                       placeholder="Filter range..."
                     />
                   </div>
@@ -552,12 +548,6 @@ const carouselImages = [
                       <div>
                         <h3 class="text-lg font-semibold mb-4">Preferences</h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                          <SHFlexContainer direction="column" gap="8px">
-                            <label class="text-sm font-medium"
-                              >Default Date</label
-                            >
-                            <SHDatePicker v-model="formData.scheduleDate" />
-                          </SHFlexContainer>
                           <SHFlexContainer direction="column" gap="8px">
                             <label class="text-sm font-medium"
                               >Default Time</label

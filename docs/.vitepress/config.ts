@@ -98,6 +98,7 @@ export default defineConfig({
         {
           text: '日期組件',
           items: [
+            { text: 'Calendar 日曆', link: '/components/calendar' },
             { text: 'TimePicker 時間選擇器', link: '/components/time-picker' },
           ],
         },
