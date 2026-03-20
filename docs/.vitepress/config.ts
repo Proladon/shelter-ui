@@ -55,8 +55,8 @@ export default defineConfig({
               link: '/components/flex-container',
             },
             {
-              text: 'BorderContainer 邊框容器',
-              link: '/components/border-container',
+              text: 'BaseContainer 基礎容器',
+              link: '/components/base-container',
             },
             {
               text: 'ConfigProvider 配置提供者',
@@ -97,11 +97,6 @@ export default defineConfig({
         {
           text: '日期組件',
           items: [
-            { text: 'DatePicker 日期選擇器', link: '/components/date-picker' },
-            {
-              text: 'DateTimePicker 日期時間選擇器',
-              link: '/components/date-time-picker',
-            },
             { text: 'TimePicker 時間選擇器', link: '/components/time-picker' },
           ],
         },

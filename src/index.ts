@@ -8,7 +8,7 @@ import SHNumberInput from './components/NumberInput/index.vue'
 import SHTextarea from './components/Textarea/index.vue'
 import SHSelect from './components/Select/index.vue'
 import SHSpin from './components/Spin/index.vue'
-import SHBorderContainer from './components/BorderContainer/index.vue'
+import SHBaseContainer from './components/BaseContainer/index.vue'
 import SHPopover from './components/Popover/index.vue'
 import SHEditableContainer from './components/EditableContainer/index.vue'
 import SHTooltip from './components/Tooltip/index.vue'
@@ -50,10 +50,7 @@ import {
 } from './components/Carousel'
 import { Pagination as SHPagination } from './components/Pagination'
 import { Divider as SHDivider } from './components/Divider'
-import SHDatePicker from './components/DatePicker/index.vue'
 import SHTimePicker from './components/TimePicker/index.vue'
-import SHDateTimePicker from './components/DateTimePicker/index.vue'
-import SHCalendar from './components/Calendar/index.vue'
 import SHMessageBox from './components/MessageBox'
 
 // 組件列表
@@ -65,7 +62,7 @@ const components = {
   SHNumberInput,
   SHTextarea,
   SHSelect,
-  SHBorderContainer,
+  SHBaseContainer,
   SHPopover,
   SHEditableContainer,
   SHTooltip,
@@ -101,10 +98,6 @@ const components = {
   SHCarouselIndicators,
   SHPagination,
   SHDivider,
-  SHDatePicker,
-  SHTimePicker,
-  SHDateTimePicker,
-  SHCalendar,
 }
 
 /**
@@ -133,9 +126,9 @@ export type {
 } from './components/Select/types'
 export type { SpinProps, SpinEmits } from './components/Spin/types'
 export type {
-  BorderContainerProps,
-  BorderContainerEmits,
-} from './components/BorderContainer/types'
+  BaseContainerProps,
+  BaseContainerEmits,
+} from './components/BaseContainer/types'
 export type { PopoverProps, PopoverEmits } from './components/Popover/types'
 export type {
   EditableContainerProps,
@@ -263,7 +256,7 @@ export {
   SHSelect,
   SHSpin,
   SHConfigProvider,
-  SHBorderContainer,
+  SHBaseContainer,
   SHPopover,
   SHEditableContainer,
   SHTooltip,

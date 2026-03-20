@@ -1,6 +1,6 @@
 <template>
   <div class="demo-section">
-    <SHBorderContainer>
+    <SHBaseContainer>
       <Collapsible v-model:open="basicOpen">
         <template #trigger>
           <span>點擊展開/收合內容</span>
@@ -10,7 +10,7 @@
           <p>你可以在這裡放置任何內容，比如表單、列表或其他組件。</p>
         </div>
       </Collapsible>
-    </SHBorderContainer>
+    </SHBaseContainer>
   </div>
 </template>
 

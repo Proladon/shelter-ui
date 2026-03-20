@@ -91,5 +91,8 @@ export default defineConfig({
     colors: {
       ...colors,
     },
+    borderRadius: tokens.borderRadius,
+    spacing: tokens.spacing,
+    fontSize: tokens.fontSize,
   },
 })
