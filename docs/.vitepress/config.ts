@@ -35,6 +35,7 @@ export default defineConfig({
           items: [
             { text: 'Button 按鈕', link: '/components/button' },
             { text: 'Input 輸入框', link: '/components/input' },
+            { text: 'InputGroup 輸入框組合', link: '/components/input-group' },
             {
               text: 'NumberInput 數字輸入框',
               link: '/components/number-input',

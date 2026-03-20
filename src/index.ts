@@ -4,6 +4,7 @@ import type { App, Plugin } from 'vue'
 import SHConfigProvider from './components/ConfigProvider/index.vue'
 import SHButton from './components/Button/index.vue'
 import SHInput from './components/Input/index.vue'
+import { SHInputGroup, SHInputGroupAddon } from './components/InputGroup'
 import SHNumberInput from './components/NumberInput/index.vue'
 import SHTextarea from './components/Textarea/index.vue'
 import SHSelect from './components/Select/index.vue'
@@ -59,6 +60,8 @@ const components = {
   SHButton,
   SHSpin,
   SHInput,
+  SHInputGroup,
+  SHInputGroupAddon,
   SHNumberInput,
   SHTextarea,
   SHSelect,
@@ -113,6 +116,10 @@ export function sayHello(name: string = 'world'): string {
 export type { ThemeVarsConfig } from './components/ConfigProvider/types'
 export type { ButtonProps, ButtonEmits } from './components/Button/types'
 export type { InputProps, InputEmits } from './components/Input/types'
+export type {
+  InputGroupProps,
+  InputGroupAddonProps,
+} from './components/InputGroup/types'
 export type {
   NumberInputProps,
   NumberInputEmits,
@@ -251,6 +258,8 @@ export { version }
 export {
   SHButton,
   SHInput,
+  SHInputGroup,
+  SHInputGroupAddon,
   SHNumberInput,
   SHTextarea,
   SHSelect,
