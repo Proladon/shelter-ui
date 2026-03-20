@@ -22,6 +22,6 @@ const selected = ref<DateValue | null>(null)
 }
 
 .demo-result {
-  @apply text-text.base text-[var(--sh-font-size-sm)];
+  @apply text-text.base text-[length:var(--sh-font-size-sm)];
 }
 </style>

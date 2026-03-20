@@ -138,7 +138,7 @@ const modelValue = computed({
 }
 
 .sh-calendar__heading {
-  @apply text-text.base font-medium text-[var(--sh-font-size-sm)];
+  @apply text-text.base font-medium text-[length:var(--sh-font-size-sm)];
   flex: 1;
   text-align: center;
 }
@@ -185,7 +185,7 @@ const modelValue = computed({
 }
 
 .sh-calendar__weekday {
-  @apply text-center text-text.primary font-medium text-[var(--sh-font-size-xs)];
+  @apply text-center text-text.primary font-medium text-[length:var(--sh-font-size-xs)];
   width: var(--sh-component-size-md);
   height: var(--sh-component-size-sm);
   padding: 0;
@@ -211,7 +211,7 @@ const modelValue = computed({
 .sh-calendar__day {
   @apply flex items-center justify-center;
   @apply rounded-[var(--sh-radius-md)];
-  @apply text-text.base text-[var(--sh-font-size-sm)];
+  @apply text-text.base text-[length:var(--sh-font-size-sm)];
   @apply cursor-pointer transition-all duration-300 ease-in-out outline-none;
   width: var(--sh-component-size-md);
   height: var(--sh-component-size-md);

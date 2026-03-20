@@ -75,20 +75,6 @@ defineProps<InputGroupProps>()
   border-right: none;
 }
 
-/* ── Divider line between inline button siblings ──────────── */
-.sh-input-group > button + button,
-.sh-input-group > .sh-input-wrapper + button,
-.sh-input-group > .sh-textarea-wrapper + button,
-.sh-input-group > .sh-input-group-addon + button {
-  border-left: 1px solid var(--sh-border-base) !important;
-}
-
-.sh-input-group > .sh-input-wrapper + .sh-input-group-addon,
-.sh-input-group > .sh-textarea-wrapper + .sh-input-group-addon,
-.sh-input-group > button + .sh-input-group-addon {
-  border-left: 1px solid var(--sh-border-base);
-}
-
 /* ════════════════════════════════════════════════════════════
    block-start layout
    ════════════════════════════════════════════════════════════ */

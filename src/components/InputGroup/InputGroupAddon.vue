@@ -25,7 +25,7 @@ withDefaults(defineProps<InputGroupAddonProps>(), {
   @apply inline-flex items-center shrink-0;
   @apply bg-bg.primary text-text.primary;
   @apply px-[var(--sh-spacing-md)];
-  @apply text-[var(--sh-font-size-md)];
+  @apply text-[length:var(--sh-font-size-md)];
   white-space: nowrap;
 }
 
@@ -39,7 +39,7 @@ withDefaults(defineProps<InputGroupAddonProps>(), {
 .sh-input-group-addon--block-start {
   @apply flex items-center gap-[var(--sh-spacing-sm)];
   @apply bg-bg.primary text-text.primary;
-  @apply text-[var(--sh-font-size-sm)];
+  @apply text-[length:var(--sh-font-size-sm)];
   @apply px-[var(--sh-spacing-md)] py-[var(--sh-spacing-sm)];
   min-height: var(--sh-component-size-sm);
   white-space: normal;
@@ -49,7 +49,7 @@ withDefaults(defineProps<InputGroupAddonProps>(), {
 .sh-input-group-addon--block-end {
   @apply flex items-center gap-[var(--sh-spacing-sm)];
   @apply bg-bg.primary text-text.primary;
-  @apply text-[var(--sh-font-size-sm)];
+  @apply text-[length:var(--sh-font-size-sm)];
   @apply px-[var(--sh-spacing-md)] py-[var(--sh-spacing-sm)];
   /* min height so the toolbar has comfortable click area */
   min-height: var(--sh-component-size-sm);

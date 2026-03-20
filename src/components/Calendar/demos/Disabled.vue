@@ -30,7 +30,7 @@ import Calendar from '../index.vue'
 }
 
 .demo-label {
-  @apply text-text.primary text-[var(--sh-font-size-sm)];
+  @apply text-text.primary text-[length:var(--sh-font-size-sm)];
   margin: 0;
 }
 </style>
