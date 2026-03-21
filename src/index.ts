@@ -52,6 +52,7 @@ import {
 import { Pagination as SHPagination } from './components/Pagination'
 import { Divider as SHDivider } from './components/Divider'
 import SHTimePicker from './components/TimePicker/index.vue'
+import SHDatePicker from './components/DatePicker/index.vue'
 import SHCalendar from './components/Calendar/index.vue'
 import SHMessageBox from './components/MessageBox'
 
@@ -103,6 +104,7 @@ const components = {
   SHPagination,
   SHDivider,
   SHTimePicker,
+  SHDatePicker,
   SHCalendar,
 }
 
