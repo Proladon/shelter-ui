@@ -55,6 +55,7 @@ import SHTimePicker from './components/TimePicker/index.vue'
 import SHDatePicker from './components/DatePicker/index.vue'
 import SHCalendar from './components/Calendar/index.vue'
 import SHMessageBox from './components/MessageBox'
+import SHUploadZone from './components/UploadZone/index.vue'
 
 // 組件列表
 const components = {
@@ -106,6 +107,7 @@ const components = {
   SHTimePicker,
   SHDatePicker,
   SHCalendar,
+  SHUploadZone,
 }
 
 /**
@@ -236,6 +238,14 @@ export type {
   MessageBoxType,
 } from './components/MessageBox/types'
 export type { SwitchProps, SwitchEmits } from './components/Switch/types'
+export type {
+  UploadZoneProps,
+  UploadZoneEmits,
+  UploadZoneFile,
+  UploadZoneStatus,
+  UploadZoneSize,
+  UploadZoneSlots,
+} from './components/UploadZone/types'
 
 // 安裝函數
 const install = (app: App) => {

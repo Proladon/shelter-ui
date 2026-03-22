@@ -49,6 +49,7 @@ export default defineConfig({
             { text: 'Tag 標籤', link: '/components/tag' },
             { text: 'Chip 標籤', link: '/components/chip' },
             { text: 'Divider 分隔線', link: '/components/divider' },
+            { text: 'UploadZone 上傳區域', link: '/components/file-upload' },
             { text: 'Progress 進度條', link: '/components/progress' },
             { text: 'Spin 加載中', link: '/components/spin' },
             {
