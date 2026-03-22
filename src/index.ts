@@ -18,6 +18,7 @@ import SHChip from './components/Chip/index.vue'
 import SHTag from './components/Tag/index.vue'
 import SHSwitch from './components/Switch/index.vue'
 import SHDialog from './components/Dialog/index.vue'
+import SHAlertDialog from './components/AlertDialog/index.vue'
 import SHBlockArea from './components/BlockArea/index.vue'
 import {
   SHActiveButtonGroup,
@@ -76,6 +77,7 @@ const components = {
   SHChip,
   SHTag,
   SHDialog,
+  SHAlertDialog,
   SHBlockArea,
   SHMessageBox,
   SHSwitch,
@@ -153,6 +155,11 @@ export type { BadgeProps, BadgeEmits } from './components/Badge/types'
 export type { ChipProps, ChipEmits } from './components/Chip/types'
 export type { TagProps, TagSlots, TagEmits } from './components/Tag/types'
 export type { DialogProps, DialogEmits } from './components/Dialog/types'
+export type {
+  AlertDialogProps,
+  AlertDialogEmits,
+  AlertDialogType,
+} from './components/AlertDialog/types'
 export type {
   BlockAreaProps,
   BlockAreaSlots,
@@ -288,6 +295,7 @@ export {
   SHChip,
   SHTag,
   SHDialog,
+  SHAlertDialog,
   SHBlockArea,
   SHMessageBox,
   SHActiveButtonGroup,

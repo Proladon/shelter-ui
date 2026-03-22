@@ -76,6 +76,10 @@ export default defineConfig({
             { text: 'Carousel 輪播', link: '/components/carousel' },
             { text: 'Collapsible 折疊面板', link: '/components/collapsible' },
             { text: 'ContextMenu 右鍵選單', link: '/components/context-menu' },
+            {
+              text: 'AlertDialog 警告對話框',
+              link: '/components/alert-dialog',
+            },
             { text: 'Dialog 對話框', link: '/components/dialog' },
             { text: 'Popover 彈出框', link: '/components/popover' },
             { text: 'Tooltip 工具提示', link: '/components/tooltip' },

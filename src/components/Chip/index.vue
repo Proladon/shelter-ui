@@ -6,16 +6,16 @@
     @keydown="onKeyDown"
   >
     <!-- 圖片 -->
-    <img v-if="image" :src="image" class="s-chip__image" alt="" />
+    <img v-if="image" :src="image" class="sh-chip__image" alt="" />
 
     <!-- 圖示插槽或圖示組件 -->
     <slot name="icon">
-      <component v-if="icon" :is="icon" class="s-chip__icon" />
+      <component v-if="icon" :is="icon" class="sh-chip__icon" />
     </slot>
 
     <!-- 標籤文字或預設插槽 -->
     <slot name="default">
-      <span v-if="label" class="s-chip__label">{{ label }}</span>
+      <span v-if="label" class="sh-chip__label">{{ label }}</span>
     </slot>
 
     <!-- 移除圖示 -->
@@ -27,7 +27,7 @@
     >
       <component
         :is="removeIcon || XIcon"
-        class="s-chip__remove-icon"
+        class="sh-chip__remove-icon"
         @click="remove"
         @keydown="onKeyDown"
       />
@@ -83,19 +83,19 @@ const onKeyDown = (event: KeyboardEvent) => {
   @apply outline-none;
 }
 
-.s-chip__image {
+.sh-chip__image {
   @apply w-6 h-6 rounded-full object-cover;
 }
 
-.s-chip__icon {
+.sh-chip__icon {
   @apply w-4 h-4;
 }
 
-.s-chip__label {
+.sh-chip__label {
   @apply flex-1;
 }
 
-.s-chip__remove-icon {
+.sh-chip__remove-icon {
   @apply w-4 h-4 cursor-pointer hover:opacity-70 transition-opacity;
 }
 </style>
