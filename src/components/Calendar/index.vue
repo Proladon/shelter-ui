@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import {
   CalendarCell,
   CalendarCellTrigger,
@@ -9,14 +9,15 @@ import {
   CalendarGridRow,
   CalendarHeadCell,
   CalendarHeader,
-  CalendarHeading,
   CalendarNext,
   CalendarPrev,
   CalendarRoot,
 } from 'reka-ui'
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-vue'
+import { getLocalTimeZone, today } from '@internationalized/date'
 import type { DateValue } from '@internationalized/date'
 import type { CalendarProps, CalendarEmits } from './types'
+import { SHSelect } from '@/components/Select'
 
 defineOptions({ name: 'SHCalendar' })
 
@@ -40,11 +41,49 @@ const modelValue = computed({
   set: (val: DateValue | DateValue[] | undefined) =>
     emit('update:modelValue', val),
 })
+
+// ── Placeholder (controls displayed month/year) ──────────────
+const internalPlaceholder = ref<DateValue>(
+  props.placeholder ?? props.defaultPlaceholder ?? today(getLocalTimeZone()),
+)
+
+const placeholder = computed({
+  // cast to `any` to bypass @internationalized/date version mismatch with reka-ui types
+  get: () => (props.placeholder ?? internalPlaceholder.value) as any,
+  set: (val: DateValue) => {
+    internalPlaceholder.value = val
+    emit('update:placeholder', val)
+  },
+})
+
+// ── Month / Year selectors ────────────────────────────────────
+const monthOptions = computed(() => {
+  const fmt = new Intl.DateTimeFormat(props.locale ?? 'en-US', {
+    month: 'long',
+  })
+  return Array.from({ length: 12 }, (_, i) => ({
+    value: i + 1,
+    label: fmt.format(new Date(2024, i, 1)),
+  }))
+})
+
+const todayYear = today(getLocalTimeZone()).year
+const yearRange = Array.from({ length: 201 }, (_, i) => todayYear - 100 + i)
+const yearOptions = yearRange.map((y) => ({ value: y, label: String(y) }))
+
+function onMonthChange(month: number) {
+  placeholder.value = placeholder.value.set({ month })
+}
+
+function onYearChange(year: number) {
+  placeholder.value = placeholder.value.set({ year })
+}
 </script>
 
 <template>
   <CalendarRoot
     v-model="modelValue"
+    v-model:placeholder="placeholder"
     :locale="locale"
     :disabled="disabled"
     :readonly="readonly"
@@ -71,7 +110,22 @@ const modelValue = computed({
         <CalendarPrev class="sh-calendar__nav-btn">
           <IconChevronLeft class="sh-calendar__nav-icon" />
         </CalendarPrev>
-        <CalendarHeading class="sh-calendar__heading" />
+
+        <div class="sh-calendar__heading">
+          <SHSelect
+            class="sh-calendar__month-select"
+            :value="placeholder.month"
+            :options="monthOptions"
+            @update:value="onMonthChange($event as number)"
+          />
+          <SHSelect
+            class="sh-calendar__year-select"
+            :value="placeholder.year"
+            :options="yearOptions"
+            @update:value="onYearChange($event as number)"
+          />
+        </div>
+
         <CalendarNext class="sh-calendar__nav-btn">
           <IconChevronRight class="sh-calendar__nav-icon" />
         </CalendarNext>
@@ -138,13 +192,19 @@ const modelValue = computed({
 }
 
 .sh-calendar__heading {
-  @apply text-text.base font-medium text-[length:var(--sh-font-size-sm)];
+  @apply flex items-center justify-center;
+  gap: var(--sh-spacing-xs);
   flex: 1;
-  text-align: center;
 }
 
-.sh-calendar__heading[data-disabled] {
-  @apply opacity-60;
+/* ── Month / Year Selects ────────────────────────────────────── */
+
+.sh-calendar__month-select {
+  width: 120px;
+}
+
+.sh-calendar__year-select {
+  width: 80px;
 }
 
 /* ── Navigation Buttons ──────────────────────────────────────── */
@@ -174,8 +234,12 @@ const modelValue = computed({
   gap: var(--sh-spacing-xl);
 }
 
-.sh-calendar__grid {
+.sh-calendar .sh-calendar__grid {
   border-collapse: collapse;
+  border-spacing: 0;
+  border: 0;
+  margin: 0;
+  background: none;
 }
 
 /* ── Weekday Header Row ──────────────────────────────────────── */
@@ -184,11 +248,13 @@ const modelValue = computed({
   margin-bottom: var(--sh-spacing-xs);
 }
 
-.sh-calendar__weekday {
+.sh-calendar .sh-calendar__weekday {
   @apply text-center text-text.primary font-medium text-[length:var(--sh-font-size-xs)];
   width: var(--sh-component-size-md);
   height: var(--sh-component-size-sm);
   padding: 0;
+  border: 0;
+  background: none;
 }
 
 /* ── Week Row ────────────────────────────────────────────────── */
@@ -199,11 +265,13 @@ const modelValue = computed({
 
 /* ── Cell (td wrapper) ───────────────────────────────────────── */
 
-.sh-calendar__cell {
+.sh-calendar .sh-calendar__cell {
   padding: 0;
   text-align: center;
   width: var(--sh-component-size-md);
   height: var(--sh-component-size-md);
+  border: 0;
+  background: none;
 }
 
 /* ── Day Trigger ─────────────────────────────────────────────── */
@@ -226,7 +294,7 @@ const modelValue = computed({
 
 /* Selected */
 .sh-calendar__day[data-selected] {
-  @apply bg-primary.fade text-primary;
+  @apply bg-primary text-white;
 }
 
 /* Today (not selected) */

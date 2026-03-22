@@ -1,18 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import {
-  CalendarCell,
-  CalendarCellTrigger,
-  CalendarGrid,
-  CalendarGridBody,
-  CalendarGridHead,
-  CalendarGridRow,
-  CalendarHeadCell,
-  CalendarHeader,
-  CalendarHeading,
-  CalendarNext,
-  CalendarPrev,
-  CalendarRoot,
   PopoverContent,
   PopoverPortal,
   PopoverRoot,
@@ -38,6 +26,7 @@ import {
 } from '@tabler/icons-vue'
 import type { DateValue } from '@internationalized/date'
 import type { DatePickerProps, DatePickerEmits, DateRange } from './types'
+import { Calendar as SHCalendar } from '@/components/Calendar'
 
 defineOptions({ name: 'SHDatePicker' })
 
@@ -191,8 +180,8 @@ defineExpose({ focus, blur, clear })
       >
         <!-- ── Single date calendar ─────────────────────────────── -->
         <template v-if="!range">
-          <CalendarRoot
-            v-model="singleValue"
+          <SHCalendar
+            :model-value="singleValue"
             :locale="locale"
             :disabled="disabled"
             :readonly="readonly"
@@ -203,59 +192,11 @@ defineExpose({ focus, blur, clear })
             :weekday-format="weekdayFormat"
             :fixed-weeks="fixedWeeks"
             :default-placeholder="defaultPlaceholder"
-          >
-            <template #default="{ grid, weekDays }">
-              <CalendarHeader class="sh-date-picker__cal-header">
-                <CalendarPrev class="sh-date-picker__nav-btn">
-                  <IconChevronLeft class="sh-date-picker__nav-icon" />
-                </CalendarPrev>
-                <CalendarHeading class="sh-date-picker__cal-heading" />
-                <CalendarNext class="sh-date-picker__nav-btn">
-                  <IconChevronRight class="sh-date-picker__nav-icon" />
-                </CalendarNext>
-              </CalendarHeader>
-              <div class="sh-date-picker__cal-body">
-                <template v-for="month in grid" :key="month.value.toString()">
-                  <CalendarGrid class="sh-date-picker__grid">
-                    <CalendarGridHead>
-                      <CalendarGridRow class="sh-date-picker__weekdays">
-                        <CalendarHeadCell
-                          v-for="day in weekDays"
-                          :key="day"
-                          class="sh-date-picker__weekday"
-                        >
-                          {{ day }}
-                        </CalendarHeadCell>
-                      </CalendarGridRow>
-                    </CalendarGridHead>
-                    <CalendarGridBody>
-                      <CalendarGridRow
-                        v-for="(week, weekIndex) in month.rows"
-                        :key="weekIndex"
-                        class="sh-date-picker__week"
-                      >
-                        <CalendarCell
-                          v-for="date in week"
-                          :key="date.toString()"
-                          :date="date"
-                          class="sh-date-picker__cell"
-                        >
-                          <CalendarCellTrigger
-                            :day="date"
-                            :month="month.value"
-                            v-slot="{ dayValue }"
-                            class="sh-date-picker__day"
-                          >
-                            {{ dayValue }}
-                          </CalendarCellTrigger>
-                        </CalendarCell>
-                      </CalendarGridRow>
-                    </CalendarGridBody>
-                  </CalendarGrid>
-                </template>
-              </div>
-            </template>
-          </CalendarRoot>
+            @update:model-value="
+              (v: DateValue | DateValue[] | undefined) =>
+                (singleValue = v as DateValue | undefined)
+            "
+          />
         </template>
 
         <!-- ── Range date calendar ─────────────────────────────── -->
@@ -344,7 +285,7 @@ defineExpose({ focus, blur, clear })
 .sh-date-picker:hover:not(.sh-date-picker--readonly):not(
     .sh-date-picker--disabled
   ) {
-  @apply border-border.primary;
+  @apply border-primary;
 }
 
 .sh-date-picker--open {
@@ -394,6 +335,16 @@ defineExpose({ focus, blur, clear })
   @apply bg-bg.primary border border-solid border-border.base rounded-[var(--sh-radius-lg)] shadow-lg z-30;
   padding: var(--sh-spacing-md);
   width: fit-content;
+}
+
+/* ── SHCalendar used inside the popover: strip its own box so the
+   popover wrapper provides the only visible border/background. ── */
+:deep(.sh-calendar) {
+  border: none !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  width: auto;
 }
 
 :deep(.sh-date-picker__cal-header) {
