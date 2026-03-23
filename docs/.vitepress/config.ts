@@ -48,6 +48,7 @@ export default defineConfig({
             { text: 'PinInput 驗證碼輸入框', link: '/components/pin-input' },
             { text: 'Badge 徽章', link: '/components/badge' },
             { text: 'Tag 標籤', link: '/components/tag' },
+            { text: 'StatusTag 狀態標籤', link: '/components/status-tag' },
             { text: 'Chip 標籤', link: '/components/chip' },
             { text: 'Divider 分隔線', link: '/components/divider' },
             { text: 'UploadZone 上傳區域', link: '/components/file-upload' },

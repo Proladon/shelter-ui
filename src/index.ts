@@ -16,6 +16,7 @@ import SHTooltip from './components/Tooltip/index.vue'
 import SHBadge from './components/Badge/index.vue'
 import SHChip from './components/Chip/index.vue'
 import SHTag from './components/Tag/index.vue'
+import SHStatusTag from './components/StatusTag/index.vue'
 import SHSwitch from './components/Switch/index.vue'
 import SHDialog from './components/Dialog/index.vue'
 import SHAlertDialog from './components/AlertDialog/index.vue'
@@ -156,6 +157,11 @@ export type { TooltipProps, TooltipEmits } from './components/Tooltip/types'
 export type { BadgeProps, BadgeEmits } from './components/Badge/types'
 export type { ChipProps, ChipEmits } from './components/Chip/types'
 export type { TagProps, TagSlots, TagEmits } from './components/Tag/types'
+export type {
+  StatusTagProps,
+  StatusTagSlots,
+  StatusTagEmits,
+} from './components/StatusTag/types'
 export type { DialogProps, DialogEmits } from './components/Dialog/types'
 export type {
   AlertDialogProps,
@@ -302,6 +308,7 @@ export {
   SHBadge,
   SHChip,
   SHTag,
+  SHStatusTag,
   SHDialog,
   SHAlertDialog,
   SHBlockArea,
