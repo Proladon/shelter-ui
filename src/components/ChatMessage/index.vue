@@ -20,24 +20,41 @@
     <div class="sh-chat-message__body">
       <!-- Header: username + time -->
       <div class="sh-chat-message__header">
-        <slot name="username">
-          <span v-if="username" class="sh-chat-message__username">
-            {{ username }}
-          </span>
-        </slot>
-        <slot name="time">
-          <span v-if="time" class="sh-chat-message__time">{{ time }}</span>
-        </slot>
+        <template v-if="showUsername">
+          <slot name="username">
+            <span v-if="username" class="sh-chat-message__username">
+              {{ username }}
+            </span>
+          </slot>
+        </template>
+        <template v-if="showTime">
+          <slot name="time">
+            <span v-if="time" class="sh-chat-message__time">{{ time }}</span>
+          </slot>
+        </template>
       </div>
 
-      <!-- Bubble -->
-      <div
-        class="sh-chat-message__bubble"
-        :class="[`sh-chat-message__bubble--${position}`, statusClass]"
-      >
-        <slot name="content">
-          <span class="sh-chat-message__content">{{ content }}</span>
-        </slot>
+      <!-- Bubble row: bubble + copy button -->
+      <div class="sh-chat-message__bubble-row">
+        <div
+          class="sh-chat-message__bubble"
+          :class="[`sh-chat-message__bubble--${position}`, statusClass]"
+        >
+          <slot name="content">
+            <span class="sh-chat-message__content">{{ content }}</span>
+          </slot>
+        </div>
+
+        <button
+          v-if="showCopyButton"
+          class="sh-chat-message__copy-btn"
+          :class="{ 'sh-chat-message__copy-btn--copied': copied }"
+          :title="copied ? '已複製' : '複製訊息'"
+          @click="handleCopy"
+        >
+          <IconCheck v-if="copied" :size="14" />
+          <IconCopy v-else :size="14" />
+        </button>
       </div>
 
       <!-- Status indicator (for right/self messages) -->
@@ -69,16 +86,41 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import type { ChatMessageProps, ChatMessageSlots } from './types'
+import { computed, ref } from 'vue'
+import { IconCopy, IconCheck } from '@tabler/icons-vue'
+import type { ChatMessageSlots } from './types'
+import type { ChatMessagePosition, ChatMessageStatus } from './types'
 
 defineOptions({ name: 'SHChatMessage' })
 
-const props = withDefaults(defineProps<ChatMessageProps>(), {
-  position: 'left',
-})
+const props = withDefaults(
+  defineProps<{
+    avatar?: string
+    avatarFallback?: string
+    username?: string
+    time?: string
+    content?: string
+    position?: ChatMessagePosition
+    status?: ChatMessageStatus
+    showCopyButton?: boolean
+    showTime?: boolean
+    showUsername?: boolean
+  }>(),
+  {
+    position: 'left',
+    showCopyButton: true,
+    showTime: true,
+    showUsername: true,
+  },
+)
+
+const emit = defineEmits<{
+  (e: 'copy', content: string): void
+}>()
 
 defineSlots<ChatMessageSlots>()
+
+const copied = ref(false)
 
 const computedFallback = computed(() => {
   if (props.avatarFallback) return props.avatarFallback
@@ -91,6 +133,16 @@ const statusClass = computed(() => {
   if (props.status === 'failed') return 'sh-chat-message__bubble--failed'
   return ''
 })
+
+const handleCopy = async () => {
+  if (copied.value) return
+  await navigator.clipboard.writeText(props.content ?? '')
+  emit('copy', props.content ?? '')
+  copied.value = true
+  setTimeout(() => {
+    copied.value = false
+  }, 1500)
+}
 </script>
 
 <style lang="postcss" scoped>
@@ -150,6 +202,15 @@ const statusClass = computed(() => {
   font-size: var(--sh-font-size-xs);
 }
 
+/* ---- Bubble row (bubble + copy btn) ---- */
+.sh-chat-message__bubble-row {
+  @apply flex items-center gap-1.5;
+}
+
+.sh-chat-message--right .sh-chat-message__bubble-row {
+  @apply flex-row-reverse;
+}
+
 /* ---- Bubble ---- */
 .sh-chat-message__bubble {
   @apply px-4 py-2 rounded-[var(--sh-radius-lg)] text-text.base break-words;
@@ -177,6 +238,27 @@ const statusClass = computed(() => {
 /* Failed state: error border */
 .sh-chat-message__bubble--failed {
   @apply border border-solid border-status.danger;
+}
+
+/* ---- Copy button ---- */
+.sh-chat-message__copy-btn {
+  @apply flex-shrink-0 flex items-center justify-center;
+  @apply w-6 h-6 rounded-[var(--sh-radius-sm)] cursor-pointer;
+  @apply border-none bg-transparent p-0;
+  @apply text-text.primary;
+  @apply opacity-0 transition-opacity duration-150;
+}
+
+.sh-chat-message__bubble-row:hover .sh-chat-message__copy-btn {
+  @apply opacity-100;
+}
+
+.sh-chat-message__copy-btn:hover {
+  @apply bg-bg.secondary text-text.base;
+}
+
+.sh-chat-message__copy-btn--copied {
+  color: var(--sh-status-success);
 }
 
 /* ---- Status ---- */

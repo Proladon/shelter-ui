@@ -16,6 +16,16 @@ export interface ChatMessageProps {
   position?: ChatMessagePosition
   /** 訊息狀態 */
   status?: ChatMessageStatus
+  /** 是否顯示複製按鈕（hover 時出現） */
+  showCopyButton?: boolean
+  /** 是否顯示時間 */
+  showTime?: boolean
+  /** 是否顯示使用者名稱 */
+  showUsername?: boolean
+}
+
+export interface ChatMessageEmits {
+  (e: 'copy', content: string): void
 }
 
 export interface ChatMessageSlots {
