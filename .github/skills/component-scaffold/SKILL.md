@@ -185,29 +185,34 @@ docs/.vitepress/config.ts
 
 ---
 
-## Phase 4 — Validation
-
-### Goal
-
-Ensure the newly created component and documentation do not introduce any type errors or runtime issues.
-
-### Requirements
-
-1. **Terminal / TypeScript Check**: Run `pnpm type-check` (or equivalent) to ensure no TS errors are present in the new files.
-2. **VS Code Problems**: Resolve any red squiggles or linting errors in the newly created `src/components/` and `docs/components/` files.
-3. **VitePress Build**: If possible, ensure the documentation site builds without errors.
-
----
-
 ## Execution Order
 
-Run the phases **sequentially**:
+Run the phases **sequentially** — do not start Phase 3 until Phase 1 and Phase 2 are complete:
 
 ```
 Phase 1 → Phase 2 → Phase 3 → Phase 4
 ```
 
-This ensures assets are created before documentation, and documentation is complete before final validation.
+This ensures demo files exist before the doc page references them.
+
+---
+
+## Phase 4 — Build Validation
+
+### Goal
+
+Ensure that the new component and its documentation do not break the project build.
+
+### Steps
+
+1. Run `pnpm lib:build` to verify the library component exports.
+2. Run `pnpm docs:build` to verify the VitePress documentation generation.
+
+### Rules
+
+- **Zero Errors**: Both build commands must complete without any errors.
+- **Ignore Warnings**: Any warnings produced during the build can be safely ignored unless they directly impact the component's functionality.
+- If a build fails, fix the underlying issue (e.g., missing imports, type errors, broken markdown links) and retry until successful.
 
 ---
 
@@ -223,5 +228,5 @@ This ensures assets are created before documentation, and documentation is compl
 - [ ] `<script setup>` imports all demo components correctly
 - [ ] `docs/.vitepress/config.ts` sidebar entry added
 - [ ] Route and filename are consistent (kebab-case)
-- [ ] No TypeScript errors in terminal or editor
-- [ ] No runtime errors in terminal or browser console
+- [ ] `pnpm lib:build` runs without errors
+- [ ] `pnpm docs:build` runs without errors
