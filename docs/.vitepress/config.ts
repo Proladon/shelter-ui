@@ -45,6 +45,7 @@ export default defineConfig({
             { text: 'Checkbox 複選框', link: '/components/checkbox' },
             { text: 'Radio 單選框', link: '/components/radio' },
             { text: 'Switch 開關', link: '/components/switch' },
+            { text: 'PinInput 驗證碼輸入框', link: '/components/pin-input' },
             { text: 'Badge 徽章', link: '/components/badge' },
             { text: 'Tag 標籤', link: '/components/tag' },
             { text: 'Chip 標籤', link: '/components/chip' },

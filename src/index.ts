@@ -57,6 +57,7 @@ import SHDatePicker from './components/DatePicker/index.vue'
 import SHCalendar from './components/Calendar/index.vue'
 import SHMessageBox from './components/MessageBox'
 import SHUploadZone from './components/UploadZone/index.vue'
+import SHPinInput from './components/PinInput/index.vue'
 
 // 組件列表
 const components = {
@@ -110,6 +111,7 @@ const components = {
   SHDatePicker,
   SHCalendar,
   SHUploadZone,
+  SHPinInput,
 }
 
 /**
@@ -253,6 +255,12 @@ export type {
   UploadZoneSize,
   UploadZoneSlots,
 } from './components/UploadZone/types'
+export type {
+  PinInputProps,
+  PinInputEmits,
+  PinInputSize,
+  PinInputType,
+} from './components/PinInput/types'
 
 // 安裝函數
 const install = (app: App) => {
@@ -329,4 +337,5 @@ export {
   SHDateTimePicker,
   SHCalendar,
   SHSwitch,
+  SHPinInput,
 }
