@@ -103,6 +103,12 @@ export default defineConfig({
           ],
         },
         {
+          text: '對話組件 Chat',
+          items: [
+            { text: 'ChatMessage 對話訊息', link: '/components/chat-message' },
+          ],
+        },
+        {
           text: '日期組件',
           items: [
             { text: 'Calendar 日曆', link: '/components/calendar' },
