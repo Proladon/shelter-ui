@@ -185,15 +185,29 @@ docs/.vitepress/config.ts
 
 ---
 
+## Phase 4 — Validation
+
+### Goal
+
+Ensure the newly created component and documentation do not introduce any type errors or runtime issues.
+
+### Requirements
+
+1. **Terminal / TypeScript Check**: Run `pnpm type-check` (or equivalent) to ensure no TS errors are present in the new files.
+2. **VS Code Problems**: Resolve any red squiggles or linting errors in the newly created `src/components/` and `docs/components/` files.
+3. **VitePress Build**: If possible, ensure the documentation site builds without errors.
+
+---
+
 ## Execution Order
 
-Run the phases **sequentially** — do not start Phase 3 until Phase 1 and Phase 2 are complete:
+Run the phases **sequentially**:
 
 ```
-Phase 1 → Phase 2 → Phase 3
+Phase 1 → Phase 2 → Phase 3 → Phase 4
 ```
 
-This ensures demo files exist before the doc page references them.
+This ensures assets are created before documentation, and documentation is complete before final validation.
 
 ---
 
@@ -209,3 +223,5 @@ This ensures demo files exist before the doc page references them.
 - [ ] `<script setup>` imports all demo components correctly
 - [ ] `docs/.vitepress/config.ts` sidebar entry added
 - [ ] Route and filename are consistent (kebab-case)
+- [ ] No TypeScript errors in terminal or editor
+- [ ] No runtime errors in terminal or browser console
