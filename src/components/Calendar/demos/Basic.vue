@@ -1,7 +1,14 @@
 <template>
   <div class="demo-container">
     <Calendar v-model="selected" />
-    <p class="demo-result">Selected: {{ selected?.toString() ?? 'None' }}</p>
+    <p class="demo-result">
+      Selected:
+      {{
+        Array.isArray(selected)
+          ? selected.map((d) => d.toString()).join(', ')
+          : (selected?.toString() ?? 'None')
+      }}
+    </p>
   </div>
 </template>
 
@@ -10,7 +17,7 @@ import { ref } from 'vue'
 import type { DateValue } from '@internationalized/date'
 import Calendar from '../index.vue'
 
-const selected = ref<DateValue | null>(null)
+const selected = ref<DateValue | DateValue[] | null | undefined>(null)
 </script>
 
 <style scoped>

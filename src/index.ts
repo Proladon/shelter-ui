@@ -238,12 +238,6 @@ export type {
   TimeRange,
 } from './components/TimePicker/types'
 export type {
-  DateTimePickerProps,
-  DateTimePickerEmits,
-  DateTimePickerExpose,
-  DateTimeRange,
-} from './components/DateTimePicker/types'
-export type {
   CalendarProps,
   CalendarEmits,
   CalendarExpose,
@@ -341,7 +335,6 @@ export {
   SHDivider,
   SHDatePicker,
   SHTimePicker,
-  SHDateTimePicker,
   SHCalendar,
   SHSwitch,
   SHPinInput,
