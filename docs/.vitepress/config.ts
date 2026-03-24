@@ -45,10 +45,13 @@ export default defineConfig({
             { text: 'Checkbox 複選框', link: '/components/checkbox' },
             { text: 'Radio 單選框', link: '/components/radio' },
             { text: 'Switch 開關', link: '/components/switch' },
+            { text: 'PinInput 驗證碼輸入框', link: '/components/pin-input' },
             { text: 'Badge 徽章', link: '/components/badge' },
             { text: 'Tag 標籤', link: '/components/tag' },
+            { text: 'StatusTag 狀態標籤', link: '/components/status-tag' },
             { text: 'Chip 標籤', link: '/components/chip' },
             { text: 'Divider 分隔線', link: '/components/divider' },
+            { text: 'UploadZone 上傳區域', link: '/components/file-upload' },
             { text: 'Progress 進度條', link: '/components/progress' },
             { text: 'Spin 加載中', link: '/components/spin' },
             {
@@ -75,6 +78,10 @@ export default defineConfig({
             { text: 'Carousel 輪播', link: '/components/carousel' },
             { text: 'Collapsible 折疊面板', link: '/components/collapsible' },
             { text: 'ContextMenu 右鍵選單', link: '/components/context-menu' },
+            {
+              text: 'AlertDialog 警告對話框',
+              link: '/components/alert-dialog',
+            },
             { text: 'Dialog 對話框', link: '/components/dialog' },
             { text: 'Popover 彈出框', link: '/components/popover' },
             { text: 'Tooltip 工具提示', link: '/components/tooltip' },
@@ -96,8 +103,16 @@ export default defineConfig({
           ],
         },
         {
+          text: '對話組件 Chat',
+          items: [
+            { text: 'ChatMessage 對話訊息', link: '/components/chat-message' },
+          ],
+        },
+        {
           text: '日期組件',
           items: [
+            { text: 'Calendar 日曆', link: '/components/calendar' },
+            { text: 'DatePicker 日期選擇器', link: '/components/date-picker' },
             { text: 'TimePicker 時間選擇器', link: '/components/time-picker' },
           ],
         },

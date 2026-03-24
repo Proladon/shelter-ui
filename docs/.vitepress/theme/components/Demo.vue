@@ -142,4 +142,29 @@ const toggleCode = () => {
 .shelter-demo-code {
   @apply border-t border-gray-200 p-4;
 }
+
+/* Reset VitePress .vp-doc table styles inside demo preview.
+   Uses two-class prefix (.shelter-demo .shelter-demo-preview) to get
+   specificity (0,2,1) which beats .vp-doc table (0,1,1) and
+   .vp-doc table td (0,1,2) regardless of stylesheet load order. */
+.shelter-demo .shelter-demo-preview table {
+  border-spacing: 0;
+  border: none;
+  background: none;
+  margin: 0;
+  width: auto;
+  display: table;
+}
+
+.shelter-demo .shelter-demo-preview tr {
+  background: none;
+  border: none;
+}
+
+.shelter-demo .shelter-demo-preview th,
+.shelter-demo .shelter-demo-preview td {
+  border: none;
+  padding: 0;
+  background: none;
+}
 </style>

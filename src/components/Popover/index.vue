@@ -57,7 +57,7 @@ const handleOpenChange = (value: boolean) => {
           <slot></slot>
         </div>
         <!-- <slot name="close">
-          <PopoverClose class="s-popover-close" aria-label="Close">
+          <PopoverClose class="sh-popover-close" aria-label="Close">
             <IconX :size="14" />
           </PopoverClose>
         </slot> -->
@@ -103,7 +103,7 @@ const handleOpenChange = (value: boolean) => {
   @apply w-full text-text-base;
 }
 
-:deep(.s-popover-close) {
+:deep(.sh-popover-close) {
   @apply text-lg leading-none font-semibold;
   @apply absolute top-[5px] right-[5px] inline-flex items-center justify-center h-6 w-6 rounded-full;
   @apply text-text-base hover:bg-bg-secondary transition-colors cursor-pointer;

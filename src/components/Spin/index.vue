@@ -10,32 +10,32 @@
       },
     ]"
   >
-    <div v-if="$slots.default" class="s-spin__container">
-      <div class="s-spin__content" :style="contentStyle">
+    <div v-if="$slots.default" class="sh-spin__container">
+      <div class="sh-spin__content" :style="contentStyle">
         <slot></slot>
       </div>
-      <div v-if="shouldShowSpin" class="s-spin__mask">
-        <div class="s-spin__mask-inner">
-          <div class="s-spin__body">
+      <div v-if="shouldShowSpin" class="sh-spin__mask">
+        <div class="sh-spin__mask-inner">
+          <div class="sh-spin__body">
             <slot name="icon">
-              <div class="s-spin__icon">
+              <div class="sh-spin__icon">
                 <Spinner :color="mergedStroke" :size="mergedSize" />
               </div>
             </slot>
-            <div v-if="description" class="s-spin__description">
+            <div v-if="description" class="sh-spin__description">
               <slot name="description">{{ description }}</slot>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div v-else class="s-spin__body">
+    <div v-else class="sh-spin__body">
       <slot name="icon">
-        <div class="s-spin__icon">
+        <div class="sh-spin__icon">
           <Spinner :color="mergedStroke" :size="mergedSize" />
         </div>
       </slot>
-      <div v-if="description" class="s-spin__description">
+      <div v-if="description" class="sh-spin__description">
         <slot name="description">{{ description }}</slot>
       </div>
     </div>
@@ -143,51 +143,51 @@ onBeforeUnmount(() => {
   position: relative;
 }
 
-.s-spin__container {
+.sh-spin__container {
   @apply w-full h-full relative;
 }
 
-.s-spin__content {
+.sh-spin__content {
   @apply w-full h-full transition-opacity duration-300;
 }
 
-.s-spin__mask {
+.sh-spin__mask {
   @apply absolute inset-0 z-10 flex items-center justify-center;
 }
 
-.s-spin__mask-inner {
+.sh-spin__mask-inner {
   @apply flex items-center justify-center;
 }
 
-.s-spin__body {
+.sh-spin__body {
   @apply flex flex-col items-center justify-center;
 }
 
-.s-spin__icon {
+.sh-spin__icon {
   @apply inline-flex items-center justify-center;
 }
 
-.s-spin__svg {
+.sh-spin__svg {
   @apply w-full h-full;
 }
 
-.sh-spin--rotating .s-spin__svg {
+.sh-spin--rotating .sh-spin__svg {
   animation: sh-spin-rotate 1.2s linear infinite;
 }
 
-.s-spin__description {
+.sh-spin__description {
   @apply mt-2 text-sm text-gray-600;
 }
 
-.sh-spin--small .s-spin__description {
+.sh-spin--small .sh-spin__description {
   @apply text-xs;
 }
 
-.sh-spin--large .s-spin__description {
+.sh-spin--large .sh-spin__description {
   @apply text-base;
 }
 
-.sh-spin--with-description .s-spin__icon {
+.sh-spin--with-description .sh-spin__icon {
   @apply mb-1;
 }
 

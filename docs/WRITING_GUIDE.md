@@ -110,11 +110,10 @@ title: Button 按鈕
 /* CSS 樣式（如需要） */
 </style>
 ```
-````
 
   </template>
 </Demo>
-```
+````
 
 **重要說明：**
 
@@ -346,7 +345,6 @@ title: Button 按鈕
   </div>
 </template>
 ```
-````
 
   </template>
 </Demo>
@@ -392,8 +390,7 @@ title: Button 按鈕
 import BasicDemo from '@/components/Button/demos/BasicDemo.vue'
 import SizeDemo from '@/components/Button/demos/SizeDemo.vue'
 </script>
-
-```
+````
 
 ## 🔧 工具和資源
 
@@ -411,5 +408,8 @@ import SizeDemo from '@/components/Button/demos/SizeDemo.vue'
 
 ---
 
-*這份指南會持續更新，以反映最佳實踐和項目需求的變化。如有建議或問題，歡迎提出 Issue 或 PR。*
+_這份指南會持續更新，以反映最佳實踐和項目需求的變化。如有建議或問題，歡迎提出 Issue 或 PR。_
+
+```
+
 ```
