@@ -74,5 +74,10 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"
+  },
+  "pnpm": {
+    "overrides": {
+      "@internationalized/date": "^3.12.0"
+    }
   }
 }

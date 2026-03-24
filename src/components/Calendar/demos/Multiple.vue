@@ -4,7 +4,9 @@
     <p class="demo-result">
       Selected:
       {{
-        selected?.length ? selected.map((d) => d.toString()).join(', ') : 'None'
+        Array.isArray(selected) && selected.length
+          ? selected.map((d) => d.toString()).join(', ')
+          : 'None'
       }}
     </p>
   </div>
@@ -15,7 +17,7 @@ import { ref } from 'vue'
 import type { DateValue } from '@internationalized/date'
 import Calendar from '../index.vue'
 
-const selected = ref<DateValue[]>([])
+const selected = ref<DateValue | DateValue[] | null | undefined>([])
 </script>
 
 <style scoped>
