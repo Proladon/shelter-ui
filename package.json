@@ -24,6 +24,11 @@
       "import": "./dist/core.js.js",
       "require": "./dist/core.cjs.js"
     },
+    "./preset": {
+      "types": "./dist/preset.d.ts",
+      "import": "./dist/preset.js.js",
+      "require": "./dist/preset.cjs.js"
+    },
     "./dist/index.css": {
       "import": "./dist/index.css",
       "require": "./dist/index.css"

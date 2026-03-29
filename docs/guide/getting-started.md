@@ -52,6 +52,35 @@ const handleClick = () => console.log('clicked')
 </script>
 ```
 
+## UnoCSS 整合
+
+shelter-ui 提供官方 UnoCSS preset，讓消費端專案自動擁有所有必要的 shortcuts、safelist 與 theme tokens。
+
+### 使用 UnoCSS 的專案
+
+在 `uno.config.ts` 中加入 `presetShelterUI`：
+
+```ts
+import { defineConfig } from 'unocss'
+import { presetUno } from 'unocss'
+import { presetShelterUI } from '@proladon/shelter-ui/preset'
+
+export default defineConfig({
+  presets: [presetUno(), presetShelterUI()],
+})
+```
+
+### 未使用 UnoCSS 的專案
+
+shelter-ui 已將所有樣式編譯進 `dist/index.css`，只需引入即可正常顯示：
+
+```ts
+// main.ts
+import '@proladon/shelter-ui/dist/index.css'
+```
+
+> UnoCSS 並非必要依賴。未使用 UnoCSS 時，組件依然能正常運作，但無法在自身專案中使用 `sh-*` utility class。
+
 ## 配置主題
 
 用 `SHConfigProvider` 包裹應用根節點，透過 `theme-config` 覆蓋設計 Token：
