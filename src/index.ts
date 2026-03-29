@@ -1,4 +1,5 @@
 import type { App, Plugin } from 'vue'
+import './generated/baseline.css'
 
 // 導入組件
 import SHConfigProvider from './components/ConfigProvider/index.vue'
