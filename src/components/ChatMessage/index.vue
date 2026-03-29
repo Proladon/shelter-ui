@@ -213,7 +213,7 @@ const handleCopy = async () => {
 
 /* ---- Bubble ---- */
 .sh-chat-message__bubble {
-  @apply px-4 py-2 rounded-[var(--sh-radius-lg)] text-text.base break-words;
+  @apply px-4 py-2 rounded-[length:var(--sh-radius-lg)] text-text.base break-words;
   font-size: var(--sh-font-size-sm);
   line-height: 1.6;
 }
@@ -243,7 +243,7 @@ const handleCopy = async () => {
 /* ---- Copy button ---- */
 .sh-chat-message__copy-btn {
   @apply flex-shrink-0 flex items-center justify-center;
-  @apply w-6 h-6 rounded-[var(--sh-radius-sm)] cursor-pointer;
+  @apply w-6 h-6 rounded-[length:var(--sh-radius-sm)] cursor-pointer;
   @apply border-none bg-transparent p-0;
   @apply text-text.primary;
   @apply opacity-0 transition-opacity duration-150;

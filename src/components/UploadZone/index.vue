@@ -342,7 +342,7 @@ defineExpose({ openFilePicker })
 /* ── Drop zone ── */
 .sh-upload-zone-dropzone {
   @apply relative flex flex-col items-center justify-center;
-  @apply rounded-[var(--sh-radius-lg)];
+  @apply rounded-[length:var(--sh-radius-lg)];
   @apply border-2 border-dashed border-border.base;
   @apply bg-bg.primary;
   @apply cursor-pointer sh-interactive;
@@ -412,7 +412,7 @@ defineExpose({ openFilePicker })
 
 .sh-upload-zone-item {
   @apply flex items-center gap-[var(--sh-spacing-sm)] overflow-hidden;
-  @apply bg-bg.primary rounded-[var(--sh-radius-md)];
+  @apply bg-bg.primary rounded-[length:var(--sh-radius-md)];
   @apply border border-solid border-border.base;
   @apply px-[var(--sh-spacing-md)] py-[var(--sh-spacing-xs)];
   @apply transition-all duration-300 ease-in-out;
@@ -439,7 +439,7 @@ defineExpose({ openFilePicker })
 }
 
 .sh-upload-zone-thumbnail {
-  @apply w-full h-full object-cover rounded-[var(--sh-radius-sm)];
+  @apply w-full h-full object-cover rounded-[length:var(--sh-radius-sm)];
 }
 
 /* Body */
@@ -458,7 +458,7 @@ defineExpose({ openFilePicker })
 
 /* Progress */
 .sh-upload-zone-progress {
-  @apply w-full h-[3px] bg-bg.secondary rounded-[var(--sh-radius-full)] overflow-hidden;
+  @apply w-full h-[3px] bg-bg.secondary rounded-[length:var(--sh-radius-full)] overflow-hidden;
 }
 
 .sh-upload-zone-progress-bar {
@@ -490,7 +490,7 @@ defineExpose({ openFilePicker })
   @apply flex items-center justify-center;
   @apply text-text.primary sh-interactive cursor-pointer;
   @apply bg-transparent border-none outline-none p-[var(--sh-spacing-xs)];
-  @apply rounded-[var(--sh-radius-sm)];
+  @apply rounded-[length:var(--sh-radius-sm)];
 }
 
 .sh-upload-zone-remove:hover {

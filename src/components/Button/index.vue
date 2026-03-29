@@ -1,6 +1,6 @@
 <template>
   <button
-    class="relative font-medium flex items-center justify-center border border-solid rounded-[var(--sh-radius-md)] sh-interactive hover:brightness-90 active:brightness-80"
+    class="relative font-medium flex items-center justify-center border border-solid rounded-[length:var(--sh-radius-md)] sh-interactive hover:brightness-90 active:brightness-80"
     :class="[variantClass, sizeClass, { 'sh-disabled': disabled || loading }]"
     :disabled="disabled || loading"
     @click="handleClick"

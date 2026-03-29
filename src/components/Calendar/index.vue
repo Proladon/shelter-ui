@@ -179,7 +179,7 @@ function onYearChange(year: number) {
 <style scoped>
 .sh-calendar {
   @apply inline-flex flex-col select-none;
-  @apply bg-bg.primary border border-solid border-border.base rounded-[var(--sh-radius-lg)];
+  @apply bg-bg.primary border border-solid border-border.base rounded-[length:var(--sh-radius-lg)];
   padding: var(--sh-spacing-md);
   width: fit-content;
 }
@@ -210,7 +210,7 @@ function onYearChange(year: number) {
 /* ── Navigation Buttons ──────────────────────────────────────── */
 
 .sh-calendar__nav-btn {
-  @apply flex items-center justify-center rounded-[var(--sh-radius-md)];
+  @apply flex items-center justify-center rounded-[length:var(--sh-radius-md)];
   @apply text-text.base cursor-pointer transition-all duration-300 ease-in-out;
   @apply hover:bg-primary.fade hover:text-primary;
   width: var(--sh-component-size-sm);
@@ -278,7 +278,7 @@ function onYearChange(year: number) {
 
 .sh-calendar__day {
   @apply flex items-center justify-center;
-  @apply rounded-[var(--sh-radius-md)];
+  @apply rounded-[length:var(--sh-radius-md)];
   @apply text-text.base text-[length:var(--sh-font-size-sm)];
   @apply cursor-pointer transition-all duration-300 ease-in-out outline-none;
   width: var(--sh-component-size-md);

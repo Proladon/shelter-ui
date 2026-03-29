@@ -29,7 +29,7 @@
     <template #footer>
       <slot name="footer">
         <button
-          class="sh-interactive sh-outline-default sh-size-md rounded-[var(--sh-radius-md)] border border-solid"
+          class="sh-interactive sh-outline-default sh-size-md rounded-[length:var(--sh-radius-md)] border border-solid"
           @click="handleCancel"
         >
           {{ cancelText }}
@@ -37,7 +37,7 @@
 
         <button
           :class="[
-            'sh-interactive rounded-[var(--sh-radius-md)] border border-solid sh-size-md',
+            'sh-interactive rounded-[length:var(--sh-radius-md)] border border-solid sh-size-md',
             `sh-fill-${type}`,
             { 'sh-disabled': confirmLoading },
           ]"
