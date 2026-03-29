@@ -29,22 +29,23 @@
     <template #footer>
       <slot name="footer">
         <button
-          class="sh-interactive sh-outline-default sh-size-md sh-rounded-md border border-solid"
+          class="sh-alert-dialog__cancel-btn sh-interactive sh-outline-default sh-size-md sh-rounded-md"
           @click="handleCancel"
         >
           {{ cancelText }}
         </button>
 
         <button
+          class="sh-alert-dialog__confirm-btn"
           :class="[
-            'sh-interactive sh-rounded-md border border-solid sh-size-md',
+            'sh-interactive sh-rounded-md sh-size-md',
             `sh-fill-${type}`,
             { 'sh-disabled': confirmLoading },
           ]"
           :disabled="confirmLoading"
           @click="handleConfirm"
         >
-          <Spinner v-if="confirmLoading" class="mr-1.5" :size="14" />
+          <Spinner v-if="confirmLoading" :size="14" />
           {{ confirmText }}
         </button>
       </slot>
@@ -130,5 +131,15 @@ const handleCancel = () => {
 }
 .sh-alert-dialog__icon-wrapper.type-success {
   color: var(--sh-status-success);
+}
+
+.sh-alert-dialog__cancel-btn,
+.sh-alert-dialog__confirm-btn {
+  border-width: 1px;
+  border-style: solid;
+}
+
+.sh-alert-dialog__confirm-btn .loader {
+  margin-right: 0.375rem; /* mr-1.5 */
 }
 </style>

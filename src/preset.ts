@@ -84,7 +84,7 @@ export function presetShelterUI(): Preset {
       // ── Common component base styles ──────────────────────────
       {
         'sh-interactive':
-          'cursor-pointer transition-all duration-300 ease-in-out',
+          'cursor-pointer transition-all duration-300 ease-in-out hover:brightness-90 active:brightness-80',
         'sh-disabled': 'opacity-60 cursor-not-allowed',
       },
     ],

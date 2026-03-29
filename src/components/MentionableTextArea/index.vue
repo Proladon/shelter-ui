@@ -7,9 +7,9 @@
       v-model:open="open"
       ignore-filter
       :reset-search-term-on-blur="false"
-      class="text-foreground flex flex-col"
+      class="sh-mentionable-root"
     >
-      <Label v-if="label" :for="textareaId" class="text-sm font-semibold mb-2">
+      <Label v-if="label" :for="textareaId" class="sh-mentionable-label">
         {{ label }}
       </Label>
 
@@ -45,16 +45,16 @@
           position="popper"
           side="bottom"
           align="start"
-          class="overflow-y-auto overflow-x-hidden max-h-48 max-w-80 bg-bg.primary border p-1.5 rounded-md shadow-lg z-50"
+          class="sh-mentionable-dropdown"
         >
           <ComboboxItem
             v-for="item in list"
             :key="item"
             :value="item"
-            class="text-text.base px-2 py-1 data-[highlighted]:(bg-primary.fade text-primary rounded flex cursor-default) hover:(bg-muted/50 transition-colors)"
+            class="sh-mentionable-item"
             @select="handleSelect"
           >
-            <span class="truncate">{{ item }}</span>
+            <span class="sh-mentionable-item-text">{{ item }}</span>
           </ComboboxItem>
         </ComboboxContent>
       </ComboboxPortal>
@@ -249,6 +249,17 @@ function handleBlur(ev: FocusEvent) {
 </script>
 
 <style lang="postcss" scoped>
+.sh-mentionable-root {
+  @apply flex flex-col;
+  color: var(--sh-text-base);
+}
+
+.sh-mentionable-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
 .sh-textarea-wrapper {
   @apply w-full inline-flex flex-col relative;
 }
@@ -285,5 +296,45 @@ function handleBlur(ev: FocusEvent) {
   .sh-textarea-inner {
     @apply cursor-not-allowed;
   }
+}
+</style>
+
+<!-- Unscoped: targets portal-teleported ComboboxContent/ComboboxItem outside component DOM -->
+<style lang="postcss">
+.sh-mentionable-dropdown {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 12rem; /* max-h-48 */
+  max-width: 20rem; /* max-w-80 */
+  background-color: var(--sh-bg-primary);
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--sh-border-base);
+  padding: 0.375rem; /* p-1.5 */
+  border-radius: 0.375rem;
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
+  z-index: 50;
+}
+
+.sh-mentionable-item {
+  display: flex;
+  align-items: center;
+  color: var(--sh-text-base);
+  padding: 0.25rem 0.5rem; /* py-1 px-2 */
+  border-radius: 0.25rem;
+  cursor: default;
+
+  &[data-highlighted] {
+    background-color: var(--sh-primary-fade);
+    color: var(--sh-primary);
+  }
+}
+
+.sh-mentionable-item-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 </style>

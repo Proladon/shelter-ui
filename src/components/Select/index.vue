@@ -166,7 +166,6 @@ const wrapperStyle = computed(() => {
       @update:open="(val) => (isOpen = disabled ? false : val)"
       :disabled="disabled"
       :multiple="multiple"
-      class="shadow-lg"
     >
       <ComboboxAnchor
         class="sh-select"
@@ -180,7 +179,7 @@ const wrapperStyle = computed(() => {
       >
         <template v-if="!filterable">
           <ComboboxTrigger as-child :disabled="disabled">
-            <div class="flex-1 flex items-center h-full w-full overflow-hidden">
+            <div class="sh-select-body">
               <div
                 class="sh-select-input truncate"
                 :class="{
@@ -217,7 +216,7 @@ const wrapperStyle = computed(() => {
         </template>
 
         <template v-else>
-          <div class="flex-1 flex items-center h-full w-full overflow-hidden">
+          <div class="sh-select-body">
             <div
               v-if="
                 multiple &&
@@ -225,7 +224,7 @@ const wrapperStyle = computed(() => {
                 internalValue.length > 0 &&
                 !searchTerm
               "
-              class="flex-none max-w-[80%] truncate text-text.base opacity-60 mr-1"
+              class="sh-select-multi-label"
             >
               {{ getDisplayLabel(internalValue) }}
             </div>
@@ -486,5 +485,20 @@ const wrapperStyle = computed(() => {
 
 .sh-select-group-title {
   @apply text-primary;
+}
+
+.sh-select-body {
+  @apply flex-1 flex items-center h-full w-full overflow-hidden;
+}
+
+.sh-select-multi-label {
+  flex: none;
+  max-width: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--sh-text-base);
+  opacity: 0.6;
+  margin-right: 0.25rem;
 }
 </style>
