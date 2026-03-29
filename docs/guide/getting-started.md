@@ -2,27 +2,31 @@
 
 ## 安裝
 
-使用 yarn 安裝 Shelter UI（推薦）：
+::: code-group
 
-```bash
-yarn add shelter-ui
+```bash [pnpm]
+pnpm add @proladon/shelter-ui
 ```
 
-或使用 npm：
-
-```bash
-npm install shelter-ui
+```bash [yarn]
+yarn add @proladon/shelter-ui
 ```
 
-## 全局引入
+```bash [npm]
+npm install @proladon/shelter-ui
+```
 
-在你的 main.ts 文件中引入 Shelter UI：
+:::
+
+## 全域引入
+
+在 `main.ts` 中註冊整個組件庫：
 
 ```ts
 import { createApp } from 'vue'
 import App from './App.vue'
-import ShelterUI from 'shelter-ui'
-import 'shelter-ui/dist/style.css'
+import ShelterUI from '@proladon/shelter-ui'
+import '@proladon/shelter-ui/dist/index.css'
 
 const app = createApp(App)
 app.use(ShelterUI)
@@ -31,56 +35,66 @@ app.mount('#app')
 
 ## 按需引入
 
-你也可以只引入需要的組件：
+只引入需要的組件，享受最小化打包體積：
 
 ```vue
 <template>
-  <SHButton type="primary">按鈕</SHButton>
-</template>
-
-<script setup lang="ts">
-import { SButton } from 'shelter-ui'
-</script>
-```
-
-## 基本使用
-
-以下是一個簡單的示例：
-
-```vue
-<template>
-  <div>
-    <SHButton type="primary" @click="handleClick">點擊我</SHButton>
-    <SHInput v-model="inputValue" placeholder="請輸入內容" />
-  </div>
+  <SHButton @click="handleClick">點擊我</SHButton>
+  <SHInput v-model="value" placeholder="請輸入內容" />
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { SHButton, SHInput } from '@proladon/shelter-ui'
 
-const inputValue = ref('')
-const handleClick = () => {
-  alert('按鈕被點擊了！')
-}
+const value = ref('')
+const handleClick = () => console.log('clicked')
 </script>
 ```
 
+## UnoCSS 整合
+
+shelter-ui 提供官方 UnoCSS preset，讓消費端專案自動擁有所有必要的 shortcuts、safelist 與 theme tokens。
+
+### 使用 UnoCSS 的專案
+
+在 `uno.config.ts` 中加入 `presetShelterUI`：
+
+```ts
+import { defineConfig } from 'unocss'
+import { presetUno } from 'unocss'
+import { presetShelterUI } from '@proladon/shelter-ui/preset'
+
+export default defineConfig({
+  presets: [presetUno(), presetShelterUI()],
+})
+```
+
+### 未使用 UnoCSS 的專案
+
+shelter-ui 已將所有樣式編譯進 `dist/index.css`，只需引入即可正常顯示：
+
+```ts
+// main.ts
+import '@proladon/shelter-ui/dist/index.css'
+```
+
+> UnoCSS 並非必要依賴。未使用 UnoCSS 時，組件依然能正常運作，但無法在自身專案中使用 `sh-*` utility class。
+
 ## 配置主題
 
-你可以使用 `SHConfigProvider` 來配置全局主題：
+用 `SHConfigProvider` 包裹應用根節點，透過 `theme-config` 覆蓋設計 Token：
 
 ```vue
 <template>
   <SHConfigProvider :theme-config="customTheme">
-    <div id="app">
-      <!-- 你的應用內容 -->
-    </div>
+    <App />
   </SHConfigProvider>
 </template>
 
 <script setup lang="ts">
-import { SHConfigProvider } from 'shelter-ui'
-import type { ThemeVarsConfig } from 'shelter-ui'
+import { SHConfigProvider } from '@proladon/shelter-ui'
+import type { ThemeVarsConfig } from '@proladon/shelter-ui'
 
 const customTheme: ThemeVarsConfig = {
   primary: '#1890ff',
@@ -104,29 +118,34 @@ const customTheme: ThemeVarsConfig = {
 </script>
 ```
 
+> `themePrefix` 預設為 `sh`，可透過 `:theme-prefix` prop 自訂 CSS 變數前綴。
+
 ## 配置通知
 
-如果你需要使用通知組件（Notification），需要在應用的最外層包裹 `SHNotificationProvider`：
+需要使用 `Notification` 時，在應用最外層加上 `SHNotificationProvider`，讓子組件可透過 `useNotification()` hook 觸發通知：
 
 ```vue
 <template>
   <SHConfigProvider :theme-config="customTheme">
     <SHNotificationProvider>
-      <div id="app">
-        <!-- 你的應用內容 -->
-      </div>
+      <App />
     </SHNotificationProvider>
   </SHConfigProvider>
 </template>
 
 <script setup lang="ts">
-import { SHConfigProvider, SHNotificationProvider } from 'shelter-ui'
-// ...
+import { SHConfigProvider, SHNotificationProvider } from '@proladon/shelter-ui'
 </script>
 ```
 
-這樣你就可以在任何子組件中使用 `useNotification` hook 來顯示通知了。
+在子組件中使用：
 
-## TypeScript 支持
+```vue
+<script setup lang="ts">
+import { useNotification } from '@proladon/shelter-ui'
 
-Shelter UI 提供了完整的 TypeScript 類型定義，可以獲得良好的開發體驗。
+const { notify } = useNotification()
+
+notify({ type: 'success', message: '操作成功！' })
+</script>
+```

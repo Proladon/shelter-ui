@@ -1,0 +1,90 @@
+import type { Preset } from 'unocss'
+import { generateUnoThemeColors, generateUnoThemeTokens } from './core'
+
+// ── CSS Variable Key Mapping ────────────────────────────────────────
+const cssVarMap: Record<string, string> = {
+  default: 'text-primary',
+  primary: 'primary',
+  success: 'status-success',
+  warning: 'status-warning',
+  danger: 'status-danger',
+  info: 'status-info',
+}
+
+// ── Safelist ────────────────────────────────────────────────────────
+const variantPrefixes = [
+  'sh-fill',
+  'sh-ghost',
+  'sh-text',
+  'sh-outline',
+  'sh-dashed',
+  'sh-bordered',
+]
+const typeKeys = Object.keys(cssVarMap)
+const safelist = [
+  ...variantPrefixes.flatMap((p) => typeKeys.map((t) => `${p}-${t}`)),
+  'sh-size-sm',
+  'sh-size-md',
+  'sh-size-lg',
+  'sh-interactive',
+  'sh-disabled',
+]
+
+// ── Preset ──────────────────────────────────────────────────────────
+export function presetShelterUI(): Preset {
+  const colors = generateUnoThemeColors()
+  const tokens = generateUnoThemeTokens()
+
+  return {
+    name: 'shelter-ui',
+    safelist,
+    shortcuts: [
+      // ── Dynamic Variant Shortcuts ──────────────────────────────
+      [
+        /^sh-(fill|ghost|text|outline|dashed|bordered)-(.*)$/,
+        (match) => {
+          const [, variant, type] = match
+          const v = cssVarMap[type]
+          if (!v) return ''
+
+          switch (variant) {
+            case 'fill':
+              return `bg-[var(--sh-${v}-fade)] text-[var(--sh-${v})] border-transparent`
+            case 'ghost':
+              return `bg-transparent text-[var(--sh-${v})] border-transparent hover:bg-[var(--sh-${v}-fade)] active:brightness-80`
+            case 'text':
+              return `bg-transparent text-[var(--sh-${v})] border-transparent hover:text-[var(--sh-${v}-lighten)]`
+            case 'outline':
+              return `bg-transparent text-[var(--sh-${v})] border-[var(--sh-${v})] border-solid hover:bg-[var(--sh-${v}-fade)]`
+            case 'dashed':
+              return `bg-transparent text-[var(--sh-${v})] border-[var(--sh-${v})] border-dashed hover:bg-[var(--sh-${v}-fade)]`
+            case 'bordered':
+              return `bg-[var(--sh-${v}-fade)] text-[var(--sh-${v})] border-[var(--sh-${v})] border-solid`
+            default:
+              return ''
+          }
+        },
+      ],
+
+      // ── Dynamic Size Shortcuts ────────────────────────────────
+      [
+        /^sh-size-(sm|md|lg)$/,
+        ([, size]) =>
+          `h-[var(--sh-component-size-${size})] text-[length:var(--sh-font-size-${size})] px-[var(--sh-spacing-${size})]`,
+      ],
+
+      // ── Common component base styles ──────────────────────────
+      {
+        'sh-interactive':
+          'cursor-pointer transition-all duration-300 ease-in-out',
+        'sh-disabled': 'opacity-60 cursor-not-allowed',
+      },
+    ],
+    theme: {
+      colors: { ...colors },
+      borderRadius: tokens.borderRadius,
+      spacing: tokens.spacing,
+      fontSize: tokens.fontSize,
+    },
+  }
+}

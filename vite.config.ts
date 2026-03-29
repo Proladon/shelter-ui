@@ -54,6 +54,7 @@ export default defineConfig({
       entry: {
         'shelter-ui': resolve(__dirname, 'src/index.ts'),
         core: resolve(__dirname, 'src/core/index.ts'),
+        preset: resolve(__dirname, 'src/preset.ts'),
       },
       name: 'ShelterUI',
       // 調整檔案名稱格式以支援多個入口
