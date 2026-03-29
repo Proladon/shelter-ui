@@ -106,6 +106,7 @@ export default defineConfig({
           text: '對話組件 Chat',
           items: [
             { text: 'ChatMessage 對話訊息', link: '/components/chat-message' },
+            { text: 'ChatInput 對話輸入框', link: '/components/chat-input' },
           ],
         },
         {

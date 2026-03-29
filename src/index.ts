@@ -60,6 +60,7 @@ import SHCalendar from './components/Calendar/index.vue'
 import SHMessageBox from './components/MessageBox'
 import SHUploadZone from './components/UploadZone/index.vue'
 import SHPinInput from './components/PinInput/index.vue'
+import SHChatInput from './components/ChatInput/index.vue'
 
 // 組件列表
 const components = {
@@ -114,6 +115,7 @@ const components = {
   SHCalendar,
   SHUploadZone,
   SHPinInput,
+  SHChatInput,
 }
 
 /**
@@ -262,6 +264,10 @@ export type {
   PinInputSize,
   PinInputType,
 } from './components/PinInput/types'
+export type {
+  ChatInputProps,
+  ChatInputEmits,
+} from './components/ChatInput/types'
 
 // 安裝函數
 const install = (app: App) => {
@@ -339,4 +345,5 @@ export {
   SHCalendar,
   SHSwitch,
   SHPinInput,
+  SHChatInput,
 }
