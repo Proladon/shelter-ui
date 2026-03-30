@@ -1,13 +1,12 @@
 <template>
   <button
-    class="relative font-medium flex items-center justify-center border border-solid rounded-[var(--sh-radius-md)] sh-interactive hover:brightness-90 active:brightness-80"
+    class="sh-button"
     :class="[variantClass, sizeClass, { 'sh-disabled': disabled || loading }]"
     :disabled="disabled || loading"
     @click="handleClick"
   >
     <Spinner
       v-if="loading"
-      class="mr-1"
       :color="spinnerColor"
       :size="size === 'default' ? 20 : size"
     />
@@ -64,3 +63,13 @@ const spinnerColor = computed(() => {
   return `var(--sh-${props.type})`
 })
 </script>
+
+<style scoped lang="postcss">
+.sh-button {
+  @apply relative font-medium flex items-center justify-center border border-solid sh-rounded-md sh-interactive;
+}
+
+.sh-button :deep(.loader) {
+  margin-right: 0.25rem; /* mr-1 */
+}
+</style>

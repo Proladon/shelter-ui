@@ -275,7 +275,7 @@ defineExpose({ focus, blur, clear })
 <style lang="postcss" scoped>
 .sh-date-picker {
   @apply inline-flex items-center w-full;
-  @apply bg-bg.primary border border-solid border-border.base rounded-[var(--sh-radius-md)];
+  @apply bg-bg.primary border border-solid border-border.base rounded-[length:var(--sh-radius-md)];
   @apply transition-all duration-300 ease-in-out cursor-pointer select-none outline-none;
   height: var(--sh-component-size-md);
   padding-inline: var(--sh-spacing-md);
@@ -332,7 +332,7 @@ defineExpose({ focus, blur, clear })
 }
 
 :deep(.sh-date-picker__content) {
-  @apply bg-bg.primary border border-solid border-border.base rounded-[var(--sh-radius-lg)] shadow-lg z-30;
+  @apply bg-bg.primary border border-solid border-border.base rounded-[length:var(--sh-radius-lg)] shadow-lg z-30;
   padding: var(--sh-spacing-md);
   width: fit-content;
 }
@@ -364,7 +364,7 @@ defineExpose({ focus, blur, clear })
 }
 
 :deep(.sh-date-picker__nav-btn) {
-  @apply flex items-center justify-center rounded-[var(--sh-radius-md)];
+  @apply flex items-center justify-center rounded-[length:var(--sh-radius-md)];
   @apply text-text.base cursor-pointer transition-all duration-300 ease-in-out;
   @apply hover:bg-primary.fade hover:text-primary bg-transparent border-none;
   width: var(--sh-component-size-sm);
@@ -410,7 +410,7 @@ defineExpose({ focus, blur, clear })
 }
 
 :deep(.sh-date-picker__day) {
-  @apply flex items-center justify-center rounded-[var(--sh-radius-md)] text-text.base;
+  @apply flex items-center justify-center rounded-[length:var(--sh-radius-md)] text-text.base;
   @apply cursor-pointer transition-all duration-300 ease-in-out outline-none;
   font-size: var(--sh-font-size-sm);
   width: var(--sh-component-size-md);
@@ -436,7 +436,7 @@ defineExpose({ focus, blur, clear })
 
 :deep(.sh-date-picker__day[data-selection-start]),
 :deep(.sh-date-picker__day[data-selection-end]) {
-  @apply bg-primary text-white rounded-[var(--sh-radius-md)];
+  @apply bg-primary text-white rounded-[length:var(--sh-radius-md)];
 }
 
 :deep(

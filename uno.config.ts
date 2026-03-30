@@ -30,6 +30,7 @@ const variantPrefixes = [
   'sh-bordered',
 ]
 const typeKeys = Object.keys(cssVarMap)
+const radiusKeys = ['none', 'sm', 'md', 'lg', 'xl', 'full']
 const safelist = [
   ...variantPrefixes.flatMap((p) => typeKeys.map((t) => `${p}-${t}`)),
   'sh-size-sm',
@@ -37,6 +38,7 @@ const safelist = [
   'sh-size-lg',
   'sh-interactive',
   'sh-disabled',
+  ...radiusKeys.map((r) => `sh-rounded-${r}`),
 ]
 
 export default defineConfig({
@@ -61,7 +63,7 @@ export default defineConfig({
           case 'text':
             return `bg-transparent text-[var(--sh-${v})] border-transparent hover:text-[var(--sh-${v}-lighten)]`
           case 'outline':
-            return `bg-transparent text-[var(--sh-${v})] border-[var(--sh-${v})] border-solid hover:bg-[var(--sh-${v}-fade)]`
+            return `bg-transparent text-[var(--sh-${v})] border-[color:var(--sh-${v})] border-solid hover:bg-[var(--sh-${v}-fade)]`
           case 'dashed':
             return `bg-transparent text-[var(--sh-${v})] border-[var(--sh-${v})] border-dashed hover:bg-[var(--sh-${v}-fade)]`
           case 'bordered':
@@ -79,10 +81,16 @@ export default defineConfig({
         `h-[var(--sh-component-size-${size})] text-[var(--sh-font-size-${size})] px-[var(--sh-spacing-${size})]`,
     ],
 
+    // ── Dynamic Radius Shortcuts ──────────────────────────────────
+    [
+      /^sh-rounded-(none|sm|md|lg|xl|full)$/,
+      ([, r]) => `rounded-[length:var(--sh-radius-${r})]`,
+    ],
+
     // ── Common component base styles ──────────────────────────────
     {
       'sh-interactive':
-        'cursor-pointer transition-all duration-300 ease-in-out',
+        'cursor-pointer transition-all duration-300 ease-in-out hover:brightness-90 active:brightness-80',
       'sh-disabled': 'opacity-60 cursor-not-allowed',
     },
   ],
