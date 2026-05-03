@@ -32,10 +32,12 @@
     "./dist/index.css": {
       "import": "./dist/index.css",
       "require": "./dist/index.css"
-    }
+    },
+    "./components-catalog.json": "./components-catalog.json"
   },
   "files": [
-    "dist"
+    "dist",
+    "components-catalog.json"
   ],
   "scripts": {
     "dev": "vite",
