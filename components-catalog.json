@@ -1,0 +1,3666 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "_meta": {
+        "description": "shelter-ui component catalog — machine-readable reference for AI agents. Lists every public component with its purpose, props, events, slots, and exposed methods.",
+        "version": "1.0.0",
+        "generated": "2026-05-03",
+        "importBase": "shelter-ui"
+    },
+    "components": [
+        {
+            "name": "ActiveButtonGroup",
+            "description": "提供類似標籤頁切換的按鈕組，切換時有平滑過渡動畫。搭配 ActiveButtonItem 子組件使用。",
+            "subComponents": [
+                "ActiveButtonItem"
+            ],
+            "props": [
+                {
+                    "name": "modelValue",
+                    "type": "string",
+                    "default": null,
+                    "description": "當前選中按鈕的值（支持 v-model）"
+                },
+                {
+                    "name": "defaultValue",
+                    "type": "string",
+                    "default": null,
+                    "description": "默認選中按鈕的值"
+                }
+            ],
+            "events": [
+                {
+                    "name": "update:modelValue",
+                    "payload": "string",
+                    "description": "選中按鈕變化時觸發，用於 v-model"
+                },
+                {
+                    "name": "change",
+                    "payload": "string",
+                    "description": "選中按鈕變化時觸發"
+                }
+            ],
+            "slots": [],
+            "methods": []
+        },
+        {
+            "name": "ActiveButtonItem",
+            "description": "ActiveButtonGroup 的子項目組件。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "value",
+                    "type": "string",
+                    "default": null,
+                    "required": true,
+                    "description": "按鈕的值"
+                },
+                {
+                    "name": "disabled",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否禁用此按鈕"
+                }
+            ],
+            "events": [],
+            "slots": [
+                {
+                    "name": "default",
+                    "description": "按鈕的內容"
+                }
+            ],
+            "methods": []
+        },
+        {
+            "name": "AlertDialog",
+            "description": "警告對話框，用於需要用戶明確確認的危險或重要操作，支援 danger / warning / info / success 四種語意類型。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "open",
+                    "type": "boolean",
+                    "default": null,
+                    "description": "控制對話框是否顯示（v-model）"
+                },
+                {
+                    "name": "type",
+                    "type": "'danger' | 'warning' | 'info' | 'success'",
+                    "default": "'danger'",
+                    "description": "對話框類型，影響圖示與確認按鈕顏色"
+                },
+                {
+                    "name": "title",
+                    "type": "string",
+                    "default": null,
+                    "description": "標題文字（也可透過 slot 設定）"
+                },
+                {
+                    "name": "description",
+                    "type": "string",
+                    "default": null,
+                    "description": "描述文字（也可透過 slot 設定）"
+                },
+                {
+                    "name": "confirmText",
+                    "type": "string",
+                    "default": "'確認'",
+                    "description": "確認按鈕文字"
+                },
+                {
+                    "name": "cancelText",
+                    "type": "string",
+                    "default": "'取消'",
+                    "description": "取消按鈕文字"
+                },
+                {
+                    "name": "confirmLoading",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "確認按鈕載入狀態"
+                },
+                {
+                    "name": "modal",
+                    "type": "boolean",
+                    "default": true,
+                    "description": "是否為 modal 模式"
+                }
+            ],
+            "events": [
+                {
+                    "name": "update:open",
+                    "payload": "boolean",
+                    "description": "對話框開關狀態變化時觸發"
+                },
+                {
+                    "name": "confirm",
+                    "payload": null,
+                    "description": "使用者點擊確認按鈕時觸發"
+                },
+                {
+                    "name": "cancel",
+                    "payload": null,
+                    "description": "使用者點擊取消按鈕時觸發"
+                }
+            ],
+            "slots": [
+                {
+                    "name": "trigger",
+                    "description": "觸發對話框的元素"
+                },
+                {
+                    "name": "title",
+                    "description": "自訂標題內容（優先級高於 title prop）"
+                },
+                {
+                    "name": "description",
+                    "description": "自訂描述內容（優先級高於 description prop）"
+                },
+                {
+                    "name": "footer",
+                    "description": "完全自訂底部按鈕區域"
+                }
+            ],
+            "methods": []
+        },
+        {
+            "name": "Badge",
+            "description": "徽章組件，用於在目標元素上方顯示數字、圓點或自訂內容，常用於通知計數。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "value",
+                    "type": "string | number",
+                    "default": "''",
+                    "description": "徽章顯示的內容"
+                },
+                {
+                    "name": "color",
+                    "type": "string",
+                    "default": "''",
+                    "description": "徽章背景顏色（默認使用 status.danger 主題顏色）"
+                },
+                {
+                    "name": "textColor",
+                    "type": "string",
+                    "default": "''",
+                    "description": "徽章文本顏色（默認為白色）"
+                },
+                {
+                    "name": "isDot",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否顯示為小圓點"
+                },
+                {
+                    "name": "max",
+                    "type": "number",
+                    "default": "Infinity",
+                    "description": "最大值，超過時顯示 '{max}+'"
+                },
+                {
+                    "name": "show",
+                    "type": "boolean",
+                    "default": true,
+                    "description": "是否顯示徽章"
+                },
+                {
+                    "name": "position",
+                    "type": "'left' | 'center' | 'right'",
+                    "default": "'right'",
+                    "description": "徽章顯示位置"
+                },
+                {
+                    "name": "offsetLeft",
+                    "type": "string | number",
+                    "default": null,
+                    "description": "距離左側的偏移量"
+                },
+                {
+                    "name": "offsetRight",
+                    "type": "string | number",
+                    "default": null,
+                    "description": "距離右側的偏移量"
+                },
+                {
+                    "name": "offsetTop",
+                    "type": "string | number",
+                    "default": null,
+                    "description": "距離頂部的偏移量"
+                },
+                {
+                    "name": "offsetBottom",
+                    "type": "string | number",
+                    "default": null,
+                    "description": "距離底部的偏移量"
+                },
+                {
+                    "name": "size",
+                    "type": "number",
+                    "default": 12,
+                    "description": "徽章字體大小 (px)"
+                }
+            ],
+            "events": [
+                {
+                    "name": "click",
+                    "payload": "MouseEvent",
+                    "description": "點擊徽章時觸發"
+                }
+            ],
+            "slots": [
+                {
+                    "name": "default",
+                    "description": "依附的內容元素"
+                },
+                {
+                    "name": "content",
+                    "description": "自定義徽章內容"
+                }
+            ],
+            "methods": []
+        },
+        {
+            "name": "BaseContainer",
+            "description": "基礎容器，提供統一的寬高、陰影與禁用狀態，可作為卡片或區塊的基底。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "width",
+                    "type": "string | number",
+                    "default": "'auto'",
+                    "description": "容器寬度"
+                },
+                {
+                    "name": "height",
+                    "type": "string | number",
+                    "default": "'auto'",
+                    "description": "容器高度"
+                },
+                {
+                    "name": "shadow",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否顯示陰影"
+                },
+                {
+                    "name": "disabled",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否禁用"
+                }
+            ],
+            "events": [
+                {
+                    "name": "click",
+                    "payload": "MouseEvent",
+                    "description": "點擊容器時觸發"
+                }
+            ],
+            "slots": [
+                {
+                    "name": "default",
+                    "description": "容器內容"
+                }
+            ],
+            "methods": []
+        },
+        {
+            "name": "BlockArea",
+            "description": "遮罩區塊，active 時在內容上方顯示遮罩與提示圖示或文字，常用於拖放上傳等場景。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "active",
+                    "type": "boolean",
+                    "default": true,
+                    "description": "是否顯示遮罩"
+                },
+                {
+                    "name": "icon",
+                    "type": "Component",
+                    "default": null,
+                    "description": "遮罩圖示組件"
+                },
+                {
+                    "name": "text",
+                    "type": "string",
+                    "default": null,
+                    "description": "遮罩提示文字"
+                }
+            ],
+            "events": [],
+            "slots": [
+                {
+                    "name": "default",
+                    "description": "被遮罩的內容"
+                },
+                {
+                    "name": "icon",
+                    "description": "自訂圖示"
+                },
+                {
+                    "name": "text",
+                    "description": "自訂提示文字"
+                }
+            ],
+            "methods": []
+        },
+        {
+            "name": "Button",
+            "description": "通用按鈕，支援多種語意類型、尺寸與外觀變體（text、ghost、dashed、outline、bordered）。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "type",
+                    "type": "'primary' | 'success' | 'warning' | 'danger' | 'info' | 'default'",
+                    "default": "'default'",
+                    "description": "按鈕語意類型"
+                },
+                {
+                    "name": "size",
+                    "type": "'large' | 'default' | 'small'",
+                    "default": "'default'",
+                    "description": "按鈕尺寸"
+                },
+                {
+                    "name": "disabled",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否禁用"
+                },
+                {
+                    "name": "loading",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否顯示載入狀態"
+                },
+                {
+                    "name": "text",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "文字按鈕樣式"
+                },
+                {
+                    "name": "ghost",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "幽靈按鈕樣式（透明背景）"
+                },
+                {
+                    "name": "dashed",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "虛線邊框樣式"
+                },
+                {
+                    "name": "outline",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "輪廓按鈕樣式"
+                },
+                {
+                    "name": "borderd",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "帶邊框樣式"
+                }
+            ],
+            "events": [
+                {
+                    "name": "click",
+                    "payload": "MouseEvent",
+                    "description": "點擊按鈕時觸發"
+                }
+            ],
+            "slots": [
+                {
+                    "name": "default",
+                    "description": "按鈕內容"
+                }
+            ],
+            "methods": []
+        },
+        {
+            "name": "Calendar",
+            "description": "日曆選擇組件，支援單選、多選、範圍選擇，可搭配 locale 進行國際化。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "modelValue",
+                    "type": "DateValue | DateValue[] | DateRange | null",
+                    "default": null,
+                    "description": "選中的日期值（v-model）"
+                },
+                {
+                    "name": "multiple",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否多選"
+                },
+                {
+                    "name": "disabled",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否禁用"
+                },
+                {
+                    "name": "readonly",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否唯讀"
+                },
+                {
+                    "name": "locale",
+                    "type": "string",
+                    "default": null,
+                    "description": "語言 locale（如 'zh-TW'）"
+                },
+                {
+                    "name": "minValue",
+                    "type": "DateValue",
+                    "default": null,
+                    "description": "可選最小日期"
+                },
+                {
+                    "name": "maxValue",
+                    "type": "DateValue",
+                    "default": null,
+                    "description": "可選最大日期"
+                },
+                {
+                    "name": "isDateDisabled",
+                    "type": "(date: DateValue) => boolean",
+                    "default": null,
+                    "description": "自訂日期禁用判斷函式"
+                },
+                {
+                    "name": "isDateUnavailable",
+                    "type": "(date: DateValue) => boolean",
+                    "default": null,
+                    "description": "自訂日期不可用判斷函式"
+                },
+                {
+                    "name": "placeholder",
+                    "type": "DateValue",
+                    "default": null,
+                    "description": "未選中時的佔位日期"
+                },
+                {
+                    "name": "defaultPlaceholder",
+                    "type": "DateValue",
+                    "default": null,
+                    "description": "默認佔位日期"
+                },
+                {
+                    "name": "defaultValue",
+                    "type": "DateValue",
+                    "default": null,
+                    "description": "默認選中日期"
+                },
+                {
+                    "name": "weekStartsOn",
+                    "type": "number",
+                    "default": null,
+                    "description": "每週起始日（0=日, 1=一, ...）"
+                },
+                {
+                    "name": "weekdayFormat",
+                    "type": "'narrow' | 'short' | 'long'",
+                    "default": "'short'",
+                    "description": "週日標題格式"
+                },
+                {
+                    "name": "fixedWeeks",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否固定顯示6週"
+                },
+                {
+                    "name": "numberOfMonths",
+                    "type": "number",
+                    "default": 1,
+                    "description": "同時顯示的月份數"
+                },
+                {
+                    "name": "pagedNavigation",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否按頁數翻頁"
+                },
+                {
+                    "name": "preventDeselect",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否防止取消選中"
+                },
+                {
+                    "name": "disableDaysOutsideCurrentView",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否禁用當前月份以外的日期"
+                },
+                {
+                    "name": "calendarLabel",
+                    "type": "string",
+                    "default": null,
+                    "description": "日曆 aria-label"
+                },
+                {
+                    "name": "initialFocus",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否初始時自動聚焦"
+                }
+            ],
+            "events": [
+                {
+                    "name": "update:modelValue",
+                    "payload": "DateValue | DateValue[] | DateRange | null",
+                    "description": "選中值變化時觸發"
+                },
+                {
+                    "name": "update:placeholder",
+                    "payload": "DateValue",
+                    "description": "佔位日期變化時觸發"
+                }
+            ],
+            "slots": [],
+            "methods": []
+        },
+        {
+            "name": "Carousel",
+            "description": "輪播組件，支援自動播放、循環、指示器、導航按鈕，以及 slide / fade 過渡效果。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "modelValue",
+                    "type": "number",
+                    "default": 0,
+                    "description": "當前輪播索引（v-model）"
+                },
+                {
+                    "name": "items",
+                    "type": "CarouselItem[]",
+                    "default": "[]",
+                    "description": "輪播項目資料陣列"
+                },
+                {
+                    "name": "autoplay",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否自動播放"
+                },
+                {
+                    "name": "interval",
+                    "type": "number",
+                    "default": 3000,
+                    "description": "自動播放間隔（ms）"
+                },
+                {
+                    "name": "showIndicators",
+                    "type": "boolean",
+                    "default": true,
+                    "description": "是否顯示指示器"
+                },
+                {
+                    "name": "showNavigation",
+                    "type": "boolean",
+                    "default": true,
+                    "description": "是否顯示導航按鈕"
+                },
+                {
+                    "name": "loop",
+                    "type": "boolean",
+                    "default": true,
+                    "description": "是否循環播放"
+                },
+                {
+                    "name": "pauseOnHover",
+                    "type": "boolean",
+                    "default": true,
+                    "description": "懸停時是否暫停自動播放"
+                },
+                {
+                    "name": "duration",
+                    "type": "number",
+                    "default": 300,
+                    "description": "過渡動畫時長（ms）"
+                },
+                {
+                    "name": "effect",
+                    "type": "'slide' | 'fade'",
+                    "default": "'slide'",
+                    "description": "過渡效果類型"
+                },
+                {
+                    "name": "height",
+                    "type": "string | number",
+                    "default": "'400px'",
+                    "description": "輪播高度"
+                },
+                {
+                    "name": "disabled",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否禁用導航"
+                }
+            ],
+            "events": [
+                {
+                    "name": "update:modelValue",
+                    "payload": "number",
+                    "description": "當前索引變化時觸發"
+                },
+                {
+                    "name": "change",
+                    "payload": "{ current: number, previous: number }",
+                    "description": "切換輪播項目時觸發"
+                },
+                {
+                    "name": "item-click",
+                    "payload": "{ item: CarouselItem, index: number }",
+                    "description": "點擊輪播項目時觸發"
+                },
+                {
+                    "name": "autoplay-start",
+                    "payload": null,
+                    "description": "自動播放開始時觸發"
+                },
+                {
+                    "name": "autoplay-stop",
+                    "payload": null,
+                    "description": "自動播放停止時觸發"
+                }
+            ],
+            "slots": [
+                {
+                    "name": "default",
+                    "description": "自訂輪播內容（取代 items prop）"
+                },
+                {
+                    "name": "item",
+                    "slotProps": "{ item: CarouselItem, index: number, active: boolean }",
+                    "description": "自訂每個輪播項目的渲染"
+                },
+                {
+                    "name": "indicator",
+                    "slotProps": "{ index: number, active: boolean }",
+                    "description": "自訂指示器"
+                },
+                {
+                    "name": "prev-button",
+                    "description": "自訂上一頁按鈕"
+                },
+                {
+                    "name": "next-button",
+                    "description": "自訂下一頁按鈕"
+                }
+            ],
+            "methods": []
+        },
+        {
+            "name": "ChatInput",
+            "description": "聊天輸入框，整合文字輸入、檔案上傳、圖片上傳與送出功能，適用於 AI 聊天介面。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "modelValue",
+                    "type": "string",
+                    "default": "''",
+                    "description": "輸入內容（v-model）"
+                },
+                {
+                    "name": "placeholder",
+                    "type": "string",
+                    "default": "'輸入訊息…'",
+                    "description": "佔位提示文字"
+                },
+                {
+                    "name": "rows",
+                    "type": "number",
+                    "default": 3,
+                    "description": "文字區域的行數"
+                },
+                {
+                    "name": "disabled",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否禁用"
+                },
+                {
+                    "name": "maxlength",
+                    "type": "number",
+                    "default": null,
+                    "description": "最大輸入字數"
+                },
+                {
+                    "name": "showWordLimit",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否顯示字數限制"
+                },
+                {
+                    "name": "submitLoading",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "送出按鈕是否顯示載入狀態"
+                },
+                {
+                    "name": "fileAccept",
+                    "type": "string",
+                    "default": null,
+                    "description": "檔案上傳接受的類型"
+                },
+                {
+                    "name": "imageAccept",
+                    "type": "string",
+                    "default": "'image/*'",
+                    "description": "圖片上傳接受的類型"
+                },
+                {
+                    "name": "hideFileUpload",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否隱藏檔案上傳按鈕"
+                },
+                {
+                    "name": "hideImageUpload",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否隱藏圖片上傳按鈕"
+                }
+            ],
+            "events": [
+                {
+                    "name": "update:modelValue",
+                    "payload": "string",
+                    "description": "輸入內容變化時觸發"
+                },
+                {
+                    "name": "submit",
+                    "payload": "string",
+                    "description": "點擊送出或按 Enter 時觸發"
+                },
+                {
+                    "name": "fileSelect",
+                    "payload": "FileList",
+                    "description": "選擇檔案時觸發"
+                },
+                {
+                    "name": "imageSelect",
+                    "payload": "FileList",
+                    "description": "選擇圖片時觸發"
+                },
+                {
+                    "name": "pressEnter",
+                    "payload": "KeyboardEvent",
+                    "description": "按下 Enter 時觸發"
+                }
+            ],
+            "slots": [
+                {
+                    "name": "block-start",
+                    "description": "輸入框上方的區塊"
+                },
+                {
+                    "name": "toolbar",
+                    "description": "工具列區域（位於輸入框下方）"
+                }
+            ],
+            "methods": []
+        },
+        {
+            "name": "ChatMessage",
+            "description": "聊天訊息氣泡，支援左/右對齊、頭像、使用者名稱、時間、傳送狀態。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "avatar",
+                    "type": "string",
+                    "default": null,
+                    "description": "頭像圖片 URL"
+                },
+                {
+                    "name": "avatarFallback",
+                    "type": "string",
+                    "default": null,
+                    "description": "頭像載入失敗時的替代文字"
+                },
+                {
+                    "name": "username",
+                    "type": "string",
+                    "default": null,
+                    "description": "使用者名稱"
+                },
+                {
+                    "name": "time",
+                    "type": "string",
+                    "default": null,
+                    "description": "訊息時間"
+                },
+                {
+                    "name": "content",
+                    "type": "string",
+                    "default": null,
+                    "description": "訊息內容"
+                },
+                {
+                    "name": "position",
+                    "type": "'left' | 'right'",
+                    "default": "'left'",
+                    "description": "訊息對齊方向"
+                },
+                {
+                    "name": "status",
+                    "type": "'sending' | 'sent' | 'failed'",
+                    "default": null,
+                    "description": "訊息傳送狀態"
+                }
+            ],
+            "events": [],
+            "slots": [
+                {
+                    "name": "avatar",
+                    "description": "自訂頭像"
+                },
+                {
+                    "name": "username",
+                    "description": "自訂使用者名稱"
+                },
+                {
+                    "name": "time",
+                    "description": "自訂時間顯示"
+                },
+                {
+                    "name": "content",
+                    "description": "自訂訊息內容"
+                }
+            ],
+            "methods": []
+        },
+        {
+            "name": "Checkbox",
+            "description": "核取方塊，支援三態（true / false / indeterminate）與二元模式，可單獨使用或透過 CheckboxGroup 批量管理。",
+            "subComponents": [
+                "CheckboxGroup"
+            ],
+            "props": [
+                {
+                    "name": "modelValue",
+                    "type": "boolean | 'indeterminate' | null",
+                    "default": null,
+                    "description": "核取方塊的值（v-model）"
+                },
+                {
+                    "name": "value",
+                    "type": "any",
+                    "default": null,
+                    "description": "在 CheckboxGroup 中代表此項目的值"
+                },
+                {
+                    "name": "name",
+                    "type": "string",
+                    "default": null,
+                    "description": "原生 name 屬性"
+                },
+                {
+                    "name": "disabled",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否禁用"
+                },
+                {
+                    "name": "required",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否必填"
+                },
+                {
+                    "name": "inputId",
+                    "type": "string",
+                    "default": null,
+                    "description": "input 元素 id"
+                },
+                {
+                    "name": "inputClass",
+                    "type": "string",
+                    "default": null,
+                    "description": "input 元素 class"
+                },
+                {
+                    "name": "inputStyle",
+                    "type": "string | object",
+                    "default": null,
+                    "description": "input 元素 style"
+                },
+                {
+                    "name": "binary",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否只允許 true / false 兩態"
+                },
+                {
+                    "name": "indeterminate",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否顯示半選狀態"
+                },
+                {
+                    "name": "label",
+                    "type": "string",
+                    "default": null,
+                    "description": "標籤文字"
+                }
+            ],
+            "events": [
+                {
+                    "name": "update:modelValue",
+                    "payload": "boolean | 'indeterminate' | any[]",
+                    "description": "值變化時觸發"
+                },
+                {
+                    "name": "change",
+                    "payload": "boolean | 'indeterminate' | any[]",
+                    "description": "值變化時觸發"
+                },
+                {
+                    "name": "focus",
+                    "payload": "FocusEvent",
+                    "description": "獲得焦點時觸發"
+                },
+                {
+                    "name": "blur",
+                    "payload": "FocusEvent",
+                    "description": "失去焦點時觸發"
+                }
+            ],
+            "slots": [
+                {
+                    "name": "default",
+                    "description": "標籤內容"
+                },
+                {
+                    "name": "icon",
+                    "description": "自訂勾選圖示"
+                }
+            ],
+            "methods": []
+        },
+        {
+            "name": "CheckboxGroup",
+            "description": "核取方塊群組，透過 options 陣列批量渲染 Checkbox，並統一管理選中值。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "modelValue",
+                    "type": "any[]",
+                    "default": "[]",
+                    "description": "選中值的陣列（v-model）"
+                },
+                {
+                    "name": "options",
+                    "type": "CheckboxOption[]",
+                    "default": "[]",
+                    "description": "選項陣列"
+                },
+                {
+                    "name": "optionLabel",
+                    "type": "string",
+                    "default": "'label'",
+                    "description": "選項中作為顯示文字的欄位名"
+                },
+                {
+                    "name": "optionValue",
+                    "type": "string",
+                    "default": "'value'",
+                    "description": "選項中作為值的欄位名"
+                },
+                {
+                    "name": "optionDisabled",
+                    "type": "string",
+                    "default": "'disabled'",
+                    "description": "選項中作為禁用判斷的欄位名"
+                },
+                {
+                    "name": "disabled",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否禁用整個群組"
+                },
+                {
+                    "name": "name",
+                    "type": "string",
+                    "default": null,
+                    "description": "原生 name 屬性"
+                },
+                {
+                    "name": "orientation",
+                    "type": "'horizontal' | 'vertical'",
+                    "default": "'vertical'",
+                    "description": "排列方向"
+                },
+                {
+                    "name": "label",
+                    "type": "string",
+                    "default": null,
+                    "description": "群組標籤文字"
+                }
+            ],
+            "events": [
+                {
+                    "name": "update:modelValue",
+                    "payload": "any[]",
+                    "description": "選中值變化時觸發"
+                },
+                {
+                    "name": "change",
+                    "payload": "any[]",
+                    "description": "選中值變化時觸發"
+                }
+            ],
+            "slots": [],
+            "methods": []
+        },
+        {
+            "name": "Chip",
+            "description": "標籤片，可顯示圖示、文字，並支援可移除（removable）功能。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "label",
+                    "type": "string",
+                    "default": null,
+                    "description": "顯示文字"
+                },
+                {
+                    "name": "image",
+                    "type": "string",
+                    "default": null,
+                    "description": "頭像圖片 URL"
+                },
+                {
+                    "name": "icon",
+                    "type": "Component",
+                    "default": null,
+                    "description": "左側圖示組件"
+                },
+                {
+                    "name": "removable",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否可移除"
+                },
+                {
+                    "name": "removeIcon",
+                    "type": "Component",
+                    "default": "IconX",
+                    "description": "移除圖示組件"
+                }
+            ],
+            "events": [
+                {
+                    "name": "remove",
+                    "payload": null,
+                    "description": "點擊移除按鈕時觸發"
+                },
+                {
+                    "name": "removeicon",
+                    "payload": null,
+                    "description": "移除圖示相關事件"
+                }
+            ],
+            "slots": [
+                {
+                    "name": "default",
+                    "description": "自訂內容"
+                },
+                {
+                    "name": "icon",
+                    "description": "自訂左側圖示"
+                },
+                {
+                    "name": "removeicon",
+                    "slotProps": "{ removeCallback, keydownCallback }",
+                    "description": "自訂移除圖示"
+                }
+            ],
+            "methods": []
+        },
+        {
+            "name": "Collapsible",
+            "description": "可折疊容器，點擊 header 展開或收起內容，支援受控與非受控模式。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "open",
+                    "type": "boolean",
+                    "default": null,
+                    "description": "控制展開狀態（受控模式）"
+                },
+                {
+                    "name": "defaultOpen",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "默認展開狀態（非受控模式）"
+                },
+                {
+                    "name": "disabled",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否禁用"
+                },
+                {
+                    "name": "unmountOnHide",
+                    "type": "boolean",
+                    "default": true,
+                    "description": "收起時是否卸載內容 DOM"
+                },
+                {
+                    "name": "headerClass",
+                    "type": "string",
+                    "default": null,
+                    "description": "header 的 CSS class"
+                },
+                {
+                    "name": "contentClass",
+                    "type": "string",
+                    "default": null,
+                    "description": "內容區的 CSS class"
+                },
+                {
+                    "name": "triggerPosition",
+                    "type": "'left' | 'right'",
+                    "default": "'left'",
+                    "description": "展開觸發圖示位置"
+                }
+            ],
+            "events": [
+                {
+                    "name": "update:open",
+                    "payload": "boolean",
+                    "description": "展開狀態變化時觸發"
+                }
+            ],
+            "slots": [
+                {
+                    "name": "default",
+                    "description": "折疊內容"
+                },
+                {
+                    "name": "trigger",
+                    "description": "自訂觸發區域圖示"
+                },
+                {
+                    "name": "header",
+                    "description": "自訂 header 內容"
+                }
+            ],
+            "methods": []
+        },
+        {
+            "name": "ConfigProvider",
+            "description": "全域配置提供者，用於注入主題變數與 themePrefix，應放置於應用程式根部。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "themeConfig",
+                    "type": "ThemeVarsConfig",
+                    "default": "defaultTheme",
+                    "description": "主題變數配置物件"
+                },
+                {
+                    "name": "themePrefix",
+                    "type": "string",
+                    "default": "'sh'",
+                    "description": "CSS 變數前綴"
+                }
+            ],
+            "events": [],
+            "slots": [
+                {
+                    "name": "default",
+                    "description": "應用程式內容"
+                }
+            ],
+            "methods": []
+        },
+        {
+            "name": "ContextMenu",
+            "description": "右鍵選單，透過 items 配置選單項目，支援分隔線、子選單、核取項、單選群組。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "items",
+                    "type": "ContextMenuItemOption[]",
+                    "default": "[]",
+                    "description": "選單項目配置陣列"
+                },
+                {
+                    "name": "triggerContent",
+                    "type": "string",
+                    "default": "'Right click here.'",
+                    "description": "觸發區域的預設文字"
+                },
+                {
+                    "name": "triggerClass",
+                    "type": "string",
+                    "default": null,
+                    "description": "觸發區域的 CSS class"
+                },
+                {
+                    "name": "radioValue",
+                    "type": "string | number",
+                    "default": null,
+                    "description": "單選群組的當前值"
+                },
+                {
+                    "name": "radioGroup",
+                    "type": "string",
+                    "default": null,
+                    "description": "單選群組名稱"
+                }
+            ],
+            "events": [
+                {
+                    "name": "item-click",
+                    "payload": "ContextMenuItemOption",
+                    "description": "點擊普通選單項目時觸發"
+                },
+                {
+                    "name": "checkbox-change",
+                    "payload": "{ item: ContextMenuItemOption, checked: boolean }",
+                    "description": "核取項目變化時觸發"
+                },
+                {
+                    "name": "radio-change",
+                    "payload": "string | number",
+                    "description": "單選項目變化時觸發"
+                },
+                {
+                    "name": "update:radioValue",
+                    "payload": "string | number",
+                    "description": "單選值變化時觸發"
+                }
+            ],
+            "slots": [
+                {
+                    "name": "default",
+                    "description": "觸發右鍵選單的內容區域"
+                }
+            ],
+            "methods": []
+        },
+        {
+            "name": "DatePicker",
+            "description": "日期選擇器，支援單日與範圍選擇模式，內建日曆面板，可配置 locale、最小/最大日期等限制。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "modelValue",
+                    "type": "DateValue | DateRange | null",
+                    "default": null,
+                    "description": "選中的日期值（v-model）"
+                },
+                {
+                    "name": "range",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否為範圍選擇模式"
+                },
+                {
+                    "name": "placeholder",
+                    "type": "string",
+                    "default": null,
+                    "description": "佔位提示文字"
+                },
+                {
+                    "name": "disabled",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否禁用"
+                },
+                {
+                    "name": "readonly",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否唯讀"
+                },
+                {
+                    "name": "locale",
+                    "type": "string",
+                    "default": null,
+                    "description": "語言 locale"
+                },
+                {
+                    "name": "minValue",
+                    "type": "DateValue",
+                    "default": null,
+                    "description": "可選最小日期"
+                },
+                {
+                    "name": "maxValue",
+                    "type": "DateValue",
+                    "default": null,
+                    "description": "可選最大日期"
+                },
+                {
+                    "name": "isDateUnavailable",
+                    "type": "(date: DateValue) => boolean",
+                    "default": null,
+                    "description": "自訂日期不可用判斷函式"
+                },
+                {
+                    "name": "weekStartsOn",
+                    "type": "number",
+                    "default": null,
+                    "description": "每週起始日"
+                },
+                {
+                    "name": "weekdayFormat",
+                    "type": "'narrow' | 'short' | 'long'",
+                    "default": null,
+                    "description": "週日標題格式"
+                },
+                {
+                    "name": "fixedWeeks",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否固定顯示6週"
+                },
+                {
+                    "name": "open",
+                    "type": "boolean",
+                    "default": null,
+                    "description": "控制下拉面板開關"
+                },
+                {
+                    "name": "defaultPlaceholder",
+                    "type": "DateValue",
+                    "default": null,
+                    "description": "默認佔位日期"
+                }
+            ],
+            "events": [
+                {
+                    "name": "update:modelValue",
+                    "payload": "DateValue | DateRange | null",
+                    "description": "日期變化時觸發"
+                },
+                {
+                    "name": "update:open",
+                    "payload": "boolean",
+                    "description": "面板開關狀態變化時觸發"
+                },
+                {
+                    "name": "change",
+                    "payload": "DateValue | DateRange | null",
+                    "description": "日期變化時觸發"
+                },
+                {
+                    "name": "clear",
+                    "payload": null,
+                    "description": "清除日期時觸發"
+                },
+                {
+                    "name": "focus",
+                    "payload": "FocusEvent",
+                    "description": "獲得焦點時觸發"
+                },
+                {
+                    "name": "blur",
+                    "payload": "FocusEvent",
+                    "description": "失去焦點時觸發"
+                }
+            ],
+            "slots": [],
+            "methods": [
+                {
+                    "name": "focus",
+                    "description": "使輸入框獲得焦點"
+                },
+                {
+                    "name": "blur",
+                    "description": "使輸入框失去焦點"
+                },
+                {
+                    "name": "clear",
+                    "description": "清除選中的日期"
+                }
+            ]
+        },
+        {
+            "name": "Dialog",
+            "description": "通用對話框，支援多種語意類型、自訂寬度、modal 模式，以及觸發器與底部按鈕 slot。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "type",
+                    "type": "'primary' | 'success' | 'warning' | 'danger' | 'info' | 'default'",
+                    "default": "'default'",
+                    "description": "對話框語意類型"
+                },
+                {
+                    "name": "width",
+                    "type": "string | number",
+                    "default": 400,
+                    "description": "對話框寬度"
+                },
+                {
+                    "name": "open",
+                    "type": "boolean",
+                    "default": null,
+                    "description": "控制是否顯示（受控模式）"
+                },
+                {
+                    "name": "defaultOpen",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "默認開啟狀態（非受控模式）"
+                },
+                {
+                    "name": "modal",
+                    "type": "boolean",
+                    "default": true,
+                    "description": "是否為 modal 模式"
+                },
+                {
+                    "name": "title",
+                    "type": "string",
+                    "default": null,
+                    "description": "標題文字"
+                }
+            ],
+            "events": [
+                {
+                    "name": "update:open",
+                    "payload": "boolean",
+                    "description": "開關狀態變化時觸發"
+                },
+                {
+                    "name": "openChange",
+                    "payload": "boolean",
+                    "description": "開關狀態變化時觸發"
+                }
+            ],
+            "slots": [
+                {
+                    "name": "trigger",
+                    "description": "觸發對話框的元素"
+                },
+                {
+                    "name": "title",
+                    "description": "自訂標題內容"
+                },
+                {
+                    "name": "description",
+                    "description": "自訂描述內容"
+                },
+                {
+                    "name": "default",
+                    "description": "對話框主體內容"
+                },
+                {
+                    "name": "footer",
+                    "description": "自訂底部按鈕區域"
+                }
+            ],
+            "methods": []
+        },
+        {
+            "name": "Divider",
+            "description": "分隔線，支援水平/垂直方向、自訂顏色與中間插槽內容。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "orientation",
+                    "type": "'horizontal' | 'vertical'",
+                    "default": "'horizontal'",
+                    "description": "分隔線方向"
+                },
+                {
+                    "name": "color",
+                    "type": "string",
+                    "default": "'#e5e7eb'",
+                    "description": "分隔線顏色"
+                },
+                {
+                    "name": "class",
+                    "type": "string",
+                    "default": null,
+                    "description": "額外 CSS class"
+                }
+            ],
+            "events": [],
+            "slots": [
+                {
+                    "name": "default",
+                    "description": "分隔線中間的內容（如文字）"
+                }
+            ],
+            "methods": []
+        },
+        {
+            "name": "EditableContainer",
+            "description": "可編輯容器，提供編輯/完成兩種狀態，支援非同步更新函式，透過 slot props 傳遞狀態給子內容。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "editable",
+                    "type": "boolean",
+                    "default": true,
+                    "description": "是否可進入編輯狀態"
+                },
+                {
+                    "name": "updateFn",
+                    "type": "() => Promise<void>",
+                    "default": null,
+                    "description": "點擊完成時執行的非同步更新函式"
+                }
+            ],
+            "events": [
+                {
+                    "name": "edit",
+                    "payload": null,
+                    "description": "進入編輯狀態時觸發"
+                },
+                {
+                    "name": "done",
+                    "payload": null,
+                    "description": "完成編輯時觸發"
+                }
+            ],
+            "slots": [
+                {
+                    "name": "default",
+                    "slotProps": "{ editing: boolean, loading: boolean }",
+                    "description": "容器內容，可透過 slot props 取得當前狀態"
+                }
+            ],
+            "methods": []
+        },
+        {
+            "name": "FileUpload",
+            "description": "檔案上傳組件（又名 UploadZone），支援多檔、大小限制、數量限制、預覽，並追蹤每個檔案的上傳狀態。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "modelValue",
+                    "type": "FileUploadFile[]",
+                    "default": "[]",
+                    "description": "已選檔案列表（v-model）"
+                },
+                {
+                    "name": "accept",
+                    "type": "string",
+                    "default": null,
+                    "description": "接受的檔案類型"
+                },
+                {
+                    "name": "multiple",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否允許多選"
+                },
+                {
+                    "name": "disabled",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否禁用"
+                },
+                {
+                    "name": "maxCount",
+                    "type": "number",
+                    "default": 0,
+                    "description": "最大檔案數量（0 表示不限）"
+                },
+                {
+                    "name": "maxSize",
+                    "type": "number",
+                    "default": 0,
+                    "description": "單一檔案最大大小 bytes（0 表示不限）"
+                },
+                {
+                    "name": "size",
+                    "type": "'sm' | 'md' | 'lg'",
+                    "default": "'md'",
+                    "description": "組件尺寸"
+                }
+            ],
+            "events": [
+                {
+                    "name": "update:modelValue",
+                    "payload": "FileUploadFile[]",
+                    "description": "檔案列表變化時觸發"
+                },
+                {
+                    "name": "change",
+                    "payload": "FileUploadFile[]",
+                    "description": "檔案列表變化時觸發"
+                },
+                {
+                    "name": "exceed-size",
+                    "payload": "File",
+                    "description": "檔案超過大小限制時觸發"
+                },
+                {
+                    "name": "exceed-count",
+                    "payload": "number",
+                    "description": "檔案超過數量限制時觸發"
+                },
+                {
+                    "name": "remove",
+                    "payload": "FileUploadFile",
+                    "description": "移除檔案時觸發"
+                }
+            ],
+            "slots": [
+                {
+                    "name": "trigger",
+                    "description": "自訂觸發上傳的按鈕/區域"
+                },
+                {
+                    "name": "tip",
+                    "description": "提示文字區域"
+                }
+            ],
+            "methods": [
+                {
+                    "name": "openFilePicker",
+                    "description": "以程式方式開啟檔案選擇器"
+                }
+            ],
+            "types": {
+                "FileUploadFile": {
+                    "id": "string",
+                    "raw": "File",
+                    "name": "string",
+                    "size": "number",
+                    "type": "string",
+                    "status": "'idle' | 'uploading' | 'success' | 'error'",
+                    "progress": "number",
+                    "error": "string | null",
+                    "previewUrl": "string | null"
+                }
+            }
+        },
+        {
+            "name": "FlexContainer",
+            "description": "Flex 排版容器，透過 props 快速設定 align-items、justify-content、gap、方向與換行。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "align",
+                    "type": "'start' | 'center' | 'end' | 'between' | 'around' | 'evenly'",
+                    "default": null,
+                    "description": "align-items 值"
+                },
+                {
+                    "name": "justify",
+                    "type": "'start' | 'center' | 'end' | 'between' | 'around' | 'evenly'",
+                    "default": null,
+                    "description": "justify-content 值"
+                },
+                {
+                    "name": "gap",
+                    "type": "number",
+                    "default": 0,
+                    "description": "子元素間距（rem 單位）"
+                },
+                {
+                    "name": "col",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否為垂直排列（flex-direction: column）"
+                },
+                {
+                    "name": "wrap",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否允許換行（flex-wrap: wrap）"
+                }
+            ],
+            "events": [],
+            "slots": [
+                {
+                    "name": "default",
+                    "description": "flex 子元素"
+                }
+            ],
+            "methods": []
+        },
+        {
+            "name": "Input",
+            "description": "文字輸入框，支援清除、字數限制、前綴/後綴 slot，以及程式控制焦點。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "modelValue",
+                    "type": "string | number",
+                    "default": "''",
+                    "description": "輸入值（v-model）"
+                },
+                {
+                    "name": "disabled",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否禁用"
+                },
+                {
+                    "name": "clearable",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否顯示清除按鈕"
+                },
+                {
+                    "name": "placeholder",
+                    "type": "string",
+                    "default": null,
+                    "description": "佔位提示文字"
+                },
+                {
+                    "name": "type",
+                    "type": "string",
+                    "default": "'text'",
+                    "description": "原生 input type"
+                },
+                {
+                    "name": "readonly",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否唯讀"
+                },
+                {
+                    "name": "autocomplete",
+                    "type": "string",
+                    "default": "'off'",
+                    "description": "自動完成設定"
+                },
+                {
+                    "name": "maxlength",
+                    "type": "number",
+                    "default": null,
+                    "description": "最大字數"
+                },
+                {
+                    "name": "showWordLimit",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否顯示字數統計"
+                }
+            ],
+            "events": [
+                {
+                    "name": "update:modelValue",
+                    "payload": "string | number",
+                    "description": "值變化時觸發"
+                },
+                {
+                    "name": "input",
+                    "payload": "Event",
+                    "description": "原生 input 事件"
+                },
+                {
+                    "name": "change",
+                    "payload": "string | number",
+                    "description": "值確認變化時觸發"
+                },
+                {
+                    "name": "focus",
+                    "payload": "FocusEvent",
+                    "description": "獲得焦點時觸發"
+                },
+                {
+                    "name": "blur",
+                    "payload": "FocusEvent",
+                    "description": "失去焦點時觸發"
+                },
+                {
+                    "name": "clear",
+                    "payload": null,
+                    "description": "點擊清除按鈕時觸發"
+                }
+            ],
+            "slots": [
+                {
+                    "name": "prefix",
+                    "description": "輸入框前置內容"
+                },
+                {
+                    "name": "suffix",
+                    "description": "輸入框後置內容"
+                }
+            ],
+            "methods": [
+                {
+                    "name": "focus",
+                    "description": "使輸入框獲得焦點"
+                },
+                {
+                    "name": "blur",
+                    "description": "使輸入框失去焦點"
+                },
+                {
+                    "name": "select",
+                    "description": "選中輸入框中的文字"
+                }
+            ]
+        },
+        {
+            "name": "InputGroup",
+            "description": "輸入框群組容器，將多個 Input 與 InputGroupAddon 組合在一起並共用邊框。",
+            "subComponents": [
+                "InputGroupAddon"
+            ],
+            "props": [],
+            "events": [],
+            "slots": [
+                {
+                    "name": "default",
+                    "description": "輸入框與附加元素"
+                }
+            ],
+            "methods": []
+        },
+        {
+            "name": "InputGroupAddon",
+            "description": "輸入框附加元素，可放置於 InputGroup 中作為前置或後置裝飾。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "align",
+                    "type": "'inline' | 'block-start' | 'block-end'",
+                    "default": "'inline'",
+                    "description": "附加元素的對齊方式"
+                }
+            ],
+            "events": [],
+            "slots": [
+                {
+                    "name": "default",
+                    "description": "附加元素內容"
+                }
+            ],
+            "methods": []
+        },
+        {
+            "name": "MentionableTextarea",
+            "description": "支援 @ / # / : 等觸發字元的文字區域，觸發後顯示候選列表，適用於評論、搜尋、表情符號等場景。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "modelValue",
+                    "type": "string",
+                    "default": "''",
+                    "description": "輸入值（v-model）"
+                },
+                {
+                    "name": "placeholder",
+                    "type": "string",
+                    "default": null,
+                    "description": "佔位提示文字"
+                },
+                {
+                    "name": "rows",
+                    "type": "number",
+                    "default": 5,
+                    "description": "顯示行數"
+                },
+                {
+                    "name": "disabled",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否禁用"
+                },
+                {
+                    "name": "readonly",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否唯讀"
+                },
+                {
+                    "name": "triggers",
+                    "type": "string[]",
+                    "default": "['@', '#', ':']",
+                    "description": "觸發字元列表"
+                },
+                {
+                    "name": "userList",
+                    "type": "MentionItem[]",
+                    "default": null,
+                    "description": "@ 觸發時的使用者列表"
+                },
+                {
+                    "name": "issueList",
+                    "type": "MentionItem[]",
+                    "default": null,
+                    "description": "# 觸發時的 issue 列表"
+                },
+                {
+                    "name": "emojiList",
+                    "type": "MentionItem[]",
+                    "default": null,
+                    "description": ": 觸發時的表情符號列表"
+                },
+                {
+                    "name": "label",
+                    "type": "string",
+                    "default": null,
+                    "description": "標籤文字"
+                },
+                {
+                    "name": "class",
+                    "type": "string",
+                    "default": null,
+                    "description": "額外 CSS class"
+                }
+            ],
+            "events": [
+                {
+                    "name": "update:modelValue",
+                    "payload": "string",
+                    "description": "值變化時觸發"
+                },
+                {
+                    "name": "change",
+                    "payload": "string",
+                    "description": "值變化時觸發"
+                },
+                {
+                    "name": "focus",
+                    "payload": "FocusEvent",
+                    "description": "獲得焦點時觸發"
+                },
+                {
+                    "name": "blur",
+                    "payload": "FocusEvent",
+                    "description": "失去焦點時觸發"
+                },
+                {
+                    "name": "mention",
+                    "payload": "{ trigger: string, searchValue: string }",
+                    "description": "觸發 mention 搜尋時觸發"
+                }
+            ],
+            "slots": [],
+            "methods": []
+        },
+        {
+            "name": "MessageBox",
+            "description": "訊息方塊，帶有語意圖示的靜態提示區塊，用於展示 info / danger / success / normal 等狀態訊息。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "type",
+                    "type": "'info' | 'danger' | 'success' | 'normal'",
+                    "default": "'info'",
+                    "description": "訊息類型"
+                },
+                {
+                    "name": "icon",
+                    "type": "string | Component",
+                    "default": null,
+                    "description": "自訂圖示"
+                }
+            ],
+            "events": [],
+            "slots": [
+                {
+                    "name": "default",
+                    "description": "訊息內容"
+                },
+                {
+                    "name": "icon",
+                    "description": "自訂圖示"
+                }
+            ],
+            "methods": []
+        },
+        {
+            "name": "Notification",
+            "description": "全域通知系統，由 NotificationProvider 與 useNotification composable 組成，支援 6 種位置、自動關閉、懸停暫停與自訂圖示。",
+            "subComponents": [
+                "NotificationProvider"
+            ],
+            "composables": [
+                {
+                    "name": "useNotification",
+                    "methods": [
+                        {
+                            "name": "info",
+                            "signature": "(options: NotificationOptions) => void",
+                            "description": "顯示 info 通知"
+                        },
+                        {
+                            "name": "success",
+                            "signature": "(options: NotificationOptions) => void",
+                            "description": "顯示 success 通知"
+                        },
+                        {
+                            "name": "warning",
+                            "signature": "(options: NotificationOptions) => void",
+                            "description": "顯示 warning 通知"
+                        },
+                        {
+                            "name": "error",
+                            "signature": "(options: NotificationOptions) => void",
+                            "description": "顯示 error 通知"
+                        }
+                    ]
+                }
+            ],
+            "types": {
+                "NotificationOptions": {
+                    "title": "string",
+                    "content": "string (optional)",
+                    "duration": "number (optional, ms, 0=永久)",
+                    "placement": "'top' | 'top-left' | 'top-right' | 'bottom' | 'bottom-left' | 'bottom-right'",
+                    "icon": "Component (optional)",
+                    "onClick": "() => void (optional)",
+                    "onClose": "() => void (optional)"
+                }
+            },
+            "props": [],
+            "events": [],
+            "slots": [],
+            "methods": []
+        },
+        {
+            "name": "NumberInput",
+            "description": "數字輸入框，帶有遞增/遞減控制，支援最小值、最大值、步進值與鍵盤操作。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "modelValue",
+                    "type": "number",
+                    "default": null,
+                    "description": "數值（v-model）"
+                },
+                {
+                    "name": "min",
+                    "type": "number",
+                    "default": null,
+                    "description": "最小值"
+                },
+                {
+                    "name": "max",
+                    "type": "number",
+                    "default": null,
+                    "description": "最大值"
+                },
+                {
+                    "name": "step",
+                    "type": "number",
+                    "default": 1,
+                    "description": "每次增減的步進量"
+                },
+                {
+                    "name": "size",
+                    "type": "'small' | 'default' | 'large'",
+                    "default": "'default'",
+                    "description": "組件尺寸"
+                },
+                {
+                    "name": "disabled",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否禁用"
+                },
+                {
+                    "name": "readonly",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否唯讀"
+                },
+                {
+                    "name": "invalid",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否顯示錯誤狀態"
+                },
+                {
+                    "name": "focusOnChange",
+                    "type": "boolean",
+                    "default": true,
+                    "description": "點擊增減按鈕後是否自動聚焦"
+                },
+                {
+                    "name": "stepSnapping",
+                    "type": "boolean",
+                    "default": true,
+                    "description": "是否對齊步進值"
+                }
+            ],
+            "events": [
+                {
+                    "name": "update:modelValue",
+                    "payload": "number",
+                    "description": "值變化時觸發"
+                }
+            ],
+            "slots": [
+                {
+                    "name": "decrement",
+                    "description": "自訂遞減按鈕"
+                },
+                {
+                    "name": "increment",
+                    "description": "自訂遞增按鈕"
+                }
+            ],
+            "methods": []
+        },
+        {
+            "name": "Pagination",
+            "description": "分頁組件，支援跳轉、邊緣頁碼、上/下一頁按鈕，以及多種按鈕外觀與尺寸。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "modelValue",
+                    "type": "number",
+                    "default": 1,
+                    "description": "當前頁碼（v-model）"
+                },
+                {
+                    "name": "total",
+                    "type": "number",
+                    "default": null,
+                    "description": "總頁數"
+                },
+                {
+                    "name": "pageSize",
+                    "type": "number",
+                    "default": 10,
+                    "description": "每頁筆數（用於計算總頁數）"
+                },
+                {
+                    "name": "siblingCount",
+                    "type": "number",
+                    "default": 2,
+                    "description": "當前頁左右顯示的頁碼數量"
+                },
+                {
+                    "name": "showEdges",
+                    "type": "boolean",
+                    "default": true,
+                    "description": "是否顯示首尾頁碼"
+                },
+                {
+                    "name": "showPrevNext",
+                    "type": "boolean",
+                    "default": true,
+                    "description": "是否顯示上/下一頁按鈕"
+                },
+                {
+                    "name": "disabled",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否禁用"
+                },
+                {
+                    "name": "size",
+                    "type": "'large' | 'default' | 'small'",
+                    "default": "'default'",
+                    "description": "按鈕尺寸"
+                },
+                {
+                    "name": "text",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "文字按鈕樣式"
+                },
+                {
+                    "name": "ghost",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "幽靈按鈕樣式"
+                },
+                {
+                    "name": "outline",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "輪廓按鈕樣式"
+                },
+                {
+                    "name": "borderd",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "帶邊框樣式"
+                }
+            ],
+            "events": [
+                {
+                    "name": "update:modelValue",
+                    "payload": "number",
+                    "description": "頁碼變化時觸發"
+                },
+                {
+                    "name": "change",
+                    "payload": "number",
+                    "description": "頁碼變化時觸發"
+                }
+            ],
+            "slots": [
+                {
+                    "name": "info",
+                    "slotProps": "{ current: number, total: number, pageSize: number, totalItems: number }",
+                    "description": "自訂分頁資訊顯示"
+                }
+            ],
+            "methods": []
+        },
+        {
+            "name": "PinInput",
+            "description": "PIN 碼輸入框，由多個單字元格組成，支援數字/文字模式、密碼遮罩、OTP 自動填入。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "modelValue",
+                    "type": "string[]",
+                    "default": null,
+                    "description": "各格的值陣列（v-model）"
+                },
+                {
+                    "name": "length",
+                    "type": "number",
+                    "default": 6,
+                    "description": "PIN 碼長度（格數）"
+                },
+                {
+                    "name": "placeholder",
+                    "type": "string",
+                    "default": "'○'",
+                    "description": "空格的佔位符"
+                },
+                {
+                    "name": "type",
+                    "type": "'text' | 'number'",
+                    "default": "'text'",
+                    "description": "輸入類型"
+                },
+                {
+                    "name": "mask",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否遮罩顯示（密碼模式）"
+                },
+                {
+                    "name": "disabled",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否禁用"
+                },
+                {
+                    "name": "size",
+                    "type": "'sm' | 'md' | 'lg'",
+                    "default": "'md'",
+                    "description": "組件尺寸"
+                },
+                {
+                    "name": "otp",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否啟用 OTP 自動填入"
+                }
+            ],
+            "events": [
+                {
+                    "name": "update:modelValue",
+                    "payload": "string[]",
+                    "description": "值變化時觸發"
+                },
+                {
+                    "name": "change",
+                    "payload": "string[]",
+                    "description": "值變化時觸發"
+                },
+                {
+                    "name": "complete",
+                    "payload": "string[]",
+                    "description": "所有格填滿時觸發"
+                }
+            ],
+            "slots": [],
+            "methods": []
+        },
+        {
+            "name": "Popover",
+            "description": "浮動彈出框，相對於觸發元素定位，支援多個方向與對齊方式，可受控或非受控。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "open",
+                    "type": "boolean",
+                    "default": null,
+                    "description": "控制是否顯示（受控模式）"
+                },
+                {
+                    "name": "defaultOpen",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "默認開啟狀態（非受控模式）"
+                },
+                {
+                    "name": "modal",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否為 modal 模式"
+                },
+                {
+                    "name": "side",
+                    "type": "'top' | 'right' | 'bottom' | 'left'",
+                    "default": "'bottom'",
+                    "description": "彈出方向"
+                },
+                {
+                    "name": "sideOffset",
+                    "type": "number",
+                    "default": 5,
+                    "description": "距離觸發元素的偏移量（px）"
+                },
+                {
+                    "name": "align",
+                    "type": "'start' | 'center' | 'end'",
+                    "default": "'center'",
+                    "description": "對齊方式"
+                },
+                {
+                    "name": "alignOffset",
+                    "type": "number",
+                    "default": 0,
+                    "description": "對齊偏移量（px）"
+                },
+                {
+                    "name": "disabled",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否禁用"
+                }
+            ],
+            "events": [
+                {
+                    "name": "update:open",
+                    "payload": "boolean",
+                    "description": "開關狀態變化時觸發"
+                },
+                {
+                    "name": "openChange",
+                    "payload": "boolean",
+                    "description": "開關狀態變化時觸發"
+                }
+            ],
+            "slots": [
+                {
+                    "name": "trigger",
+                    "description": "觸發彈出框的元素"
+                },
+                {
+                    "name": "default",
+                    "description": "彈出框內容"
+                },
+                {
+                    "name": "close",
+                    "description": "自訂關閉按鈕"
+                }
+            ],
+            "methods": []
+        },
+        {
+            "name": "Progress",
+            "description": "進度條，支援條紋與動態動畫變體、文字格式化、最大值設定。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "modelValue",
+                    "type": "number | null",
+                    "default": null,
+                    "description": "當前進度值（v-model）"
+                },
+                {
+                    "name": "max",
+                    "type": "number",
+                    "default": 100,
+                    "description": "最大值"
+                },
+                {
+                    "name": "size",
+                    "type": "'small' | 'default' | 'large'",
+                    "default": "'default'",
+                    "description": "進度條高度尺寸"
+                },
+                {
+                    "name": "variant",
+                    "type": "'default' | 'striped' | 'animated'",
+                    "default": "'default'",
+                    "description": "進度條外觀變體"
+                },
+                {
+                    "name": "showText",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否顯示百分比文字"
+                },
+                {
+                    "name": "formatText",
+                    "type": "(value: number, max: number) => string",
+                    "default": null,
+                    "description": "自訂進度文字格式化函式"
+                }
+            ],
+            "events": [
+                {
+                    "name": "update",
+                    "payload": "number",
+                    "description": "進度值更新時觸發"
+                },
+                {
+                    "name": "update:max",
+                    "payload": "number",
+                    "description": "最大值更新時觸發"
+                }
+            ],
+            "slots": [
+                {
+                    "name": "default",
+                    "description": "自訂進度條填充內容"
+                },
+                {
+                    "name": "text",
+                    "description": "自訂進度文字"
+                }
+            ],
+            "methods": []
+        },
+        {
+            "name": "Radio",
+            "description": "單選按鈕，可單獨使用或透過 RadioGroup 批量管理，支援水平/垂直排列。",
+            "subComponents": [
+                "RadioGroup"
+            ],
+            "props": [
+                {
+                    "name": "modelValue",
+                    "type": "any",
+                    "default": null,
+                    "description": "選中值（v-model）"
+                },
+                {
+                    "name": "value",
+                    "type": "any",
+                    "default": null,
+                    "description": "此 Radio 的值"
+                },
+                {
+                    "name": "name",
+                    "type": "string",
+                    "default": null,
+                    "description": "原生 name 屬性"
+                },
+                {
+                    "name": "disabled",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否禁用"
+                },
+                {
+                    "name": "required",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否必填"
+                },
+                {
+                    "name": "inputId",
+                    "type": "string",
+                    "default": null,
+                    "description": "input 元素 id"
+                },
+                {
+                    "name": "inputClass",
+                    "type": "string",
+                    "default": null,
+                    "description": "input 元素 class"
+                },
+                {
+                    "name": "inputStyle",
+                    "type": "string | object",
+                    "default": null,
+                    "description": "input 元素 style"
+                },
+                {
+                    "name": "label",
+                    "type": "string",
+                    "default": null,
+                    "description": "標籤文字"
+                }
+            ],
+            "events": [
+                {
+                    "name": "update:modelValue",
+                    "payload": "any",
+                    "description": "值變化時觸發"
+                },
+                {
+                    "name": "change",
+                    "payload": "any",
+                    "description": "值變化時觸發"
+                },
+                {
+                    "name": "focus",
+                    "payload": "FocusEvent",
+                    "description": "獲得焦點時觸發"
+                },
+                {
+                    "name": "blur",
+                    "payload": "FocusEvent",
+                    "description": "失去焦點時觸發"
+                }
+            ],
+            "slots": [
+                {
+                    "name": "default",
+                    "description": "標籤內容"
+                }
+            ],
+            "methods": []
+        },
+        {
+            "name": "RadioGroup",
+            "description": "單選按鈕群組，透過 options 陣列批量渲染 Radio。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "modelValue",
+                    "type": "any",
+                    "default": null,
+                    "description": "選中值（v-model）"
+                },
+                {
+                    "name": "options",
+                    "type": "RadioOption[]",
+                    "default": "[]",
+                    "description": "選項陣列"
+                },
+                {
+                    "name": "optionLabel",
+                    "type": "string",
+                    "default": "'label'",
+                    "description": "選項中作為顯示文字的欄位名"
+                },
+                {
+                    "name": "optionValue",
+                    "type": "string",
+                    "default": "'value'",
+                    "description": "選項中作為值的欄位名"
+                },
+                {
+                    "name": "optionDisabled",
+                    "type": "string",
+                    "default": "'disabled'",
+                    "description": "選項中作為禁用判斷的欄位名"
+                },
+                {
+                    "name": "disabled",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否禁用整個群組"
+                },
+                {
+                    "name": "name",
+                    "type": "string",
+                    "default": null,
+                    "description": "原生 name 屬性"
+                },
+                {
+                    "name": "orientation",
+                    "type": "'horizontal' | 'vertical'",
+                    "default": "'vertical'",
+                    "description": "排列方向"
+                },
+                {
+                    "name": "label",
+                    "type": "string",
+                    "default": null,
+                    "description": "群組標籤文字"
+                }
+            ],
+            "events": [
+                {
+                    "name": "update:modelValue",
+                    "payload": "any",
+                    "description": "值變化時觸發"
+                },
+                {
+                    "name": "change",
+                    "payload": "any",
+                    "description": "值變化時觸發"
+                }
+            ],
+            "slots": [],
+            "methods": []
+        },
+        {
+            "name": "ScrollArea",
+            "description": "自訂捲軸容器，支援水平/垂直捲軸顯示策略、方向，以及程式化捲動控制。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "type",
+                    "type": "'auto' | 'always' | 'scroll' | 'hover'",
+                    "default": "'hover'",
+                    "description": "捲軸顯示策略"
+                },
+                {
+                    "name": "scrollHideDelay",
+                    "type": "number",
+                    "default": 600,
+                    "description": "捲軸隱藏延遲（ms）"
+                },
+                {
+                    "name": "dir",
+                    "type": "'ltr' | 'rtl'",
+                    "default": "'ltr'",
+                    "description": "文字方向"
+                },
+                {
+                    "name": "scrollX",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否啟用水平捲動"
+                },
+                {
+                    "name": "scrollY",
+                    "type": "boolean",
+                    "default": true,
+                    "description": "是否啟用垂直捲動"
+                }
+            ],
+            "events": [],
+            "slots": [
+                {
+                    "name": "default",
+                    "description": "捲動內容"
+                }
+            ],
+            "methods": [
+                {
+                    "name": "scrollTop",
+                    "description": "捲動到頂部"
+                },
+                {
+                    "name": "scrollTopLeft",
+                    "description": "捲動到左上角"
+                },
+                {
+                    "name": "scrollBottom",
+                    "description": "捲動到底部"
+                },
+                {
+                    "name": "scrollTo",
+                    "signature": "(options: ScrollToOptions) => void",
+                    "description": "捲動到指定位置"
+                },
+                {
+                    "name": "getViewport",
+                    "description": "取得 viewport DOM 元素"
+                }
+            ]
+        },
+        {
+            "name": "Select",
+            "description": "下拉選擇器，支援單選/多選、可清除、可過濾（搜尋）、自訂最大選擇數量與下拉面板位置。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "modelValue",
+                    "type": "any | any[]",
+                    "default": null,
+                    "description": "選中值（v-model）"
+                },
+                {
+                    "name": "options",
+                    "type": "SelectOption[]",
+                    "default": "[]",
+                    "description": "選項陣列"
+                },
+                {
+                    "name": "disabled",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否禁用"
+                },
+                {
+                    "name": "clearable",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否可清除"
+                },
+                {
+                    "name": "placeholder",
+                    "type": "string",
+                    "default": "'請選擇'",
+                    "description": "佔位提示文字"
+                },
+                {
+                    "name": "readonly",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否唯讀"
+                },
+                {
+                    "name": "multiple",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否多選"
+                },
+                {
+                    "name": "maxSelections",
+                    "type": "number",
+                    "default": null,
+                    "description": "多選時最大選擇數量"
+                },
+                {
+                    "name": "filterable",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否可搜尋過濾"
+                },
+                {
+                    "name": "filterMethod",
+                    "type": "(query: string, option: SelectOption) => boolean",
+                    "default": null,
+                    "description": "自訂過濾方法"
+                },
+                {
+                    "name": "loading",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否顯示載入狀態"
+                },
+                {
+                    "name": "noDataText",
+                    "type": "string",
+                    "default": null,
+                    "description": "無資料時的提示文字"
+                },
+                {
+                    "name": "noMatchText",
+                    "type": "string",
+                    "default": null,
+                    "description": "無匹配項時的提示文字"
+                },
+                {
+                    "name": "placement",
+                    "type": "'top' | 'bottom' | 'auto'",
+                    "default": "'auto'",
+                    "description": "下拉面板出現方向"
+                },
+                {
+                    "name": "dropdownWidth",
+                    "type": "string | number",
+                    "default": null,
+                    "description": "下拉面板寬度"
+                },
+                {
+                    "name": "maxHeight",
+                    "type": "string",
+                    "default": "'200px'",
+                    "description": "下拉面板最大高度"
+                }
+            ],
+            "events": [
+                {
+                    "name": "update:modelValue",
+                    "payload": "any | any[]",
+                    "description": "值變化時觸發"
+                },
+                {
+                    "name": "change",
+                    "payload": "any | any[]",
+                    "description": "值變化時觸發"
+                },
+                {
+                    "name": "focus",
+                    "payload": "FocusEvent",
+                    "description": "獲得焦點時觸發"
+                },
+                {
+                    "name": "blur",
+                    "payload": "FocusEvent",
+                    "description": "失去焦點時觸發"
+                },
+                {
+                    "name": "clear",
+                    "payload": null,
+                    "description": "清除選中值時觸發"
+                },
+                {
+                    "name": "visible-change",
+                    "payload": "boolean",
+                    "description": "下拉面板顯示狀態變化時觸發"
+                },
+                {
+                    "name": "remove-tag",
+                    "payload": "any",
+                    "description": "多選模式移除標籤時觸發"
+                }
+            ],
+            "slots": [
+                {
+                    "name": "prefix",
+                    "description": "選擇器前置內容"
+                },
+                {
+                    "name": "suffix",
+                    "description": "選擇器後置內容"
+                }
+            ],
+            "methods": [
+                {
+                    "name": "focus",
+                    "description": "使選擇器獲得焦點"
+                },
+                {
+                    "name": "blur",
+                    "description": "使選擇器失去焦點"
+                },
+                {
+                    "name": "toggleDropdown",
+                    "description": "切換下拉面板顯示狀態"
+                }
+            ]
+        },
+        {
+            "name": "Slider",
+            "description": "滑桿，支援單值與範圍（雙滑塊），可水平或垂直排列，支援刻度標記與 tooltip 格式化。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "modelValue",
+                    "type": "number[]",
+                    "default": null,
+                    "description": "滑桿值陣列（v-model），單值用 [n]，範圍用 [min, max]"
+                },
+                {
+                    "name": "min",
+                    "type": "number",
+                    "default": 0,
+                    "description": "最小值"
+                },
+                {
+                    "name": "max",
+                    "type": "number",
+                    "default": 100,
+                    "description": "最大值"
+                },
+                {
+                    "name": "step",
+                    "type": "number",
+                    "default": 1,
+                    "description": "步進量"
+                },
+                {
+                    "name": "size",
+                    "type": "'small' | 'default' | 'large'",
+                    "default": "'default'",
+                    "description": "滑桿尺寸"
+                },
+                {
+                    "name": "color",
+                    "type": "'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'info'",
+                    "default": "'primary'",
+                    "description": "滑桿顏色"
+                },
+                {
+                    "name": "orientation",
+                    "type": "'horizontal' | 'vertical'",
+                    "default": "'horizontal'",
+                    "description": "排列方向"
+                },
+                {
+                    "name": "disabled",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否禁用"
+                },
+                {
+                    "name": "showTooltip",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否顯示 tooltip"
+                },
+                {
+                    "name": "formatTooltip",
+                    "type": "(value: number) => string",
+                    "default": null,
+                    "description": "tooltip 文字格式化函式"
+                },
+                {
+                    "name": "showMarks",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否顯示刻度標記"
+                },
+                {
+                    "name": "marks",
+                    "type": "Record<number, string>",
+                    "default": null,
+                    "description": "自訂刻度標記 { value: label }"
+                }
+            ],
+            "events": [
+                {
+                    "name": "update:modelValue",
+                    "payload": "number[]",
+                    "description": "滑動時觸發"
+                },
+                {
+                    "name": "valueCommit",
+                    "payload": "number[]",
+                    "description": "滑動結束（mouseup）時觸發"
+                }
+            ],
+            "slots": [
+                {
+                    "name": "default",
+                    "description": "自訂滑桿內容"
+                },
+                {
+                    "name": "tooltip",
+                    "slotProps": "{ value: number, index: number }",
+                    "description": "自訂 tooltip 內容"
+                },
+                {
+                    "name": "mark",
+                    "slotProps": "{ value: number, label: string }",
+                    "description": "自訂刻度標記內容"
+                }
+            ],
+            "methods": []
+        },
+        {
+            "name": "Spin",
+            "description": "載入旋轉指示器，可作為遮罩覆蓋在其他內容上，支援自訂圖示、延遲顯示與描述文字。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "size",
+                    "type": "string | number",
+                    "default": "'medium'",
+                    "description": "旋轉圖示大小"
+                },
+                {
+                    "name": "description",
+                    "type": "string",
+                    "default": null,
+                    "description": "載入描述文字"
+                },
+                {
+                    "name": "rotate",
+                    "type": "boolean",
+                    "default": true,
+                    "description": "是否旋轉動畫"
+                },
+                {
+                    "name": "show",
+                    "type": "boolean",
+                    "default": true,
+                    "description": "是否顯示載入狀態"
+                },
+                {
+                    "name": "stroke",
+                    "type": "string",
+                    "default": null,
+                    "description": "旋轉圖示顏色"
+                },
+                {
+                    "name": "strokeWidth",
+                    "type": "number",
+                    "default": 2,
+                    "description": "旋轉圖示線條粗細"
+                },
+                {
+                    "name": "delay",
+                    "type": "number",
+                    "default": 0,
+                    "description": "延遲顯示時間（ms）"
+                }
+            ],
+            "events": [
+                {
+                    "name": "update:show",
+                    "payload": "boolean",
+                    "description": "顯示狀態變化時觸發"
+                }
+            ],
+            "slots": [
+                {
+                    "name": "default",
+                    "description": "被遮罩的內容"
+                },
+                {
+                    "name": "icon",
+                    "description": "自訂旋轉圖示"
+                },
+                {
+                    "name": "description",
+                    "description": "自訂描述文字"
+                }
+            ],
+            "methods": []
+        },
+        {
+            "name": "Splitter",
+            "description": "分割面板容器，支援水平/垂直分割，可拖拽調整各面板大小，支援鍵盤操作與自動儲存佈局。",
+            "subComponents": [
+                "SplitterPanel",
+                "SplitterResizeHandle"
+            ],
+            "props": [
+                {
+                    "name": "direction",
+                    "type": "'horizontal' | 'vertical'",
+                    "default": null,
+                    "required": true,
+                    "description": "分割方向"
+                },
+                {
+                    "name": "gap",
+                    "type": "number",
+                    "default": 0,
+                    "description": "面板間距（px）"
+                },
+                {
+                    "name": "color",
+                    "type": "string",
+                    "default": null,
+                    "description": "分割線顏色"
+                },
+                {
+                    "name": "autoSaveId",
+                    "type": "string",
+                    "default": null,
+                    "description": "自動儲存佈局的 id（存於 localStorage）"
+                },
+                {
+                    "name": "keyboardResizeBy",
+                    "type": "number",
+                    "default": 10,
+                    "description": "鍵盤調整每次步進量（%）"
+                }
+            ],
+            "events": [
+                {
+                    "name": "layout",
+                    "payload": "number[]",
+                    "description": "面板大小變化時觸發（各面板百分比陣列）"
+                }
+            ],
+            "slots": [
+                {
+                    "name": "default",
+                    "description": "SplitterPanel 與 SplitterResizeHandle 的組合"
+                }
+            ],
+            "methods": []
+        },
+        {
+            "name": "SplitterPanel",
+            "description": "Splitter 的子面板，定義各面板的初始大小與大小限制。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "defaultSize",
+                    "type": "number",
+                    "default": null,
+                    "description": "初始大小（%）"
+                },
+                {
+                    "name": "minSize",
+                    "type": "number",
+                    "default": 10,
+                    "description": "最小大小（%）"
+                },
+                {
+                    "name": "maxSize",
+                    "type": "number",
+                    "default": 100,
+                    "description": "最大大小（%）"
+                },
+                {
+                    "name": "collapsible",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否可折疊"
+                },
+                {
+                    "name": "collapsedSize",
+                    "type": "number",
+                    "default": null,
+                    "description": "折疊後的大小（%）"
+                },
+                {
+                    "name": "padding",
+                    "type": "'none' | 'small' | 'default' | 'large'",
+                    "default": "'default'",
+                    "description": "面板內距"
+                }
+            ],
+            "events": [
+                {
+                    "name": "collapse",
+                    "payload": null,
+                    "description": "面板折疊時觸發"
+                },
+                {
+                    "name": "expand",
+                    "payload": null,
+                    "description": "面板展開時觸發"
+                },
+                {
+                    "name": "resize",
+                    "payload": "{ size: number, prevSize: number }",
+                    "description": "面板大小調整時觸發"
+                }
+            ],
+            "slots": [
+                {
+                    "name": "default",
+                    "description": "面板內容"
+                }
+            ],
+            "methods": []
+        },
+        {
+            "name": "SplitterResizeHandle",
+            "description": "Splitter 的拖拽控制條，放置於 SplitterPanel 之間。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "visable",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否始終顯示拖拽控制條"
+                },
+                {
+                    "name": "color",
+                    "type": "string",
+                    "default": null,
+                    "description": "控制條顏色"
+                },
+                {
+                    "name": "hoverColor",
+                    "type": "string",
+                    "default": null,
+                    "description": "懸停時的控制條顏色"
+                },
+                {
+                    "name": "dragColor",
+                    "type": "string",
+                    "default": null,
+                    "description": "拖拽時的控制條顏色"
+                },
+                {
+                    "name": "disabled",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否禁用拖拽"
+                }
+            ],
+            "events": [
+                {
+                    "name": "dragging",
+                    "payload": "boolean",
+                    "description": "拖拽狀態變化時觸發"
+                }
+            ],
+            "slots": [],
+            "methods": []
+        },
+        {
+            "name": "StatusTag",
+            "description": "狀態標籤，帶有語意顏色與可選載入動畫，適用於顯示狀態文字（如 進行中、已完成）。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "value",
+                    "type": "string",
+                    "default": "''",
+                    "description": "標籤文字"
+                },
+                {
+                    "name": "type",
+                    "type": "'primary' | 'success' | 'info' | 'warning' | 'danger'",
+                    "default": "'primary'",
+                    "description": "標籤語意類型"
+                },
+                {
+                    "name": "loading",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否顯示載入動畫"
+                }
+            ],
+            "events": [],
+            "slots": [
+                {
+                    "name": "default",
+                    "description": "自訂標籤內容"
+                }
+            ],
+            "methods": []
+        },
+        {
+            "name": "Switch",
+            "description": "開關切換組件，支援 v-model 雙向綁定與禁用狀態。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "modelValue",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "開關狀態（v-model）"
+                },
+                {
+                    "name": "disabled",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否禁用"
+                }
+            ],
+            "events": [
+                {
+                    "name": "update:modelValue",
+                    "payload": "boolean",
+                    "description": "狀態變化時觸發"
+                },
+                {
+                    "name": "change",
+                    "payload": "boolean",
+                    "description": "狀態變化時觸發"
+                }
+            ],
+            "slots": [
+                {
+                    "name": "default",
+                    "description": "自訂開關標籤"
+                }
+            ],
+            "methods": []
+        },
+        {
+            "name": "Tag",
+            "description": "標籤，支援多種語意類型、圓角、邊框與自訂圖示。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "value",
+                    "type": "string",
+                    "default": "''",
+                    "description": "標籤文字"
+                },
+                {
+                    "name": "type",
+                    "type": "'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'danger'",
+                    "default": "'primary'",
+                    "description": "標籤語意類型"
+                },
+                {
+                    "name": "rounded",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否圓角樣式"
+                },
+                {
+                    "name": "bordered",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否帶邊框"
+                },
+                {
+                    "name": "icon",
+                    "type": "Component",
+                    "default": null,
+                    "description": "左側圖示組件"
+                }
+            ],
+            "events": [],
+            "slots": [
+                {
+                    "name": "default",
+                    "description": "自訂標籤內容"
+                },
+                {
+                    "name": "icon",
+                    "description": "自訂圖示"
+                }
+            ],
+            "methods": []
+        },
+        {
+            "name": "Textarea",
+            "description": "多行文字輸入框，支援自動調整高度、字數限制與多種 resize 模式。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "value",
+                    "type": "string",
+                    "default": "''",
+                    "description": "輸入值（v-model:value）"
+                },
+                {
+                    "name": "placeholder",
+                    "type": "string",
+                    "default": null,
+                    "description": "佔位提示文字"
+                },
+                {
+                    "name": "rows",
+                    "type": "number",
+                    "default": 3,
+                    "description": "顯示行數"
+                },
+                {
+                    "name": "resize",
+                    "type": "'none' | 'both' | 'horizontal' | 'vertical'",
+                    "default": "'vertical'",
+                    "description": "調整大小方向"
+                },
+                {
+                    "name": "disabled",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否禁用"
+                },
+                {
+                    "name": "readonly",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否唯讀"
+                },
+                {
+                    "name": "maxlength",
+                    "type": "number",
+                    "default": null,
+                    "description": "最大字數"
+                },
+                {
+                    "name": "showWordLimit",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否顯示字數統計"
+                },
+                {
+                    "name": "autosize",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否自動調整高度"
+                }
+            ],
+            "events": [
+                {
+                    "name": "update:value",
+                    "payload": "string",
+                    "description": "值變化時觸發"
+                },
+                {
+                    "name": "input",
+                    "payload": "Event",
+                    "description": "原生 input 事件"
+                },
+                {
+                    "name": "change",
+                    "payload": "string",
+                    "description": "值確認變化時觸發"
+                },
+                {
+                    "name": "focus",
+                    "payload": "FocusEvent",
+                    "description": "獲得焦點時觸發"
+                },
+                {
+                    "name": "blur",
+                    "payload": "FocusEvent",
+                    "description": "失去焦點時觸發"
+                }
+            ],
+            "slots": [],
+            "methods": [
+                {
+                    "name": "focus",
+                    "description": "使輸入框獲得焦點"
+                },
+                {
+                    "name": "blur",
+                    "description": "使輸入框失去焦點"
+                },
+                {
+                    "name": "select",
+                    "description": "選中輸入框中的文字"
+                }
+            ]
+        },
+        {
+            "name": "TimePicker",
+            "description": "時間選擇器，支援單時間與範圍模式、12小時制、各欄位步進、禁用時間列表。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "modelValue",
+                    "type": "string | TimeRange | null",
+                    "default": null,
+                    "description": "選中的時間值（v-model），格式由 format 決定"
+                },
+                {
+                    "name": "range",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否為時間範圍選擇模式"
+                },
+                {
+                    "name": "placeholder",
+                    "type": "string | string[]",
+                    "default": null,
+                    "description": "佔位提示文字"
+                },
+                {
+                    "name": "disabled",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否禁用"
+                },
+                {
+                    "name": "readonly",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否唯讀"
+                },
+                {
+                    "name": "format",
+                    "type": "string",
+                    "default": "'HH:mm:ss'",
+                    "description": "時間格式"
+                },
+                {
+                    "name": "use12Hour",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否使用12小時制"
+                },
+                {
+                    "name": "hour",
+                    "type": "boolean",
+                    "default": true,
+                    "description": "是否顯示小時欄位"
+                },
+                {
+                    "name": "minute",
+                    "type": "boolean",
+                    "default": true,
+                    "description": "是否顯示分鐘欄位"
+                },
+                {
+                    "name": "second",
+                    "type": "boolean",
+                    "default": true,
+                    "description": "是否顯示秒數欄位"
+                },
+                {
+                    "name": "hourStep",
+                    "type": "number",
+                    "default": 1,
+                    "description": "小時步進量"
+                },
+                {
+                    "name": "minuteStep",
+                    "type": "number",
+                    "default": 1,
+                    "description": "分鐘步進量"
+                },
+                {
+                    "name": "secondStep",
+                    "type": "number",
+                    "default": 1,
+                    "description": "秒數步進量"
+                },
+                {
+                    "name": "minTime",
+                    "type": "string",
+                    "default": null,
+                    "description": "可選最早時間"
+                },
+                {
+                    "name": "maxTime",
+                    "type": "string",
+                    "default": null,
+                    "description": "可選最晚時間"
+                },
+                {
+                    "name": "disabledTimes",
+                    "type": "string[]",
+                    "default": "[]",
+                    "description": "禁用的時間列表"
+                }
+            ],
+            "events": [
+                {
+                    "name": "update:modelValue",
+                    "payload": "string | TimeRange | null",
+                    "description": "時間變化時觸發"
+                },
+                {
+                    "name": "change",
+                    "payload": "string | TimeRange | null",
+                    "description": "時間變化時觸發"
+                },
+                {
+                    "name": "focus",
+                    "payload": "FocusEvent",
+                    "description": "獲得焦點時觸發"
+                },
+                {
+                    "name": "blur",
+                    "payload": "FocusEvent",
+                    "description": "失去焦點時觸發"
+                },
+                {
+                    "name": "clear",
+                    "payload": null,
+                    "description": "清除時間時觸發"
+                }
+            ],
+            "slots": [
+                {
+                    "name": "prefix",
+                    "description": "輸入框前置內容"
+                },
+                {
+                    "name": "suffix",
+                    "description": "輸入框後置內容"
+                }
+            ],
+            "methods": []
+        },
+        {
+            "name": "Tooltip",
+            "description": "提示框，懸停觸發元素時顯示浮動提示，支援多方向、延遲顯示與箭頭。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "open",
+                    "type": "boolean",
+                    "default": null,
+                    "description": "控制是否顯示（受控模式）"
+                },
+                {
+                    "name": "defaultOpen",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "默認開啟狀態（非受控模式）"
+                },
+                {
+                    "name": "side",
+                    "type": "'top' | 'right' | 'bottom' | 'left'",
+                    "default": "'top'",
+                    "description": "提示框出現方向"
+                },
+                {
+                    "name": "sideOffset",
+                    "type": "number",
+                    "default": 5,
+                    "description": "距離觸發元素的偏移量（px）"
+                },
+                {
+                    "name": "align",
+                    "type": "'start' | 'center' | 'end'",
+                    "default": "'center'",
+                    "description": "對齊方式"
+                },
+                {
+                    "name": "alignOffset",
+                    "type": "number",
+                    "default": 0,
+                    "description": "對齊偏移量（px）"
+                },
+                {
+                    "name": "delayDuration",
+                    "type": "number",
+                    "default": 300,
+                    "description": "延遲顯示時間（ms）"
+                },
+                {
+                    "name": "disabled",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否禁用"
+                },
+                {
+                    "name": "arrow",
+                    "type": "boolean",
+                    "default": true,
+                    "description": "是否顯示箭頭"
+                }
+            ],
+            "events": [
+                {
+                    "name": "update:open",
+                    "payload": "boolean",
+                    "description": "開關狀態變化時觸發"
+                },
+                {
+                    "name": "openChange",
+                    "payload": "boolean",
+                    "description": "開關狀態變化時觸發"
+                }
+            ],
+            "slots": [
+                {
+                    "name": "default",
+                    "description": "提示框內容"
+                },
+                {
+                    "name": "trigger",
+                    "description": "觸發提示框的元素"
+                }
+            ],
+            "methods": []
+        }
+    ]
+}
