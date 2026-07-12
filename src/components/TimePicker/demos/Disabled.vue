@@ -3,7 +3,7 @@
     <div style="margin-bottom: 20px">
       <h4>禁用狀態</h4>
       <TimePicker
-        v-model="disabledTime"
+        v-model:value="disabledTime"
         :disabled="true"
         placeholder="禁用的時間選擇器"
       />
@@ -11,7 +11,7 @@
     <div>
       <h4>唯讀狀態</h4>
       <TimePicker
-        v-model="readonlyTime"
+        v-model:value="readonlyTime"
         :readonly="true"
         placeholder="唯讀的時間選擇器"
       />

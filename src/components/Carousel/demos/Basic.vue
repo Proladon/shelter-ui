@@ -3,7 +3,7 @@
     <h3>Basic Carousel</h3>
     <div class="demo__content">
       <SHCarousel
-        v-model="currentSlide"
+        v-model:value="currentSlide"
         :items="basicItems"
         height="300px"
         :autoplay="false"

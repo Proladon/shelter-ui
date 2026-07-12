@@ -82,23 +82,23 @@ Popover 支持四個不同的彈出方位：上、右、下、左。
 
 ### 屬性
 
-| 屬性名      | 說明                     | 類型                                     | 默認值      |
-| ----------- | ------------------------ | ---------------------------------------- | ----------- |
-| open        | 控制彈出框是否打開       | `boolean`                                | `undefined` |
-| defaultOpen | 彈出框默認是否打開       | `boolean`                                | `undefined` |
-| modal       | 是否為模態彈出框         | `boolean`                                | `false`     |
-| side        | 彈出框相對於觸發器的方位 | `'top' \| 'right' \| 'bottom' \| 'left'` | `'bottom'`  |
-| sideOffset  | 彈出框與觸發器之間的距離 | `number`                                 | `5`         |
-| align       | 彈出框與觸發器的對齊方式 | `'start' \| 'center' \| 'end'`           | `'center'`  |
-| alignOffset | 彈出框對齊偏移量         | `number`                                 | `0`         |
-| disabled    | 是否禁用彈出框           | `boolean`                                | `false`     |
+| 屬性名       | 說明                     | 類型                                     | 默認值      |
+| ------------ | ------------------------ | ---------------------------------------- | ----------- |
+| value        | 控制彈出框是否打開       | `boolean`                                | `undefined` |
+| defaultValue | 彈出框默認是否打開       | `boolean`                                | `undefined` |
+| modal        | 是否為模態彈出框         | `boolean`                                | `false`     |
+| side         | 彈出框相對於觸發器的方位 | `'top' \| 'right' \| 'bottom' \| 'left'` | `'bottom'`  |
+| sideOffset   | 彈出框與觸發器之間的距離 | `number`                                 | `5`         |
+| align        | 彈出框與觸發器的對齊方式 | `'start' \| 'center' \| 'end'`           | `'center'`  |
+| alignOffset  | 彈出框對齊偏移量         | `number`                                 | `0`         |
+| disabled     | 是否禁用彈出框           | `boolean`                                | `false`     |
 
 ### 事件
 
-| 事件名      | 說明                         | 回調參數                   |
-| ----------- | ---------------------------- | -------------------------- |
-| update:open | 當彈出框的打開狀態變化時觸發 | `(value: boolean) => void` |
-| openChange  | 當彈出框的打開狀態變化時觸發 | `(value: boolean) => void` |
+| 事件名       | 說明                         | 回調參數                   |
+| ------------ | ---------------------------- | -------------------------- |
+| update:value | 當彈出框的打開狀態變化時觸發 | `(value: boolean) => void` |
+| valueChange  | 當彈出框的打開狀態變化時觸發 | `(value: boolean) => void` |
 
 ### 插槽
 

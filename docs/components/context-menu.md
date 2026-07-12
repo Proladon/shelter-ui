@@ -43,7 +43,7 @@ const menuItems = [
 | `items`          | `ContextMenuItemOption[]` | `[]`                  | 選單項目配置        |
 | `triggerContent` | `string`                  | `'Right click here.'` | 觸發元素的內容      |
 | `triggerClass`   | `string`                  | -                     | 觸發元素的 CSS 類別 |
-| `radioValue`     | `string \| number`        | -                     | 單選組的當前值      |
+| `value`          | `string \| number`        | -                     | 單選組的當前值      |
 | `radioGroup`     | `string`                  | -                     | 單選組名稱          |
 
 ## 選單項目類型
@@ -124,7 +124,7 @@ const menuItems = [
 | `item-click`        | `item: ContextMenuItemOption`                   | 選單項目被點擊時觸發        |
 | `checkbox-change`   | `item: ContextMenuItemOption, checked: boolean` | 複選框狀態改變時觸發        |
 | `radio-change`      | `value: string \| number`                       | 單選框選擇改變時觸發        |
-| `update:radioValue` | `value: string \| number`                       | 用於 v-model 雙向綁定單選值 |
+| `update:value`      | `value: string \| number`                       | 用於 v-model 雙向綁定單選值 |
 
 ## 插槽
 
@@ -151,7 +151,7 @@ const menuItems = [
     <ContextMenu
       :items="radioItems"
       radio-group="people"
-      v-model:radio-value="selectedPerson"
+      v-model:value="selectedPerson"
       trigger-content="單選組選單"
     />
 
@@ -265,7 +265,7 @@ interface ContextMenuProps {
   items?: ContextMenuItemOption[]
   triggerContent?: string
   triggerClass?: string
-  radioValue?: string | number
+  value?: string | number
   radioGroup?: string
 }
 ```

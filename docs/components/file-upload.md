@@ -18,7 +18,7 @@ title: FileUpload 文件上傳
 ```vue
 <template>
   <div class="flex flex-col gap-4">
-    <SHUploadZone v-model="files" multiple @change="onChange" />
+    <SHUploadZone v-model:value="files" multiple @change="onChange" />
     <pre class="text-text.primary text-xs">{{ summary }}</pre>
   </div>
 </template>
@@ -57,15 +57,15 @@ const summary = computed(() =>
   <div class="flex flex-col gap-6">
     <div>
       <p class="text-text.primary text-sm mb-2">Small</p>
-      <SHUploadZone v-model="filesS" size="sm" />
+      <SHUploadZone v-model:value="filesS" size="sm" />
     </div>
     <div>
       <p class="text-text.primary text-sm mb-2">Medium (預設)</p>
-      <SHUploadZone v-model="filesM" size="md" />
+      <SHUploadZone v-model:value="filesM" size="md" />
     </div>
     <div>
       <p class="text-text.primary text-sm mb-2">Large</p>
-      <SHUploadZone v-model="filesL" size="lg" />
+      <SHUploadZone v-model:value="filesL" size="lg" />
     </div>
   </div>
 </template>
@@ -98,7 +98,7 @@ const filesL = ref([])
       Only images, max 1 MB each, up to 3 files.
     </p>
     <SHUploadZone
-      v-model="files"
+      v-model:value="files"
       accept="image/*"
       multiple
       :max-count="3"
@@ -147,7 +147,7 @@ const onExceedCount = (excess) => {
 
 ```vue
 <template>
-  <SHUploadZone v-model="files" disabled />
+  <SHUploadZone v-model:value="files" disabled />
 </template>
 
 <script setup>
@@ -166,7 +166,7 @@ const files = ref([])
 
 | 屬性名       | 說明                                                       | 類型                   | 默認值  |
 | ------------ | ---------------------------------------------------------- | ---------------------- | ------- |
-| `modelValue` | 文件列表（v-model）                                        | `FileUploadFile[]`     | `[]`    |
+| `value`      | 文件列表（v-model）                                        | `FileUploadFile[]`     | `[]`    |
 | `accept`     | 可接受的文件類型，同 `<input accept>`，如 `"image/*,.pdf"` | `string`               | —       |
 | `multiple`   | 是否允許多選                                               | `boolean`              | `false` |
 | `disabled`   | 是否禁用                                                   | `boolean`              | `false` |
@@ -178,7 +178,7 @@ const files = ref([])
 
 | 事件名              | 說明                          | 回調參數                            |
 | ------------------- | ----------------------------- | ----------------------------------- |
-| `update:modelValue` | 文件列表更新                  | `(files: FileUploadFile[]) => void` |
+| `update:value`      | 文件列表更新                  | `(files: FileUploadFile[]) => void` |
 | `change`            | 文件選取後（驗證完成後）觸發  | `(files: FileUploadFile[]) => void` |
 | `exceed-size`       | 單個文件超過 `maxSize` 時觸發 | `(file: File) => void`              |
 | `exceed-count`      | 超過 `maxCount` 的文件觸發    | `(files: File[]) => void`           |

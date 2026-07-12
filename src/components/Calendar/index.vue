@@ -36,10 +36,10 @@ const props = withDefaults(defineProps<CalendarProps>(), {
 
 const emit = defineEmits<CalendarEmits>()
 
-const modelValue = computed({
-  get: () => props.modelValue ?? undefined,
+const boundValue = computed({
+  get: () => props.value ?? undefined,
   set: (val: DateValue | DateValue[] | undefined) =>
-    emit('update:modelValue', val),
+    emit('update:value', val),
 })
 
 // ── Placeholder (controls displayed month/year) ──────────────
@@ -82,7 +82,7 @@ function onYearChange(year: number) {
 
 <template>
   <CalendarRoot
-    v-model="modelValue"
+    v-model="boundValue"
     v-model:placeholder="placeholder"
     :locale="locale"
     :disabled="disabled"

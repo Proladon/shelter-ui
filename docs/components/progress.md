@@ -13,7 +13,7 @@ csacsacs
 
 ```vue
 <template>
-  <SHProgress v-model="value" :show-text="true" />
+  <SHProgress v-model:value="value" :show-text="true" />
   <button @click="onClick">Increase</button>
 </template>
 
@@ -58,9 +58,9 @@ const onClick = () => {
 ```vue
 <template>
   <div>
-    <SHProgress v-model="sizeValue" size="small" />
-    <SHProgress v-model="sizeValue" size="default" />
-    <SHProgress v-model="sizeValue" size="large" />
+    <SHProgress v-model:value="sizeValue" size="small" />
+    <SHProgress v-model:value="sizeValue" size="default" />
+    <SHProgress v-model:value="sizeValue" size="large" />
   </div>
 </template>
 ```
@@ -78,9 +78,9 @@ const onClick = () => {
 ```vue
 <template>
   <div>
-    <SHProgress v-model="v" variant="default" />
-    <SHProgress v-model="v" variant="striped" />
-    <SHProgress v-model="v" variant="animated" />
+    <SHProgress v-model:value="v" variant="default" />
+    <SHProgress v-model:value="v" variant="striped" />
+    <SHProgress v-model:value="v" variant="animated" />
   </div>
 </template>
 ```
@@ -98,9 +98,9 @@ const onClick = () => {
 ```vue
 <template>
   <div>
-    <SHProgress v-model="p" text-position="left" />
-    <SHProgress v-model="p" text-position="bottom" />
-    <SHProgress v-model="p" text-position="right" />
+    <SHProgress v-model:value="p" text-position="left" />
+    <SHProgress v-model:value="p" text-position="bottom" />
+    <SHProgress v-model:value="p" text-position="right" />
   </div>
 </template>
 ```
@@ -119,7 +119,7 @@ const onClick = () => {
 ```vue
 <template>
   <div>
-    <SHProgress v-model="c" :show-text="true" :format-text="formatter" />
+    <SHProgress v-model:value="c" :show-text="true" :format-text="formatter" />
   </div>
 </template>
 ```
@@ -138,9 +138,9 @@ const onClick = () => {
 ```vue
 <template>
   <div>
-    <SHProgress v-model="col" color="#ef4444" />
-    <SHProgress v-model="col" color="#22c55e" />
-    <SHProgress v-model="col" color="#8b5cf6" height="15px" />
+    <SHProgress v-model:value="col" color="#ef4444" />
+    <SHProgress v-model:value="col" color="#22c55e" />
+    <SHProgress v-model:value="col" color="#8b5cf6" height="15px" />
   </div>
 </template>
 ```
@@ -155,7 +155,7 @@ const onClick = () => {
 
 | 屬性名     | 說明               | 類型                                             | 默認值      |
 | ---------- | ------------------ | ------------------------------------------------ | ----------- |
-| v-model    | 當前進度值         | `number \| null`                                 | -           |
+| value      | 當前進度值         | `number \| null`                                 | -           |
 | max        | 最大進度值         | `number`                                         | `100`       |
 | size       | 進度條尺寸         | `'small' \| 'default' \| 'large'`                | `'default'` |
 | variant    | 進度條變體         | `'default' \| 'striped' \| 'animated'`           | `'default'` |
@@ -164,10 +164,9 @@ const onClick = () => {
 
 ### 事件 Events
 
-| 事件名     | 說明             | 回調參數                  |
-| ---------- | ---------------- | ------------------------- |
-| update     | 進度值變化時觸發 | `(value: number \| null)` |
-| update:max | 最大值變化時觸發 | `(value: number)`         |
+| 事件名       | 說明             | 回調參數                  |
+| ------------ | ---------------- | ------------------------- |
+| update:value | 進度值變化時觸發 | `(value: number \| null)` |
 
 ### 插槽 Slots
 
@@ -182,7 +181,7 @@ const onClick = () => {
 
 ```vue
 <template>
-  <SHProgress v-model="value" :show-text="true">
+  <SHProgress v-model:value="value" :show-text="true">
     <template #text> {{ value }} / {{ max }} </template>
   </SHProgress>
 </template>

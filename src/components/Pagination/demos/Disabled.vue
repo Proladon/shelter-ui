@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-4">
-    <Pagination v-model="disabledPage" :total="100" :page-size="10" disabled />
+    <Pagination v-model:value="disabledPage" :total="100" :page-size="10" disabled />
     <p class="text-sm text-gray-600">當前頁數: {{ disabledPage }}</p>
   </div>
 </template>

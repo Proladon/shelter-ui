@@ -3,7 +3,7 @@
     <div>
       <h3 class="text-sm font-semibold mb-2">正常狀態</h3>
       <MentionableTextArea
-        v-model="normalValue"
+        v-model:value="normalValue"
         placeholder="正常可編輯狀態"
         :rows="3"
       />
@@ -12,7 +12,7 @@
     <div>
       <h3 class="text-sm font-semibold mb-2">禁用狀態</h3>
       <MentionableTextArea
-        v-model="disabledValue"
+        v-model:value="disabledValue"
         placeholder="禁用狀態"
         :rows="3"
         disabled
@@ -22,7 +22,7 @@
     <div>
       <h3 class="text-sm font-semibold mb-2">只讀狀態</h3>
       <MentionableTextArea
-        v-model="readonlyValue"
+        v-model:value="readonlyValue"
         placeholder="只讀狀態"
         :rows="3"
         readonly
@@ -52,7 +52,7 @@
     <div>
       <h3 class="text-sm font-semibold mb-2">動態狀態控制</h3>
       <MentionableTextArea
-        v-model="dynamicValue"
+        v-model:value="dynamicValue"
         placeholder="動態控制狀態"
         :rows="3"
         :disabled="isDisabled"

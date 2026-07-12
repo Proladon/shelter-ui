@@ -30,7 +30,7 @@ defineOptions({
 })
 
 const props = withDefaults(defineProps<CheckboxGroupProps>(), {
-  modelValue: () => [],
+  value: () => [],
   options: () => [],
   optionLabel: "label",
   optionValue: "value",
@@ -41,7 +41,7 @@ const props = withDefaults(defineProps<CheckboxGroupProps>(), {
 
 const emit = defineEmits<CheckboxGroupEmits>()
 
-const modelValue = defineModel<any[]>({
+const modelValue = defineModel<any[]>('value', {
   default: () => [],
 })
 

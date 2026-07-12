@@ -8,14 +8,14 @@
 
       <!-- Main textarea -->
       <SHTextarea
-        :model-value="modelValue"
+        :value="value"
         :placeholder="placeholder"
         :rows="rows"
         :disabled="disabled"
         :maxlength="maxlength"
         :show-word-limit="showWordLimit"
         resize="none"
-        @update:value="emit('update:modelValue', $event)"
+        @update:value="emit('update:value', $event)"
         @keydown.enter.exact.prevent="handleEnterSubmit"
       />
 
@@ -72,9 +72,9 @@
         <button
           class="sh-chat-input__send-btn sh-interactive"
           :class="{
-            'sh-disabled': disabled || submitLoading || !modelValue?.trim(),
+            'sh-disabled': disabled || submitLoading || !value?.trim(),
           }"
-          :disabled="disabled || submitLoading || !modelValue?.trim()"
+          :disabled="disabled || submitLoading || !value?.trim()"
           title="送出"
           type="button"
           style="margin-left: auto"
@@ -100,7 +100,7 @@ import type { ChatInputProps, ChatInputEmits } from './types'
 defineOptions({ name: 'SHChatInput' })
 
 const props = withDefaults(defineProps<ChatInputProps>(), {
-  modelValue: '',
+  value: '',
   placeholder: '輸入訊息…',
   rows: 3,
   disabled: false,
@@ -144,8 +144,8 @@ function handleImageChange(event: Event) {
 }
 
 function handleSubmit() {
-  if (!props.modelValue?.trim() || props.disabled || props.submitLoading) return
-  emit('submit', props.modelValue)
+  if (!props.value?.trim() || props.disabled || props.submitLoading) return
+  emit('submit', props.value)
 }
 
 function handleEnterSubmit(event: KeyboardEvent) {

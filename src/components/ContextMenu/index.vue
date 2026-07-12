@@ -12,7 +12,7 @@
       <ContextMenuContent class="sh-context-menu-content" :side-offset="5">
         <template v-if="radioGroup">
           <ContextMenuRadioGroup
-            :model-value="radioValue?.toString()"
+            :model-value="value?.toString()"
             @update:model-value="handleRadioChange"
           >
             <ContextMenuRadioItem
@@ -110,7 +110,7 @@ const handleRadioChange = (value: any): void => {
   const numValue = Number(stringValue)
   const finalValue = isNaN(numValue) ? stringValue : numValue
   emit('radio-change', finalValue)
-  emit('update:radioValue', finalValue)
+  emit('update:value', finalValue)
 }
 
 const handleItemClick = (item: ContextMenuItemOption): void => {

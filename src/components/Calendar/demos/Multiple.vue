@@ -1,6 +1,6 @@
 <template>
   <div class="demo-container">
-    <Calendar v-model="selected" multiple />
+    <Calendar v-model:value="selected" multiple />
     <p class="demo-result">
       Selected:
       {{

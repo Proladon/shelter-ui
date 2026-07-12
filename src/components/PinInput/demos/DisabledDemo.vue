@@ -5,7 +5,7 @@
     >
       Disabled
     </p>
-    <SHPinInput v-model="value" disabled />
+    <SHPinInput v-model:value="value" disabled />
   </div>
 </template>
 

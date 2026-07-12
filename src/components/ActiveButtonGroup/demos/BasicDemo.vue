@@ -1,6 +1,6 @@
 <template>
   <div>
-    <SHActiveButtonGroup v-model="activeTab" class="mb-5">
+    <SHActiveButtonGroup v-model:value="activeTab" class="mb-5">
       <SHActiveButtonItem value="all">All</SHActiveButtonItem>
       <SHActiveButtonItem value="active">Active</SHActiveButtonItem>
       <SHActiveButtonItem value="completed">Completed</SHActiveButtonItem>

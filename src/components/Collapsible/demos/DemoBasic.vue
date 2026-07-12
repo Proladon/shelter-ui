@@ -1,7 +1,7 @@
 <template>
   <div class="demo-section">
     <SHBaseContainer>
-      <Collapsible v-model:open="basicOpen">
+      <Collapsible v-model:value="basicOpen">
         <template #trigger>
           <span>點擊展開/收合內容</span>
         </template>

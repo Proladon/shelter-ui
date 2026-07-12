@@ -2,13 +2,16 @@
   <div class="sh-slider-wrapper">
     <SliderRoot
       v-slot="{ modelValue }"
-      v-bind="rootProps"
+      :model-value="value"
+      v-bind="delegatedProps"
       class="sh-slider"
       :class="[
         `sh-slider-size--${props.size}`,
         `sh-slider-color--${props.color}`,
         `sh-slider-orientation--${props.orientation}`,
       ]"
+      @update:model-value="emits('update:value', $event)"
+      @value-commit="(v: number[]) => emits('valueCommit', v)"
     >
       <SliderTrack class="sh-slider__track">
         <SliderRange class="sh-slider__range" />
@@ -49,13 +52,8 @@
 </template>
 
 <script setup lang="ts">
-import {
-  SliderRoot,
-  SliderTrack,
-  SliderRange,
-  SliderThumb,
-  useForwardPropsEmits,
-} from 'reka-ui'
+import { reactiveOmit } from '@vueuse/core'
+import { SliderRoot, SliderTrack, SliderRange, SliderThumb } from 'reka-ui'
 import type { SliderProps, SliderSlots } from './types'
 
 const props = withDefaults(defineProps<SliderProps>(), {
@@ -72,11 +70,20 @@ const props = withDefaults(defineProps<SliderProps>(), {
 defineSlots<SliderSlots>()
 
 const emits = defineEmits<{
-  'update:modelValue': [value: number[]]
+  'update:value': [value: number[] | undefined]
   valueCommit: [value: number[]]
 }>()
 
-const rootProps = useForwardPropsEmits(props, emits)
+const delegatedProps = reactiveOmit(
+  props,
+  'value',
+  'size',
+  'color',
+  'showTooltip',
+  'formatTooltip',
+  'showMarks',
+  'marks',
+)
 
 const getMarkStyle = (value: number) => {
   const min = props.min ?? 0

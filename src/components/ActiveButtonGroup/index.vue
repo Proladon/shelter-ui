@@ -8,7 +8,7 @@ defineOptions({
 
 const props = withDefaults(defineProps<ActiveButtonGroupProps>(), {
   defaultValue: undefined,
-  modelValue: undefined,
+  value: undefined,
 })
 
 const emit = defineEmits<ActiveButtonGroupEmits>()
@@ -32,9 +32,9 @@ const addButton = (button: {
   buttons.value.push(button)
 }
 
-// Get the current value (modelValue or defaultValue)
+// Get the current value (value or defaultValue)
 const currentValue = computed(() => {
-  return props.modelValue !== undefined ? props.modelValue : props.defaultValue
+  return props.value !== undefined ? props.value : props.defaultValue
 })
 
 // Store a non-reactive copy of the current value to break the reactivity chain
@@ -59,7 +59,7 @@ const updateIndicator = () => {
 
 const handleButtonClick = (value: string) => {
   if (value === currentValue.value) return
-  emit('update:modelValue', value)
+  emit('update:value', value)
   emit('change', value)
 }
 

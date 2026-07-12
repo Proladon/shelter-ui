@@ -1,7 +1,7 @@
 <template>
   <div class="space-y-4">
     <MentionableTextArea
-      v-model="value"
+      v-model:value="value"
       label="事件處理"
       placeholder="監聽各種事件"
       :rows="4"

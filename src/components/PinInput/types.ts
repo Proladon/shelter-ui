@@ -5,7 +5,7 @@ export interface PinInputProps {
   /**
    * The controlled value of the pin input. Each item in the array represents a single cell.
    */
-  modelValue?: string[]
+  value?: string[]
   /**
    * Number of input cells
    * @default 6
@@ -44,7 +44,7 @@ export interface PinInputProps {
 }
 
 export interface PinInputEmits {
-  (e: 'update:modelValue', value: string[]): void
+  (e: 'update:value', value: string[]): void
   (e: 'complete', value: string[]): void
   (e: 'change', value: string[]): void
 }

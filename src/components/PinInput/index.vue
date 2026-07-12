@@ -26,7 +26,7 @@ defineOptions({
 })
 
 const props = withDefaults(defineProps<PinInputProps>(), {
-  modelValue: undefined,
+  value: undefined,
   length: 6,
   placeholder: '○',
   type: 'text',
@@ -39,7 +39,7 @@ const props = withDefaults(defineProps<PinInputProps>(), {
 const emit = defineEmits<PinInputEmits>()
 
 const rootProps = computed(() => ({
-  modelValue: props.modelValue,
+  modelValue: props.value,
   placeholder: props.placeholder,
   type: props.type,
   mask: props.mask,
@@ -48,7 +48,7 @@ const rootProps = computed(() => ({
 }))
 
 const handleUpdate = (value: string[]) => {
-  emit('update:modelValue', value)
+  emit('update:value', value)
   emit('change', value)
 }
 

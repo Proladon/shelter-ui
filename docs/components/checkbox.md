@@ -195,7 +195,7 @@ const updateChild = (
     <h3>Checkbox Group</h3>
     <div class="demo__content">
       <SHCheckboxGroup
-        v-model="selected1"
+        v-model:value="selected1"
         label="選擇您的興趣"
         :options="interests"
         orientation="vertical"
@@ -205,7 +205,7 @@ const updateChild = (
 
     <div class="demo__content">
       <SHCheckboxGroup
-        v-model="selected2"
+        v-model:value="selected2"
         label="選擇顏色（水平）"
         :options="colors"
         orientation="horizontal"
@@ -259,7 +259,7 @@ const colors = ['紅色', '藍色', '綠色', '黃色']
 
 | 屬性名         | 說明                 | 類型                           | 默認值       |
 | -------------- | -------------------- | ------------------------------ | ------------ |
-| modelValue     | 當前選中的值陣列     | `any[]`                        | `[]`         |
+| value          | 當前選中的值陣列     | `any[]`                        | `[]`         |
 | options        | 選項陣列             | `(CheckboxOption \| string)[]` | `[]`         |
 | optionLabel    | 選項標籤的屬性名     | `string`                       | `'label'`    |
 | optionValue    | 選項值的屬性名       | `string`                       | `'value'`    |
@@ -269,7 +269,7 @@ const colors = ['紅色', '藍色', '綠色', '黃色']
 | orientation    | 佈局方向             | `'horizontal' \| 'vertical'`   | `'vertical'` |
 | label          | 群組標籤             | `string`                       | -            |
 
-### 事件 Events
+### Checkbox 事件
 
 | 事件名            | 說明         | 回調參數                                              |
 | ----------------- | ------------ | ----------------------------------------------------- |
@@ -277,6 +277,13 @@ const colors = ['紅色', '藍色', '綠色', '黃色']
 | change            | 值變更事件   | `(event: Event) => void`                              |
 | focus             | 獲得焦點事件 | `(event: FocusEvent) => void`                         |
 | blur              | 失去焦點事件 | `(event: FocusEvent) => void`                         |
+
+### CheckboxGroup 事件
+
+| 事件名       | 說明       | 回調參數                  |
+| ------------ | ---------- | ------------------------- |
+| update:value | 更新模型值 | `(value: any[]) => void`  |
+| change       | 值變更事件 | `(value: any[]) => void`  |
 
 ### 插槽 Slots
 

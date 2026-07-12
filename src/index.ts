@@ -61,6 +61,7 @@ import SHMessageBox from './components/MessageBox'
 import SHUploadZone from './components/UploadZone/index.vue'
 import SHPinInput from './components/PinInput/index.vue'
 import SHChatInput from './components/ChatInput/index.vue'
+import { SHChatMessage } from './components/ChatMessage'
 
 // 組件列表
 const components = {
@@ -116,6 +117,7 @@ const components = {
   SHUploadZone,
   SHPinInput,
   SHChatInput,
+  SHChatMessage,
 }
 
 /**
@@ -192,7 +194,11 @@ export type {
   ContextMenuEmits,
   ContextMenuItemOption,
 } from './components/ContextMenu/types'
-export type { ProgressProps, ProgressSlots } from './components/Progress/types'
+export type {
+  ProgressProps,
+  ProgressSlots,
+  ProgressEmits,
+} from './components/Progress/types'
 export type { SliderProps, SliderSlots } from './components/Slider/types'
 export type {
   CollapsibleProps,
@@ -268,6 +274,13 @@ export type {
   ChatInputProps,
   ChatInputEmits,
 } from './components/ChatInput/types'
+export type {
+  ChatMessageProps,
+  ChatMessageEmits,
+  ChatMessageSlots,
+  ChatMessagePosition,
+  ChatMessageStatus,
+} from './components/ChatMessage/types'
 
 // 安裝函數
 const install = (app: App) => {
@@ -278,7 +291,7 @@ const install = (app: App) => {
 }
 
 // 版本號
-const version = '0.1.0'
+const version = '1.1.1'
 
 // Vue 插件對象
 const ShelterUI: Plugin = {
@@ -346,4 +359,5 @@ export {
   SHSwitch,
   SHPinInput,
   SHChatInput,
+  SHChatMessage,
 }

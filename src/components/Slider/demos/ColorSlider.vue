@@ -4,26 +4,26 @@
     <div class="space-y-4">
       <div>
         <span class="demo-label">一般：</span>
-        <Slider v-model="colorValue" color="info" :min="0" :max="100" />
+        <Slider v-model:value="colorValue" color="info" :min="0" :max="100" />
       </div>
       <div>
         <span class="demo-label">主要：</span>
-        <Slider v-model="colorValue" color="primary" :min="0" :max="100" />
+        <Slider v-model:value="colorValue" color="primary" :min="0" :max="100" />
       </div>
       <div>
         <span class="demo-label">次要：</span>
       </div>
       <div>
         <span class="demo-label">成功：</span>
-        <Slider v-model="colorValue" color="success" :min="0" :max="100" />
+        <Slider v-model:value="colorValue" color="success" :min="0" :max="100" />
       </div>
       <div>
         <span class="demo-label">警告：</span>
-        <Slider v-model="colorValue" color="warning" :min="0" :max="100" />
+        <Slider v-model:value="colorValue" color="warning" :min="0" :max="100" />
       </div>
       <div>
         <span class="demo-label">危險：</span>
-        <Slider v-model="colorValue" color="danger" :min="0" :max="100" />
+        <Slider v-model:value="colorValue" color="danger" :min="0" :max="100" />
       </div>
     </div>
   </div>

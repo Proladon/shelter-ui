@@ -3,25 +3,25 @@
     <!-- Text prefix addon -->
     <SHInputGroup>
       <SHInputGroupAddon>https://</SHInputGroupAddon>
-      <SHInput v-model="url" placeholder="example.com" />
+      <SHInput v-model:value="url" placeholder="example.com" />
     </SHInputGroup>
 
     <!-- Text suffix addon -->
     <SHInputGroup>
-      <SHInput v-model="email" placeholder="username" />
+      <SHInput v-model:value="email" placeholder="username" />
       <SHInputGroupAddon>@example.com</SHInputGroupAddon>
     </SHInputGroup>
 
     <!-- Prefix + suffix addons -->
     <SHInputGroup>
       <SHInputGroupAddon>$</SHInputGroupAddon>
-      <SHInput v-model="price" placeholder="0.00" />
+      <SHInput v-model:value="price" placeholder="0.00" />
       <SHInputGroupAddon>USD</SHInputGroupAddon>
     </SHInputGroup>
 
     <!-- Input + Button (search bar) -->
     <SHInputGroup>
-      <SHInput v-model="search" placeholder="Search..." />
+      <SHInput v-model:value="search" placeholder="Search..." />
       <SHButton type="primary">Search</SHButton>
     </SHInputGroup>
 
@@ -43,12 +43,12 @@
           <path d="m21 21-4.35-4.35" />
         </svg>
       </SHInputGroupAddon>
-      <SHInput v-model="search2" placeholder="Search by keyword..." />
+      <SHInput v-model:value="search2" placeholder="Search by keyword..." />
     </SHInputGroup>
 
     <!-- Input + block-end footer addon -->
     <SHInputGroup>
-      <SHInput v-model="amount" placeholder="Enter amount" />
+      <SHInput v-model:value="amount" placeholder="Enter amount" />
       <SHInputGroupAddon align="block-end">USD</SHInputGroupAddon>
     </SHInputGroup>
 

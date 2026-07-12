@@ -13,7 +13,7 @@
 ```vue
 <template>
   <div>
-    <SHCalendar v-model="selected" />
+    <SHCalendar v-model:value="selected" />
     <p>選中的日期: {{ selected?.toString() ?? '無' }}</p>
   </div>
 </template>
@@ -38,7 +38,7 @@ const selected = ref(null)
 ```vue
 <template>
   <div>
-    <SHCalendar v-model="selected" multiple />
+    <SHCalendar v-model:value="selected" multiple />
     <p>
       選中的日期:
       {{
@@ -120,7 +120,7 @@ type CalendarWeekdayFormat = 'narrow' | 'short' | 'long'
 
 | 屬性名                          | 類型                               | 預設值    | 說明                                             |
 | ------------------------------- | ---------------------------------- | --------- | ------------------------------------------------ |
-| `modelValue`                    | `DateValue \| DateValue[] \| null` | -         | 受控選中值，可使用 `v-model` 綁定                |
+| `value`                         | `DateValue \| DateValue[] \| null` | -         | 受控選中值，可使用 `v-model:value` 綁定          |
 | `multiple`                      | `boolean`                          | `false`   | 是否允許多選日期                                 |
 | `disabled`                      | `boolean`                          | `false`   | 是否禁用日曆                                     |
 | `readonly`                      | `boolean`                          | `false`   | 是否唯讀                                         |
@@ -146,7 +146,7 @@ type CalendarWeekdayFormat = 'narrow' | 'short' | 'long'
 
 | 事件名               | 說明               | 參數                                             |
 | -------------------- | ------------------ | ------------------------------------------------ |
-| `update:modelValue`  | 選中值改變時觸發   | `(value: DateValue \| DateValue[] \| undefined)` |
+| `update:value`       | 選中值改變時觸發   | `(value: DateValue \| DateValue[] \| undefined)` |
 | `update:placeholder` | 佔位日期改變時觸發 | `(value: DateValue)`                             |
 
 <script setup>

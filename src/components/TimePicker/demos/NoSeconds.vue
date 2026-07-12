@@ -1,7 +1,7 @@
 <template>
   <div class="demo-container">
     <TimePicker
-      v-model="timeNoSeconds"
+      v-model:value="timeNoSeconds"
       :second="false"
       placeholder="選擇時間（不含秒）"
     />

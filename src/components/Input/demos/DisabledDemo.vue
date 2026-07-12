@@ -1,6 +1,6 @@
 <template>
   <div class="demo-container">
-    <SHInput v-model="inputValue" placeholder="Disabled input" disabled />
+    <SHInput v-model:value="inputValue" placeholder="Disabled input" disabled />
   </div>
 </template>
 

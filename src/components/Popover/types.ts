@@ -1,6 +1,6 @@
 export interface PopoverProps {
-  defaultOpen?: boolean
-  open?: boolean
+  defaultValue?: boolean
+  value?: boolean
   modal?: boolean
   side?: 'top' | 'right' | 'bottom' | 'left'
   sideOffset?: number
@@ -11,6 +11,6 @@ export interface PopoverProps {
 }
 
 export interface PopoverEmits {
-  (e: 'update:open', value: boolean): void
-  (e: 'openChange', value: boolean): void
+  (e: 'update:value', value: boolean): void
+  (e: 'valueChange', value: boolean): void
 }

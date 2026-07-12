@@ -6,7 +6,7 @@
       >
         Basic (6 cells)
       </p>
-      <SHPinInput v-model="value1" @complete="onComplete" />
+      <SHPinInput v-model:value="value1" @complete="onComplete" />
       <p
         class="text-text.primary text-[length:var(--sh-font-size-sm)] mt-[var(--sh-spacing-sm)]"
       >
@@ -20,7 +20,7 @@
       >
         4-cell PIN
       </p>
-      <SHPinInput v-model="value2" :length="4" />
+      <SHPinInput v-model:value="value2" :length="4" />
     </div>
   </div>
 </template>

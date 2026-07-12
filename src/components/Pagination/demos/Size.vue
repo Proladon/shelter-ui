@@ -3,7 +3,7 @@
     <section>
       <h3 class="text-lg font-semibold mb-4">小尺寸 (Small)</h3>
       <Pagination
-        v-model="smallPage"
+        v-model:value="smallPage"
         :total="100"
         :page-size="10"
         size="small"
@@ -14,7 +14,7 @@
     <section>
       <h3 class="text-lg font-semibold mb-4">默認尺寸 (Default)</h3>
       <Pagination
-        v-model="defaultPage"
+        v-model:value="defaultPage"
         :total="100"
         :page-size="10"
         size="default"
@@ -25,7 +25,7 @@
     <section>
       <h3 class="text-lg font-semibold mb-4">大尺寸 (Large)</h3>
       <Pagination
-        v-model="largePage"
+        v-model:value="largePage"
         :total="100"
         :page-size="10"
         size="large"

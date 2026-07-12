@@ -15,8 +15,8 @@ defineOptions({
 
 // Props are used in the template
 withDefaults(defineProps<TooltipProps>(), {
-  defaultOpen: undefined,
-  open: undefined,
+  defaultValue: undefined,
+  value: undefined,
   side: 'top',
   sideOffset: 5,
   align: 'center',
@@ -28,19 +28,19 @@ withDefaults(defineProps<TooltipProps>(), {
 
 const emit = defineEmits<TooltipEmits>()
 
-const handleOpenChange = (value: boolean) => {
-  emit('update:open', value)
-  emit('openChange', value)
+const handleValueChange = (value: boolean) => {
+  emit('update:value', value)
+  emit('valueChange', value)
 }
 </script>
 
 <template>
   <TooltipProvider>
     <TooltipRoot
-      :default-open="defaultOpen"
-      :open="open"
+      :default-open="defaultValue"
+      :open="value"
       :delay-duration="delayDuration"
-      @update:open="handleOpenChange"
+      @update:open="handleValueChange"
     >
       <TooltipTrigger :disabled="disabled" class="sh-tooltip-trigger">
         <slot name="trigger"></slot>

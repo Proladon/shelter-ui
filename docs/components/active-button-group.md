@@ -18,7 +18,7 @@ ActiveButtonGroup 是一個提供類似標籤頁切換的按鈕組件，特點�
 ```vue
 <template>
   <div>
-    <SHActiveButtonGroup v-model="activeTab" class="mb-5">
+    <SHActiveButtonGroup v-model:value="activeTab" class="mb-5">
       <SHActiveButtonItem value="all">All</SHActiveButtonItem>
       <SHActiveButtonItem value="active">Active</SHActiveButtonItem>
       <SHActiveButtonItem value="completed">Completed</SHActiveButtonItem>
@@ -87,7 +87,7 @@ ActiveButtonGroup 的其他使用示例，包括禁用按鈕等。
   <div class="demo-container">
     <div class="variant-section">
       <h4>Disabled Button Example</h4>
-      <SHActiveButtonGroup v-model="disabled" class="mb-4">
+      <SHActiveButtonGroup v-model:value="disabled" class="mb-4">
         <SHActiveButtonItem value="tab1">Normal</SHActiveButtonItem>
         <SHActiveButtonItem value="tab2" disabled>Disabled</SHActiveButtonItem>
         <SHActiveButtonItem value="tab3">Button</SHActiveButtonItem>
@@ -136,14 +136,14 @@ h4 {
 
 | 屬性名       | 說明                                      | 類型     | 默認值 |
 | ------------ | ----------------------------------------- | -------- | ------ |
-| modelValue   | 當前選中按鈕的值（支持 v-model 雙向綁定） | `string` | —      |
+| value        | 當前選中按鈕的值（支持 v-model:value 雙向綁定） | `string` | —      |
 | defaultValue | 默認選中按鈕的值                          | `string` | —      |
 
 ### ActiveButtonGroup Events
 
 | 事件名            | 說明                               | 回調參數                  |
 | ----------------- | ---------------------------------- | ------------------------- |
-| update:modelValue | 當選中按鈕變化時觸發，用於 v-model | `(value: string) => void` |
+| update:value      | 當選中按鈕變化時觸發，用於 v-model:value | `(value: string) => void` |
 | change            | 當選中按鈕變化時觸發               | `(value: string) => void` |
 
 ### ActiveButtonItem Props

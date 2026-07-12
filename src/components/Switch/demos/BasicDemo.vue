@@ -1,6 +1,6 @@
 <template>
   <div class="demo-row">
-  <SHSwitch v-model="checked">啟用</SHSwitch>
+  <SHSwitch v-model:value="checked">啟用</SHSwitch>
     <p class="ml-4">目前狀態：{{ checked ? '開啟' : '關閉' }}</p>
   </div>
 </template>

@@ -35,7 +35,7 @@ app.mount('#app')
 ```vue
 <template>
   <SHButton type="primary">按鈕</SHButton>
-  <SHInput v-model="input" placeholder="請輸入內容" />
+  <SHInput v-model:value="input" placeholder="請輸入內容" />
 </template>
 
 <script setup lang="ts">

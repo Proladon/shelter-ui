@@ -1,7 +1,7 @@
 <template>
   <div class="demo-container">
     <TimePicker
-      v-model="time12Hour"
+      v-model:value="time12Hour"
       :use12-hour="true"
       placeholder="選擇時間（12小時制）"
     />

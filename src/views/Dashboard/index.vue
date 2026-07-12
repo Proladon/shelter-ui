@@ -85,9 +85,12 @@ const handleSave = () => {
   }, 1500)
 }
 
-const toggleTheme = (val: boolean) => {
-  theme.value = val ? 'dark' : 'light'
-}
+const isDarkMode = computed({
+  get: () => theme.value === 'dark',
+  set: (val: boolean) => {
+    theme.value = val ? 'dark' : 'light'
+  },
+})
 
 const carouselImages = [
   'https://picsum.photos/400/200?random=1',
@@ -105,18 +108,14 @@ const carouselImages = [
           <SHFlexContainer gap="16px" align="center">
             <div class="text-xl font-bold text-primary">Shelter UI</div>
             <SHInput
-              v-model="searchText"
+              v-model:value="searchText"
               placeholder="Search..."
               width="250px"
             />
           </SHFlexContainer>
 
           <SHFlexContainer gap="16px" align="center">
-            <SHSwitch
-              v-model="theme"
-              label="Dark Mode"
-              @update:model-value="toggleTheme"
-            />
+            <SHSwitch v-model:value="isDarkMode" label="Dark Mode" />
 
             <SHPopover trigger="click">
               <template #trigger>
@@ -161,7 +160,7 @@ const carouselImages = [
             <SHScrollArea class="h-full">
               <div class="p-4">
                 <SHActiveButtonGroup
-                  v-model="activeTab"
+                  v-model:value="activeTab"
                   direction="vertical"
                   class="w-full"
                 >
@@ -235,7 +234,7 @@ const carouselImages = [
                       </p>
                     </div>
                     <SHTimePicker
-                      v-model="formData.scheduleTime"
+                      v-model:value="formData.scheduleTime"
                       placeholder="Filter range..."
                     />
                   </div>
@@ -424,7 +423,7 @@ const carouselImages = [
                     </div>
                     <div class="p-4 border-t border.base flex justify-center">
                       <SHPagination
-                        v-model="currentPage"
+                        v-model:value="currentPage"
                         :total="items.length"
                         :page-size="5"
                       />
@@ -481,7 +480,7 @@ const carouselImages = [
                   <div class="grid grid-cols-1 gap-6">
                     <h3 class="text-lg font-bold">Draft Content</h3>
                     <SHMentionableTextArea
-                      v-model="formData.mentionContent"
+                      v-model:value="formData.mentionContent"
                       :mentions="
                         items.map((i) => ({ label: i.name, value: i.id }))
                       "
@@ -512,13 +511,13 @@ const carouselImages = [
                             <label class="text-sm font-medium"
                               >Display Name</label
                             >
-                            <SHInput v-model="formData.name" />
+                            <SHInput v-model:value="formData.name" />
                           </SHFlexContainer>
 
                           <SHFlexContainer direction="column" gap="8px">
                             <label class="text-sm font-medium">Role</label>
                             <SHSelect
-                              v-model="formData.role"
+                              v-model:value="formData.role"
                               :options="[
                                 { label: 'Administrator', value: 'admin' },
                                 { label: 'User', value: 'user' },
@@ -535,7 +534,7 @@ const carouselImages = [
                         >
                           <label class="text-sm font-medium">Bio</label>
                           <SHTextarea
-                            v-model="formData.bio"
+                            v-model:value="formData.bio"
                             :rows="3"
                             placeholder="Tell something about yourself"
                           />
@@ -552,7 +551,7 @@ const carouselImages = [
                             <label class="text-sm font-medium"
                               >Default Time</label
                             >
-                            <SHTimePicker v-model="formData.scheduleTime" />
+                            <SHTimePicker v-model:value="formData.scheduleTime" />
                           </SHFlexContainer>
                         </div>
 
@@ -560,7 +559,7 @@ const carouselImages = [
                           <label class="block mb-2 text-sm font-medium"
                             >Notification Channels</label
                           >
-                          <SHCheckboxGroup v-model="formData.notifications">
+                          <SHCheckboxGroup v-model:value="formData.notifications">
                             <SHCheckbox
                               label="Email Notifications"
                               value="email"
@@ -577,7 +576,7 @@ const carouselImages = [
                           <label class="block mb-2 text-sm font-medium"
                             >System Role (Radio)</label
                           >
-                          <SHRadioGroup v-model="formData.role">
+                          <SHRadioGroup v-model:value="formData.role">
                             <SHRadio label="Admin" value="admin" />
                             <SHRadio label="Standard User" value="user" />
                           </SHRadioGroup>
@@ -587,7 +586,7 @@ const carouselImages = [
                           <label class="block mb-2 text-sm font-medium"
                             >Audio Volume: {{ formData.sliderVal }}%</label
                           >
-                          <SHSlider v-model="formData.sliderVal" />
+                          <SHSlider v-model:value="formData.sliderVal" />
                         </div>
                       </div>
 
@@ -613,7 +612,7 @@ const carouselImages = [
     </div>
 
     <!-- Dialog -->
-    <SHDialog v-model="showDialog" title="Wait a second!">
+    <SHDialog v-model:value="showDialog" title="Wait a second!">
       This is a dialog component demo. You can put any content here.
       <template #footer>
         <SHButton @click="showDialog = false">Close</SHButton>

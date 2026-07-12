@@ -1,11 +1,11 @@
 <template>
   <SHDialog
-    :open="open"
+    :value="value"
     :modal="modal"
     :type="type"
     :width="400"
     content-class="sh-alert-dialog"
-    @openChange="handleOpenChange"
+    @valueChange="handleValueChange"
   >
     <template #trigger>
       <slot name="trigger" />
@@ -65,7 +65,7 @@ defineOptions({ name: 'SHAlertDialog' })
 const props = withDefaults(defineProps<AlertDialogProps>(), {
   type: 'danger',
   modal: true,
-  open: undefined,
+  value: undefined,
   title: undefined,
   description: undefined,
   confirmText: '確認',
@@ -77,9 +77,9 @@ const emit = defineEmits<AlertDialogEmits>()
 
 const iconComponent = computed(() => alertDialogIconMap[props.type ?? 'danger'])
 
-// openChange fires when dialog is dismissed via Escape / external means — treat as cancel
-const handleOpenChange = (value: boolean) => {
-  emit('update:open', value)
+// valueChange fires when dialog is dismissed via Escape / external means — treat as cancel
+const handleValueChange = (value: boolean) => {
+  emit('update:value', value)
   if (!value) emit('cancel')
 }
 
@@ -88,7 +88,7 @@ const handleConfirm = () => {
 }
 
 const handleCancel = () => {
-  emit('update:open', false)
+  emit('update:value', false)
   emit('cancel')
 }
 </script>

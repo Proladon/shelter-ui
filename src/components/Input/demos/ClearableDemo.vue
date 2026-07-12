@@ -1,7 +1,7 @@
 <template>
   <div class="demo-container">
     <SHInput
-      v-model="inputValue"
+      v-model:value="inputValue"
       placeholder="Hover to see clear button"
       clearable
     />

@@ -1,7 +1,7 @@
 <template>
   <div class="demo-container">
     <TimePicker
-      v-model="stepTime"
+      v-model:value="stepTime"
       :hour-step="2"
       :minute-step="15"
       :second-step="30"

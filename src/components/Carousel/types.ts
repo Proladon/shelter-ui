@@ -4,7 +4,7 @@ export interface CarouselProps {
   /**
    * 當前活動項目的索引
    */
-  modelValue?: number
+  value?: number
   /**
    * 輪播項目陣列
    */
@@ -125,7 +125,7 @@ export interface CarouselEmits {
   /**
    * 更新模型值
    */
-  'update:modelValue': [value: number]
+  'update:value': [value: number]
   /**
    * 項目變更事件
    */

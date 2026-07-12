@@ -1,7 +1,7 @@
 <template>
   <div class="space-y-4">
     <MentionableTextArea
-      v-model="value"
+      v-model:value="value"
       label="基本使用"
       placeholder="輸入 @, # 或 : 來觸發提及功能"
       :rows="4"

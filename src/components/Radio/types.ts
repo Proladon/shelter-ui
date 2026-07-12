@@ -43,7 +43,7 @@ export interface RadioGroupProps {
   /**
    * 當前選中的值
    */
-  modelValue?: any
+  value?: any
   /**
    * 選項陣列
    */
@@ -123,7 +123,7 @@ export interface RadioGroupEmits {
   /**
    * 更新模型值
    */
-  "update:modelValue": [value: any]
+  "update:value": [value: any]
   /**
    * 值變更事件
    */

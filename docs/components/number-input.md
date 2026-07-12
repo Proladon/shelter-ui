@@ -18,7 +18,7 @@ NumberInput 用於輸入與調整數字值，內建遞增/遞減按鈕，並支�
 ```vue
 <template>
   <div class="w-[280px] flex flex-col gap-3">
-    <SHNumberInput v-model="value" :min="0" :max="100" :step="1" />
+    <SHNumberInput v-model:value="value" :min="0" :max="100" :step="1" />
     <p>目前值：{{ value }}</p>
   </div>
 </template>
@@ -39,7 +39,7 @@ const value = ref(10)
 
 | 屬性名        | 說明                     | 類型                              | 默認值      |
 | ------------- | ------------------------ | --------------------------------- | ----------- |
-| modelValue    | 綁定值                   | `number`                          | —           |
+| value         | 綁定值                   | `number`                          | —           |
 | min           | 允許的最小值             | `number`                          | —           |
 | max           | 允許的最大值             | `number`                          | —           |
 | step          | 每次遞增/遞減的步長      | `number`                          | `1`         |
@@ -52,9 +52,9 @@ const value = ref(10)
 
 ### 事件
 
-| 事件名            | 說明             | 回調參數        |
-| ----------------- | ---------------- | --------------- |
-| update:modelValue | 當數值改變時觸發 | `value: number` |
+| 事件名       | 說明             | 回調參數        |
+| ------------ | ---------------- | --------------- |
+| update:value | 當數值改變時觸發 | `value: number` |
 
 ### 插槽
 

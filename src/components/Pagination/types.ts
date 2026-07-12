@@ -1,6 +1,6 @@
 export interface PaginationProps {
   /** 當前頁數 */
-  modelValue?: number
+  value?: number
   /** 總頁數 */
   total: number
   /** 每頁項目數量 */
@@ -34,7 +34,7 @@ export interface PaginationItemType {
 
 export interface PaginationEmits {
   /** 頁數變更事件 */
-  "update:modelValue": [page: number]
+  "update:value": [page: number]
   /** 頁數變更事件 */
   change: [page: number]
 }

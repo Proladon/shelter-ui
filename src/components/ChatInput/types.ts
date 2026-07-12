@@ -2,7 +2,7 @@ export interface ChatInputProps {
   /**
    * 輸入框的值（v-model）
    */
-  modelValue?: string
+  value?: string
   /**
    * 占位符文字
    */
@@ -46,7 +46,7 @@ export interface ChatInputProps {
 }
 
 export interface ChatInputEmits {
-  (e: 'update:modelValue', value: string): void
+  (e: 'update:value', value: string): void
   (e: 'submit', value: string): void
   (e: 'fileSelect', files: FileList): void
   (e: 'imageSelect', files: FileList): void
