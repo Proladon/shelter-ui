@@ -1,7 +1,7 @@
 <template>
   <div class="max-w-lg">
     <SHChatInput
-      v-model="message"
+      v-model:value="message"
       placeholder="輸入訊息…"
       @submit="handleSubmit"
       @file-select="handleFile"

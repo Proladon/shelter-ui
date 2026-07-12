@@ -47,7 +47,7 @@ const selected = ref<string>("option1")
     <h3>Radio Group</h3>
     <div class="demo__content">
       <SHRadioGroup
-        v-model="groupSelected"
+        v-model:value="groupSelected"
         :options="options"
         label="選擇一個選項"
         orientation="vertical"
@@ -92,7 +92,7 @@ const options = [
 
 | 屬性名         | 說明                 | 類型                         | 默認值       |
 | -------------- | -------------------- | ---------------------------- | ------------ |
-| modelValue     | 綁定值               | `any`                        | -            |
+| value          | 綁定值               | `any`                        | -            |
 | options        | 選項陣列             | `(RadioOption \| string)[]`  | `[]`         |
 | optionLabel    | 選項標籤的屬性名     | `string`                     | `'label'`    |
 | optionValue    | 選項值的屬性名       | `string`                     | `'value'`    |
@@ -102,7 +102,7 @@ const options = [
 | orientation    | 佈局方向             | `'horizontal' \| 'vertical'` | `'vertical'` |
 | label          | 群組標籤             | `string`                     | -            |
 
-### 事件 Events
+### Radio 事件
 
 | 事件名            | 說明         | 回調參數                      |
 | ----------------- | ------------ | ----------------------------- |
@@ -110,6 +110,13 @@ const options = [
 | change            | 值變更事件   | `(event: Event) => void`      |
 | focus             | 獲得焦點事件 | `(event: FocusEvent) => void` |
 | blur              | 失去焦點事件 | `(event: FocusEvent) => void` |
+
+### RadioGroup 事件
+
+| 事件名       | 說明       | 回調參數                |
+| ------------ | ---------- | ------------------------ |
+| update:value | 更新模型值 | `(value: any) => void`   |
+| change       | 值變更事件 | `(value: any) => void`   |
 
 ### 插槽 Slots
 

@@ -4,7 +4,7 @@
     <div class="flex items-center space-x-4">
       <span class="demo-label">值：{{ verticalValue[0] }}</span>
       <Slider
-        v-model="verticalValue"
+        v-model:value="verticalValue"
         orientation="vertical"
         :min="0"
         :max="100"

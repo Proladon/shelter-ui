@@ -8,8 +8,8 @@ export interface DateRange {
 export type DatePickerWeekdayFormat = 'narrow' | 'short' | 'long'
 
 export interface DatePickerProps {
-  /** Controlled selected date value. Single mode: DateValue. Range mode: DateRange. Bind with v-model. */
-  modelValue?: DateValue | DateRange | null
+  /** Controlled selected date value. Single mode: DateValue. Range mode: DateRange. Bind with v-model:value. */
+  value?: DateValue | DateRange | null
   /** Whether to enable date range selection mode, default false */
   range?: boolean
   /** Input placeholder text (string label shown on the trigger) */
@@ -39,7 +39,7 @@ export interface DatePickerProps {
 }
 
 export interface DatePickerEmits {
-  (event: 'update:modelValue', value: DateValue | DateRange | undefined): void
+  (event: 'update:value', value: DateValue | DateRange | undefined): void
   (event: 'update:open', value: boolean): void
   (event: 'change', value: DateValue | DateRange | undefined): void
   (event: 'clear'): void

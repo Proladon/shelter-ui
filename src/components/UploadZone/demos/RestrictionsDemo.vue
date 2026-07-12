@@ -4,7 +4,7 @@
       Only images, max 1 MB each, up to 3 files.
     </p>
     <SHUploadZone
-      v-model="files"
+      v-model:value="files"
       accept="image/*"
       multiple
       :max-count="3"

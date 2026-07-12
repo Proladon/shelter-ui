@@ -22,8 +22,8 @@ const disabledDate = shallowRef<DateValue>(new CalendarDate(2026, 3, 21))
         Single Date
       </h3>
       <SHDatePicker
-        :model-value="singleDate"
-        @update:model-value="
+        :value="singleDate"
+        @update:value="
           (v) => {
             singleDate = v as DateValue | undefined
           }
@@ -45,9 +45,9 @@ const disabledDate = shallowRef<DateValue>(new CalendarDate(2026, 3, 21))
         Date Range
       </h3>
       <SHDatePicker
-        :model-value="rangeDate"
+        :value="rangeDate"
         :range="true"
-        @update:model-value="
+        @update:value="
           (v) => {
             rangeDate = v as DateRange | undefined
           }
@@ -69,7 +69,7 @@ const disabledDate = shallowRef<DateValue>(new CalendarDate(2026, 3, 21))
       >
         Disabled
       </h3>
-      <SHDatePicker :model-value="disabledDate" :disabled="true" />
+      <SHDatePicker :value="disabledDate" :disabled="true" />
     </section>
 
     <section>
@@ -79,7 +79,7 @@ const disabledDate = shallowRef<DateValue>(new CalendarDate(2026, 3, 21))
       >
         Readonly
       </h3>
-      <SHDatePicker :model-value="disabledDate" :readonly="true" />
+      <SHDatePicker :value="disabledDate" :readonly="true" />
     </section>
   </div>
 </template>

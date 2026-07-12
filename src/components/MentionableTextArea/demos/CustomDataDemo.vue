@@ -1,7 +1,7 @@
 <template>
   <div class="space-y-4">
     <MentionableTextArea
-      v-model="value"
+      v-model:value="value"
       label="自定義數據"
       placeholder="輸入 @ 來提及自定義用戶列表"
       :rows="4"

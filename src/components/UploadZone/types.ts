@@ -26,7 +26,7 @@ export interface UploadZoneProps {
   /**
    * v-model: the current file list
    */
-  modelValue?: UploadZoneFile[]
+  value?: UploadZoneFile[]
   /**
    * Accepted MIME types or file extensions, same as `<input accept>`.
    * E.g. "image/*,.pdf"
@@ -62,7 +62,7 @@ export interface UploadZoneProps {
 }
 
 export interface UploadZoneEmits {
-  (e: 'update:modelValue', files: UploadZoneFile[]): void
+  (e: 'update:value', files: UploadZoneFile[]): void
   /** Fires after files are selected and validated */
   (e: 'change', files: UploadZoneFile[]): void
   /** Fires when a file exceeds maxSize */

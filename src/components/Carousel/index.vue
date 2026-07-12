@@ -85,7 +85,7 @@ defineOptions({
 })
 
 const props = withDefaults(defineProps<CarouselProps>(), {
-  modelValue: 0,
+  value: 0,
   items: () => [],
   autoplay: false,
   interval: 3000,
@@ -101,7 +101,7 @@ const props = withDefaults(defineProps<CarouselProps>(), {
 
 const emit = defineEmits<CarouselEmits>()
 
-const currentIndex = defineModel<number>({ default: 0 })
+const currentIndex = defineModel<number>('value', { default: 0 })
 
 // Refs
 const autoplayTimer = ref<number>()

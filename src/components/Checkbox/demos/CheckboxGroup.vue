@@ -3,7 +3,7 @@
     <h3>Checkbox Group</h3>
     <div class="demo__content">
       <SHCheckboxGroup
-        v-model="selected1"
+        v-model:value="selected1"
         label="Choose your interests"
         :options="interests"
         orientation="vertical"
@@ -13,7 +13,7 @@
 
     <div class="demo__content">
       <SHCheckboxGroup
-        v-model="selected2"
+        v-model:value="selected2"
         label="Choose colors (horizontal)"
         :options="colors"
         orientation="horizontal"
@@ -23,7 +23,7 @@
 
     <div class="demo__content">
       <SHCheckboxGroup
-        v-model="selected3"
+        v-model:value="selected3"
         label="Choose languages (with disabled options)"
         :options="languages"
         orientation="vertical"

@@ -5,7 +5,7 @@
     <div class="demo-section">
       <h4>垂直佈局</h4>
       <SHRadioGroup
-        v-model="selectedOption1"
+        v-model:value="selectedOption1"
         :options="options"
         label="選擇您的喜好"
         orientation="vertical"
@@ -16,7 +16,7 @@
     <div class="demo-section">
       <h4>水平佈局</h4>
       <SHRadioGroup
-        v-model="selectedOption2"
+        v-model:value="selectedOption2"
         :options="options"
         label="選擇顏色"
         orientation="horizontal"
@@ -27,7 +27,7 @@
     <div class="demo-section">
       <h4>帶禁用選項</h4>
       <SHRadioGroup
-        v-model="selectedOption3"
+        v-model:value="selectedOption3"
         :options="disabledOptions"
         label="選擇方案"
         orientation="vertical"
@@ -38,7 +38,7 @@
     <div class="demo-section">
       <h4>禁用整個群組</h4>
       <SHRadioGroup
-        v-model="selectedOption4"
+        v-model:value="selectedOption4"
         :options="options"
         label="禁用的群組"
         orientation="vertical"

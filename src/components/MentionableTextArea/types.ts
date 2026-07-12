@@ -4,7 +4,7 @@ export interface MentionItem {
 }
 
 export interface MentionableTextAreaProps {
-  modelValue?: string
+  value?: string
   placeholder?: string
   rows?: number
   disabled?: boolean
@@ -18,7 +18,7 @@ export interface MentionableTextAreaProps {
 }
 
 export interface MentionableTextAreaEmits {
-  'update:modelValue': [value: string]
+  'update:value': [value: string]
   change: [value: string]
   focus: [event: FocusEvent]
   blur: [event: FocusEvent]

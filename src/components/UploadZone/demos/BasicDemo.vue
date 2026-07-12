@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col gap-4">
-    <SHUploadZone v-model="files" multiple @change="onChange" />
+    <SHUploadZone v-model:value="files" multiple @change="onChange" />
     <pre class="text-text.primary text-xs">{{ summary }}</pre>
   </div>
 </template>

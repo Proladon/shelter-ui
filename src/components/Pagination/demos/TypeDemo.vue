@@ -4,27 +4,27 @@
 
     <div class="demo-section">
       <h4>Default (預設)</h4>
-      <SHPagination v-model="page1" :total="100" :page-size="10" />
+      <SHPagination v-model:value="page1" :total="100" :page-size="10" />
     </div>
 
     <div class="demo-section">
       <h4>Text (文字按鈕)</h4>
-      <SHPagination v-model="page2" :total="100" :page-size="10" text />
+      <SHPagination v-model:value="page2" :total="100" :page-size="10" text />
     </div>
 
     <div class="demo-section">
       <h4>Ghost (幽靈按鈕)</h4>
-      <SHPagination v-model="page3" :total="100" :page-size="10" ghost />
+      <SHPagination v-model:value="page3" :total="100" :page-size="10" ghost />
     </div>
 
     <div class="demo-section">
       <h4>Outline (外框按鈕)</h4>
-      <SHPagination v-model="page4" :total="100" :page-size="10" outline />
+      <SHPagination v-model:value="page4" :total="100" :page-size="10" outline />
     </div>
 
     <div class="demo-section">
       <h4>Bordered (帶邊框按鈕)</h4>
-      <SHPagination v-model="page5" :total="100" :page-size="10" borderd />
+      <SHPagination v-model:value="page5" :total="100" :page-size="10" borderd />
     </div>
   </div>
 </template>

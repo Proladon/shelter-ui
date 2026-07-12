@@ -3,7 +3,7 @@
     <p class="text-text.primary text-sm">
       Disabled state — no interaction possible.
     </p>
-    <SHUploadZone v-model="files" disabled />
+    <SHUploadZone v-model:value="files" disabled />
   </div>
 </template>
 

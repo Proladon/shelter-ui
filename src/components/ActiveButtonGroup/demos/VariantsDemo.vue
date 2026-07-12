@@ -2,7 +2,7 @@
   <div class="demo-container">
     <div class="variant-section">
       <h4>Disabled Button Example</h4>
-      <SHActiveButtonGroup v-model="disabled" class="mb-4">
+      <SHActiveButtonGroup v-model:value="disabled" class="mb-4">
         <SHActiveButtonItem value="tab1">Normal</SHActiveButtonItem>
         <SHActiveButtonItem value="tab2" disabled>Disabled</SHActiveButtonItem>
         <SHActiveButtonItem value="tab3">Button</SHActiveButtonItem>

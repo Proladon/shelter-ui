@@ -1,7 +1,7 @@
 <template>
   <div class="demo-container">
     <h4>Prefix Slot</h4>
-    <SHInput v-model="userInput" placeholder="Enter username">
+    <SHInput v-model:value="userInput" placeholder="Enter username">
       <template #prefix>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -23,7 +23,7 @@
 
     <h4>Suffix Slot</h4>
     <SHInput
-      v-model="passwordInput"
+      v-model:value="passwordInput"
       placeholder="Enter password"
       type="password"
     >
@@ -47,7 +47,7 @@
     </SHInput>
 
     <h4>Both Slots</h4>
-    <SHInput v-model="searchInput" placeholder="Search..." clearable>
+    <SHInput v-model:value="searchInput" placeholder="Search..." clearable>
       <template #prefix>
         <svg
           xmlns="http://www.w3.org/2000/svg"

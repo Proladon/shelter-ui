@@ -2,7 +2,7 @@ export interface InputProps {
   /**
    * Input model value
    */
-  modelValue?: string | number
+  value?: string | number
   /**
    * Whether the input is disabled
    */
@@ -38,7 +38,7 @@ export interface InputProps {
 }
 
 export interface InputEmits {
-  (e: 'update:modelValue', value: string): void
+  (e: 'update:value', value: string): void
   (e: 'input', value: string): void
   (e: 'change', value: string): void
   (e: 'focus', event: FocusEvent): void

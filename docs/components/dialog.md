@@ -16,19 +16,19 @@
 
 | 属性名      | 说明                             | 类型                                                                     | 默认值      |
 | ----------- | -------------------------------- | ------------------------------------------------------------------------ | ----------- |
-| type        | 对话框类型                       | `'primary' \| 'success' \| 'warning' \| 'danger' \| 'info' \| 'default'` | `'default'` |
-| width       | 对话框宽度                       | `string \| number`                                                       | `400`       |
-| open        | 控制对话框是否打开               | `boolean`                                                                | `undefined` |
-| defaultOpen | 对话框默认是否打开               | `boolean`                                                                | `undefined` |
-| modal       | 是否为模态对话框                 | `boolean`                                                                | `true`      |
-| title       | 对话框标题（也可通过 slot 设置） | `string`                                                                 | `undefined` |
+| type         | 对话框类型                       | `'primary' \| 'success' \| 'warning' \| 'danger' \| 'info' \| 'default'` | `'default'` |
+| width        | 对话框宽度                       | `string \| number`                                                       | `400`       |
+| value        | 控制对话框是否打开               | `boolean`                                                                | `undefined` |
+| defaultValue | 对话框默认是否打开               | `boolean`                                                                | `undefined` |
+| modal        | 是否为模态对话框                 | `boolean`                                                                | `true`      |
+| title        | 对话框标题（也可通过 slot 设置） | `string`                                                                 | `undefined` |
 
 ### 事件
 
-| 事件名      | 说明                         | 类型                       |
-| ----------- | ---------------------------- | -------------------------- |
-| update:open | 当对话框的打开状态变化时触发 | `(value: boolean) => void` |
-| openChange  | 当对话框的打开状态变化时触发 | `(value: boolean) => void` |
+| 事件名       | 说明                         | 类型                       |
+| ------------ | ---------------------------- | -------------------------- |
+| update:value | 当对话框的打开状态变化时触发 | `(value: boolean) => void` |
+| valueChange  | 当对话框的打开状态变化时触发 | `(value: boolean) => void` |
 
 ### 插槽
 

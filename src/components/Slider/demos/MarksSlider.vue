@@ -4,7 +4,7 @@
     <div class="mb-4">
       <span class="demo-label">值：{{ marksValue[0] }}</span>
       <Slider
-        v-model="marksValue"
+        v-model:value="marksValue"
         :show-marks="true"
         :marks="marks"
         :min="0"

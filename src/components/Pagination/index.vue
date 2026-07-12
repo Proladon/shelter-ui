@@ -100,7 +100,7 @@ import type {
 
 // Props
 const props = withDefaults(defineProps<PaginationProps>(), {
-  modelValue: 1,
+  value: 1,
   pageSize: 10,
   siblingCount: 2,
   showEdges: true,
@@ -117,7 +117,7 @@ const props = withDefaults(defineProps<PaginationProps>(), {
 const emit = defineEmits<PaginationEmits>()
 
 // Internal state
-const currentPage = ref(props.modelValue)
+const currentPage = ref(props.value)
 
 // Computed
 const totalPages = computed(() => Math.ceil(props.total / props.pageSize))
@@ -235,13 +235,13 @@ const goToPage = (page: number) => {
   }
 
   currentPage.value = page
-  emit('update:modelValue', page)
+  emit('update:value', page)
   emit('change', page)
 }
 
 // Watchers
 watch(
-  () => props.modelValue,
+  () => props.value,
   (newPage) => {
     if (newPage !== currentPage.value) {
       currentPage.value = newPage

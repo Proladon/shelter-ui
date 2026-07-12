@@ -1,7 +1,7 @@
 <template>
   <div class="demo-container">
     <div class="demo-item">
-      <TimePicker v-model="singleTime" placeholder="選擇時間" />
+      <TimePicker v-model:value="singleTime" placeholder="選擇時間" />
       <p class="demo-result">選中的時間: {{ singleTime || '無' }}</p>
     </div>
   </div>

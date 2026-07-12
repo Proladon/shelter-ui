@@ -22,7 +22,7 @@
 
     <!-- Primary Dialog -->
     <Dialog
-      v-model:open="dialogs.primary"
+      v-model:value="dialogs.primary"
       type="primary"
       title="Primary Dialog (via prop)"
     >
@@ -33,7 +33,11 @@
       <div class="form-fields">
         <div class="form-group">
           <label for="name">Name</label>
-          <Input id="name" v-model="form.name" placeholder="Enter your name" />
+          <Input
+            id="name"
+            v-model:value="form.name"
+            placeholder="Enter your name"
+          />
         </div>
       </div>
 
@@ -47,7 +51,7 @@
 
     <!-- Success Dialog -->
     <Dialog
-      v-model:open="dialogs.success"
+      v-model:value="dialogs.success"
       type="success"
       title="Success Dialog"
     >
@@ -66,7 +70,7 @@
 
     <!-- Warning Dialog -->
     <Dialog
-      v-model:open="dialogs.warning"
+      v-model:value="dialogs.warning"
       type="warning"
       title="Warning Dialog"
     >
@@ -88,7 +92,7 @@
     </Dialog>
 
     <!-- Danger Dialog -->
-    <Dialog v-model:open="dialogs.danger" type="danger" title="Danger Dialog">
+    <Dialog v-model:value="dialogs.danger" type="danger" title="Danger Dialog">
       <template #description>
         This is a danger type dialog with red accent colors.
       </template>
@@ -109,7 +113,7 @@
     </Dialog>
 
     <!-- Info Dialog -->
-    <Dialog v-model:open="dialogs.info" type="info" title="Info Dialog">
+    <Dialog v-model:value="dialogs.info" type="info" title="Info Dialog">
       <template #description>
         This is an info type dialog with cyan accent colors.
       </template>
@@ -125,7 +129,7 @@
 
     <!-- Default Dialog -->
     <Dialog
-      v-model:open="dialogs.default"
+      v-model:value="dialogs.default"
       type="default"
       title="Default Dialog"
     >

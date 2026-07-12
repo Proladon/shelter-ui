@@ -1,6 +1,6 @@
 export interface TooltipProps {
-  defaultOpen?: boolean
-  open?: boolean
+  defaultValue?: boolean
+  value?: boolean
   side?: 'top' | 'right' | 'bottom' | 'left'
   sideOffset?: number
   align?: 'start' | 'center' | 'end'
@@ -11,6 +11,6 @@ export interface TooltipProps {
 }
 
 export interface TooltipEmits {
-  (e: 'update:open', value: boolean): void
-  (e: 'openChange', value: boolean): void
+  (e: 'update:value', value: boolean): void
+  (e: 'valueChange', value: boolean): void
 }

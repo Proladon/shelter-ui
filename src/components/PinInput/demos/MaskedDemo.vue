@@ -6,7 +6,7 @@
       >
         Masked (password)
       </p>
-      <SHPinInput v-model="maskedValue" :mask="true" />
+      <SHPinInput v-model:value="maskedValue" :mask="true" />
     </div>
 
     <div>
@@ -15,7 +15,7 @@
       >
         Number type
       </p>
-      <SHPinInput v-model="numericValue" type="number" />
+      <SHPinInput v-model:value="numericValue" type="number" />
     </div>
   </div>
 </template>

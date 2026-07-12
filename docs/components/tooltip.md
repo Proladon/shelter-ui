@@ -101,8 +101,8 @@ Tooltip 支持四個不同的彈出方位：上、右、下、左。
 
 | 屬性名        | 說明                       | 類型                                     | 默認值      |
 | ------------- | -------------------------- | ---------------------------------------- | ----------- |
-| defaultOpen   | 初始渲染時的默認打開狀態   | `boolean`                                | `undefined` |
-| open          | 受控打開狀態               | `boolean`                                | `undefined` |
+| defaultValue  | 初始渲染時的默認打開狀態   | `boolean`                                | `undefined` |
+| value         | 受控打開狀態               | `boolean`                                | `undefined` |
 | side          | 相對於觸發器的首選渲染位置 | `'top' \| 'right' \| 'bottom' \| 'left'` | `'top'`     |
 | sideOffset    | 與觸發器的距離             | `number`                                 | `5`         |
 | align         | 相對於觸發器的對齊方式     | `'start' \| 'center' \| 'end'`           | `'center'`  |
@@ -113,10 +113,10 @@ Tooltip 支持四個不同的彈出方位：上、右、下、左。
 
 ### 事件
 
-| 事件名      | 說明               | 回調參數                   |
-| ----------- | ------------------ | -------------------------- |
-| update:open | 打開狀態變化時觸發 | `(value: boolean) => void` |
-| openChange  | 打開狀態變化時觸發 | `(value: boolean) => void` |
+| 事件名       | 說明               | 回調參數                   |
+| ------------ | ------------------ | -------------------------- |
+| update:value | 打開狀態變化時觸發 | `(value: boolean) => void` |
+| valueChange  | 打開狀態變化時觸發 | `(value: boolean) => void` |
 
 ### 插槽
 

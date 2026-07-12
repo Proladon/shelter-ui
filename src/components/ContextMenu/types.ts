@@ -53,7 +53,7 @@ export interface ContextMenuProps {
   /**
    * For radio groups - current selected value
    */
-  radioValue?: string | number
+  value?: string | number
   /**
    * Radio group name (for grouping radio items)
    */
@@ -64,5 +64,5 @@ export interface ContextMenuEmits {
   (e: 'item-click', item: ContextMenuItemOption): void
   (e: 'checkbox-change', item: ContextMenuItemOption, checked: boolean): void
   (e: 'radio-change', value: string | number): void
-  (e: 'update:radioValue', value: string | number): void
+  (e: 'update:value', value: string | number): void
 }

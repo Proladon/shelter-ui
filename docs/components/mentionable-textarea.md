@@ -12,7 +12,7 @@ MentionableTextArea 是一個支持提及功能的多行文本輸入組件。用
 <template>
   <div class="space-y-4">
     <MentionableTextArea
-      v-model="value"
+      v-model:value="value"
       label="基本使用"
       placeholder="輸入 @, # 或 : 來觸發提及功能"
       :rows="4"
@@ -47,7 +47,7 @@ const value = ref('嘗試輸入 @user 或 #issue 或 :emoji')
 <template>
   <div class="space-y-4">
     <MentionableTextArea
-      v-model="value"
+      v-model:value="value"
       label="自定義數據"
       placeholder="輸入 @ 來提及自定義用戶列表"
       :rows="4"
@@ -89,7 +89,7 @@ const customUsers: MentionItem[] = [
 <template>
   <div class="space-y-4">
     <MentionableTextArea
-      v-model="value"
+      v-model:value="value"
       label="事件處理"
       placeholder="監聽各種事件"
       :rows="4"
@@ -134,7 +134,7 @@ function handleMention(trigger: string, searchValue: string) {
     <div>
       <h3 class="text-sm font-semibold mb-2">正常狀態</h3>
       <MentionableTextArea
-        v-model="normalValue"
+        v-model:value="normalValue"
         placeholder="正常可編輯狀態"
         :rows="3"
       />
@@ -143,7 +143,7 @@ function handleMention(trigger: string, searchValue: string) {
     <div>
       <h3 class="text-sm font-semibold mb-2">禁用狀態</h3>
       <MentionableTextArea
-        v-model="disabledValue"
+        v-model:value="disabledValue"
         placeholder="禁用狀態"
         :rows="3"
         disabled
@@ -153,7 +153,7 @@ function handleMention(trigger: string, searchValue: string) {
     <div>
       <h3 class="text-sm font-semibold mb-2">只讀狀態</h3>
       <MentionableTextArea
-        v-model="readonlyValue"
+        v-model:value="readonlyValue"
         placeholder="只讀狀態"
         :rows="3"
         readonly
@@ -173,7 +173,7 @@ function handleMention(trigger: string, searchValue: string) {
 
 | 屬性名      | 說明               | 類型          | 默認值                  |
 | ----------- | ------------------ | ------------- | ----------------------- |
-| modelValue  | 綁定值             | string        | ''                      |
+| value       | 綁定值             | string        | ''                      |
 | placeholder | 占位符文本         | string        | '輸入 @, # 或 : 來提及' |
 | rows        | 文本域行數         | number        | 5                       |
 | disabled    | 是否禁用           | boolean       | false                   |
@@ -189,7 +189,7 @@ function handleMention(trigger: string, searchValue: string) {
 
 | 事件名            | 說明               | 回調參數                               |
 | ----------------- | ------------------ | -------------------------------------- |
-| update:modelValue | v-model 雙向綁定   | (value: string)                        |
+| update:value      | v-model 雙向綁定   | (value: string)                        |
 | change            | 值改變時觸發       | (value: string)                        |
 | focus             | 獲得焦點時觸發     | (event: FocusEvent)                    |
 | blur              | 失去焦點時觸發     | (event: FocusEvent)                    |

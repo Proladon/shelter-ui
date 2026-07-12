@@ -12,7 +12,7 @@
 ```vue
 <template>
   <div>
-    <Collapsible v-model:open="basicOpen">
+    <Collapsible v-model:value="basicOpen">
       <template #trigger>
         <span>點擊展開/收合內容</span>
       </template>
@@ -47,7 +47,7 @@ const basicOpen = ref(false)
 
 ```vue
 <template>
-  <Collapsible v-model:open="customOpen">
+  <Collapsible v-model:value="customOpen">
     <template #trigger>
       <div>
         <IconInfoCircle />
@@ -79,10 +79,10 @@ const customOpen = ref(false)
 
 ```vue
 <template>
-  <Collapsible v-model:open="outerOpen">
+  <Collapsible v-model:value="outerOpen">
     <template #trigger><span>第一層</span></template>
     <div>
-      <Collapsible v-model:open="innerOpen">
+      <Collapsible v-model:value="innerOpen">
         <template #trigger><span>第二層</span></template>
         <div>內部內容</div>
       </Collapsible>
@@ -108,8 +108,8 @@ const innerOpen = ref(false)
 
 | 屬性名          | 說明               | 類型                | 默認值   |
 | --------------- | ------------------ | ------------------- | -------- |
-| open            | 是否展開           | `boolean`           | -        |
-| defaultOpen     | 預設展開狀態       | `boolean`           | `false`  |
+| value           | 是否展開           | `boolean`           | -        |
+| defaultValue    | 預設展開狀態       | `boolean`           | `false`  |
 | disabled        | 是否禁用           | `boolean`           | `false`  |
 | unmountOnHide   | 收合時是否卸載內容 | `boolean`           | `true`   |
 | headerClass     | 頭部樣式類名       | `string`            | -        |
@@ -118,9 +118,9 @@ const innerOpen = ref(false)
 
 ### 事件 Events
 
-| 事件名      | 說明               | 回調參數           |
-| ----------- | ------------------ | ------------------ |
-| update:open | 展開狀態變化時觸發 | `(value: boolean)` |
+| 事件名       | 說明               | 回調參數           |
+| ------------ | ------------------ | ------------------ |
+| update:value | 展開狀態變化時觸發 | `(value: boolean)` |
 
 ### 插槽 Slots
 

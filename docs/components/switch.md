@@ -14,7 +14,7 @@ title: Switch 開關
 
 ```vue
 <template>
-  <SHSwitch v-model="checked">啟用</SHSwitch>
+  <SHSwitch v-model:value="checked">啟用</SHSwitch>
   <span class="ml-4">目前狀態：{{ checked ? '開啟' : '關閉' }}</span>
 </template>
 
@@ -32,17 +32,17 @@ const checked = ref(false)
 
 ### 屬性
 
-| 屬性名     | 說明     | 類型    | 默認值 |
-| ---------- | -------- | ------- | ------ |
-| modelValue | 綁定值   | boolean | false  |
-| disabled   | 是否禁用 | boolean | false  |
+| 屬性名   | 說明     | 類型    | 默認值 |
+| -------- | -------- | ------- | ------ |
+| value    | 綁定值   | boolean | false  |
+| disabled | 是否禁用 | boolean | false  |
 
 ### 事件
 
-| 事件名            | 說明             | 回調參數 |
-| ----------------- | ---------------- | -------- |
-| update:modelValue | 綁定值變化時觸發 | boolean  |
-| change            | 狀態切換時觸發   | boolean  |
+| 事件名       | 說明             | 回調參數 |
+| ------------ | ---------------- | -------- |
+| update:value | 綁定值變化時觸發 | boolean  |
+| change       | 狀態切換時觸發   | boolean  |
 
 ### 插槽
 

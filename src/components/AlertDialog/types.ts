@@ -2,7 +2,7 @@ export type AlertDialogType = 'danger' | 'warning' | 'info' | 'success'
 
 export interface AlertDialogProps {
   /** 控制對話框是否顯示 */
-  open?: boolean
+  value?: boolean
   /** 是否為 modal 模式（預設：true） */
   modal?: boolean
   /** 對話框類型，影響圖示與確認按鈕顏色 */
@@ -20,7 +20,7 @@ export interface AlertDialogProps {
 }
 
 export interface AlertDialogEmits {
-  (e: 'update:open', value: boolean): void
+  (e: 'update:value', value: boolean): void
   (e: 'confirm'): void
   (e: 'cancel'): void
 }

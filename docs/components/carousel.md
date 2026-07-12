@@ -18,7 +18,7 @@ Carousel 組件用於展示一系列內容項目的滑動展示器，支援自�
         <h3>Basic Carousel</h3>
         <div class="demo__content">
           <SHCarousel
-            v-model="currentSlide"
+            v-model:value="currentSlide"
             :items="basicItems"
             height="300px"
             :autoplay="false"
@@ -72,7 +72,7 @@ Carousel 組件用於展示一系列內容項目的滑動展示器，支援自�
         <h3>Autoplay Carousel</h3>
         <div class="demo__content">
           <SHCarousel
-            v-model="currentSlide"
+            v-model:value="currentSlide"
             :items="autoplayItems"
             height="350px"
             :autoplay="true"
@@ -144,7 +144,7 @@ Carousel 組件用於展示一系列內容項目的滑動展示器，支援自�
         <h3>Carousel with Custom Content</h3>
         <div class="demo__content">
           <SHCarousel
-            v-model="currentSlide"
+            v-model:value="currentSlide"
             :items="customItems"
             height="250px"
             :show-indicators="false"
@@ -202,7 +202,7 @@ Carousel 組件用於展示一系列內容項目的滑動展示器，支援自�
 
 | 屬性名            | 說明                       | 類型                          | 默認值     |
 | ----------------- | -------------------------- | ----------------------------- | ---------- |
-| modelValue        | 當前活動項目的索引         | `number`                      | `0`        |
+| value             | 當前活動項目的索引         | `number`                      | `0`        |
 | items             | 輪播項目陣列               | `CarouselItem[]`              | `[]`       |
 | autoplay          | 是否自動播放               | `boolean`                     | `false`    |
 | interval          | 自動播放間隔時間（毫秒）   | `number`                      | `3000`     |
@@ -235,7 +235,7 @@ Carousel 組件用於展示一系列內容項目的滑動展示器，支援自�
 
 | 事件名             | 說明               | 回調參數                                        |
 | ------------------ | ------------------ | ----------------------------------------------- |
-| update:modelValue  | 更新模型值         | `(value: number) => void`                       |
+| update:value       | 更新模型值         | `(value: number) => void`                       |
 | change             | 項目變更事件       | `(current: number, previous: number) => void`   |
 | item-click         | 項目點擊事件       | `(item: CarouselItem, index: number) => void`   |
 | autoplay-start     | 自動播放開始事件   | `() => void`                                    |

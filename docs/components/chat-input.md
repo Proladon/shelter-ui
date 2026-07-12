@@ -18,7 +18,7 @@ ChatInput 是專為對話場景設計的輸入框組件，底部左側提供檔�
 ```vue
 <template>
   <SHChatInput
-    v-model="message"
+    v-model:value="message"
     placeholder="輸入訊息…"
     @submit="handleSubmit"
     @file-select="handleFile"
@@ -62,7 +62,7 @@ function handleImage(files: FileList) {
 ```vue
 <template>
   <SHChatInput
-    v-model="message"
+    v-model:value="message"
     placeholder="詢問 AI 任何問題…"
     :submit-loading="loading"
     @submit="handleSubmit"
@@ -108,7 +108,7 @@ function handleSubmit(value: string) {
 
 ```vue
 <template>
-  <SHChatInput v-model="message" placeholder="已停用輸入…" disabled />
+  <SHChatInput v-model:value="message" placeholder="已停用輸入…" disabled />
 </template>
 
 <script setup lang="ts">
@@ -128,7 +128,7 @@ const message = ref('')
 
 | 屬性              | 類型      | 預設值        | 說明                              |
 | ----------------- | --------- | ------------- | --------------------------------- |
-| `modelValue`      | `string`  | `''`          | 輸入框的值（`v-model`）           |
+| `value`           | `string`  | `''`          | 輸入框的值（`v-model:value`）     |
 | `placeholder`     | `string`  | `'輸入訊息…'` | 占位符文字                        |
 | `rows`            | `number`  | `3`           | 顯示行數                          |
 | `disabled`        | `boolean` | `false`       | 是否禁用                          |
@@ -144,7 +144,7 @@ const message = ref('')
 
 | 事件名              | 參數                     | 說明                              |
 | ------------------- | ------------------------ | --------------------------------- |
-| `update:modelValue` | `(value: string)`        | 內容更新時觸發                    |
+| `update:value`      | `(value: string)`        | 內容更新時觸發                    |
 | `submit`            | `(value: string)`        | 送出訊息時觸發（按 Enter 或點擊） |
 | `fileSelect`        | `(files: FileList)`      | 選擇檔案後觸發                    |
 | `imageSelect`       | `(files: FileList)`      | 選擇圖片後觸發                    |

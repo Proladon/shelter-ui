@@ -18,7 +18,7 @@ PinInput 驗證碼輸入框用於接收固定長度的字符序列，常見於 O
 ```vue
 <template>
   <div>
-    <SHPinInput v-model="value" @complete="onComplete" />
+    <SHPinInput v-model:value="value" @complete="onComplete" />
     <p>Value: {{ value }}</p>
   </div>
 </template>
@@ -50,10 +50,10 @@ const onComplete = (val) => {
 <template>
   <div class="flex flex-col gap-4">
     <!-- 遮罩模式 -->
-    <SHPinInput v-model="maskedValue" :mask="true" />
+    <SHPinInput v-model:value="maskedValue" :mask="true" />
 
     <!-- 數字類型 -->
-    <SHPinInput v-model="numericValue" type="number" />
+    <SHPinInput v-model:value="numericValue" type="number" />
   </div>
 </template>
 
@@ -80,9 +80,9 @@ const numericValue = ref([])
 ```vue
 <template>
   <div class="flex flex-col gap-4">
-    <SHPinInput v-model="value" size="sm" />
-    <SHPinInput v-model="value" size="md" />
-    <SHPinInput v-model="value" size="lg" />
+    <SHPinInput v-model:value="value" size="sm" />
+    <SHPinInput v-model:value="value" size="md" />
+    <SHPinInput v-model:value="value" size="lg" />
   </div>
 </template>
 
@@ -107,7 +107,7 @@ const value = ref([])
 
 ```vue
 <template>
-  <SHPinInput v-model="value" disabled />
+  <SHPinInput v-model:value="value" disabled />
 </template>
 
 <script setup>
@@ -126,7 +126,7 @@ const value = ref(['1', '2', '3'])
 
 | 屬性名      | 說明                                     | 類型                   | 默認值   |
 | ----------- | ---------------------------------------- | ---------------------- | -------- |
-| modelValue  | 綁定值，陣列每個元素對應一個輸入格       | `string[]`             | —        |
+| value       | 綁定值，陣列每個元素對應一個輸入格       | `string[]`             | —        |
 | length      | 輸入格數量                               | `number`               | `6`      |
 | placeholder | 空格佔位符                               | `string`               | `'○'`    |
 | type        | 輸入類型                                 | `'text' \| 'number'`   | `'text'` |
@@ -139,7 +139,7 @@ const value = ref(['1', '2', '3'])
 
 | 事件名            | 說明                         | 回調參數          |
 | ----------------- | ---------------------------- | ----------------- |
-| update:modelValue | 當任意格輸入值改變時觸發     | `value: string[]` |
+| update:value      | 當任意格輸入值改變時觸發     | `value: string[]` |
 | change            | 當任意格輸入值改變時觸發     | `value: string[]` |
 | complete          | 當所有輸入格均填入內容時觸發 | `value: string[]` |
 

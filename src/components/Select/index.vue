@@ -54,7 +54,7 @@ watch(
   { deep: true },
 )
 
-const modelValue = computed({
+const internalModel = computed({
   get: () => {
     const val = internalValue.value
     if (props.multiple) {
@@ -114,7 +114,7 @@ const getDisplayLabel = (val: any) => {
 
 const handleClear = (e: Event) => {
   e.stopPropagation()
-  modelValue.value = props.multiple ? [] : undefined
+  internalModel.value = props.multiple ? [] : undefined
   searchTerm.value = ''
   emit('clear')
 }
@@ -160,7 +160,7 @@ const wrapperStyle = computed(() => {
 <template>
   <div class="sh-select-wrapper" :style="wrapperStyle">
     <ComboboxRoot
-      v-model="modelValue"
+      v-model="internalModel"
       v-model:search-term="searchTerm"
       :open="disabled ? false : isOpen"
       @update:open="(val) => (isOpen = disabled ? false : val)"
@@ -174,7 +174,7 @@ const wrapperStyle = computed(() => {
           'is-open': isOpen,
           'is-clearable':
             clearable &&
-            (Array.isArray(modelValue) ? modelValue.length > 0 : modelValue),
+            (Array.isArray(internalModel) ? internalModel.length > 0 : internalModel),
         }"
       >
         <template v-if="!filterable">

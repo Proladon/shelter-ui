@@ -13,7 +13,7 @@
 ```vue
 <template>
   <div>
-    <SHSlider v-model="value" :min="0" :max="100" />
+    <SHSlider v-model:value="value" :min="0" :max="100" />
   </div>
 </template>
 
@@ -37,7 +37,7 @@ const value = ref([50])
 ```vue
 <template>
   <div>
-    <SHSlider v-model="range" :min="0" :max="100" />
+    <SHSlider v-model:value="range" :min="0" :max="100" />
   </div>
 </template>
 
@@ -61,9 +61,9 @@ const range = ref([25, 75])
 ```vue
 <template>
   <div>
-    <SHSlider v-model="v" size="small" />
-    <SHSlider v-model="v" size="default" />
-    <SHSlider v-model="v" size="large" />
+    <SHSlider v-model:value="v" size="small" />
+    <SHSlider v-model:value="v" size="default" />
+    <SHSlider v-model:value="v" size="large" />
   </div>
 </template>
 
@@ -87,9 +87,9 @@ const v = ref([60])
 ```vue
 <template>
   <div>
-    <SHSlider v-model="c" color="primary" />
-    <SHSlider v-model="c" color="secondary" />
-    <SHSlider v-model="c" color="success" />
+    <SHSlider v-model:value="c" color="primary" />
+    <SHSlider v-model:value="c" color="secondary" />
+    <SHSlider v-model:value="c" color="success" />
   </div>
 </template>
 
@@ -114,7 +114,7 @@ const c = ref([70])
 <template>
   <div>
     <SHSlider
-      v-model="t"
+      v-model:value="t"
       :show-tooltip="true"
       :format-tooltip="(v) => `${v}%`"
     />
@@ -141,7 +141,7 @@ const t = ref([40])
 ```vue
 <template>
   <div style="height:200px">
-    <SHSlider v-model="v" orientation="vertical" />
+    <SHSlider v-model:value="v" orientation="vertical" />
   </div>
 </template>
 
@@ -165,7 +165,7 @@ const v = ref([80])
 ```vue
 <template>
   <div>
-    <SHSlider v-model="m" :show-marks="true" :marks="marks" :step="25" />
+    <SHSlider v-model:value="m" :show-marks="true" :marks="marks" :step="25" />
   </div>
 </template>
 
@@ -187,7 +187,7 @@ const marks = { 0: '0%', 25: '25%', 50: '50%', 75: '75%', 100: '100%' }
 
 | 屬性名        | 說明             | 類型                                                                       | 默認值         |
 | ------------- | ---------------- | -------------------------------------------------------------------------- | -------------- |
-| modelValue    | 當前滑桿值       | `number[]`                                                                 | -              |
+| value         | 當前滑桿值       | `number[]`                                                                 | -              |
 | min           | 最小值           | `number`                                                                   | `0`            |
 | max           | 最大值           | `number`                                                                   | `100`          |
 | step          | 步進間隔         | `number`                                                                   | `1`            |
@@ -202,10 +202,10 @@ const marks = { 0: '0%', 25: '25%', 50: '50%', 75: '75%', 100: '100%' }
 
 ### 事件 Events
 
-| 事件名            | 說明             | 回調參數            |
-| ----------------- | ---------------- | ------------------- |
-| update:modelValue | 滑桿值變化時觸發 | `(value: number[])` |
-| valueCommit       | 滑桿值確定時觸發 | `(value: number[])` |
+| 事件名       | 說明             | 回調參數            |
+| ------------ | ---------------- | ------------------- |
+| update:value | 滑桿值變化時觸發 | `(value: number[])` |
+| valueCommit  | 滑桿值確定時觸發 | `(value: number[])` |
 
 ### 插槽 Slots
 

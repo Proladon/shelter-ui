@@ -1,9 +1,9 @@
 export interface SwitchProps {
-  modelValue?: boolean
+  value?: boolean
   disabled?: boolean
 }
 
 export interface SwitchEmits {
-  (e: 'update:modelValue', value: boolean): void
+  (e: 'update:value', value: boolean): void
   (e: 'change', value: boolean): void
 }

@@ -13,7 +13,7 @@
 ```vue
 <template>
   <div>
-    <SHTimePicker v-model="selectedTime" placeholder="選擇時間" />
+    <SHTimePicker v-model:value="selectedTime" placeholder="選擇時間" />
     <p>選中的時間: {{ selectedTime || '無' }}</p>
   </div>
 </template>
@@ -39,7 +39,7 @@ const selectedTime = ref()
 <template>
   <div>
     <SHTimePicker
-      v-model="timeRange"
+      v-model:value="timeRange"
       :range="true"
       placeholder="選擇時間範圍"
     />
@@ -75,7 +75,7 @@ const timeRange = ref()
 <template>
   <div>
     <SHTimePicker
-      v-model="selectedTime"
+      v-model:value="selectedTime"
       :use12-hour="true"
       placeholder="選擇時間（12小時制）"
     />
@@ -104,7 +104,7 @@ const selectedTime = ref()
 <template>
   <div>
     <SHTimePicker
-      v-model="selectedTime"
+      v-model:value="selectedTime"
       :second="false"
       placeholder="選擇時間（不含秒）"
     />
@@ -133,7 +133,7 @@ const selectedTime = ref()
 <template>
   <div>
     <SHTimePicker
-      v-model="selectedTime"
+      v-model:value="selectedTime"
       :hour-step="2"
       :minute-step="15"
       :second-step="30"
@@ -165,14 +165,14 @@ const selectedTime = ref()
   <div>
     <div style="margin-bottom: 20px;">
       <SHTimePicker
-        v-model="disabledTime"
+        v-model:value="disabledTime"
         :disabled="true"
         placeholder="禁用的時間選擇器"
       />
     </div>
     <div>
       <SHTimePicker
-        v-model="readonlyTime"
+        v-model:value="readonlyTime"
         :readonly="true"
         placeholder="唯讀的時間選擇器"
       />
@@ -207,7 +207,7 @@ interface TimeRange {
 
 | 屬性名          | 類型                          | 預設值         | 說明                                     |
 | --------------- | ----------------------------- | -------------- | ---------------------------------------- |
-| `modelValue`    | `string \| TimeRange \| null` | `null`         | 選中的時間值                             |
+| `value`         | `string \| TimeRange \| null` | `null`         | 選中的時間值                             |
 | `range`         | `boolean`                     | `false`        | 是否為範圍選擇模式                       |
 | `placeholder`   | `string`                      | `'請選擇時間'` | 佔位符文字                               |
 | `disabled`      | `boolean`                     | `false`        | 是否禁用                                 |
@@ -229,7 +229,7 @@ interface TimeRange {
 
 | 事件名              | 說明           | 參數                                   |
 | ------------------- | -------------- | -------------------------------------- |
-| `update:modelValue` | 值改變時觸發   | `(value: string \| TimeRange \| null)` |
+| `update:value`      | 值改變時觸發   | `(value: string \| TimeRange \| null)` |
 | `change`            | 值改變時觸發   | `(value: string \| TimeRange \| null)` |
 | `focus`             | 獲得焦點時觸發 | `(event: FocusEvent)`                  |
 | `blur`              | 失去焦點時觸發 | `(event: FocusEvent)`                  |

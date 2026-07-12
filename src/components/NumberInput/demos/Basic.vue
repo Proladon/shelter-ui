@@ -2,7 +2,7 @@
   <div class="number-input-demo">
     <h4 class="number-input-demo__title">基礎數字輸入</h4>
 
-    <NumberInput v-model="value" :min="0" :max="100" :step="1" />
+    <NumberInput v-model:value="value" :min="0" :max="100" :step="1" />
 
     <p class="number-input-demo__value">目前值：{{ value }}</p>
   </div>

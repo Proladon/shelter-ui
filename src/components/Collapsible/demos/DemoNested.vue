@@ -1,7 +1,7 @@
 <template>
   <div class="demo-section">
     <SHBorderContainer>
-      <Collapsible variant="card" v-model:open="nestedOpen1">
+      <Collapsible variant="card" v-model:value="nestedOpen1">
         <template #trigger>
           <span>第一層折疊面板</span>
         </template>
@@ -9,7 +9,7 @@
           <p class="mb-4">這是第一層的內容。</p>
 
           <SHBorderContainer>
-            <Collapsible variant="default" v-model:open="nestedOpen2">
+            <Collapsible variant="default" v-model:value="nestedOpen2">
               <template #trigger>
                 <span>第二層折疊面板</span>
               </template>

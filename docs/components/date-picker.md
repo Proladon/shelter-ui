@@ -18,8 +18,8 @@ title: DatePicker 日期選擇器
   <div class="flex flex-col gap-6 p-6">
     <!-- 單一日期 -->
     <SHDatePicker
-      :model-value="singleDate"
-      @update:model-value="
+      :value="singleDate"
+      @update:value="
         (v) => {
           singleDate = v as DateValue | undefined
         }
@@ -28,9 +28,9 @@ title: DatePicker 日期選擇器
 
     <!-- 日期範圍 -->
     <SHDatePicker
-      :model-value="rangeDate"
+      :value="rangeDate"
       :range="true"
-      @update:model-value="
+      @update:value="
         (v) => {
           rangeDate = v as DateRange | undefined
         }
@@ -38,10 +38,10 @@ title: DatePicker 日期選擇器
     />
 
     <!-- 禁用 -->
-    <SHDatePicker :model-value="date" :disabled="true" />
+    <SHDatePicker :value="date" :disabled="true" />
 
     <!-- 唯讀 -->
-    <SHDatePicker :model-value="date" :readonly="true" />
+    <SHDatePicker :value="date" :readonly="true" />
   </div>
 </template>
 
@@ -67,7 +67,7 @@ const date = shallowRef<DateValue>(new CalendarDate(2026, 3, 21))
 
 | 屬性名             | 說明                                                                        | 類型                              | 默認值    |
 | ------------------ | --------------------------------------------------------------------------- | --------------------------------- | --------- |
-| modelValue         | 綁定值，單一模式為 `DateValue`，範圍模式為 `DateRange`，搭配 `v-model` 使用 | `DateValue \| DateRange \| null`  | -         |
+| value              | 綁定值，單一模式為 `DateValue`，範圍模式為 `DateRange`，搭配 `v-model:value` 使用 | `DateValue \| DateRange \| null`  | -         |
 | range              | 是否啟用日期範圍選擇模式                                                    | `boolean`                         | `false`   |
 | placeholder        | 觸發器上顯示的佔位文字                                                      | `string`                          | -         |
 | disabled           | 是否禁用                                                                    | `boolean`                         | `false`   |
@@ -86,9 +86,9 @@ const date = shallowRef<DateValue>(new CalendarDate(2026, 3, 21))
 
 | 事件名            | 說明                                     | 回調參數                                               |
 | ----------------- | ---------------------------------------- | ------------------------------------------------------ |
-| update:modelValue | 選擇日期後觸發                           | `(value: DateValue \| DateRange \| undefined) => void` |
+| update:value      | 選擇日期後觸發                           | `(value: DateValue \| DateRange \| undefined) => void` |
 | update:open       | 彈出層展開狀態變更時觸發                 | `(value: boolean) => void`                             |
-| change            | 選擇日期後觸發（同 `update:modelValue`） | `(value: DateValue \| DateRange \| undefined) => void` |
+| change            | 選擇日期後觸發（同 `update:value`）      | `(value: DateValue \| DateRange \| undefined) => void` |
 | clear             | 點擊清除按鈕時觸發                       | `() => void`                                           |
 | focus             | 輸入框獲得焦點時觸發                     | `(event: FocusEvent) => void`                          |
 | blur              | 輸入框失去焦點時觸發                     | `(event: FocusEvent) => void`                          |
