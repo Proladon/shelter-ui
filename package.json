@@ -1,6 +1,6 @@
 {
   "name": "@proladon/shelter-ui",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "type": "module",
   "description": "shelter vue ui components",
   "author": "Proladon",
@@ -33,11 +33,13 @@
       "import": "./dist/index.css",
       "require": "./dist/index.css"
     },
-    "./components-catalog.json": "./components-catalog.json"
+    "./components-catalog.json": "./components-catalog.json",
+    "./SKILL.md": "./SKILL.md"
   },
   "files": [
     "dist",
-    "components-catalog.json"
+    "components-catalog.json",
+    "SKILL.md"
   ],
   "scripts": {
     "dev": "vite",
