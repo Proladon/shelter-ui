@@ -11,3 +11,7 @@ type DeepPartial<T> = {
  * default value.
  */
 export type ThemeVarsConfig = DeepPartial<DesignTokens>
+
+export interface ConfigProviderProps {
+  themeConfig?: ThemeVarsConfig
+}

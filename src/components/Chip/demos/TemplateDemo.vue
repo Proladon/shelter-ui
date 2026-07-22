@@ -10,7 +10,7 @@
 
     <SHChip class="py-0 pl-0 pr-4">
       <span
-        class="bg-status-success text-white rounded-full w-8 h-8 flex items-center justify-center"
+        class="bg-status.success text-white rounded-full w-8 h-8 flex items-center justify-center"
         >S</span
       >
       <span class="ml-2 font-medium">SHELTER</span>

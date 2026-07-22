@@ -60,7 +60,7 @@ const handleOpenChange = (value: boolean) => {
   </TooltipProvider>
 </template>
 
-<style scoped>
+<style scoped lang="postcss">
 :deep(.sh-tooltip-content) {
   @apply rounded-md py-2 px-3 bg-bg.primary text-text.base shadow-lg;
   @apply z-[var(--sh-z-tooltip)] outline-none text-sm;

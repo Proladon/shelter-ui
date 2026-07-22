@@ -14,7 +14,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { MessageBoxProps } from './types'
-import { messageBoxIconMap } from './_icon-map'
+import { messageBoxIconMap } from '@/utils/statusIcons'
 
 defineOptions({
   name: 'SHMessageBox',

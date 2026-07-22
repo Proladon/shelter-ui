@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ref, inject, onMounted, computed, useTemplateRef } from 'vue'
+import { inject, onMounted, computed, useTemplateRef } from 'vue'
 import type { ActiveButtonItemProps } from './types'
+import { addButtonKey, activeValueKey, handleButtonClickKey } from './context'
 
 defineOptions({
   name: 'SHActiveButtonItem',
@@ -13,13 +14,12 @@ const props = withDefaults(defineProps<ActiveButtonItemProps>(), {
 const buttonRef = useTemplateRef<HTMLElement>('buttonRef')
 
 // Inject functions and values from parent
-const addButton = inject('addButton', null) as
-  | ((button: { value: string; disabled?: boolean; ref?: HTMLElement }) => void)
-  | null
-const activeValue = inject('activeValue', ref('')) as { value: string }
-const handleButtonClick = inject('handleButtonClick', null) as
-  | ((value: string) => void)
-  | null
+const addButton = inject(addButtonKey)
+const activeValue = inject(
+  activeValueKey,
+  computed(() => undefined),
+)
+const handleButtonClick = inject(handleButtonClickKey)
 
 // Check if this button is active
 const isActive = computed(() => activeValue.value === props.value)

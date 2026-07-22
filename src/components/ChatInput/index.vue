@@ -94,7 +94,7 @@ import { IconPaperclip, IconPhoto, IconSend } from '@tabler/icons-vue'
 import SHInputGroup from '@/components/InputGroup/index.vue'
 import SHInputGroupAddon from '@/components/InputGroup/InputGroupAddon.vue'
 import SHTextarea from '@/components/Textarea/index.vue'
-import Spinner from '@/components/Spinner/index.vue'
+import Spinner from '@/components/Spinner'
 import type { ChatInputProps, ChatInputEmits } from './types'
 
 defineOptions({ name: 'SHChatInput' })

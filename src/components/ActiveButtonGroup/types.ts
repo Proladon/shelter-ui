@@ -7,8 +7,8 @@ export interface ActiveButtonGroupProps {
 }
 
 export interface ActiveButtonGroupEmits {
-  (e: 'update:value', value: string): void
-  (e: 'change', value: string): void
+  'update:value': [value: string]
+  change: [value: string]
 }
 
 export interface ActiveButtonItemProps {

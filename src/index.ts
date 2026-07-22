@@ -3,48 +3,48 @@ import './generated/baseline.css'
 
 // 導入組件
 import SHConfigProvider from './components/ConfigProvider/index.vue'
-import SHButton from './components/Button/index.vue'
-import SHInput from './components/Input/index.vue'
+import SHButton from './components/Button'
+import SHInput from './components/Input'
 import { SHInputGroup, SHInputGroupAddon } from './components/InputGroup'
 import SHNumberInput from './components/NumberInput/index.vue'
 import SHTextarea from './components/Textarea/index.vue'
 import SHSelect from './components/Select/index.vue'
-import SHSpin from './components/Spin/index.vue'
-import SHBaseContainer from './components/BaseContainer/index.vue'
-import SHPopover from './components/Popover/index.vue'
-import SHEditableContainer from './components/EditableContainer/index.vue'
-import SHTooltip from './components/Tooltip/index.vue'
-import SHBadge from './components/Badge/index.vue'
+import SHSpin from './components/Spin'
+import SHBaseContainer from './components/BaseContainer'
+import SHPopover from './components/Popover'
+import SHEditableContainer from './components/EditableContainer'
+import SHTooltip from './components/Tooltip'
+import SHBadge from './components/Badge'
 import SHChip from './components/Chip/index.vue'
 import SHTag from './components/Tag/index.vue'
 import SHStatusTag from './components/StatusTag/index.vue'
 import SHSwitch from './components/Switch/index.vue'
-import SHDialog from './components/Dialog/index.vue'
+import SHDialog from './components/Dialog'
 import SHAlertDialog from './components/AlertDialog/index.vue'
 import SHBlockArea from './components/BlockArea/index.vue'
 import {
   SHActiveButtonGroup,
   SHActiveButtonItem,
 } from './components/ActiveButtonGroup'
-import SHFlexContainer from './components/FlexContainer/index.vue'
+import SHFlexContainer from './components/FlexContainer'
 import SHMentionableTextArea from './components/MentionableTextArea/index.vue'
 import SHContextMenu from './components/ContextMenu/index.vue'
 import SHProgress from './components/Progress/index.vue'
 import SHSlider from './components/Slider/index.vue'
 import SHCollapsible from './components/Collapsible/index.vue'
 import SHScrollArea from './components/ScrollArea/index.vue'
-import SHSplitter from './components/Splitter/index.vue'
 import {
-  SplitterGroup as SHSplitterGroup,
-  SplitterPanel as SHSplitterPanel,
-  SplitterResizeHandle as SHSplitterResizeHandle,
+  SHSplitter,
+  SHSplitterGroup,
+  SHSplitterPanel,
+  SHSplitterResizeHandle,
 } from './components/Splitter'
 import {
   SHNotificationProvider,
   SHNotification,
   useNotification,
 } from './components/Notification'
-import SHRadio, { RadioGroup as SHRadioGroup } from './components/Radio'
+import SHRadio, { SHRadioGroup } from './components/Radio'
 import { SHCheckbox, SHCheckboxGroup } from './components/Checkbox'
 import {
   SHCarousel,
@@ -52,8 +52,8 @@ import {
   SHCarouselNavigation,
   SHCarouselIndicators,
 } from './components/Carousel'
-import { Pagination as SHPagination } from './components/Pagination'
-import { Divider as SHDivider } from './components/Divider'
+import { SHPagination } from './components/Pagination'
+import { SHDivider } from './components/Divider'
 import SHTimePicker from './components/TimePicker/index.vue'
 import SHDatePicker from './components/DatePicker/index.vue'
 import SHCalendar from './components/Calendar/index.vue'
@@ -213,12 +213,15 @@ export type {
 } from './components/EditableContainer/types'
 export type { TooltipProps, TooltipEmits } from './components/Tooltip/types'
 export type { BadgeProps, BadgeEmits } from './components/Badge/types'
-export type { ChipProps, ChipEmits } from './components/Chip/types'
-export type { TagProps, TagSlots, TagEmits } from './components/Tag/types'
+export type {
+  ChipProps,
+  ChipEmits,
+  ChipSlots,
+} from './components/Chip/types'
+export type { TagProps, TagSlots } from './components/Tag/types'
 export type {
   StatusTagProps,
   StatusTagSlots,
-  StatusTagEmits,
 } from './components/StatusTag/types'
 export type { DialogProps, DialogEmits } from './components/Dialog/types'
 export type {
@@ -281,6 +284,32 @@ export type {
   NotificationSlots,
   NotificationType,
 } from './components/Notification/types'
+export type {
+  RadioProps,
+  RadioGroupProps,
+  RadioOption,
+  RadioSlots,
+  RadioEmits,
+  RadioGroupEmits,
+} from './components/Radio/types'
+export type {
+  CheckboxProps,
+  CheckboxGroupProps,
+  CheckboxOption,
+  CheckboxSlots,
+  CheckboxEmits,
+  CheckboxGroupEmits,
+} from './components/Checkbox/types'
+export type {
+  CarouselProps,
+  CarouselItem,
+  CarouselSlots,
+  CarouselEmits,
+  CarouselNavigationProps,
+  CarouselNavigationEmits,
+  CarouselIndicatorsProps,
+  CarouselIndicatorsEmits,
+} from './components/Carousel/types'
 export type {
   PaginationProps,
   PaginationEmits,

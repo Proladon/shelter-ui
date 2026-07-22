@@ -12,5 +12,5 @@ export interface DialogProps {
 }
 
 export interface DialogEmits {
-  (e: 'update:value', value: boolean): void
+  'update:value': [value: boolean]
 }

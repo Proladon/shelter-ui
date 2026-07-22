@@ -80,7 +80,7 @@ const computedStyle = computed(() => {
 })
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
 .flex-layout {
   width: auto;
   box-sizing: border-box;

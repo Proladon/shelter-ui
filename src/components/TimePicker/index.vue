@@ -779,11 +779,11 @@ defineExpose({ focus, blur, clear })
   @apply flex-1 w-full bg-transparent border-none outline-none text-text.base p-0 m-0 cursor-pointer;
 }
 .sh-time-picker__input::placeholder {
-  @apply text-text-placeholder;
+  @apply text-text.placeholder;
 }
 
 .sh-time-picker__icon {
-  @apply ml-2 text-text-primary flex items-center justify-center w-4 h-4;
+  @apply ml-2 text-text.primary flex items-center justify-center w-4 h-4;
 }
 
 .sh-time-picker__clear-icon {
@@ -796,7 +796,7 @@ defineExpose({ focus, blur, clear })
 }
 
 .sh-time-picker__timezone-info {
-  @apply text-xs text-text-primary text-center;
+  @apply text-xs text-text.primary text-center;
 }
 
 .sh-time-picker__panels {
@@ -811,7 +811,7 @@ defineExpose({ focus, blur, clear })
 }
 
 .sh-time-picker__panel-title {
-  @apply text-xs font-semibold text-text-primary text-center;
+  @apply text-xs font-semibold text-text.primary text-center;
 }
 
 .sh-time-picker__columns {
@@ -824,7 +824,7 @@ defineExpose({ focus, blur, clear })
   content: '';
   @apply absolute left-0 right-0 h-8 pointer-events-none;
   top: calc(50% - 16px); /* Center */
-  @apply bg-bg-secondary opacity-30;
+  @apply bg-bg.secondary opacity-30;
   z-index: 0;
 }
 

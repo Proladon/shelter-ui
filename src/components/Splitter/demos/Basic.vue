@@ -5,7 +5,7 @@
     <div class="demo-section">
       <h4>水平分割</h4>
       <div class="demo-wrapper">
-        <Splitter direction="horizontal" class="h-64">
+        <SplitterGroup direction="horizontal" class="h-64">
           <SplitterPanel :default-size="30">
             <SHBaseContainer class="bg-bg.primary" height="100%">
               <h5>左側面板</h5>
@@ -21,14 +21,14 @@
               <p>這是右側的內容區域，可以通過拖拽中間的分割線來調整大小。</p>
             </SHBaseContainer>
           </SplitterPanel>
-        </Splitter>
+        </SplitterGroup>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import Splitter from '../index.vue'
+import SplitterGroup from '../SplitterGroup.vue'
 import SplitterPanel from '../SplitterPanel.vue'
 import SplitterResizeHandle from '../SplitterResizeHandle.vue'
 </script>

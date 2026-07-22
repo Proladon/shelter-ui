@@ -62,15 +62,15 @@ export interface UploadZoneProps {
 }
 
 export interface UploadZoneEmits {
-  (e: 'update:value', files: UploadZoneFile[]): void
+  'update:value': [files: UploadZoneFile[]]
   /** Fires after files are selected and validated */
-  (e: 'change', files: UploadZoneFile[]): void
+  change: [files: UploadZoneFile[]]
   /** Fires when a file exceeds maxSize */
-  (e: 'exceed-size', file: File): void
+  'exceed-size': [file: File]
   /** Fires when the file count exceeds maxCount */
-  (e: 'exceed-count', files: File[]): void
+  'exceed-count': [files: File[]]
   /** Fires when a file is removed */
-  (e: 'remove', file: UploadZoneFile): void
+  remove: [file: UploadZoneFile]
 }
 
 export interface UploadZoneSlots {

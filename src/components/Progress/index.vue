@@ -36,7 +36,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { ProgressRoot, ProgressIndicator } from 'reka-ui'
-import type { ProgressProps, ProgressEmits } from './types'
+import type { ProgressProps, ProgressEmits, ProgressSlots } from './types'
 import { useVModel } from '@vueuse/core'
 
 const props = withDefaults(defineProps<ProgressProps>(), {
@@ -51,6 +51,8 @@ const props = withDefaults(defineProps<ProgressProps>(), {
 })
 
 const emits = defineEmits<ProgressEmits>()
+
+defineSlots<ProgressSlots>()
 
 const syncValue = useVModel(props, 'value', emits)
 

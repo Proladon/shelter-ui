@@ -27,6 +27,7 @@ import {
 import type { DateValue } from '@internationalized/date'
 import type { DatePickerProps, DatePickerEmits, DateRange } from './types'
 import { Calendar as SHCalendar } from '@/components/Calendar'
+import { useComponentSize } from '@/composables/useComponentSize'
 
 defineOptions({ name: 'SHDatePicker' })
 
@@ -44,6 +45,8 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
 })
 
 const emit = defineEmits<DatePickerEmits>()
+
+const sizeClass = useComponentSize('sh-date-picker', () => props.size)
 
 /* ── Open state ─────────────────────────────────────────────────── */
 const internalOpen = ref(false)
@@ -143,7 +146,7 @@ defineExpose({ focus, blur, clear })
       <div
         class="sh-date-picker"
         :class="[
-          `sh-date-picker--${size}`,
+          sizeClass,
           {
             'sh-date-picker--disabled': disabled,
             'sh-date-picker--readonly': readonly,

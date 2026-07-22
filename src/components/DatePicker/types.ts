@@ -43,12 +43,12 @@ export interface DatePickerProps {
 }
 
 export interface DatePickerEmits {
-  (event: 'update:value', value: DateValue | DateRange | undefined): void
-  (event: 'update:open', value: boolean): void
-  (event: 'change', value: DateValue | DateRange | undefined): void
-  (event: 'clear'): void
-  (event: 'focus', focusEvent: FocusEvent): void
-  (event: 'blur', blurEvent: FocusEvent): void
+  'update:value': [value: DateValue | DateRange | undefined]
+  'update:open': [value: boolean]
+  change: [value: DateValue | DateRange | undefined]
+  clear: []
+  focus: [focusEvent: FocusEvent]
+  blur: [blurEvent: FocusEvent]
 }
 
 export interface DatePickerExpose {

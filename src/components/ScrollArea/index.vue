@@ -40,7 +40,7 @@ import {
   ScrollAreaThumb,
   ScrollAreaCorner,
 } from 'reka-ui'
-import type { ScrollAreaProps, ScrollAreaMethods } from './types'
+import type { ScrollAreaProps, ScrollAreaMethods, ScrollAreaSlots } from './types'
 
 const props = withDefaults(defineProps<ScrollAreaProps>(), {
   visibility: 'hover',
@@ -49,6 +49,8 @@ const props = withDefaults(defineProps<ScrollAreaProps>(), {
   scrollX: false,
   scrollY: true,
 })
+
+defineSlots<ScrollAreaSlots>()
 
 const scrollAreaRoot = ref<InstanceType<typeof ScrollAreaRoot> | null>(null)
 
@@ -105,8 +107,8 @@ defineExpose<ScrollAreaMethods>({
 })
 </script>
 
-<style lang="postcss">
-:root {
+<style lang="postcss" scoped>
+:global(:root) {
   --reka-scroll-area-thumb-width: 100%;
   --reka-scroll-area-thumb-height: 100%;
 }

@@ -64,8 +64,12 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch, onUnmounted } from 'vue'
 import { IconX } from '@tabler/icons-vue'
-import type { NotificationProps, NotificationEmits } from './types'
-import { notificationIconMap } from './_icon-map'
+import type {
+  NotificationProps,
+  NotificationEmits,
+  NotificationSlots,
+} from './types'
+import { notificationIconMap } from '@/utils/statusIcons'
 import { useMouseInElement } from '@vueuse/core'
 import { useTemplateRef } from 'vue'
 import { getCssVar } from '@/utils/style'
@@ -79,6 +83,8 @@ const props = withDefaults(defineProps<NotificationProps>(), {
 })
 
 const emit = defineEmits<NotificationEmits>()
+
+defineSlots<NotificationSlots>()
 
 const visible = ref(false)
 const notificationEl = useTemplateRef<HTMLDivElement>('notificationRef')

@@ -2,7 +2,7 @@
   <div class="flex flex-col gap-4">
     <div class="mb-4">
       <h4 class="text-lg font-semibold mb-2">默認主題</h4>
-      <div class="p-4 rounded border border-border-base bg-bg-secondary">
+      <div class="p-4 rounded border border-border.base bg-bg.secondary">
         <div class="flex flex-wrap gap-3 mb-4">
           <SHButton type="primary">主要按鈕</SHButton>
           <SHButton type="default">默認按鈕</SHButton>
@@ -14,7 +14,7 @@
         <div class="flex flex-wrap gap-3 mb-4">
           <SHInput placeholder="請輸入內容" style="width: 200px" />
           <SHBadge :count="5">
-            <div class="px-3 py-1 border border-border-base rounded">通知</div>
+            <div class="px-3 py-1 border border-border.base rounded">通知</div>
           </SHBadge>
         </div>
       </div>
@@ -23,7 +23,7 @@
     <div class="mb-4">
       <h4 class="text-lg font-semibold mb-2">自定義主題</h4>
       <SHConfigProvider :theme-config="customTheme">
-        <div class="p-4 rounded border border-border-base bg-bg-secondary">
+        <div class="p-4 rounded border border-border.base bg-bg.secondary">
           <div class="flex flex-wrap gap-3 mb-4">
             <SHButton type="primary">主要按鈕</SHButton>
             <SHButton type="default">默認按鈕</SHButton>
@@ -35,7 +35,7 @@
           <div class="flex flex-wrap gap-3 mb-4">
             <SHInput placeholder="請輸入內容" style="width: 200px" />
             <SHBadge :count="5">
-              <div class="px-3 py-1 border border-border-base rounded">
+              <div class="px-3 py-1 border border-border.base rounded">
                 通知
               </div>
             </SHBadge>
@@ -47,7 +47,7 @@
     <div class="mb-4">
       <h4 class="text-lg font-semibold mb-2">明亮主題</h4>
       <SHConfigProvider :theme-config="lightTheme">
-        <div class="p-4 rounded border border-border-base bg-bg-secondary">
+        <div class="p-4 rounded border border-border.base bg-bg.secondary">
           <div class="flex flex-wrap gap-3 mb-4">
             <SHButton type="primary">主要按鈕</SHButton>
             <SHButton type="default">默認按鈕</SHButton>
@@ -59,7 +59,7 @@
           <div class="flex flex-wrap gap-3 mb-4">
             <SHInput placeholder="請輸入內容" style="width: 200px" />
             <SHBadge :count="5">
-              <div class="px-3 py-1 border border-border-base rounded">
+              <div class="px-3 py-1 border border-border.base rounded">
                 通知
               </div>
             </SHBadge>

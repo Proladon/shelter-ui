@@ -52,5 +52,5 @@ export interface BadgeProps {
 }
 
 export interface BadgeEmits {
-  (e: 'click', event: MouseEvent): void
+  click: [event: MouseEvent]
 }

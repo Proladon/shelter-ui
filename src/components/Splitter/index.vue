@@ -1,25 +1,19 @@
 <template>
-  <SplitterGroup
-    v-bind="$attrs"
-    :gap="gap"
-    :direction="direction"
-    @layout="$emit('layout', $event)"
-  >
+  <SplitterGroup v-bind="rootProps">
     <slot />
   </SplitterGroup>
 </template>
 
 <script setup lang="ts">
+import { useForwardPropsEmits } from 'reka-ui'
 import SplitterGroup from './SplitterGroup.vue'
-import type { SplitterGroupCustomProps } from './types'
+import type { SplitterProps } from './types'
 
-interface SplitterProps extends Omit<SplitterGroupCustomProps, 'variant'> {
-  direction: 'horizontal' | 'vertical'
-}
+const props = defineProps<SplitterProps>()
 
-defineProps<SplitterProps>()
-
-defineEmits<{
+const emits = defineEmits<{
   layout: [val: number[]]
 }>()
+
+const rootProps = useForwardPropsEmits(props, emits)
 </script>

@@ -4,6 +4,6 @@ export interface EditableContainerProps {
 }
 
 export interface EditableContainerEmits {
-  (e: 'edit'): void
-  (e: 'done'): void
+  edit: []
+  done: []
 }

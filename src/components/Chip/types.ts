@@ -41,7 +41,7 @@ export interface ChipSlots {
    */
   'remove-icon': (scope: {
     removeCallback: (event: Event) => void
-    keydownCallback: (event: Event) => void
+    keydownCallback: (event: KeyboardEvent) => void
   }) => any
 }
 

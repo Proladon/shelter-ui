@@ -32,16 +32,11 @@
 </template>
 <script setup lang="ts">
 import { computed } from 'vue'
+import type { SpinnerProps } from './types'
 
-const props = defineProps({
-  color: {
-    type: String,
-    default: '',
-  },
-  size: {
-    type: [String, Number],
-    default: 40,
-  },
+const props = withDefaults(defineProps<SpinnerProps>(), {
+  color: '',
+  size: 40,
 })
 
 const size = computed(() =>

@@ -1,7 +1,7 @@
 <template>
   <div class="demo-section">
     <div class="demo-wrapper">
-      <Splitter direction="horizontal" class="h-32">
+      <SplitterGroup direction="horizontal" class="h-32">
         <SplitterPanel :default-size="50" class="demo-panel">
           <div class="panel-content">面板 A</div>
         </SplitterPanel>
@@ -11,13 +11,13 @@
         <SplitterPanel :default-size="50" class="demo-panel">
           <div class="panel-content">面板 B</div>
         </SplitterPanel>
-      </Splitter>
+      </SplitterGroup>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import Splitter from '../index.vue'
+import SplitterGroup from '../SplitterGroup.vue'
 import SplitterPanel from '../SplitterPanel.vue'
 import SplitterResizeHandle from '../SplitterResizeHandle.vue'
 </script>

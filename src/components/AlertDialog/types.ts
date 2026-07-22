@@ -20,9 +20,9 @@ export interface AlertDialogProps {
 }
 
 export interface AlertDialogEmits {
-  (e: 'update:value', value: boolean): void
-  (e: 'confirm'): void
-  (e: 'cancel'): void
+  'update:value': [value: boolean]
+  confirm: []
+  cancel: []
 }
 
 export interface AlertDialogSlots {

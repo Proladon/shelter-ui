@@ -2,6 +2,8 @@
 
 將版面分割為可調整大小區塊的組件。
 
+> **注意**：全能包裝組件 `SHSplitter` 已標記為 deprecated（仍可正常運作，不會被移除），建議改用下方展示的 `SHSplitterGroup` + `SHSplitterPanel` + `SHSplitterResizeHandle` 組合作為新的標準寫法。
+
 ## 基本用法
 
 <Demo>
@@ -16,7 +18,7 @@
         <div class="demo-section">
           <h4>水平分割</h4>
           <div class="demo-wrapper">
-            <Splitter direction="horizontal" class="h-64">
+            <SplitterGroup direction="horizontal" class="h-64">
               <SplitterPanel :default-size="30" class="demo-panel">
                 <div class="panel-content">
                   <h5>左側面板</h5>
@@ -32,7 +34,7 @@
                   <p>這是右側的內容區域，可以通過拖拽中間的分割線來調整大小。</p>
                 </div>
               </SplitterPanel>
-            </Splitter>
+            </SplitterGroup>
           </div>
         </div>
       </div>
@@ -40,7 +42,7 @@
 
     <script setup lang="ts">
     import {
-      SHSplitter as Splitter,
+      SHSplitterGroup as SplitterGroup,
       SHSplitterPanel as SplitterPanel,
       SHSplitterResizeHandle as SplitterResizeHandle
     } from '@proladon/shelter-ui'
@@ -59,16 +61,16 @@
     ```vue
     <template>
       <div class="demo-wrapper">
-        <Splitter direction="horizontal" class="h-64">
+        <SplitterGroup direction="horizontal" class="h-64">
           <SplitterPanel :default-size="30" class="demo-panel">...</SplitterPanel>
           <SplitterResizeHandle />
           <SplitterPanel :default-size="70" class="demo-panel">...</SplitterPanel>
-        </Splitter>
+        </SplitterGroup>
       </div>
     </template>
 
     <script setup lang="ts">
-    import { SHSplitter as Splitter, SHSplitterPanel as SplitterPanel, SHSplitterResizeHandle as SplitterResizeHandle } from '@proladon/shelter-ui'
+    import { SHSplitterGroup as SplitterGroup, SHSplitterPanel as SplitterPanel, SHSplitterResizeHandle as SplitterResizeHandle } from '@proladon/shelter-ui'
     </script>
     ```
 
@@ -84,16 +86,16 @@
     ```vue
     <template>
       <div class="demo-wrapper">
-        <Splitter direction="vertical" class="h-64">
+        <SplitterGroup direction="vertical" class="h-64">
           <SplitterPanel :default-size="40" class="demo-panel">...</SplitterPanel>
           <SplitterResizeHandle />
           <SplitterPanel :default-size="60" class="demo-panel">...</SplitterPanel>
-        </Splitter>
+        </SplitterGroup>
       </div>
     </template>
 
     <script setup lang="ts">
-    import { SHSplitter as Splitter, SHSplitterPanel as SplitterPanel, SHSplitterResizeHandle as SplitterResizeHandle } from '@proladon/shelter-ui'
+    import { SHSplitterGroup as SplitterGroup, SHSplitterPanel as SplitterPanel, SHSplitterResizeHandle as SplitterResizeHandle } from '@proladon/shelter-ui'
     </script>
     ```
 
@@ -109,16 +111,16 @@
     ```vue
     <template>
       <div class="demo-wrapper">
-        <Splitter direction="horizontal" class="h-64">...
+        <SplitterGroup direction="horizontal" class="h-64">...
           <SplitterPanel :default-size="70">
-            <Splitter direction="vertical">...</Splitter>
+            <SplitterGroup direction="vertical">...</SplitterGroup>
           </SplitterPanel>
-        </Splitter>
+        </SplitterGroup>
       </div>
     </template>
 
     <script setup lang="ts">
-    import { SHSplitter as Splitter, SHSplitterPanel as SplitterPanel, SHSplitterResizeHandle as SplitterResizeHandle } from '@proladon/shelter-ui'
+    import { SHSplitterGroup as SplitterGroup, SHSplitterPanel as SplitterPanel, SHSplitterResizeHandle as SplitterResizeHandle } from '@proladon/shelter-ui'
     </script>
     ```
 
@@ -134,16 +136,16 @@
     ```vue
     <template>
       <div class="demo-wrapper">
-        <Splitter direction="horizontal" class="h-64">
+        <SplitterGroup direction="horizontal" class="h-64">
           <SplitterPanel :default-size="30" :min-size="20" :collapsible="true" :collapsed-size="5">...</SplitterPanel>
           <SplitterResizeHandle />
           <SplitterPanel :default-size="70">...</SplitterPanel>
-        </Splitter>
+        </SplitterGroup>
       </div>
     </template>
 
     <script setup lang="ts">
-    import { SHSplitter as Splitter, SHSplitterPanel as SplitterPanel, SHSplitterResizeHandle as SplitterResizeHandle } from '@proladon/shelter-ui'
+    import { SHSplitterGroup as SplitterGroup, SHSplitterPanel as SplitterPanel, SHSplitterResizeHandle as SplitterResizeHandle } from '@proladon/shelter-ui'
     </script>
     ```
 
@@ -158,15 +160,15 @@
 
     ```vue
     <template>
-      <Splitter direction="horizontal" class="h-32">
+      <SplitterGroup direction="horizontal" class="h-32">
         <SplitterPanel :default-size="50">A</SplitterPanel>
         <SplitterResizeHandle :visible="true" />
         <SplitterPanel :default-size="50">B</SplitterPanel>
-      </Splitter>
+      </SplitterGroup>
     </template>
 
     <script setup lang="ts">
-    import { SHSplitter as Splitter, SHSplitterPanel as SplitterPanel, SHSplitterResizeHandle as SplitterResizeHandle } from '@proladon/shelter-ui'
+    import { SHSplitterGroup as SplitterGroup, SHSplitterPanel as SplitterPanel, SHSplitterResizeHandle as SplitterResizeHandle } from '@proladon/shelter-ui'
     </script>
     ```
 
@@ -181,15 +183,15 @@
 
     ```vue
     <template>
-      <Splitter direction="horizontal" class="h-32">
+      <SplitterGroup direction="horizontal" class="h-32">
         <SplitterPanel :default-size="50">A</SplitterPanel>
         <SplitterResizeHandle color="#f97316" />
         <SplitterPanel :default-size="50">B</SplitterPanel>
-      </Splitter>
+      </SplitterGroup>
     </template>
 
     <script setup lang="ts">
-    import { SHSplitter as Splitter, SHSplitterPanel as SplitterPanel, SHSplitterResizeHandle as SplitterResizeHandle } from '@proladon/shelter-ui'
+    import { SHSplitterGroup as SplitterGroup, SHSplitterPanel as SplitterPanel, SHSplitterResizeHandle as SplitterResizeHandle } from '@proladon/shelter-ui'
     </script>
     ```
 
@@ -198,7 +200,7 @@
 
 ## API
 
-### Splitter (SplitterGroup)
+### SplitterGroup
 
 #### 屬性
 

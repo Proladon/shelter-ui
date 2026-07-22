@@ -9,6 +9,14 @@ export interface SplitterGroupCustomProps extends SplitterGroupProps {
   color?: string
 }
 
+/**
+ * @deprecated Use `SplitterGroupCustomProps` instead (paired with `SHSplitterGroup` +
+ * `SHSplitterPanel` + `SHSplitterResizeHandle`).
+ */
+export interface SplitterProps extends Omit<SplitterGroupCustomProps, 'variant'> {
+  direction: 'horizontal' | 'vertical'
+}
+
 export interface SplitterPanelCustomProps extends SplitterPanelProps {
   padding?: 'none' | 'small' | 'default' | 'large'
 }

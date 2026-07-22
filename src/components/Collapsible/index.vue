@@ -28,7 +28,7 @@
 <script setup lang="ts">
 import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent } from 'reka-ui'
 import { reactiveOmit } from '@vueuse/core'
-import type { CollapsibleProps, CollapsibleEmits } from './types'
+import type { CollapsibleProps, CollapsibleEmits, CollapsibleSlots } from './types'
 
 const props = withDefaults(defineProps<CollapsibleProps>(), {
   variant: 'default',
@@ -38,6 +38,8 @@ const props = withDefaults(defineProps<CollapsibleProps>(), {
 })
 
 const emits = defineEmits<CollapsibleEmits>()
+
+defineSlots<CollapsibleSlots>()
 
 const delegatedProps = reactiveOmit(
   props,
@@ -49,7 +51,7 @@ const delegatedProps = reactiveOmit(
 )
 </script>
 
-<style lang="postcss">
+<style lang="postcss" scoped>
 .sh-collapsible {
   @apply w-full;
 }

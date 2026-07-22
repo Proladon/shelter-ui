@@ -232,15 +232,20 @@ ComponentName/
 
 ### 3b. 結構對齊（D6）
 
-- [ ] 為 10 個無 barrel 組件補 `index.ts`：Badge、BaseContainer、Button、Dialog、EditableContainer、FlexContainer、Input、Popover、Spin、Tooltip；`src/index.ts` 改為一律從 barrel 匯入
-- [ ] barrel 匯出名統一 SH 前綴（Radio、Splitter、Pagination、Divider、InputGroup）
-- [ ] 根目錄補匯出遺漏型別：Carousel、Radio、Checkbox 的 Props/Emits/Option 系列
-- [ ] 合併三份 `_icon-map.ts` → `src/utils/statusIcons.ts`；抽 `useComponentSize`、`resolveTypeVar` composables
-- [ ] provide/inject 改 `InjectionKey<T>` + `context.ts`（ActiveButtonGroup、ConfigProvider、DatePicker、NotificationProvider）
-- [ ] Spinner 轉正式內部組件：補 types.ts、改 `defineProps<T>()`，或評估併入 Spin
-- [ ] 處理 `SHSplitter` 與 `SHSplitterGroup` 近重複：擇一為權威（建議保留 Group/Panel/Handle 組合，`SHSplitter` 標記 deprecated）
-- [ ] props 定義風格修正：ChatMessage、ConfigProvider 改從 types.ts 匯入；15 個有 `XxxSlots` 未接線的組件補 `defineSlots`
-- [ ] 統一 `<style lang="postcss" scoped>`（16 檔補 scoped、10 檔補 lang）；色彩 utility 統一 dot-notation
+- [x] 為 10 個無 barrel 組件補 `index.ts`：Badge、BaseContainer、Button、Dialog、EditableContainer、FlexContainer、Input、Popover、Spin、Tooltip；`src/index.ts` 改為一律從 barrel 匯入
+- [x] barrel 匯出名統一 SH 前綴（Radio、Splitter、Pagination、Divider；InputGroup 原本就已合規）—— Splitter 順便處理了 `SHSplitter`/`SHSplitterGroup` 重複問題（見下）
+- [x] 根目錄補匯出遺漏型別：Carousel（含原本連 barrel 自己都漏掉的 `CarouselSlots`）、Radio、Checkbox 的 Props/Emits/Option 系列（這兩者原本根目錄完全沒有型別匯出，非僅部分缺漏）
+- [x] 合併三份 `_icon-map.ts` → `src/utils/statusIcons.ts`（保留三者原本互不相同的 mapping，包括 AlertDialog 的 danger 圖示與 Notification/MessageBox 不同——已標記為待決策問題，未強行統一）；新增 `useComponentSize`、`resolveTypeVar` composables 並套用到 Button、StatusTag（色彩變數）與 Input、Textarea、Select、DatePicker、NumberInput、Switch、PinInput、Slider、Tag（尺寸 class）
+- [x] provide/inject 改 `InjectionKey<T>` + `context.ts`——**執行時發現 ConfigProvider、DatePicker 目前根本沒有用 provide/inject**（ConfigProvider 在 D9 改版後改用 CSS 變數機制，DatePicker 純 props 組合），原計畫項目對這兩者已過時；實際只有 ActiveButtonGroup、NotificationProvider 兩者真的需要轉換，皆已完成
+- [x] Spinner 轉正式內部組件：補 `types.ts`（`SpinnerProps`）、改 `withDefaults(defineProps<SpinnerProps>(), ...)`，barrel 補上型別匯出並讓 6 個消費者（ChatInput、StatusTag、Select、Spin、AlertDialog、Button）改從 barrel 匯入而非直接匯入 `.vue` 檔；維持純內部組件，不從套件根目錄匯出
+- [x] 處理 `SHSplitter` 與 `SHSplitterGroup` 近重複：保留 Group/Panel/Handle 組合為權威，`SHSplitter` 標記 `@deprecated`（非移除）；順便修掉 `SHSplitter` 未用 `useForwardPropsEmits` 導致 `color` 等 prop 被靜默丟棄的既存 bug；7 個 demo 與 `splitter.md` 全部改用 `SHSplitterGroup`
+- [x] props 定義風格修正：ChatMessage（Props 與 Emits 皆為未使用的第二份定義，屬於真實 drift 風險，已修正）、ConfigProvider（原本沒有 `ConfigProviderProps`，屬於新增而非修正 drift）改從 types.ts 匯入；15+ 個有 `XxxSlots` 未接線的組件補 `defineSlots`（含 UploadZone 原本用內嵌重複型別、Input 原本 `defineSlots` 沒對應 named type 兩個變體問題）；Chip 額外修正 barrel 未 `export * from './types'` 的既存缺陷（Phase 3a 就已發現，這裡一併處理）；順手修正 BlockArea/Chip 兩處 `XxxSlots` 型別與實際模板用法不符的問題（BlockArea 的 icon/text 應為可選、Chip 的 keydownCallback 應為 `KeyboardEvent`）
+- [x] 統一 `<style lang="postcss" scoped>`：修正約 14 個檔案缺 `scoped`、5 個缺 `lang="postcss"`；AlertDialog、InputGroup 因程式碼內已有明確註解說明其 unscoped 是刻意設計（跨 Teleport／slot 邊界），僅補 `lang`、刻意不加 `scoped`；色彩 utility 統一 dot-notation（12 檔、13 處，另有 Chip demo 一處 `text-primary-contrast` 經查證不是任何 notation 下的合法 token，已保留不動並標記待釐清）；順手刪除 Spin 空的 `<style>` 區塊誤判（實際上非空，未刪除）
+- [x] Emits 具名 tuple 化：實際涵蓋約 20 個組件（遠多於原計畫僅列的 Dialog/Popover/Tooltip 3 個），事後以 `grep "(e: '|(event: '" src/components/**/types.ts` 全庫複查確認零殘留
+
+### Phase 3b 執行中的重大意外：org API 額度上限
+
+執行本批次時，8 個平行 agent 中有 5 個因組織的 Anthropic API 月度額度上限被觸發而中途失敗（非工作內容本身的錯誤）。已完成的 3 個（新增 10 個 barrel、barrel 慣例遷移＋Splitter 整併、icon-map 合併）完全沒受影響；另外 5 個雖中途中斷，但事後逐一比對 `git diff`／重新執行 `pnpm test:run`＋`vue-tsc -b`（注意：`vue-tsc --noEmit -p tsconfig.json` 這個先前一直在用的驗證指令其實是 no-op，因為根目錄 tsconfig.json 只有 `references` 沒有 `files`，必須用 `-p tsconfig.app.json` 或 `-b` 才會真的檢查——這是本批次意外發現的既存驗證盲點，值得所有未來批次注意）＋乾淨 `vite build`後確認：實際程式碼異動大多已落地，只有 Chip 的 D6 修正完全沒開始、`ConfigProvider`/`StatusTag` 各有一項未完成收尾（`ConfigProviderProps` 型別已新增但 `index.vue` 未接上；`StatusTag` 未换成 `resolveTypeVar`）、`Progress` 的 `defineSlots` 觸發了一個原本就存在但沒人發現的型別缺漏（`text` slot 不在 `ProgressSlots` 裡）。以上缺口皆由我直接手動補完（未再另外派工 agent，以免又撞上額度上限），並重新跑過完整驗證（測試、`vue-tsc -b`、`vite build`、瀏覽器抽查）確認無誤。
 
 ### 3c. 測試（與 3a/3b 同批進行）
 

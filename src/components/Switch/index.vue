@@ -1,7 +1,7 @@
 <template>
   <SwitchRoot
     class="shelter-switch-root"
-    :class="`sh-switch--${size}`"
+    :class="sizeClass"
     :model-value="value"
     :disabled="disabled"
     @update:model-value="handleUpdate"
@@ -14,6 +14,7 @@
 
 <script setup lang="ts">
 import { SwitchRoot, SwitchThumb } from 'reka-ui'
+import { useComponentSize } from '@/composables/useComponentSize'
 import type { SwitchProps, SwitchEmits } from './types'
 
 defineOptions({ name: 'SHSwitch' })
@@ -26,6 +27,8 @@ const props = withDefaults(defineProps<SwitchProps>(), {
 })
 
 const emit = defineEmits<SwitchEmits>()
+
+const sizeClass = useComponentSize('sh-switch', () => props.size)
 
 const handleUpdate = (value: boolean) => {
   if (props.disabled || props.readonly) return

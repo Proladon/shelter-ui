@@ -176,7 +176,7 @@ function onYearChange(year: number) {
   </CalendarRoot>
 </template>
 
-<style scoped>
+<style scoped lang="postcss">
 .sh-calendar {
   @apply inline-flex flex-col select-none;
   @apply bg-bg.primary border border-solid border-border.base rounded-[length:var(--sh-radius-lg)];

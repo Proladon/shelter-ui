@@ -42,9 +42,9 @@ export interface TextareaProps {
 }
 
 export interface TextareaEmits {
-  (e: 'update:value', value: string): void
-  (e: 'input', value: string): void
-  (e: 'change', value: string): void
-  (e: 'focus', event: FocusEvent): void
-  (e: 'blur', event: FocusEvent): void
+  'update:value': [value: string]
+  input: [value: string]
+  change: [value: string]
+  focus: [event: FocusEvent]
+  blur: [event: FocusEvent]
 }

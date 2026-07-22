@@ -28,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import type { BlockAreaProps } from './types'
+import type { BlockAreaProps, BlockAreaSlots } from './types'
 
 defineOptions({
   name: 'SHBlockArea',
@@ -37,9 +37,11 @@ defineOptions({
 withDefaults(defineProps<BlockAreaProps>(), {
   active: true,
 })
+
+defineSlots<BlockAreaSlots>()
 </script>
 
-<style lang="postcss">
+<style lang="postcss" scoped>
 .sh-block-area {
   @apply relative;
 

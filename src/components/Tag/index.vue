@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import { computed } from "vue"
-import type { TagProps } from "./types"
+import type { TagProps, TagSlots } from "./types"
 
 defineOptions({
   name: "SHTag",
@@ -27,6 +27,8 @@ const props = withDefaults(defineProps<TagProps>(), {
   rounded: false,
   bordered: false,
 })
+
+defineSlots<TagSlots>()
 
 const tagClasses = computed(() => {
   return [

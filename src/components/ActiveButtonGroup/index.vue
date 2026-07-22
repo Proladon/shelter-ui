@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref, provide, computed, onMounted, watch, nextTick } from 'vue'
 import type { ActiveButtonGroupProps, ActiveButtonGroupEmits } from './types'
+import { addButtonKey, activeValueKey, handleButtonClickKey } from './context'
+import type { ActiveButtonRegistration } from './context'
 
 defineOptions({
   name: 'SHActiveButtonGroup',
@@ -15,9 +17,7 @@ const props = withDefaults(defineProps<ActiveButtonGroupProps>(), {
 const emit = defineEmits<ActiveButtonGroupEmits>()
 
 // For collecting buttons
-const buttons = ref<
-  Array<{ value: string; disabled?: boolean; ref?: HTMLElement }>
->([])
+const buttons = ref<ActiveButtonRegistration[]>([])
 const indicatorRef = ref<HTMLElement | null>(null)
 const indicatorStyle = ref({
   width: '0px',
@@ -25,11 +25,7 @@ const indicatorStyle = ref({
   transform: 'translateX(0px)',
 })
 
-const addButton = (button: {
-  value: string
-  disabled?: boolean
-  ref?: HTMLElement
-}) => {
+const addButton = (button: ActiveButtonRegistration) => {
   buttons.value.push(button)
 }
 
@@ -65,9 +61,9 @@ const handleButtonClick = (value: string) => {
 }
 
 // Provide the context to child components
-provide('addButton', addButton)
-provide('activeValue', currentValue) // This is safe as we're providing the computed ref
-provide('handleButtonClick', handleButtonClick)
+provide(addButtonKey, addButton)
+provide(activeValueKey, currentValue) // This is safe as we're providing the computed ref
+provide(handleButtonClickKey, handleButtonClick)
 
 // Use watch instead of onUpdated to avoid recursive updates
 watch(

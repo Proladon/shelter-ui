@@ -88,35 +88,18 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { IconCopy, IconCheck } from '@tabler/icons-vue'
-import type { ChatMessageSlots } from './types'
-import type { ChatMessagePosition, ChatMessageStatus } from './types'
+import type { ChatMessageProps, ChatMessageEmits, ChatMessageSlots } from './types'
 
 defineOptions({ name: 'SHChatMessage' })
 
-const props = withDefaults(
-  defineProps<{
-    avatar?: string
-    avatarFallback?: string
-    username?: string
-    time?: string
-    content?: string
-    position?: ChatMessagePosition
-    status?: ChatMessageStatus
-    showCopyButton?: boolean
-    showTime?: boolean
-    showUsername?: boolean
-  }>(),
-  {
-    position: 'left',
-    showCopyButton: true,
-    showTime: true,
-    showUsername: true,
-  },
-)
+const props = withDefaults(defineProps<ChatMessageProps>(), {
+  position: 'left',
+  showCopyButton: true,
+  showTime: true,
+  showUsername: true,
+})
 
-const emit = defineEmits<{
-  (e: 'copy', content: string): void
-}>()
+const emit = defineEmits<ChatMessageEmits>()
 
 defineSlots<ChatMessageSlots>()
 

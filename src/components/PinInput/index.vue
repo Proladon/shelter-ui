@@ -3,7 +3,7 @@
     v-bind="rootProps"
     class="sh-pin-input"
     :class="[
-      `sh-pin-input--${size}`,
+      sizeClass,
       {
         'sh-pin-input--disabled': disabled,
         'sh-pin-input--readonly': readonly,
@@ -33,6 +33,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { PinInputRoot, PinInputInput } from 'reka-ui'
+import { useComponentSize } from '@/composables/useComponentSize'
 import type { PinInputProps, PinInputEmits } from './types'
 
 defineOptions({
@@ -52,6 +53,8 @@ const props = withDefaults(defineProps<PinInputProps>(), {
 })
 
 const emit = defineEmits<PinInputEmits>()
+
+const sizeClass = useComponentSize('sh-pin-input', () => props.size)
 
 const rootProps = computed(() => ({
   modelValue: props.value,

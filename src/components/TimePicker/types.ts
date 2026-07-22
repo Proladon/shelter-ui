@@ -45,11 +45,11 @@ export interface TimePickerProps {
 }
 
 export interface TimePickerEmits {
-  (event: 'update:value', value?: string | TimeRange): void
-  (event: 'change', value?: string | TimeRange): void
-  (event: 'focus', focusEvent: FocusEvent): void
-  (event: 'blur', blurEvent: FocusEvent): void
-  (event: 'clear'): void
+  'update:value': [value?: string | TimeRange]
+  change: [value?: string | TimeRange]
+  focus: [focusEvent: FocusEvent]
+  blur: [blurEvent: FocusEvent]
+  clear: []
 }
 
 export interface TimePickerExpose {

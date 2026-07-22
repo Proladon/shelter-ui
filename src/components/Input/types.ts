@@ -42,10 +42,15 @@ export interface InputProps {
 }
 
 export interface InputEmits {
-  (e: 'update:value', value: string): void
-  (e: 'input', value: string): void
-  (e: 'change', value: string): void
-  (e: 'focus', event: FocusEvent): void
-  (e: 'blur', event: FocusEvent): void
-  (e: 'clear'): void
+  'update:value': [value: string]
+  input: [value: string]
+  change: [value: string]
+  focus: [event: FocusEvent]
+  blur: [event: FocusEvent]
+  clear: []
+}
+
+export interface InputSlots {
+  prefix?: () => any
+  suffix?: () => any
 }

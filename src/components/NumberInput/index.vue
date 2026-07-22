@@ -5,7 +5,7 @@
     @update:model-value="(v: number) => emits('update:value', v)"
     class="sh-number-input"
     :class="[
-      `sh-number-input--${size}`,
+      sizeClass,
       {
         'is-disabled': disabled,
         'is-invalid': invalid,
@@ -40,7 +40,12 @@ import {
   NumberFieldIncrement,
   NumberFieldDecrement,
 } from 'reka-ui'
-import type { NumberInputProps, NumberInputEmits } from './types'
+import { useComponentSize } from '@/composables/useComponentSize'
+import type {
+  NumberInputProps,
+  NumberInputEmits,
+  NumberInputSlots,
+} from './types'
 
 defineOptions({
   name: 'SHNumberInput',
@@ -56,7 +61,11 @@ const props = withDefaults(defineProps<NumberInputProps>(), {
   invalid: false,
 })
 
+defineSlots<NumberInputSlots>()
+
 const emits = defineEmits<NumberInputEmits>()
+
+const sizeClass = useComponentSize('sh-number-input', () => props.size)
 
 const delegatedProps = reactiveOmit(props, 'size', 'invalid', 'value')
 </script>

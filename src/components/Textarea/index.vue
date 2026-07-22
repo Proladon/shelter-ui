@@ -3,7 +3,7 @@
     <div
       class="sh-textarea"
       :class="[
-        `sh-textarea--${size}`,
+        sizeClass,
         {
           'is-focused': focused,
         },
@@ -37,6 +37,7 @@
 <script setup lang="ts">
 import { ref, computed, nextTick, watch } from 'vue'
 import type { TextareaProps, TextareaEmits } from './types'
+import { useComponentSize } from '@/composables/useComponentSize'
 
 defineOptions({
   name: 'SHTextarea',
@@ -56,6 +57,8 @@ const props = withDefaults(defineProps<TextareaProps>(), {
 })
 
 const emit = defineEmits<TextareaEmits>()
+
+const sizeClass = useComponentSize('sh-textarea', () => props.size)
 
 const textareaRef = ref<HTMLTextAreaElement | null>(null)
 const focused = ref(false)

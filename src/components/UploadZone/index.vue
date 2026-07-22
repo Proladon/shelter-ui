@@ -174,7 +174,12 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import type { UploadZoneProps, UploadZoneEmits, UploadZoneFile } from './types'
+import type {
+  UploadZoneProps,
+  UploadZoneEmits,
+  UploadZoneFile,
+  UploadZoneSlots,
+} from './types'
 
 defineOptions({ name: 'SHUploadZone' })
 
@@ -190,10 +195,7 @@ const props = withDefaults(defineProps<UploadZoneProps>(), {
 
 const emit = defineEmits<UploadZoneEmits>()
 
-defineSlots<{
-  trigger?: () => unknown
-  tip?: () => unknown
-}>()
+defineSlots<UploadZoneSlots>()
 
 // ─── Internal state ────────────────────────────────────────────────
 

@@ -19,5 +19,3 @@ export interface StatusTagSlots {
    */
   default: () => unknown
 }
-
-export interface StatusTagEmits {}

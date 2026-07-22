@@ -23,9 +23,9 @@ export interface BlockAreaSlots {
   /**
    * 圖示插槽
    */
-  icon: () => any
+  icon?: () => any
   /**
    * 文字插槽
    */
-  text: () => any
+  text?: () => any
 }

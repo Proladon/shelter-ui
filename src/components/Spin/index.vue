@@ -46,7 +46,7 @@
 import type { CSSProperties } from 'vue'
 import { computed, ref, watch, onBeforeUnmount } from 'vue'
 import type { SpinProps } from './types'
-import Spinner from '@/components/Spinner/index.vue'
+import Spinner from '@/components/Spinner'
 
 const props = withDefaults(defineProps<Omit<SpinProps, 'value'>>(), {
   size: 'medium',

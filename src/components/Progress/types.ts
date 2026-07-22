@@ -17,8 +17,9 @@ export interface ProgressProps extends ProgressRootProps {
 
 export interface ProgressSlots {
   default?: any
+  text?: any
 }
 
 export interface ProgressEmits {
-  (e: 'update:value', value: number): void
+  'update:value': [value: number]
 }

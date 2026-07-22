@@ -19,5 +19,5 @@ export interface ButtonProps {
 }
 
 export interface ButtonEmits {
-  (e: 'click', event: MouseEvent): void
+  click: [event: MouseEvent]
 }

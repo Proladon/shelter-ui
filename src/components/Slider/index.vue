@@ -6,7 +6,7 @@
       v-bind="delegatedProps"
       class="sh-slider"
       :class="[
-        `sh-slider-size--${props.size}`,
+        sizeClass,
         `sh-slider-type--${props.type}`,
         `sh-slider-orientation--${props.orientation}`,
       ]"
@@ -56,6 +56,7 @@
 <script setup lang="ts">
 import { reactiveOmit } from '@vueuse/core'
 import { SliderRoot, SliderTrack, SliderRange, SliderThumb } from 'reka-ui'
+import { useComponentSize } from '@/composables/useComponentSize'
 import type { SliderProps, SliderSlots } from './types'
 
 const props = withDefaults(defineProps<SliderProps>(), {
@@ -71,6 +72,8 @@ const props = withDefaults(defineProps<SliderProps>(), {
 })
 
 defineSlots<SliderSlots>()
+
+const sizeClass = useComponentSize('sh-slider-size', () => props.size)
 
 const emits = defineEmits<{
   'update:value': [value: number[] | undefined]

@@ -56,9 +56,9 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import SHDialog from '@/components/Dialog/index.vue'
-import Spinner from '@/components/Spinner/index.vue'
+import Spinner from '@/components/Spinner'
 import type { AlertDialogProps, AlertDialogEmits } from './types'
-import { alertDialogIconMap } from './_icon-map'
+import { alertDialogIconMap } from '@/utils/statusIcons'
 
 defineOptions({ name: 'SHAlertDialog' })
 

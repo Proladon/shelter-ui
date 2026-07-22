@@ -1,7 +1,7 @@
 <template>
   <div
     class="sh-input-wrapper"
-    :class="[`sh-input--${size}`, { 'is-disabled': disabled }]"
+    :class="[sizeClass, { 'is-disabled': disabled }]"
   >
     <div
       class="sh-input"
@@ -58,7 +58,8 @@
 
 <script setup lang="ts">
 import { ref, computed, nextTick } from 'vue'
-import type { InputProps, InputEmits } from './types'
+import type { InputProps, InputEmits, InputSlots } from './types'
+import { useComponentSize } from '@/composables/useComponentSize'
 
 defineOptions({
   name: 'SHInput',
@@ -81,6 +82,8 @@ const emit = defineEmits<InputEmits>()
 
 const inputRef = ref<HTMLInputElement | null>(null)
 const focused = ref(false)
+
+const sizeClass = useComponentSize('sh-input', () => props.size)
 
 const isEmpty = computed(() => {
   return (
@@ -169,10 +172,7 @@ defineExpose({
   input: inputRef,
 })
 
-const slots = defineSlots<{
-  prefix?: () => any
-  suffix?: () => any
-}>()
+const slots = defineSlots<InputSlots>()
 </script>
 
 <style lang="postcss" scoped>

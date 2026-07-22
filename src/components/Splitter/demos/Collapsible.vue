@@ -1,7 +1,7 @@
 <template>
   <div class="demo-section">
     <div class="demo-wrapper">
-      <Splitter direction="horizontal" class="h-64">
+      <SplitterGroup direction="horizontal" class="h-64">
         <SplitterPanel
           :default-size="30"
           :min-size="20"
@@ -23,13 +23,13 @@
             <p>這是主要的內容區域</p>
           </div>
         </SplitterPanel>
-      </Splitter>
+      </SplitterGroup>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import Splitter from '../index.vue'
+import SplitterGroup from '../SplitterGroup.vue'
 import SplitterPanel from '../SplitterPanel.vue'
 import SplitterResizeHandle from '../SplitterResizeHandle.vue'
 </script>

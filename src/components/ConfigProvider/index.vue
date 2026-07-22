@@ -5,20 +5,15 @@
 </template>
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import type { ThemeVarsConfig } from './types'
+import type { ConfigProviderProps, ThemeVarsConfig } from './types'
 import type { DesignTokens } from '@/core/theme-utils'
 import { flattenTokens, deriveColorVariants } from '@/core/theme-utils'
 
 type ScaleCategory = Exclude<keyof DesignTokens, 'colors' | 'focusRing'>
 
-const props = withDefaults(
-  defineProps<{
-    themeConfig?: ThemeVarsConfig
-  }>(),
-  {
-    themeConfig: undefined,
-  },
-)
+const props = withDefaults(defineProps<ConfigProviderProps>(), {
+  themeConfig: undefined,
+})
 
 const containerRef = ref<HTMLElement>()
 

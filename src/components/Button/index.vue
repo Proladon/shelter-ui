@@ -21,7 +21,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { ButtonProps, ButtonEmits } from './types'
-import Spinner from '@/components/Spinner/index.vue'
+import Spinner from '@/components/Spinner'
+import { resolveTypeVar } from '@/composables/resolveTypeVar'
 
 const props = withDefaults(defineProps<ButtonProps>(), {
   type: 'default',
@@ -60,13 +61,7 @@ const sizeMap: Record<string, string> = {
 
 const sizeClass = computed(() => sizeMap[props.size] ?? 'sh-size-md')
 
-const spinnerColor = computed(() => {
-  if (props.type === 'default') return 'var(--sh-text-base)'
-  if (['success', 'warning', 'danger', 'info'].includes(props.type)) {
-    return `var(--sh-status-${props.type})`
-  }
-  return `var(--sh-${props.type})`
-})
+const spinnerColor = resolveTypeVar(() => props.type)
 </script>
 
 <style scoped lang="postcss">

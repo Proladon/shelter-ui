@@ -46,9 +46,9 @@ export interface ChatInputProps {
 }
 
 export interface ChatInputEmits {
-  (e: 'update:value', value: string): void
-  (e: 'submit', value: string): void
-  (e: 'fileSelect', files: FileList): void
-  (e: 'imageSelect', files: FileList): void
-  (e: 'pressEnter', event: KeyboardEvent): void
+  'update:value': [value: string]
+  submit: [value: string]
+  fileSelect: [files: FileList]
+  imageSelect: [files: FileList]
+  pressEnter: [event: KeyboardEvent]
 }

@@ -1,9 +1,6 @@
-import Radio from './index.vue'
-import RadioGroup from './RadioGroup.vue'
-
-export default Radio
-export { RadioGroup }
-export type {
+import SHRadio from './index.vue'
+import SHRadioGroup from './RadioGroup.vue'
+import type {
   RadioProps,
   RadioSlots,
   RadioEmits,
@@ -11,3 +8,14 @@ export type {
   RadioGroupEmits,
   RadioOption,
 } from './types'
+
+export { SHRadio, SHRadioGroup }
+export type {
+  RadioProps,
+  RadioSlots,
+  RadioEmits,
+  RadioGroupProps,
+  RadioGroupEmits,
+  RadioOption,
+}
+export default SHRadio

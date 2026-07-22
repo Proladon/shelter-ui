@@ -1,4 +1,4 @@
-export { default as Pagination } from "./index.vue"
+export { default as SHPagination } from "./index.vue"
 export type {
   PaginationProps,
   PaginationEmits,

@@ -25,7 +25,7 @@ export interface ChatMessageProps {
 }
 
 export interface ChatMessageEmits {
-  (e: 'copy', content: string): void
+  copy: [content: string]
 }
 
 export interface ChatMessageSlots {

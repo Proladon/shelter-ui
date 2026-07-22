@@ -37,7 +37,3 @@ export interface TagSlots {
    */
   icon: () => any
 }
-
-export interface TagEmits {
-  // Tag 組件通常不需要發出事件，主要用於顯示
-}

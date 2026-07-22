@@ -17,7 +17,8 @@ import {
 } from 'reka-ui'
 import { IconChevronDown, IconCheck, IconX } from '@tabler/icons-vue'
 import type { SelectProps, SelectEmits, SelectOption } from './types'
-import Spinner from '@/components/Spinner/index.vue'
+import Spinner from '@/components/Spinner'
+import { useComponentSize } from '@/composables/useComponentSize'
 
 defineOptions({
   name: 'SHSelect',
@@ -156,12 +157,14 @@ const wrapperStyle = computed(() => {
     width: typeof props.width === 'number' ? `${props.width}px` : props.width,
   }
 })
+
+const sizeClass = useComponentSize('sh-select', () => props.size)
 </script>
 
 <template>
   <div
     class="sh-select-wrapper"
-    :class="`sh-select--${size}`"
+    :class="sizeClass"
     :style="wrapperStyle"
   >
     <ComboboxRoot

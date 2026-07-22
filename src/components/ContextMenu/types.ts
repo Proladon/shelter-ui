@@ -61,8 +61,8 @@ export interface ContextMenuProps {
 }
 
 export interface ContextMenuEmits {
-  (e: 'item-click', item: ContextMenuItemOption): void
-  (e: 'checkbox-change', item: ContextMenuItemOption, checked: boolean): void
-  (e: 'radio-change', value: string | number): void
-  (e: 'update:value', value: string | number): void
+  'item-click': [item: ContextMenuItemOption]
+  'checkbox-change': [item: ContextMenuItemOption, checked: boolean]
+  'radio-change': [value: string | number]
+  'update:value': [value: string | number]
 }

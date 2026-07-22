@@ -2,7 +2,7 @@
   <span class="sh-status-tag" :style="textStyle">
     <!-- Status indicator: spinner or dot -->
     <span class="sh-status-tag__indicator">
-      <Spinner v-if="loading" :color="`var(--sh-${typeVar})`" :size="10" />
+      <Spinner v-if="loading" :color="typeVar" :size="10" />
       <span v-else class="sh-status-tag__dot" :style="dotStyle" />
     </span>
 
@@ -15,8 +15,9 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import type { StatusTagProps } from './types'
-import Spinner from '@/components/Spinner/index.vue'
+import type { StatusTagProps, StatusTagSlots } from './types'
+import Spinner from '@/components/Spinner'
+import { resolveTypeVar } from '@/composables/resolveTypeVar'
 
 defineOptions({ name: 'SHStatusTag' })
 
@@ -26,23 +27,16 @@ const props = withDefaults(defineProps<StatusTagProps>(), {
   loading: false,
 })
 
-// Maps type to the CSS variable key prefix
-const cssVarMap: Record<string, string> = {
-  primary: 'primary',
-  success: 'status-success',
-  warning: 'status-warning',
-  danger: 'status-danger',
-  info: 'status-info',
-}
+defineSlots<StatusTagSlots>()
 
-const typeVar = computed(() => cssVarMap[props.type] ?? 'primary')
+const typeVar = resolveTypeVar(() => props.type)
 
 const dotStyle = computed(() => ({
-  backgroundColor: `var(--sh-${typeVar.value})`,
+  backgroundColor: typeVar.value,
 }))
 
 const textStyle = computed(() => ({
-  color: `var(--sh-${typeVar.value})`,
+  color: typeVar.value,
 }))
 </script>
 

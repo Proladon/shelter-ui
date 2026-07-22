@@ -32,6 +32,7 @@ import type {
   NotificationConfig,
   NotificationInstance,
 } from './types'
+import { notificationApiKey } from './context'
 import SHNotification from './Notification.vue'
 
 defineOptions({
@@ -100,7 +101,7 @@ const notificationApi: NotificationApi = {
 }
 
 // 注入 API
-provide('notificationApi', notificationApi)
+provide(notificationApiKey, notificationApi)
 
 // 計算容器樣式
 const containerStyle = computed(() => {

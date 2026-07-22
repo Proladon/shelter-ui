@@ -6,5 +6,5 @@ export interface BaseContainerProps {
 }
 
 export interface BaseContainerEmits {
-  (e: 'click', event: MouseEvent): void
+  click: [event: MouseEvent]
 }

@@ -48,8 +48,8 @@ export interface CalendarProps {
 }
 
 export interface CalendarEmits {
-  (event: 'update:value', value: DateValue | DateValue[] | undefined): void
-  (event: 'update:placeholder', value: DateValue): void
+  'update:value': [value: DateValue | DateValue[] | undefined]
+  'update:placeholder': [value: DateValue]
 }
 
 export interface CalendarExpose {

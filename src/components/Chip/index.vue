@@ -39,7 +39,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { IconX } from '@tabler/icons-vue'
-import type { ChipProps, ChipEmits } from './types'
+import type { ChipProps, ChipEmits, ChipSlots } from './types'
 
 defineOptions({
   name: 'SHChip',
@@ -53,6 +53,7 @@ const props = withDefaults(defineProps<ChipProps>(), {
 })
 
 const emit = defineEmits<ChipEmits>()
+defineSlots<ChipSlots>()
 
 const visible = ref(true)
 const XIcon = IconX
