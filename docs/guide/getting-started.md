@@ -40,7 +40,7 @@ app.mount('#app')
 ```vue
 <template>
   <SHButton @click="handleClick">點擊我</SHButton>
-  <SHInput v-model="value" placeholder="請輸入內容" />
+  <SHInput v-model:value="value" placeholder="請輸入內容" />
 </template>
 
 <script setup lang="ts">

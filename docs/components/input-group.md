@@ -21,19 +21,19 @@ InputGroup 將輸入框與前置 / 後置附加元素（文字、按鈕、圖示
     <!-- 前綴附加 -->
     <SHInputGroup>
       <SHInputGroupAddon>https://</SHInputGroupAddon>
-      <SHInput v-model="url" placeholder="example.com" />
+      <SHInput v-model:value="url" placeholder="example.com" />
     </SHInputGroup>
 
     <!-- 後綴附加 -->
     <SHInputGroup>
-      <SHInput v-model="email" placeholder="username" />
+      <SHInput v-model:value="email" placeholder="username" />
       <SHInputGroupAddon>@example.com</SHInputGroupAddon>
     </SHInputGroup>
 
     <!-- 前後雙附加 -->
     <SHInputGroup>
       <SHInputGroupAddon>$</SHInputGroupAddon>
-      <SHInput v-model="price" placeholder="0.00" />
+      <SHInput v-model:value="price" placeholder="0.00" />
       <SHInputGroupAddon>USD</SHInputGroupAddon>
     </SHInputGroup>
   </div>
@@ -65,14 +65,14 @@ const price = ref('')
   <div class="flex flex-col gap-4 max-w-md">
     <!-- 輸入框 + 按鈕 -->
     <SHInputGroup>
-      <SHInput v-model="search" placeholder="Search..." />
+      <SHInput v-model:value="search" placeholder="Search..." />
       <SHButton type="primary">Search</SHButton>
     </SHInputGroup>
 
     <!-- 按鈕 + 輸入框 -->
     <SHInputGroup>
       <SHButton type="default">Browse</SHButton>
-      <SHInput v-model="path" placeholder="/path/to/file" />
+      <SHInput v-model:value="path" placeholder="/path/to/file" />
     </SHInputGroup>
   </div>
 </template>
@@ -116,7 +116,7 @@ const path = ref('')
         <path d="m21 21-4.35-4.35" />
       </svg>
     </SHInputGroupAddon>
-    <SHInput v-model="keyword" placeholder="Search by keyword..." />
+    <SHInput v-model:value="keyword" placeholder="Search by keyword..." />
   </SHInputGroup>
 </template>
 

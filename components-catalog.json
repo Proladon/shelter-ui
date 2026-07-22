@@ -15,7 +15,7 @@
             ],
             "props": [
                 {
-                    "name": "modelValue",
+                    "name": "value",
                     "type": "string",
                     "default": null,
                     "description": "當前選中按鈕的值（支持 v-model）"
@@ -29,7 +29,7 @@
             ],
             "events": [
                 {
-                    "name": "update:modelValue",
+                    "name": "update:value",
                     "payload": "string",
                     "description": "選中按鈕變化時觸發，用於 v-model"
                 },
@@ -76,7 +76,7 @@
             "subComponents": [],
             "props": [
                 {
-                    "name": "open",
+                    "name": "value",
                     "type": "boolean",
                     "default": null,
                     "description": "控制對話框是否顯示（v-model）"
@@ -126,7 +126,7 @@
             ],
             "events": [
                 {
-                    "name": "update:open",
+                    "name": "update:value",
                     "payload": "boolean",
                     "description": "對話框開關狀態變化時觸發"
                 },
@@ -425,7 +425,7 @@
             "subComponents": [],
             "props": [
                 {
-                    "name": "modelValue",
+                    "name": "value",
                     "type": "DateValue | DateValue[] | DateRange | null",
                     "default": null,
                     "description": "選中的日期值（v-model）"
@@ -553,7 +553,7 @@
             ],
             "events": [
                 {
-                    "name": "update:modelValue",
+                    "name": "update:value",
                     "payload": "DateValue | DateValue[] | DateRange | null",
                     "description": "選中值變化時觸發"
                 },
@@ -572,7 +572,7 @@
             "subComponents": [],
             "props": [
                 {
-                    "name": "modelValue",
+                    "name": "value",
                     "type": "number",
                     "default": 0,
                     "description": "當前輪播索引（v-model）"
@@ -646,7 +646,7 @@
             ],
             "events": [
                 {
-                    "name": "update:modelValue",
+                    "name": "update:value",
                     "payload": "number",
                     "description": "當前索引變化時觸發"
                 },
@@ -703,7 +703,7 @@
             "subComponents": [],
             "props": [
                 {
-                    "name": "modelValue",
+                    "name": "value",
                     "type": "string",
                     "default": "''",
                     "description": "輸入內容（v-model）"
@@ -771,7 +771,7 @@
             ],
             "events": [
                 {
-                    "name": "update:modelValue",
+                    "name": "update:value",
                     "payload": "string",
                     "description": "輸入內容變化時觸發"
                 },
@@ -991,7 +991,7 @@
             "subComponents": [],
             "props": [
                 {
-                    "name": "modelValue",
+                    "name": "value",
                     "type": "any[]",
                     "default": "[]",
                     "description": "選中值的陣列（v-model）"
@@ -1047,7 +1047,7 @@
             ],
             "events": [
                 {
-                    "name": "update:modelValue",
+                    "name": "update:value",
                     "payload": "any[]",
                     "description": "選中值變化時觸發"
                 },
@@ -1131,13 +1131,13 @@
             "subComponents": [],
             "props": [
                 {
-                    "name": "open",
+                    "name": "value",
                     "type": "boolean",
                     "default": null,
                     "description": "控制展開狀態（受控模式）"
                 },
                 {
-                    "name": "defaultOpen",
+                    "name": "defaultValue",
                     "type": "boolean",
                     "default": false,
                     "description": "默認展開狀態（非受控模式）"
@@ -1175,7 +1175,7 @@
             ],
             "events": [
                 {
-                    "name": "update:open",
+                    "name": "update:value",
                     "payload": "boolean",
                     "description": "展開狀態變化時觸發"
                 }
@@ -1247,7 +1247,7 @@
                     "description": "觸發區域的 CSS class"
                 },
                 {
-                    "name": "radioValue",
+                    "name": "value",
                     "type": "string | number",
                     "default": null,
                     "description": "單選群組的當前值"
@@ -1276,7 +1276,7 @@
                     "description": "單選項目變化時觸發"
                 },
                 {
-                    "name": "update:radioValue",
+                    "name": "update:value",
                     "payload": "string | number",
                     "description": "單選值變化時觸發"
                 }
@@ -1295,7 +1295,7 @@
             "subComponents": [],
             "props": [
                 {
-                    "name": "modelValue",
+                    "name": "value",
                     "type": "DateValue | DateRange | null",
                     "default": null,
                     "description": "選中的日期值（v-model）"
@@ -1381,7 +1381,7 @@
             ],
             "events": [
                 {
-                    "name": "update:modelValue",
+                    "name": "update:value",
                     "payload": "DateValue | DateRange | null",
                     "description": "日期變化時觸發"
                 },
@@ -1445,13 +1445,13 @@
                     "description": "對話框寬度"
                 },
                 {
-                    "name": "open",
+                    "name": "value",
                     "type": "boolean",
                     "default": null,
                     "description": "控制是否顯示（受控模式）"
                 },
                 {
-                    "name": "defaultOpen",
+                    "name": "defaultValue",
                     "type": "boolean",
                     "default": false,
                     "description": "默認開啟狀態（非受控模式）"
@@ -1471,12 +1471,12 @@
             ],
             "events": [
                 {
-                    "name": "update:open",
+                    "name": "update:value",
                     "payload": "boolean",
                     "description": "開關狀態變化時觸發"
                 },
                 {
-                    "name": "openChange",
+                    "name": "valueChange",
                     "payload": "boolean",
                     "description": "開關狀態變化時觸發"
                 }
@@ -1583,7 +1583,7 @@
             "subComponents": [],
             "props": [
                 {
-                    "name": "modelValue",
+                    "name": "value",
                     "type": "FileUploadFile[]",
                     "default": "[]",
                     "description": "已選檔案列表（v-model）"
@@ -1627,7 +1627,7 @@
             ],
             "events": [
                 {
-                    "name": "update:modelValue",
+                    "name": "update:value",
                     "payload": "FileUploadFile[]",
                     "description": "檔案列表變化時觸發"
                 },
@@ -1733,7 +1733,7 @@
             "subComponents": [],
             "props": [
                 {
-                    "name": "modelValue",
+                    "name": "value",
                     "type": "string | number",
                     "default": "''",
                     "description": "輸入值（v-model）"
@@ -1789,7 +1789,7 @@
             ],
             "events": [
                 {
-                    "name": "update:modelValue",
+                    "name": "update:value",
                     "payload": "string | number",
                     "description": "值變化時觸發"
                 },
@@ -1887,7 +1887,7 @@
             "subComponents": [],
             "props": [
                 {
-                    "name": "modelValue",
+                    "name": "value",
                     "type": "string",
                     "default": "''",
                     "description": "輸入值（v-model）"
@@ -1955,7 +1955,7 @@
             ],
             "events": [
                 {
-                    "name": "update:modelValue",
+                    "name": "update:value",
                     "payload": "string",
                     "description": "值變化時觸發"
                 },
@@ -2069,7 +2069,7 @@
             "subComponents": [],
             "props": [
                 {
-                    "name": "modelValue",
+                    "name": "value",
                     "type": "number",
                     "default": null,
                     "description": "數值（v-model）"
@@ -2131,7 +2131,7 @@
             ],
             "events": [
                 {
-                    "name": "update:modelValue",
+                    "name": "update:value",
                     "payload": "number",
                     "description": "值變化時觸發"
                 }
@@ -2154,7 +2154,7 @@
             "subComponents": [],
             "props": [
                 {
-                    "name": "modelValue",
+                    "name": "value",
                     "type": "number",
                     "default": 1,
                     "description": "當前頁碼（v-model）"
@@ -2228,7 +2228,7 @@
             ],
             "events": [
                 {
-                    "name": "update:modelValue",
+                    "name": "update:value",
                     "payload": "number",
                     "description": "頁碼變化時觸發"
                 },
@@ -2253,7 +2253,7 @@
             "subComponents": [],
             "props": [
                 {
-                    "name": "modelValue",
+                    "name": "value",
                     "type": "string[]",
                     "default": null,
                     "description": "各格的值陣列（v-model）"
@@ -2303,7 +2303,7 @@
             ],
             "events": [
                 {
-                    "name": "update:modelValue",
+                    "name": "update:value",
                     "payload": "string[]",
                     "description": "值變化時觸發"
                 },
@@ -2327,13 +2327,13 @@
             "subComponents": [],
             "props": [
                 {
-                    "name": "open",
+                    "name": "value",
                     "type": "boolean",
                     "default": null,
                     "description": "控制是否顯示（受控模式）"
                 },
                 {
-                    "name": "defaultOpen",
+                    "name": "defaultValue",
                     "type": "boolean",
                     "default": false,
                     "description": "默認開啟狀態（非受控模式）"
@@ -2377,12 +2377,12 @@
             ],
             "events": [
                 {
-                    "name": "update:open",
+                    "name": "update:value",
                     "payload": "boolean",
                     "description": "開關狀態變化時觸發"
                 },
                 {
-                    "name": "openChange",
+                    "name": "valueChange",
                     "payload": "boolean",
                     "description": "開關狀態變化時觸發"
                 }
@@ -2409,7 +2409,7 @@
             "subComponents": [],
             "props": [
                 {
-                    "name": "modelValue",
+                    "name": "value",
                     "type": "number | null",
                     "default": null,
                     "description": "當前進度值（v-model）"
@@ -2447,14 +2447,9 @@
             ],
             "events": [
                 {
-                    "name": "update",
+                    "name": "update:value",
                     "payload": "number",
                     "description": "進度值更新時觸發"
-                },
-                {
-                    "name": "update:max",
-                    "payload": "number",
-                    "description": "最大值更新時觸發"
                 }
             ],
             "slots": [
@@ -2567,7 +2562,7 @@
             "subComponents": [],
             "props": [
                 {
-                    "name": "modelValue",
+                    "name": "value",
                     "type": "any",
                     "default": null,
                     "description": "選中值（v-model）"
@@ -2623,7 +2618,7 @@
             ],
             "events": [
                 {
-                    "name": "update:modelValue",
+                    "name": "update:value",
                     "payload": "any",
                     "description": "值變化時觸發"
                 },
@@ -2709,7 +2704,7 @@
             "subComponents": [],
             "props": [
                 {
-                    "name": "modelValue",
+                    "name": "value",
                     "type": "any | any[]",
                     "default": null,
                     "description": "選中值（v-model）"
@@ -2807,7 +2802,7 @@
             ],
             "events": [
                 {
-                    "name": "update:modelValue",
+                    "name": "update:value",
                     "payload": "any | any[]",
                     "description": "值變化時觸發"
                 },
@@ -2873,7 +2868,7 @@
             "subComponents": [],
             "props": [
                 {
-                    "name": "modelValue",
+                    "name": "value",
                     "type": "number[]",
                     "default": null,
                     "description": "滑桿值陣列（v-model），單值用 [n]，範圍用 [min, max]"
@@ -2947,7 +2942,7 @@
             ],
             "events": [
                 {
-                    "name": "update:modelValue",
+                    "name": "update:value",
                     "payload": "number[]",
                     "description": "滑動時觸發"
                 },
@@ -3253,7 +3248,7 @@
             "subComponents": [],
             "props": [
                 {
-                    "name": "modelValue",
+                    "name": "value",
                     "type": "boolean",
                     "default": false,
                     "description": "開關狀態（v-model）"
@@ -3267,7 +3262,7 @@
             ],
             "events": [
                 {
-                    "name": "update:modelValue",
+                    "name": "update:value",
                     "payload": "boolean",
                     "description": "狀態變化時觸發"
                 },
@@ -3443,7 +3438,7 @@
             "subComponents": [],
             "props": [
                 {
-                    "name": "modelValue",
+                    "name": "value",
                     "type": "string | TimeRange | null",
                     "default": null,
                     "description": "選中的時間值（v-model），格式由 format 決定"
@@ -3541,7 +3536,7 @@
             ],
             "events": [
                 {
-                    "name": "update:modelValue",
+                    "name": "update:value",
                     "payload": "string | TimeRange | null",
                     "description": "時間變化時觸發"
                 },
@@ -3584,13 +3579,13 @@
             "subComponents": [],
             "props": [
                 {
-                    "name": "open",
+                    "name": "value",
                     "type": "boolean",
                     "default": null,
                     "description": "控制是否顯示（受控模式）"
                 },
                 {
-                    "name": "defaultOpen",
+                    "name": "defaultValue",
                     "type": "boolean",
                     "default": false,
                     "description": "默認開啟狀態（非受控模式）"
@@ -3640,12 +3635,12 @@
             ],
             "events": [
                 {
-                    "name": "update:open",
+                    "name": "update:value",
                     "payload": "boolean",
                     "description": "開關狀態變化時觸發"
                 },
                 {
-                    "name": "openChange",
+                    "name": "valueChange",
                     "payload": "boolean",
                     "description": "開關狀態變化時觸發"
                 }

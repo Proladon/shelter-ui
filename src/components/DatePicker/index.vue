@@ -63,10 +63,10 @@ const closePopover = () => {
 const singleValue = computed({
   get: () =>
     !props.range
-      ? ((props.modelValue as DateValue | null | undefined) ?? undefined)
+      ? ((props.value as DateValue | null | undefined) ?? undefined)
       : undefined,
   set: (val: DateValue | undefined) => {
-    emit('update:modelValue', val)
+    emit('update:value', val)
     emit('change', val)
     if (val !== undefined) closePopover()
   },
@@ -76,11 +76,11 @@ const singleValue = computed({
 const rangeValue = computed({
   get: () => {
     if (!props.range) return undefined
-    const v = props.modelValue as DateRange | null | undefined
+    const v = props.value as DateRange | null | undefined
     return v ?? ({ start: undefined, end: undefined } as DateRange)
   },
   set: (val: DateRange | undefined) => {
-    emit('update:modelValue', val)
+    emit('update:value', val)
     emit('change', val)
     if (val?.start && val?.end) closePopover()
   },
@@ -112,23 +112,23 @@ const formattedRange = computed(() => {
 /* ── Clear ─────────────────────────────────────────────────────────── */
 const handleClear = (e: MouseEvent) => {
   e.stopPropagation()
-  emit('update:modelValue', undefined)
+  emit('update:value', undefined)
   emit('clear')
 }
 
 const hasValue = computed(() => {
   if (props.range) {
-    const v = props.modelValue as DateRange | null | undefined
+    const v = props.value as DateRange | null | undefined
     return !!(v?.start || v?.end)
   }
-  return props.modelValue != null
+  return props.value != null
 })
 
 /* ── Expose ────────────────────────────────────────────────────────── */
 const focus = () => {}
 const blur = () => {}
 const clear = () => {
-  emit('update:modelValue', undefined)
+  emit('update:value', undefined)
   emit('clear')
 }
 
@@ -181,7 +181,7 @@ defineExpose({ focus, blur, clear })
         <!-- ── Single date calendar ─────────────────────────────── -->
         <template v-if="!range">
           <SHCalendar
-            :model-value="singleValue"
+            :value="singleValue"
             :locale="locale"
             :disabled="disabled"
             :readonly="readonly"
@@ -192,7 +192,7 @@ defineExpose({ focus, blur, clear })
             :weekday-format="weekdayFormat"
             :fixed-weeks="fixedWeeks"
             :default-placeholder="defaultPlaceholder"
-            @update:model-value="
+            @update:value="
               (v: DateValue | DateValue[] | undefined) =>
                 (singleValue = v as DateValue | undefined)
             "

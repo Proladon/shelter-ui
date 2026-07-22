@@ -1,6 +1,10 @@
 <template>
   <div class="demo-container">
-    <TimePicker v-model="timeRange" :range="true" placeholder="選擇時間範圍" />
+    <TimePicker
+      v-model:value="timeRange"
+      :range="true"
+      placeholder="選擇時間範圍"
+    />
     <p class="demo-result">
       選中的範圍:
       {{

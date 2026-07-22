@@ -1,7 +1,7 @@
 <template>
   <div class="max-w-lg">
     <SHChatInput
-      v-model="message"
+      v-model:value="message"
       placeholder="詢問 AI 任何問題…"
       :submit-loading="loading"
       @submit="handleSubmit"

@@ -2,7 +2,7 @@
   <div class="flex gap-3 flex-wrap">
     <!-- Danger (Delete) -->
     <AlertDialog
-      v-model:open="dangerOpen"
+      v-model:value="dangerOpen"
       type="danger"
       title="確認刪除"
       description="此操作無法復原，刪除後資料將永久消失，確定要繼續嗎？"
@@ -19,7 +19,7 @@
 
     <!-- Warning -->
     <AlertDialog
-      v-model:open="warningOpen"
+      v-model:value="warningOpen"
       type="warning"
       title="注意"
       description="此操作將重置所有設定為預設值，確定要繼續嗎？"
@@ -35,7 +35,7 @@
 
     <!-- Info -->
     <AlertDialog
-      v-model:open="infoOpen"
+      v-model:value="infoOpen"
       type="info"
       title="提示"
       description="您即將離開目前頁面，未儲存的變更將會遺失。"
@@ -52,7 +52,7 @@
 
     <!-- Success -->
     <AlertDialog
-      v-model:open="successOpen"
+      v-model:value="successOpen"
       type="success"
       title="發布確認"
       description="確定要發布此版本？發布後將對所有用戶生效。"

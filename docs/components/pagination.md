@@ -17,7 +17,7 @@ title: Pagination 分頁
 
 ```vue
 <template>
-  <SHPagination v-model="currentPage" :total="100" :page-size="10" />
+  <SHPagination v-model:value="currentPage" :total="100" :page-size="10" />
 </template>
 
 <script setup>
@@ -42,7 +42,7 @@ const currentPage = ref(1)
 ```vue
 <template>
   <SHPagination
-    v-model="currentPage"
+    v-model:value="currentPage"
     :total="500"
     :page-size="20"
     :sibling-count="1"
@@ -71,7 +71,7 @@ const currentPage = ref(5)
 
 ```vue
 <template>
-  <SHPagination v-model="currentPage" :total="1000" :page-size="25">
+  <SHPagination v-model:value="currentPage" :total="1000" :page-size="25">
     <template #info="{ current, pageSize, totalItems }">
       <span class="text-sm text-gray-600">
         第 {{ (current - 1) * pageSize + 1 }}-{{
@@ -107,7 +107,7 @@ const currentPage = ref(3)
   <div class="space-y-6">
     <!-- 小尺寸 -->
     <SHPagination
-      v-model="smallPage"
+      v-model:value="smallPage"
       :total="100"
       :page-size="10"
       size="small"
@@ -115,7 +115,7 @@ const currentPage = ref(3)
 
     <!-- 默認尺寸 -->
     <SHPagination
-      v-model="defaultPage"
+      v-model:value="defaultPage"
       :total="100"
       :page-size="10"
       size="default"
@@ -123,7 +123,7 @@ const currentPage = ref(3)
 
     <!-- 大尺寸 -->
     <SHPagination
-      v-model="largePage"
+      v-model:value="largePage"
       :total="100"
       :page-size="10"
       size="large"
@@ -156,17 +156,17 @@ const largePage = ref(1)
 <template>
   <div class="space-y-4">
     <!-- 文字按鈕 -->
-    <SHPagination v-model="currentPage" :total="100" :page-size="10" text />
+    <SHPagination v-model:value="currentPage" :total="100" :page-size="10" text />
 
     <!-- 外框按鈕 -->
-    <SHPagination v-model="currentPage" :total="100" :page-size="10" outline />
+    <SHPagination v-model:value="currentPage" :total="100" :page-size="10" outline />
 
     <!-- 幽靈按鈕 -->
-    <SHPagination v-model="currentPage" :total="100" :page-size="10" ghost />
+    <SHPagination v-model:value="currentPage" :total="100" :page-size="10" ghost />
 
     <!-- 組合樣式 -->
     <SHPagination
-      v-model="currentPage"
+      v-model:value="currentPage"
       :total="100"
       :page-size="10"
       text
@@ -196,7 +196,7 @@ const currentPage = ref(3)
 
 ```vue
 <template>
-  <SHPagination v-model="currentPage" :total="100" :page-size="10" disabled />
+  <SHPagination v-model:value="currentPage" :total="100" :page-size="10" disabled />
 </template>
 
 <script setup>
@@ -215,7 +215,7 @@ const currentPage = ref(2)
 
 | 屬性名       | 類型                              | 預設值      | 說明                       |
 | ------------ | --------------------------------- | ----------- | -------------------------- |
-| modelValue   | `number`                          | `1`         | 當前頁數，支持 v-model     |
+| value        | `number`                          | `1`         | 當前頁數，支持 v-model:value |
 | total        | `number`                          | —           | 總項目數量                 |
 | pageSize     | `number`                          | `10`        | 每頁項目數量               |
 | siblingCount | `number`                          | `2`         | 當前頁面附近顯示的頁碼數量 |
@@ -233,7 +233,7 @@ const currentPage = ref(2)
 
 | 事件名            | 參數             | 說明           |
 | ----------------- | ---------------- | -------------- |
-| update:modelValue | `(page: number)` | 頁數變更時觸發 |
+| update:value      | `(page: number)` | 頁數變更時觸發 |
 | change            | `(page: number)` | 頁數變更時觸發 |
 
 ### Slots

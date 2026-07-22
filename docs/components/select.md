@@ -246,7 +246,7 @@ const options = [
 
 | 屬性            | 類型                                               | 默認值         | 說明               |
 | --------------- | -------------------------------------------------- | -------------- | ------------------ |
-| `modelValue`    | `string \| number \| (string \| number)[]`         | `undefined`    | 綁定值             |
+| `value`         | `string \| number \| (string \| number)[]`         | `undefined`    | 綁定值             |
 | `options`       | `SelectOption[]`                                   | `[]`           | 選項數據           |
 | `disabled`      | `boolean`                                          | `false`        | 是否禁用           |
 | `clearable`     | `boolean`                                          | `false`        | 是否可清空         |
@@ -278,7 +278,7 @@ interface SelectOption {
 
 | 事件名              | 類型                                                        | 說明                     |
 | ------------------- | ----------------------------------------------------------- | ------------------------ |
-| `update:modelValue` | `(value: string \| number \| (string \| number)[]) => void` | 值更新時觸發             |
+| `update:value`      | `(value: string \| number \| (string \| number)[]) => void` | 值更新時觸發             |
 | `change`            | `(value: string \| number \| (string \| number)[]) => void` | 值改變時觸發             |
 | `focus`             | `(event: FocusEvent) => void`                               | 獲得焦點時觸發           |
 | `blur`              | `(event: FocusEvent) => void`                               | 失去焦點時觸發           |

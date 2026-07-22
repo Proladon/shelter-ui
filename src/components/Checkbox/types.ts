@@ -51,7 +51,7 @@ export interface CheckboxGroupProps {
   /**
    * 當前選中的值陣列
    */
-  modelValue?: any[]
+  value?: any[]
   /**
    * 選項陣列
    */
@@ -135,7 +135,7 @@ export interface CheckboxGroupEmits {
   /**
    * 更新模型值
    */
-  "update:modelValue": [value: any[]]
+  "update:value": [value: any[]]
   /**
    * 值變更事件
    */

@@ -4,7 +4,7 @@
     <div class="mb-4">
       <span class="demo-label">值：{{ tooltipValue[0] }}</span>
       <Slider
-        v-model="tooltipValue"
+        v-model:value="tooltipValue"
         :show-tooltip="true"
         :format-tooltip="(value) => `${value}%`"
         :min="0"

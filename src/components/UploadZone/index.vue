@@ -179,7 +179,7 @@ import type { UploadZoneProps, UploadZoneEmits, UploadZoneFile } from './types'
 defineOptions({ name: 'SHUploadZone' })
 
 const props = withDefaults(defineProps<UploadZoneProps>(), {
-  modelValue: () => [],
+  value: () => [],
   accept: undefined,
   multiple: false,
   disabled: false,
@@ -200,7 +200,7 @@ defineSlots<{
 const inputRef = ref<HTMLInputElement | null>(null)
 const isDragOver = ref(false)
 
-const fileList = computed(() => props.modelValue ?? [])
+const fileList = computed(() => props.value ?? [])
 const hasFiles = computed(() => fileList.value.length > 0)
 
 // ─── Computed helpers ──────────────────────────────────────────────
@@ -317,7 +317,7 @@ function addFiles(rawFiles: File[]) {
 
   const updated = props.multiple ? [...fileList.value, ...newFiles] : newFiles
 
-  emit('update:modelValue', updated)
+  emit('update:value', updated)
   emit('change', updated)
 }
 
@@ -326,7 +326,7 @@ function removeFile(target: UploadZoneFile) {
   if (target.previewUrl) URL.revokeObjectURL(target.previewUrl)
 
   const updated = fileList.value.filter((f) => f.id !== target.id)
-  emit('update:modelValue', updated)
+  emit('update:value', updated)
   emit('remove', target)
 }
 

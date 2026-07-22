@@ -1,11 +1,31 @@
 <template>
-  <SwitchRoot class="shelter-switch-root">
+  <SwitchRoot
+    class="shelter-switch-root"
+    :model-value="value"
+    :disabled="disabled"
+    @update:model-value="handleUpdate"
+  >
     <SwitchThumb class="shelter-switch-thumb" />
   </SwitchRoot>
 </template>
 
 <script setup lang="ts">
 import { SwitchRoot, SwitchThumb } from 'reka-ui'
+import type { SwitchProps, SwitchEmits } from './types'
+
+defineOptions({ name: 'SHSwitch' })
+
+withDefaults(defineProps<SwitchProps>(), {
+  value: false,
+  disabled: false,
+})
+
+const emit = defineEmits<SwitchEmits>()
+
+const handleUpdate = (value: boolean) => {
+  emit('update:value', value)
+  emit('change', value)
+}
 </script>
 
 <style scoped lang="postcss">
@@ -16,6 +36,7 @@ import { SwitchRoot, SwitchThumb } from 'reka-ui'
   @apply dark:data-[state=unchecked]:(bg-bg.primary.lighten) dark:data-[state=checked]:(bg-primary);
   @apply border-bg.secondary data-[state=checked]:(border-border.base) dark:(border-border.base);
   @apply focus-within:outline-none;
+  @apply data-[disabled]:(opacity-60 cursor-not-allowed);
   &:focus-within {
     box-shadow: 0 0 0 2px var(--sh-primary-fade);
   }

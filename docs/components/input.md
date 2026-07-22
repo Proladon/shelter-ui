@@ -17,7 +17,7 @@ Input 輸入框組件用於接收用戶的文本輸入，支持多種功能如�
 
 ```vue
 <template>
-  <SHInput v-model="inputValue" placeholder="Please input..." />
+  <SHInput v-model:value="inputValue" placeholder="Please input..." />
 </template>
 
 <script setup>
@@ -42,7 +42,7 @@ const inputValue = ref('')
 ```vue
 <template>
   <SHInput
-    v-model="inputValue"
+    v-model:value="inputValue"
     placeholder="Hover to see clear button"
     clearable
   />
@@ -69,7 +69,7 @@ const inputValue = ref('This text can be cleared')
 
 ```vue
 <template>
-  <SHInput v-model="inputValue" placeholder="Disabled input" disabled />
+  <SHInput v-model:value="inputValue" placeholder="Disabled input" disabled />
 </template>
 
 <script setup>
@@ -95,7 +95,7 @@ const inputValue = ref('This input is disabled')
 <template>
   <div>
     <h4>Prefix Slot</h4>
-    <SHInput v-model="userInput" placeholder="Enter username">
+    <SHInput v-model:value="userInput" placeholder="Enter username">
       <template #prefix>
         <svg class="icon"><!-- User icon SVG --></svg>
       </template>
@@ -103,7 +103,7 @@ const inputValue = ref('This input is disabled')
 
     <h4>Suffix Slot</h4>
     <SHInput
-      v-model="passwordInput"
+      v-model:value="passwordInput"
       placeholder="Enter password"
       type="password"
     >
@@ -113,7 +113,7 @@ const inputValue = ref('This input is disabled')
     </SHInput>
 
     <h4>Both Slots</h4>
-    <SHInput v-model="searchInput" placeholder="Search..." clearable>
+    <SHInput v-model:value="searchInput" placeholder="Search..." clearable>
       <template #prefix>
         <svg class="icon"><!-- Search icon SVG --></svg>
       </template>
@@ -153,7 +153,7 @@ const searchInput = ref('')
 
 | 屬性名        | 說明                 | 類型               | 默認值   |
 | ------------- | -------------------- | ------------------ | -------- |
-| modelValue    | 綁定值               | `string \| number` | `''`     |
+| value         | 綁定值               | `string \| number` | `''`     |
 | disabled      | 是否禁用             | `boolean`          | `false`  |
 | clearable     | 是否顯示清空按鈕     | `boolean`          | `false`  |
 | placeholder   | 輸入框佔位文本       | `string`           | `''`     |
@@ -167,7 +167,7 @@ const searchInput = ref('')
 
 | 事件名            | 說明                             | 回調參數            |
 | ----------------- | -------------------------------- | ------------------- |
-| update:modelValue | 當輸入值改變時觸發               | `value: string`     |
+| update:value      | 當輸入值改變時觸發               | `value: string`     |
 | input             | 當輸入值改變時觸發               | `value: string`     |
 | change            | 當輸入值改變時觸發（失去焦點時） | `value: string`     |
 | focus             | 當輸入框獲得焦點時觸發           | `event: FocusEvent` |

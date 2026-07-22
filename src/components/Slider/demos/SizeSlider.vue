@@ -4,15 +4,15 @@
     <div class="space-y-4">
       <div>
         <span class="demo-label">小：</span>
-        <Slider v-model="sizeValue" size="small" :min="0" :max="100" />
+        <Slider v-model:value="sizeValue" size="small" :min="0" :max="100" />
       </div>
       <div>
         <span class="demo-label">默認：</span>
-        <Slider v-model="sizeValue" size="default" :min="0" :max="100" />
+        <Slider v-model:value="sizeValue" size="default" :min="0" :max="100" />
       </div>
       <div>
         <span class="demo-label">大：</span>
-        <Slider v-model="sizeValue" size="large" :min="0" :max="100" />
+        <Slider v-model:value="sizeValue" size="large" :min="0" :max="100" />
       </div>
     </div>
   </div>

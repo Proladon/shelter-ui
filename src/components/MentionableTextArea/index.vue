@@ -108,7 +108,7 @@ const emit = defineEmits<MentionableTextAreaEmits>()
 const { contains } = useFilter({ sensitivity: 'base' })
 
 // Internal state
-const internalValue = ref(props.modelValue || '')
+const internalValue = ref(props.value || '')
 const trigger = ref<string | null>(null)
 const caretOffset = ref<number | null>(null)
 const open = ref(false)
@@ -124,7 +124,7 @@ const textareaRef = ref<InstanceType<typeof ComboboxInput>>()
 
 // Watch for external model changes
 watch(
-  () => props.modelValue,
+  () => props.value,
   (newValue) => {
     if (newValue !== internalValue.value) {
       internalValue.value = newValue || ''
@@ -198,7 +198,7 @@ function handleChange(ev: InputEvent) {
 
   if (!_trigger) open.value = false
 
-  emit('update:modelValue', target.value)
+  emit('update:value', target.value)
   emit('change', target.value)
 }
 
@@ -229,7 +229,7 @@ function handleSelect(ev: CustomEvent) {
   const nextCaretOffset = offset + displayValue.length + 1
   caretOffset.value = nextCaretOffset
 
-  emit('update:modelValue', newValue)
+  emit('update:value', newValue)
   emit('change', newValue)
 }
 

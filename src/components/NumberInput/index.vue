@@ -1,6 +1,8 @@
 <template>
   <NumberFieldRoot
-    v-bind="rootProps"
+    :model-value="value"
+    v-bind="delegatedProps"
+    @update:model-value="(v: number) => emits('update:value', v)"
     class="sh-number-input"
     :class="[
       `sh-number-input--${size}`,
@@ -33,7 +35,6 @@ import {
   NumberFieldInput,
   NumberFieldIncrement,
   NumberFieldDecrement,
-  useForwardPropsEmits,
 } from 'reka-ui'
 import type { NumberInputProps, NumberInputEmits } from './types'
 
@@ -53,8 +54,7 @@ const props = withDefaults(defineProps<NumberInputProps>(), {
 
 const emits = defineEmits<NumberInputEmits>()
 
-const delegatedProps = reactiveOmit(props, 'size', 'invalid')
-const rootProps = useForwardPropsEmits(delegatedProps, emits)
+const delegatedProps = reactiveOmit(props, 'size', 'invalid', 'value')
 </script>
 
 <style lang="postcss">

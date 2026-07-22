@@ -24,7 +24,7 @@
       <ContextMenu
         :items="radioMenuItems"
         radio-group="people"
-        :radio-value="selectedPerson"
+        :value="selectedPerson"
         @radio-change="handlePersonChange"
         trigger-content="Right click for radio menu"
       />

@@ -5,7 +5,7 @@ export interface TimeRange {
 
 export interface TimePickerProps {
   /** 綁定的值，單一時間選擇時為 string (HH:mm:ss)，範圍選擇時為 TimeRange */
-  modelValue?: string | TimeRange | null
+  value?: string | TimeRange | null
   /** 是否啟用時間範圍選擇模式，預設為 false */
   range?: boolean
   /** 輸入框佔位符文字 */
@@ -41,7 +41,7 @@ export interface TimePickerProps {
 }
 
 export interface TimePickerEmits {
-  (event: 'update:modelValue', value?: string | TimeRange): void
+  (event: 'update:value', value?: string | TimeRange): void
   (event: 'change', value?: string | TimeRange): void
   (event: 'focus', focusEvent: FocusEvent): void
   (event: 'blur', blurEvent: FocusEvent): void

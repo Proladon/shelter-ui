@@ -13,7 +13,7 @@
 
       <input
         ref="inputRef"
-        :value="modelValue"
+        :value="value"
         :type="type"
         :disabled="disabled"
         :readonly="readonly"
@@ -62,7 +62,7 @@ defineOptions({
 })
 
 const props = withDefaults(defineProps<InputProps>(), {
-  modelValue: '',
+  value: '',
   disabled: false,
   clearable: false,
   placeholder: '',
@@ -80,9 +80,9 @@ const focused = ref(false)
 
 const isEmpty = computed(() => {
   return (
-    props.modelValue === '' ||
-    props.modelValue === undefined ||
-    props.modelValue === null
+    props.value === '' ||
+    props.value === undefined ||
+    props.value === null
   )
 })
 
@@ -106,10 +106,10 @@ const isWordLimitVisible = computed(() => {
 })
 
 const valueLength = computed(() => {
-  if (typeof props.modelValue === 'string') {
-    return props.modelValue.length
-  } else if (typeof props.modelValue === 'number') {
-    return props.modelValue.toString().length
+  if (typeof props.value === 'string') {
+    return props.value.length
+  } else if (typeof props.value === 'number') {
+    return props.value.toString().length
   }
   return 0
 })
@@ -128,7 +128,7 @@ const select = () => {
 
 const handleInput = (event: Event) => {
   const value = (event.target as HTMLInputElement).value
-  emit('update:modelValue', value)
+  emit('update:value', value)
   emit('input', value)
 }
 
@@ -148,7 +148,7 @@ const handleBlur = (event: FocusEvent) => {
 }
 
 const handleClear = () => {
-  emit('update:modelValue', '')
+  emit('update:value', '')
   emit('clear')
 
   // Focus back to input after clearing

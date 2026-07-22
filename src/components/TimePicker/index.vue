@@ -27,7 +27,7 @@
               class="text-text.base"
               v-if="
                 !displayValue ||
-                (!range && !modelValue) ||
+                (!range && !value) ||
                 (range && !rangeValue?.start && !rangeValue?.end)
               "
             />
@@ -475,11 +475,11 @@ const parseTime = (str?: string) => {
 
 const displayValue = computed(() => {
   if (props.range) {
-    const v = props.modelValue as TimeRange
+    const v = props.value as TimeRange
     if (v?.start || v?.end) {
       if (props.use12Hour) {
         // Display in 12h format?
-        // Assuming modelValue is stored as 24h, we want to show it as is or formatted?
+        // Assuming value is stored as 24h, we want to show it as is or formatted?
         // Since native input type="text" is used, we can format it.
         // Let's format it for display if use12Hour is true
         const s = parseTime(v.start)
@@ -498,7 +498,7 @@ const displayValue = computed(() => {
     return ''
   }
 
-  const val = props.modelValue as string
+  const val = props.value as string
   if (props.use12Hour && val) {
     const t = parseTime(val)
     return `${t.h}:${String(t.m).padStart(2, '0')}:${String(t.s).padStart(2, '0')} ${t.ampm}`
@@ -510,7 +510,7 @@ const computedPlaceholder = computed(
   () => props.placeholder || (props.range ? '選擇時間範圍' : '選擇時間'),
 )
 const rangeValue = computed(() =>
-  props.range ? (props.modelValue as TimeRange) : undefined,
+  props.range ? (props.value as TimeRange) : undefined,
 )
 
 const updateModel = () => {
@@ -528,7 +528,7 @@ const updateModel = () => {
       endAmPm.value,
     )
     const newVal = { start: startStr, end: endStr }
-    emit('update:modelValue', newVal)
+    emit('update:value', newVal)
     emit('change', newVal)
   } else {
     const str = formatTime(
@@ -537,7 +537,7 @@ const updateModel = () => {
       startSecond.value,
       startAmPm.value,
     )
-    emit('update:modelValue', str)
+    emit('update:value', str)
     emit('change', str)
   }
 }
@@ -666,7 +666,7 @@ const syncScrollToCurrentValues = () => {
 
 const initValues = () => {
   if (props.range) {
-    const val = props.modelValue as TimeRange
+    const val = props.value as TimeRange
     const s = parseTime(val?.start)
     const e = parseTime(val?.end)
     startHour.value = s.h
@@ -678,7 +678,7 @@ const initValues = () => {
     endSecond.value = e.s
     endAmPm.value = e.ampm
   } else {
-    const val = parseTime(props.modelValue as string)
+    const val = parseTime(props.value as string)
     startHour.value = val.h
     startMinute.value = val.m
     startSecond.value = val.s
@@ -699,7 +699,7 @@ watch(
 )
 
 watch(
-  () => props.modelValue,
+  () => props.value,
   () => {
     if (!isOpen.value) {
       initValues()
@@ -708,7 +708,7 @@ watch(
 )
 
 const handleClear = () => {
-  emit('update:modelValue', props.range ? {} : undefined)
+  emit('update:value', props.range ? {} : undefined)
   emit('change', props.range ? {} : undefined)
   emit('clear')
 }

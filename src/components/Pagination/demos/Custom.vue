@@ -1,7 +1,7 @@
 <template>
   <div class="space-y-4">
     <Pagination
-      v-model="customPage"
+      v-model:value="customPage"
       :total="500"
       :page-size="20"
       :sibling-count="1"

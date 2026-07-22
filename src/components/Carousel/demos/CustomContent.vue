@@ -3,7 +3,7 @@
     <h3>Carousel with Custom Content</h3>
     <div class="demo__content">
       <SHCarousel
-        v-model="currentSlide"
+        v-model:value="currentSlide"
         :items="customItems"
         :show-indicators="false"
         effect="fade"

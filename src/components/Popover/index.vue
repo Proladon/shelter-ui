@@ -16,8 +16,8 @@ defineOptions({
 
 // Props are used in the template
 withDefaults(defineProps<PopoverProps>(), {
-  defaultOpen: undefined,
-  open: undefined,
+  defaultValue: undefined,
+  value: undefined,
   modal: false,
   side: 'top',
   sideOffset: 5,
@@ -29,18 +29,18 @@ withDefaults(defineProps<PopoverProps>(), {
 
 const emit = defineEmits<PopoverEmits>()
 
-const handleOpenChange = (value: boolean) => {
-  emit('update:open', value)
-  emit('openChange', value)
+const handleValueChange = (value: boolean) => {
+  emit('update:value', value)
+  emit('valueChange', value)
 }
 </script>
 
 <template>
   <PopoverRoot
-    :default-open="defaultOpen"
-    :open="open"
+    :default-open="defaultValue"
+    :open="value"
     :modal="modal"
-    @update:open="handleOpenChange"
+    @update:open="handleValueChange"
   >
     <PopoverTrigger :disabled="disabled" class="sh-popover-trigger">
       <slot name="trigger"></slot>

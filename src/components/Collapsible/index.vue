@@ -1,5 +1,11 @@
 <template>
-  <CollapsibleRoot v-bind="rootProps" class="sh-collapsible">
+  <CollapsibleRoot
+    :open="value"
+    :default-open="defaultValue"
+    v-bind="delegatedProps"
+    @update:open="emits('update:value', $event)"
+    class="sh-collapsible"
+  >
     <div
       class="sh-collapsible__header"
       :class="[headerClass, `sh-collapsible__header--${triggerPosition}`]"
@@ -20,24 +26,27 @@
 </template>
 
 <script setup lang="ts">
-import {
-  CollapsibleRoot,
-  CollapsibleTrigger,
-  CollapsibleContent,
-  useForwardPropsEmits,
-} from 'reka-ui'
+import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent } from 'reka-ui'
+import { reactiveOmit } from '@vueuse/core'
 import type { CollapsibleProps, CollapsibleEmits } from './types'
 
 const props = withDefaults(defineProps<CollapsibleProps>(), {
   variant: 'default',
   triggerPosition: 'left',
-  defaultOpen: false,
+  defaultValue: false,
   unmountOnHide: true,
 })
 
 const emits = defineEmits<CollapsibleEmits>()
 
-const rootProps = useForwardPropsEmits(props, emits)
+const delegatedProps = reactiveOmit(
+  props,
+  'value',
+  'defaultValue',
+  'headerClass',
+  'contentClass',
+  'triggerPosition',
+)
 </script>
 
 <style lang="postcss">

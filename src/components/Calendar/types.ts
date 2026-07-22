@@ -3,8 +3,8 @@ import type { DateValue } from '@internationalized/date'
 export type CalendarWeekdayFormat = 'narrow' | 'short' | 'long'
 
 export interface CalendarProps {
-  /** Controlled selected date value. Bind with v-model. */
-  modelValue?: DateValue | DateValue[] | null
+  /** Controlled selected date value. Bind with v-model:value. */
+  value?: DateValue | DateValue[] | null
   /** Whether multiple dates can be selected */
   multiple?: boolean
   /** Whether the calendar is disabled */
@@ -48,7 +48,7 @@ export interface CalendarProps {
 }
 
 export interface CalendarEmits {
-  (event: 'update:modelValue', value: DateValue | DateValue[] | undefined): void
+  (event: 'update:value', value: DateValue | DateValue[] | undefined): void
   (event: 'update:placeholder', value: DateValue): void
 }
 

@@ -1,9 +1,9 @@
 <template>
   <DialogRoot
-    :open="open"
-    :defaultOpen="defaultOpen"
+    :open="value"
+    :defaultOpen="defaultValue"
     :modal="modal"
-    @update:open="handleOpenChange"
+    @update:open="handleValueChange"
   >
     <slot name="trigger" :Dialog="DialogTrigger"></slot>
     <DialogPortal>
@@ -64,8 +64,8 @@ defineOptions({
 const props = withDefaults(defineProps<DialogProps>(), {
   type: 'default',
   width: 400,
-  open: undefined,
-  defaultOpen: undefined,
+  value: undefined,
+  defaultValue: undefined,
   modal: true,
   title: undefined,
   contentClass: undefined,
@@ -74,9 +74,9 @@ const props = withDefaults(defineProps<DialogProps>(), {
 
 const emit = defineEmits<DialogEmits>()
 
-const handleOpenChange = (value: boolean) => {
-  emit('update:open', value)
-  emit('openChange', value)
+const handleValueChange = (value: boolean) => {
+  emit('update:value', value)
+  emit('valueChange', value)
 }
 </script>
 

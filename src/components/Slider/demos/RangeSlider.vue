@@ -5,7 +5,7 @@
       <span class="demo-label"
         >值：{{ rangeValue[0] }} - {{ rangeValue[1] }}</span
       >
-      <Slider v-model="rangeValue" :min="0" :max="100" :step="1" class="mt-2" />
+      <Slider v-model:value="rangeValue" :min="0" :max="100" :step="1" class="mt-2" />
     </div>
   </div>
 </template>

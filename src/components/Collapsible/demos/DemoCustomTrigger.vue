@@ -1,6 +1,6 @@
 <template>
   <div class="demo-section">
-    <Collapsible v-model:open="customOpen">
+    <Collapsible v-model:value="customOpen">
       <template #trigger>
         <div class="custom-trigger">
           <IconInfoCircle :size="20" />

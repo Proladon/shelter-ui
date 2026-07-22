@@ -3,7 +3,7 @@
     <p class="text-[length:var(--sh-font-size-sm)] text-text.primary">
       禁用狀態：
     </p>
-    <SHChatInput v-model="message" placeholder="已停用輸入…" disabled />
+    <SHChatInput v-model:value="message" placeholder="已停用輸入…" disabled />
   </div>
 </template>
 

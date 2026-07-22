@@ -35,7 +35,7 @@ const props = withDefaults(defineProps<RadioGroupProps>(), {
 
 const emit = defineEmits<RadioGroupEmits>()
 
-const modelValue = defineModel<any>()
+const modelValue = defineModel<any>('value')
 
 const radioGroupClasses = computed(() => {
   return {

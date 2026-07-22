@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-4">
-    <Pagination v-model="infoPage" :total="1000" :page-size="25">
+    <Pagination v-model:value="infoPage" :total="1000" :page-size="25">
       <template #info="{ current, pageSize, totalItems }">
         <span class="text-sm text-gray-600">
           第 {{ (current - 1) * pageSize + 1 }}-{{
