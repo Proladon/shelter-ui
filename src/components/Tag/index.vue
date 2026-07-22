@@ -23,6 +23,7 @@ defineOptions({
 const props = withDefaults(defineProps<TagProps>(), {
   value: "",
   type: "primary",
+  size: "medium",
   rounded: false,
   bordered: false,
 })
@@ -31,6 +32,7 @@ const tagClasses = computed(() => {
   return [
     "sh-tag",
     `sh-tag--${props.type}`,
+    `sh-tag--${props.size}`,
     {
       "sh-tag--rounded": props.rounded,
       "sh-tag--bordered": props.bordered,
@@ -45,13 +47,22 @@ const tagClasses = computed(() => {
   @apply rounded;
 }
 
+/* Size 變化（medium 與上方基礎規則相同，為未變更的預設值） */
+.sh-tag--small {
+  @apply px-1.5 py-0.5 text-xs;
+}
+
+.sh-tag--large {
+  @apply px-2.5 py-1.5 text-base;
+}
+
 .sh-tag--rounded {
   @apply rounded-full;
 }
 
 /* Type 變化 */
-.sh-tag--primary {
-  @apply bg-primary.fade text-primary;
+.sh-tag--default {
+  @apply bg-bg.secondary text-text.base;
 }
 
 .sh-tag--primary {
@@ -76,10 +87,10 @@ const tagClasses = computed(() => {
 
 /* Bordered 變化 */
 .sh-tag--bordered {
-  @apply border border-[1px] border-solid;
+  @apply border border-solid;
 
-  &.sh-tag--primary {
-    @apply text-primary border-primary;
+  &.sh-tag--default {
+    @apply text-text.base border-border.base;
   }
 
   &.sh-tag--primary {

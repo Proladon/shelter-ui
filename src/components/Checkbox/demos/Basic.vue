@@ -2,12 +2,12 @@
   <div class="demo">
     <h3>Basic Checkbox</h3>
     <div class="demo__content">
-      <SHCheckbox v-model="checked1" />
+      <SHCheckbox v-model:value="checked1" />
       <p>Checked: {{ checked1 }}</p>
     </div>
 
     <div class="demo__content">
-      <SHCheckbox v-model="checked2" value="option1" />
+      <SHCheckbox v-model:value="checked2" native-value="option1" />
       <p>Value: {{ checked2 }}</p>
     </div>
   </div>

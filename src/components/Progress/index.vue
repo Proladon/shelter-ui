@@ -41,7 +41,7 @@ import { useVModel } from '@vueuse/core'
 
 const props = withDefaults(defineProps<ProgressProps>(), {
   value: null,
-  size: 'default',
+  size: 'medium',
   variant: 'default',
   showText: false,
   max: 100,
@@ -101,11 +101,11 @@ const textPositionClass = computed(
 }
 
 .sh-progress__container {
-  @apply rounded-full w-full overflow-hidden bg-white dark:bg-stone-950 border border-muted;
+  @apply rounded-full w-full overflow-hidden bg-bg.primary border border-border.base;
 }
 
 .sh-progress__indicator {
-  @apply h-full bg-blue-500 rounded-full transition-all duration-300 ease-out;
+  @apply h-full bg-primary rounded-full transition-all duration-300 ease-out;
 }
 
 .sh-progress__indicator--striped {
@@ -138,17 +138,17 @@ const textPositionClass = computed(
 }
 
 .sh-progress__text {
-  @apply text-sm text-gray-600 text-center font-medium;
+  @apply text-sm text-text.primary text-center font-medium;
 }
 
 /* 布局：當文字在左或右時，水平排列 */
 .sh-progress__inner {
-  @apply flex items-center gap-[12px];
+  @apply flex items-center gap-[var(--sh-spacing-md)];
 }
 
 .sh-progress--text-bottom {
   .sh-progress__inner {
-    @apply flex-col gap-[4px];
+    @apply flex-col gap-[var(--sh-spacing-xs)];
   }
 }
 
@@ -162,11 +162,12 @@ const textPositionClass = computed(
 } */
 
 /* 尺寸變化 - 如果沒有自定義 height 才生效 */
+/* thin/default/thick thickness scale is specific to this component, doesn't map to any spacing/component-size token */
 .sh-progress--small .sh-progress__container:not([style*='height']) {
   @apply h-[2px];
 }
 
-.sh-progress--default .sh-progress__container:not([style*='height']) {
+.sh-progress--medium .sh-progress__container:not([style*='height']) {
   @apply h-[6px];
 }
 

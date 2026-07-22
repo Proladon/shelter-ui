@@ -4,7 +4,7 @@ export interface ProgressProps extends ProgressRootProps {
   value?: number | null
   percentage?: number
   max?: number
-  size?: 'small' | 'default' | 'large'
+  size?: 'small' | 'medium' | 'large'
   variant?: 'default' | 'striped' | 'animated'
   showText?: boolean
   formatText?: (value: number | null, max: number) => string

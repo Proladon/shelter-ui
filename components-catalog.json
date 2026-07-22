@@ -2,9 +2,9 @@
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "_meta": {
         "description": "shelter-ui component catalog — machine-readable reference for AI agents. Lists every public component with its purpose, props, events, slots, and exposed methods.",
-        "version": "1.0.0",
+        "version": "2.0.1",
         "generated": "2026-05-03",
-        "importBase": "shelter-ui"
+        "importBase": "@proladon/shelter-ui"
     },
     "components": [
         {
@@ -25,6 +25,12 @@
                     "type": "string",
                     "default": null,
                     "description": "默認選中按鈕的值"
+                },
+                {
+                    "name": "block",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否撐滿容器寬度"
                 }
             ],
             "events": [
@@ -112,7 +118,7 @@
                     "description": "取消按鈕文字"
                 },
                 {
-                    "name": "confirmLoading",
+                    "name": "loading",
                     "type": "boolean",
                     "default": false,
                     "description": "確認按鈕載入狀態"
@@ -357,8 +363,8 @@
                 },
                 {
                     "name": "size",
-                    "type": "'large' | 'default' | 'small'",
-                    "default": "'default'",
+                    "type": "'small' | 'medium' | 'large'",
+                    "default": "'medium'",
                     "description": "按鈕尺寸"
                 },
                 {
@@ -398,10 +404,16 @@
                     "description": "輪廓按鈕樣式"
                 },
                 {
-                    "name": "borderd",
+                    "name": "bordered",
                     "type": "boolean",
                     "default": false,
                     "description": "帶邊框樣式"
+                },
+                {
+                    "name": "block",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否撐滿容器寬度"
                 }
             ],
             "events": [
@@ -739,7 +751,7 @@
                     "description": "是否顯示字數限制"
                 },
                 {
-                    "name": "submitLoading",
+                    "name": "loading",
                     "type": "boolean",
                     "default": false,
                     "description": "送出按鈕是否顯示載入狀態"
@@ -885,16 +897,16 @@
             ],
             "props": [
                 {
-                    "name": "modelValue",
-                    "type": "boolean | 'indeterminate' | null",
+                    "name": "value",
+                    "type": "boolean | 'indeterminate' | null | any[]",
                     "default": null,
-                    "description": "核取方塊的值（v-model）"
+                    "description": "核取方塊的值（v-model:value）；單獨使用時為 boolean，於 CheckboxGroup 中為選中值陣列"
                 },
                 {
-                    "name": "value",
+                    "name": "nativeValue",
                     "type": "any",
                     "default": null,
-                    "description": "在 CheckboxGroup 中代表此項目的值"
+                    "description": "原生表單值 / 在 CheckboxGroup 中代表此項目的值"
                 },
                 {
                     "name": "name",
@@ -903,10 +915,22 @@
                     "description": "原生 name 屬性"
                 },
                 {
+                    "name": "size",
+                    "type": "'small' | 'medium' | 'large'",
+                    "default": "'medium'",
+                    "description": "尺寸"
+                },
+                {
                     "name": "disabled",
                     "type": "boolean",
                     "default": false,
                     "description": "是否禁用"
+                },
+                {
+                    "name": "readonly",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否唯讀"
                 },
                 {
                     "name": "required",
@@ -953,14 +977,14 @@
             ],
             "events": [
                 {
-                    "name": "update:modelValue",
-                    "payload": "boolean | 'indeterminate' | any[]",
+                    "name": "update:value",
+                    "payload": "boolean | 'indeterminate' | null | any[]",
                     "description": "值變化時觸發"
                 },
                 {
                     "name": "change",
-                    "payload": "boolean | 'indeterminate' | any[]",
-                    "description": "值變化時觸發"
+                    "payload": "boolean | any[]",
+                    "description": "值變化時觸發（帶新值）"
                 },
                 {
                     "name": "focus",
@@ -1021,10 +1045,22 @@
                     "description": "選項中作為禁用判斷的欄位名"
                 },
                 {
+                    "name": "size",
+                    "type": "'small' | 'medium' | 'large'",
+                    "default": "'medium'",
+                    "description": "尺寸（套用至所有子選項）"
+                },
+                {
                     "name": "disabled",
                     "type": "boolean",
                     "default": false,
                     "description": "是否禁用整個群組"
+                },
+                {
+                    "name": "readonly",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否唯讀整個群組"
                 },
                 {
                     "name": "name",
@@ -1094,6 +1130,12 @@
                     "type": "Component",
                     "default": "IconX",
                     "description": "移除圖示組件"
+                },
+                {
+                    "name": "disabled",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否禁用"
                 }
             ],
             "events": [
@@ -1118,7 +1160,7 @@
                     "description": "自訂左側圖示"
                 },
                 {
-                    "name": "removeicon",
+                    "name": "remove-icon",
                     "slotProps": "{ removeCallback, keydownCallback }",
                     "description": "自訂移除圖示"
                 }
@@ -1198,20 +1240,14 @@
         },
         {
             "name": "ConfigProvider",
-            "description": "全域配置提供者，用於注入主題變數與 themePrefix，應放置於應用程式根部。",
+            "description": "全域配置提供者，用於注入主題變數覆寫，應放置於應用程式根部（可巢狀，覆寫範圍僅限於自身容器）。",
             "subComponents": [],
             "props": [
                 {
                     "name": "themeConfig",
                     "type": "ThemeVarsConfig",
-                    "default": "defaultTheme",
-                    "description": "主題變數配置物件"
-                },
-                {
-                    "name": "themePrefix",
-                    "type": "string",
-                    "default": "'sh'",
-                    "description": "CSS 變數前綴"
+                    "default": null,
+                    "description": "主題變數覆寫物件，每個 token 類別與巢狀欄位皆為可選（DeepPartial<DesignTokens>），例如 { colors: { primary: '#ff0000' } }"
                 }
             ],
             "events": [],
@@ -1307,6 +1343,12 @@
                     "description": "是否為範圍選擇模式"
                 },
                 {
+                    "name": "size",
+                    "type": "'small' | 'medium' | 'large'",
+                    "default": "'medium'",
+                    "description": "觸發器尺寸"
+                },
+                {
                     "name": "placeholder",
                     "type": "string",
                     "default": null,
@@ -1323,6 +1365,12 @@
                     "type": "boolean",
                     "default": false,
                     "description": "是否唯讀"
+                },
+                {
+                    "name": "clearable",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否顯示清除按鈕"
                 },
                 {
                     "name": "locale",
@@ -1373,7 +1421,7 @@
                     "description": "控制下拉面板開關"
                 },
                 {
-                    "name": "defaultPlaceholder",
+                    "name": "defaultPlaceholderDate",
                     "type": "DateValue",
                     "default": null,
                     "description": "默認佔位日期"
@@ -1472,11 +1520,6 @@
             "events": [
                 {
                     "name": "update:value",
-                    "payload": "boolean",
-                    "description": "開關狀態變化時觸發"
-                },
-                {
-                    "name": "valueChange",
                     "payload": "boolean",
                     "description": "開關狀態變化時觸發"
                 }
@@ -1578,13 +1621,13 @@
             "methods": []
         },
         {
-            "name": "FileUpload",
-            "description": "檔案上傳組件（又名 UploadZone），支援多檔、大小限制、數量限制、預覽，並追蹤每個檔案的上傳狀態。",
+            "name": "UploadZone",
+            "description": "檔案上傳組件，支援多檔、大小限制、數量限制、預覽，並追蹤每個檔案的上傳狀態。",
             "subComponents": [],
             "props": [
                 {
                     "name": "value",
-                    "type": "FileUploadFile[]",
+                    "type": "UploadZoneFile[]",
                     "default": "[]",
                     "description": "已選檔案列表（v-model）"
                 },
@@ -1620,20 +1663,20 @@
                 },
                 {
                     "name": "size",
-                    "type": "'sm' | 'md' | 'lg'",
-                    "default": "'md'",
+                    "type": "'small' | 'medium' | 'large'",
+                    "default": "'medium'",
                     "description": "組件尺寸"
                 }
             ],
             "events": [
                 {
                     "name": "update:value",
-                    "payload": "FileUploadFile[]",
+                    "payload": "UploadZoneFile[]",
                     "description": "檔案列表變化時觸發"
                 },
                 {
                     "name": "change",
-                    "payload": "FileUploadFile[]",
+                    "payload": "UploadZoneFile[]",
                     "description": "檔案列表變化時觸發"
                 },
                 {
@@ -1648,7 +1691,7 @@
                 },
                 {
                     "name": "remove",
-                    "payload": "FileUploadFile",
+                    "payload": "UploadZoneFile",
                     "description": "移除檔案時觸發"
                 }
             ],
@@ -1669,7 +1712,7 @@
                 }
             ],
             "types": {
-                "FileUploadFile": {
+                "UploadZoneFile": {
                     "id": "string",
                     "raw": "File",
                     "name": "string",
@@ -1737,6 +1780,12 @@
                     "type": "string | number",
                     "default": "''",
                     "description": "輸入值（v-model）"
+                },
+                {
+                    "name": "size",
+                    "type": "'small' | 'medium' | 'large'",
+                    "default": "'medium'",
+                    "description": "組件尺寸"
                 },
                 {
                     "name": "disabled",
@@ -1882,7 +1931,7 @@
             "methods": []
         },
         {
-            "name": "MentionableTextarea",
+            "name": "MentionableTextArea",
             "description": "支援 @ / # / : 等觸發字元的文字區域，觸發後顯示候選列表，適用於評論、搜尋、表情符號等場景。",
             "subComponents": [],
             "props": [
@@ -1985,12 +2034,12 @@
         },
         {
             "name": "MessageBox",
-            "description": "訊息方塊，帶有語意圖示的靜態提示區塊，用於展示 info / danger / success / normal 等狀態訊息。",
+            "description": "訊息方塊，帶有語意圖示的靜態提示區塊，用於展示 info / danger / success / default 等狀態訊息。",
             "subComponents": [],
             "props": [
                 {
                     "name": "type",
-                    "type": "'info' | 'danger' | 'success' | 'normal'",
+                    "type": "'info' | 'danger' | 'success' | 'default'",
                     "default": "'info'",
                     "description": "訊息類型"
                 },
@@ -2040,9 +2089,9 @@
                             "description": "顯示 warning 通知"
                         },
                         {
-                            "name": "error",
+                            "name": "danger",
                             "signature": "(options: NotificationOptions) => void",
-                            "description": "顯示 error 通知"
+                            "description": "顯示 danger 通知"
                         }
                     ]
                 }
@@ -2094,8 +2143,8 @@
                 },
                 {
                     "name": "size",
-                    "type": "'small' | 'default' | 'large'",
-                    "default": "'default'",
+                    "type": "'small' | 'medium' | 'large'",
+                    "default": "'medium'",
                     "description": "組件尺寸"
                 },
                 {
@@ -2134,6 +2183,16 @@
                     "name": "update:value",
                     "payload": "number",
                     "description": "值變化時觸發"
+                },
+                {
+                    "name": "focus",
+                    "payload": "FocusEvent",
+                    "description": "輸入框獲得焦點時觸發"
+                },
+                {
+                    "name": "blur",
+                    "payload": "FocusEvent",
+                    "description": "輸入框失去焦點時觸發"
                 }
             ],
             "slots": [
@@ -2197,8 +2256,8 @@
                 },
                 {
                     "name": "size",
-                    "type": "'large' | 'default' | 'small'",
-                    "default": "'default'",
+                    "type": "'small' | 'medium' | 'large'",
+                    "default": "'medium'",
                     "description": "按鈕尺寸"
                 },
                 {
@@ -2220,7 +2279,7 @@
                     "description": "輪廓按鈕樣式"
                 },
                 {
-                    "name": "borderd",
+                    "name": "bordered",
                     "type": "boolean",
                     "default": false,
                     "description": "帶邊框樣式"
@@ -2289,9 +2348,15 @@
                     "description": "是否禁用"
                 },
                 {
+                    "name": "readonly",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否唯讀（阻擋輸入、Backspace、Delete、貼上）"
+                },
+                {
                     "name": "size",
-                    "type": "'sm' | 'md' | 'lg'",
-                    "default": "'md'",
+                    "type": "'small' | 'medium' | 'large'",
+                    "default": "'medium'",
                     "description": "組件尺寸"
                 },
                 {
@@ -2316,6 +2381,16 @@
                     "name": "complete",
                     "payload": "string[]",
                     "description": "所有格填滿時觸發"
+                },
+                {
+                    "name": "focus",
+                    "payload": "FocusEvent",
+                    "description": "任一輸入格獲得焦點時觸發"
+                },
+                {
+                    "name": "blur",
+                    "payload": "FocusEvent",
+                    "description": "任一輸入格失去焦點時觸發"
                 }
             ],
             "slots": [],
@@ -2380,11 +2455,6 @@
                     "name": "update:value",
                     "payload": "boolean",
                     "description": "開關狀態變化時觸發"
-                },
-                {
-                    "name": "valueChange",
-                    "payload": "boolean",
-                    "description": "開關狀態變化時觸發"
                 }
             ],
             "slots": [
@@ -2422,8 +2492,8 @@
                 },
                 {
                     "name": "size",
-                    "type": "'small' | 'default' | 'large'",
-                    "default": "'default'",
+                    "type": "'small' | 'medium' | 'large'",
+                    "default": "'medium'",
                     "description": "進度條高度尺寸"
                 },
                 {
@@ -2472,16 +2542,16 @@
             ],
             "props": [
                 {
-                    "name": "modelValue",
-                    "type": "any",
-                    "default": null,
-                    "description": "選中值（v-model）"
-                },
-                {
                     "name": "value",
                     "type": "any",
                     "default": null,
-                    "description": "此 Radio 的值"
+                    "description": "目前選中的值（v-model:value）"
+                },
+                {
+                    "name": "nativeValue",
+                    "type": "any",
+                    "default": null,
+                    "description": "原生表單值 / 此 Radio 代表的值"
                 },
                 {
                     "name": "name",
@@ -2490,10 +2560,22 @@
                     "description": "原生 name 屬性"
                 },
                 {
+                    "name": "size",
+                    "type": "'small' | 'medium' | 'large'",
+                    "default": "'medium'",
+                    "description": "尺寸"
+                },
+                {
                     "name": "disabled",
                     "type": "boolean",
                     "default": false,
                     "description": "是否禁用"
+                },
+                {
+                    "name": "readonly",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否唯讀"
                 },
                 {
                     "name": "required",
@@ -2528,14 +2610,14 @@
             ],
             "events": [
                 {
-                    "name": "update:modelValue",
+                    "name": "update:value",
                     "payload": "any",
                     "description": "值變化時觸發"
                 },
                 {
                     "name": "change",
                     "payload": "any",
-                    "description": "值變化時觸發"
+                    "description": "值變化時觸發（帶新值）"
                 },
                 {
                     "name": "focus",
@@ -2592,10 +2674,22 @@
                     "description": "選項中作為禁用判斷的欄位名"
                 },
                 {
+                    "name": "size",
+                    "type": "'small' | 'medium' | 'large'",
+                    "default": "'medium'",
+                    "description": "尺寸（套用至所有子選項）"
+                },
+                {
                     "name": "disabled",
                     "type": "boolean",
                     "default": false,
                     "description": "是否禁用整個群組"
+                },
+                {
+                    "name": "readonly",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否唯讀整個群組"
                 },
                 {
                     "name": "name",
@@ -2637,7 +2731,7 @@
             "subComponents": [],
             "props": [
                 {
-                    "name": "type",
+                    "name": "visibility",
                     "type": "'auto' | 'always' | 'scroll' | 'hover'",
                     "default": "'hover'",
                     "description": "捲軸顯示策略"
@@ -2714,6 +2808,12 @@
                     "type": "SelectOption[]",
                     "default": "[]",
                     "description": "選項陣列"
+                },
+                {
+                    "name": "size",
+                    "type": "'small' | 'medium' | 'large'",
+                    "default": "'medium'",
+                    "description": "觸發器尺寸"
                 },
                 {
                     "name": "disabled",
@@ -2893,15 +2993,15 @@
                 },
                 {
                     "name": "size",
-                    "type": "'small' | 'default' | 'large'",
-                    "default": "'default'",
+                    "type": "'small' | 'medium' | 'large'",
+                    "default": "'medium'",
                     "description": "滑桿尺寸"
                 },
                 {
-                    "name": "color",
-                    "type": "'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'info'",
+                    "name": "type",
+                    "type": "'default' | 'primary' | 'info' | 'success' | 'warning' | 'danger'",
                     "default": "'primary'",
-                    "description": "滑桿顏色"
+                    "description": "滑桿語意類型"
                 },
                 {
                     "name": "orientation",
@@ -2914,6 +3014,12 @@
                     "type": "boolean",
                     "default": false,
                     "description": "是否禁用"
+                },
+                {
+                    "name": "readonly",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否唯讀（唯讀時仍可聚焦，但無法拖曳或以鍵盤變更數值）"
                 },
                 {
                     "name": "showTooltip",
@@ -2950,6 +3056,16 @@
                     "name": "valueCommit",
                     "payload": "number[]",
                     "description": "滑動結束（mouseup）時觸發"
+                },
+                {
+                    "name": "focus",
+                    "payload": "FocusEvent",
+                    "description": "滑塊（thumb）獲得焦點時觸發"
+                },
+                {
+                    "name": "blur",
+                    "payload": "FocusEvent",
+                    "description": "滑塊（thumb）失去焦點時觸發"
                 }
             ],
             "slots": [
@@ -2977,7 +3093,7 @@
             "props": [
                 {
                     "name": "size",
-                    "type": "string | number",
+                    "type": "'small' | 'medium' | 'large' | number",
                     "default": "'medium'",
                     "description": "旋轉圖示大小"
                 },
@@ -2994,10 +3110,10 @@
                     "description": "是否旋轉動畫"
                 },
                 {
-                    "name": "show",
+                    "name": "value",
                     "type": "boolean",
                     "default": true,
-                    "description": "是否顯示載入狀態"
+                    "description": "是否顯示載入狀態（v-model:value）"
                 },
                 {
                     "name": "stroke",
@@ -3020,7 +3136,7 @@
             ],
             "events": [
                 {
-                    "name": "update:show",
+                    "name": "update:value",
                     "payload": "boolean",
                     "description": "顯示狀態變化時觸發"
                 }
@@ -3169,7 +3285,7 @@
             "subComponents": [],
             "props": [
                 {
-                    "name": "visable",
+                    "name": "visible",
                     "type": "boolean",
                     "default": false,
                     "description": "是否始終顯示拖拽控制條"
@@ -3254,10 +3370,22 @@
                     "description": "開關狀態（v-model）"
                 },
                 {
+                    "name": "size",
+                    "type": "'small' | 'medium' | 'large'",
+                    "default": "'medium'",
+                    "description": "尺寸"
+                },
+                {
                     "name": "disabled",
                     "type": "boolean",
                     "default": false,
                     "description": "是否禁用"
+                },
+                {
+                    "name": "readonly",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否唯讀"
                 }
             ],
             "events": [
@@ -3270,6 +3398,16 @@
                     "name": "change",
                     "payload": "boolean",
                     "description": "狀態變化時觸發"
+                },
+                {
+                    "name": "focus",
+                    "payload": "FocusEvent",
+                    "description": "獲得焦點時觸發"
+                },
+                {
+                    "name": "blur",
+                    "payload": "FocusEvent",
+                    "description": "失去焦點時觸發"
                 }
             ],
             "slots": [
@@ -3293,9 +3431,15 @@
                 },
                 {
                     "name": "type",
-                    "type": "'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'danger'",
+                    "type": "'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger'",
                     "default": "'primary'",
                     "description": "標籤語意類型"
+                },
+                {
+                    "name": "size",
+                    "type": "'small' | 'medium' | 'large'",
+                    "default": "'medium'",
+                    "description": "尺寸"
                 },
                 {
                     "name": "rounded",
@@ -3339,6 +3483,12 @@
                     "type": "string",
                     "default": "''",
                     "description": "輸入值（v-model:value）"
+                },
+                {
+                    "name": "size",
+                    "type": "'small' | 'medium' | 'large'",
+                    "default": "'medium'",
+                    "description": "組件尺寸"
                 },
                 {
                     "name": "placeholder",
@@ -3450,6 +3600,12 @@
                     "description": "是否為時間範圍選擇模式"
                 },
                 {
+                    "name": "size",
+                    "type": "'small' | 'medium' | 'large'",
+                    "default": "'medium'",
+                    "description": "觸發器尺寸"
+                },
+                {
                     "name": "placeholder",
                     "type": "string | string[]",
                     "default": null,
@@ -3466,6 +3622,12 @@
                     "type": "boolean",
                     "default": false,
                     "description": "是否唯讀"
+                },
+                {
+                    "name": "clearable",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否顯示清除按鈕"
                 },
                 {
                     "name": "format",
@@ -3636,11 +3798,6 @@
             "events": [
                 {
                     "name": "update:value",
-                    "payload": "boolean",
-                    "description": "開關狀態變化時觸發"
-                },
-                {
-                    "name": "valueChange",
                     "payload": "boolean",
                     "description": "開關狀態變化時觸發"
                 }

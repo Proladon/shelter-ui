@@ -5,7 +5,7 @@
     <SHChip label="Brand Google" :icon="IconBrandGoogle" />
     <SHChip label="Brand Windows" :icon="IconBrandWindows" removable />
     <SHChip label="Brand GitHub" :icon="IconBrandGithub" removable>
-      <template #removeicon="{ removeCallback, keydownCallback }">
+      <template #remove-icon="{ removeCallback, keydownCallback }">
         <icon-minus
           @click="removeCallback"
           @keydown="keydownCallback"

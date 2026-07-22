@@ -14,5 +14,5 @@ export const messageBoxIconMap: Record<MessageBoxType, Component> = {
   danger: IconX,
   success: IconCircleCheck,
   warning: IconAlertTriangle,
-  normal: IconInfoSquare,
+  default: IconInfoSquare,
 }

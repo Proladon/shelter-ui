@@ -30,6 +30,28 @@ const inputValue = ref('')
   </template>
 </Demo>
 
+## 尺寸
+
+透過 `size` 屬性設定輸入框大小，支持 `small`、`medium`（預設）、`large` 三種尺寸。
+
+<Demo>
+  <SizeDemo />
+  
+  <template #code>
+
+```vue
+<template>
+  <div class="flex flex-col gap-3">
+    <SHInput size="small" placeholder="Small" />
+    <SHInput size="medium" placeholder="Medium (default)" />
+    <SHInput size="large" placeholder="Large" />
+  </div>
+</template>
+```
+
+  </template>
+</Demo>
+
 ## 可清除內容
 
 設置 `clearable` 屬性後，當輸入框內容不為空時，鼠標懸浮會顯示清除按鈕。
@@ -154,6 +176,7 @@ const searchInput = ref('')
 | 屬性名        | 說明                 | 類型               | 默認值   |
 | ------------- | -------------------- | ------------------ | -------- |
 | value         | 綁定值               | `string \| number` | `''`     |
+| size          | 尺寸                 | `'small' \| 'medium' \| 'large'` | `'medium'` |
 | disabled      | 是否禁用             | `boolean`          | `false`  |
 | clearable     | 是否顯示清空按鈕     | `boolean`          | `false`  |
 | placeholder   | 輸入框佔位文本       | `string`           | `''`     |
@@ -192,6 +215,7 @@ const searchInput = ref('')
 <script setup>
 import { SHConfigProvider } from '@/index'
 import BasicDemo from '@/components/Input/demos/BasicDemo.vue'
+import SizeDemo from '@/components/Input/demos/SizeDemo.vue'
 import ClearableDemo from '@/components/Input/demos/ClearableDemo.vue'
 import DisabledDemo from '@/components/Input/demos/DisabledDemo.vue'
 import SlotsDemo from '@/components/Input/demos/SlotsDemo.vue'

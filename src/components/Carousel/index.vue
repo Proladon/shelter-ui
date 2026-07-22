@@ -313,7 +313,7 @@ onUnmounted(() => {
 
 <style lang="postcss">
 .sh-carousel {
-  @apply relative overflow-hidden bg-gray-100 dark:bg-gray-900 rounded-lg;
+  @apply relative overflow-hidden bg-bg.primary rounded-lg;
 }
 
 .sh-carousel--disabled {

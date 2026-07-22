@@ -29,9 +29,8 @@ withDefaults(defineProps<PopoverProps>(), {
 
 const emit = defineEmits<PopoverEmits>()
 
-const handleValueChange = (value: boolean) => {
+const handleOpenChange = (value: boolean) => {
   emit('update:value', value)
-  emit('valueChange', value)
 }
 </script>
 
@@ -40,7 +39,7 @@ const handleValueChange = (value: boolean) => {
     :default-open="defaultValue"
     :open="value"
     :modal="modal"
-    @update:open="handleValueChange"
+    @update:open="handleOpenChange"
   >
     <PopoverTrigger :disabled="disabled" class="sh-popover-trigger">
       <slot name="trigger"></slot>
@@ -70,91 +69,47 @@ const handleValueChange = (value: boolean) => {
 <style lang="postcss" scoped>
 :deep(.sh-popover-content) {
   @apply rounded-md py-5 px-5 bg-bg.primary text-text.base shadow-lg;
-  @apply z-50 outline-none;
-  animation-duration: 400ms;
-  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  @apply z-[var(--sh-z-popover)] outline-none;
+  animation-duration: var(--sh-duration-slow);
+  animation-timing-function: var(--sh-ease-enter);
   will-change: transform, opacity;
 }
 
 :deep(.sh-popover-content[data-state='open'][data-side='top']) {
-  animation-name: slideDownAndFade;
+  animation-name: sh-slide-down-fade;
 }
 
 :deep(.sh-popover-content[data-state='open'][data-side='right']) {
-  animation-name: slideLeftAndFade;
+  animation-name: sh-slide-left-fade;
 }
 
 :deep(.sh-popover-content[data-state='open'][data-side='bottom']) {
-  animation-name: slideUpAndFade;
+  animation-name: sh-slide-up-fade;
 }
 
 :deep(.sh-popover-content[data-state='open'][data-side='left']) {
-  animation-name: slideRightAndFade;
+  animation-name: sh-slide-right-fade;
 }
 
 :deep(.sh-popover-trigger) {
-  @apply inline-flex items-center justify-center h-[35px] w-[35px] rounded-full cursor-pointer;
+  @apply inline-flex items-center justify-center h-[var(--sh-component-size-md)] w-[var(--sh-component-size-md)] rounded-full cursor-pointer;
 }
 :deep(.sh-popover-trigger:disabled) {
   @apply cursor-not-allowed opacity-50;
 }
 
 :deep(.sh-popover-body) {
-  @apply w-full text-text-base;
+  @apply w-full text-text.base;
 }
 
 :deep(.sh-popover-close) {
   @apply text-lg leading-none font-semibold;
-  @apply absolute top-[5px] right-[5px] inline-flex items-center justify-center h-6 w-6 rounded-full;
-  @apply text-text-base hover:bg-bg-secondary transition-colors cursor-pointer;
+  @apply absolute top-1 right-1 inline-flex items-center justify-center h-6 w-6 rounded-full;
+  @apply text-text.base hover:bg-bg.secondary transition-colors cursor-pointer;
   @apply focus:(outline-none);
 }
 
 :deep(.sh-popover-arrow) {
   @apply fill-bg.primary;
-}
-
-@keyframes slideUpAndFade {
-  from {
-    opacity: 0;
-    transform: translateY(2px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideRightAndFade {
-  from {
-    opacity: 0;
-    transform: translateX(-2px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideDownAndFade {
-  from {
-    opacity: 0;
-    transform: translateY(-2px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideLeftAndFade {
-  from {
-    opacity: 0;
-    transform: translateX(2px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
 }
 </style>

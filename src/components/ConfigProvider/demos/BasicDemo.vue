@@ -79,43 +79,47 @@ import SHBadge from "../../Badge/index.vue"
 
 // 自定義主題 - 藍綠色調
 const customTheme: ThemeVarsConfig = {
-  primary: "#1890ff",
-  bg: {
-    primary: "#001529",
-    secondary: "#002140",
-  },
-  text: {
-    base: "#ffffff",
-  },
-  border: {
-    base: "#40a9ff",
-  },
-  status: {
-    info: "#1890ff",
-    danger: "#ff4d4f",
-    warning: "#faad14",
-    success: "#52c41a",
+  colors: {
+    primary: "#1890ff",
+    bg: {
+      primary: "#001529",
+      secondary: "#002140",
+    },
+    text: {
+      base: "#ffffff",
+    },
+    border: {
+      base: "#40a9ff",
+    },
+    status: {
+      info: "#1890ff",
+      danger: "#ff4d4f",
+      warning: "#faad14",
+      success: "#52c41a",
+    },
   },
 }
 
 // 明亮主題
 const lightTheme: ThemeVarsConfig = {
-  primary: "#e91e63",
-  bg: {
-    primary: "#ffffff",
-    secondary: "#f5f5f5",
-  },
-  text: {
-    base: "#212121",
-  },
-  border: {
-    base: "#e0e0e0",
-  },
-  status: {
-    info: "#2196f3",
-    danger: "#f44336",
-    warning: "#ff9800",
-    success: "#4caf50",
+  colors: {
+    primary: "#e91e63",
+    bg: {
+      primary: "#ffffff",
+      secondary: "#f5f5f5",
+    },
+    text: {
+      base: "#212121",
+    },
+    border: {
+      base: "#e0e0e0",
+    },
+    status: {
+      info: "#2196f3",
+      danger: "#f44336",
+      warning: "#ff9800",
+      success: "#4caf50",
+    },
   },
 }
 </script>

@@ -63,12 +63,46 @@ export interface SizeTokens extends Record<string, string> {
   xl: string
 }
 
+export interface ZIndexTokens extends Record<string, string> {
+  dropdown: string
+  sticky: string
+  overlay: string
+  modal: string
+  popover: string
+  tooltip: string
+  notification: string
+}
+
+export interface ShadowTokens extends Record<string, string> {
+  sm: string
+  md: string
+  lg: string
+}
+
+export interface DurationTokens extends Record<string, string> {
+  fast: string
+  normal: string
+  slow: string
+}
+
+export interface EasingTokens extends Record<string, string> {
+  standard: string
+  enter: string
+  leave: string
+}
+
 export interface DesignTokens {
   colors: ColorTokens
   spacing: SpacingTokens
   radius: RadiusTokens
   fontSize: TypographyTokens
   componentSize: SizeTokens
+  zIndex: ZIndexTokens
+  shadow: ShadowTokens
+  duration: DurationTokens
+  easing: EasingTokens
+  /** Single CSS value (not a scale) — outputs as the lone `--sh-focus-ring` variable. */
+  focusRing: string
 }
 
 // ── Shared Flatten Logic ────────────────────────────────────────────
@@ -76,7 +110,10 @@ export interface DesignTokens {
  *  e.g. { bg: { primary: '#fff' } } → { 'bg-primary': '#fff' }
  */
 export function flattenTokens(
-  tokens: TokenGroup | Record<string, string>,
+  // Accepts partial/optional shapes (e.g. a ConfigProvider override that only
+  // sets some keys) — undefined leaves are simply skipped below, same as a
+  // missing key would be.
+  tokens: Record<string, TokenValue | TokenGroup | undefined>,
   prefix = '',
 ): Record<string, string> {
   const result: Record<string, string> = {}
@@ -142,9 +179,10 @@ export function buildUnoColorMap(
 export function generateCssVarBlock(
   flatTokens: Record<string, string>,
   prefix = 'sh',
+  selector = ':root',
 ): string {
   const lines = Object.entries(flatTokens)
     .map(([key, value]) => `  --${prefix}-${key}: ${value};`)
     .join('\n')
-  return `:root {\n${lines}\n}`
+  return `${selector} {\n${lines}\n}`
 }

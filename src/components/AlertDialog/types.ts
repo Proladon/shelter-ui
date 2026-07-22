@@ -16,7 +16,7 @@ export interface AlertDialogProps {
   /** 取消按鈕文字（預設：'取消'） */
   cancelText?: string
   /** 確認按鈕載入狀態 */
-  confirmLoading?: boolean
+  loading?: boolean
 }
 
 export interface AlertDialogEmits {

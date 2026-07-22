@@ -2,9 +2,9 @@
   <div class="demo-container">
     <h3>基本用法</h3>
     <div class="demo-section">
-      <SHRadio v-model="selectedValue" value="option1" label="選項一" />
-      <SHRadio v-model="selectedValue" value="option2" label="選項二" />
-      <SHRadio v-model="selectedValue" value="option3" label="選項三" />
+      <SHRadio v-model:value="selectedValue" native-value="option1" label="選項一" />
+      <SHRadio v-model:value="selectedValue" native-value="option2" label="選項二" />
+      <SHRadio v-model:value="selectedValue" native-value="option3" label="選項三" />
     </div>
 
     <div class="demo-result">

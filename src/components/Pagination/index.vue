@@ -109,8 +109,8 @@ const props = withDefaults(defineProps<PaginationProps>(), {
   text: false,
   ghost: false,
   outline: false,
-  borderd: false,
-  size: 'default',
+  bordered: false,
+  size: 'medium',
 })
 
 // Emits
@@ -126,7 +126,7 @@ const buttonProps = computed(() => ({
   text: props.text,
   ghost: props.ghost,
   outline: props.outline,
-  borderd: props.borderd,
+  bordered: props.bordered,
   size: props.size,
 }))
 
@@ -135,24 +135,24 @@ const activeButtonProps = (active: boolean) => {
     text: props.text,
     ghost: props.ghost,
     outline: props.outline,
-    borderd: props.borderd,
+    bordered: props.bordered,
     size: props.size,
     type: active ? 'primary' : 'default',
   }
 
   if (active) {
-    if (!props.text && !props.ghost && !props.outline && !props.borderd) {
-      data.borderd = true
+    if (!props.text && !props.ghost && !props.outline && !props.bordered) {
+      data.bordered = true
     } else if (props.text) {
       data.text = false
       data.outline = true
     } else if (props.ghost) {
       data.ghost = false
     } else if (props.outline) {
-      data.borderd = true
+      data.bordered = true
       data.outline = false
-    } else if (props.borderd) {
-      data.borderd = false
+    } else if (props.bordered) {
+      data.bordered = false
       data.outline = true
     }
   }

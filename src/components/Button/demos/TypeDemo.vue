@@ -2,7 +2,7 @@
   <div class="flex gap-2">
     <SHButton dashed>Dashed</SHButton>
     <SHButton type="warning" outline>outline</SHButton>
-    <SHButton type="primary" borderd>borderd</SHButton>
+    <SHButton type="primary" bordered>bordered</SHButton>
     <SHButton type="primary" plain>Plain</SHButton>
     <SHButton type="danger" ghost>Ghost</SHButton>
     <SHButton type="success" text>Text</SHButton>

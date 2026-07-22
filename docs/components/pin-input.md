@@ -70,7 +70,7 @@ const numericValue = ref([])
 
 ## 尺寸
 
-透過 `size` 屬性控制輸入格大小，支持 `sm`、`md`（預設）、`lg` 三種尺寸。
+透過 `size` 屬性控制輸入格大小，支持 `small`、`medium`（預設）、`large` 三種尺寸。
 
 <Demo>
   <SizeDemo />
@@ -80,9 +80,9 @@ const numericValue = ref([])
 ```vue
 <template>
   <div class="flex flex-col gap-4">
-    <SHPinInput v-model:value="value" size="sm" />
-    <SHPinInput v-model:value="value" size="md" />
-    <SHPinInput v-model:value="value" size="lg" />
+    <SHPinInput v-model:value="value" size="small" />
+    <SHPinInput v-model:value="value" size="medium" />
+    <SHPinInput v-model:value="value" size="large" />
   </div>
 </template>
 
@@ -120,6 +120,30 @@ const value = ref(['1', '2', '3'])
   </template>
 </Demo>
 
+## 唯讀狀態
+
+設置 `readonly` 屬性後，輸入格會顯示既有內容但無法透過輸入、Backspace、Delete 或貼上變更。
+
+<Demo>
+  <ReadonlyDemo />
+
+<template #code>
+
+```vue
+<template>
+  <SHPinInput v-model:value="value" readonly />
+</template>
+
+<script setup>
+import { ref } from 'vue'
+
+const value = ref(['1', '2', '3'])
+</script>
+```
+
+  </template>
+</Demo>
+
 ## API
 
 ### 屬性
@@ -132,7 +156,8 @@ const value = ref(['1', '2', '3'])
 | type        | 輸入類型                                 | `'text' \| 'number'`   | `'text'` |
 | mask        | 是否遮罩輸入內容（密碼模式）             | `boolean`              | `false`  |
 | disabled    | 是否禁用                                 | `boolean`              | `false`  |
-| size        | 尺寸                                     | `'sm' \| 'md' \| 'lg'` | `'md'`   |
+| readonly    | 是否唯讀（阻擋輸入、Backspace、Delete、貼上） | `boolean`         | `false`  |
+| size        | 尺寸                                     | `'small' \| 'medium' \| 'large'` | `'medium'` |
 | otp         | 啟用 OTP 模式（支持瀏覽器/簡訊自動填充） | `boolean`              | `false`  |
 
 ### 事件
@@ -142,10 +167,13 @@ const value = ref(['1', '2', '3'])
 | update:value      | 當任意格輸入值改變時觸發     | `value: string[]` |
 | change            | 當任意格輸入值改變時觸發     | `value: string[]` |
 | complete          | 當所有輸入格均填入內容時觸發 | `value: string[]` |
+| focus             | 任一輸入格獲得焦點時觸發     | `e: FocusEvent`   |
+| blur              | 任一輸入格失去焦點時觸發     | `e: FocusEvent`   |
 
 <script setup>
 import BasicDemo from '@/components/PinInput/demos/BasicDemo.vue'
 import MaskedDemo from '@/components/PinInput/demos/MaskedDemo.vue'
 import SizeDemo from '@/components/PinInput/demos/SizeDemo.vue'
 import DisabledDemo from '@/components/PinInput/demos/DisabledDemo.vue'
+import ReadonlyDemo from '@/components/PinInput/demos/ReadonlyDemo.vue'
 </script>

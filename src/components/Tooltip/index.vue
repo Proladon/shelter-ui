@@ -28,9 +28,8 @@ withDefaults(defineProps<TooltipProps>(), {
 
 const emit = defineEmits<TooltipEmits>()
 
-const handleValueChange = (value: boolean) => {
+const handleOpenChange = (value: boolean) => {
   emit('update:value', value)
-  emit('valueChange', value)
 }
 </script>
 
@@ -40,7 +39,7 @@ const handleValueChange = (value: boolean) => {
       :default-open="defaultValue"
       :open="value"
       :delay-duration="delayDuration"
-      @update:open="handleValueChange"
+      @update:open="handleOpenChange"
     >
       <TooltipTrigger :disabled="disabled" class="sh-tooltip-trigger">
         <slot name="trigger"></slot>
@@ -64,26 +63,26 @@ const handleValueChange = (value: boolean) => {
 <style scoped>
 :deep(.sh-tooltip-content) {
   @apply rounded-md py-2 px-3 bg-bg.primary text-text.base shadow-lg;
-  @apply z-50 outline-none text-sm;
-  animation-duration: 400ms;
-  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  @apply z-[var(--sh-z-tooltip)] outline-none text-sm;
+  animation-duration: var(--sh-duration-slow);
+  animation-timing-function: var(--sh-ease-enter);
   will-change: transform, opacity;
 }
 
 :deep(.sh-tooltip-content[data-state='delayed-open'][data-side='top']) {
-  animation-name: slideDownAndFade;
+  animation-name: sh-slide-down-fade;
 }
 
 :deep(.sh-tooltip-content[data-state='delayed-open'][data-side='right']) {
-  animation-name: slideLeftAndFade;
+  animation-name: sh-slide-left-fade;
 }
 
 :deep(.sh-tooltip-content[data-state='delayed-open'][data-side='bottom']) {
-  animation-name: slideUpAndFade;
+  animation-name: sh-slide-up-fade;
 }
 
 :deep(.sh-tooltip-content[data-state='delayed-open'][data-side='left']) {
-  animation-name: slideRightAndFade;
+  animation-name: sh-slide-right-fade;
 }
 
 :deep(.sh-tooltip-trigger) {
@@ -96,49 +95,5 @@ const handleValueChange = (value: boolean) => {
 
 :deep(.sh-tooltip-arrow) {
   @apply fill-bg.primary;
-}
-
-@keyframes slideUpAndFade {
-  from {
-    opacity: 0;
-    transform: translateY(2px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideRightAndFade {
-  from {
-    opacity: 0;
-    transform: translateX(-2px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideDownAndFade {
-  from {
-    opacity: 0;
-    transform: translateY(-2px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideLeftAndFade {
-  from {
-    opacity: 0;
-    transform: translateX(2px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
 }
 </style>

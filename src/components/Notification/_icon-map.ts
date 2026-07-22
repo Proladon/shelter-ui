@@ -12,5 +12,5 @@ export const notificationIconMap: Record<NotificationType, Component> = {
   info: IconInfoCircle,
   success: IconCircleCheck,
   warning: IconAlertTriangle,
-  error: IconX,
+  danger: IconX,
 }

@@ -11,11 +11,10 @@ description: 'src/index.ts 維護指南，包含組件導出與類型定義規�
 
 1.  **組件導入 (Imports)**: 從各個組件目錄導入 `.vue` 文件或 `index.ts`。
 2.  **組件列表 (Components List)**: `components` 對象包含了所有註冊為全局組件的 Vue 組件。
-3.  **工具函數 (Utils)**: 如 `sayHello` 等全局工具函數。
+3.  **命名導出 (Named Exports)**: 緊接在 `components` 之後，單獨導出每個組件以支持 Tree-shaking。兩份清單內容必須一致（由 `src/__tests__/index.test.ts` 驗證：具名匯出 ⊆ 註冊清單，且反之亦然）。
 4.  **類型導出 (Type Exports)**: 導出各個組件的 Props、Emits 和其他相關類型。
 5.  **安裝函數 (Install Function)**: `install` 函數用於遍歷 `components` 對象並將其註冊到 Vue 應用實例中。
 6.  **默認導出 (Default Export)**: 導出包含 `install` 方法的 Vue 插件對象。
-7.  **命名導出 (Named Exports)**: 單獨導出每個組件，以便支持 Tree-shaking。
 
 ## 新增組件流程
 
@@ -53,7 +52,7 @@ export type {
 
 ### 4. 單獨導出組件
 
-在文件底部的 `export { ... }` 區域添加組件，以支持按需導入：
+緊接在 `components` 常量之後的 `export { ... }` 區域添加組件，以支持按需導入：
 
 ```typescript
 export {
@@ -61,6 +60,24 @@ export {
   SHNewComponent,
 }
 ```
+
+### 5. 更新 components-catalog.json
+
+`components-catalog.json` 目前是**手工維護**（尚無從 `types.ts` 自動生成的腳本，該腳本已列入 `IMPROVEMENT_PLAN.md` Phase 4 待辦）。在 `components` 陣列中新增一筆物件，`name` 不含 `SH` 前綴，並填齊 `props`/`events`/`slots`/`methods`（對照 `types.ts` 手動同步，不要用猜的）。
+
+### 6. 新增文檔頁
+
+依照 `docs/WRITING_GUIDE.md` 建立 `docs/components/new-component.md`，並在 `docs/.vitepress/config.ts` 的 sidebar 加入對應項目。
+
+## 新組件檢查清單
+
+新增或修改一個公開組件時，以下五處必須同步，缺一即為未完成：
+
+- [ ] `src/index.ts`：進入 `components` 註冊清單
+- [ ] `src/index.ts`：進入具名匯出區塊
+- [ ] `src/index.ts`：進入型別匯出（`export type { ... }`）
+- [ ] `components-catalog.json`：新增/更新對應物件
+- [ ] `docs/components/*.md`：新增/更新文檔頁 + sidebar 連結
 
 ## 命名規範
 

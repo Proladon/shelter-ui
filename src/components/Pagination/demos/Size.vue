@@ -12,14 +12,14 @@
     </section>
 
     <section>
-      <h3 class="text-lg font-semibold mb-4">默認尺寸 (Default)</h3>
+      <h3 class="text-lg font-semibold mb-4">中尺寸 (Medium)</h3>
       <Pagination
-        v-model:value="defaultPage"
+        v-model:value="mediumPage"
         :total="100"
         :page-size="10"
-        size="default"
+        size="medium"
       />
-      <p class="text-sm text-gray-600 mt-2">當前頁數: {{ defaultPage }}</p>
+      <p class="text-sm text-gray-600 mt-2">當前頁數: {{ mediumPage }}</p>
     </section>
 
     <section>
@@ -40,6 +40,6 @@ import { ref } from "vue"
 import Pagination from "../index.vue"
 
 const smallPage = ref(1)
-const defaultPage = ref(1)
+const mediumPage = ref(1)
 const largePage = ref(1)
 </script>

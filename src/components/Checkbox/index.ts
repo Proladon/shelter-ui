@@ -1,12 +1,13 @@
-import SHCheckbox from "./index.vue"
-import SHCheckboxGroup from "./CheckboxGroup.vue"
+import SHCheckbox from './index.vue'
+import SHCheckboxGroup from './CheckboxGroup.vue'
 import type {
   CheckboxProps,
   CheckboxGroupProps,
   CheckboxEmits,
   CheckboxGroupEmits,
   CheckboxOption,
-} from "./types"
+  CheckboxSlots,
+} from './types'
 
 export { SHCheckbox, SHCheckboxGroup }
 export type {
@@ -15,5 +16,6 @@ export type {
   CheckboxEmits,
   CheckboxGroupEmits,
   CheckboxOption,
+  CheckboxSlots,
 }
 export default SHCheckbox

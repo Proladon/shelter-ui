@@ -6,11 +6,11 @@ export interface ScrollAreaProps {
    * - scroll: 滾動時顯示捲軸
    * - hover: hover 或滾動時顯示捲軸
    */
-  type?: 'auto' | 'always' | 'scroll' | 'hover'
+  visibility?: 'auto' | 'always' | 'scroll' | 'hover'
 
   /**
    * 停止互動後隱藏捲軸的延遲時間（毫秒）
-   * 僅在 type 為 'scroll' 或 'hover' 時有效
+   * 僅在 visibility 為 'scroll' 或 'hover' 時有效
    */
   scrollHideDelay?: number
 

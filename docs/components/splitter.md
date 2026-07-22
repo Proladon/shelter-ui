@@ -160,7 +160,7 @@
     <template>
       <Splitter direction="horizontal" class="h-32">
         <SplitterPanel :default-size="50">A</SplitterPanel>
-        <SplitterResizeHandle :visable="true" />
+        <SplitterResizeHandle :visible="true" />
         <SplitterPanel :default-size="50">B</SplitterPanel>
       </Splitter>
     </template>
@@ -243,7 +243,7 @@
 
 | 屬性名     | 說明             | 類型      | 默認值  |
 | ---------- | ---------------- | --------- | ------- |
-| visable    | 是否讓控制桿常亮 | `boolean` | `false` |
+| visible    | 是否讓控制桿常亮 | `boolean` | `false` |
 | color      | 控制桿顏色       | `string`  | -       |
 | hoverColor | 滑鼠懸停顏色     | `string`  | -       |
 | dragColor  | 拖拽時顏色       | `string`  | -       |

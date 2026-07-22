@@ -1,6 +1,6 @@
 # MessageBox 訊息盒
 
-`MessageBox` 是一個帶有邊框與 icon 的訊息提示容器，支援 info、danger、success、normal 四種型態，icon 可自訂。
+`MessageBox` 是一個帶有邊框與 icon 的訊息提示容器，支援 info、danger、success、default 四種型態，icon 可自訂。
 
 ## 範例
 
@@ -19,7 +19,7 @@ import BasicDemo from '@/components/MessageBox/demos/BasicDemo.vue'
 <SHMessageBox type="info">這是一個 info 訊息</SHMessageBox>
 <SHMessageBox type="danger">這是一個 danger 訊息</SHMessageBox>
 <SHMessageBox type="success">這是一個 success 訊息</SHMessageBox>
-<SHMessageBox type="normal">這是一個 normal 訊息</SHMessageBox>
+<SHMessageBox type="default">這是一個 default 訊息</SHMessageBox>
 ```
 
 ## 自訂 icon
@@ -37,7 +37,7 @@ import BasicDemo from '@/components/MessageBox/demos/BasicDemo.vue'
 
 | 名稱 | 類型                                  | 預設值 | 說明                      |
 | ---- | ------------------------------------- | ------ | ------------------------- |
-| type | 'info'\|'danger'\|'success'\|'normal' | 'info' | 訊息盒型態                |
+| type | 'info'\|'danger'\|'success'\|'default' | 'info' | 訊息盒型態                |
 | icon | string \| 組件                        | 無     | 自訂 icon (svg/html/組件) |
 
 ## Slot

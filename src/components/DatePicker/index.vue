@@ -32,8 +32,10 @@ defineOptions({ name: 'SHDatePicker' })
 
 const props = withDefaults(defineProps<DatePickerProps>(), {
   range: false,
+  size: 'medium',
   disabled: false,
   readonly: false,
+  clearable: false,
   weekdayFormat: 'short',
   fixedWeeks: false,
   weekStartsOn: 0,
@@ -140,11 +142,14 @@ defineExpose({ focus, blur, clear })
     <PopoverTrigger as-child :disabled="disabled || readonly">
       <div
         class="sh-date-picker"
-        :class="{
-          'sh-date-picker--disabled': disabled,
-          'sh-date-picker--readonly': readonly,
-          'sh-date-picker--open': isOpen,
-        }"
+        :class="[
+          `sh-date-picker--${size}`,
+          {
+            'sh-date-picker--disabled': disabled,
+            'sh-date-picker--readonly': readonly,
+            'sh-date-picker--open': isOpen,
+          },
+        ]"
         role="combobox"
         :aria-expanded="isOpen"
         :aria-disabled="disabled || undefined"
@@ -160,7 +165,7 @@ defineExpose({ focus, blur, clear })
         </span>
         <div class="sh-date-picker__suffix">
           <button
-            v-if="hasValue && !disabled && !readonly"
+            v-if="clearable && hasValue && !disabled && !readonly"
             type="button"
             class="sh-date-picker__clear"
             @click="handleClear"
@@ -191,7 +196,7 @@ defineExpose({ focus, blur, clear })
             :week-starts-on="weekStartsOn"
             :weekday-format="weekdayFormat"
             :fixed-weeks="fixedWeeks"
-            :default-placeholder="defaultPlaceholder"
+            :default-placeholder="defaultPlaceholderDate"
             @update:value="
               (v: DateValue | DateValue[] | undefined) =>
                 (singleValue = v as DateValue | undefined)
@@ -212,7 +217,7 @@ defineExpose({ focus, blur, clear })
             :week-starts-on="weekStartsOn"
             :weekday-format="weekdayFormat"
             :fixed-weeks="fixedWeeks"
-            :default-placeholder="defaultPlaceholder"
+            :default-placeholder="defaultPlaceholderDate"
           >
             <template #default="{ grid, weekDays }">
               <RangeCalendarHeader class="sh-date-picker__cal-header">
@@ -277,8 +282,6 @@ defineExpose({ focus, blur, clear })
   @apply inline-flex items-center w-full;
   @apply bg-bg.primary border border-solid border-border.base rounded-[length:var(--sh-radius-md)];
   @apply transition-all duration-300 ease-in-out cursor-pointer select-none outline-none;
-  height: var(--sh-component-size-md);
-  padding-inline: var(--sh-spacing-md);
   gap: var(--sh-spacing-xs);
 }
 
@@ -290,7 +293,7 @@ defineExpose({ focus, blur, clear })
 
 .sh-date-picker--open {
   @apply border-primary;
-  box-shadow: 0 0 0 2px var(--sh-primary-fade);
+  box-shadow: var(--sh-focus-ring);
 }
 
 .sh-date-picker--disabled {
@@ -301,9 +304,27 @@ defineExpose({ focus, blur, clear })
   @apply bg-bg.secondary cursor-default;
 }
 
+.sh-date-picker--small {
+  height: var(--sh-component-size-sm);
+  padding-inline: var(--sh-spacing-sm);
+  font-size: var(--sh-font-size-sm);
+}
+
+.sh-date-picker--medium {
+  height: var(--sh-component-size-md);
+  padding-inline: var(--sh-spacing-md);
+  font-size: var(--sh-font-size-sm);
+}
+
+.sh-date-picker--large {
+  height: var(--sh-component-size-lg);
+  padding-inline: var(--sh-spacing-lg);
+  font-size: var(--sh-font-size-lg);
+}
+
 .sh-date-picker__display {
   @apply flex-1 text-text.base truncate;
-  font-size: var(--sh-font-size-sm);
+  font-size: inherit;
 }
 
 .sh-date-picker__display--placeholder {
@@ -332,7 +353,7 @@ defineExpose({ focus, blur, clear })
 }
 
 :deep(.sh-date-picker__content) {
-  @apply bg-bg.primary border border-solid border-border.base rounded-[length:var(--sh-radius-lg)] shadow-lg z-30;
+  @apply bg-bg.primary border border-solid border-border.base rounded-[length:var(--sh-radius-lg)] shadow-lg z-[var(--sh-z-popover)];
   padding: var(--sh-spacing-md);
   width: fit-content;
 }
@@ -426,6 +447,7 @@ defineExpose({ focus, blur, clear })
 }
 
 :deep(.sh-date-picker__day[data-selected]) {
+  /* white text for contrast on solid primary background */
   @apply bg-primary text-white;
 }
 
@@ -436,6 +458,7 @@ defineExpose({ focus, blur, clear })
 
 :deep(.sh-date-picker__day[data-selection-start]),
 :deep(.sh-date-picker__day[data-selection-end]) {
+  /* white text for contrast on solid primary background */
   @apply bg-primary text-white rounded-[length:var(--sh-radius-md)];
 }
 

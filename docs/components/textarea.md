@@ -39,6 +39,63 @@ const text = ref('')
   </template>
 </Demo>
 
+## 尺寸
+
+透過 `size` 屬性設定文字大小與內距，支援 `small`、`medium`（預設）、`large` 三種尺寸。
+
+<Demo>
+  <SizeDemo />
+  
+  <template #code>
+
+```vue
+<template>
+  <div class="demo-container">
+    <div class="demo-section">
+      <h4>Small</h4>
+      <Textarea
+        v-model:value="text1"
+        placeholder="Small textarea..."
+        size="small"
+        :rows="3"
+      />
+    </div>
+
+    <div class="demo-section">
+      <h4>Medium（預設）</h4>
+      <Textarea
+        v-model:value="text2"
+        placeholder="Medium textarea..."
+        size="medium"
+        :rows="3"
+      />
+    </div>
+
+    <div class="demo-section">
+      <h4>Large</h4>
+      <Textarea
+        v-model:value="text3"
+        placeholder="Large textarea..."
+        size="large"
+        :rows="3"
+      />
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+import Textarea from '../index.vue'
+
+const text1 = ref('')
+const text2 = ref('')
+const text3 = ref('')
+</script>
+```
+
+  </template>
+</Demo>
+
 ## 調整大小
 
 可以設定 textarea 的調整大小行為。
@@ -264,6 +321,7 @@ const readonlyText = ref('這是唯讀狀態的內容，無法編輯')
 | 屬性名        | 說明             | 類型                                           | 默認值     |
 | ------------- | ---------------- | ---------------------------------------------- | ---------- |
 | value         | 綁定值           | string                                         | ''         |
+| size          | 尺寸             | 'small' \| 'medium' \| 'large'                 | 'medium'   |
 | placeholder   | 占位符文字       | string                                         | —          |
 | rows          | 預設顯示的行數   | number                                         | 3          |
 | resize        | 調整大小的方式   | 'none' \| 'both' \| 'horizontal' \| 'vertical' | 'vertical' |
@@ -294,6 +352,7 @@ const readonlyText = ref('這是唯讀狀態的內容，無法編輯')
 <script setup>
 import { SHConfigProvider } from '@/index'
 import BasicDemo from '@/components/Textarea/demos/BasicDemo.vue'
+import SizeDemo from '@/components/Textarea/demos/SizeDemo.vue'
 import ResizeDemo from '@/components/Textarea/demos/ResizeDemo.vue'
 import AutosizeDemo from '@/components/Textarea/demos/AutosizeDemo.vue'
 import WordLimitDemo from '@/components/Textarea/demos/WordLimitDemo.vue'

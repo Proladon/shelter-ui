@@ -1,5 +1,5 @@
 export type UploadZoneStatus = 'idle' | 'uploading' | 'success' | 'error'
-export type UploadZoneSize = 'sm' | 'md' | 'lg'
+export type UploadZoneSize = 'small' | 'medium' | 'large'
 
 export interface UploadZoneFile {
   /** Unique id (generated internally) */
@@ -56,7 +56,7 @@ export interface UploadZoneProps {
   maxSize?: number
   /**
    * Size variant of the drop zone
-   * @default 'md'
+   * @default 'medium'
    */
   size?: UploadZoneSize
 }

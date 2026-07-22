@@ -22,9 +22,9 @@ export interface PaginationProps {
   /** 外框按鈕 */
   outline?: boolean
   /** 帶邊框按鈕 */
-  borderd?: boolean
+  bordered?: boolean
   /** 按鈕大小 */
-  size?: "large" | "default" | "small"
+  size?: 'small' | 'medium' | 'large'
 }
 
 export interface PaginationItemType {

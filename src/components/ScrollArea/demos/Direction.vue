@@ -41,7 +41,7 @@
         <ScrollArea
           :scroll-y="false"
           :scroll-x="true"
-          type="always"
+          visibility="always"
           class="h-32 w-full border border-gray-300 dark:border-gray-600 rounded"
         >
           <div class="p-3 w-[600px] h-20 flex items-center">

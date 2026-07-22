@@ -4,7 +4,7 @@ title: ConfigProvider 配置提供者
 
 # ConfigProvider 配置提供者
 
-ConfigProvider 是 Shelter UI 的全局配置組件，用於設置主題變數和樣式前綴。它通過 CSS 變數的方式為整個組件庫提供統一的主題配置。
+ConfigProvider 是 Shelter UI 的全局配置組件，用於覆寫設計 token。它透過 CSS 變數的方式為所在容器（可巢狀）提供主題配置。
 
 ## 基本用法
 
@@ -29,28 +29,29 @@ ConfigProvider 是 Shelter UI 的全局配置組件，用於設置主題變數�
 </template>
 
     <script setup lang="ts">
-    import type { ThemeVarsConfig } from 'shelter-ui'
+    import type { ThemeVarsConfig } from '@proladon/shelter-ui'
 
     const customTheme: ThemeVarsConfig = {
-      primary: '#1890ff',
-      secondary: '#52c41a',
-      bg: {
-        primary: '#ffffff',
-        secondary: '#f5f5f5',
-      },
-      text: {
-        base: '#333333',
+      colors: {
         primary: '#1890ff',
-      },
-      border: {
-        base: '#d9d9d9',
-        primary: '#1890ff',
-      },
-      status: {
-        info: '#1890ff',
-        danger: '#ff4d4f',
-        warning: '#faad14',
-        success: '#52c41a',
+        bg: {
+          primary: '#ffffff',
+          secondary: '#f5f5f5',
+        },
+        text: {
+          base: '#333333',
+          primary: '#1890ff',
+        },
+        border: {
+          base: '#d9d9d9',
+          primary: '#1890ff',
+        },
+        status: {
+          info: '#1890ff',
+          danger: '#ff4d4f',
+          warning: '#faad14',
+          success: '#52c41a',
+        },
       },
     }
     </script>
@@ -59,62 +60,37 @@ ConfigProvider 是 Shelter UI 的全局配置組件，用於設置主題變數�
   </template>
 </Demo>
 
-## 自定義主題前綴
-
-你可以通過 `themePrefix` 屬性自定義 CSS 變數的前綴。
-
-<Demo>
-  <PrefixDemo />
-
-<template #code>
-```vue
-<template>
-<SHConfigProvider theme-prefix="my-ui">
-<div class="prefix-demo">
-<SHButton type="primary">自定義前綴按鈕</SHButton>
-<p>CSS 變數前綴已更改為 "my-ui"</p>
-</div>
-</SHConfigProvider>
-</template>
-
-    <script setup lang="ts">
-    // 這樣會生成類似 --my-ui-primary 的 CSS 變數
-    </script>
-    ```
-
-  </template>
-</Demo>
-
 ## 主題配置說明
 
-ConfigProvider 接受一個 `ThemeVarsConfig` 類型的主題配置對象，包含以下屬性：
+ConfigProvider 接受一個 `ThemeVarsConfig` 類型的主題配置物件（`DeepPartial<DesignTokens>`）——每個 token 類別與其巢狀欄位都是可選的，只需傳入想覆寫的部分即可。`colors` 類別包含以下屬性：
 
 ### 主色調
 
-- `primary`: 主要顏色，用於按鈕、鏈接等重要元素
-- `secondary`: 次要顏色
+- `colors.primary`: 主要顏色，用於按鈕、鏈接等重要元素
 
 ### 背景色
 
-- `bg.primary`: 主要背景色
-- `bg.secondary`: 次要背景色
+- `colors.bg.primary`: 主要背景色
+- `colors.bg.secondary`: 次要背景色
 
 ### 文字顏色
 
-- `text.base`: 基礎文字顏色
-- `text.primary`: 主要文字顏色
+- `colors.text.base`: 基礎文字顏色
+- `colors.text.primary`: 次要（低強調）文字顏色
 
 ### 邊框顏色
 
-- `border.base`: 基礎邊框顏色
-- `border.primary`: 主要邊框顏色
+- `colors.border.base`: 基礎邊框顏色
+- `colors.border.primary`: 強調邊框顏色
 
 ### 狀態顏色
 
-- `status.info`: 信息狀態顏色
-- `status.danger`: 危險狀態顏色
-- `status.warning`: 警告狀態顏色
-- `status.success`: 成功狀態顏色
+- `colors.status.info`: 信息狀態顏色
+- `colors.status.danger`: 危險狀態顏色
+- `colors.status.warning`: 警告狀態顏色
+- `colors.status.success`: 成功狀態顏色
+
+其餘 token 類別（`spacing`、`radius`、`fontSize`、`componentSize`、`zIndex`、`shadow`、`duration`、`easing`、`focusRing`）也可依相同方式覆寫，詳見 `instructions/theming.instructions.md`。
 
 ## 顏色變體
 
@@ -151,10 +127,9 @@ ConfigProvider 會自動為每個顏色生成以下變體：
 
 ### 屬性
 
-| 屬性名      | 說明              | 類型              | 默認值         |
-| ----------- | ----------------- | ----------------- | -------------- |
-| themeConfig | 主題配置對象      | `ThemeVarsConfig` | `defaultTheme` |
-| themePrefix | 主題變數 CSS 前綴 | `string`          | `'sh'`         |
+| 屬性名      | 說明                                                  | 類型              | 默認值 |
+| ----------- | ----------------------------------------------------- | ----------------- | ------ |
+| themeConfig | 主題變數覆寫物件（`DeepPartial<DesignTokens>`，每項皆可選） | `ThemeVarsConfig` | -      |
 
 ### 插槽 Slots
 
@@ -172,5 +147,4 @@ ConfigProvider 會自動為每個顏色生成以下變體：
 <script setup>
 import { SHConfigProvider } from '@/index'
 import BasicDemo from '@/components/ConfigProvider/demos/BasicDemo.vue'
-import PrefixDemo from '@/components/ConfigProvider/demos/PrefixDemo.vue'
 </script>

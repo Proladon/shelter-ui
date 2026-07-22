@@ -240,6 +240,42 @@ const options = [
   </template>
 </Demo>
 
+## 尺寸
+
+透過 `size` 屬性調整觸發器的高度與字級，支援 `small`、`medium`、`large` 三種尺寸。
+
+<Demo>
+  <SizeDemo />
+
+<template #code>
+
+```vue
+<template>
+  <div class="flex flex-col gap-4">
+    <SHSelect v-model:value="small" :options="options" size="small" style="width: 200px" />
+    <SHSelect v-model:value="medium" :options="options" size="medium" style="width: 200px" />
+    <SHSelect v-model:value="large" :options="options" size="large" style="width: 200px" />
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+
+const small = ref('')
+const medium = ref('')
+const large = ref('')
+
+const options = [
+  { value: 'option1', label: '選項一' },
+  { value: 'option2', label: '選項二' },
+  { value: 'option3', label: '選項三' },
+]
+</script>
+```
+
+  </template>
+</Demo>
+
 ## API
 
 ### Props
@@ -248,6 +284,7 @@ const options = [
 | --------------- | -------------------------------------------------- | -------------- | ------------------ |
 | `value`         | `string \| number \| (string \| number)[]`         | `undefined`    | 綁定值             |
 | `options`       | `SelectOption[]`                                   | `[]`           | 選項數據           |
+| `size`          | `'small' \| 'medium' \| 'large'`                   | `'medium'`     | 觸發器尺寸         |
 | `disabled`      | `boolean`                                          | `false`        | 是否禁用           |
 | `clearable`     | `boolean`                                          | `false`        | 是否可清空         |
 | `placeholder`   | `string`                                           | `'請選擇'`     | 佔位符             |
@@ -306,4 +343,5 @@ import BasicDemo from '@/components/Select/demos/BasicDemo.vue'
 import MultipleDemo from '@/components/Select/demos/MultipleDemo.vue'
 import GroupedDemo from '@/components/Select/demos/GroupedDemo.vue'
 import AdvancedDemo from '@/components/Select/demos/AdvancedDemo.vue'
+import SizeDemo from '@/components/Select/demos/SizeDemo.vue'
 </script>

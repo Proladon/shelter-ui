@@ -151,7 +151,7 @@ const renderMenuItem = (item: ContextMenuItemOption): VNode => {
     case 'label':
       return h(
         ContextMenuLabel,
-        { class: 'pl-[25px] text-xs leading-[25px] text-mauve11' },
+        { class: 'pl-[25px] text-xs leading-[25px] text-text.primary' },
         () => item.label,
       )
 
@@ -204,7 +204,10 @@ const renderMenuItem = (item: ContextMenuItemOption): VNode => {
               'div',
               {
                 class:
-                  'text-text.base group-data-[highlighted]:text-white group-data-[disabled]:text-text.base.fade',
+                  // Sub-trigger chevron: highlighted bg is bg-primary.fade (a translucent
+                  // tint, not solid), so it matches the sub-trigger's own
+                  // data-[highlighted]:text-primary treatment rather than white-on-solid.
+                  'text-text.base group-data-[highlighted]:text-primary group-data-[disabled]:text-text.base.fade',
               },
               h(IconChevronRight, {
                 size: '14',
@@ -219,7 +222,7 @@ const renderMenuItem = (item: ContextMenuItemOption): VNode => {
             h(
               ContextMenuSubContent,
               {
-                class: 'sh-context-menu-sub-conent',
+                class: 'sh-context-menu-sub-content',
                 sideOffset: 2,
                 alignOffset: -5,
               },
@@ -260,13 +263,32 @@ const renderMenuItem = (item: ContextMenuItemOption): VNode => {
 </script>
 
 <style scoped lang="postcss">
+/**
+ * This component follows a fixed internal layout grid carried over from its
+ * reka-ui/Radix reference menu implementation: ~25px row height/indicator
+ * width, 5px gutters/padding, and 3px corner radius throughout (also mirrored
+ * on a few inline template classes, e.g. the item indicators and label
+ * padding). These raw px values are an intentional, internally-consistent
+ * micro-layout and are deliberately left un-tokenized rather than forced
+ * onto the spacing/radius scale.
+ */
 :deep(.sh-context-menu-content) {
-  @apply min-w-[220px] z-[30] bg-bg.primary shadow-lg outline-none rounded-md p-[5px];
+  @apply min-w-[220px] z-[var(--sh-z-popover)] bg-bg.primary shadow-lg outline-none rounded-md p-[5px];
   @apply will-change-[opacity,transform];
-  @apply data-[side=top]:animate-slideDownAndFade;
-  @apply data-[side=right]:animate-slideLeftAndFade;
-  @apply data-[side=bottom]:animate-slideUpAndFade;
-  @apply data-[side=left]:animate-slideRightAndFade;
+  animation-duration: var(--sh-duration-slow);
+  animation-timing-function: var(--sh-ease-enter);
+}
+:deep(.sh-context-menu-content[data-side='top']) {
+  animation-name: sh-slide-down-fade;
+}
+:deep(.sh-context-menu-content[data-side='right']) {
+  animation-name: sh-slide-left-fade;
+}
+:deep(.sh-context-menu-content[data-side='bottom']) {
+  animation-name: sh-slide-up-fade;
+}
+:deep(.sh-context-menu-content[data-side='left']) {
+  animation-name: sh-slide-right-fade;
 }
 
 :deep(.sh-context-menu-item) {
@@ -282,17 +304,27 @@ const renderMenuItem = (item: ContextMenuItemOption): VNode => {
 }
 
 :deep(.sh-context-menu-separator) {
-  @apply h-[1px] bg-border.base m-[5px];
+  @apply h-px bg-border.base m-1;
 }
 
-:deep(.sh-context-menu-sub-conent) {
-  @apply min-w-[220px] z-30 outline-none bg-bg.primary rounded-md p-[5px];
+:deep(.sh-context-menu-sub-content) {
+  @apply min-w-[220px] z-[var(--sh-z-popover)] outline-none bg-bg.primary rounded-md p-[5px];
   @apply shadow-lg;
   @apply will-change-[opacity,transform];
-  @apply data-[side=top]:animate-slideDownAndFade;
-  @apply data-[side=right]:animate-slideLeftAndFade;
-  @apply data-[side=bottom]:animate-slideUpAndFade;
-  @apply data-[side=left]:animate-slideRightAndFade;
+  animation-duration: var(--sh-duration-slow);
+  animation-timing-function: var(--sh-ease-enter);
+}
+:deep(.sh-context-menu-sub-content[data-side='top']) {
+  animation-name: sh-slide-down-fade;
+}
+:deep(.sh-context-menu-sub-content[data-side='right']) {
+  animation-name: sh-slide-left-fade;
+}
+:deep(.sh-context-menu-sub-content[data-side='bottom']) {
+  animation-name: sh-slide-up-fade;
+}
+:deep(.sh-context-menu-sub-content[data-side='left']) {
+  animation-name: sh-slide-right-fade;
 }
 
 :deep(.sh-context-menu-sub-trigger) {

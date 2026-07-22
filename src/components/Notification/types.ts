@@ -1,6 +1,6 @@
 import type { Component } from 'vue'
 
-export type NotificationType = 'info' | 'success' | 'warning' | 'error'
+export type NotificationType = 'info' | 'success' | 'warning' | 'danger'
 
 export interface NotificationConfig {
   /**
@@ -95,9 +95,9 @@ export interface NotificationApi {
    */
   warning: (config: Omit<NotificationConfig, 'type'>) => string
   /**
-   * 創建錯誤通知
+   * 創建危險通知
    */
-  error: (config: Omit<NotificationConfig, 'type'>) => string
+  danger: (config: Omit<NotificationConfig, 'type'>) => string
   /**
    * 銷毀特定通知
    */

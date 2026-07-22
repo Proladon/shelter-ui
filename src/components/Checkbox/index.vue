@@ -5,8 +5,9 @@
       ref="inputRef"
       type="checkbox"
       :name="name"
-      :value="value"
+      :value="nativeValue"
       :disabled="disabled"
+      :readonly="readonly"
       :required="required"
       :indeterminate="isIndeterminate"
       :class="['sh-checkbox__input', inputClass]"
@@ -37,20 +38,23 @@ defineOptions({
   name: 'SHCheckbox',
 })
 
-const props = withDefaults(defineProps<CheckboxProps>(), {
+const props = withDefaults(defineProps<Omit<CheckboxProps, 'value'>>(), {
   disabled: false,
+  readonly: false,
   required: false,
   binary: false,
   indeterminate: false,
+  size: 'medium',
 })
 
 const emit = defineEmits<CheckboxEmits>()
 
-const modelValue = defineModel<boolean | 'indeterminate' | null | any[]>()
+const value = defineModel<boolean | 'indeterminate' | null | any[]>('value')
 const inputRef = ref<HTMLInputElement>()
 
 const checkboxClasses = computed(() => {
   return {
+    [`sh-checkbox--${props.size}`]: true,
     'sh-checkbox--disabled': props.disabled,
     'sh-checkbox--checked': isChecked.value,
     'sh-checkbox--indeterminate': isIndeterminate.value,
@@ -58,19 +62,19 @@ const checkboxClasses = computed(() => {
 })
 
 const isChecked = computed(() => {
-  if (props.value !== undefined) {
-    // 當有 value 時，檢查是否在 modelValue 陣列中
-    if (Array.isArray(modelValue.value)) {
-      return modelValue.value.includes(props.value)
+  if (props.nativeValue !== undefined) {
+    // 當有 nativeValue 時，檢查是否在 value 陣列中
+    if (Array.isArray(value.value)) {
+      return value.value.includes(props.nativeValue)
     }
-    return modelValue.value === props.value
+    return value.value === props.nativeValue
   }
-  // 沒有 value 時，直接使用 modelValue 的布林值
-  return modelValue.value === true
+  // 沒有 nativeValue 時，直接使用 value 的布林值
+  return value.value === true
 })
 
 const isIndeterminate = computed(() => {
-  return modelValue.value === 'indeterminate' || props.indeterminate
+  return value.value === 'indeterminate' || props.indeterminate
 })
 
 const checkboxState = computed(() => {
@@ -80,33 +84,31 @@ const checkboxState = computed(() => {
 })
 
 const onChange = (event: Event) => {
-  if (props.disabled) return
+  if (props.disabled || props.readonly) return
 
   const target = event.target as HTMLInputElement
   const checked = target.checked
 
-  if (props.value !== undefined) {
-    // 當有 value 時，更新陣列
-    const currentValue = Array.isArray(modelValue.value)
-      ? [...modelValue.value]
-      : []
+  if (props.nativeValue !== undefined) {
+    // 當有 nativeValue 時，更新陣列
+    const currentValue = Array.isArray(value.value) ? [...value.value] : []
     if (checked) {
-      if (!currentValue.includes(props.value)) {
-        currentValue.push(props.value)
+      if (!currentValue.includes(props.nativeValue)) {
+        currentValue.push(props.nativeValue)
       }
     } else {
-      const index = currentValue.indexOf(props.value)
+      const index = currentValue.indexOf(props.nativeValue)
       if (index > -1) {
         currentValue.splice(index, 1)
       }
     }
-    modelValue.value = currentValue
+    value.value = currentValue
+    emit('change', currentValue)
   } else {
-    // 沒有 value 時，直接設定布林值
-    modelValue.value = checked
+    // 沒有 nativeValue 時，直接設定布林值
+    value.value = checked
+    emit('change', checked)
   }
-
-  emit('change', event)
 }
 
 const onFocus = (event: FocusEvent) => {
@@ -140,7 +142,7 @@ watch(
 )
 </script>
 
-<style lang="postcss">
+<style lang="postcss" scoped>
 .sh-checkbox {
   @apply inline-flex items-center cursor-pointer gap-2;
 }
@@ -154,9 +156,21 @@ watch(
 }
 
 .sh-checkbox__indicator {
-  @apply relative w-4 h-4 border border-solid border-border.base dark:border-border.base rounded;
-  @apply bg-white dark:bg-bg.primary transition-all duration-200;
+  @apply relative border border-solid border-border.base rounded;
+  @apply bg-bg.primary transition-all duration-200;
   @apply flex items-center justify-center shadow-sm;
+}
+
+.sh-checkbox--small .sh-checkbox__indicator {
+  @apply w-3.5 h-3.5;
+}
+
+.sh-checkbox--medium .sh-checkbox__indicator {
+  @apply w-4 h-4;
+}
+
+.sh-checkbox--large .sh-checkbox__indicator {
+  @apply w-5 h-5;
 }
 
 .sh-checkbox__input:checked + .sh-checkbox__indicator,
@@ -165,7 +179,7 @@ watch(
 }
 
 .sh-checkbox__input:focus + .sh-checkbox__indicator {
-  box-shadow: 0 0 0 2px var(--sh-primary-fade);
+  box-shadow: var(--sh-focus-ring);
 }
 
 .sh-checkbox__input:disabled + .sh-checkbox__indicator {
@@ -174,6 +188,14 @@ watch(
 
 .sh-checkbox__label {
   @apply text-sm text-text.base;
+}
+
+.sh-checkbox--small .sh-checkbox__label {
+  @apply text-xs;
+}
+
+.sh-checkbox--large .sh-checkbox__label {
+  @apply text-base;
 }
 
 .sh-checkbox--disabled .sh-checkbox__label {

@@ -18,7 +18,11 @@
       <slot name="decrement">−</slot>
     </NumberFieldDecrement>
 
-    <NumberFieldInput class="sh-number-input__input" />
+    <NumberFieldInput
+      class="sh-number-input__input"
+      @focus="emits('focus', $event)"
+      @blur="emits('blur', $event)"
+    />
 
     <NumberFieldIncrement
       class="sh-number-input__step sh-number-input__step--increment"
@@ -43,7 +47,7 @@ defineOptions({
 })
 
 const props = withDefaults(defineProps<NumberInputProps>(), {
-  size: 'default',
+  size: 'medium',
   step: 1,
   focusOnChange: true,
   stepSnapping: true,
@@ -57,7 +61,7 @@ const emits = defineEmits<NumberInputEmits>()
 const delegatedProps = reactiveOmit(props, 'size', 'invalid', 'value')
 </script>
 
-<style lang="postcss">
+<style lang="postcss" scoped>
 .sh-number-input {
   @apply inline-flex items-center w-full rounded-md;
   @apply border border-solid border-border.base;
@@ -70,7 +74,7 @@ const delegatedProps = reactiveOmit(props, 'size', 'invalid', 'value')
 
   &:focus-within {
     @apply border-primary outline-none;
-    box-shadow: 0 0 0 2px var(--sh-primary-fade);
+    box-shadow: var(--sh-focus-ring);
   }
 }
 
@@ -104,31 +108,31 @@ const delegatedProps = reactiveOmit(props, 'size', 'invalid', 'value')
 
 .sh-number-input--small {
   .sh-number-input__input {
-    @apply h-[30px] text-sm;
+    @apply h-[var(--sh-component-size-sm)] text-sm;
   }
 
   .sh-number-input__step {
-    @apply w-[30px] h-[30px] text-sm;
+    @apply w-[var(--sh-component-size-sm)] h-[var(--sh-component-size-sm)] text-sm;
   }
 }
 
-.sh-number-input--default {
+.sh-number-input--medium {
   .sh-number-input__input {
-    @apply h-[36px] text-sm;
+    @apply h-[var(--sh-component-size-md)] text-sm;
   }
 
   .sh-number-input__step {
-    @apply w-[36px] h-[36px] text-base;
+    @apply w-[var(--sh-component-size-md)] h-[var(--sh-component-size-md)] text-base;
   }
 }
 
 .sh-number-input--large {
   .sh-number-input__input {
-    @apply h-[42px] text-base;
+    @apply h-[var(--sh-component-size-lg)] text-base;
   }
 
   .sh-number-input__step {
-    @apply w-[42px] h-[42px] text-lg;
+    @apply w-[var(--sh-component-size-lg)] h-[var(--sh-component-size-lg)] text-lg;
   }
 }
 

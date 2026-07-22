@@ -41,7 +41,7 @@ defineProps<InputGroupProps>()
 .sh-input-group:has(.sh-input.is-focused),
 .sh-input-group:has(.sh-textarea.is-focused) {
   border-color: var(--sh-primary);
-  box-shadow: 0 0 0 2px var(--sh-primary-fade);
+  box-shadow: var(--sh-focus-ring);
 }
 
 /* Enable wrapping when a block-end addon is present */

@@ -3,7 +3,7 @@
     :open="value"
     :defaultOpen="defaultValue"
     :modal="modal"
-    @update:open="handleValueChange"
+    @update:open="handleOpenChange"
   >
     <slot name="trigger" :Dialog="DialogTrigger"></slot>
     <DialogPortal>
@@ -74,20 +74,19 @@ const props = withDefaults(defineProps<DialogProps>(), {
 
 const emit = defineEmits<DialogEmits>()
 
-const handleValueChange = (value: boolean) => {
+const handleOpenChange = (value: boolean) => {
   emit('update:value', value)
-  emit('valueChange', value)
 }
 </script>
 
 <style scoped>
 .sh-dialog-overlay {
-  @apply fixed inset-0 z-50 backdrop-blur-sm;
+  @apply fixed inset-0 z-[var(--sh-z-overlay)] backdrop-blur-sm;
   background-color: rgba(0, 0, 0, 0.4);
 }
 
 .sh-dialog {
-  @apply fixed inset-0 m-auto z-99;
+  @apply fixed inset-0 m-auto z-[var(--sh-z-modal)];
   @apply bg-bg.primary rounded-md;
   @apply p-6 shadow-md;
   @apply focus:outline-none;
@@ -192,32 +191,14 @@ const handleValueChange = (value: boolean) => {
   @apply border-status.info;
 }
 
-/* Animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
-
+/* Animations (shared keyframes defined once in src/preset.ts) */
 .sh-dialog-overlay[data-state='open'],
 .sh-dialog[data-state='open'] {
-  animation: fadeIn 300ms ease-out;
+  animation: sh-fade-in var(--sh-duration-normal) var(--sh-ease-enter);
 }
 
 .sh-dialog-overlay[data-state='closed'],
 .sh-dialog[data-state='closed'] {
-  animation: fadeOut 300ms ease-in;
+  animation: sh-fade-out var(--sh-duration-normal) var(--sh-ease-leave);
 }
 </style>

@@ -9,6 +9,7 @@ defineOptions({
 const props = withDefaults(defineProps<ActiveButtonGroupProps>(), {
   defaultValue: undefined,
   value: undefined,
+  block: false,
 })
 
 const emit = defineEmits<ActiveButtonGroupEmits>()
@@ -95,6 +96,7 @@ onMounted(() => {
     class="sh-active-button-group"
     :class="{
       'sh-active-button-group--primary': true,
+      'sh-active-button-group--block': block,
     }"
   >
     <div
@@ -112,6 +114,10 @@ onMounted(() => {
   @apply relative flex rounded-md overflow-hidden bg-bg.primary text-text.base p-1;
   @apply border border-solid border-border.base;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.sh-active-button-group--block {
+  @apply w-full;
 }
 
 /* Indicator style - always primary */

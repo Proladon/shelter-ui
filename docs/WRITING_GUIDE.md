@@ -89,6 +89,8 @@ title: Button 按鈕
 
 ### 4. 示例代碼格式
 
+**規則：組件文檔中的每一個範例都必須用 `<Demo>` 包裝**，不可只用裸的 ` ```vue ` code block 呈現而不搭配 `<Demo>`（現況 `dialog.md` / `alert-dialog.md` / `spin.md` 尚未遵守，待修正）。
+
 使用 `<Demo>` 組件包裝示例，並引用對應的 Demo 組件：
 
 ````markdown
@@ -178,8 +180,8 @@ const handleClick = () => {
 
 **Demo 組件命名規則：**
 
-- 使用 PascalCase 命名法
-- 文件名應描述功能特性，如：`BasicDemo.vue`、`SizeDemo.vue`、`ColorDemo.vue`
+- **規則：檔名一律以 `Demo.vue` 結尾（即 `XxxDemo.vue`），不可用其他命名（如 `Basic.vue`）**
+- 使用 PascalCase 命名法，前綴描述功能特性，如：`BasicDemo.vue`、`SizeDemo.vue`、`ColorDemo.vue`
 - 常用的 demo 命名模式：
   - `BasicDemo.vue` - 基本用法
   - `SizeDemo.vue` - 尺寸變化
@@ -296,7 +298,8 @@ const handleClick = () => {
 - [ ] 使用正確的組件前綴（SH）
 - [ ] 導入語句正確
 - [ ] 代碼風格一致
-- [ ] Demo 組件命名規範正確
+- [ ] 所有範例都用 `<Demo>` 包裝，沒有裸的 code block
+- [ ] Demo 檔名為 `XxxDemo.vue` 格式
 - [ ] Demo 組件與文檔代碼保持一致
 - [ ] 文檔底部正確導入所有使用的 Demo 組件
 

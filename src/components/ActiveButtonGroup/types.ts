@@ -2,7 +2,8 @@ export interface ActiveButtonGroupProps {
   value?: string
   defaultValue?: string
   showIndicator?: boolean
-  fullWidth?: boolean
+  /** 是否撐滿容器寬度 */
+  block?: boolean
 }
 
 export interface ActiveButtonGroupEmits {

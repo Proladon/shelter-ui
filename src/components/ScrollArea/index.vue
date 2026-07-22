@@ -1,7 +1,7 @@
 <template>
   <ScrollAreaRoot
     ref="scrollAreaRoot"
-    :type="type"
+    :type="visibility"
     :scroll-hide-delay="scrollHideDelay"
     :dir="dir"
     :class="rootClasses"
@@ -43,7 +43,7 @@ import {
 import type { ScrollAreaProps, ScrollAreaMethods } from './types'
 
 const props = withDefaults(defineProps<ScrollAreaProps>(), {
-  type: 'hover',
+  visibility: 'hover',
   scrollHideDelay: 600,
   dir: 'ltr',
   scrollX: false,
@@ -134,7 +134,7 @@ defineExpose<ScrollAreaMethods>({
     }
 
     &:hover {
-      @apply bg-bg-text.base.fade dark:(bg-text.base.fade);
+      @apply bg-text.base.fade;
     }
 
     &[data-state='hidden'] {
@@ -147,10 +147,8 @@ defineExpose<ScrollAreaMethods>({
   }
 
   & .sh-scroll-thumb {
-    /* @apply relative block rounded-full bg-gray-400/50; */
     @apply relative block rounded-full bg-primary;
     @apply transition-colors duration-150;
-    /* @apply hover:bg-gray-400/70 active:bg-gray-400/90; */
     @apply hover:bg-primary active:bg-primary;
 
     &[data-state='hidden'] {
@@ -163,6 +161,7 @@ defineExpose<ScrollAreaMethods>({
 
     &::before {
       @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+      /* 44px = WCAG minimum touch-target size, not a design-scale value */
       @apply w-full min-w-[44px] h-full min-h-[44px];
       content: '';
     }
@@ -170,7 +169,6 @@ defineExpose<ScrollAreaMethods>({
 
   & .sh-scroll-corner {
     @apply absolute bottom-0 right-0 w-2.5 h-2.5;
-    /* @apply bg-gray-50 dark:bg-gray-900/20; */
   }
 
   & .sh-scroll-viewport {

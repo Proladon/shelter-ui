@@ -4,8 +4,8 @@
     <SMessageBox type="danger">這是一個 danger 訊息</SMessageBox>
     <SMessageBox type="success">這是一個 success 訊息</SMessageBox>
     <SMessageBox type="warning">這是一個 warning 訊息</SMessageBox>
-    <SMessageBox type="normal">這是一個 normal 訊息</SMessageBox>
-    <SMessageBox type="normal"
+    <SMessageBox type="default">這是一個 default 訊息</SMessageBox>
+    <SMessageBox type="default"
       >Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae nam,
       sequi nulla laboriosam quasi aperiam nostrum magni aut impedit, corrupti,
       quos obcaecati praesentium saepe. Vel libero minus laudantium cumque

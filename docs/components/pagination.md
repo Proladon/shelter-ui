@@ -95,7 +95,7 @@ const currentPage = ref(3)
 
 ## 按鈕尺寸
 
-通過 `size` 屬性可以設置分頁按鈕的尺寸大小，支援 `small`、`default`、`large` 三種尺寸。
+通過 `size` 屬性可以設置分頁按鈕的尺寸大小，支援 `small`、`medium`、`large` 三種尺寸。
 
 <Demo>
   <SizePaginationDemo />
@@ -113,12 +113,12 @@ const currentPage = ref(3)
       size="small"
     />
 
-    <!-- 默認尺寸 -->
+    <!-- 中尺寸 -->
     <SHPagination
-      v-model:value="defaultPage"
+      v-model:value="mediumPage"
       :total="100"
       :page-size="10"
-      size="default"
+      size="medium"
     />
 
     <!-- 大尺寸 -->
@@ -135,7 +135,7 @@ const currentPage = ref(3)
 import { ref } from "vue"
 
 const smallPage = ref(1)
-const defaultPage = ref(1)
+const mediumPage = ref(1)
 const largePage = ref(1)
 </script>
 ```
@@ -145,7 +145,7 @@ const largePage = ref(1)
 
 ## 按鈕樣式變體
 
-可以通過 `text`、`ghost`、`outline`、`borderd` 等屬性設置分頁按鈕的樣式變體。
+可以通過 `text`、`ghost`、`outline`、`bordered` 等屬性設置分頁按鈕的樣式變體。
 
 <Demo>
   <TypePaginationDemo />
@@ -226,8 +226,8 @@ const currentPage = ref(2)
 | text         | `boolean`                         | `false`     | 文字按鈕樣式               |
 | ghost        | `boolean`                         | `false`     | 幽靈按鈕樣式               |
 | outline      | `boolean`                         | `false`     | 外框按鈕樣式               |
-| borderd      | `boolean`                         | `false`     | 帶邊框按鈕樣式             |
-| size         | `'large' \| 'default' \| 'small'` | `'default'` | 按鈕尺寸大小               |
+| bordered     | `boolean`                         | `false`     | 帶邊框按鈕樣式             |
+| size         | `'small' \| 'medium' \| 'large'` | `'medium'` | 按鈕尺寸大小               |
 
 ### Events
 

@@ -85,10 +85,10 @@ const handleNext = () => {
 
 .sh-carousel-navigation__button {
   @apply absolute top-1/2 transform -translate-y-1/2 z-10;
+  /* bg-white/60 & hover:bg-white/80: translucent scrim over carousel images, not a themed surface */
   @apply w-10 h-10 rounded-full bg-white/60 backdrop-blur-sm border-0;
   @apply flex items-center justify-center cursor-pointer transition-all duration-200;
   @apply hover:bg-white/80;
-  /* @apply focus:(outline-none ring-2 ring-blue-500); */
   @apply disabled:(opacity-50 cursor-not-allowed);
 }
 
@@ -105,6 +105,7 @@ const handleNext = () => {
 }
 
 .sh-carousel-navigation__icon {
+  /* text-gray-700: deliberate dark-icon-on-light translucent-button contrast, not a themed surface color */
   @apply w-5 h-5 text-gray-700;
 }
 </style>

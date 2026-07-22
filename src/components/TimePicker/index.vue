@@ -1,5 +1,8 @@
 <template>
-  <div class="sh-time-picker" :class="{ 'sh-time-picker--disabled': disabled }">
+  <div
+    class="sh-time-picker"
+    :class="[`sh-time-picker--${size}`, { 'sh-time-picker--disabled': disabled }]"
+  >
     <SHPopover
       v-model:open="isOpen"
       side="bottom"
@@ -32,7 +35,7 @@
               "
             />
             <IconX
-              v-else-if="!readonly && !disabled"
+              v-else-if="clearable && !readonly && !disabled"
               @click.stop="handleClear"
               class="sh-time-picker__clear-icon"
             />
@@ -245,7 +248,8 @@
 
         <div class="sh-time-picker__actions">
           <button
-            class="sh-time-picker__button sh-time-picker__button--primary"
+            v-if="clearable"
+            class="sh-time-picker__button sh-time-picker__button--secondary"
             @click="handleClear"
           >
             清除
@@ -274,10 +278,12 @@ defineOptions({
 
 const props = withDefaults(defineProps<TimePickerProps>(), {
   range: false,
+  size: 'medium',
   format: 'HH:mm:ss',
   hour: true,
   minute: true,
   second: true,
+  clearable: false,
   // Maintaining compatibility if needed, but props above take precedence defaults
   use12Hour: false,
   hourStep: 1,
@@ -744,8 +750,8 @@ defineExpose({ focus, blur, clear })
 }
 
 .sh-time-picker__trigger {
-  @apply flex items-center w-full px-3 py-2 h-[36px];
-  @apply bg-bg.primary border border-border.base rounded-md text-sm;
+  @apply flex items-center w-full;
+  @apply bg-bg.primary border border-border.base rounded-md;
   @apply transition-colors duration-200 cursor-pointer;
 }
 .sh-time-picker__trigger:hover:not(.sh-time-picker__trigger--readonly) {
@@ -753,10 +759,20 @@ defineExpose({ focus, blur, clear })
 }
 .sh-time-picker__trigger--active {
   @apply border-primary outline-none;
-  box-shadow: 0 0 0 2px var(--sh-primary-fade);
+  box-shadow: var(--sh-focus-ring);
 }
 .sh-time-picker__trigger--readonly {
   @apply bg-bg.secondary cursor-default;
+}
+
+.sh-time-picker--small .sh-time-picker__trigger {
+  @apply h-[var(--sh-component-size-sm)] px-2 py-1 text-sm;
+}
+.sh-time-picker--medium .sh-time-picker__trigger {
+  @apply h-[var(--sh-component-size-md)] px-3 py-2 text-sm;
+}
+.sh-time-picker--large .sh-time-picker__trigger {
+  @apply h-[var(--sh-component-size-lg)] px-4 py-2 text-base;
 }
 
 .sh-time-picker__input {
@@ -851,10 +867,11 @@ defineExpose({ focus, blur, clear })
 .sh-time-picker__button {
   @apply px-3 py-1 rounded text-sm transition-colors duration-200;
 }
-.sh-time-picker__button--primary {
+.sh-time-picker__button--secondary {
   @apply text-text.base bg-bg.secondary hover:bg-bg.secondary.lighten;
 }
 .sh-time-picker__button--primary {
+  /* white text for contrast on solid primary background */
   @apply text-white bg-primary hover:bg-primary.darken;
 }
 </style>

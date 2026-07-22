@@ -97,28 +97,30 @@ import { SHConfigProvider } from '@proladon/shelter-ui'
 import type { ThemeVarsConfig } from '@proladon/shelter-ui'
 
 const customTheme: ThemeVarsConfig = {
-  primary: '#1890ff',
-  bg: {
-    primary: '#ffffff',
-    secondary: '#f5f5f5',
-  },
-  text: {
-    base: '#333333',
-  },
-  border: {
-    base: '#d9d9d9',
-  },
-  status: {
-    info: '#1890ff',
-    danger: '#ff4d4f',
-    warning: '#faad14',
-    success: '#52c41a',
+  colors: {
+    primary: '#1890ff',
+    bg: {
+      primary: '#ffffff',
+      secondary: '#f5f5f5',
+    },
+    text: {
+      base: '#333333',
+    },
+    border: {
+      base: '#d9d9d9',
+    },
+    status: {
+      info: '#1890ff',
+      danger: '#ff4d4f',
+      warning: '#faad14',
+      success: '#52c41a',
+    },
   },
 }
 </script>
 ```
 
-> `themePrefix` 預設為 `sh`，可透過 `:theme-prefix` prop 自訂 CSS 變數前綴。
+> `themeConfig` 的每個 token 類別與巢狀欄位都是可選的（`DeepPartial<DesignTokens>`），只需傳入想覆寫的部分即可；`ConfigProvider` 可巢狀使用，覆寫範圍僅限於自身容器。
 
 ## 配置通知
 

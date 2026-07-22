@@ -185,7 +185,7 @@ const props = withDefaults(defineProps<UploadZoneProps>(), {
   disabled: false,
   maxCount: 0,
   maxSize: 0,
-  size: 'md',
+  size: 'medium',
 })
 
 const emit = defineEmits<UploadZoneEmits>()
@@ -207,11 +207,11 @@ const hasFiles = computed(() => fileList.value.length > 0)
 
 const sizeClass = computed(() => {
   const map: Record<string, string> = {
-    sm: 'sh-upload-zone-dropzone--sm',
-    md: 'sh-upload-zone-dropzone--md',
-    lg: 'sh-upload-zone-dropzone--lg',
+    small: 'sh-upload-zone-dropzone--small',
+    medium: 'sh-upload-zone-dropzone--medium',
+    large: 'sh-upload-zone-dropzone--large',
   }
-  return map[props.size] ?? 'sh-upload-zone-dropzone--md'
+  return map[props.size] ?? 'sh-upload-zone-dropzone--medium'
 })
 
 const hintText = computed(() => {
@@ -333,7 +333,7 @@ function removeFile(target: UploadZoneFile) {
 defineExpose({ openFilePicker })
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
 /* ── Wrapper ── */
 .sh-upload-zone {
   @apply w-full flex flex-col gap-[var(--sh-spacing-sm)];
@@ -359,15 +359,15 @@ defineExpose({ openFilePicker })
 }
 
 /* Sizes */
-.sh-upload-zone-dropzone--sm {
+.sh-upload-zone-dropzone--small {
   @apply px-[var(--sh-spacing-md)] py-[var(--sh-spacing-lg)];
 }
 
-.sh-upload-zone-dropzone--md {
+.sh-upload-zone-dropzone--medium {
   @apply px-[var(--sh-spacing-lg)] py-[var(--sh-spacing-xl)];
 }
 
-.sh-upload-zone-dropzone--lg {
+.sh-upload-zone-dropzone--large {
   @apply px-[var(--sh-spacing-xl)] py-[var(--sh-spacing-2xl)];
 }
 

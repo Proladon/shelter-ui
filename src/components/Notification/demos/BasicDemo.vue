@@ -4,7 +4,7 @@
       <SHButton @click="showInfo">信息通知</SHButton>
       <SHButton @click="showSuccess" type="success">成功通知</SHButton>
       <SHButton @click="showWarning" type="warning">警告通知</SHButton>
-      <SHButton @click="showError" type="danger">錯誤通知</SHButton>
+      <SHButton @click="showDanger" type="danger">危險通知</SHButton>
     </div>
   </div>
 </template>
@@ -36,8 +36,8 @@ const showWarning = () => {
   })
 }
 
-const showError = () => {
-  notification.error({
+const showDanger = () => {
+  notification.danger({
     title: '錯誤發生',
     message: '抱歉，操作失敗了，請稍後再試。',
   })

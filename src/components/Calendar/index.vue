@@ -294,6 +294,7 @@ function onYearChange(year: number) {
 
 /* Selected */
 .sh-calendar__day[data-selected] {
+  /* white text for contrast on solid primary background */
   @apply bg-primary text-white;
 }
 

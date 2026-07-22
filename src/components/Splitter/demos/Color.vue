@@ -7,7 +7,7 @@
         </SplitterPanel>
 
         <SplitterResizeHandle
-          :visable="true"
+          :visible="true"
           color="#f97316"
           hoverColor="#2f8552"
           dragColor="yellow"

@@ -2,6 +2,14 @@ import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vitepress'
 import UnoCSS from 'unocss/vite'
 import { resolve } from 'node:path'
+import { readFileSync } from 'node:fs'
+
+// src/index.ts reads this global (injected by vite `define`) for its version
+// export — without it, importing src/index.ts here throws a ReferenceError
+// at module-evaluation time and the whole docs app silently fails to mount.
+const pkg = JSON.parse(
+  readFileSync(resolve(__dirname, '../../package.json'), 'utf-8'),
+)
 
 export default defineConfig({
   title: 'Shelter UI',
@@ -128,6 +136,9 @@ export default defineConfig({
     },
   },
   vite: {
+    define: {
+      __SHELTER_UI_VERSION__: JSON.stringify(pkg.version),
+    },
     plugins: [UnoCSS()],
     ssr: {
       noExternal: ['unocss'],

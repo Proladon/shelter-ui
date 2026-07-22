@@ -129,27 +129,34 @@ ComponentName/
 
 ### 匯出與發佈
 
-- [ ] [BUG] `src/index.ts`：`SHStatusTag` 加入全域註冊物件 `components`（目前 `app.use()` 後無法使用）
-- [ ] [BUG] `src/index.ts`：`SHUploadZone` 加入具名匯出區塊（目前 `import { SHUploadZone }` 失敗）
-- [ ] [DX] `src/index.ts` 重構為單一組件清單，同時產生註冊物件與（維持靜態的）具名匯出對照；新增 vitest 測試驗證「具名匯出 ⊆ 註冊清單」防再漂移
-- [ ] [BUG] 移除公開 API 的 `sayHello()`
-- [ ] [BUG] 版本號單一來源：`src/index.ts` 的 `version` 改由 `package.json` 匯入（vite `define` 或直接 import），移除寫死的 `'1.1.1'`
-- [ ] [BUG] 修復 `./preset` 子路徑：確認 `vite.config.ts` 產出 `dist/preset.js.js` + `dist/preset.d.ts` 與 package.json exports 一致，重新建置驗證
-- [ ] [BUG] `package.json` 新增 `prepublishOnly: "npm run lib:build"`，杜絕發佈過期 dist（現有 dist 缺 ChatInput、safelist utilities）
-- [ ] [DX] `vite-plugin-dts` include 範圍排除 `src/App.vue`、`src/main.ts`、`src/views/**`、`src/components/Notification/TestApp.vue`（目前 dev 腳手架 d.ts 洩漏進 dist）
+- [x] [BUG] `src/index.ts`：`SHStatusTag` 加入全域註冊物件 `components`（目前 `app.use()` 後無法使用）
+- [x] [BUG] `src/index.ts`：`SHUploadZone` 加入具名匯出區塊（目前 `import { SHUploadZone }` 失敗）
+- [x] [DX] `src/index.ts` 重構為單一組件清單，同時產生註冊物件與（維持靜態的）具名匯出對照；新增 vitest 測試驗證「具名匯出 ⊆ 註冊清單」防再漂移
+- [x] [BUG] 移除公開 API 的 `sayHello()`
+- [x] [BUG] 版本號單一來源：`src/index.ts` 的 `version` 改由 `package.json` 匯入（vite `define` 或直接 import），移除寫死的 `'1.1.1'`
+- [x] [BUG] 修復 `./preset` 子路徑：確認 `vite.config.ts` 產出 `dist/preset.js.js` + `dist/preset.d.ts` 與 package.json exports 一致，重新建置驗證
+- [x] [BUG] `package.json` 新增 `prepublishOnly: "npm run lib:build"`，杜絕發佈過期 dist（現有 dist 缺 ChatInput、safelist utilities）
+- [x] [DX] `vite-plugin-dts` include 範圍排除 `src/App.vue`、`src/main.ts`、`src/views/**`、`src/components/Notification/TestApp.vue`（目前 dev 腳手架 d.ts 洩漏進 dist）
 
 ### 資料同步
 
-- [ ] [BUG] `components-catalog.json`：`FileUpload` 更正為 `UploadZone`、`MentionableTextarea` 更正為 `MentionableTextArea`、`_meta.importBase` 改為 `@proladon/shelter-ui`、`_meta.version` 對齊 package.json
-- [ ] [BUG] `README.md`：`https://your-website.com` 佔位連結換成實際文檔網址（GitHub Pages `/shelter-ui/`）
-- [ ] [DX] `TODO.md`：勾掉已完成項（Pagination、Divider、PinInput、NumberInput、BaseContainer），或整份併入本計畫後刪除
+- [x] [BUG] `components-catalog.json`：`FileUpload` 更正為 `UploadZone`、`MentionableTextarea` 更正為 `MentionableTextArea`、`_meta.importBase` 改為 `@proladon/shelter-ui`、`_meta.version` 對齊 package.json
+- [x] [BUG] `README.md`：`https://your-website.com` 佔位連結換成實際文檔網址（GitHub Pages `/shelter-ui/`）
+- [x] [DX] `TODO.md`：勾掉已完成項（Pagination、Divider、PinInput、NumberInput、BaseContainer），或整份併入本計畫後刪除 — 採後者，已併入本文件 Phase 4 並刪除 `TODO.md`
 
 ### 死碼清理
 
-- [ ] 刪除 `src/components/Spinner/index_bit.vue`（零引用）
-- [ ] 刪除 `src/components/Notification/TestApp.vue`（開發測試頁）
-- [ ] 清除 `Spinner/index.vue` 內註解掉的死分支、`Splitter/index.vue:28`、`vite.config.ts` 的註解殘留
-- [ ] 刪除 docs 已發佈產物中的孤兒頁面來源確認（`border-container` / `editable-area` / `code-editor*`，重建 docs 即可消除）
+- [x] 刪除 `src/components/Spinner/index_bit.vue`（零引用）
+- [x] 刪除 `src/components/Notification/TestApp.vue`（開發測試頁）
+- [x] 清除 `Spinner/index.vue` 內註解掉的死分支、`Splitter/index.vue:28`、`vite.config.ts` 的註解殘留
+- [x] 刪除 docs 已發佈產物中的孤兒頁面來源確認（`border-container` / `editable-area` / `code-editor*`，重建 docs 即可消除） — 已確認原始碼中無此三頁，無需額外動作
+
+### Phase 0 執行中發現的新問題（非計畫原列項目）
+
+- [ ] [BUG] `pnpm exec vue-tsc -b` 目前因既有（與本次改動無關）問題而失敗，導致 `lib:build`／`prepublishOnly` 會擋下發佈：
+  1. `Calendar/index.vue`、`DatePicker/index.vue` 與 reka-ui 之間 `@internationalized/date` 型別不相容（根目錄與 `reka-ui/node_modules` 下各存在一份，`pnpm.overrides` 未能完全 dedupe）
+  2. `Splitter/SplitterPanel.vue` 的 `onResize` prop 型別與 reka-ui 期望的簽名（`prevSize: number | undefined`）不符
+  - `vite build` 本身可正常完成（`vite-plugin-dts` 僅回報診斷、不中斷建置），但嚴格的 `vue-tsc -b` 會擋下 CI／發佈。已建立背景任務追蹤修復。
 
 ---
 
@@ -157,14 +164,14 @@ ComponentName/
 
 > 一致性問題的根因是規範過期。先讓「權威文件」正確，之後人與 AI 都照著寫。
 
-- [ ] 重寫 `instructions/component.instructions.md`：
-  - [ ] v-model 範例改為 `defineModel<T>('value')`（目前仍教 `modelValue` + call-signature emits，是 straggler 的直接根因）
-  - [ ] 寫入 D1–D7 全部決策（size 值域、type 值域、事件規則、通用 props 矩陣、檔案結構、樣式規則）
-  - [ ] 範例組件完整示範：types.ts（named-tuple emits + Slots）、index.vue（defineModel + defineSlots）、index.ts barrel
-- [ ] 更新 `instructions/cmpExport.instructions.md`：加入「新組件必須同時進入註冊清單、具名匯出、型別匯出、components-catalog.json、docs」的 checklist
-- [ ] 更新 `SKILL.md` 與 `components-catalog.json` 產出流程說明（若 catalog 為手工維護，建立「從 types.ts 生成」的腳本列入 Phase 4 待辦）
-- [ ] `docs/WRITING_GUIDE.md` 補上 demo 命名（`XxxDemo.vue`）與 `<Demo>` wrapper 規則（D10）
-- [ ] 新增 `instructions/theming.instructions.md`：token 使用規則（禁 raw 色、禁任意 px、focus-ring/z-index/motion token 用法）
+- [x] 重寫 `instructions/component.instructions.md`：
+  - [x] v-model 範例改為 `defineModel<T>('value')`（目前仍教 `modelValue` + call-signature emits，是 straggler 的直接根因）
+  - [x] 寫入 D1–D7 全部決策（size 值域、type 值域、事件規則、通用 props 矩陣、檔案結構、樣式規則）
+  - [x] 範例組件完整示範：types.ts（named-tuple emits + Slots）、index.vue（defineModel + defineSlots）、index.ts barrel
+- [x] 更新 `instructions/cmpExport.instructions.md`：加入「新組件必須同時進入註冊清單、具名匯出、型別匯出、components-catalog.json、docs」的 checklist
+- [x] 更新 `SKILL.md` 與 `components-catalog.json` 產出流程說明（若 catalog 為手工維護，建立「從 types.ts 生成」的腳本列入 Phase 4 待辦）—— SKILL.md 已修正 Phase 0 catalog 改名遺留的過期敘述；「從 types.ts 生成」腳本已確認列於 Phase 4
+- [x] `docs/WRITING_GUIDE.md` 補上 demo 命名（`XxxDemo.vue`）與 `<Demo>` wrapper 規則（D10）
+- [x] 新增 `instructions/theming.instructions.md`：token 使用規則（禁 raw 色、禁任意 px、focus-ring/z-index/motion token 用法）
 
 ---
 
@@ -172,18 +179,25 @@ ComponentName/
 
 > 在既有 `default.ts → theme-utils → baseline.css + preset` 管線上加類別，成本低、全庫受益。
 
-- [ ] `themes/default.ts` + `core/theme-utils.ts` 新增 token 類別：`zIndex`、`shadow`、`motion`（duration/easing）、`focusRing`（D7 值域）
-- [ ] 產出對應 CSS 變數（`--sh-z-*`、`--sh-shadow-*`、`--sh-duration-*`、`--sh-ease-*`、`--sh-focus-ring`）與 UnoCSS theme 映射
-- [ ] 以 `--sh-focus-ring` 取代 14 處複製的 focus box-shadow（Input、NumberInput、Select×2、Radio、Checkbox、InputGroup、MentionableTextArea、PinInput、Switch、Textarea、TimePicker、DatePicker）
-- [ ] 以 `--sh-z-*` 取代所有硬編碼 z-index（Notification 9999、Select `z-[9999]`、Dialog z-99/z-50、Tooltip/Popover z-50、ContextMenu z-30、DatePicker z-30、MentionableTextArea 50），驗收：Dialog 內開 Tooltip/Popover/Select 均正確顯示於上層
-- [ ] 動畫 keyframes 抽成共用（uno preset 或共用 css），合併 Popover/Tooltip/ContextMenu/Dialog 的重複定義；duration/easing 改用 motion token
-- [ ] 清除 54 處 raw Tailwind 色 → 語意 token（重災區：Checkbox、CheckboxGroup、Carousel、Radio、Switch、ScrollArea、Progress）；同步移除 9 檔死的 `dark:` variants
-- [ ] 清理 67 處 `[NNpx]` 任意值（重災區：ContextMenu ×12、NumberInput ×6、Progress ×5、MessageBox ×5）改用 token
-- [ ] `uno.config.ts` 改為 import `src/preset.ts`（消滅雙份維護與既有 drift：`text-[length:var()]` vs `text-[var()]`）
-- [ ] ConfigProvider 改造（D9）：scoped 容器變數注入、`watch` themeConfig、覆寫範圍擴至全部 token；`themePrefix` 標記 deprecated（實際移除在 Phase 3）
-- [ ] 深淺色模式（D8）：新增 light palette、`data-theme` 雙組變數輸出、UnoCSS darkMode 設定；docs 站加切換驗證
-- [ ] 修正 1 處寫死 hex：`ChatInput/index.vue` 的 `color: #fff`
-- [ ] 修正 class 拼字 `sh-context-menu-sub-conent` → `sh-context-menu-sub-content`
+- [x] `themes/default.ts` + `core/theme-utils.ts` 新增 token 類別：`zIndex`、`shadow`、`motion`（duration/easing）、`focusRing`（D7 值域）
+- [x] 產出對應 CSS 變數（`--sh-z-*`、`--sh-shadow-*`、`--sh-duration-*`、`--sh-ease-*`、`--sh-focus-ring`）與 UnoCSS theme 映射
+- [x] 以 `--sh-focus-ring` 取代 14 處複製的 focus box-shadow（Input、NumberInput、Select×2、Radio、Checkbox、InputGroup、MentionableTextArea、PinInput、Switch、Textarea、TimePicker、DatePicker）—— 實測 13 處，已全數取代
+- [x] 以 `--sh-z-*` 取代所有硬編碼 z-index（Notification 9999、Select `z-[9999]`、Dialog z-99/z-50、Tooltip/Popover z-50、ContextMenu z-30、DatePicker z-30、MentionableTextArea 50），驗收：Dialog 內開 Tooltip/Popover/Select 均正確顯示於上層 —— 已於瀏覽器實測：Dialog z=1050 > Overlay z=1040，Popover/Select/DatePicker 皆設為 popover(1060)、Tooltip 為 tooltip(1070)、Notification 為 notification(1080)，皆高於 modal(1050)
+- [x] 動畫 keyframes 抽成共用（uno preset 或共用 css），合併 Popover/Tooltip/ContextMenu/Dialog 的重複定義；duration/easing 改用 motion token —— 採共用 css（經 generateBaselineCss 輸出，UnoCSS preflights 在此 lib build 管線下不可靠，已改用更保險的路徑並雙重保留）；同時修正 ContextMenu 動畫實際上因缺少對應 keyframes 定義而從未生效的問題
+- [x] 清除 54 處 raw Tailwind 色 → 語意 token（重災區：Checkbox、CheckboxGroup、Carousel、Radio、Switch、ScrollArea、Progress）；同步移除 9 檔死的 `dark:` variants
+- [x] 清理 67 處 `[NNpx]` 任意值（重災區：ContextMenu ×12、NumberInput ×6、Progress ×5、MessageBox ×5）改用 token
+- [x] `uno.config.ts` 改為 import `src/preset.ts`（消滅雙份維護與既有 drift：`text-[length:var()]` vs `text-[var()]`）—— 驗證發現移除隱含預設 preset 會讓全庫基礎 utility 消失，已改為明確帶入 `presetUno()` + `presetShelterUI()`
+- [x] ConfigProvider 改造（D9）：scoped 容器變數注入、`watch` themeConfig、覆寫範圍擴至全部 token；`themePrefix` 標記 deprecated（實際移除在 Phase 3）
+- [x] 深淺色模式（D8）：新增 light palette、`data-theme` 雙組變數輸出、UnoCSS darkMode 設定；docs 站加切換驗證 —— 已於瀏覽器實測：VitePress 深色切換鈕會同步 `data-theme`，`--sh-bg-primary`/`--sh-text-base`/`--sh-primary` 等變數即時切換（UnoCSS 本身無 darkMode 設定選項，改採「顏色一律走 CSS 變數」的方式達成，元件不需要 `dark:` variant）
+- [x] 修正 1 處寫死 hex：`ChatInput/index.vue` 的 `color: #fff`
+- [x] 修正 class 拼字 `sh-context-menu-sub-conent` → `sh-context-menu-sub-content`
+
+### Phase 2 執行中發現的新問題（非計畫原列項目）
+
+- [ ] `docs/.vitepress/config.ts` 先前缺少 `__SHELTER_UI_VERSION__` 的 vite `define`（Phase 0 的 version 單一來源改動未同步到這裡），導致整個 docs 站在 dev/build 時 `src/index.ts` 模組求值時丟出 `ReferenceError` 而整頁靜默無法掛載（無任何 console 錯誤，難以察覺）。已修正並在瀏覽器實測確認修復。
+- [ ] `TimePicker/index.vue` 有兩個相同的 `.sh-time-picker__button--primary` selector，後者完全覆蓋前者，導致「清除」與「確認」兩顆按鈕原本會顯示成一模一樣的樣式。已將「清除」按鈕改回獨立的 `--secondary` 樣式。
+- [ ] `Select/index.vue` 有一個孤立/疑似殘留的 `border-border-1` class（不對應任何 token），已移除。
+- [ ] `Progress/index.vue` 有 `border-muted`，`muted` 並非本庫定義的 token，已改為 `border-border.base`。
 
 ---
 
@@ -193,14 +207,28 @@ ComponentName/
 
 ### 3a. API 對齊（全組件套用 D1–D5）
 
-- [ ] [BREAKING] size 統一 `small/medium/large`：改 Spin（medium 已合規但補 default 值確認）、PinInput、UploadZone（`sm/md/lg` →全名）、Button/Pagination/NumberInput/Slider/Progress（`default` → `medium`）
-- [ ] [BREAKING] 為 8 個缺 size 的表單組件補上：Input、Textarea、Select、Switch、Checkbox、Radio、DatePicker、TimePicker（Input 已有現成 `.sh-input--large/--small` CSS 未接線）
-- [ ] [BREAKING] v-model 補完：Checkbox、Radio 改 `defineModel('value')`；Spin `show` → `value`
-- [ ] [BREAKING] 語意色統一（D2）：Notification `error`→`danger`、MessageBox `normal`→`default`、Slider `color`→`type`、Button union 移除 `'text'`、ScrollArea `type` 改名
-- [ ] [BREAKING] Checkbox/Radio 的 `change` 改發值；移除 Dialog/Popover/Tooltip 的 `valueChange`
-- [ ] [BREAKING] 拼字修正：`borderd`→`bordered`（Button、Pagination）、`visable`→`visible`（Splitter）、slot `removeicon`→`remove-icon`（Chip）
-- [ ] [BREAKING] 通用 props 補齊與改名（D5）：`confirmLoading`/`submitLoading`→`loading`、`fullWidth`→`block`、PinInput `placeholder`→`mask`、DatePicker/TimePicker 補 `clearable`、readonly 補 6 組件、focus/blur 補 4 組件、Chip 補 `disabled`
-- [ ] [BREAKING] 移除 `themePrefix` prop（D9）
+- [x] [BREAKING] size 統一 `small/medium/large`：改 Spin（確認 medium 已合規，型別與預設值皆無需改動）、PinInput、UploadZone（`sm/md/lg` →全名，型別別名保留）、Button/Pagination/NumberInput/Slider/Progress（`default` → `medium`）—— Slider 順手修正一個既存 bug（`--small` 尺寸從未設定 track 高度）
+- [x] [BREAKING] 為缺 size 的表單組件補上：Input、Textarea、Select、Switch、DatePicker、TimePicker（Checkbox/Radio 已於 v-model 重構時提前補上）。額外依 D1 補上清單外漏列的 **Tag**（D1 決策本身有列，執行清單 3a 原文漏寫）。Input/Select/DatePicker/TimePicker 採 `--sh-component-size-*` token 三階；Switch/Tag 比照 Checkbox/Radio 前例採寫死 Tailwind 三階（Switch 另外算出 checked 狀態 thumb 位移的等比例縮放值）。順手清掉 `docs/.vitepress/theme/components/Demo.vue` 裡一段目標 class 早已不存在的死 CSS（`.sh-input--large/--small` 等）
+- [x] [BREAKING] v-model 補完：Checkbox、Radio 改 `defineModel('value')`；Spin `show` → `value` —— 額外發現並解決 value 值域衝突（Checkbox/Radio 原有代表「選項本身值」的 `value` prop 改名為 `nativeValue`，比照 Vuetify 相同情境的解法），並補上 `readonly`
+- [x] [BREAKING] 語意色統一（D2）：Notification `error`→`danger`（含 `useNotification().error()` 方法同步更名為 `.danger()`）、MessageBox `normal`→`default`、Slider `color`→`type`、Button union 移除 `'text'`、ScrollArea `type` 改名為 `visibility`
+- [x] [BREAKING] Checkbox/Radio 的 `change` 改發值；移除 Dialog/Popover/Tooltip 的 `valueChange`（AlertDialog 已同步改聽 `update:value`，順手移除一併死掉的 `DialogProps.onValueChange`）
+- [x] [BREAKING] 拼字修正：`borderd`→`bordered`（Button、Pagination）、`visable`→`visible`（Splitter）、slot `removeicon`→`remove-icon`（Chip）
+- [x] [BREAKING] 通用 props 補齊與改名（D5）：AlertDialog `confirmLoading`→`loading`、ChatInput `submitLoading`→`loading`、ActiveButtonGroup `fullWidth`→`block`（原 prop 是從未接線的死碼，此次補上實作而非單純改名）、DatePicker/TimePicker 補 `clearable`（預設 `false`，屬於真正的行為破壞——兩者原本清除按鈕無條件顯示，升級後需明確加上 `clearable` 才會出現，須寫進 MIGRATION.md）、DatePicker `defaultPlaceholder`→`defaultPlaceholderDate`（僅 DatePicker 本身改名，`Calendar` 保持不動——Calendar 沒有文字 placeholder，不存在同名異義問題，改了只會徒增遷移成本）、readonly 補 Switch/Slider/PinInput（NumberInput 其實已透過 reka-ui 內建繼承而合規，執行清單原文誤植；PinInput 因 reka-ui 內部 passive v-model 架構，簡單 guard 無法真正攔截 backspace/delete/paste，改用 capture 階段攔截、已逐案實測驗證四種互動皆正確阻擋）、focus/blur 補 NumberInput/Slider/PinInput/Switch（Switch 是特例：原本靠 Vue attrs fallthrough 就能運作，宣告具名 emit 反而會讓 fallthrough 失效，須額外手動轉發，已實測確認未產生回歸）—— Chip 補 `disabled`、Button 新增 `block` 已於拼字修正/語意色批次提前完成。**跳過原計畫的 PinInput `placeholder`→`mask`**：調查後發現 `mask: boolean`（密碼樣式開關）早已存在且用途完全不同，`placeholder` 本身其實就是正常的空格提示字元，不是遮罩字元，原計畫描述的前提本身有誤，故不執行這項改名
+- [x] [BREAKING] 移除 `themePrefix` prop（D9）—— 同步移除所有相關文件（getting-started.md、config-provider.md 含過期的 PrefixDemo.vue、SKILL.md），並修正 Phase 2 遺留的 bug：ConfigProvider 的 `ThemeVarsConfig` 改為巢狀 `{ colors: {...} }` 結構後，`ConfigProvider/demos/BasicDemo.vue` 仍用舊的扁平結構寫死顏色，型別已對不上，一併修正
+
+### Phase 3a 執行中發現的新問題（非計畫原列項目）
+
+- [ ] Slider 的 `SliderThumb` 一直都有套用 `sh-slider__thumb--${type}` class，但從未有對應的 CSS 規則（只有 range/fill 會變色，thumb 本身不會）。與本次改名無關的既存缺陷，已記錄待補。
+- [ ] `DialogEmits`/`PopoverEmits`/`TooltipEmits` 仍使用已淘汰的 call-signature 語法（`(e: 'update:value', value: boolean): void`），應改為 D4 規定的 named-tuple 語法。發現於移除 `valueChange` 時，非本次範圍。
+- [ ] Chip 的 barrel（`index.ts`）未 `export * from './types'`，導致根目錄 `src/index.ts` 從未匯出 `ChipSlots`；`index.vue` 也從未呼叫 `defineSlots<ChipSlots>()`。發現於 slot 改名時，屬於 D6 結構對齊範疇，留給 Phase 3b。
+- [x] `components-catalog.json` 的 Spin `size` prop 型別寫成 `string | number`（應為 `'small' | 'medium' | 'large' | number`），與原始碼 `types.ts` 不符，屬於既存 catalog drift（Spin 不在本次 size 改動範圍內才被順手發現）。已修正。
+- [x] Tag 的 `type` 值域不符 D2：程式碼原本沒有 `'default'`，但文件（`docs/components/tag.md`）與 `components-catalog.json` 卻寫著一個從未真正實作過的 `'secondary'`（4 處 demo 範例、API 表、catalog 皆有）。已依 D2 補上真正的 `'default'`（沿用 StatusTag 的 `bg.secondary` + `text.base` 中性配色），並將文件/範例的 `'secondary'` 全部改為 `'default'`；同時發現 `Tag/index.vue` 有兩處重複的 CSS 規則（`.sh-tag--primary` 本體與 `.sh-tag--bordered` 內的 `&.sh-tag--primary` 各自重複宣告一次），已刪除重複、改為 `.sh-tag--default` 規則。未變動 Tag 既有預設值（仍是 `'primary'`，非 `'default'`）——是否統一預設值是更大的行為決策，留待未來再議。
+- [ ] `src/components/Select/index.vue` 的 `.sh-select-option`、`.sh-select-group-title` 各自重複宣告一次（近似 Tag 的重複 CSS 問題）。發現於補 size prop 時，屬於既存缺陷、非本次範圍，已 spawn_task 記錄（`task_754e93e0`）。
+- [ ] `src/components/MentionableTextArea/index.vue` 複製了 Textarea 重構前的舊版 CSS（含同樣寫死的 `padding: 12px`），且沒有 `size` prop，與 Textarea 已分岔。發現於補 Textarea size 時，已 spawn_task 記錄（`task_5e514f07`）。
+- [ ] `ActiveButtonGroup` 的 `showIndicator` prop 與 `fullWidth` 一樣是從未接線的死碼（`.sh-active-button-indicator` 目前無條件渲染，不受此 prop 控制）。發現於補 `block` 時，刻意不擴大範圍處理，留待未來。
+- [ ] `src/components/Select/index.vue` 有一段抽取具名 emits interface（`SliderEmits` 型態的手法）會讓 `@vue/compiler-sfc` 丟出「Unresolvable type reference」並讓整個 docs 站（因 `src/index.ts` 全域註冊機制）掛掉的編譯器怪癖，已在 Slider 身上發現並改回 inline emits 解決；已 spawn_task 記錄（`task_551d6baf`），供 Phase 3b（D6 emits 具名化）小心處理，避免重蹈覆轍。
+- [ ] Vite dev server 有一個過期轉換快取的怪癖：只修改 `types.ts` 而不順手重存對應的 `index.vue`，新增的 props/emits 有機率被靜默排除在編譯後的 `props`/`emits` 之外（無錯誤訊息）。已 spawn_task 記錄（`task_65e6d1c8`），供後續各批次注意。
+- [ ] Slider 在完全不受控（未綁定 `:value`/`v-model:value`）情境下，reka-ui 的 `passive: true` 內部 ref 可能讓新增的 `readonly` guard 出現短暫視覺漂移（受控用法下已實測確認 airtight）。已 spawn_task 記錄（`task_46da2444`），非本次文件化的主要使用情境，暫不深究。
 
 ### 3b. 結構對齊（D6）
 
@@ -255,7 +283,8 @@ ComponentName/
 
 - [ ] **Form / FormItem**：validation（rules、async validator、狀態注入 Input/Select 等的 error 顯示）— 最大功能缺口，需先設計 `useFormItem` 注入協議
 - [ ] **Table / DataTable**：基本欄位、排序、與 Pagination 整合（第一版不做虛擬捲動）
-- [ ] 其餘 TODO 清單重新排序：Drawer、Skeleton、Empty、Breadcrumb、TreeView
+- [ ] 其餘 TODO 清單重新排序與納管（原 `TODO.md`，已併入本文件並刪除）：Drawer、Skeleton、Empty、Breadcrumb、TreeView、TextEditor、MarkdownEditor、ToggleGroup、ActionButton、OptionToggle、DayRangeFilters、DayTimeline、MarkdownViewer、Timer
+- [ ] Chip 補「已勾選（checked）狀態」樣式（原 TODO.md 項目）
 
 ### 文件整頓
 

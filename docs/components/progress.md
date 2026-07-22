@@ -59,7 +59,7 @@ const onClick = () => {
 <template>
   <div>
     <SHProgress v-model:value="sizeValue" size="small" />
-    <SHProgress v-model:value="sizeValue" size="default" />
+    <SHProgress v-model:value="sizeValue" size="medium" />
     <SHProgress v-model:value="sizeValue" size="large" />
   </div>
 </template>
@@ -157,7 +157,7 @@ const onClick = () => {
 | ---------- | ------------------ | ------------------------------------------------ | ----------- |
 | value      | 當前進度值         | `number \| null`                                 | -           |
 | max        | 最大進度值         | `number`                                         | `100`       |
-| size       | 進度條尺寸         | `'small' \| 'default' \| 'large'`                | `'default'` |
+| size       | 進度條尺寸         | `'small' \| 'medium' \| 'large'`                 | `'medium'`  |
 | variant    | 進度條變體         | `'default' \| 'striped' \| 'animated'`           | `'default'` |
 | showText   | 是否顯示進度文字   | `boolean`                                        | `false`     |
 | formatText | 自定義進度文字格式 | `(value: number \| null, max: number) => string` | -           |

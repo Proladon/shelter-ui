@@ -1,22 +1,31 @@
-import type { StyleValue } from "vue"
+import type { StyleValue } from 'vue'
 
 export interface RadioProps {
   /**
-   * 當前選中的值
-   */
-  modelValue?: any
-  /**
-   * 單選框的值
+   * 目前選中的值（v-model:value）
    */
   value?: any
+  /**
+   * 原生表單值 / 此單選框代表的值（對應原生 <input value>）。
+   * 與 v-model 的 value 是兩個不同概念，故不同名，避免衝突。
+   */
+  nativeValue?: any
   /**
    * 表單名稱
    */
   name?: string
   /**
+   * 尺寸
+   */
+  size?: 'small' | 'medium' | 'large'
+  /**
    * 是否禁用
    */
   disabled?: boolean
+  /**
+   * 是否唯讀
+   */
+  readonly?: boolean
   /**
    * 是否必填
    */
@@ -61,9 +70,17 @@ export interface RadioGroupProps {
    */
   optionDisabled?: string
   /**
+   * 尺寸（套用至所有子選項）
+   */
+  size?: 'small' | 'medium' | 'large'
+  /**
    * 是否禁用整個群組
    */
   disabled?: boolean
+  /**
+   * 是否唯讀整個群組
+   */
+  readonly?: boolean
   /**
    * 表單名稱
    */
@@ -71,7 +88,7 @@ export interface RadioGroupProps {
   /**
    * 佈局方向
    */
-  orientation?: "horizontal" | "vertical"
+  orientation?: 'horizontal' | 'vertical'
   /**
    * 群組標籤
    */
@@ -102,13 +119,9 @@ export interface RadioSlots {
 
 export interface RadioEmits {
   /**
-   * 更新模型值
+   * 值變更事件（帶新值）
    */
-  "update:modelValue": [value: any]
-  /**
-   * 值變更事件
-   */
-  change: [event: Event]
+  change: [value: any]
   /**
    * 獲得焦點事件
    */
@@ -120,10 +133,6 @@ export interface RadioEmits {
 }
 
 export interface RadioGroupEmits {
-  /**
-   * 更新模型值
-   */
-  "update:value": [value: any]
   /**
    * 值變更事件
    */

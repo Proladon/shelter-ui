@@ -4,7 +4,7 @@
     class="sh-splitter-resize-handle"
     :class="{
       'sh-splitter-resize-handle--with-handle': showHandle,
-      'sh-splitter-resize-handle--visible': visable,
+      'sh-splitter-resize-handle--visible': visible,
     }"
   >
     <slot />
@@ -18,7 +18,7 @@ import type { SplitterResizeHandleCustomProps } from './types'
 
 const props = withDefaults(defineProps<SplitterResizeHandleCustomProps>(), {
   showHandle: true,
-  visable: false,
+  visible: false,
   color: 'var(--sh-primary)',
   hoverColor: 'var(--sh-primary)',
   dragColor: 'var(--sh-primary)',
@@ -32,14 +32,14 @@ const rootProps = useForwardPropsEmits(props, emits)
 
 const showHandle = computed(() => (props as any).showHandle)
 
-const visable = computed(() => {
-  return (props as any).visable
+const visible = computed(() => {
+  return props.visible
 })
 
 //@ts-ignore
 const handleStyle = computed(() => {
   return {
-    default: props.visable ? props.color : 'transparent',
+    default: props.visible ? props.color : 'transparent',
     hover: props.hoverColor || props.color,
     drag: props.dragColor || props.color,
   }
@@ -55,7 +55,7 @@ const handleStyle = computed(() => {
   }
 
   &:focus-visible {
-    @apply outline-none ring-2 ring-blue-500;
+    @apply outline-none ring-2 ring-primary;
   }
 }
 
@@ -69,7 +69,7 @@ const handleStyle = computed(() => {
 
 /* 拖拽指示器 */
 .sh-splitter-resize-handle__indicator {
-  @apply flex items-center justify-center text-gray-400;
+  @apply flex items-center justify-center text-text.primary;
 }
 
 .sh-splitter-resize-handle {

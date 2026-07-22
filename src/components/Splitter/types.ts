@@ -15,7 +15,7 @@ export interface SplitterPanelCustomProps extends SplitterPanelProps {
 
 export interface SplitterResizeHandleCustomProps
   extends SplitterResizeHandleProps {
-  visable?: boolean
+  visible?: boolean
   color?: string
   hoverColor?: string
   dragColor?: string

@@ -45,7 +45,7 @@ const summary = computed(() =>
 
 ## 尺寸
 
-上傳區域提供三種尺寸：`sm`、`md`（預設）、`lg`。
+上傳區域提供三種尺寸：`small`、`medium`（預設）、`large`。
 
 <Demo>
   <SizeDemo />
@@ -57,15 +57,15 @@ const summary = computed(() =>
   <div class="flex flex-col gap-6">
     <div>
       <p class="text-text.primary text-sm mb-2">Small</p>
-      <SHUploadZone v-model:value="filesS" size="sm" />
+      <SHUploadZone v-model:value="filesS" size="small" />
     </div>
     <div>
       <p class="text-text.primary text-sm mb-2">Medium (預設)</p>
-      <SHUploadZone v-model:value="filesM" size="md" />
+      <SHUploadZone v-model:value="filesM" size="medium" />
     </div>
     <div>
       <p class="text-text.primary text-sm mb-2">Large</p>
-      <SHUploadZone v-model:value="filesL" size="lg" />
+      <SHUploadZone v-model:value="filesL" size="large" />
     </div>
   </div>
 </template>
@@ -172,7 +172,7 @@ const files = ref([])
 | `disabled`   | 是否禁用                                                   | `boolean`              | `false` |
 | `maxCount`   | 最大文件數（`multiple` 為 `true` 時有效，`0` 表示無限制）  | `number`               | `0`     |
 | `maxSize`    | 單個文件最大位元組數（`0` 表示無限制）                     | `number`               | `0`     |
-| `size`       | 上傳區域尺寸                                               | `'sm' \| 'md' \| 'lg'` | `'md'`  |
+| `size`       | 上傳區域尺寸                                               | `'small' \| 'medium' \| 'large'` | `'medium'` |
 
 ### 事件
 

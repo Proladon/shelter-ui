@@ -1,14 +1,18 @@
 <template>
   <button
     class="sh-button"
-    :class="[variantClass, sizeClass, { 'sh-disabled': disabled || loading }]"
+    :class="[
+      variantClass,
+      sizeClass,
+      { 'sh-disabled': disabled || loading, 'sh-button--block': block },
+    ]"
     :disabled="disabled || loading"
     @click="handleClick"
   >
     <Spinner
       v-if="loading"
       :color="spinnerColor"
-      :size="size === 'default' ? 20 : size"
+      :size="size === 'medium' ? 20 : size"
     />
     <slot></slot>
   </button>
@@ -21,14 +25,15 @@ import Spinner from '@/components/Spinner/index.vue'
 
 const props = withDefaults(defineProps<ButtonProps>(), {
   type: 'default',
-  size: 'default',
+  size: 'medium',
   disabled: false,
   loading: false,
   text: false,
   ghost: false,
   dashed: false,
   outline: false,
-  borderd: false,
+  bordered: false,
+  block: false,
 })
 
 const emit = defineEmits<ButtonEmits>()
@@ -43,13 +48,13 @@ const variantClass = computed(() => {
   if (props.text) return `sh-text-${props.type}`
   if (props.outline) return `sh-outline-${props.type}`
   if (props.dashed) return `sh-dashed-${props.type}`
-  if (props.borderd) return `sh-bordered-${props.type}`
+  if (props.bordered) return `sh-bordered-${props.type}`
   return `sh-fill-${props.type}`
 })
 
 const sizeMap: Record<string, string> = {
   large: 'sh-size-lg',
-  default: 'sh-size-md',
+  medium: 'sh-size-md',
   small: 'sh-size-sm',
 }
 
@@ -71,5 +76,9 @@ const spinnerColor = computed(() => {
 
 .sh-button :deep(.loader) {
   margin-right: 0.25rem; /* mr-1 */
+}
+
+.sh-button--block {
+  @apply w-full;
 }
 </style>

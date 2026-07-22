@@ -12,5 +12,4 @@ export interface PopoverProps {
 
 export interface PopoverEmits {
   (e: 'update:value', value: boolean): void
-  (e: 'valueChange', value: boolean): void
 }

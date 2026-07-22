@@ -5,10 +5,12 @@
       <SHRadio
         v-for="option in normalizedOptions"
         :key="getOptionValue(option)"
-        v-model="modelValue"
-        :value="getOptionValue(option)"
+        v-model:value="value"
+        :native-value="getOptionValue(option)"
         :name="name"
+        :size="size"
         :disabled="disabled || getOptionDisabled(option)"
+        :readonly="readonly"
         :label="getOptionLabel(option)"
       />
     </div>
@@ -16,32 +18,34 @@
 </template>
 
 <script setup lang="ts">
-import { computed, watch } from "vue"
-import type { RadioGroupProps, RadioGroupEmits, RadioOption } from "./types"
-import SHRadio from "./index.vue"
+import { computed, watch } from 'vue'
+import type { RadioGroupProps, RadioGroupEmits, RadioOption } from './types'
+import SHRadio from './index.vue'
 
 defineOptions({
-  name: "SHRadioGroup",
+  name: 'SHRadioGroup',
 })
 
-const props = withDefaults(defineProps<RadioGroupProps>(), {
+const props = withDefaults(defineProps<Omit<RadioGroupProps, 'value'>>(), {
   options: () => [],
-  optionLabel: "label",
-  optionValue: "value",
-  optionDisabled: "disabled",
+  optionLabel: 'label',
+  optionValue: 'value',
+  optionDisabled: 'disabled',
+  size: 'medium',
   disabled: false,
-  orientation: "vertical",
+  readonly: false,
+  orientation: 'vertical',
 })
 
 const emit = defineEmits<RadioGroupEmits>()
 
-const modelValue = defineModel<any>('value')
+const value = defineModel<any>('value')
 
 const radioGroupClasses = computed(() => {
   return {
-    "sh-radio-group--horizontal": props.orientation === "horizontal",
-    "sh-radio-group--vertical": props.orientation === "vertical",
-    "sh-radio-group--disabled": props.disabled,
+    'sh-radio-group--horizontal': props.orientation === 'horizontal',
+    'sh-radio-group--vertical': props.orientation === 'vertical',
+    'sh-radio-group--disabled': props.disabled,
   }
 })
 
@@ -50,14 +54,14 @@ const normalizedOptions = computed(() => {
 })
 
 const getOptionLabel = (option: RadioOption | any) => {
-  if (typeof option === "object" && option !== null) {
+  if (typeof option === 'object' && option !== null) {
     return option[props.optionLabel] || option.label
   }
   return option
 }
 
 const getOptionValue = (option: RadioOption | any) => {
-  if (typeof option === "object" && option !== null) {
+  if (typeof option === 'object' && option !== null) {
     return option[props.optionValue] !== undefined
       ? option[props.optionValue]
       : option.value
@@ -66,7 +70,7 @@ const getOptionValue = (option: RadioOption | any) => {
 }
 
 const getOptionDisabled = (option: RadioOption | any) => {
-  if (typeof option === "object" && option !== null) {
+  if (typeof option === 'object' && option !== null) {
     return option[props.optionDisabled] || option.disabled || false
   }
   return false
@@ -74,21 +78,21 @@ const getOptionDisabled = (option: RadioOption | any) => {
 
 // 監聽模型值變化，發出 change 事件
 watch(
-  modelValue,
+  value,
   (newValue) => {
-    emit("change", newValue)
+    emit('change', newValue)
   },
-  { deep: true }
+  { deep: true },
 )
 </script>
 
-<style lang="postcss">
+<style lang="postcss" scoped>
 .sh-radio-group {
   @apply border-none p-0 m-0;
 }
 
 .sh-radio-group__label {
-  @apply block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2;
+  @apply block text-sm font-medium text-text.base mb-2;
 }
 
 .sh-radio-group__content {

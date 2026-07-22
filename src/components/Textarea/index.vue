@@ -2,9 +2,12 @@
   <div class="sh-textarea-wrapper" :class="{ 'is-disabled': disabled }">
     <div
       class="sh-textarea"
-      :class="{
-        'is-focused': focused,
-      }"
+      :class="[
+        `sh-textarea--${size}`,
+        {
+          'is-focused': focused,
+        },
+      ]"
     >
       <textarea
         ref="textareaRef"
@@ -45,6 +48,7 @@ const props = withDefaults(defineProps<TextareaProps>(), {
   placeholder: '',
   rows: 3,
   resize: 'vertical',
+  size: 'medium',
   readonly: false,
   maxlength: undefined,
   showWordLimit: false,
@@ -175,25 +179,38 @@ defineExpose({
   @apply inline-flex w-full bg-bg.primary relative;
   @apply rounded-md overflow-hidden;
   @apply transition duration-300 ease-in-out;
-  @apply border-[1px] border-solid border-border.base;
-
-  padding: 12px;
+  @apply border border-solid border-border.base;
 
   &.is-focused {
     @apply border-primary outline-none;
-    box-shadow: 0 0 0 2px var(--sh-primary-fade);
+    box-shadow: var(--sh-focus-ring);
   }
+}
+
+.sh-textarea--small {
+  @apply text-sm;
+  padding: var(--sh-spacing-sm);
+}
+
+.sh-textarea--medium {
+  @apply text-sm;
+  padding: var(--sh-spacing-md);
+}
+
+.sh-textarea--large {
+  @apply text-base;
+  padding: var(--sh-spacing-lg);
 }
 
 .sh-textarea-inner {
   @apply flex-1 w-full outline-none bg-transparent text-text.base;
-  @apply placeholder:text-gray-500;
+  @apply placeholder:text-text.primary;
   @apply resize-none;
   min-height: 0;
 }
 
 .sh-textarea-count {
-  @apply absolute bottom-2 right-2 text-xs text-gray-400;
+  @apply absolute bottom-2 right-2 text-xs text-text.primary;
   @apply bg-bg.primary px-1;
 }
 

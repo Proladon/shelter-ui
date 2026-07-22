@@ -6,7 +6,7 @@
       >
         Small
       </p>
-      <SHPinInput v-model:value="value" size="sm" />
+      <SHPinInput v-model:value="value" size="small" />
     </div>
 
     <div>
@@ -15,7 +15,7 @@
       >
         Medium (default)
       </p>
-      <SHPinInput v-model:value="value" size="md" />
+      <SHPinInput v-model:value="value" size="medium" />
     </div>
 
     <div>
@@ -24,7 +24,7 @@
       >
         Large
       </p>
-      <SHPinInput v-model:value="value" size="lg" />
+      <SHPinInput v-model:value="value" size="large" />
     </div>
   </div>
 </template>

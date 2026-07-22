@@ -24,7 +24,7 @@
 
     <div class="demo-section">
       <h4>Bordered (帶邊框按鈕)</h4>
-      <SHPagination v-model:value="page5" :total="100" :page-size="10" borderd />
+      <SHPagination v-model:value="page5" :total="100" :page-size="10" bordered />
     </div>
   </div>
 </template>

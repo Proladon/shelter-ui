@@ -81,6 +81,7 @@ const components = {
   SHBadge,
   SHChip,
   SHTag,
+  SHStatusTag,
   SHDialog,
   SHAlertDialog,
   SHBlockArea,
@@ -120,14 +121,66 @@ const components = {
   SHChatMessage,
 }
 
-/**
- * Say hello function - returns a greeting message
- * @param name - Optional name to greet, defaults to "world"
- * @returns A greeting message
- */
-export function sayHello(name: string = 'world'): string {
-  return `Hello, ${name}!`
+// 單獨導出組件（須與上方 components 清單一致，由 src/__tests__/index.test.ts 驗證）
+export {
+  SHConfigProvider,
+  SHButton,
+  SHSpin,
+  SHInput,
+  SHInputGroup,
+  SHInputGroupAddon,
+  SHNumberInput,
+  SHTextarea,
+  SHSelect,
+  SHBaseContainer,
+  SHPopover,
+  SHEditableContainer,
+  SHTooltip,
+  SHBadge,
+  SHChip,
+  SHTag,
+  SHStatusTag,
+  SHDialog,
+  SHAlertDialog,
+  SHBlockArea,
+  SHMessageBox,
+  SHSwitch,
+  SHActiveButtonGroup,
+  SHActiveButtonItem,
+  SHFlexContainer,
+  SHMentionableTextArea,
+  SHContextMenu,
+  SHProgress,
+  SHSlider,
+  SHCollapsible,
+  SHScrollArea,
+  SHSplitter,
+  SHSplitterGroup,
+  SHSplitterPanel,
+  SHSplitterResizeHandle,
+  SHNotificationProvider,
+  SHNotification,
+  SHRadio,
+  SHRadioGroup,
+  SHCheckbox,
+  SHCheckboxGroup,
+  SHCarousel,
+  SHCarouselItem,
+  SHCarouselNavigation,
+  SHCarouselIndicators,
+  SHPagination,
+  SHDivider,
+  SHTimePicker,
+  SHDatePicker,
+  SHCalendar,
+  SHUploadZone,
+  SHPinInput,
+  SHChatInput,
+  SHChatMessage,
 }
+
+// useNotification 為 composable，非組件，不進入 components 註冊清單
+export { useNotification }
 
 // 類型聲明
 export type { ThemeVarsConfig } from './components/ConfigProvider/types'
@@ -148,7 +201,7 @@ export type {
   SelectEmits,
   SelectOption,
 } from './components/Select/types'
-export type { SpinProps, SpinEmits } from './components/Spin/types'
+export type { SpinProps } from './components/Spin/types'
 export type {
   BaseContainerProps,
   BaseContainerEmits,
@@ -290,8 +343,8 @@ const install = (app: App) => {
   return app
 }
 
-// 版本號
-const version = '1.1.1'
+// 版本號（單一來源：package.json，透過 vite `define` 注入）
+const version = __SHELTER_UI_VERSION__
 
 // Vue 插件對象
 const ShelterUI: Plugin = {
@@ -303,61 +356,3 @@ export default ShelterUI
 
 // 單獨導出版本號
 export { version }
-
-// 單獨導出組件
-export {
-  SHButton,
-  SHInput,
-  SHInputGroup,
-  SHInputGroupAddon,
-  SHNumberInput,
-  SHTextarea,
-  SHSelect,
-  SHSpin,
-  SHConfigProvider,
-  SHBaseContainer,
-  SHPopover,
-  SHEditableContainer,
-  SHTooltip,
-  SHBadge,
-  SHChip,
-  SHTag,
-  SHStatusTag,
-  SHDialog,
-  SHAlertDialog,
-  SHBlockArea,
-  SHMessageBox,
-  SHActiveButtonGroup,
-  SHActiveButtonItem,
-  SHFlexContainer,
-  SHMentionableTextArea,
-  SHContextMenu,
-  SHProgress,
-  SHSlider,
-  SHCollapsible,
-  SHScrollArea,
-  SHSplitter,
-  SHSplitterGroup,
-  SHSplitterPanel,
-  SHSplitterResizeHandle,
-  SHNotificationProvider,
-  SHNotification,
-  useNotification,
-  SHRadio,
-  SHRadioGroup,
-  SHCheckbox,
-  SHCheckboxGroup,
-  SHCarousel,
-  SHCarouselItem,
-  SHCarouselNavigation,
-  SHCarouselIndicators,
-  SHPagination,
-  SHDivider,
-  SHDatePicker,
-  SHTimePicker,
-  SHCalendar,
-  SHSwitch,
-  SHPinInput,
-  SHChatInput,
-  SHChatMessage,
-}

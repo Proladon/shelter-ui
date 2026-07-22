@@ -26,7 +26,7 @@ title: AlertDialog 警告對話框
 | description    | 描述文字（也可透過 slot 設定）     | `string`                                       | —          |
 | confirmText    | 確認按鈕文字                       | `string`                                       | `'確認'`   |
 | cancelText     | 取消按鈕文字                       | `string`                                       | `'取消'`   |
-| confirmLoading | 確認按鈕載入狀態                   | `boolean`                                      | `false`    |
+| loading        | 確認按鈕載入狀態                   | `boolean`                                      | `false`    |
 | modal          | 是否為 modal 模式                  | `boolean`                                      | `true`     |
 
 ### 事件

@@ -40,14 +40,14 @@
       <SHButton type="info" outline>Info</SHButton>
     </div>
 
-    <h4>Borderd 帶邊框按鈕</h4>
+    <h4>Bordered 帶邊框按鈕</h4>
     <div class="flex gap-2 mb-2">
-      <SHButton borderd>Default</SHButton>
-      <SHButton type="primary" borderd>Primary</SHButton>
-      <SHButton type="success" borderd>Success</SHButton>
-      <SHButton type="warning" borderd>Warning</SHButton>
-      <SHButton type="danger" borderd>Danger</SHButton>
-      <SHButton type="info" borderd>Info</SHButton>
+      <SHButton bordered>Default</SHButton>
+      <SHButton type="primary" bordered>Primary</SHButton>
+      <SHButton type="success" bordered>Success</SHButton>
+      <SHButton type="warning" bordered>Warning</SHButton>
+      <SHButton type="danger" bordered>Danger</SHButton>
+      <SHButton type="info" bordered>Info</SHButton>
     </div>
   </div>
 </template>

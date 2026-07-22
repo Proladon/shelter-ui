@@ -8,7 +8,7 @@
       </div>
       <div>
         <span class="demo-label">默認：</span>
-        <Slider v-model:value="sizeValue" size="default" :min="0" :max="100" />
+        <Slider v-model:value="sizeValue" size="medium" :min="0" :max="100" />
       </div>
       <div>
         <span class="demo-label">大：</span>

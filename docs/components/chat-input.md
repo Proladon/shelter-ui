@@ -64,7 +64,7 @@ function handleImage(files: FileList) {
   <SHChatInput
     v-model:value="message"
     placeholder="詢問 AI 任何問題…"
-    :submit-loading="loading"
+    :loading="loading"
     @submit="handleSubmit"
   >
     <template #block-start>
@@ -134,7 +134,7 @@ const message = ref('')
 | `disabled`        | `boolean` | `false`       | 是否禁用                          |
 | `maxlength`       | `number`  | —             | 最大字元長度                      |
 | `showWordLimit`   | `boolean` | `false`       | 是否顯示字元計數                  |
-| `submitLoading`   | `boolean` | `false`       | 送出按鈕載入狀態                  |
+| `loading`         | `boolean` | `false`       | 送出按鈕載入狀態                  |
 | `fileAccept`      | `string`  | —             | 傳遞給檔案 input 的 `accept` 屬性 |
 | `imageAccept`     | `string`  | `'image/*'`   | 傳遞給圖片 input 的 `accept` 屬性 |
 | `hideFileUpload`  | `boolean` | `false`       | 是否隱藏檔案上傳按鈕              |

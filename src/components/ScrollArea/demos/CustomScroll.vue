@@ -41,7 +41,7 @@
         <ScrollArea
           ref="scrollArea"
           class="h-64 w-full border border-gray-300 dark:border-gray-600 rounded"
-          type="scroll"
+          visibility="scroll"
         >
           <div class="p-4 w-[800px] h-[600px] relative">
             <!-- 網格背景 -->

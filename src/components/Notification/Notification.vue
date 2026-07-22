@@ -91,14 +91,7 @@ const iconComponent = computed(() => {
 })
 
 const iconColor = computed(() => {
-  const statusMap = {
-    info: 'info',
-    success: 'success',
-    warning: 'warning',
-    error: 'danger',
-  }
-
-  return getCssVar(`sh-status-${statusMap[props.config.type || 'info']}`)
+  return getCssVar(`sh-status-${props.config.type || 'info'}`)
 })
 
 const handleClick = () => {
@@ -195,10 +188,10 @@ onUnmounted(() => {
   @apply text-status.warning;
 }
 
-.sh-notification--error {
+.sh-notification--danger {
   @apply border-status.danger bg-status.danger.fade;
 }
-.sh-notification--error .sh-notification__icon-component {
+.sh-notification--danger .sh-notification__icon-component {
   @apply text-status.danger;
 }
 
@@ -219,12 +212,12 @@ onUnmounted(() => {
 }
 
 .sh-notification__title {
-  @apply font-semibold text-gray-300 mb-1;
+  @apply font-semibold text-text.base mb-1;
   @apply text-sm leading-5;
 }
 
 .sh-notification__message {
-  @apply text-gray-400 text-sm leading-5;
+  @apply text-text.primary text-sm leading-5;
 }
 
 .sh-notification__actions {

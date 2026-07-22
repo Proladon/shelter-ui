@@ -3,13 +3,13 @@ export type MessageBoxType =
   | 'danger'
   | 'success'
   | 'warning'
-  | 'normal'
+  | 'default'
 
 import type { Component } from 'vue'
 
 export interface MessageBoxProps {
   /**
-   * 訊息盒型態：info | danger | success | warning | normal
+   * 訊息盒型態：info | danger | success | warning | default
    */
   type?: MessageBoxType
   /**

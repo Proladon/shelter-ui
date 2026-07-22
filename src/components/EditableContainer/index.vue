@@ -92,8 +92,8 @@ const handleEdit = async () => {
   @apply inline-flex items-center justify-center;
   @apply text-text.base.darken;
   @apply bg-border.base outline-none;
-  @apply rounded-bl-[6px] z-1;
-  @apply py-[3px] px-[8px];
+  @apply rounded-bl-[length:var(--sh-radius-md)] z-1;
+  @apply py-[3px] px-[var(--sh-spacing-sm)];
   @apply hover:(brightness-110 text-primary) active:(brightness-90);
   @apply transition-all duration-300;
 }

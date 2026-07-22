@@ -89,7 +89,7 @@ const tags = Array.from({ length: 50 }, (_, i) => `v1.2.0-beta.${i + 1}`)
         <ScrollArea
           ref="scrollArea"
           class="h-64 w-full border border-gray-300 dark:border-gray-600 rounded"
-          type="scroll"
+          visibility="scroll"
         >
           <div class="p-4 w-[800px] h-[600px] relative">
             <!-- 內容區塊 -->
@@ -167,7 +167,7 @@ const scrollToMiddle = () => {
           <p class="text-xs text-gray-500">內容溢出時顯示捲軸</p>
         </div>
         <ScrollArea
-          type="auto"
+          visibility="auto"
           class="h-32 w-full border border-gray-300 dark:border-gray-600 rounded"
         >
           <div class="p-3 space-y-2">
@@ -185,7 +185,7 @@ const scrollToMiddle = () => {
           <p class="text-xs text-gray-500">總是顯示捲軸</p>
         </div>
         <ScrollArea
-          type="always"
+          visibility="always"
           class="h-32 w-full border border-gray-300 dark:border-gray-600 rounded"
         >
           <div class="p-3 space-y-2">
@@ -203,7 +203,7 @@ const scrollToMiddle = () => {
           <p class="text-xs text-gray-500">滾動時顯示捲軸</p>
         </div>
         <ScrollArea
-          type="scroll"
+          visibility="scroll"
           class="h-32 w-full border border-gray-300 dark:border-gray-600 rounded"
         >
           <div class="p-3 space-y-2">
@@ -221,7 +221,7 @@ const scrollToMiddle = () => {
           <p class="text-xs text-gray-500">hover 或滾動時顯示捲軸</p>
         </div>
         <ScrollArea
-          type="hover"
+          visibility="hover"
           class="h-32 w-full border border-gray-300 dark:border-gray-600 rounded"
         >
           <div class="p-3 space-y-2">
@@ -341,7 +341,7 @@ import { ScrollArea } from '../index'
 
 | 屬性              | 類型                                        | 預設值    | 說明                                 |
 | ----------------- | ------------------------------------------- | --------- | ------------------------------------ |
-| `type`            | `'auto' \| 'always' \| 'scroll' \| 'hover'` | `'hover'` | 捲軸顯示策略                         |
+| `visibility`      | `'auto' \| 'always' \| 'scroll' \| 'hover'` | `'hover'` | 捲軸顯示策略                         |
 | `scrollHideDelay` | `number`                                    | `600`     | 停止互動後隱藏捲軸的延遲時間（毫秒） |
 | `dir`             | `'ltr' \| 'rtl'`                            | `'ltr'`   | 讀取方向                             |
 | `scrollX`         | `boolean`                                   | `false`   | 是否允許水平滾動                     |
@@ -391,7 +391,7 @@ import { ScrollArea } from '../index'
 
 - 滾動條置於內容之上，不佔用布局空間
 - 使用原生滾動確保最佳效能與相容性
-- 在 `type="scroll"` 或 `type="hover"` 模式下，可調整 `scrollHideDelay` 控制隱藏延遲
+- 在 `visibility="scroll"` 或 `visibility="hover"` 模式下，可調整 `scrollHideDelay` 控制隱藏延遲
 - 支援同時水平與垂直滾動
 
 <script setup>

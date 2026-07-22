@@ -1,5 +1,5 @@
-import Radio from "./index.vue"
-import RadioGroup from "./RadioGroup.vue"
+import Radio from './index.vue'
+import RadioGroup from './RadioGroup.vue'
 
 export default Radio
 export { RadioGroup }
@@ -10,4 +10,4 @@ export type {
   RadioGroupProps,
   RadioGroupEmits,
   RadioOption,
-} from "./types"
+} from './types'

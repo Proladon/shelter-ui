@@ -73,6 +73,7 @@ withDefaults(defineProps<BlockAreaProps>(), {
 }
 
 .sh-block-area__text {
+  /* text-white: mask-overlay text must stay high-contrast over arbitrary wrapped content */
   @apply text-sm font-medium text-white;
 }
 </style>

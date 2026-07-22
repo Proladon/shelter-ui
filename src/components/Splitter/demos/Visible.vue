@@ -6,7 +6,7 @@
           <div class="panel-content">面板 A</div>
         </SplitterPanel>
 
-        <SplitterResizeHandle :visable="true" />
+        <SplitterResizeHandle :visible="true" />
 
         <SplitterPanel :default-size="50" class="demo-panel">
           <div class="panel-content">面板 B</div>

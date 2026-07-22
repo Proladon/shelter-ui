@@ -7,10 +7,10 @@
       class="sh-slider"
       :class="[
         `sh-slider-size--${props.size}`,
-        `sh-slider-color--${props.color}`,
+        `sh-slider-type--${props.type}`,
         `sh-slider-orientation--${props.orientation}`,
       ]"
-      @update:model-value="emits('update:value', $event)"
+      @update:model-value="handleUpdate"
       @value-commit="(v: number[]) => emits('valueCommit', v)"
     >
       <SliderTrack class="sh-slider__track">
@@ -21,7 +21,9 @@
         v-for="(value, index) in modelValue"
         :key="index"
         class="sh-slider__thumb"
-        :class="`sh-slider__thumb--${props.color}`"
+        :class="`sh-slider__thumb--${props.type}`"
+        @focus="emits('focus', $event)"
+        @blur="emits('blur', $event)"
       >
         <div v-if="props.showTooltip" class="sh-slider__tooltip">
           <slot name="tooltip" :value="value" :index="index">
@@ -57,9 +59,10 @@ import { SliderRoot, SliderTrack, SliderRange, SliderThumb } from 'reka-ui'
 import type { SliderProps, SliderSlots } from './types'
 
 const props = withDefaults(defineProps<SliderProps>(), {
-  size: 'default',
-  color: 'primary',
+  size: 'medium',
+  type: 'primary',
   orientation: 'horizontal',
+  readonly: false,
   showTooltip: false,
   showMarks: false,
   min: 0,
@@ -72,18 +75,26 @@ defineSlots<SliderSlots>()
 const emits = defineEmits<{
   'update:value': [value: number[] | undefined]
   valueCommit: [value: number[]]
+  focus: [event: FocusEvent]
+  blur: [event: FocusEvent]
 }>()
 
 const delegatedProps = reactiveOmit(
   props,
   'value',
   'size',
-  'color',
+  'type',
+  'readonly',
   'showTooltip',
   'formatTooltip',
   'showMarks',
   'marks',
 )
+
+const handleUpdate = (value: number[] | undefined) => {
+  if (props.disabled || props.readonly) return
+  emits('update:value', value)
+}
 
 const getMarkStyle = (value: number) => {
   const min = props.min ?? 0
@@ -102,7 +113,7 @@ const getMarkStyle = (value: number) => {
 }
 </script>
 
-<style lang="postcss">
+<style lang="postcss" scoped>
 .sh-slider-wrapper {
   @apply relative;
 }
@@ -157,10 +168,6 @@ const getMarkStyle = (value: number) => {
   /* @apply focus:(outline-none ring-2 ring-offset-2); */
   @apply focus:(outline-none);
   @apply active:cursor-grabbing;
-  /*
-  &:focus {
-    @apply ring-blue-500;
-  } */
 
   &:hover {
     @apply shadow-md;
@@ -169,12 +176,15 @@ const getMarkStyle = (value: number) => {
 
 /* 尺寸變化 */
 .sh-slider-size--small {
+  .sh-slider__track {
+    @apply h-1.5;
+  }
   .sh-slider__thumb {
     @apply w-4 h-4;
   }
 }
 
-.sh-slider-size--default {
+.sh-slider-size--medium {
   .sh-slider__track {
     @apply h-2;
   }
@@ -193,31 +203,37 @@ const getMarkStyle = (value: number) => {
 }
 
 /* 顏色變化 */
-.sh-slider-color--primary {
+.sh-slider-type--default {
+  .sh-slider__range {
+    @apply bg-text.primary;
+  }
+}
+
+.sh-slider-type--primary {
   .sh-slider__range {
     @apply bg-primary;
   }
 }
 
-.sh-slider-color--success {
+.sh-slider-type--success {
   .sh-slider__range {
     @apply bg-status.success;
   }
 }
 
-.sh-slider-color--warning {
+.sh-slider-type--warning {
   .sh-slider__range {
     @apply bg-status.warning;
   }
 }
 
-.sh-slider-color--danger {
+.sh-slider-type--danger {
   .sh-slider__range {
     @apply bg-status.danger;
   }
 }
 
-.sh-slider-color--info {
+.sh-slider-type--info {
   .sh-slider__range {
     @apply bg-status.info;
   }
@@ -232,7 +248,7 @@ const getMarkStyle = (value: number) => {
 
   &::after {
     content: '';
-    @apply absolute top-full left-1/2 transform -translate-x-1/2 border-t-4 border-t-gray-900 border-l-4 border-l-transparent border-r-4 border-r-transparent;
+    @apply absolute top-full left-1/2 transform -translate-x-1/2 border-t-4 border-t-bg.primary border-l-4 border-l-transparent border-r-4 border-r-transparent;
   }
 }
 
@@ -244,7 +260,7 @@ const getMarkStyle = (value: number) => {
     top: 50%;
 
     &::after {
-      @apply top-1/2 left-0 transform -translate-y-1/2 border-r-4 border-r-gray-900 border-t-4 border-t-transparent border-b-4 border-b-transparent border-l-0;
+      @apply top-1/2 left-0 transform -translate-y-1/2 border-r-4 border-r-bg.primary border-t-4 border-t-transparent border-b-4 border-b-transparent border-l-0;
       left: -4px;
     }
   }
@@ -280,7 +296,7 @@ const getMarkStyle = (value: number) => {
 }
 
 .sh-slider__mark-label {
-  @apply text-xs text-gray-500;
+  @apply text-xs text-text.primary;
 }
 
 /* 禁用狀態 */

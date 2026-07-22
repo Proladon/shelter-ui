@@ -21,6 +21,10 @@ export interface ChipProps {
    * 移除圖示組件
    */
   removeIcon?: Component
+  /**
+   * 是否禁用
+   */
+  disabled?: boolean
 }
 
 export interface ChipSlots {
@@ -35,7 +39,7 @@ export interface ChipSlots {
   /**
    * 移除圖示插槽
    */
-  removeicon: (scope: {
+  'remove-icon': (scope: {
     removeCallback: (event: Event) => void
     keydownCallback: (event: Event) => void
   }) => any

@@ -2,11 +2,11 @@
   <div class="demo">
     <h3>Checkbox with Label</h3>
     <div class="demo__content">
-      <SHCheckbox v-model="checked1" label="Accept terms and conditions" />
+      <SHCheckbox v-model:value="checked1" label="Accept terms and conditions" />
     </div>
 
     <div class="demo__content">
-      <SHCheckbox v-model="checked2" label="Subscribe to newsletter" />
+      <SHCheckbox v-model:value="checked2" label="Subscribe to newsletter" />
     </div>
   </div>
 </template>

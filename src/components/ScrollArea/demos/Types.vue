@@ -15,7 +15,7 @@
           <p class="text-xs text-gray-500">內容溢出時顯示捲軸</p>
         </div>
         <ScrollArea
-          type="auto"
+          visibility="auto"
           class="h-32 w-full border border-gray-300 dark:border-gray-600 rounded"
         >
           <div class="p-3 space-y-2">
@@ -33,7 +33,7 @@
           <p class="text-xs text-gray-500">總是顯示捲軸</p>
         </div>
         <ScrollArea
-          type="always"
+          visibility="always"
           class="h-32 w-full border border-gray-300 dark:border-gray-600 rounded"
         >
           <div class="p-3 space-y-2">
@@ -51,7 +51,7 @@
           <p class="text-xs text-gray-500">滾動時顯示捲軸</p>
         </div>
         <ScrollArea
-          type="scroll"
+          visibility="scroll"
           :scroll-hide-delay="1000"
           class="h-32 w-full border border-gray-300 dark:border-gray-600 rounded"
         >
@@ -70,7 +70,7 @@
           <p class="text-xs text-gray-500">hover 或滾動時顯示捲軸</p>
         </div>
         <ScrollArea
-          type="hover"
+          visibility="hover"
           :scroll-hide-delay="500"
           class="h-32 w-full border border-gray-300 dark:border-gray-600 rounded"
         >

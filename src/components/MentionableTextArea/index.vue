@@ -268,19 +268,19 @@ function handleBlur(ev: FocusEvent) {
   @apply inline-flex w-full bg-bg.primary relative;
   @apply rounded-md overflow-hidden;
   @apply transition duration-300 ease-in-out;
-  @apply border-[1px] border-solid border-border.base;
+  @apply border border-solid border-border.base;
 
   padding: 12px;
 
   &.is-focused {
     @apply border-primary outline-none;
-    box-shadow: 0 0 0 2px var(--sh-primary-fade);
+    box-shadow: var(--sh-focus-ring);
   }
 }
 
 .sh-textarea-inner {
   @apply flex-1 w-full outline-none bg-transparent text-text.base;
-  @apply placeholder:text-gray-500;
+  @apply placeholder:text-text.primary;
   @apply resize-none;
   min-height: 0;
 }
@@ -315,7 +315,7 @@ function handleBlur(ev: FocusEvent) {
   box-shadow:
     0 10px 15px -3px rgb(0 0 0 / 0.1),
     0 4px 6px -4px rgb(0 0 0 / 0.1);
-  z-index: 50;
+  z-index: var(--sh-z-popover);
 }
 
 .sh-mentionable-item {

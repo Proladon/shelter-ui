@@ -12,12 +12,16 @@ export interface DatePickerProps {
   value?: DateValue | DateRange | null
   /** Whether to enable date range selection mode, default false */
   range?: boolean
+  /** Size of the trigger control, default 'medium' */
+  size?: 'small' | 'medium' | 'large'
   /** Input placeholder text (string label shown on the trigger) */
   placeholder?: string
   /** Whether the date picker is disabled */
   disabled?: boolean
   /** Whether the date picker is readonly */
   readonly?: boolean
+  /** 是否顯示清除按鈕 */
+  clearable?: boolean
   /** The locale to use for formatting dates (e.g. 'en-US', 'zh-TW') */
   locale?: string
   /** The minimum date that can be selected */
@@ -35,7 +39,7 @@ export interface DatePickerProps {
   /** Controlled open state of the date picker popover */
   open?: boolean
   /** Default (uncontrolled) placeholder DateValue — determines displayed month when nothing is selected */
-  defaultPlaceholder?: DateValue
+  defaultPlaceholderDate?: DateValue
 }
 
 export interface DatePickerEmits {

@@ -192,6 +192,59 @@ const readonlyTime = ref('09:15:30')
   </template>
 </Demo>
 
+### 尺寸
+
+<Demo>
+  <SizeDemo />
+  <template #code>
+
+```vue
+<template>
+  <div style="display: flex; flex-direction: column; gap: 12px;">
+    <SHTimePicker v-model:value="small" size="small" placeholder="Small" />
+    <SHTimePicker v-model:value="medium" size="medium" placeholder="Medium" />
+    <SHTimePicker v-model:value="large" size="large" placeholder="Large" />
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+import { SHTimePicker } from '@proladon/shelter-ui'
+
+const small = ref()
+const medium = ref()
+const large = ref()
+</script>
+```
+
+  </template>
+</Demo>
+
+### 可清除
+
+<Demo>
+  <ClearableTimePicker />
+  <template #code>
+
+```vue
+<template>
+  <div>
+    <SHTimePicker v-model:value="selectedTime" clearable placeholder="選擇時間" />
+    <p>選中的時間: {{ selectedTime || '無' }}</p>
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+import { SHTimePicker } from '@proladon/shelter-ui'
+
+const selectedTime = ref('14:30:00')
+</script>
+```
+
+  </template>
+</Demo>
+
 ## API
 
 ### 類型定義
@@ -209,9 +262,11 @@ interface TimeRange {
 | --------------- | ----------------------------- | -------------- | ---------------------------------------- |
 | `value`         | `string \| TimeRange \| null` | `null`         | 選中的時間值                             |
 | `range`         | `boolean`                     | `false`        | 是否為範圍選擇模式                       |
+| `size`          | `'small' \| 'medium' \| 'large'` | `'medium'`  | 觸發器尺寸                               |
 | `placeholder`   | `string`                      | `'請選擇時間'` | 佔位符文字                               |
 | `disabled`      | `boolean`                     | `false`        | 是否禁用                                 |
 | `readonly`      | `boolean`                     | `false`        | 是否唯讀                                 |
+| `clearable`     | `boolean`                     | `false`        | 是否顯示清除按鈕                         |
 | `format`        | `string`                      | `'HH:mm:ss'`   | 時間顯示格式                             |
 | `use12Hour`     | `boolean`                     | `false`        | 是否使用 12 小時制                       |
 | `hour`          | `boolean`                     | `true`         | 是否顯示小時                             |
@@ -249,4 +304,6 @@ import TwelveHourTimePicker from '@/components/TimePicker/demos/TwelveHour.vue'
 import NoSecondsTimePicker from '@/components/TimePicker/demos/NoSeconds.vue'
 import StepTimePicker from '@/components/TimePicker/demos/Step.vue'
 import DisabledTimePicker from '@/components/TimePicker/demos/Disabled.vue'
+import SizeDemo from '@/components/TimePicker/demos/SizeDemo.vue'
+import ClearableTimePicker from '@/components/TimePicker/demos/ClearableDemo.vue'
 </script>

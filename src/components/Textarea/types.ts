@@ -16,6 +16,10 @@ export interface TextareaProps {
    */
   resize?: 'none' | 'both' | 'horizontal' | 'vertical'
   /**
+   * 尺寸
+   */
+  size?: 'small' | 'medium' | 'large'
+  /**
    * 是否禁用
    */
   disabled?: boolean

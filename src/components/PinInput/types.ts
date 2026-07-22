@@ -1,4 +1,4 @@
-export type PinInputSize = 'sm' | 'md' | 'lg'
+export type PinInputSize = 'small' | 'medium' | 'large'
 export type PinInputType = 'text' | 'number'
 
 export interface PinInputProps {
@@ -32,8 +32,13 @@ export interface PinInputProps {
    */
   disabled?: boolean
   /**
+   * Whether the input is readonly (blocks typing, backspace, delete and paste)
+   * @default false
+   */
+  readonly?: boolean
+  /**
    * Size variant
-   * @default 'md'
+   * @default 'medium'
    */
   size?: PinInputSize
   /**
@@ -44,7 +49,9 @@ export interface PinInputProps {
 }
 
 export interface PinInputEmits {
-  (e: 'update:value', value: string[]): void
-  (e: 'complete', value: string[]): void
-  (e: 'change', value: string[]): void
+  'update:value': [value: string[]]
+  complete: [value: string[]]
+  change: [value: string[]]
+  focus: [e: FocusEvent]
+  blur: [e: FocusEvent]
 }

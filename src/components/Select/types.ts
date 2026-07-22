@@ -27,6 +27,10 @@ export interface SelectProps {
    */
   options?: SelectOption[]
   /**
+   * Component size
+   */
+  size?: 'small' | 'medium' | 'large'
+  /**
    * Whether the select is disabled
    */
   disabled?: boolean

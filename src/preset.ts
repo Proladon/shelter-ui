@@ -32,6 +32,43 @@ const safelist = [
   ...radiusKeys.map((r) => `sh-rounded-${r}`),
 ]
 
+// ── Shared enter/exit keyframes ──────────────────────────────────────
+// Single source for the slide+fade / fade animations previously duplicated
+// across Popover, Tooltip, ContextMenu and Dialog. Consumed via plain
+// `animation-name` (not Uno's `animate-*` utility) — each component still
+// controls its own duration/easing (via --sh-duration-*/--sh-ease-* tokens)
+// and which data-state/data-side triggers which animation-name.
+// Also duplicated into core/index.ts's generateBaselineCss(): this preflight
+// covers consumers who use only this preset (no compiled dist/index.css),
+// while generateBaselineCss covers the compiled-CSS path — that one is the
+// one actually verified to reach dist/index.css in this repo's own build.
+const sharedKeyframesCss = `
+@keyframes sh-slide-up-fade {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes sh-slide-right-fade {
+  from { opacity: 0; transform: translateX(-4px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes sh-slide-down-fade {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes sh-slide-left-fade {
+  from { opacity: 0; transform: translateX(4px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes sh-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes sh-fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+`
+
 // ── Preset ──────────────────────────────────────────────────────────
 export function presetShelterUI(): Preset {
   const colors = generateUnoThemeColors()
@@ -40,6 +77,7 @@ export function presetShelterUI(): Preset {
   return {
     name: 'shelter-ui',
     safelist,
+    preflights: [{ getCSS: () => sharedKeyframesCss }],
     shortcuts: [
       // ── Dynamic Variant Shortcuts ──────────────────────────────
       [
@@ -93,6 +131,10 @@ export function presetShelterUI(): Preset {
       borderRadius: tokens.borderRadius,
       spacing: tokens.spacing,
       fontSize: tokens.fontSize,
+      zIndex: tokens.zIndex,
+      boxShadow: tokens.boxShadow,
+      transitionDuration: tokens.transitionDuration,
+      transitionTimingFunction: tokens.transitionTimingFunction,
     },
   }
 }

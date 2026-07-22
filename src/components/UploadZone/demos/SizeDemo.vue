@@ -2,15 +2,15 @@
   <div class="flex flex-col gap-6">
     <div>
       <p class="text-text.primary text-sm mb-2">Small</p>
-      <SHUploadZone v-model:value="filesS" size="sm" />
+      <SHUploadZone v-model:value="filesS" size="small" />
     </div>
     <div>
       <p class="text-text.primary text-sm mb-2">Medium (default)</p>
-      <SHUploadZone v-model:value="filesM" size="md" />
+      <SHUploadZone v-model:value="filesM" size="medium" />
     </div>
     <div>
       <p class="text-text.primary text-sm mb-2">Large</p>
-      <SHUploadZone v-model:value="filesL" size="lg" />
+      <SHUploadZone v-model:value="filesL" size="large" />
     </div>
   </div>
 </template>

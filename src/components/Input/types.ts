@@ -4,6 +4,10 @@ export interface InputProps {
    */
   value?: string | number
   /**
+   * Input size
+   */
+  size?: 'small' | 'medium' | 'large'
+  /**
    * Whether the input is disabled
    */
   disabled?: boolean

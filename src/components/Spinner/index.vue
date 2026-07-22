@@ -48,12 +48,7 @@ const size = computed(() =>
   typeof props.size === 'number' ? props.size : parseInt(props.size, 10) || 40,
 )
 const computedColor = computed(() => {
-  // If color is a hex or rgb(a), use as fill, else if class name, use as var(--color), else use var(--sh-text-base)
-  if (props.color) {
-    // if (/^#|rgb|hsl/.test(props.color)) return props.color
-    // treat as CSS var name
-    return props.color
-  }
+  if (props.color) return props.color
   return 'var(--sh-text-base)'
 })
 </script>

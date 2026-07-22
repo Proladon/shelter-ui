@@ -3,6 +3,49 @@
 /* Re-generated on every `pnpm dev` / `pnpm build`.           */
 
 :root {
+  --sh-spacing-xs: 4px;
+  --sh-spacing-sm: 8px;
+  --sh-spacing-md: 12px;
+  --sh-spacing-lg: 16px;
+  --sh-spacing-xl: 24px;
+  --sh-spacing-2xl: 32px;
+  --sh-radius-none: 0px;
+  --sh-radius-sm: 4px;
+  --sh-radius-md: 6px;
+  --sh-radius-lg: 8px;
+  --sh-radius-xl: 12px;
+  --sh-radius-full: 9999px;
+  --sh-font-size-xs: 12px;
+  --sh-font-size-sm: 14px;
+  --sh-font-size-md: 16px;
+  --sh-font-size-lg: 18px;
+  --sh-font-size-xl: 20px;
+  --sh-font-size-2xl: 24px;
+  --sh-component-size-xs: 24px;
+  --sh-component-size-sm: 30px;
+  --sh-component-size-md: 36px;
+  --sh-component-size-lg: 42px;
+  --sh-component-size-xl: 48px;
+  --sh-z-dropdown: 1000;
+  --sh-z-sticky: 1020;
+  --sh-z-overlay: 1040;
+  --sh-z-modal: 1050;
+  --sh-z-popover: 1060;
+  --sh-z-tooltip: 1070;
+  --sh-z-notification: 1080;
+  --sh-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.24);
+  --sh-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
+  --sh-shadow-lg: 0 10px 24px rgba(0, 0, 0, 0.35);
+  --sh-duration-fast: 150ms;
+  --sh-duration-normal: 250ms;
+  --sh-duration-slow: 400ms;
+  --sh-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --sh-ease-enter: cubic-bezier(0, 0, 0.2, 1);
+  --sh-ease-leave: cubic-bezier(0.4, 0, 1, 1);
+  --sh-focus-ring: 0 0 0 2px var(--sh-primary-fade);
+}
+
+:root, [data-theme='dark'] {
   --sh-primary: #b1a69a;
   --sh-primary-darken: #837465;
   --sh-primary-lighten: #DCD7D2;
@@ -47,27 +90,76 @@
   --sh-status-success-darken: #5D9982;
   --sh-status-success-lighten: #DEEBE6;
   --sh-status-success-fade: #9CC3B44D;
-  --sh-spacing-xs: 4px;
-  --sh-spacing-sm: 8px;
-  --sh-spacing-md: 12px;
-  --sh-spacing-lg: 16px;
-  --sh-spacing-xl: 24px;
-  --sh-spacing-2xl: 32px;
-  --sh-radius-none: 0px;
-  --sh-radius-sm: 4px;
-  --sh-radius-md: 6px;
-  --sh-radius-lg: 8px;
-  --sh-radius-xl: 12px;
-  --sh-radius-full: 9999px;
-  --sh-font-size-xs: 12px;
-  --sh-font-size-sm: 14px;
-  --sh-font-size-md: 16px;
-  --sh-font-size-lg: 18px;
-  --sh-font-size-xl: 20px;
-  --sh-font-size-2xl: 24px;
-  --sh-component-size-xs: 24px;
-  --sh-component-size-sm: 30px;
-  --sh-component-size-md: 36px;
-  --sh-component-size-lg: 42px;
-  --sh-component-size-xl: 48px;
+}
+
+[data-theme='light'] {
+  --sh-primary: #8a7561;
+  --sh-primary-darken: #615244;
+  --sh-primary-lighten: #AB9887;
+  --sh-primary-fade: #8A75614D;
+  --sh-bg-primary: #ffffff;
+  --sh-bg-primary-darken: #B3B3B3;
+  --sh-bg-primary-lighten: #FFFFFF;
+  --sh-bg-primary-fade: #FFFFFF4D;
+  --sh-bg-secondary: #f3f4f6;
+  --sh-bg-secondary-darken: #9FA7B7;
+  --sh-bg-secondary-lighten: #FFFFFF;
+  --sh-bg-secondary-fade: #F3F4F64D;
+  --sh-text-base: #1f2937;
+  --sh-text-base-darken: #161D27;
+  --sh-text-base-lighten: #283548;
+  --sh-text-base-fade: #1F29374D;
+  --sh-text-primary: #6b7280;
+  --sh-text-primary-darken: #4B505A;
+  --sh-text-primary-lighten: #9096A2;
+  --sh-text-primary-fade: #6B72804D;
+  --sh-border-base: #e5e7eb;
+  --sh-border-base-darken: #969EAE;
+  --sh-border-base-lighten: #FFFFFF;
+  --sh-border-base-fade: #E5E7EB4D;
+  --sh-border-primary: #c9b8a3;
+  --sh-border-primary-darken: #A1835E;
+  --sh-border-primary-lighten: #F1EDE8;
+  --sh-border-primary-fade: #C9B8A34D;
+  --sh-status-info: #57606a;
+  --sh-status-info-darken: #3D434A;
+  --sh-status-info-lighten: #717D8A;
+  --sh-status-info-fade: #57606A4D;
+  --sh-status-danger: #dc2626;
+  --sh-status-danger-darken: #9C1919;
+  --sh-status-danger-lighten: #E76969;
+  --sh-status-danger-fade: #DC26264D;
+  --sh-status-warning: #d97706;
+  --sh-status-warning-darken: #985304;
+  --sh-status-warning-lighten: #F99829;
+  --sh-status-warning-fade: #D977064D;
+  --sh-status-success: #16a34a;
+  --sh-status-success-darken: #0F7234;
+  --sh-status-success-lighten: #1DD460;
+  --sh-status-success-fade: #16A34A4D;
+}
+
+@keyframes sh-slide-up-fade {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes sh-slide-right-fade {
+  from { opacity: 0; transform: translateX(-4px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes sh-slide-down-fade {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes sh-slide-left-fade {
+  from { opacity: 0; transform: translateX(4px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes sh-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes sh-fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
 }

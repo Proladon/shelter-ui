@@ -130,14 +130,54 @@ h4 {
   </template>
 </Demo>
 
+## 撐滿寬度
+
+設定 `block` 後，按鈕組會撐滿容器寬度，內部按鈕依比例平均分配剩餘空間。
+
+<Demo>
+  <BlockDemo />
+  
+  <template #code>
+
+```vue
+<template>
+  <div class="narrow-container">
+    <SHActiveButtonGroup v-model:value="activeTab" block>
+      <SHActiveButtonItem value="all">All</SHActiveButtonItem>
+      <SHActiveButtonItem value="active">Active</SHActiveButtonItem>
+      <SHActiveButtonItem value="completed">Completed</SHActiveButtonItem>
+    </SHActiveButtonGroup>
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+
+const activeTab = ref('all')
+</script>
+
+<style scoped>
+.narrow-container {
+  width: 280px;
+  padding: 12px;
+  border: 1px dashed var(--sh-border-base);
+  border-radius: 6px;
+}
+</style>
+```
+
+  </template>
+</Demo>
+
 ## API
 
 ### ActiveButtonGroup Props
 
-| 屬性名       | 說明                                      | 類型     | 默認值 |
-| ------------ | ----------------------------------------- | -------- | ------ |
+| 屬性名       | 說明                                      | 類型      | 默認值  |
+| ------------ | ----------------------------------------- | --------- | ------- |
 | value        | 當前選中按鈕的值（支持 v-model:value 雙向綁定） | `string` | —      |
-| defaultValue | 默認選中按鈕的值                          | `string` | —      |
+| defaultValue | 默認選中按鈕的值                          | `string`  | —       |
+| block        | 是否撐滿容器寬度                          | `boolean` | `false` |
 
 ### ActiveButtonGroup Events
 
@@ -163,4 +203,5 @@ h4 {
 import { SHConfigProvider } from '@/index'
 import BasicDemo from '@/components/ActiveButtonGroup/demos/BasicDemo.vue'
 import VariantsDemo from '@/components/ActiveButtonGroup/demos/VariantsDemo.vue'
+import BlockDemo from '@/components/ActiveButtonGroup/demos/BlockDemo.vue'
 </script>

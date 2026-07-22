@@ -62,7 +62,7 @@ const range = ref([25, 75])
 <template>
   <div>
     <SHSlider v-model:value="v" size="small" />
-    <SHSlider v-model:value="v" size="default" />
+    <SHSlider v-model:value="v" size="medium" />
     <SHSlider v-model:value="v" size="large" />
   </div>
 </template>
@@ -87,9 +87,9 @@ const v = ref([60])
 ```vue
 <template>
   <div>
-    <SHSlider v-model:value="c" color="primary" />
-    <SHSlider v-model:value="c" color="secondary" />
-    <SHSlider v-model:value="c" color="success" />
+    <SHSlider v-model:value="c" type="default" />
+    <SHSlider v-model:value="c" type="primary" />
+    <SHSlider v-model:value="c" type="success" />
   </div>
 </template>
 
@@ -181,6 +181,30 @@ const marks = { 0: '0%', 25: '25%', 50: '50%', 75: '75%', 100: '100%' }
   </template>
 </Demo>
 
+## 唯讀狀態
+
+<Demo>
+  <ReadonlySlider />
+  <template #code>
+
+```vue
+<template>
+  <div>
+    <SHSlider v-model:value="value" :min="0" :max="100" readonly />
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+import { SHSlider } from '@proladon/shelter-ui'
+
+const value = ref([50])
+</script>
+```
+
+  </template>
+</Demo>
+
 ## API
 
 ### 屬性
@@ -191,10 +215,11 @@ const marks = { 0: '0%', 25: '25%', 50: '50%', 75: '75%', 100: '100%' }
 | min           | 最小值           | `number`                                                                   | `0`            |
 | max           | 最大值           | `number`                                                                   | `100`          |
 | step          | 步進間隔         | `number`                                                                   | `1`            |
-| size          | 滑桿尺寸         | `'small' \| 'default' \| 'large'`                                          | `'default'`    |
-| color         | 滑桿顏色         | `'primary' \| 'secondary' \| 'success' \| 'warning' \| 'danger' \| 'info'` | `'primary'`    |
+| size          | 滑桿尺寸         | `'small' \| 'medium' \| 'large'`                                           | `'medium'`     |
+| type          | 滑桿語意類型     | `'default' \| 'primary' \| 'info' \| 'success' \| 'warning' \| 'danger'`   | `'primary'`    |
 | orientation   | 滑桿方向         | `'horizontal' \| 'vertical'`                                               | `'horizontal'` |
 | disabled      | 是否禁用         | `boolean`                                                                  | `false`        |
+| readonly      | 是否唯讀（唯讀時滑塊仍可聚焦，但無法拖曳或以鍵盤變更數值） | `boolean`                                     | `false`        |
 | showTooltip   | 是否顯示提示框   | `boolean`                                                                  | `false`        |
 | formatTooltip | 自定義提示框格式 | `(value: number) => string`                                                | -              |
 | showMarks     | 是否顯示標記     | `boolean`                                                                  | `false`        |
@@ -206,6 +231,8 @@ const marks = { 0: '0%', 25: '25%', 50: '50%', 75: '75%', 100: '100%' }
 | ------------ | ---------------- | ------------------- |
 | update:value | 滑桿值變化時觸發 | `(value: number[])` |
 | valueCommit  | 滑桿值確定時觸發 | `(value: number[])` |
+| focus        | 滑塊（thumb）獲得焦點時觸發 | `(event: FocusEvent)` |
+| blur         | 滑塊（thumb）失去焦點時觸發 | `(event: FocusEvent)` |
 
 ### 插槽 Slots
 
@@ -224,4 +251,5 @@ import ColorSlider from '@/components/Slider/demos/ColorSlider.vue'
 import TooltipSlider from '@/components/Slider/demos/TooltipSlider.vue'
 import VerticalSlider from '@/components/Slider/demos/VerticalSlider.vue'
 import MarksSlider from '@/components/Slider/demos/MarksSlider.vue'
+import ReadonlySlider from '@/components/Slider/demos/ReadonlySlider.vue'
 </script>

@@ -1,5 +1,8 @@
 <template>
-  <div class="sh-input-wrapper" :class="{ 'is-disabled': disabled }">
+  <div
+    class="sh-input-wrapper"
+    :class="[`sh-input--${size}`, { 'is-disabled': disabled }]"
+  >
     <div
       class="sh-input"
       :class="{
@@ -63,6 +66,7 @@ defineOptions({
 
 const props = withDefaults(defineProps<InputProps>(), {
   value: '',
+  size: 'medium',
   disabled: false,
   clearable: false,
   placeholder: '',
@@ -171,7 +175,7 @@ const slots = defineSlots<{
 }>()
 </script>
 
-<style scoped>
+<style lang="postcss" scoped>
 .sh-input-wrapper {
   @apply w-full inline-flex flex-col relative;
 }
@@ -185,12 +189,23 @@ const slots = defineSlots<{
   @apply rounded-md overflow-hidden;
   @apply transition duration-300 ease-in-out;
   @apply border border-solid border-border.base;
-  @apply h-[var(--sh-component-size-md)] px-[var(--sh-spacing-md)];
 }
 
 .sh-input.is-focused {
   @apply border-primary outline-none;
-  box-shadow: 0 0 0 2px var(--sh-primary-fade);
+  box-shadow: var(--sh-focus-ring);
+}
+
+.sh-input--small .sh-input {
+  @apply h-[var(--sh-component-size-sm)] px-[var(--sh-spacing-sm)] text-sm;
+}
+
+.sh-input--medium .sh-input {
+  @apply h-[var(--sh-component-size-md)] px-[var(--sh-spacing-md)] text-sm;
+}
+
+.sh-input--large .sh-input {
+  @apply h-[var(--sh-component-size-lg)] px-[var(--sh-spacing-lg)] text-base;
 }
 
 .sh-input-inner {

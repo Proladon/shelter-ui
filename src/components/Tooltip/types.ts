@@ -12,5 +12,4 @@ export interface TooltipProps {
 
 export interface TooltipEmits {
   (e: 'update:value', value: boolean): void
-  (e: 'valueChange', value: boolean): void
 }

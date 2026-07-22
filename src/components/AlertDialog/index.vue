@@ -5,7 +5,7 @@
     :type="type"
     :width="400"
     content-class="sh-alert-dialog"
-    @valueChange="handleValueChange"
+    @update:value="handleValueChange"
   >
     <template #trigger>
       <slot name="trigger" />
@@ -40,12 +40,12 @@
           :class="[
             'sh-interactive sh-rounded-md sh-size-md',
             `sh-fill-${type}`,
-            { 'sh-disabled': confirmLoading },
+            { 'sh-disabled': loading },
           ]"
-          :disabled="confirmLoading"
+          :disabled="loading"
           @click="handleConfirm"
         >
-          <Spinner v-if="confirmLoading" :size="14" />
+          <Spinner v-if="loading" :size="14" />
           {{ confirmText }}
         </button>
       </slot>
@@ -70,14 +70,14 @@ const props = withDefaults(defineProps<AlertDialogProps>(), {
   description: undefined,
   confirmText: '確認',
   cancelText: '取消',
-  confirmLoading: false,
+  loading: false,
 })
 
 const emit = defineEmits<AlertDialogEmits>()
 
 const iconComponent = computed(() => alertDialogIconMap[props.type ?? 'danger'])
 
-// valueChange fires when dialog is dismissed via Escape / external means — treat as cancel
+// Fires whenever the dialog's open state changes, including dismissal via Escape / external means — treat closing as cancel
 const handleValueChange = (value: boolean) => {
   emit('update:value', value)
   if (!value) emit('cancel')

@@ -94,10 +94,12 @@ const handleClick = () => {
 }
 
 .sh-carousel-item__overlay {
+  /* photo-caption gradient scrim over the slide image, not a themed surface */
   @apply absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent;
   @apply flex items-end justify-start p-6;
 }
 
+/* text-white below: caption text sits on the image + gradient scrim above, contrast-on-image */
 .sh-carousel-item__text {
   @apply text-white;
 }
@@ -112,6 +114,6 @@ const handleClick = () => {
 
 .sh-carousel-item__content-text {
   @apply w-full h-full flex items-center justify-center p-6 text-center;
-  @apply bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100;
+  @apply bg-bg.primary text-text.base;
 }
 </style>

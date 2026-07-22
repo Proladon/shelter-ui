@@ -45,7 +45,7 @@ Button 組件提供了多種樣式變化，包括文字、幽靈、虛線、描�
   <div class="flex gap-2">
     <SHButton dashed>Dashed</SHButton>
     <SHButton type="warning" outline>Outline</SHButton>
-    <SHButton type="primary" borderd>Borderd</SHButton>
+    <SHButton type="primary" bordered>Bordered</SHButton>
     <SHButton type="primary" plain>Plain</SHButton>
     <SHButton type="danger" ghost>Ghost</SHButton>
     <SHButton type="success" text>Text</SHButton>
@@ -104,14 +104,14 @@ Button 組件提供了多種樣式變化，包括文字、幽靈、虛線、描�
       <SHButton type="info" outline>Info</SHButton>
     </div>
 
-    <h4>Borderd 帶邊框按鈕</h4>
+    <h4>Bordered 帶邊框按鈕</h4>
     <div class="flex gap-2 mb-2">
-      <SHButton borderd>Default</SHButton>
-      <SHButton type="primary" borderd>Primary</SHButton>
-      <SHButton type="success" borderd>Success</SHButton>
-      <SHButton type="warning" borderd>Warning</SHButton>
-      <SHButton type="danger" borderd>Danger</SHButton>
-      <SHButton type="info" borderd>Info</SHButton>
+      <SHButton bordered>Default</SHButton>
+      <SHButton type="primary" bordered>Primary</SHButton>
+      <SHButton type="success" bordered>Success</SHButton>
+      <SHButton type="warning" bordered>Warning</SHButton>
+      <SHButton type="danger" bordered>Danger</SHButton>
+      <SHButton type="info" bordered>Info</SHButton>
     </div>
   </div>
 </template>
@@ -122,7 +122,7 @@ Button 組件提供了多種樣式變化，包括文字、幽靈、虛線、描�
 
 ## 按鈕尺寸
 
-Button 組件提供三種尺寸：小、默認、大。
+Button 組件提供三種尺寸：小、中、大。
 
 <Demo>
   <SizeDemo />
@@ -133,7 +133,7 @@ Button 組件提供三種尺寸：小、默認、大。
 <template>
   <div class="flex items-center gap-2">
     <SHButton size="small">小按鈕</SHButton>
-    <SHButton>默認按鈕</SHButton>
+    <SHButton>中按鈕</SHButton>
     <SHButton size="large">大按鈕</SHButton>
   </div>
 </template>
@@ -208,14 +208,15 @@ const toggleLoading = () => {
 | 屬性名   | 說明               | 類型                                                                     | 默認值      |
 | -------- | ------------------ | ------------------------------------------------------------------------ | ----------- |
 | type     | 按鈕類型           | `'primary' \| 'success' \| 'warning' \| 'danger' \| 'info' \| 'default'` | `'default'` |
-| size     | 按鈕尺寸           | `'large' \| 'default' \| 'small'`                                        | `'default'` |
+| size     | 按鈕尺寸           | `'small' \| 'medium' \| 'large'` | `'medium'` |
 | disabled | 是否禁用           | `boolean`                                                                | `false`     |
 | loading  | 是否顯示加載狀態   | `boolean`                                                                | `false`     |
 | text     | 是否為文字按鈕     | `boolean`                                                                | `false`     |
 | ghost    | 是否為幽靈按鈕     | `boolean`                                                                | `false`     |
 | dashed   | 是否為虛線邊框按鈕 | `boolean`                                                                | `false`     |
 | outline  | 是否為描邊按鈕     | `boolean`                                                                | `false`     |
-| borderd  | 是否為帶邊框按鈕   | `boolean`                                                                | `false`     |
+| bordered | 是否為帶邊框按鈕   | `boolean`                                                                | `false`     |
+| block    | 是否撐滿容器寬度   | `boolean`                                                                | `false`     |
 
 ### 事件
 

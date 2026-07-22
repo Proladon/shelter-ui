@@ -2,7 +2,8 @@
   <div
     v-if="visible"
     class="sh-chip"
-    :tabindex="removable ? 0 : undefined"
+    :class="{ 'sh-chip--disabled': disabled }"
+    :tabindex="removable && !disabled ? 0 : undefined"
     @keydown="onKeyDown"
   >
     <!-- 圖片 -->
@@ -21,7 +22,7 @@
     <!-- 移除圖示 -->
     <slot
       v-if="removable"
-      name="removeicon"
+      name="remove-icon"
       :remove-callback="remove"
       :keydown-callback="onKeyDown"
     >
@@ -48,6 +49,7 @@ const props = withDefaults(defineProps<ChipProps>(), {
   label: '',
   image: '',
   removable: false,
+  disabled: false,
 })
 
 const emit = defineEmits<ChipEmits>()
@@ -56,6 +58,7 @@ const visible = ref(true)
 const XIcon = IconX
 
 const remove = (event: Event) => {
+  if (props.disabled) return
   visible.value = false
   emit('remove', event)
   emit('removeicon', event)
@@ -81,6 +84,10 @@ const onKeyDown = (event: KeyboardEvent) => {
 
 .sh-chip:focus {
   @apply outline-none;
+}
+
+.sh-chip--disabled {
+  @apply opacity-50 pointer-events-none cursor-not-allowed;
 }
 
 .sh-chip__image {

@@ -116,6 +116,6 @@ const delegatedProps = reactiveOmit(
 
 /* Focus 狀態 */
 /* .sh-collapsible__trigger:focus-visible {
-  @apply ring-2 ring-blue-500 ring-offset-2;
+  @apply ring-2 ring-primary ring-offset-2;
 } */
 </style>

@@ -74,6 +74,7 @@ const handleIndicatorClick = (index: number) => {
 }
 
 .sh-carousel-indicators__item {
+  /* bg-white/50: translucent dot indicator over carousel images, not a themed surface */
   @apply w-3 h-3 rounded-full bg-white/50 border-0 cursor-pointer transition-all duration-200;
   @apply hover:(bg-primary);
   @apply focus:(outline-none ring-2 ring-primary.fade);

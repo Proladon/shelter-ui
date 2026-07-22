@@ -2,10 +2,13 @@ import { defineConfig, type Plugin } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import UnoCSS from 'unocss/vite'
 import { resolve } from 'path'
-import { mkdirSync, writeFileSync } from 'node:fs'
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import dts from 'vite-plugin-dts'
 import { generateBaselineCss } from './src/core'
-// import { analyzer } from 'vite-bundle-analyzer'
+
+const pkg = JSON.parse(
+  readFileSync(resolve(__dirname, 'package.json'), 'utf-8'),
+)
 
 /**
  * Generates src/generated/baseline.css from design tokens at build/dev start.
@@ -31,16 +34,19 @@ function generateBaselinePlugin(): Plugin {
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  define: {
+    __SHELTER_UI_VERSION__: JSON.stringify(pkg.version),
+  },
   plugins: [
     generateBaselinePlugin(),
     vue(),
     UnoCSS(),
     dts({
       include: ['src/**/*.ts', 'src/**/*.vue'],
+      exclude: ['src/App.vue', 'src/main.ts', 'src/views/**'],
       outDir: 'dist',
       tsconfigPath: './tsconfig.app.json',
     }),
-    // analyzer(),
   ],
   resolve: {
     alias: {
@@ -76,11 +82,7 @@ export default defineConfig({
           vue: 'Vue',
         },
         exports: 'named',
-        assetFileNames: () => {
-          // if (assetInfo.name === 'style.css') return 'index.css'
-          // return assetInfo.name || ''
-          return 'index.css'
-        },
+        assetFileNames: () => 'index.css',
       },
     },
   },

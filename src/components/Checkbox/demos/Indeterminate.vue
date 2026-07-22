@@ -2,22 +2,22 @@
   <div class="demo">
     <h3>Indeterminate Checkbox</h3>
     <div class="demo__content">
-      <SHCheckbox v-model="parentChecked" label="Select All" />
+      <SHCheckbox v-model:value="parentChecked" label="Select All" />
 
       <div class="ml-6 mt-2 space-y-2">
         <SHCheckbox
-          :model-value="children.includes('option1')"
-          @update:model-value="(value) => updateChild('option1', value as boolean | 'indeterminate' | null)"
+          :value="children.includes('option1')"
+          @update:value="(value) => updateChild('option1', value as boolean | 'indeterminate' | null)"
           label="Option 1"
         />
         <SHCheckbox
-          :model-value="children.includes('option2')"
-          @update:model-value="(value) => updateChild('option2', value as boolean | 'indeterminate' | null)"
+          :value="children.includes('option2')"
+          @update:value="(value) => updateChild('option2', value as boolean | 'indeterminate' | null)"
           label="Option 2"
         />
         <SHCheckbox
-          :model-value="children.includes('option3')"
-          @update:model-value="(value) => updateChild('option3', value as boolean | 'indeterminate' | null)"
+          :value="children.includes('option3')"
+          @update:value="(value) => updateChild('option3', value as boolean | 'indeterminate' | null)"
           label="Option 3"
         />
       </div>

@@ -26,7 +26,7 @@ export interface ChatInputProps {
   /**
    * 送出按鈕是否載入中
    */
-  submitLoading?: boolean
+  loading?: boolean
   /**
    * 接受的檔案類型（傳遞給 file input 的 accept 屬性）
    */

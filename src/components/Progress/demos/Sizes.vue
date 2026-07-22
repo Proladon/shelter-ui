@@ -8,7 +8,7 @@
       </div>
       <div>
         <span class="demo-label">默認尺寸：</span>
-        <Progress :value="sizeProgress" size="default" :show-text="true" />
+        <Progress :value="sizeProgress" size="medium" :show-text="true" />
       </div>
       <div>
         <span class="demo-label">大尺寸：</span>

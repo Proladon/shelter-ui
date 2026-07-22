@@ -72,7 +72,6 @@ export default defineConfig({
 
 匯出名稱 = `SH` + PascalCase 元件名（`components-catalog.json` 裡的 `name` **不含** `SH` 前綴，記得自己補上）。
 
-- 例外：catalog 裡的 `FileUpload` 實際匯出名稱是 **`SHUploadZone`**（catalog 描述裡有註記「又名 UploadZone」）。
 - 不確定某個元件的正確匯出名稱時，去 `node_modules/@proladon/shelter-ui/dist/index.d.ts` 或 catalog 對照，不要用猜的複數/單數或縮寫。
 
 ### 2. v-model 慣例：`value` / `update:value`（不是 Vue 預設的 `modelValue`）
@@ -101,7 +100,7 @@ export default defineConfig({
 沒有全庫統一的 size 列舉。實際觀察到兩種風格並存：
 
 - `'small' | 'default' | 'large'` — 例如 `SHButton`、`SHNumberInput`、`SHPagination`、`SHProgress`、`SHSlider`
-- `'sm' | 'md' | 'lg'` — 例如 `SHFileUpload`（`SHUploadZone`）、`SHPinInput`
+- `'sm' | 'md' | 'lg'` — 例如 `SHUploadZone`、`SHPinInput`
 
 寫 `size="sm"` 在 `SHButton` 上是錯的（要寫 `size="small"`）。**每次都去 catalog 查該元件實際的 `size` 型別**，不要跨元件複製貼上。
 
@@ -113,7 +112,7 @@ export default defineConfig({
 
 ### 5. 需要包裹的全域 Provider
 
-- **`SHConfigProvider`**：建議包在應用最外層（不是硬性要求，但要客製主題、或用到 `theme-config` 時必須有），透過 `theme-config` prop 傳入 `ThemeVarsConfig` 覆蓋設計 token，`theme-prefix` 預設為 `'sh'`。
+- **`SHConfigProvider`**：建議包在應用最外層（不是硬性要求，但要客製主題、或用到 `theme-config` 時必須有），透過 `theme-config` prop 傳入 `ThemeVarsConfig`（`DeepPartial<DesignTokens>`，例如 `{ colors: { primary: '#ff0000' } }`）覆蓋設計 token；可巢狀使用，覆寫範圍僅限於自身容器。
 - **`SHNotificationProvider`**：只有用到 `SHNotification` / `useNotification()` 時才需要，且必須包在會呼叫 `useNotification()` 的元件之外層：
 
 ```vue
@@ -160,13 +159,13 @@ notify({ type: 'success', message: '操作成功！' })
 
 查詢方式：讀取這個 JSON，用元件名稱（不含 `SH` 前綴）過濾出對應物件即可拿到該元件完整定義，**優先於**憑記憶或猜測 Vue 慣例編寫代碼。
 
-少數元件透過 `ref` 暴露方法，需要程式化控制時才用得到：`SHInput`/`SHTextarea`（focus/blur/select）、`SHSelect`（focus/blur/toggleDropdown）、`SHDatePicker`（focus/blur/clear）、`SHScrollArea`（scrollTop/scrollBottom/scrollTo/getViewport）、`SHFileUpload`（openFilePicker）。
+少數元件透過 `ref` 暴露方法，需要程式化控制時才用得到：`SHInput`/`SHTextarea`（focus/blur/select）、`SHSelect`（focus/blur/toggleDropdown）、`SHDatePicker`（focus/blur/clear）、`SHScrollArea`（scrollTop/scrollBottom/scrollTo/getViewport）、`SHUploadZone`（openFilePicker）。
 
 ## 元件總覽（依分類，方便快速查找該用哪個）
 
 > 下方僅列一句話用途，供快速定位；詳細 API 一律以 `components-catalog.json` 為準。除特別標註外，匯入名稱皆為 `SH` + 元件名。
 
-**基礎表單**：`Button`、`Input`、`InputGroup`（+`InputGroupAddon`）、`NumberInput`、`Textarea`、`MentionableTextarea`、`Select`、`Checkbox`（+`CheckboxGroup`）、`Radio`（+`RadioGroup`）、`Switch`、`Slider`、`PinInput`、`FileUpload`（匯入為 **`SHUploadZone`**）
+**基礎表單**：`Button`、`Input`、`InputGroup`（+`InputGroupAddon`）、`NumberInput`、`Textarea`、`MentionableTextArea`、`Select`、`Checkbox`（+`CheckboxGroup`）、`Radio`（+`RadioGroup`）、`Switch`、`Slider`、`PinInput`、`UploadZone`
 
 **日期時間**：`Calendar`、`DatePicker`、`TimePicker`
 

@@ -43,7 +43,7 @@ const value = ref(10)
 | min           | 允許的最小值             | `number`                          | —           |
 | max           | 允許的最大值             | `number`                          | —           |
 | step          | 每次遞增/遞減的步長      | `number`                          | `1`         |
-| size          | 尺寸                     | `'small' \| 'default' \| 'large'` | `'default'` |
+| size          | 尺寸                     | `'small' \| 'medium' \| 'large'`  | `'medium'`  |
 | disabled      | 是否禁用                 | `boolean`                         | `false`     |
 | readonly      | 是否只讀                 | `boolean`                         | `false`     |
 | invalid       | 是否顯示錯誤狀態         | `boolean`                         | `false`     |
@@ -52,9 +52,11 @@ const value = ref(10)
 
 ### 事件
 
-| 事件名       | 說明             | 回調參數        |
-| ------------ | ---------------- | --------------- |
-| update:value | 當數值改變時觸發 | `value: number` |
+| 事件名       | 說明             | 回調參數           |
+| ------------ | ---------------- | ------------------ |
+| update:value | 當數值改變時觸發 | `value: number`    |
+| focus        | 輸入框獲得焦點時觸發 | `event: FocusEvent` |
+| blur         | 輸入框失去焦點時觸發 | `event: FocusEvent` |
 
 ### 插槽
 

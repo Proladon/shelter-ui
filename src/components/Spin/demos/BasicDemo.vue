@@ -31,7 +31,7 @@
 
     <div>
       <h4>包裹內容</h4>
-      <SHSpin :show="spinning">
+      <SHSpin :value="spinning">
         <div class="p-4 border rounded">
           <p>這是一段被包裹的內容</p>
           <p>點擊下方按鈕切換加載狀態</p>

@@ -48,13 +48,14 @@ import { computed, ref, watch, onBeforeUnmount } from 'vue'
 import type { SpinProps } from './types'
 import Spinner from '@/components/Spinner/index.vue'
 
-const props = withDefaults(defineProps<SpinProps>(), {
+const props = withDefaults(defineProps<Omit<SpinProps, 'value'>>(), {
   size: 'medium',
   rotate: true,
-  show: true,
   strokeWidth: 2,
   delay: 0,
 })
+
+const value = defineModel<boolean>('value', { default: true })
 
 // 計算實際尺寸
 const mergedSize = computed(() => {
@@ -92,7 +93,7 @@ const active = ref(false)
 let timerId: number | null = null
 
 const shouldShowSpin = computed(() => {
-  return props.show && active.value
+  return value.value && active.value
 })
 
 const contentStyle = computed(() => {
@@ -105,7 +106,7 @@ const contentStyle = computed(() => {
 })
 
 watch(
-  () => props.show,
+  value,
   (show) => {
     if (typeof window === 'undefined') return
 
@@ -176,7 +177,7 @@ onBeforeUnmount(() => {
 }
 
 .sh-spin__description {
-  @apply mt-2 text-sm text-gray-600;
+  @apply mt-2 text-sm text-text.primary;
 }
 
 .sh-spin--small .sh-spin__description {

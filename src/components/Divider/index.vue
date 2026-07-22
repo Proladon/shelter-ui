@@ -51,7 +51,7 @@ const computedStyle = computed(() => {
 
 /* 帶文字的分隔線 - 水平 */
 .sh-divider[data-orientation='horizontal']:not(:empty) {
-  @apply flex items-center text-sm text-gray-500 h-auto;
+  @apply flex items-center text-sm text-text.primary h-auto;
   background-color: transparent;
 }
 
@@ -73,7 +73,7 @@ const computedStyle = computed(() => {
 
 /* 帶文字的分隔線 - 垂直 */
 .sh-divider[data-orientation='vertical']:not(:empty) {
-  @apply flex flex-col items-center text-sm text-gray-500 w-auto;
+  @apply flex flex-col items-center text-sm text-text.primary w-auto;
   background-color: transparent;
   writing-mode: vertical-lr;
   text-orientation: mixed;

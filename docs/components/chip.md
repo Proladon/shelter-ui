@@ -46,7 +46,7 @@ Chip 標籤用於顯示實體資訊，支持圖示、標籤文字和圖片。
     <SHChip label="Brand Google" :icon="IconBrandGoogle" />
     <SHChip label="Brand Windows" :icon="IconBrandWindows" removable />
     <SHChip label="Brand GitHub" :icon="IconBrandGithub" removable>
-      <template #removeicon="{ removeCallback, keydownCallback }">
+      <template #remove-icon="{ removeCallback, keydownCallback }">
         <icon-minus
           @click="removeCallback"
           @keydown="keydownCallback"
@@ -162,6 +162,7 @@ import { IconHeart } from '@tabler/icons-vue'
 | icon       | 圖示組件     | Component | -      |
 | removable  | 是否可移除   | boolean   | false  |
 | removeIcon | 移除圖示組件 | Component | IconX  |
+| disabled   | 是否禁用     | boolean   | false  |
 
 ## 事件
 
@@ -172,11 +173,11 @@ import { IconHeart } from '@tabler/icons-vue'
 
 ## 插槽
 
-| 插槽名     | 說明         | 插槽屬性                                                                              |
-| ---------- | ------------ | ------------------------------------------------------------------------------------- |
-| default    | 預設內容     | -                                                                                     |
-| icon       | 圖示內容     | -                                                                                     |
-| removeicon | 移除圖示內容 | `{ removeCallback: (event: Event) => void, keydownCallback: (event: Event) => void }` |
+| 插槽名      | 說明         | 插槽屬性                                                                              |
+| ----------- | ------------ | ------------------------------------------------------------------------------------- |
+| default     | 預設內容     | -                                                                                     |
+| icon        | 圖示內容     | -                                                                                     |
+| remove-icon | 移除圖示內容 | `{ removeCallback: (event: Event) => void, keydownCallback: (event: Event) => void }` |
 
 <script setup>
 import { SHConfigProvider } from '@/index'

@@ -3,7 +3,6 @@ export interface DialogProps {
   width?: string | number
   value?: boolean
   defaultValue?: boolean
-  onValueChange?: (value: boolean) => void
   modal?: boolean
   title?: string
   /** Extra class(es) added to DialogContent — useful for child components that need to override inner layout */
@@ -14,5 +13,4 @@ export interface DialogProps {
 
 export interface DialogEmits {
   (e: 'update:value', value: boolean): void
-  (e: 'valueChange', value: boolean): void
 }

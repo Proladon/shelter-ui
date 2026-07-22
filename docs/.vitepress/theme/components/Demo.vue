@@ -84,61 +84,6 @@ const toggleCode = () => {
   @apply opacity-60 cursor-not-allowed;
 }
 
-/* Input 组件样式 */
-.s-component-container :deep(.sh-input-wrapper) {
-  @apply inline-block w-full;
-}
-
-.s-component-container :deep(.sh-input-container) {
-  @apply relative flex items-center w-full;
-}
-
-.s-component-container :deep(.sh-input) {
-  @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300;
-}
-
-.s-component-container :deep(.sh-input--with-prefix) {
-  @apply pl-10;
-}
-
-.s-component-container :deep(.sh-input--with-suffix) {
-  @apply pr-10;
-}
-
-.s-component-container :deep(.sh-input--large) {
-  @apply text-lg px-5 py-3;
-}
-
-.s-component-container :deep(.sh-input--small) {
-  @apply text-sm px-3 py-1;
-}
-
-.s-component-container :deep(.sh-input-prefix) {
-  @apply absolute left-3 flex items-center justify-center text-gray-500;
-}
-
-.s-component-container :deep(.sh-input-suffix) {
-  @apply absolute right-3 flex items-center justify-center text-gray-500;
-}
-
-.s-component-container :deep(.sh-input-clear) {
-  @apply absolute right-3 flex items-center justify-center text-gray-400 hover:text-gray-600 cursor-pointer;
-}
-
-.s-component-container :deep(.sh-input-clear-icon) {
-  @apply text-lg font-light;
-}
-
-.s-component-container :deep(.sh-input-wrapper.is-disabled .sh-input) {
-  @apply bg-gray-100 text-gray-400 cursor-not-allowed;
-}
-
-.s-component-container :deep(.sh-input-wrapper.is-disabled .sh-input-prefix),
-.s-component-container :deep(.sh-input-wrapper.is-disabled .sh-input-suffix),
-.s-component-container :deep(.sh-input-wrapper.is-disabled .sh-input-clear) {
-  @apply text-gray-300 cursor-not-allowed;
-}
-
 .shelter-demo-code {
   @apply border-t border-gray-200 p-4;
 }

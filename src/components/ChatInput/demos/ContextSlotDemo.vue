@@ -3,7 +3,7 @@
     <SHChatInput
       v-model:value="message"
       placeholder="詢問 AI 任何問題…"
-      :submit-loading="loading"
+      :loading="loading"
       @submit="handleSubmit"
     >
       <template #block-start>

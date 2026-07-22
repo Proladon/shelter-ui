@@ -94,7 +94,7 @@ const notificationApi: NotificationApi = {
   info: (config) => createNotification({ ...config, type: 'info' }),
   success: (config) => createNotification({ ...config, type: 'success' }),
   warning: (config) => createNotification({ ...config, type: 'warning' }),
-  error: (config) => createNotification({ ...config, type: 'error' }),
+  danger: (config) => createNotification({ ...config, type: 'danger' }),
   destroy: removeNotification,
   destroyAll,
 }
@@ -105,7 +105,7 @@ provide('notificationApi', notificationApi)
 // 計算容器樣式
 const containerStyle = computed(() => {
   const styles: Record<string, string> = {
-    zIndex: '9999',
+    zIndex: 'var(--sh-z-notification)',
     position: 'fixed',
     pointerEvents: 'none',
   }

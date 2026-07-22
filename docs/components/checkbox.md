@@ -18,7 +18,7 @@ Checkbox 組件用於選擇多個選項或切換單一選項的狀態，支援 c
   <div class="demo">
     <h3>Basic Checkbox</h3>
     <div class="demo__content">
-      <SHCheckbox v-model="checked" />
+      <SHCheckbox v-model:value="checked" />
       <p>Value: {{ checked }}</p>
     </div>
   </div>
@@ -48,8 +48,8 @@ const checked = ref<boolean>(false)
   <div class="demo">
     <h3>Checkbox with Label</h3>
     <div class="demo__content">
-      <SHCheckbox v-model="checked1" label="接受條款和條件" />
-      <SHCheckbox v-model="checked2" label="訂閱電子報" />
+      <SHCheckbox v-model:value="checked1" label="接受條款和條件" />
+      <SHCheckbox v-model:value="checked2" label="訂閱電子報" />
     </div>
   </div>
 </template>
@@ -78,8 +78,8 @@ const checked2 = ref<boolean>(true)
 <template>
   <h3>Disabled Checkbox</h3>
   <div class="demo__content">
-    <SHCheckbox v-model="checked1" label="禁用未選中" disabled />
-    <SHCheckbox v-model="checked2" label="禁用已選中" disabled />
+    <SHCheckbox v-model:value="checked1" label="禁用未選中" disabled />
+    <SHCheckbox v-model:value="checked2" label="禁用已選中" disabled />
   </div>
 </template>
 
@@ -108,22 +108,22 @@ const checked2 = ref<boolean>(true)
   <div class="demo">
     <h3>Indeterminate Checkbox</h3>
     <div class="demo__content">
-      <SHCheckbox v-model="parentChecked" label="全選" />
+      <SHCheckbox v-model:value="parentChecked" label="全選" />
 
       <div class="ml-6 mt-2 space-y-2">
         <SHCheckbox
-          :model-value="children.includes('option1')"
-          @update:model-value="(value) => updateChild('option1', value)"
+          :value="children.includes('option1')"
+          @update:value="(value) => updateChild('option1', value)"
           label="選項 1"
         />
         <SHCheckbox
-          :model-value="children.includes('option2')"
-          @update:model-value="(value) => updateChild('option2', value)"
+          :value="children.includes('option2')"
+          @update:value="(value) => updateChild('option2', value)"
           label="選項 2"
         />
         <SHCheckbox
-          :model-value="children.includes('option3')"
-          @update:model-value="(value) => updateChild('option3', value)"
+          :value="children.includes('option3')"
+          @update:value="(value) => updateChild('option3', value)"
           label="選項 3"
         />
       </div>
@@ -241,19 +241,21 @@ const colors = ['紅色', '藍色', '綠色', '黃色']
 
 ### Checkbox 屬性
 
-| 屬性名        | 說明               | 類型                                 | 默認值  |
-| ------------- | ------------------ | ------------------------------------ | ------- |
-| modelValue    | 當前選中狀態       | `boolean \| 'indeterminate' \| null` | -       |
-| value         | 複選框的值         | `any`                                | -       |
-| name          | 表單名稱           | `string`                             | -       |
-| disabled      | 是否禁用           | `boolean`                            | `false` |
-| required      | 是否必填           | `boolean`                            | `false` |
-| inputId       | input 元素的 ID    | `string`                             | -       |
-| inputClass    | input 元素的 class | `string`                             | -       |
-| inputStyle    | input 元素的樣式   | `StyleValue`                         | -       |
-| binary        | 是否為二進位模式   | `boolean`                            | `false` |
-| indeterminate | 是否為不確定狀態   | `boolean`                            | `false` |
-| label         | 標籤文字           | `string`                             | -       |
+| 屬性名        | 說明                                              | 類型                                       | 默認值     |
+| ------------- | -------------------------------------------------- | -------------------------------------------- | ---------- |
+| value         | 核取方塊的值（v-model:value）；單獨使用時為 boolean，於 CheckboxGroup 中為選中值陣列 | `boolean \| 'indeterminate' \| null \| any[]` | -          |
+| nativeValue   | 原生表單值 / 群組中代表此選項的值                  | `any`                                        | -          |
+| name          | 表單名稱                                           | `string`                                     | -          |
+| size          | 尺寸                                               | `'small' \| 'medium' \| 'large'`             | `'medium'` |
+| disabled      | 是否禁用                                           | `boolean`                                    | `false`    |
+| readonly      | 是否唯讀                                           | `boolean`                                    | `false`    |
+| required      | 是否必填                                           | `boolean`                                    | `false`    |
+| inputId       | input 元素的 ID                                    | `string`                                     | -          |
+| inputClass    | input 元素的 class                                 | `string`                                     | -          |
+| inputStyle    | input 元素的樣式                                   | `StyleValue`                                 | -          |
+| binary        | 是否為二進位模式                                   | `boolean`                                    | `false`    |
+| indeterminate | 是否為不確定狀態                                   | `boolean`                                    | `false`    |
+| label         | 標籤文字                                           | `string`                                     | -          |
 
 ### CheckboxGroup 屬性
 
@@ -264,19 +266,21 @@ const colors = ['紅色', '藍色', '綠色', '黃色']
 | optionLabel    | 選項標籤的屬性名     | `string`                       | `'label'`    |
 | optionValue    | 選項值的屬性名       | `string`                       | `'value'`    |
 | optionDisabled | 選項禁用狀態的屬性名 | `string`                       | `'disabled'` |
+| size           | 尺寸（套用至所有子選項） | `'small' \| 'medium' \| 'large'` | `'medium'` |
 | disabled       | 是否禁用整個群組     | `boolean`                      | `false`      |
+| readonly       | 是否唯讀整個群組     | `boolean`                      | `false`      |
 | name           | 表單名稱             | `string`                       | -            |
 | orientation    | 佈局方向             | `'horizontal' \| 'vertical'`   | `'vertical'` |
 | label          | 群組標籤             | `string`                       | -            |
 
 ### Checkbox 事件
 
-| 事件名            | 說明         | 回調參數                                              |
-| ----------------- | ------------ | ----------------------------------------------------- |
-| update:modelValue | 更新模型值   | `(value: boolean \| 'indeterminate' \| null) => void` |
-| change            | 值變更事件   | `(event: Event) => void`                              |
-| focus             | 獲得焦點事件 | `(event: FocusEvent) => void`                         |
-| blur              | 失去焦點事件 | `(event: FocusEvent) => void`                         |
+| 事件名       | 說明         | 回調參數                              |
+| ------------ | ------------ | -------------------------------------- |
+| update:value | 更新模型值   | `(value: boolean \| 'indeterminate' \| null \| any[]) => void` |
+| change       | 值變更事件（帶新值） | `(value: boolean \| any[]) => void` |
+| focus        | 獲得焦點事件 | `(event: FocusEvent) => void`         |
+| blur         | 失去焦點事件 | `(event: FocusEvent) => void`         |
 
 ### CheckboxGroup 事件
 

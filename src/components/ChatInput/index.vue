@@ -72,15 +72,15 @@
         <button
           class="sh-chat-input__send-btn sh-interactive"
           :class="{
-            'sh-disabled': disabled || submitLoading || !value?.trim(),
+            'sh-disabled': disabled || loading || !value?.trim(),
           }"
-          :disabled="disabled || submitLoading || !value?.trim()"
+          :disabled="disabled || loading || !value?.trim()"
           title="送出"
           type="button"
           style="margin-left: auto"
           @click="handleSubmit"
         >
-          <Spinner v-if="submitLoading" :size="14" />
+          <Spinner v-if="loading" :size="14" />
           <IconSend v-else :size="16" />
         </button>
       </SHInputGroupAddon>
@@ -106,7 +106,7 @@ const props = withDefaults(defineProps<ChatInputProps>(), {
   disabled: false,
   showWordLimit: false,
   maxlength: undefined,
-  submitLoading: false,
+  loading: false,
   fileAccept: undefined,
   imageAccept: 'image/*',
   hideFileUpload: false,
@@ -144,7 +144,7 @@ function handleImageChange(event: Event) {
 }
 
 function handleSubmit() {
-  if (!props.value?.trim() || props.disabled || props.submitLoading) return
+  if (!props.value?.trim() || props.disabled || props.loading) return
   emit('submit', props.value)
 }
 
@@ -189,7 +189,7 @@ function handleEnterSubmit(event: KeyboardEvent) {
   border-radius: var(--sh-radius-sm);
   border: none;
   background: var(--sh-primary);
-  color: #fff;
+  color: white; /* contrast text on solid primary background */
   cursor: pointer;
   flex-shrink: 0;
 }

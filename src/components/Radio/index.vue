@@ -2,11 +2,12 @@
   <label class="sh-radio" :class="radioClasses">
     <input
       :id="inputId"
-      v-model="modelValue"
+      v-model="value"
       type="radio"
       :name="name"
-      :value="value"
+      :value="nativeValue"
       :disabled="disabled"
+      :readonly="readonly"
       :required="required"
       :class="['sh-radio__input', inputClass]"
       :style="inputStyle"
@@ -31,26 +32,28 @@ defineOptions({
   name: 'SHRadio',
 })
 
-const props = withDefaults(defineProps<RadioProps>(), {
+const props = withDefaults(defineProps<Omit<RadioProps, 'value'>>(), {
   disabled: false,
+  readonly: false,
   required: false,
+  size: 'medium',
 })
 
 const emit = defineEmits<RadioEmits>()
 
-const modelValue = defineModel<any>()
+const value = defineModel<any>('value')
 
 const radioClasses = computed(() => {
   return {
+    [`sh-radio--${props.size}`]: true,
     'sh-radio--disabled': props.disabled,
-    'sh-radio--checked': modelValue.value === props.value,
+    'sh-radio--checked': value.value === props.nativeValue,
   }
 })
 
-const onChange = (event: Event) => {
-  if (!props.disabled) {
-    emit('change', event)
-  }
+const onChange = () => {
+  if (props.disabled || props.readonly) return
+  emit('change', props.nativeValue)
 }
 
 const onFocus = (event: FocusEvent) => {
@@ -62,7 +65,7 @@ const onBlur = (event: FocusEvent) => {
 }
 </script>
 
-<style lang="postcss">
+<style lang="postcss" scoped>
 .sh-radio {
   @apply inline-flex items-center cursor-pointer gap-2;
 }
@@ -76,9 +79,21 @@ const onBlur = (event: FocusEvent) => {
 }
 
 .sh-radio__indicator {
-  @apply relative w-4 h-4 border-1 border border-solid border-border.base dark:border-border.base rounded-full;
-  @apply bg-white dark:bg-bg.primary transition-colors duration-300;
+  @apply relative border-1 border border-solid border-border.base rounded-full;
+  @apply bg-bg.primary transition-colors duration-300;
   @apply flex items-center justify-center shadow-md;
+}
+
+.sh-radio--small .sh-radio__indicator {
+  @apply w-3.5 h-3.5;
+}
+
+.sh-radio--medium .sh-radio__indicator {
+  @apply w-4 h-4;
+}
+
+.sh-radio--large .sh-radio__indicator {
+  @apply w-5 h-5;
 }
 
 .sh-radio__input:checked + .sh-radio__indicator {
@@ -86,7 +101,7 @@ const onBlur = (event: FocusEvent) => {
 }
 
 .sh-radio__input:focus + .sh-radio__indicator {
-  box-shadow: 0 0 0 2px var(--sh-primary-fade);
+  box-shadow: var(--sh-focus-ring);
 }
 
 .sh-radio__input:disabled + .sh-radio__indicator {
@@ -97,16 +112,31 @@ const onBlur = (event: FocusEvent) => {
   @apply w-2 h-2 rounded-full bg-border.base opacity-0 transition-opacity duration-300;
 }
 
+.sh-radio--small .sh-radio__dot {
+  @apply w-1.5 h-1.5;
+}
+
+.sh-radio--large .sh-radio__dot {
+  @apply w-2.5 h-2.5;
+}
+
 .sh-radio__input:checked + .sh-radio__indicator .sh-radio__dot {
   @apply opacity-100;
 }
 
 .sh-radio__label {
-  @apply text-sm text-text.base dark:text-text.base;
+  @apply text-sm text-text.base;
+}
+
+.sh-radio--small .sh-radio__label {
+  @apply text-xs;
+}
+
+.sh-radio--large .sh-radio__label {
+  @apply text-base;
 }
 
 .sh-radio--disabled .sh-radio__label {
-  /* @apply text-gray-400 dark:text-gray-600; */
   @apply opacity-70;
 }
 </style>

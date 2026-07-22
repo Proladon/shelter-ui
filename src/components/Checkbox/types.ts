@@ -1,22 +1,32 @@
-import type { StyleValue } from "vue"
+import type { StyleValue } from 'vue'
 
 export interface CheckboxProps {
   /**
-   * 當前選中狀態
+   * 核取方塊的值（v-model:value）。單獨使用時為 boolean | 'indeterminate'；
+   * 在 CheckboxGroup 中則為選中值陣列。
    */
-  modelValue?: boolean | "indeterminate" | null
+  value?: boolean | 'indeterminate' | null | any[]
   /**
-   * 複選框的值
+   * 原生表單值 / 群組中代表此選項的值（對應原生 <input value>）。
+   * 與 v-model 的 value 是兩個不同概念，故不同名，避免衝突。
    */
-  value?: any
+  nativeValue?: any
   /**
    * 表單名稱
    */
   name?: string
   /**
+   * 尺寸
+   */
+  size?: 'small' | 'medium' | 'large'
+  /**
    * 是否禁用
    */
   disabled?: boolean
+  /**
+   * 是否唯讀
+   */
+  readonly?: boolean
   /**
    * 是否必填
    */
@@ -69,9 +79,17 @@ export interface CheckboxGroupProps {
    */
   optionDisabled?: string
   /**
+   * 尺寸（套用至所有子選項）
+   */
+  size?: 'small' | 'medium' | 'large'
+  /**
    * 是否禁用整個群組
    */
   disabled?: boolean
+  /**
+   * 是否唯讀整個群組
+   */
+  readonly?: boolean
   /**
    * 表單名稱
    */
@@ -79,7 +97,7 @@ export interface CheckboxGroupProps {
   /**
    * 佈局方向
    */
-  orientation?: "horizontal" | "vertical"
+  orientation?: 'horizontal' | 'vertical'
   /**
    * 群組標籤
    */
@@ -114,13 +132,9 @@ export interface CheckboxSlots {
 
 export interface CheckboxEmits {
   /**
-   * 更新模型值
+   * 值變更事件（帶新值，單獨使用時為 boolean，群組中為選中值陣列）
    */
-  "update:modelValue": [value: boolean | "indeterminate" | null]
-  /**
-   * 值變更事件
-   */
-  change: [event: Event]
+  change: [value: boolean | any[]]
   /**
    * 獲得焦點事件
    */
@@ -132,10 +146,6 @@ export interface CheckboxEmits {
 }
 
 export interface CheckboxGroupEmits {
-  /**
-   * 更新模型值
-   */
-  "update:value": [value: any[]]
   /**
    * 值變更事件
    */

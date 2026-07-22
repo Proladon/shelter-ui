@@ -28,6 +28,28 @@ Tag 組件用於分類內容，提供簡潔的標籤顯示功能，支援不同�
   </template>
 </Demo>
 
+## 尺寸
+
+透過 `size` 屬性控制標籤大小，支援 `small`、`medium`（預設）、`large` 三種尺寸。
+
+<Demo>
+  <SizeDemo />
+  
+  <template #code>
+
+```vue
+<template>
+  <div class="flex gap-2 items-center flex-wrap">
+    <SHTag value="Small" size="small" />
+    <SHTag value="Medium" size="medium" />
+    <SHTag value="Large" size="large" />
+  </div>
+</template>
+```
+
+  </template>
+</Demo>
+
 ## 類型變化
 
 Tag 組件支援多種類型，用於表示不同的狀態和語義。
@@ -41,8 +63,8 @@ Tag 組件支援多種類型，用於表示不同的狀態和語義。
 <template>
   <div class="space-y-4">
     <div class="flex gap-2 flex-wrap">
+      <SHTag value="Default" type="default" />
       <SHTag value="Primary" type="primary" />
-      <SHTag value="Secondary" type="secondary" />
       <SHTag value="Success" type="success" />
       <SHTag value="Info" type="info" />
       <SHTag value="Warning" type="warning" />
@@ -50,8 +72,8 @@ Tag 組件支援多種類型，用於表示不同的狀態和語義。
     </div>
 
     <div class="flex gap-2 flex-wrap">
+      <SHTag value="Default" type="default" rounded />
       <SHTag value="Primary" type="primary" rounded />
-      <SHTag value="Secondary" type="secondary" rounded />
       <SHTag value="Success" type="success" rounded />
       <SHTag value="Info" type="info" rounded />
       <SHTag value="Warning" type="warning" rounded />
@@ -78,7 +100,7 @@ Tag 組件支援顯示圖示，可以通過 prop 或插槽的方式添加。
   <div class="space-y-4">
     <div class="flex gap-2 flex-wrap">
       <SHTag value="使用者" type="primary" :icon="IconUser" />
-      <SHTag value="搜尋" type="secondary" :icon="IconSearch" />
+      <SHTag value="搜尋" type="default" :icon="IconSearch" />
       <SHTag value="成功" type="success" :icon="IconCheck" />
       <SHTag value="資訊" type="info" :icon="IconInfoCircle" />
       <SHTag value="警告" type="warning" :icon="IconAlertTriangle" />
@@ -132,8 +154,8 @@ Tag 組件支援邊框樣式，可以與其他屬性組合使用。
 <template>
   <div class="space-y-4">
     <div class="flex gap-2 flex-wrap">
+      <SHTag value="Default" type="default" bordered />
       <SHTag value="Primary" type="primary" bordered />
-      <SHTag value="Secondary" type="secondary" bordered />
       <SHTag value="Success" type="success" bordered />
       <SHTag value="Info" type="info" bordered />
       <SHTag value="Warning" type="warning" bordered />
@@ -169,7 +191,8 @@ import { IconCheck, IconInfoCircle } from "@tabler/icons-vue"
 | 屬性名   | 說明         | 類型                                                                       | 默認值      |
 | -------- | ------------ | -------------------------------------------------------------------------- | ----------- |
 | value    | 標籤文字     | `string`                                                                   | `''`        |
-| type     | 標籤類型     | `'primary' \| 'secondary' \| 'success' \| 'info' \| 'warning' \| 'danger'` | `'primary'` |
+| type     | 標籤類型     | `'default' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'danger'`   | `'primary'` |
+| size     | 標籤尺寸     | `'small' \| 'medium' \| 'large'`                                           | `'medium'`  |
 | rounded  | 是否圓角     | `boolean`                                                                  | `false`     |
 | bordered | 是否顯示邊框 | `boolean`                                                                  | `false`     |
 | icon     | 圖示組件     | `Component`                                                                | -           |
@@ -184,6 +207,7 @@ import { IconCheck, IconInfoCircle } from "@tabler/icons-vue"
 <script setup>
 import { SHConfigProvider } from '@/index'
 import BasicDemo from '@/components/Tag/demos/Basic.vue'
+import SizeDemo from '@/components/Tag/demos/SizeDemo.vue'
 import TypeDemo from '@/components/Tag/demos/Type.vue'
 import IconDemo from '@/components/Tag/demos/Icon.vue'
 import BorderedDemo from '@/components/Tag/demos/Bordered.vue'

@@ -40,7 +40,7 @@ const iconComponent = computed(() => {
 
 .sh-message-box.type-info {
   @apply bg-primary.fade;
-  @apply border-[1px] border-solid border-primary;
+  @apply border border-solid border-primary;
 }
 .sh-message-box.type-info .sh-message-box__icon {
   @apply text-primary;
@@ -48,7 +48,7 @@ const iconComponent = computed(() => {
 
 .sh-message-box.type-danger {
   @apply bg-status.danger.fade;
-  @apply border-[1px] border-solid border-status.danger;
+  @apply border border-solid border-status.danger;
 }
 .sh-message-box.type-danger .sh-message-box__icon {
   @apply text-status.danger;
@@ -56,7 +56,7 @@ const iconComponent = computed(() => {
 
 .sh-message-box.type-success {
   @apply bg-status.success.fade;
-  @apply border-[1px] border-solid border-status.success;
+  @apply border border-solid border-status.success;
 }
 .sh-message-box.type-success .sh-message-box__icon {
   @apply text-status.success;
@@ -64,17 +64,17 @@ const iconComponent = computed(() => {
 
 .sh-message-box.type-warning {
   @apply bg-status.warning.fade;
-  @apply border-[1px] border-solid border-status.warning;
+  @apply border border-solid border-status.warning;
 }
 .sh-message-box.type-warning .sh-message-box__icon {
   @apply text-status.warning;
 }
 
-.sh-message-box.type-normal {
+.sh-message-box.type-default {
   @apply bg-status.info.fade;
-  @apply border-[1px] border-solid border-status.info;
+  @apply border border-solid border-status.info;
 }
-.sh-message-box.type-normal .sh-message-box__icon {
+.sh-message-box.type-default .sh-message-box__icon {
   @apply text-status.info;
 }
 

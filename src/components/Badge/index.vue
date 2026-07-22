@@ -110,7 +110,8 @@ const handleClick = (event: MouseEvent) => {
 }
 
 .sh-badge {
-  @apply rounded-full bg-status-danger text-white font-bold;
+  /* text-white: contrast against the solid status.danger background, deliberate exception */
+  @apply rounded-full bg-status.danger text-white font-bold;
   @apply absolute top-0;
   @apply flex items-center justify-center whitespace-nowrap z-10;
   @apply px-2 py-1 min-w-6 h-6;

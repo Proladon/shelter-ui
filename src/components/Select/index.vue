@@ -26,6 +26,7 @@ defineOptions({
 const props = withDefaults(defineProps<SelectProps>(), {
   value: undefined,
   options: () => [],
+  size: 'medium',
   disabled: false,
   clearable: false,
   placeholder: '請選擇',
@@ -158,7 +159,11 @@ const wrapperStyle = computed(() => {
 </script>
 
 <template>
-  <div class="sh-select-wrapper" :style="wrapperStyle">
+  <div
+    class="sh-select-wrapper"
+    :class="`sh-select--${size}`"
+    :style="wrapperStyle"
+  >
     <ComboboxRoot
       v-model="internalModel"
       v-model:search-term="searchTerm"
@@ -347,10 +352,10 @@ const wrapperStyle = computed(() => {
   </div>
 </template>
 
-<style lang="postcss">
+<style lang="postcss" scoped>
 .sh-select-wrapper {
   @apply w-full inline-flex flex-col relative;
-  @apply border border-solid border-border-1 border-border.base rounded-md;
+  @apply border border-solid border-border.base rounded-md;
 }
 
 .sh-select {
@@ -358,8 +363,7 @@ const wrapperStyle = computed(() => {
   @apply rounded-md cursor-pointer overflow-hidden;
   @apply transition duration-300 ease-in-out;
   @apply border border-border.base;
-  @apply h-[36px] px-3;
-  @apply text-text.base text-sm;
+  @apply text-text.base;
 
   &:hover:not(.is-disabled) {
     @apply border-primary;
@@ -368,7 +372,7 @@ const wrapperStyle = computed(() => {
   &[data-state='open'],
   &.is-open {
     @apply border-primary outline-none;
-    box-shadow: 0 0 0 2px var(--sh-primary-fade);
+    box-shadow: var(--sh-focus-ring);
 
     .sh-select-trigger-icon {
       @apply text-primary;
@@ -382,8 +386,20 @@ const wrapperStyle = computed(() => {
   /* Focus within works for input */
   &:focus-within {
     @apply outline-none border-primary;
-    box-shadow: 0 0 0 2px var(--sh-primary-fade);
+    box-shadow: var(--sh-focus-ring);
   }
+}
+
+.sh-select--small .sh-select {
+  @apply h-[var(--sh-component-size-sm)] px-2 text-sm;
+}
+
+.sh-select--medium .sh-select {
+  @apply h-[var(--sh-component-size-md)] px-3 text-sm;
+}
+
+.sh-select--large .sh-select {
+  @apply h-[var(--sh-component-size-lg)] px-4 text-base;
 }
 
 .sh-select-input {
@@ -408,13 +424,13 @@ const wrapperStyle = computed(() => {
   @apply text-text.primary cursor-pointer flex items-center;
 }
 
-.sh-select-dropdown {
+:deep(.sh-select-dropdown) {
   @apply bg-bg.primary border border-solid border-border.base rounded-md shadow-lg;
-  @apply overflow-hidden z-[9999];
+  @apply overflow-hidden z-[var(--sh-z-popover)];
   @apply animate-in fade-in zoom-in-95 duration-200;
 }
 
-.sh-select-viewport {
+:deep(.sh-select-viewport) {
   @apply p-1 overflow-y-auto;
 }
 
@@ -470,7 +486,7 @@ const wrapperStyle = computed(() => {
 }
 
 .sh-select-separator {
-  @apply h-[1px] bg-border.base my-1;
+  @apply h-px bg-border.base my-1;
 }
 
 .sh-select-loading,

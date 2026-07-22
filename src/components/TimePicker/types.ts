@@ -8,12 +8,16 @@ export interface TimePickerProps {
   value?: string | TimeRange | null
   /** 是否啟用時間範圍選擇模式，預設為 false */
   range?: boolean
+  /** 觸發器尺寸，預設為 'medium' */
+  size?: 'small' | 'medium' | 'large'
   /** 輸入框佔位符文字 */
   placeholder?: string
   /** 是否禁用組件 */
   disabled?: boolean
   /** 是否為只讀模式 */
   readonly?: boolean
+  /** 是否顯示清除按鈕，預設為 false */
+  clearable?: boolean
   /** 時間顯示格式，預設為 'HH:mm:ss' */
   format?: string
   /** 是否顯示小時選擇，預設為 true */

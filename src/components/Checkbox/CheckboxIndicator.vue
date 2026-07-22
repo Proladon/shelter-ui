@@ -48,6 +48,7 @@ const show = computed(() => {
 }
 
 .sh-checkbox-indicator__icon {
+  /* white icon for contrast on solid primary background */
   @apply w-3 h-3 text-white transition-opacity duration-200;
 }
 </style>

@@ -12,7 +12,7 @@
       <h4>延遲顯示</h4>
       <div class="flex flex-col gap-2">
         <p>延遲 1000ms 顯示加載狀態</p>
-        <SHSpin :delay="1000" :show="delayedSpinning">
+        <SHSpin :delay="1000" :value="delayedSpinning">
           <div class="p-4 border rounded">
             <p>這是一段被包裹的內容</p>
             <p>點擊下方按鈕切換加載狀態，加載狀態會延遲顯示</p>

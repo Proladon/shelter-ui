@@ -6,15 +6,16 @@ export interface ButtonProps {
     | 'danger'
     | 'info'
     | 'default'
-    | 'text'
-  size?: 'large' | 'default' | 'small'
+  size?: 'small' | 'medium' | 'large'
   disabled?: boolean
   loading?: boolean
   text?: boolean
   ghost?: boolean
   dashed?: boolean
   outline?: boolean
-  borderd?: boolean
+  bordered?: boolean
+  /** 是否撐滿容器寬度 */
+  block?: boolean
 }
 
 export interface ButtonEmits {

@@ -120,7 +120,7 @@ const carouselImages = [
             <SHPopover trigger="click">
               <template #trigger>
                 <SHBadge :value="3" type="danger">
-                  <SHButton type="text">Notifications</SHButton>
+                  <SHButton text>Notifications</SHButton>
                 </SHBadge>
               </template>
               <div class="p-4 w-64 border border.base rounded shadow-lg">
@@ -136,7 +136,7 @@ const carouselImages = [
                   New user registration
                 </div>
                 <SHDivider />
-                <SHButton size="small" block type="text">View All</SHButton>
+                <SHButton size="small" block text>View All</SHButton>
               </div>
             </SHPopover>
 
@@ -399,7 +399,7 @@ const carouselImages = [
                       >
                         <SHButton size="small" variant="outline">Edit</SHButton>
                         <SHContextMenu>
-                          <SHButton size="small" type="text" icon="..."
+                          <SHButton size="small" text icon="..."
                             >More</SHButton
                           >
                           <template #content>

@@ -6,7 +6,7 @@
       type="danger"
       title="確認刪除"
       description="此操作無法復原，刪除後資料將永久消失，確定要繼續嗎？"
-      :confirmLoading="deleting"
+      :loading="deleting"
       @confirm="handleDelete"
       @cancel="dangerOpen = false"
     >
