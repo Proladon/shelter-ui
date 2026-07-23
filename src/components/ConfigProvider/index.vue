@@ -4,7 +4,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import type { ConfigProviderProps, ThemeVarsConfig } from './types'
 import type { DesignTokens } from '@/core/theme-utils'
 import { flattenTokens, deriveColorVariants } from '@/core/theme-utils'
@@ -67,7 +67,15 @@ const applyTheme = (config: ThemeVarsConfig | undefined) => {
   }
 }
 
-watch(() => props.themeConfig, applyTheme, { deep: true, immediate: true })
+// Reactive updates: re-apply whenever themeConfig changes after mount.
+watch(() => props.themeConfig, applyTheme, { deep: true })
+
+// Initial application: `immediate: true` on the watcher above would fire
+// during setup(), before the `containerRef` template ref is bound to the
+// rendered DOM element, so applyTheme would silently no-op on a static
+// themeConfig passed at mount. Applying once in onMounted (after the ref is
+// bound) ensures a themeConfig provided directly at mount time is applied.
+onMounted(() => applyTheme(props.themeConfig))
 </script>
 
 <style lang="postcss" scoped>

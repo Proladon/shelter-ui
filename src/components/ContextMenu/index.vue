@@ -114,6 +114,7 @@ const handleRadioChange = (value: any): void => {
 }
 
 const handleItemClick = (item: ContextMenuItemOption): void => {
+  if (item.disabled) return
   if (item.onClick) {
     item.onClick(item)
   }

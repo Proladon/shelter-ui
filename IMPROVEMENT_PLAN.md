@@ -249,9 +249,23 @@ ComponentName/
 
 ### 3c. 測試（與 3a/3b 同批進行）
 
-- [ ] 每個組件至少一個行為測試（渲染 + v-model 往返 + disabled 阻擋），對齊既有範本 `DatePicker/__tests__/DatePicker.test.ts`
-- [ ] 高風險邏輯優先深測：Pagination 省略號演算法、Notification 佇列與 max 淘汰、UploadZone 檔案驗證（maxSize/maxCount）、Select 過濾與 multiple、Checkbox indeterminate/group、Input clearable/word-limit
-- [ ] CI（GitHub Actions）：`vue-tsc + vitest run + vite build` 三關卡
+- [x] 每個組件至少一個行為測試（渲染 + v-model 往返 + disabled 阻擋），對齊既有範本 `DatePicker/__tests__/DatePicker.test.ts`——最終共 43 個測試檔、404 個測試全數通過，`vue-tsc -b` 全庫零錯誤
+- [x] 高風險邏輯優先深測：Pagination 省略號演算法、Notification 佇列與 max 淘汰、UploadZone 檔案驗證（maxSize/maxCount）、Select 過濾與 multiple、Checkbox indeterminate/group、Input clearable/word-limit
+- [ ] CI（GitHub Actions）：`vue-tsc + vitest run + vite build` 三關卡（留給 Phase 3d/Batch 6）
+
+### Phase 3c 測試撰寫時發現並修復的既存 bug（非本次改名/結構調整範圍，但嚴重度足以現在修）
+
+撰寫行為測試的過程中意外揪出一批「功能其實沒真的運作」的既存缺陷，其中幾個嚴重度高到值得現在直接修，而非只留 spawn_task：
+
+- [x] **CheckboxGroup 完全無法正確顯示勾選狀態，取消勾選也無法從陣列移除**（嚴重）：`Checkbox.vue` 的 `isChecked` 與 `CheckboxGroup.vue` 的 `updateOption` 對「勾選狀態該用布林還是陣列表示」認知不一致，導致兩個方向都壞掉。修法：`CheckboxGroup.vue` 改用 `v-model:value` 直接綁定到每個子 `SHCheckbox`（比照 `RadioGroup.vue` 既有的正確寫法），移除死碼 `isOptionChecked`/`updateOption`。順便修了一個獨立的小問題：單獨使用、初始值為 `true` 的 `Checkbox`在首次掛載時未同步原生 `.checked`（`immediate: true` 的 watcher 搶在 template ref 綁定前執行），改用 `onMounted` 補一次初始同步。
+- [x] **Radio 的 `readonly` 完全不會阻擋互動**（中高）：原生 `readonly` 屬性對 `<input type="radio">` 無效，且 Vue 的 `vModelRadio` 指令會獨立於元件自己的 `onChange` guard 之外直接同步 v-model。修法：在 `readonly`（或 `disabled`）時於 `@click` 呼叫 `event.preventDefault()`，在原生 `change`/v-model 同步發生前就攔截。
+- [x] **ConfigProvider 掛載時傳入的靜態 `themeConfig` 完全不會套用**（中高，影響最常見用法）：`watch(..., { immediate: true })` 在 `containerRef` 綁定前就執行，`applyTheme` 因此 no-op；只有之後改變 `themeConfig` 才會生效。修法：拿掉 watcher 的 `immediate`，改在 `onMounted` 另外呼叫一次 `applyTheme`（已驗證 `flush: 'post'` 對「immediate 執行」本身沒有作用，Vue 的 immediate watcher 是同步執行，不受 flush 排程影響）。
+- [x] **Popover 開啟後幾個 tick 內會自己關閉**（中高）：`PopoverContent` 缺少 `@open-auto-focus.prevent`（`DatePicker` 對同一個 reka-ui 元件早就有這個 guard，Popover 沒有）。已補上。
+- [x] **TimePicker 的 `disabled`/`readonly` 完全不會阻擋下拉選單開啟**（中）：綁定 `SHPopover` 用的是不存在的 `open` prop（實際是 `value`/`update:value`），導致開合狀態完全不受控、也繞過了原本就沒寫的 disabled/readonly guard。修法：改綁 `value`/`update:value`，並比照 `DatePicker` 的 `handleOpenUpdate` 加上開啟前的 guard。
+- [x] **Tooltip 的 `disabled` 只是裝飾用，不會真的阻擋 hover/focus 開啟**（中）：只設定在 `TooltipTrigger` 上的原生 HTML 屬性，從未接到 reka-ui `TooltipRoot` 真正的 `disabled` context。已補上 `:disabled` 到 `TooltipRoot`。
+- [x] **ContextMenu 的 disabled 選項在 JS 層仍會觸發 `item-click`**（低中）：`handleItemClick` 從未檢查 `item.disabled`，只靠 CSS `pointer-events: none` 擋互動，程式化點擊可以繞過。已補上 guard。
+
+以下屬於嚴重度較低或範圍模糊、決定留在 backlog（皆已 spawn_task 記錄，未在本批次修）：Progress 圓角進度條無視 `max`、Badge 的 0/undefined 顯示不對稱、Select 的 `filterMethod`/`readonly`/`remove-tag` 為死碼且 `noMatchText` 顯示邏輯有誤、SplitterPanel 的 `padding` prop 為死碼、MessageBox 的 `icon` prop 的 `string` 半邊型別被忽略、Pagination/Notification/UploadZone 的 `components-catalog.json` 有 3 處與實際行為不符（將於 Phase 3d 文件同步時一併處理）。
 
 ### 3d. v3.0.0 發佈
 

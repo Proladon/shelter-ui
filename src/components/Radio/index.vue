@@ -11,6 +11,7 @@
       :required="required"
       :class="['sh-radio__input', inputClass]"
       :style="inputStyle"
+      @click="onClick"
       @change="onChange"
       @focus="onFocus"
       @blur="onBlur"
@@ -50,6 +51,16 @@ const radioClasses = computed(() => {
     'sh-radio--checked': value.value === props.nativeValue,
   }
 })
+
+// 原生 readonly 屬性對 <input type="radio"> 沒有任何作用，且 Vue 的 v-model
+// 會在底層另外綁定一個獨立的 change 監聽器來同步 value，不受此元件自身的
+// disabled/readonly 判斷所限制。因此在 click 階段（瀏覽器套用「勾選」預設行為
+// 與觸發 change 事件之前）就 preventDefault，才能真正阻止唯讀時被點擊切換。
+const onClick = (event: MouseEvent) => {
+  if (props.disabled || props.readonly) {
+    event.preventDefault()
+  }
+}
 
 const onChange = () => {
   if (props.disabled || props.readonly) return

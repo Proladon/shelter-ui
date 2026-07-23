@@ -30,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watch, onMounted } from 'vue'
 import type { CheckboxProps, CheckboxEmits } from './types'
 import CheckboxIndicator from './CheckboxIndicator.vue'
 
@@ -120,26 +120,28 @@ const onBlur = (event: FocusEvent) => {
 }
 
 // 同步 indeterminate 狀態到 DOM
-watch(
-  isIndeterminate,
-  (newValue) => {
-    if (inputRef.value) {
-      inputRef.value.indeterminate = newValue
-    }
-  },
-  { immediate: true },
-)
+watch(isIndeterminate, (newValue) => {
+  if (inputRef.value) {
+    inputRef.value.indeterminate = newValue
+  }
+})
 
 // 同步 checked 狀態到 DOM
-watch(
-  isChecked,
-  (newValue) => {
-    if (inputRef.value) {
-      inputRef.value.checked = newValue
-    }
-  },
-  { immediate: true },
-)
+watch(isChecked, (newValue) => {
+  if (inputRef.value) {
+    inputRef.value.checked = newValue
+  }
+})
+
+// 掛載後立即同步一次：immediate watcher 會在 setup() 階段同步執行，
+// 此時 template ref 尚未附加到 DOM，若只靠 immediate 會在首次掛載時被跳過，
+// 因此改為在 onMounted 中手動同步一次初始狀態。
+onMounted(() => {
+  if (inputRef.value) {
+    inputRef.value.indeterminate = isIndeterminate.value
+    inputRef.value.checked = isChecked.value
+  }
+})
 </script>
 
 <style lang="postcss" scoped>

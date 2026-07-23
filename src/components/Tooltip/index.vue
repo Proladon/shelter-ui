@@ -39,6 +39,7 @@ const handleOpenChange = (value: boolean) => {
       :default-open="defaultValue"
       :open="value"
       :delay-duration="delayDuration"
+      :disabled="disabled"
       @update:open="handleOpenChange"
     >
       <TooltipTrigger :disabled="disabled" class="sh-tooltip-trigger">

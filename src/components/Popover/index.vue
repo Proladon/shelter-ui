@@ -51,6 +51,7 @@ const handleOpenChange = (value: boolean) => {
         :align="align"
         :align-offset="alignOffset"
         class="sh-popover-content"
+        @open-auto-focus.prevent
       >
         <div class="sh-popover-body">
           <slot></slot>

@@ -562,12 +562,12 @@ const carouselImages = [
                           <SHCheckboxGroup v-model:value="formData.notifications">
                             <SHCheckbox
                               label="Email Notifications"
-                              value="email"
+                              native-value="email"
                             />
-                            <SHCheckbox label="SMS Alerts" value="sms" />
+                            <SHCheckbox label="SMS Alerts" native-value="sms" />
                             <SHCheckbox
                               label="Push Notifications"
-                              value="push"
+                              native-value="push"
                             />
                           </SHCheckboxGroup>
                         </div>

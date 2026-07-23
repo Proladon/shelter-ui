@@ -4,10 +4,11 @@
     :class="[`sh-time-picker--${size}`, { 'sh-time-picker--disabled': disabled }]"
   >
     <SHPopover
-      v-model:open="isOpen"
+      :value="isOpen"
       side="bottom"
       align="start"
       :disabled="disabled || readonly"
+      @update:value="handleOpenUpdate"
     >
       <template #trigger>
         <div
@@ -294,6 +295,11 @@ const props = withDefaults(defineProps<TimePickerProps>(), {
 const emit = defineEmits<TimePickerEmits>()
 
 const isOpen = ref(false)
+
+const handleOpenUpdate = (val: boolean) => {
+  if (val && (props.disabled || props.readonly)) return
+  isOpen.value = val
+}
 
 // Refs
 const startHourRef = ref<HTMLElement>()

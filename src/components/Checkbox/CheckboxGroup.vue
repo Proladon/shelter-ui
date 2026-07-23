@@ -5,8 +5,7 @@
       <SHCheckbox
         v-for="option in normalizedOptions"
         :key="getOptionValue(option)"
-        :value="isOptionChecked(getOptionValue(option))"
-        @update:value="(checked) => updateOption(getOptionValue(option), checked as boolean | 'indeterminate' | null)"
+        v-model:value="value"
         :native-value="getOptionValue(option)"
         :name="name"
         :size="size"
@@ -90,26 +89,6 @@ const getOptionDisabled = (option: CheckboxOption | string | any) => {
     return option[props.optionDisabled] || option.disabled || false
   }
   return false
-}
-
-const isOptionChecked = (optionValue: any) => {
-  return value.value.includes(optionValue)
-}
-
-const updateOption = (
-  optionValue: any,
-  checked: boolean | 'indeterminate' | null,
-) => {
-  const currentValues = [...(value.value || [])]
-  const index = currentValues.indexOf(optionValue)
-
-  if (checked && index === -1) {
-    currentValues.push(optionValue)
-  } else if (!checked && index !== -1) {
-    currentValues.splice(index, 1)
-  }
-
-  value.value = currentValues
 }
 
 // 監聽模型值變化，發出 change 事件
