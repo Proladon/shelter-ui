@@ -87,11 +87,12 @@ Popover 支持四個不同的彈出方位：上、右、下、左。
 | value        | 控制彈出框是否打開       | `boolean`                                | `undefined` |
 | defaultValue | 彈出框默認是否打開       | `boolean`                                | `undefined` |
 | modal        | 是否為模態彈出框         | `boolean`                                | `false`     |
-| side         | 彈出框相對於觸發器的方位 | `'top' \| 'right' \| 'bottom' \| 'left'` | `'bottom'`  |
+| side         | 彈出框相對於觸發器的方位 | `'top' \| 'right' \| 'bottom' \| 'left'` | `'top'`     |
 | sideOffset   | 彈出框與觸發器之間的距離 | `number`                                 | `5`         |
 | align        | 彈出框與觸發器的對齊方式 | `'start' \| 'center' \| 'end'`           | `'center'`  |
 | alignOffset  | 彈出框對齊偏移量         | `number`                                 | `0`         |
 | disabled     | 是否禁用彈出框           | `boolean`                                | `false`     |
+| arrow        | 是否顯示箭頭             | `boolean`                                | `true`      |
 
 ### 事件
 

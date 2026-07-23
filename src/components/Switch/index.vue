@@ -1,15 +1,23 @@
 <template>
-  <SwitchRoot
-    class="shelter-switch-root"
-    :class="sizeClass"
-    :model-value="value"
-    :disabled="disabled"
-    @update:model-value="handleUpdate"
-    @focus="emit('focus', $event)"
-    @blur="emit('blur', $event)"
+  <label
+    class="shelter-switch-wrapper"
+    :class="{ 'shelter-switch-wrapper--disabled': disabled }"
   >
-    <SwitchThumb class="shelter-switch-thumb" />
-  </SwitchRoot>
+    <SwitchRoot
+      class="shelter-switch-root"
+      :class="sizeClass"
+      :model-value="value"
+      :disabled="disabled"
+      @update:model-value="handleUpdate"
+      @focus="emit('focus', $event)"
+      @blur="emit('blur', $event)"
+    >
+      <SwitchThumb class="shelter-switch-thumb" />
+    </SwitchRoot>
+    <span v-if="$slots.default" class="shelter-switch-label">
+      <slot />
+    </span>
+  </label>
 </template>
 
 <script setup lang="ts">
@@ -38,6 +46,18 @@ const handleUpdate = (value: boolean) => {
 </script>
 
 <style scoped lang="postcss">
+.shelter-switch-wrapper {
+  @apply inline-flex items-center gap-2 cursor-pointer;
+}
+
+.shelter-switch-wrapper--disabled {
+  @apply cursor-not-allowed;
+}
+
+.shelter-switch-label {
+  @apply text-sm text-text.base select-none;
+}
+
 .shelter-switch-root {
   @apply border-border.base border-1 border-solid;
   /* fixed track dimensions: switch's intrinsic control size, not on the general component-size scale */

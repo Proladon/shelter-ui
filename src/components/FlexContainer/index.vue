@@ -6,28 +6,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-interface FlexContainerProps {
-  align?:
-    | 'start'
-    | 'center'
-    | 'end'
-    | 'between'
-    | 'around'
-    | 'evenly'
-    | 'flex-end'
-  justify?:
-    | 'start'
-    | 'center'
-    | 'end'
-    | 'between'
-    | 'around'
-    | 'evenly'
-    | 'space-between'
-    | 'flex-end'
-  gap?: number | string
-  col?: boolean
-  wrap?: boolean
-}
+import type { FlexContainerProps } from './types'
 
 const props = withDefaults(defineProps<FlexContainerProps>(), {
   gap: 0,

@@ -87,13 +87,13 @@ const basicOptions = [
       style="width: 300px"
     />
 
-    <!-- 限制選擇數量 -->
+    <!-- 多選 + 搜索 -->
     <SHSelect
-      v-model:value="limitedValue"
-      :options="options"
-      placeholder="最多選擇3個選項"
+      v-model:value="searchMultipleValue"
+      :options="searchOptions"
+      placeholder="可搜索多選"
       multiple
-      :max-selections="3"
+      filterable
       clearable
       style="width: 300px"
     />
@@ -104,7 +104,7 @@ const basicOptions = [
 import { ref } from 'vue'
 
 const multipleValue = ref([])
-const limitedValue = ref(['option1'])
+const searchMultipleValue = ref([])
 
 const options = [
   { value: 'option1', label: '選項一' },
@@ -112,6 +112,19 @@ const options = [
   { value: 'option3', label: '選項三' },
   { value: 'option4', label: '選項四' },
   { value: 'option5', label: '選項五' },
+]
+
+const searchOptions = [
+  { value: 'frontend', label: '前端開發' },
+  { value: 'backend', label: '後端開發' },
+  { value: 'fullstack', label: '全端開發' },
+  { value: 'mobile', label: '行動開發' },
+  { value: 'ui', label: 'UI設計' },
+  { value: 'ux', label: 'UX設計' },
+  { value: 'devops', label: 'DevOps' },
+  { value: 'testing', label: '測試' },
+  { value: 'pm', label: '專案管理' },
+  { value: 'data', label: '數據分析' },
 ]
 </script>
 ```
@@ -290,14 +303,13 @@ const options = [
 | `placeholder`   | `string`                                           | `'請選擇'`     | 佔位符             |
 | `readonly`      | `boolean`                                          | `false`        | 是否只讀           |
 | `multiple`      | `boolean`                                          | `false`        | 是否多選           |
-| `maxSelections` | `number`                                           | `undefined`    | 多選時最大選擇數量 |
 | `filterable`    | `boolean`                                          | `false`        | 是否可搜索         |
 | `filterMethod`  | `(query: string, option: SelectOption) => boolean` | `undefined`    | 自定義搜索方法     |
 | `loading`       | `boolean`                                          | `false`        | 是否加載中         |
 | `noDataText`    | `string`                                           | `'暫無數據'`   | 無數據時的文字     |
 | `noMatchText`   | `string`                                           | `'無匹配數據'` | 搜索無結果時的文字 |
 | `placement`     | `'top' \| 'bottom' \| 'auto'`                      | `'auto'`       | 下拉框位置         |
-| `dropdownWidth` | `string \| number`                                 | `undefined`    | 下拉框寬度         |
+| `width`         | `string \| number`                                 | `'100%'`       | 選擇器本身的寬度   |
 | `maxHeight`     | `string \| number`                                 | `'200px'`      | 下拉框最大高度     |
 
 ### SelectOption

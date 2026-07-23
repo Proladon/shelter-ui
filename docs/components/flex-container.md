@@ -44,13 +44,13 @@ FlexContainer 組件可以將包覆的區塊進行彈性布局，讓使用者可
 
 ### 屬性
 
-| 屬性名稱 | 說明         | 類型                                                    | 默認值 |
-| -------- | ------------ | ------------------------------------------------------- | ------ |
-| align    | 垂直對齊方式 | 'start'｜'center'｜'end'｜'between'｜'around'｜'evenly' | 無     |
-| justify  | 水平排列方式 | 'start'｜'center'｜'end'｜'between'｜'around'｜'evenly' | 無     |
-| gap      | 元素間距     | number                                                  | 0      |
-| col      | 是否垂直排列 | boolean                                                 | false  |
-| wrap     | 是否換行     | boolean                                                 | false  |
+| 屬性名稱 | 說明         | 類型                                                                                        | 默認值 |
+| -------- | ------------ | ------------------------------------------------------------------------------------------- | ------ |
+| align    | 垂直對齊方式 | 'start'｜'center'｜'end'｜'between'｜'around'｜'evenly'｜'flex-end'                          | 無     |
+| justify  | 水平排列方式 | 'start'｜'center'｜'end'｜'between'｜'around'｜'evenly'｜'space-between'｜'flex-end'          | 無     |
+| gap      | 元素間距     | number \| string                                                                             | 0      |
+| col      | 是否垂直排列 | boolean                                                                                      | false  |
+| wrap     | 是否換行     | boolean                                                                                      | false  |
 
 ### 插槽 Slots
 

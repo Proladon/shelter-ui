@@ -333,6 +333,89 @@ import PlacementDemo from './PlacementDemo.vue'
 </style>
 ```
 
+## API
+
+`Notification` 由三個部分組成：包裹應用的 `<SHNotificationProvider>`、在子孫組件中呼叫的 `useNotification()`，以及內部實際渲染單一通知的 `<SHNotification>` 展示組件。
+
+### NotificationProvider 屬性
+
+`<SHNotificationProvider>` 需包裹在使用 `useNotification()` 的組件外層（通常放在應用根部），並透過 `provide` 讓子孫組件取得通知 API。
+
+| 屬性名    | 類型                                                                                | 默認值        | 說明                                              |
+| --------- | ------------------------------------------------------------------------------------ | ------------- | ------------------------------------------------- |
+| max       | `number`                                                                              | `10`          | 最大同時顯示的通知數量，超過時自動移除最舊的通知   |
+| placement | `'top-right' \| 'top-left' \| 'bottom-right' \| 'bottom-left' \| 'top' \| 'bottom'`   | `'top-right'` | 通知容器的顯示位置                                |
+| gap       | `number`                                                                              | `8`           | 通知之間的間距（px）                              |
+| offset    | `number`                                                                              | `16`          | 通知容器距離視窗邊緣的偏移量（px）                |
+
+### useNotification()
+
+`useNotification()` 是一個組合式函數，**必須在 `<SHNotificationProvider>` 的子孫組件中呼叫**，否則會拋出錯誤。它回傳下列方法：
+
+| 方法名     | 類型                                                    | 說明                                               |
+| ---------- | ------------------------------------------------------- | -------------------------------------------------- |
+| create     | `(config: NotificationConfig) => string`                 | 建立通知，需自行指定 `type`；回傳該通知的唯一 key   |
+| info       | `(config: Omit<NotificationConfig, 'type'>) => string`    | 建立 `info` 類型通知；回傳該通知的唯一 key          |
+| success    | `(config: Omit<NotificationConfig, 'type'>) => string`    | 建立 `success` 類型通知；回傳該通知的唯一 key       |
+| warning    | `(config: Omit<NotificationConfig, 'type'>) => string`    | 建立 `warning` 類型通知；回傳該通知的唯一 key       |
+| danger     | `(config: Omit<NotificationConfig, 'type'>) => string`    | 建立 `danger` 類型通知；回傳該通知的唯一 key        |
+| destroy    | `(key: string) => void`                                  | 依 `key` 銷毀指定通知                              |
+| destroyAll | `() => void`                                             | 銷毀目前所有通知                                   |
+
+> `info` / `success` / `warning` / `danger` 都是 `create` 的語法糖，內部會自動帶入對應的 `type`，因此它們的參數型別排除了 `type` 欄位（`Omit<NotificationConfig, 'type'>`）。所有方法皆回傳新通知的唯一 `key`（`string`），可搭配 `destroy(key)` 使用。
+
+### NotificationConfig
+
+`create` 使用完整的 `NotificationConfig`；`info`、`success`、`warning`、`danger` 則使用 `Omit<NotificationConfig, 'type'>`（不接受也不需要 `type` 欄位）：
+
+```typescript
+interface NotificationConfig {
+  /** 通知標題 */
+  title?: string
+  /** 通知內容（必填） */
+  message: string
+  /** 通知類型；僅 create() 可指定，其餘方法會自動帶入，預設 'info' */
+  type?: 'info' | 'success' | 'warning' | 'danger'
+  /** 自訂圖標 */
+  icon?: Component
+  /** 自訂圖標顏色 */
+  iconColor?: string
+  /** 自動關閉延遲時間（毫秒），設為 0 表示不自動關閉；預設 4500 */
+  duration?: number
+  /** 是否可手動關閉；預設 true */
+  closable?: boolean
+  /** 點擊回調 */
+  onClick?: () => void
+  /** 關閉回調 */
+  onClose?: () => void
+}
+```
+
+### Notification 屬性
+
+`<SHNotification>` 是實際渲染單一通知的展示組件，一般由 `<SHNotificationProvider>` 內部自動渲染與管理，不需手動使用。
+
+| 屬性名  | 類型                    | 默認值 | 說明                                                                          |
+| ------- | ----------------------- | ------ | ----------------------------------------------------------------------------- |
+| config  | `NotificationInstance`  | -      | 通知實例資料（`NotificationConfig` 加上內部產生的 `key`、`timestamp`），必填   |
+| onClose | `(key: string) => void` | -      | 通知關閉時的回調（一般由 `NotificationProvider` 內部注入，用於從列表移除通知） |
+
+### Notification 事件
+
+| 事件名 | 說明                   | 回調參數        |
+| ------ | ---------------------- | --------------- |
+| close  | 通知關閉動畫結束後觸發 | `(key: string)` |
+| click  | 點擊通知本體時觸發     | -               |
+
+### Notification 插槽
+
+| 插槽名  | 說明                                           |
+| ------- | ---------------------------------------------- |
+| icon    | 自訂圖示內容，預設顯示依 `type` 決定的語意圖示  |
+| title   | 自訂標題內容，預設顯示 `config.title`          |
+| default | 自訂訊息內容，預設顯示 `config.message`        |
+| actions | 自訂操作按鈕區域，僅在有內容時顯示             |
+
 <script setup>
 import BasicDemo from '@/components/Notification/demos/BasicDemo.vue'
 import DurationDemo from '@/components/Notification/demos/DurationDemo.vue'

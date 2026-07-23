@@ -5,7 +5,7 @@
       <div class="space-y-4">
         <!-- 預設顏色 -->
         <div>
-          <p class="text-sm text-gray-500 mb-2">預設顏色 (#e5e7eb)</p>
+          <p class="text-sm text-gray-500 mb-2">預設顏色 (var(--sh-text-base))</p>
           <Divider />
         </div>
 

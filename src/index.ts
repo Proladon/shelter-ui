@@ -200,6 +200,7 @@ export type {
   SelectProps,
   SelectEmits,
   SelectOption,
+  SelectSlots,
 } from './components/Select/types'
 export type { SpinProps } from './components/Spin/types'
 export type {

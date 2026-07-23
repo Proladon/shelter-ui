@@ -265,13 +265,33 @@ ComponentName/
 - [x] **Tooltip 的 `disabled` 只是裝飾用，不會真的阻擋 hover/focus 開啟**（中）：只設定在 `TooltipTrigger` 上的原生 HTML 屬性，從未接到 reka-ui `TooltipRoot` 真正的 `disabled` context。已補上 `:disabled` 到 `TooltipRoot`。
 - [x] **ContextMenu 的 disabled 選項在 JS 層仍會觸發 `item-click`**（低中）：`handleItemClick` 從未檢查 `item.disabled`，只靠 CSS `pointer-events: none` 擋互動，程式化點擊可以繞過。已補上 guard。
 
-以下屬於嚴重度較低或範圍模糊、決定留在 backlog（皆已 spawn_task 記錄，未在本批次修）：Progress 圓角進度條無視 `max`、Badge 的 0/undefined 顯示不對稱、Select 的 `filterMethod`/`readonly`/`remove-tag` 為死碼且 `noMatchText` 顯示邏輯有誤、SplitterPanel 的 `padding` prop 為死碼、MessageBox 的 `icon` prop 的 `string` 半邊型別被忽略、Pagination/Notification/UploadZone 的 `components-catalog.json` 有 3 處與實際行為不符（將於 Phase 3d 文件同步時一併處理）。
+以下屬於嚴重度較低或範圍模糊、決定留在 backlog（皆已 spawn_task 記錄，未在本批次修）：Progress 圓角進度條無視 `max`、Badge 的 0/undefined 顯示不對稱、SplitterPanel 的 `padding` prop 為死碼、MessageBox 的 `icon` prop 的 `string` 半邊型別被忽略。（Select 的 `filterMethod`/`noMatchText` 顯示邏輯已在 Phase 3d 文件同步時一併查出根因並修正，見下；`remove-tag` 死碼仍待查。）
 
 ### 3d. v3.0.0 發佈
 
-- [ ] 撰寫 `MIGRATION.md`（v2 → v3 對照表：所有改名 prop/事件/值域）
-- [ ] 同步更新：全部 docs 頁 API 表、components-catalog.json、SKILL.md
-- [ ] 發佈 v3.0.0
+- [x] 撰寫 `MIGRATION.md`（v2 → v3 對照表：所有改名 prop/事件/值域，含 Phase 3d 過程中新發現需要移除的死碼 prop `TimePicker.showSeconds`）
+- [x] 同步更新：全部 docs 頁 API 表、components-catalog.json、SKILL.md——三批平行 Explore agent 對全部 ~49 個組件逐一比對原始碼/docs/catalog，共抓出 60+ 處落差（詳見下方「Phase 3d 文件同步發現的問題」），全數以 8 個平行 agent 修正
+- [x] CI（GitHub Actions）：新增 `.github/workflows/ci.yml`，在 push（main/dev）與 PR 時跑 `yarn test:run` + `yarn build`（`vue-tsc -b && vite build`），與既有 `publish.yml`/`deploy.yml` 一致採用 yarn（本庫 `pnpm-lock.yaml`／`yarn.lock` 並存，但既有自動化都用 yarn，故不引入第三種慣例）
+- [ ] 發佈 v3.0.0 — **保留給使用者明確確認，禁止自行執行**
+
+### Phase 3d 文件同步發現的問題（非改名/結構調整範圍，依嚴重度挑選處理方式）
+
+文件/catalog 稽核意外挖出大量「文件宣稱有效但實際上是假的」案例，嚴重度足以現在直接修（而非只留 backlog）的項目：
+
+- [x] **Switch 完全沒有 default slot**：文件、catalog、甚至官方 BasicDemo 本身都示範了 `<SHSwitch>啟用</SHSwitch>` 這種寫法，但元件模板裡從來沒有 `<slot />`，範例裡的文字其實一直被靜默丟棄。已補上（比照 Checkbox/Radio 用 `<label>` 包住控制項+文字的寫法，順便讓點擊標籤文字也能觸發切換）。
+- [x] **Popover 的 `close` slot 程式碼其實還在，只是被註解掉**：解除註解後直接可用，不需要重寫。
+- [x] **Select 的 `focus`/`blur`/`toggleDropdown` 方法、`prefix`/`suffix` slot 都是文件與 SKILL.md 宣稱存在、實際上沒有 `defineExpose`/`<slot>` 的假功能**：已全部實作（比照 Input 現有的 focus/blur 慣例）。順便發現並修正一個附帶 bug：`SelectEmits` 宣告的 `focus`/`blur` 事件也從未真的發出過。
+- [x] **Select 的 `filterMethod` 是死碼、`noMatchText` 顯示邏輯有 bug**：根因是 `v-model:search-term` 綁在 `ComboboxRoot` 上一個實際上不存在的 prop（reka-ui 沒有這個 prop），導致我們自己的 `searchTerm`/`filteredOptions` 從未真正跟著輸入更新，畫面上看到的篩選其實全部來自 reka-ui 內部另一套機制。修法：`v-model` 直接綁到 `ComboboxInput`，並在 `ComboboxRoot` 加上 `ignore-filter` 避免雙重過濾。
+- [x] **ContextMenu 的 `triggerClass` prop 是死碼**：宣告了但從未套用到 trigger 元素上，已補上（與現有 hardcoded class 合併而非取代）。
+- [x] **FlexContainer 的實際執行邏輯比自己對外匯出的型別支援更多值**（`align`/`justify` 額外支援 `flex-end`/`space-between`，`gap` 額外支援 `string`）：`index.vue` 原本自己另外宣告一份更寬鬆的 inline 型別，沒有從 `types.ts` 匯入，導致 TS 使用者對著公開型別寫 `align="flex-end"` 會被型別檔擋下，即使實際上完全能運作。已將 `types.ts` 的匯出型別放寬到與實際行為一致，並讓 `index.vue` 改為匯入它，一併修正了一個 D6「props 應從 types.ts 匯入」的既存違規。
+- [x] **TimePicker 的 `minTime`/`maxTime`/`disabledTimes` 是文件宣稱有效的死碼**（從未真正過濾任何時間選項）：已從機器可讀的 catalog 完全移除（避免 AI agent 誤用），文件保留但加註「尚未實作」，並 spawn_task 記錄為 Phase 4 候選功能（比照 DatePicker 的 `minValue`/`maxValue`/`isDateUnavailable` 實作）。
+- [x] **TimePicker 的 `showSeconds` 已 deprecated 且完全無效**（從未給預設值、元件邏輯也從未讀取）：直接移除此 prop（已寫入 MIGRATION.md）。
+- [x] **Notification 的文件完全沒有 API 章節**（沒有 props/methods/types 表格），catalog 的 `useNotification()` 方法清單也少了 3 個方法（`create`/`destroy`/`destroyAll`）、回傳型別全部寫成 `void`（實際是 `string`）、還有一個憑空捏造、名稱不存在於原始碼的 `NotificationOptions` 型別（含錯誤的必填/選填欄位、不該出現的 `placement` 欄位）。已全部重寫。
+- [x] **Carousel 的 catalog `subComponents` 是空的**：已補上 `CarouselItem`/`CarouselNavigation`/`CarouselIndicators`，並比照 `ActiveButtonGroup`/`InputGroup` 的慣例為三者各自新增獨立的 catalog 條目。
+- [x] **Splitter 的 catalog 完全沒有 `SplitterGroup` 條目**（`SHSplitterGroup` 是新的推薦寫法，但 catalog 只有舊的 `Splitter`/`SplitterPanel`/`SplitterResizeHandle`）：已新增，並在 `Splitter` 條目補上 deprecated 說明。
+- [x] **Divider 的 `color` 預設值在文件和 catalog 都寫錯**（寫死 `#e5e7eb`，實際是 `var(--sh-text-base)`，兩者在 light/dark theme 下解析出來的顏色完全不同——`#e5e7eb` 其實是另一個不相關 token `--sh-border-base` 的值，確認是複製貼上的錯誤）：已修正文件、catalog、demo 裡的過期註解。
+
+以下是本次稽核發現、但決定不在此批次實作、僅留 backlog 記錄的假功能/死碼（皆已 spawn_task）：Select 的 `maxSelections`（需要真正的選擇數量限制邏輯與 UI 回饋）、Select 的 `readonly`（完全是死碼）、TimePicker 的 `prefix`/`suffix` slot（版面已經有圖示與清除按鈕，非小改動）、CarouselNavigation/CarouselIndicators 未渲染 Carousel 轉發下來的 slot 內容、SplitterGroup 的 `color` prop 是死碼、Dialog `trigger` slot 暴露的 `Dialog` scope prop 意圖不明（無任何 demo 使用）。
 
 ---
 

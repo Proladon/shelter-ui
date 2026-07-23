@@ -2,7 +2,10 @@
   <ContextMenuRoot class="sh-context-menu-root">
     <ContextMenuTrigger
       as-child
-      class="block border-2 border-border.base border-dashed text-text.base rounded-xl text-sm select-none py-[45px] w-[300px] text-center"
+      :class="[
+        'block border-2 border-border.base border-dashed text-text.base rounded-xl text-sm select-none py-[45px] w-[300px] text-center',
+        triggerClass,
+      ]"
     >
       <slot>
         <span>{{ triggerContent || 'Right click here.' }}</span>

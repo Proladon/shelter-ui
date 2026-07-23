@@ -56,6 +56,23 @@ describe('ContextMenu — open/close', () => {
   })
 })
 
+describe('ContextMenu — triggerClass', () => {
+  it('applies triggerClass alongside the default trigger classes', () => {
+    const wrapper = mount(ContextMenu, {
+      props: { items, triggerClass: 'my-custom-trigger' },
+      slots: { default: '<button type="button">Trigger area</button>' },
+      attachTo: document.body,
+    })
+
+    const trigger = wrapper.find('button')
+    expect(trigger.classes()).toContain('my-custom-trigger')
+    // still carries the built-in default trigger styling
+    expect(trigger.classes()).toContain('border-dashed')
+
+    wrapper.unmount()
+  })
+})
+
 describe('ContextMenu — item-click', () => {
   it('fires item-click with the clicked item and closes the menu', async () => {
     const wrapper = mount(ContextMenu, {

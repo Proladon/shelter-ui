@@ -177,7 +177,7 @@ import { IconHeart } from '@tabler/icons-vue'
 | ----------- | ------------ | ------------------------------------------------------------------------------------- |
 | default     | 預設內容     | -                                                                                     |
 | icon        | 圖示內容     | -                                                                                     |
-| remove-icon | 移除圖示內容 | `{ removeCallback: (event: Event) => void, keydownCallback: (event: Event) => void }` |
+| remove-icon | 移除圖示內容 | `{ removeCallback: (event: Event) => void, keydownCallback: (event: KeyboardEvent) => void }` |
 
 <script setup>
 import { SHConfigProvider } from '@/index'

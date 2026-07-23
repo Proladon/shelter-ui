@@ -26,8 +26,6 @@ export interface TimePickerProps {
   minute?: boolean
   /** 是否顯示秒數選擇，預設為 false (依據 user request 改為 default: true 但通常秒數是選用的? User said default: true) */
   second?: boolean
-  /** @deprecated Use 'second' prop instead. 是否顯示秒數選擇，預設為 true */
-  showSeconds?: boolean
   /** 是否使用 12 小時制，預設為 false */
   use12Hour?: boolean
   /** 小時步進值，預設為 1 */

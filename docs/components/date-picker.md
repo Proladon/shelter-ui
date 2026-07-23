@@ -137,7 +137,7 @@ const date = shallowRef<DateValue | undefined>(new CalendarDate(2026, 3, 21))
 | value                  | 綁定值，單一模式為 `DateValue`，範圍模式為 `DateRange`，搭配 `v-model:value` 使用 | `DateValue \| DateRange \| null`  | -         |
 | range                  | 是否啟用日期範圍選擇模式                                                    | `boolean`                         | `false`   |
 | size                   | 觸發器尺寸                                                                  | `'small' \| 'medium' \| 'large'`  | `'medium'`|
-| placeholder            | 觸發器上顯示的佔位文字                                                      | `string`                          | -         |
+| placeholder            | 觸發器上顯示的佔位文字                                                      | `string`                          | `'Select date'` |
 | disabled               | 是否禁用                                                                    | `boolean`                         | `false`   |
 | readonly               | 是否唯讀                                                                    | `boolean`                         | `false`   |
 | clearable              | 是否顯示清除按鈕                                                            | `boolean`                         | `false`   |

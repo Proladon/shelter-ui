@@ -118,7 +118,7 @@ import Divider from '../index.vue'
       <div class="space-y-4">
         <!-- 預設顏色 -->
         <div>
-          <p class="text-sm text-gray-500 mb-2">預設顏色 (#e5e7eb)</p>
+          <p class="text-sm text-gray-500 mb-2">預設顏色 (var(--sh-text-base))</p>
           <Divider />
         </div>
 
@@ -199,11 +199,11 @@ import Divider from '../index.vue'
 
 ### Props
 
-| 屬性名      | 類型                         | 預設值         | 說明       |
-| ----------- | ---------------------------- | -------------- | ---------- |
-| orientation | `'horizontal' \| 'vertical'` | `'horizontal'` | 分隔線方向 |
-| color       | `string`                     | `'#e5e7eb'`    | 分隔線顏色 |
-| class       | `string`                     | —              | 自定義類名 |
+| 屬性名      | 類型                         | 預設值                   | 說明       |
+| ----------- | ---------------------------- | ------------------------ | ---------- |
+| orientation | `'horizontal' \| 'vertical'` | `'horizontal'`           | 分隔線方向 |
+| color       | `string`                     | `'var(--sh-text-base)'`  | 分隔線顏色 |
+| class       | `string`                     | —                        | 自定義類名 |
 
 ### Slots
 

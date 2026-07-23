@@ -46,7 +46,6 @@ Button 組件提供了多種樣式變化，包括文字、幽靈、虛線、描�
     <SHButton dashed>Dashed</SHButton>
     <SHButton type="warning" outline>Outline</SHButton>
     <SHButton type="primary" bordered>Bordered</SHButton>
-    <SHButton type="primary" plain>Plain</SHButton>
     <SHButton type="danger" ghost>Ghost</SHButton>
     <SHButton type="success" text>Text</SHButton>
   </div>
@@ -180,7 +179,6 @@ Button 組件提供三種尺寸：小、中、大。
       loading ? '加載中...' : '點擊加載'
     }}</SHButton>
     <SHButton
-      plain
       :type="loading ? 'warning' : 'info'"
       @click="toggleLoading"
       >{{ loading ? '停止加載' : '開始加載' }}</SHButton

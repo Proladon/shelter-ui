@@ -263,7 +263,7 @@ interface TimeRange {
 | `value`         | `string \| TimeRange \| null` | `null`         | 選中的時間值                             |
 | `range`         | `boolean`                     | `false`        | 是否為範圍選擇模式                       |
 | `size`          | `'small' \| 'medium' \| 'large'` | `'medium'`  | 觸發器尺寸                               |
-| `placeholder`   | `string`                      | `'請選擇時間'` | 佔位符文字                               |
+| `placeholder`   | `string`                      | 依模式而定     | 佔位符文字；未指定時，單一模式為 `選擇時間`，範圍模式為 `選擇時間範圍` |
 | `disabled`      | `boolean`                     | `false`        | 是否禁用                                 |
 | `readonly`      | `boolean`                     | `false`        | 是否唯讀                                 |
 | `clearable`     | `boolean`                     | `false`        | 是否顯示清除按鈕                         |
@@ -272,13 +272,11 @@ interface TimeRange {
 | `hour`          | `boolean`                     | `true`         | 是否顯示小時                             |
 | `minute`        | `boolean`                     | `true`         | 是否顯示分鐘                             |
 | `second`        | `boolean`                     | `true`         | 是否顯示秒                               |
-| `showSeconds`   | `boolean`                     | `true`         | (Deprecated) 是否顯示秒，請使用 `second` |
 | `hourStep`      | `number`                      | `1`            | 小時步長                                 |
 | `minuteStep`    | `number`                      | `1`            | 分鐘步長                                 |
 | `secondStep`    | `number`                      | `1`            | 秒步長                                   |
-| `minTime`       | `string`                      | -              | 最小可選時間                             |
-| `maxTime`       | `string`                      | -              | 最大可選時間                             |
-| `disabledTimes` | `string[]`                    | `[]`           | 禁用的特定時間列表                       |
+
+> **注意**：`TimePickerProps` 型別定義中仍保留 `minTime`、`maxTime`、`disabledTimes` 三個欄位，但目前元件邏輯完全未讀取它們，設定後不會有任何時間篩選/限制效果。這是規劃中但尚未實作的功能，故未列入上表，請勿依賴它們——實際可用的時間限制邏輯待後續版本補上。
 
 ### Events
 
@@ -289,13 +287,6 @@ interface TimeRange {
 | `focus`             | 獲得焦點時觸發 | `(event: FocusEvent)`                  |
 | `blur`              | 失去焦點時觸發 | `(event: FocusEvent)`                  |
 | `clear`             | 清除值時觸發   | `()`                                   |
-
-### Slots
-
-| 插槽名   | 說明     | 參數 |
-| -------- | -------- | ---- |
-| `prefix` | 前綴內容 | -    |
-| `suffix` | 後綴內容 | -    |
 
 <script setup>
 import BasicTimePicker from '@/components/TimePicker/demos/Basic.vue'

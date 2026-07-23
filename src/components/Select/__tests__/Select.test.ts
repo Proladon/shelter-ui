@@ -242,3 +242,222 @@ describe('Select — clearable', () => {
     wrapper.unmount()
   })
 })
+
+describe('Select — exposed methods (focus/blur/toggleDropdown)', () => {
+  it('focus() moves DOM focus into the control', async () => {
+    const wrapper = mount(Select, {
+      props: { options: basicOptions },
+      attachTo: document.body,
+    })
+
+    expect(wrapper.element.contains(document.activeElement)).toBe(false)
+
+    wrapper.vm.focus()
+    await nextTick()
+
+    expect(document.activeElement).toBe(wrapper.find('input').element)
+
+    wrapper.unmount()
+  })
+
+  it('blur() removes DOM focus from the control', async () => {
+    const wrapper = mount(Select, {
+      props: { options: basicOptions },
+      attachTo: document.body,
+    })
+
+    wrapper.vm.focus()
+    await nextTick()
+    expect(document.activeElement).toBe(wrapper.find('input').element)
+
+    wrapper.vm.blur()
+    await nextTick()
+    expect(document.activeElement).not.toBe(wrapper.find('input').element)
+
+    wrapper.unmount()
+  })
+
+  it('toggleDropdown() opens and closes the dropdown', async () => {
+    const wrapper = mount(Select, {
+      props: { options: basicOptions },
+      attachTo: document.body,
+    })
+
+    expect(document.querySelector('.sh-select-dropdown')).toBeNull()
+
+    wrapper.vm.toggleDropdown()
+    await settle()
+    expect(document.querySelector('.sh-select-dropdown')).not.toBeNull()
+
+    wrapper.vm.toggleDropdown()
+    await settle()
+    expect(document.querySelector('.sh-select-dropdown')).toBeNull()
+
+    wrapper.unmount()
+  })
+
+  it('toggleDropdown() is a no-op while disabled', async () => {
+    const wrapper = mount(Select, {
+      props: { options: basicOptions, disabled: true },
+      attachTo: document.body,
+    })
+
+    wrapper.vm.toggleDropdown()
+    await settle()
+    expect(document.querySelector('.sh-select-dropdown')).toBeNull()
+
+    wrapper.unmount()
+  })
+})
+
+describe('Select — focus/blur events', () => {
+  it('emits focus and blur when the underlying input gains/loses focus', async () => {
+    const wrapper = mount(Select, {
+      props: { options: basicOptions },
+      attachTo: document.body,
+    })
+
+    await wrapper.find('input').trigger('focus')
+    expect(wrapper.emitted('focus')).toBeTruthy()
+
+    await wrapper.find('input').trigger('blur')
+    expect(wrapper.emitted('blur')).toBeTruthy()
+
+    wrapper.unmount()
+  })
+})
+
+describe('Select — custom filterMethod', () => {
+  it('uses the provided filterMethod instead of the default label/value substring match', async () => {
+    // Deliberately matches only "Banana" regardless of the typed query, so we can tell
+    // whether the custom method actually replaced the default matching logic (which would
+    // instead match "Apple" for the query below).
+    const customFilterMethod = (_query: string, option: SelectOption) =>
+      option.value === 'banana'
+
+    const wrapper = mount(Select, {
+      props: {
+        options: basicOptions,
+        filterable: true,
+        filterMethod: customFilterMethod,
+      },
+      attachTo: document.body,
+    })
+
+    await wrapper.find('.sh-select-trigger-icon').trigger('click')
+    await settle()
+
+    const input = wrapper.find('.sh-select-input')
+    ;(input.element as HTMLInputElement).value = 'apple'
+    await input.trigger('input')
+    await settle()
+
+    const filtered = document.querySelectorAll('.sh-select-option')
+    expect(filtered).toHaveLength(1)
+    expect(filtered[0].textContent).toContain('Banana')
+
+    wrapper.unmount()
+  })
+})
+
+describe('Select — noMatchText empty state', () => {
+  it('shows noMatchText (visibly, not just in markup) when a filter query matches no option', async () => {
+    const wrapper = mount(Select, {
+      props: { options: basicOptions, filterable: true, noMatchText: '無結果測試' },
+      attachTo: document.body,
+    })
+
+    await wrapper.find('.sh-select-trigger-icon').trigger('click')
+    await settle()
+
+    const input = wrapper.find('.sh-select-input')
+    ;(input.element as HTMLInputElement).value = 'zzzzz'
+    await input.trigger('input')
+    await settle()
+
+    expect(document.querySelectorAll('.sh-select-option')).toHaveLength(0)
+
+    const empty = document.querySelector('.sh-select-empty') as HTMLElement | null
+    expect(empty).not.toBeNull()
+    expect(empty!.textContent).toContain('無結果測試')
+    expect(empty!.style.display).not.toBe('none')
+
+    wrapper.unmount()
+  })
+
+  it('shows noDataText rather than noMatchText when there are no options at all', async () => {
+    const wrapper = mount(Select, {
+      props: { options: [], filterable: true, noDataText: '空資料測試' },
+      attachTo: document.body,
+    })
+
+    await wrapper.find('.sh-select-trigger-icon').trigger('click')
+    await settle()
+
+    const empty = document.querySelector('.sh-select-empty') as HTMLElement | null
+    expect(empty).not.toBeNull()
+    expect(empty!.textContent).toContain('空資料測試')
+    expect(empty!.style.display).not.toBe('none')
+
+    wrapper.unmount()
+  })
+})
+
+describe('Select — prefix/suffix slots', () => {
+  it('renders prefix and suffix slot content when provided', () => {
+    const wrapper = mount(Select, {
+      props: { options: basicOptions },
+      slots: {
+        prefix: '<span class="my-prefix">P</span>',
+        suffix: '<span class="my-suffix">S</span>',
+      },
+      attachTo: document.body,
+    })
+
+    expect(wrapper.find('.my-prefix').exists()).toBe(true)
+    expect(wrapper.find('.my-suffix').exists()).toBe(true)
+
+    wrapper.unmount()
+  })
+
+  it('does not render the prefix wrapper when no prefix slot is provided', () => {
+    const wrapper = mount(Select, {
+      props: { options: basicOptions },
+      attachTo: document.body,
+    })
+
+    expect(wrapper.find('.sh-select-prefix').exists()).toBe(false)
+
+    wrapper.unmount()
+  })
+})
+
+describe('Select — multiple + filterable combined', () => {
+  it('narrows options while typing and still accumulates multiple selections', async () => {
+    const wrapper = mount(Select, {
+      props: { options: basicOptions, multiple: true, filterable: true, value: [] },
+      attachTo: document.body,
+    })
+
+    await wrapper.find('.sh-select-trigger-icon').trigger('click')
+    await settle()
+    expect(document.querySelectorAll('.sh-select-option')).toHaveLength(3)
+
+    const input = wrapper.find('.sh-select-input')
+    ;(input.element as HTMLInputElement).value = 'an'
+    await input.trigger('input')
+    await settle()
+
+    // "an" only matches Banana among apple/banana/cherry
+    const options = document.querySelectorAll('.sh-select-option')
+    expect(options).toHaveLength(1)
+    expect(options[0].textContent).toContain('Banana')
+
+    click(options[0])
+    await settle()
+
+    expect(wrapper.emitted('update:value')!.at(-1)![0]).toEqual(['banana'])
+
+    wrapper.unmount()
+  })
+})

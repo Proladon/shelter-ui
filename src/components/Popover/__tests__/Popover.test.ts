@@ -1,4 +1,4 @@
-import { mount, flushPromises } from '@vue/test-utils'
+import { mount, flushPromises, DOMWrapper } from '@vue/test-utils'
 import { describe, it, expect, afterEach } from 'vitest'
 import { nextTick } from 'vue'
 import Popover from '../index.vue'
@@ -128,6 +128,47 @@ describe('Popover — v-model', () => {
     await wrapper.setProps({ value: false })
     await settle()
     expect(document.querySelector('.sh-popover-content')).toBeNull()
+
+    wrapper.unmount()
+  })
+})
+
+describe('Popover — close slot', () => {
+  it('renders a default close button that closes the popover on click', async () => {
+    const wrapper = mount(Popover, {
+      props: { value: true },
+      slots: { trigger: 'Open', default: 'Popover body content' },
+      attachTo: document.body,
+    })
+    await settle()
+
+    const closeBtn = document.querySelector('.sh-popover-close')
+    expect(closeBtn).not.toBeNull()
+
+    await new DOMWrapper(closeBtn as Element).trigger('click')
+    await settle()
+
+    const emitted = wrapper.emitted('update:value')
+    expect(emitted).toBeTruthy()
+    expect(emitted![emitted!.length - 1]).toEqual([false])
+
+    wrapper.unmount()
+  })
+
+  it('supports custom close slot content in place of the default button', async () => {
+    const wrapper = mount(Popover, {
+      props: { value: true },
+      slots: {
+        trigger: 'Open',
+        default: 'Popover body content',
+        close: '<button type="button" class="my-custom-close">X</button>',
+      },
+      attachTo: document.body,
+    })
+    await settle()
+
+    expect(document.querySelector('.my-custom-close')).not.toBeNull()
+    expect(document.querySelector('.sh-popover-close')).toBeNull()
 
     wrapper.unmount()
   })

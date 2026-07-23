@@ -16,7 +16,7 @@ import {
   ComboboxViewport,
 } from 'reka-ui'
 import { IconChevronDown, IconCheck, IconX } from '@tabler/icons-vue'
-import type { SelectProps, SelectEmits, SelectOption } from './types'
+import type { SelectProps, SelectEmits, SelectOption, SelectSlots } from './types'
 import Spinner from '@/components/Spinner'
 import { useComponentSize } from '@/composables/useComponentSize'
 
@@ -121,8 +121,22 @@ const handleClear = (e: Event) => {
   emit('clear')
 }
 
+const handleFocus = (event: FocusEvent) => {
+  emit('focus', event)
+}
+
+const handleBlur = (event: FocusEvent) => {
+  emit('blur', event)
+}
+
 const filteredOptions = computed(() => {
   if (!props.filterable || !searchTerm.value) return props.options
+
+  const customFilterMethod = props.filterMethod
+  if (customFilterMethod) {
+    return props.options.filter((opt) => customFilterMethod(searchTerm.value, opt))
+  }
+
   const search = searchTerm.value.toLowerCase()
   return props.options.filter(
     (opt) =>
@@ -159,17 +173,46 @@ const wrapperStyle = computed(() => {
 })
 
 const sizeClass = useComponentSize('sh-select', () => props.size)
+
+const wrapperRef = ref<HTMLDivElement | null>(null)
+
+// Expose focus/blur/toggleDropdown to parent (mirrors Input's convention).
+// There is exactly one real <input> in the control at any time: the hidden
+// sr-only accessibility input (non-filterable mode) or the visible search
+// input (filterable mode) — so a single scoped query reaches whichever is
+// actually rendered.
+const focus = () => {
+  wrapperRef.value?.querySelector<HTMLInputElement>('input')?.focus()
+}
+
+const blur = () => {
+  wrapperRef.value?.querySelector<HTMLInputElement>('input')?.blur()
+}
+
+const toggleDropdown = () => {
+  if (props.disabled) return
+  isOpen.value = !isOpen.value
+}
+
+defineExpose({
+  focus,
+  blur,
+  toggleDropdown,
+})
+
+defineSlots<SelectSlots>()
 </script>
 
 <template>
   <div
+    ref="wrapperRef"
     class="sh-select-wrapper"
     :class="sizeClass"
     :style="wrapperStyle"
   >
     <ComboboxRoot
       v-model="internalModel"
-      v-model:search-term="searchTerm"
+      ignore-filter
       :open="disabled ? false : isOpen"
       @update:open="(val) => (isOpen = disabled ? false : val)"
       :disabled="disabled"
@@ -188,6 +231,9 @@ const sizeClass = useComponentSize('sh-select', () => props.size)
         <template v-if="!filterable">
           <ComboboxTrigger as-child :disabled="disabled">
             <div class="sh-select-body">
+              <div v-if="$slots.prefix" class="sh-select-prefix">
+                <slot name="prefix"></slot>
+              </div>
               <div
                 class="sh-select-input truncate"
                 :class="{
@@ -199,8 +245,14 @@ const sizeClass = useComponentSize('sh-select', () => props.size)
               >
                 {{ getDisplayLabel(internalValue) || placeholder }}
               </div>
-              <ComboboxInput class="sr-only" readonly />
+              <ComboboxInput
+                class="sr-only"
+                readonly
+                @focus="handleFocus"
+                @blur="handleBlur"
+              />
               <div class="sh-select-icons">
+                <slot name="suffix"></slot>
                 <div
                   v-if="
                     clearable &&
@@ -225,6 +277,9 @@ const sizeClass = useComponentSize('sh-select', () => props.size)
 
         <template v-else>
           <div class="sh-select-body">
+            <div v-if="$slots.prefix" class="sh-select-prefix">
+              <slot name="prefix"></slot>
+            </div>
             <div
               v-if="
                 multiple &&
@@ -237,6 +292,7 @@ const sizeClass = useComponentSize('sh-select', () => props.size)
               {{ getDisplayLabel(internalValue) }}
             </div>
             <ComboboxInput
+              v-model="searchTerm"
               class="sh-select-input"
               :display-value="getDisplayLabel"
               :placeholder="
@@ -247,10 +303,13 @@ const sizeClass = useComponentSize('sh-select', () => props.size)
                   : placeholder
               "
               @click.stop
+              @focus="handleFocus"
+              @blur="handleBlur"
             />
           </div>
 
           <div class="sh-select-icons">
+            <slot name="suffix"></slot>
             <div
               v-if="
                 clearable &&
@@ -413,6 +472,10 @@ const sizeClass = useComponentSize('sh-select', () => props.size)
   &:read-only {
     @apply cursor-pointer;
   }
+}
+
+.sh-select-prefix {
+  @apply flex items-center mr-2 flex-shrink-0;
 }
 
 .sh-select-icons {

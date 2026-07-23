@@ -4,8 +4,6 @@
 
 ## 基本用法
 
-csacsacs
-
 <Demo>
     <BasicProgress />
 
@@ -153,20 +151,23 @@ const onClick = () => {
 
 ### 屬性
 
-| 屬性名     | 說明               | 類型                                             | 默認值      |
-| ---------- | ------------------ | ------------------------------------------------ | ----------- |
-| value      | 當前進度值         | `number \| null`                                 | -           |
-| max        | 最大進度值         | `number`                                         | `100`       |
-| size       | 進度條尺寸         | `'small' \| 'medium' \| 'large'`                 | `'medium'`  |
-| variant    | 進度條變體         | `'default' \| 'striped' \| 'animated'`           | `'default'` |
-| showText   | 是否顯示進度文字   | `boolean`                                        | `false`     |
-| formatText | 自定義進度文字格式 | `(value: number \| null, max: number) => string` | -           |
+| 屬性名       | 說明                             | 類型                                             | 默認值      |
+| ------------ | -------------------------------- | ------------------------------------------------ | ----------- |
+| value        | 當前進度值                       | `number \| null`                                 | `null`      |
+| max          | 最大進度值                       | `number`                                         | `100`       |
+| size         | 進度條尺寸                       | `'small' \| 'medium' \| 'large'`                 | `'medium'`  |
+| variant      | 進度條變體                       | `'default' \| 'striped' \| 'animated'`           | `'default'` |
+| showText     | 是否顯示進度文字                 | `boolean`                                        | `false`     |
+| formatText   | 自定義進度文字格式               | `(value: number \| null, max: number) => string` | -           |
+| color        | 自訂進度條顏色（CSS color 字串） | `string`                                         | -           |
+| height       | 自訂進度條高度，覆蓋 size 對應的預設高度 | `string \| number`                        | -           |
+| textPosition | 進度文字顯示位置                 | `'left' \| 'bottom' \| 'right'`                  | `'bottom'`  |
 
 ### 事件 Events
 
-| 事件名       | 說明             | 回調參數                  |
-| ------------ | ---------------- | ------------------------- |
-| update:value | 進度值變化時觸發 | `(value: number \| null)` |
+| 事件名       | 說明             | 回調參數          |
+| ------------ | ---------------- | ----------------- |
+| update:value | 進度值變化時觸發 | `(value: number)` |
 
 ### 插槽 Slots
 

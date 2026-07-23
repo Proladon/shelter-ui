@@ -19,6 +19,28 @@ describe('Switch — rendering', () => {
   })
 })
 
+describe('Switch — default slot', () => {
+  it('renders default slot content next to the switch control', () => {
+    const wrapper = mount(Switch, {
+      slots: { default: '啟用' },
+      attachTo: document.body,
+    })
+
+    expect(wrapper.text()).toContain('啟用')
+    expect(wrapper.find('[role="switch"]').exists()).toBe(true)
+
+    wrapper.unmount()
+  })
+
+  it('does not render the label element when no default slot content is passed', () => {
+    const wrapper = mount(Switch, { attachTo: document.body })
+
+    expect(document.querySelector('.shelter-switch-label')).toBeNull()
+
+    wrapper.unmount()
+  })
+})
+
 describe('Switch — v-model', () => {
   it('clicking toggles the value via update:value and change', async () => {
     const wrapper = mount(Switch, {

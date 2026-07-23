@@ -211,7 +211,7 @@ const value = ref([50])
 
 | 屬性名        | 說明             | 類型                                                                       | 默認值         |
 | ------------- | ---------------- | -------------------------------------------------------------------------- | -------------- |
-| value         | 當前滑桿值       | `number[]`                                                                 | -              |
+| value         | 當前滑桿值       | `number[] \| null`                                                         | -              |
 | min           | 最小值           | `number`                                                                   | `0`            |
 | max           | 最大值           | `number`                                                                   | `100`          |
 | step          | 步進間隔         | `number`                                                                   | `1`            |
@@ -229,7 +229,7 @@ const value = ref([50])
 
 | 事件名       | 說明             | 回調參數            |
 | ------------ | ---------------- | ------------------- |
-| update:value | 滑桿值變化時觸發 | `(value: number[])` |
+| update:value | 滑桿值變化時觸發 | `(value: number[] \| undefined)` |
 | valueCommit  | 滑桿值確定時觸發 | `(value: number[])` |
 | focus        | 滑塊（thumb）獲得焦點時觸發 | `(event: FocusEvent)` |
 | blur         | 滑塊（thumb）失去焦點時觸發 | `(event: FocusEvent)` |

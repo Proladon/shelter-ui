@@ -322,7 +322,7 @@ const readonlyText = ref('這是唯讀狀態的內容，無法編輯')
 | ------------- | ---------------- | ---------------------------------------------- | ---------- |
 | value         | 綁定值           | string                                         | ''         |
 | size          | 尺寸             | 'small' \| 'medium' \| 'large'                 | 'medium'   |
-| placeholder   | 占位符文字       | string                                         | —          |
+| placeholder   | 占位符文字       | string                                         | ''         |
 | rows          | 預設顯示的行數   | number                                         | 3          |
 | resize        | 調整大小的方式   | 'none' \| 'both' \| 'horizontal' \| 'vertical' | 'vertical' |
 | disabled      | 是否禁用         | boolean                                        | false      |

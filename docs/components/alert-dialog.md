@@ -41,7 +41,7 @@ title: AlertDialog 警告對話框
 
 | 插槽名      | 說明                                                                   |
 | ----------- | ---------------------------------------------------------------------- |
-| trigger     | 觸發對話框的元素，需搭配 `AlertDialogTrigger`（從 `reka-ui` 引入）使用 |
+| trigger     | 觸發對話框的元素，為單純的 passthrough 插槽，可放入任意內容，無需搭配特定子元件 |
 | title       | 自訂標題內容（優先級高於 `title` prop）                                |
 | description | 自訂描述內容（優先級高於 `description` prop）                          |
 | footer      | 完全自訂底部按鈕區域，預設提供確認 / 取消按鈕                          |

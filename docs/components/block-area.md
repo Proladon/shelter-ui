@@ -117,7 +117,7 @@ import { IconLock, IconExclamationCircle } from '@tabler/icons-vue'
 <template>
   <div class="space-y-4">
     <!-- 純文字 -->
-    <BlockArea :disabled="true" text="此區域已禁用">
+    <BlockArea :active="false" text="此區域已禁用">
       <div class="p-4 bg-gray-100  border">
         <p>這是一個表單區域</p>
         <input
@@ -130,7 +130,7 @@ import { IconLock, IconExclamationCircle } from '@tabler/icons-vue'
     </BlockArea>
 
     <!-- 圖示 + 文字 -->
-    <BlockArea :disabled="true" :icon="IconLock" text="需要權限才能編輯">
+    <BlockArea :active="false" :icon="IconLock" text="需要權限才能編輯">
       <div class="p-4 bg-gray-100  border">
         <p>敏感資料編輯區</p>
         <input
@@ -165,7 +165,7 @@ import { IconLock } from '@tabler/icons-vue'
 <template>
   <div class="space-y-4">
     <!-- 複雜內容禁用 -->
-    <BlockArea :disabled="true" :icon="IconShieldLock" text="安全保護中">
+    <BlockArea :active="false" :icon="IconShieldLock" text="安全保護中">
       <div class="p-6 bg-white border -lg shadow">
         <h5 class="text-lg font-semibold mb-4">用戶設定</h5>
         <div class="space-y-3">
@@ -191,7 +191,7 @@ import { IconLock } from '@tabler/icons-vue'
 
     <!-- 卡片式佈局 -->
     <div class="grid grid-cols-2 gap-4">
-      <BlockArea :disabled="false">
+      <BlockArea :active="true">
         <div class="p-4 bg-green-50 border border-green-200 -lg">
           <h6 class="font-semibold text-green-800">可用功能</h6>
           <p class="text-sm text-green-600 mt-1">此功能已啟用</p>
@@ -201,7 +201,7 @@ import { IconLock } from '@tabler/icons-vue'
         </div>
       </BlockArea>
 
-      <BlockArea :disabled="true" :icon="IconClock" text="開發中">
+      <BlockArea :active="false" :icon="IconClock" text="開發中">
         <div class="p-4 bg-yellow-50 border border-yellow-200 -lg">
           <h6 class="font-semibold text-yellow-800">開發中功能</h6>
           <p class="text-sm text-yellow-600 mt-1">即將推出</p>

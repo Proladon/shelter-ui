@@ -5,7 +5,6 @@
       loading ? '加載中...' : '點擊加載 >'
     }}</SHButton>
     <SHButton
-      plain
       :type="loading ? 'warning' : 'info'"
       @click="toggleLoading"
       >{{ loading ? '停止加載' : '開始加載' }}</SHButton

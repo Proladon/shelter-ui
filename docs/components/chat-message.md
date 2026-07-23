@@ -128,6 +128,15 @@ ChatMessage 用於顯示社交軟體風格的對話訊息，包含頭像、使�
 | content        | 訊息本體文字                                    | `string`                          | `-`      |
 | position       | 訊息對齊方向，`left` 為收到，`right` 為自己發送 | `'left' \| 'right'`               | `'left'` |
 | status         | 訊息傳送狀態，僅 `position="right"` 時顯示      | `'sending' \| 'sent' \| 'failed'` | `-`      |
+| showCopyButton | 是否顯示複製按鈕（hover 時出現）                | `boolean`                         | `true`   |
+| showTime       | 是否顯示時間                                    | `boolean`                         | `true`   |
+| showUsername   | 是否顯示使用者名稱                              | `boolean`                         | `true`   |
+
+### 事件
+
+| 事件名 | 說明                                  | 回調參數            |
+| ------ | ------------------------------------- | ------------------- |
+| copy   | 點擊複製按鈕時觸發，回傳當前訊息內容  | `(content: string)` |
 
 ### 插槽
 

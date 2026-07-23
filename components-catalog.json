@@ -3,7 +3,7 @@
     "_meta": {
         "description": "shelter-ui component catalog — machine-readable reference for AI agents. Lists every public component with its purpose, props, events, slots, and exposed methods.",
         "version": "2.0.1",
-        "generated": "2026-05-03",
+        "generated": "2026-07-23",
         "importBase": "@proladon/shelter-ui"
     },
     "components": [
@@ -438,7 +438,7 @@
             "props": [
                 {
                     "name": "value",
-                    "type": "DateValue | DateValue[] | DateRange | null",
+                    "type": "DateValue | DateValue[] | null",
                     "default": null,
                     "description": "選中的日期值（v-model）"
                 },
@@ -510,7 +510,7 @@
                 },
                 {
                     "name": "weekStartsOn",
-                    "type": "number",
+                    "type": "0 | 1 | 2 | 3 | 4 | 5 | 6",
                     "default": null,
                     "description": "每週起始日（0=日, 1=一, ...）"
                 },
@@ -566,7 +566,7 @@
             "events": [
                 {
                     "name": "update:value",
-                    "payload": "DateValue | DateValue[] | DateRange | null",
+                    "payload": "DateValue | DateValue[] | undefined",
                     "description": "選中值變化時觸發"
                 },
                 {
@@ -580,8 +580,12 @@
         },
         {
             "name": "Carousel",
-            "description": "輪播組件，支援自動播放、循環、指示器、導航按鈕，以及 slide / fade 過渡效果。",
-            "subComponents": [],
+            "description": "輪播組件，支援自動播放、循環、指示器、導航按鈕，以及 slide / fade 過渡效果。搭配 CarouselItem、CarouselNavigation、CarouselIndicators 子組件使用。",
+            "subComponents": [
+                "CarouselItem",
+                "CarouselNavigation",
+                "CarouselIndicators"
+            ],
             "props": [
                 {
                     "name": "value",
@@ -654,6 +658,18 @@
                     "type": "boolean",
                     "default": false,
                     "description": "是否禁用導航"
+                },
+                {
+                    "name": "style",
+                    "type": "StyleValue",
+                    "default": null,
+                    "description": "自定義樣式"
+                },
+                {
+                    "name": "class",
+                    "type": "string",
+                    "default": null,
+                    "description": "自定義類名"
                 }
             ],
             "events": [
@@ -664,12 +680,12 @@
                 },
                 {
                     "name": "change",
-                    "payload": "{ current: number, previous: number }",
+                    "payload": "(current: number, previous: number) => void",
                     "description": "切換輪播項目時觸發"
                 },
                 {
                     "name": "item-click",
-                    "payload": "{ item: CarouselItem, index: number }",
+                    "payload": "(item: CarouselItem, index: number) => void",
                     "description": "點擊輪播項目時觸發"
                 },
                 {
@@ -707,6 +723,130 @@
                     "description": "自訂下一頁按鈕"
                 }
             ],
+            "methods": []
+        },
+        {
+            "name": "CarouselIndicators",
+            "description": "Carousel 的指示器子組件，顯示可點擊的頁面圓點指示器，用於切換輪播項目。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "currentIndex",
+                    "type": "number",
+                    "default": 0,
+                    "description": "當前索引"
+                },
+                {
+                    "name": "totalItems",
+                    "type": "number",
+                    "default": 0,
+                    "description": "總項目數"
+                },
+                {
+                    "name": "disabled",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否禁用"
+                },
+                {
+                    "name": "position",
+                    "type": "'bottom' | 'top' | 'left' | 'right'",
+                    "default": "'bottom'",
+                    "description": "指示器位置"
+                }
+            ],
+            "events": [
+                {
+                    "name": "indicator-click",
+                    "payload": "number",
+                    "description": "點擊指示器時觸發"
+                }
+            ],
+            "slots": [],
+            "methods": []
+        },
+        {
+            "name": "CarouselItem",
+            "description": "Carousel 的子項目組件，渲染單一輪播項目（圖片、標題、描述或自訂內容）。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "item",
+                    "type": "CarouselItem",
+                    "default": "{}",
+                    "description": "項目資料"
+                },
+                {
+                    "name": "index",
+                    "type": "number",
+                    "default": 0,
+                    "description": "項目索引"
+                },
+                {
+                    "name": "active",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否為目前使用中的項目"
+                }
+            ],
+            "events": [
+                {
+                    "name": "click",
+                    "payload": "(item: CarouselItem, index: number) => void",
+                    "description": "點擊項目時觸發"
+                }
+            ],
+            "slots": [
+                {
+                    "name": "default",
+                    "description": "自訂項目內容（顯示於標題與描述下方）"
+                }
+            ],
+            "methods": []
+        },
+        {
+            "name": "CarouselNavigation",
+            "description": "Carousel 的導航按鈕子組件，提供上一頁／下一頁切換控制。",
+            "subComponents": [],
+            "props": [
+                {
+                    "name": "currentIndex",
+                    "type": "number",
+                    "default": 0,
+                    "description": "當前索引"
+                },
+                {
+                    "name": "totalItems",
+                    "type": "number",
+                    "default": 0,
+                    "description": "總項目數"
+                },
+                {
+                    "name": "loop",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否循環"
+                },
+                {
+                    "name": "disabled",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否禁用"
+                }
+            ],
+            "events": [
+                {
+                    "name": "prev",
+                    "payload": null,
+                    "description": "點擊上一個時觸發"
+                },
+                {
+                    "name": "next",
+                    "payload": null,
+                    "description": "點擊下一個時觸發"
+                }
+            ],
+            "slots": [],
             "methods": []
         },
         {
@@ -866,9 +1006,33 @@
                     "type": "'sending' | 'sent' | 'failed'",
                     "default": null,
                     "description": "訊息傳送狀態"
+                },
+                {
+                    "name": "showCopyButton",
+                    "type": "boolean",
+                    "default": true,
+                    "description": "是否顯示複製按鈕（hover 時出現）"
+                },
+                {
+                    "name": "showTime",
+                    "type": "boolean",
+                    "default": true,
+                    "description": "是否顯示時間"
+                },
+                {
+                    "name": "showUsername",
+                    "type": "boolean",
+                    "default": true,
+                    "description": "是否顯示使用者名稱"
                 }
             ],
-            "events": [],
+            "events": [
+                {
+                    "name": "copy",
+                    "payload": "string",
+                    "description": "點擊複製按鈕時觸發，帶上訊息內容（content: string）"
+                }
+            ],
             "slots": [
                 {
                     "name": "avatar",
@@ -1141,12 +1305,12 @@
             "events": [
                 {
                     "name": "remove",
-                    "payload": null,
+                    "payload": "Event",
                     "description": "點擊移除按鈕時觸發"
                 },
                 {
                     "name": "removeicon",
-                    "payload": null,
+                    "payload": "Event",
                     "description": "移除圖示相關事件"
                 }
             ],
@@ -1351,7 +1515,7 @@
                 {
                     "name": "placeholder",
                     "type": "string",
-                    "default": null,
+                    "default": "'Select date'",
                     "description": "佔位提示文字"
                 },
                 {
@@ -1399,13 +1563,13 @@
                 {
                     "name": "weekStartsOn",
                     "type": "number",
-                    "default": null,
+                    "default": 0,
                     "description": "每週起始日"
                 },
                 {
                     "name": "weekdayFormat",
                     "type": "'narrow' | 'short' | 'long'",
-                    "default": null,
+                    "default": "'short'",
                     "description": "週日標題格式"
                 },
                 {
@@ -1430,7 +1594,7 @@
             "events": [
                 {
                     "name": "update:value",
-                    "payload": "DateValue | DateRange | null",
+                    "payload": "DateValue | DateRange | undefined",
                     "description": "日期變化時觸發"
                 },
                 {
@@ -1440,7 +1604,7 @@
                 },
                 {
                     "name": "change",
-                    "payload": "DateValue | DateRange | null",
+                    "payload": "DateValue | DateRange | undefined",
                     "description": "日期變化時觸發"
                 },
                 {
@@ -1515,6 +1679,18 @@
                     "type": "string",
                     "default": null,
                     "description": "標題文字"
+                },
+                {
+                    "name": "contentClass",
+                    "type": "string | string[] | Record<string, boolean>",
+                    "default": null,
+                    "description": "對話框內容區域的額外 class，常用於子組件覆蓋內部佈局"
+                },
+                {
+                    "name": "hideClose",
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否隱藏預設的關閉按鈕"
                 }
             ],
             "events": [
@@ -1527,7 +1703,8 @@
             "slots": [
                 {
                     "name": "trigger",
-                    "description": "觸發對話框的元素"
+                    "slotProps": "{ Dialog: Component }",
+                    "description": "觸發對話框的元素；透過 Dialog 作用域參數暴露底層 reka-ui DialogTrigger 組件（是否為刻意保留的公開 API 待確認）"
                 },
                 {
                     "name": "title",
@@ -1562,7 +1739,7 @@
                 {
                     "name": "color",
                     "type": "string",
-                    "default": "'#e5e7eb'",
+                    "default": "'var(--sh-text-base)'",
                     "description": "分隔線顏色"
                 },
                 {
@@ -1720,8 +1897,8 @@
                     "type": "string",
                     "status": "'idle' | 'uploading' | 'success' | 'error'",
                     "progress": "number",
-                    "error": "string | null",
-                    "previewUrl": "string | null"
+                    "error": "string | undefined",
+                    "previewUrl": "string | undefined"
                 }
             }
         },
@@ -1732,19 +1909,19 @@
             "props": [
                 {
                     "name": "align",
-                    "type": "'start' | 'center' | 'end' | 'between' | 'around' | 'evenly'",
+                    "type": "'start' | 'center' | 'end' | 'between' | 'around' | 'evenly' | 'flex-end'",
                     "default": null,
                     "description": "align-items 值"
                 },
                 {
                     "name": "justify",
-                    "type": "'start' | 'center' | 'end' | 'between' | 'around' | 'evenly'",
+                    "type": "'start' | 'center' | 'end' | 'between' | 'around' | 'evenly' | 'space-between' | 'flex-end'",
                     "default": null,
                     "description": "justify-content 值"
                 },
                 {
                     "name": "gap",
-                    "type": "number",
+                    "type": "number | string",
                     "default": 0,
                     "description": "子元素間距（rem 單位）"
                 },
@@ -1802,7 +1979,7 @@
                 {
                     "name": "placeholder",
                     "type": "string",
-                    "default": null,
+                    "default": "''",
                     "description": "佔位提示文字"
                 },
                 {
@@ -1844,7 +2021,7 @@
                 },
                 {
                     "name": "input",
-                    "payload": "Event",
+                    "payload": "string",
                     "description": "原生 input 事件"
                 },
                 {
@@ -1944,7 +2121,7 @@
                 {
                     "name": "placeholder",
                     "type": "string",
-                    "default": null,
+                    "default": "'輸入 @, # 或 : 來提及'",
                     "description": "佔位提示文字"
                 },
                 {
@@ -1992,13 +2169,13 @@
                 {
                     "name": "label",
                     "type": "string",
-                    "default": null,
+                    "default": "''",
                     "description": "標籤文字"
                 },
                 {
                     "name": "class",
                     "type": "string",
-                    "default": null,
+                    "default": "''",
                     "description": "額外 CSS class"
                 }
             ],
@@ -2025,7 +2202,7 @@
                 },
                 {
                     "name": "mention",
-                    "payload": "{ trigger: string, searchValue: string }",
+                    "payload": "(trigger: string, searchValue: string)",
                     "description": "觸發 mention 搜尋時觸發"
                 }
             ],
@@ -2034,12 +2211,12 @@
         },
         {
             "name": "MessageBox",
-            "description": "訊息方塊，帶有語意圖示的靜態提示區塊，用於展示 info / danger / success / default 等狀態訊息。",
+            "description": "訊息方塊，帶有語意圖示的靜態提示區塊，用於展示 info / danger / success / warning / default 等狀態訊息。",
             "subComponents": [],
             "props": [
                 {
                     "name": "type",
-                    "type": "'info' | 'danger' | 'success' | 'default'",
+                    "type": "'info' | 'danger' | 'success' | 'warning' | 'default'",
                     "default": "'info'",
                     "description": "訊息類型"
                 },
@@ -2069,47 +2246,132 @@
             "subComponents": [
                 "NotificationProvider"
             ],
+            "providerProps": [
+                {
+                    "name": "max",
+                    "type": "number",
+                    "default": 10,
+                    "description": "最大同時顯示的通知數量，超過時自動移除最舊的通知（NotificationProvider 的 prop）"
+                },
+                {
+                    "name": "placement",
+                    "type": "'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'top' | 'bottom'",
+                    "default": "'top-right'",
+                    "description": "通知容器的顯示位置（NotificationProvider 的 prop）"
+                },
+                {
+                    "name": "gap",
+                    "type": "number",
+                    "default": 8,
+                    "description": "通知之間的間距，單位 px（NotificationProvider 的 prop）"
+                },
+                {
+                    "name": "offset",
+                    "type": "number",
+                    "default": 16,
+                    "description": "通知容器距離視窗邊緣的偏移量，單位 px（NotificationProvider 的 prop）"
+                }
+            ],
             "composables": [
                 {
                     "name": "useNotification",
                     "methods": [
                         {
+                            "name": "create",
+                            "signature": "(config: NotificationConfig) => string",
+                            "description": "建立通用通知，需自行指定 type（省略時預設 'info'），回傳該通知的唯一 key"
+                        },
+                        {
                             "name": "info",
-                            "signature": "(options: NotificationOptions) => void",
-                            "description": "顯示 info 通知"
+                            "signature": "(config: Omit<NotificationConfig, 'type'>) => string",
+                            "description": "顯示 info 通知，回傳該通知的唯一 key"
                         },
                         {
                             "name": "success",
-                            "signature": "(options: NotificationOptions) => void",
-                            "description": "顯示 success 通知"
+                            "signature": "(config: Omit<NotificationConfig, 'type'>) => string",
+                            "description": "顯示 success 通知，回傳該通知的唯一 key"
                         },
                         {
                             "name": "warning",
-                            "signature": "(options: NotificationOptions) => void",
-                            "description": "顯示 warning 通知"
+                            "signature": "(config: Omit<NotificationConfig, 'type'>) => string",
+                            "description": "顯示 warning 通知，回傳該通知的唯一 key"
                         },
                         {
                             "name": "danger",
-                            "signature": "(options: NotificationOptions) => void",
-                            "description": "顯示 danger 通知"
+                            "signature": "(config: Omit<NotificationConfig, 'type'>) => string",
+                            "description": "顯示 danger 通知，回傳該通知的唯一 key"
+                        },
+                        {
+                            "name": "destroy",
+                            "signature": "(key: string) => void",
+                            "description": "銷毀指定 key 的通知"
+                        },
+                        {
+                            "name": "destroyAll",
+                            "signature": "() => void",
+                            "description": "銷毀所有目前顯示中的通知"
                         }
                     ]
                 }
             ],
             "types": {
-                "NotificationOptions": {
-                    "title": "string",
-                    "content": "string (optional)",
-                    "duration": "number (optional, ms, 0=永久)",
-                    "placement": "'top' | 'top-left' | 'top-right' | 'bottom' | 'bottom-left' | 'bottom-right'",
-                    "icon": "Component (optional)",
+                "NotificationConfig": {
+                    "title": "string (optional)",
+                    "message": "string",
+                    "type": "'info' | 'success' | 'warning' | 'danger' (optional, default 'info'; only settable via create() — info/success/warning/danger take Omit<NotificationConfig, 'type'> and set it automatically)",
+                    "icon": "Component (optional, custom icon, overrides the default semantic icon)",
+                    "iconColor": "string (optional, custom icon color)",
+                    "duration": "number (optional, ms, default 4500, 0 = permanent / no auto-close)",
+                    "closable": "boolean (optional, default true)",
                     "onClick": "() => void (optional)",
                     "onClose": "() => void (optional)"
                 }
             },
-            "props": [],
-            "events": [],
-            "slots": [],
+            "props": [
+                {
+                    "name": "config",
+                    "type": "NotificationInstance",
+                    "default": null,
+                    "required": true,
+                    "description": "通知實例資料（NotificationConfig 加上內部產生的 key / timestamp），由 NotificationProvider 內部傳入，一般不需手動使用 SHNotification"
+                },
+                {
+                    "name": "onClose",
+                    "type": "(key: string) => void",
+                    "default": null,
+                    "description": "通知關閉時的回調（由 NotificationProvider 內部注入以移除該通知）"
+                }
+            ],
+            "events": [
+                {
+                    "name": "close",
+                    "payload": "string (key)",
+                    "description": "通知關閉動畫結束後觸發，攜帶該通知的 key"
+                },
+                {
+                    "name": "click",
+                    "payload": null,
+                    "description": "點擊通知本體時觸發"
+                }
+            ],
+            "slots": [
+                {
+                    "name": "icon",
+                    "description": "自訂圖示內容，預設顯示依 type 決定的語意圖示"
+                },
+                {
+                    "name": "title",
+                    "description": "自訂標題內容，預設顯示 config.title"
+                },
+                {
+                    "name": "default",
+                    "description": "自訂訊息內容，預設顯示 config.message"
+                },
+                {
+                    "name": "actions",
+                    "description": "自訂操作按鈕區域，僅在有內容時顯示"
+                }
+            ],
             "methods": []
         },
         {
@@ -2119,7 +2381,7 @@
             "props": [
                 {
                     "name": "value",
-                    "type": "number",
+                    "type": "number | null",
                     "default": null,
                     "description": "數值（v-model）"
                 },
@@ -2253,6 +2515,12 @@
                     "type": "boolean",
                     "default": false,
                     "description": "是否禁用"
+                },
+                {
+                    "name": "class",
+                    "type": "string",
+                    "default": null,
+                    "description": "自定義類名"
                 },
                 {
                     "name": "size",
@@ -2422,7 +2690,7 @@
                 {
                     "name": "side",
                     "type": "'top' | 'right' | 'bottom' | 'left'",
-                    "default": "'bottom'",
+                    "default": "'top'",
                     "description": "彈出方向"
                 },
                 {
@@ -2448,6 +2716,12 @@
                     "type": "boolean",
                     "default": false,
                     "description": "是否禁用"
+                },
+                {
+                    "name": "arrow",
+                    "type": "boolean",
+                    "default": true,
+                    "description": "是否顯示箭頭"
                 }
             ],
             "events": [
@@ -2475,7 +2749,7 @@
         },
         {
             "name": "Progress",
-            "description": "進度條，支援條紋與動態動畫變體、文字格式化、最大值設定。",
+            "description": "進度條，支援條紋與動態動畫變體、文字格式化與位置、自訂顏色與高度、最大值設定。",
             "subComponents": [],
             "props": [
                 {
@@ -2510,9 +2784,27 @@
                 },
                 {
                     "name": "formatText",
-                    "type": "(value: number, max: number) => string",
+                    "type": "(value: number | null, max: number) => string",
                     "default": null,
                     "description": "自訂進度文字格式化函式"
+                },
+                {
+                    "name": "color",
+                    "type": "string",
+                    "default": null,
+                    "description": "自訂進度條顏色（CSS color 字串）"
+                },
+                {
+                    "name": "height",
+                    "type": "string | number",
+                    "default": null,
+                    "description": "自訂進度條高度，覆蓋 size 對應的預設高度"
+                },
+                {
+                    "name": "textPosition",
+                    "type": "'left' | 'bottom' | 'right'",
+                    "default": "'bottom'",
+                    "description": "進度文字顯示位置"
                 }
             ],
             "events": [
@@ -2759,6 +3051,18 @@
                     "type": "boolean",
                     "default": true,
                     "description": "是否啟用垂直捲動"
+                },
+                {
+                    "name": "class",
+                    "type": "string",
+                    "default": null,
+                    "description": "自定義根元素的 class"
+                },
+                {
+                    "name": "style",
+                    "type": "string | Record<string, any>",
+                    "default": null,
+                    "description": "自定義根元素的 style"
                 }
             ],
             "events": [],
@@ -2794,12 +3098,12 @@
         },
         {
             "name": "Select",
-            "description": "下拉選擇器，支援單選/多選、可清除、可過濾（搜尋）、自訂最大選擇數量與下拉面板位置。",
+            "description": "下拉選擇器，支援單選/多選、可清除、可過濾（搜尋）與下拉面板位置。",
             "subComponents": [],
             "props": [
                 {
                     "name": "value",
-                    "type": "any | any[]",
+                    "type": "string | number | (string | number)[]",
                     "default": null,
                     "description": "選中值（v-model）"
                 },
@@ -2846,12 +3150,6 @@
                     "description": "是否多選"
                 },
                 {
-                    "name": "maxSelections",
-                    "type": "number",
-                    "default": null,
-                    "description": "多選時最大選擇數量"
-                },
-                {
                     "name": "filterable",
                     "type": "boolean",
                     "default": false,
@@ -2872,13 +3170,13 @@
                 {
                     "name": "noDataText",
                     "type": "string",
-                    "default": null,
+                    "default": "'暫無數據'",
                     "description": "無資料時的提示文字"
                 },
                 {
                     "name": "noMatchText",
                     "type": "string",
-                    "default": null,
+                    "default": "'無匹配數據'",
                     "description": "無匹配項時的提示文字"
                 },
                 {
@@ -2888,14 +3186,14 @@
                     "description": "下拉面板出現方向"
                 },
                 {
-                    "name": "dropdownWidth",
+                    "name": "width",
                     "type": "string | number",
-                    "default": null,
-                    "description": "下拉面板寬度"
+                    "default": "'100%'",
+                    "description": "選擇器本身的寬度"
                 },
                 {
                     "name": "maxHeight",
-                    "type": "string",
+                    "type": "string | number",
                     "default": "'200px'",
                     "description": "下拉面板最大高度"
                 }
@@ -2903,12 +3201,12 @@
             "events": [
                 {
                     "name": "update:value",
-                    "payload": "any | any[]",
+                    "payload": "string | number | (string | number)[]",
                     "description": "值變化時觸發"
                 },
                 {
                     "name": "change",
-                    "payload": "any | any[]",
+                    "payload": "string | number | (string | number)[]",
                     "description": "值變化時觸發"
                 },
                 {
@@ -2933,7 +3231,7 @@
                 },
                 {
                     "name": "remove-tag",
-                    "payload": "any",
+                    "payload": "string | number",
                     "description": "多選模式移除標籤時觸發"
                 }
             ],
@@ -2969,7 +3267,7 @@
             "props": [
                 {
                     "name": "value",
-                    "type": "number[]",
+                    "type": "number[] | null",
                     "default": null,
                     "description": "滑桿值陣列（v-model），單值用 [n]，範圍用 [min, max]"
                 },
@@ -3049,7 +3347,7 @@
             "events": [
                 {
                     "name": "update:value",
-                    "payload": "number[]",
+                    "payload": "number[] | undefined",
                     "description": "滑動時觸發"
                 },
                 {
@@ -3159,10 +3457,11 @@
         },
         {
             "name": "Splitter",
-            "description": "分割面板容器，支援水平/垂直分割，可拖拽調整各面板大小，支援鍵盤操作與自動儲存佈局。",
+            "description": "分割面板容器，支援水平/垂直分割，可拖拽調整各面板大小，支援鍵盤操作與自動儲存佈局。已標記為 deprecated（仍可正常運作，不會被移除），建議改用 SplitterGroup + SplitterPanel + SplitterResizeHandle 組合。",
             "subComponents": [
                 "SplitterPanel",
-                "SplitterResizeHandle"
+                "SplitterResizeHandle",
+                "SplitterGroup"
             ],
             "props": [
                 {
@@ -3213,6 +3512,61 @@
             "methods": []
         },
         {
+            "name": "SplitterGroup",
+            "description": "分割面板容器，支援水平/垂直分割，可拖拽調整各面板大小，支援鍵盤操作與自動儲存佈局。取代已棄用的 Splitter，搭配 SplitterPanel、SplitterResizeHandle 子組件使用。",
+            "subComponents": [
+                "SplitterPanel",
+                "SplitterResizeHandle"
+            ],
+            "props": [
+                {
+                    "name": "direction",
+                    "type": "'horizontal' | 'vertical'",
+                    "default": null,
+                    "required": true,
+                    "description": "分割方向"
+                },
+                {
+                    "name": "gap",
+                    "type": "number",
+                    "default": 0,
+                    "description": "面板間隙"
+                },
+                {
+                    "name": "color",
+                    "type": "string",
+                    "default": null,
+                    "description": "分隔條顏色"
+                },
+                {
+                    "name": "autoSaveId",
+                    "type": "string | null",
+                    "default": null,
+                    "description": "自動保存 ID"
+                },
+                {
+                    "name": "keyboardResizeBy",
+                    "type": "number",
+                    "default": 10,
+                    "description": "鍵盤調整步長"
+                }
+            ],
+            "events": [
+                {
+                    "name": "layout",
+                    "payload": "number[]",
+                    "description": "版面佈局變化時觸發"
+                }
+            ],
+            "slots": [
+                {
+                    "name": "default",
+                    "description": "SplitterPanel 與 SplitterResizeHandle 的組合"
+                }
+            ],
+            "methods": []
+        },
+        {
             "name": "SplitterPanel",
             "description": "Splitter 的子面板，定義各面板的初始大小與大小限制。",
             "subComponents": [],
@@ -3248,6 +3602,18 @@
                     "description": "折疊後的大小（%）"
                 },
                 {
+                    "name": "order",
+                    "type": "number",
+                    "default": null,
+                    "description": "面板順序（用於條件渲染面板的群組）"
+                },
+                {
+                    "name": "sizeUnit",
+                    "type": "'%' | 'px'",
+                    "default": "'%'",
+                    "description": "面板大小單位"
+                },
+                {
                     "name": "padding",
                     "type": "'none' | 'small' | 'default' | 'large'",
                     "default": "'default'",
@@ -3267,7 +3633,7 @@
                 },
                 {
                     "name": "resize",
-                    "payload": "{ size: number, prevSize: number }",
+                    "payload": "{ size: number, prevSize: number | undefined }",
                     "description": "面板大小調整時觸發"
                 }
             ],
@@ -3293,19 +3659,19 @@
                 {
                     "name": "color",
                     "type": "string",
-                    "default": null,
+                    "default": "'var(--sh-primary)'",
                     "description": "控制條顏色"
                 },
                 {
                     "name": "hoverColor",
                     "type": "string",
-                    "default": null,
+                    "default": "'var(--sh-primary)'",
                     "description": "懸停時的控制條顏色"
                 },
                 {
                     "name": "dragColor",
                     "type": "string",
-                    "default": null,
+                    "default": "'var(--sh-primary)'",
                     "description": "拖拽時的控制條顏色"
                 },
                 {
@@ -3493,7 +3859,7 @@
                 {
                     "name": "placeholder",
                     "type": "string",
-                    "default": null,
+                    "default": "''",
                     "description": "佔位提示文字"
                 },
                 {
@@ -3547,7 +3913,7 @@
                 },
                 {
                     "name": "input",
-                    "payload": "Event",
+                    "payload": "string",
                     "description": "原生 input 事件"
                 },
                 {
@@ -3584,7 +3950,7 @@
         },
         {
             "name": "TimePicker",
-            "description": "時間選擇器，支援單時間與範圍模式、12小時制、各欄位步進、禁用時間列表。",
+            "description": "時間選擇器，支援單一時間與範圍模式、12/24 小時制、各欄位顯示切換與步進值。",
             "subComponents": [],
             "props": [
                 {
@@ -3607,9 +3973,9 @@
                 },
                 {
                     "name": "placeholder",
-                    "type": "string | string[]",
+                    "type": "string",
                     "default": null,
-                    "description": "佔位提示文字"
+                    "description": "佔位提示文字；未指定時，單一模式為「選擇時間」，範圍模式為「選擇時間範圍」"
                 },
                 {
                     "name": "disabled",
@@ -3676,24 +4042,6 @@
                     "type": "number",
                     "default": 1,
                     "description": "秒數步進量"
-                },
-                {
-                    "name": "minTime",
-                    "type": "string",
-                    "default": null,
-                    "description": "可選最早時間"
-                },
-                {
-                    "name": "maxTime",
-                    "type": "string",
-                    "default": null,
-                    "description": "可選最晚時間"
-                },
-                {
-                    "name": "disabledTimes",
-                    "type": "string[]",
-                    "default": "[]",
-                    "description": "禁用的時間列表"
                 }
             ],
             "events": [
@@ -3723,16 +4071,7 @@
                     "description": "清除時間時觸發"
                 }
             ],
-            "slots": [
-                {
-                    "name": "prefix",
-                    "description": "輸入框前置內容"
-                },
-                {
-                    "name": "suffix",
-                    "description": "輸入框後置內容"
-                }
-            ],
+            "slots": [],
             "methods": []
         },
         {

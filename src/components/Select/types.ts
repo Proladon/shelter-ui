@@ -93,3 +93,8 @@ export interface SelectEmits {
   'visible-change': [visible: boolean]
   'remove-tag': [value: string | number]
 }
+
+export interface SelectSlots {
+  prefix?: () => any
+  suffix?: () => any
+}

@@ -229,27 +229,29 @@
 | maxSize       | 最大面板大小 | `number`                                    | `100`       |
 | collapsible   | 是否可收縮   | `boolean`                                   | `false`     |
 | collapsedSize | 收縮時大小   | `number`                                    | -           |
+| order         | 面板順序（用於條件渲染面板的群組） | `number`                       | -           |
+| sizeUnit      | 面板大小單位 | `'%' \| 'px'`                               | `'%'`       |
 | padding       | 面板內距     | `'none' \| 'small' \| 'default' \| 'large'` | `'default'` |
 
 #### 事件
 
-| 事件名   | 說明               | 回調參數                           |
-| -------- | ------------------ | ---------------------------------- |
-| collapse | 面板收縮時觸發     | `()`                               |
-| expand   | 面板展開時觸發     | `()`                               |
-| resize   | 面板大小變化時觸發 | `(size: number, prevSize: number)` |
+| 事件名   | 說明               | 回調參數                                      |
+| -------- | ------------------ | ---------------------------------------------- |
+| collapse | 面板收縮時觸發     | `()`                                           |
+| expand   | 面板展開時觸發     | `()`                                           |
+| resize   | 面板大小變化時觸發 | `(size: number, prevSize: number \| undefined)` |
 
 ### SplitterResizeHandle
 
 #### 屬性
 
-| 屬性名     | 說明             | 類型      | 默認值  |
-| ---------- | ---------------- | --------- | ------- |
-| visible    | 是否讓控制桿常亮 | `boolean` | `false` |
-| color      | 控制桿顏色       | `string`  | -       |
-| hoverColor | 滑鼠懸停顏色     | `string`  | -       |
-| dragColor  | 拖拽時顏色       | `string`  | -       |
-| disabled   | 是否禁用         | `boolean` | `false` |
+| 屬性名     | 說明             | 類型      | 默認值                   |
+| ---------- | ---------------- | --------- | ------------------------ |
+| visible    | 是否讓控制桿常亮 | `boolean` | `false`                  |
+| color      | 控制桿顏色       | `string`  | `'var(--sh-primary)'`    |
+| hoverColor | 滑鼠懸停顏色     | `string`  | `'var(--sh-primary)'`    |
+| dragColor  | 拖拽時顏色       | `string`  | `'var(--sh-primary)'`    |
+| disabled   | 是否禁用         | `boolean` | `false`                  |
 
 #### 事件
 
